@@ -1,0 +1,127 @@
+using System;
+using System.Collections.Generic;
+using UnityEngine;
+
+namespace KindredSiege.Core
+{
+    /// <summary>
+    /// Lightweight event bus for decoupled communication between game systems.
+    /// Use this instead of direct references between managers.
+    /// 
+    /// Usage:
+    ///   EventBus.Subscribe<BattleEndEvent>(OnBattleEnd);
+    ///   EventBus.Publish(new BattleEndEvent { Winner = team, KPEarned = 50 });
+    ///   EventBus.Unsubscribe<BattleEndEvent>(OnBattleEnd);
+    /// </summary>
+    public static class EventBus
+    {
+        private static readonly Dictionary<Type, List<Delegate>> subscribers = new();
+
+        public static void Subscribe<T>(Action<T> handler) where T : struct
+        {
+            Type type = typeof(T);
+            if (!subscribers.ContainsKey(type))
+                subscribers[type] = new List<Delegate>();
+
+            subscribers[type].Add(handler);
+        }
+
+        public static void Unsubscribe<T>(Action<T> handler) where T : struct
+        {
+            Type type = typeof(T);
+            if (subscribers.ContainsKey(type))
+                subscribers[type].Remove(handler);
+        }
+
+        public static void Publish<T>(T eventData) where T : struct
+        {
+            Type type = typeof(T);
+            if (!subscribers.ContainsKey(type)) return;
+
+            // Iterate copy to avoid modification during iteration
+            var handlers = new List<Delegate>(subscribers[type]);
+            foreach (var handler in handlers)
+            {
+                try
+                {
+                    ((Action<T>)handler)?.Invoke(eventData);
+                }
+                catch (Exception e)
+                {
+                    Debug.LogError($"[EventBus] Error in handler for {type.Name}: {e.Message}");
+                }
+            }
+        }
+
+        /// <summary>
+        /// Clear all subscribers. Call on scene unload or game reset.
+        /// </summary>
+        public static void Clear()
+        {
+            subscribers.Clear();
+        }
+    }
+
+    // ═══════════════════════════════════════════════
+    // EVENT DEFINITIONS
+    // Add new events here as the project grows.
+    // ═══════════════════════════════════════════════
+
+    // --- Battle Events ---
+    public struct BattleStartEvent
+    {
+        public int BattleNumber;
+        public int Season;
+    }
+
+    public struct BattleEndEvent
+    {
+        public enum Result { Victory, Defeat, Draw }
+        public Result BattleResult;
+        public int KPEarned;
+        public float Duration;
+    }
+
+    public struct UnitDefeatedEvent
+    {
+        public int UnitId;
+        public string UnitType;
+        public int DefeatedByUnitId;
+    }
+
+    public struct UnitActionEvent
+    {
+        public int UnitId;
+        public string ActionName;
+        public Vector3 Position;
+        public int TargetId;
+    }
+
+    // --- City Events ---
+    public struct BuildingPlacedEvent
+    {
+        public string BuildingType;
+        public Vector2Int GridPosition;
+    }
+
+    public struct ResourceChangedEvent
+    {
+        public ResourceType Type;
+        public int OldAmount;
+        public int NewAmount;
+        public int Delta;
+    }
+
+    // --- Charity Events ---
+    public struct KindnessPointsEarnedEvent
+    {
+        public int Amount;
+        public string Source;
+    }
+
+    public struct SeasonDonationEvent
+    {
+        public int TotalKP;
+        public int Season;
+    }
+}
