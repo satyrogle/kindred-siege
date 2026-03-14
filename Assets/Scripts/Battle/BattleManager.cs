@@ -53,6 +53,9 @@ namespace KindredSiege.Battle
             {
                 GameManager.Instance.OnStateChanged += OnGameStateChanged;
             }
+
+            // Auto-start battle for testing
+            Invoke("StartBattle", 1f);
         }
 
         private void OnDestroy()
@@ -144,9 +147,12 @@ namespace KindredSiege.Battle
                     var renderer = unitGO.GetComponent<Renderer>();
                     if (renderer != null)
                     {
-                        renderer.material.color = teamId == 1
+                        // Create a new material so URP works
+                        var mat = new Material(Shader.Find("Standard"));
+                        mat.color = teamId == 1
                             ? new Color(0.2f, 0.5f, 0.9f)
                             : new Color(0.9f, 0.3f, 0.2f);
+                        renderer.material = mat;
                     }
                 }
 

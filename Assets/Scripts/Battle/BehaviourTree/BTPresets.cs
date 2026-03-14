@@ -50,7 +50,7 @@ namespace KindredSiege.AI.BehaviourTree
             return new Selector("Ranger_Root",
                 // Priority 1: Retreat if enemy is too close
                 new Sequence("KiteBack",
-                    new IsHealthBelow(0.5f),
+                    new IsHealthBelow(0.2f),
                     new Condition("EnemyClose", ctx =>
                     {
                         var target = ctx.Get<UnitController>("Target");
