@@ -10,26 +10,33 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fb16f79b272eb1e4da14167a79540f60, type: 3}
-  m_Name: Mage
+  m_Name: Vessel
   m_EditorClassIdentifier: 
-  UnitName: New Unit
-  UnitType: guardian
-  Description: 
+  UnitName: Shadow
+  UnitType: shadow
+  Description: assassin, flanker , back stabber circles to the back
   Portrait: {fileID: 0}
   Prefab: {fileID: 0}
-  MaxHP: 100
-  AttackDamage: 10
+  MaxHP: 85
+  AttackDamage: 22
   AttackRange: 2
-  AttackCooldown: 1
-  MoveSpeed: 3
+  AttackCooldown: 0.6
+  MoveSpeed: 4.5
   Armour: 0
   IsRanged: 0
-  CanHeal: 0
-  HealAmount: 0
+  CanHeal: 1
+  HealAmount: 15
   IsCharityUnit: 0
   BonusKPPerSurvival: 0
-  GoldCost: 50
-  FoodCost: 20
+  BaseSanity: 80
+  SanityOnKill: 0
+  ImmuneToAllyDeathSanityLoss: 1
+  AllySanityLossMultiplier: 1
+  CannotBeHealed: 0
+  PassiveSanityDrainPerSecond: 0
+  ExpeditionCount: 0
+  GoldCost: 80
+  FoodCost: 15
   MaterialCost: 0
-  TeamTint: {r: 1, g: 1, b: 1, a: 1}
-  ModelScale: 1
+  TeamTint: {r: 0.036845837, g: 0.14785555, b: 0.8679245, a: 1}
+  ModelScale: 0.85

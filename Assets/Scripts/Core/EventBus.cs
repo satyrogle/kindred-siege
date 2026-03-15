@@ -85,7 +85,9 @@ namespace KindredSiege.Core
     public struct UnitDefeatedEvent
     {
         public int UnitId;
+        public string UnitName;
         public string UnitType;
+        public int TeamId;
         public int DefeatedByUnitId;
     }
 
@@ -110,6 +112,60 @@ namespace KindredSiege.Core
         public int OldAmount;
         public int NewAmount;
         public int Delta;
+    }
+
+    // --- Sanity Events ---
+
+    public struct SanityChangedEvent
+    {
+        public int UnitId;
+        public string UnitName;
+        public int OldSanity;
+        public int NewSanity;
+        public string Reason;
+    }
+
+    /// <summary>Unit's sanity hit 0 — permanently consumed by madness.</summary>
+    public struct UnitLostEvent
+    {
+        public int UnitId;
+        public string UnitName;
+        public string UnitType;
+    }
+
+    public struct VirtueGainedEvent
+    {
+        public int UnitId;
+        public string UnitName;
+        public string VirtueName;   // VirtueType.ToString()
+    }
+
+    public struct AfflictionGainedEvent
+    {
+        public int UnitId;
+        public string UnitName;
+        public string AfflictionName;   // AfflictionType.ToString()
+    }
+
+    // --- Rivalry Events ---
+
+    public struct RivalEncounteredEvent
+    {
+        public string RivalId;
+        public string RivalName;
+        public string Rank;         // RivalRank.ToString()
+    }
+
+    public struct RivalDefeatedEvent
+    {
+        public string RivalId;
+        public string RivalName;
+    }
+
+    public struct MercyTokenEarnedEvent
+    {
+        public int Amount;
+        public string Source;
     }
 
     // --- Charity Events ---

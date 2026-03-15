@@ -207,6 +207,224 @@ namespace KindredSiege.AI.BehaviourTree
         }
     }
 
+    /// <summary>Check if the owner's sanity is below a 0-100 threshold.</summary>
+    public class IsSanityBelow : BTNode
+    {
+        private readonly int threshold;
+
+        public IsSanityBelow(int threshold) : base($"Sanity<{threshold}") { this.threshold = threshold; }
+
+        public override NodeState Tick(BattleContext context)
+        {
+            return context.Owner.CurrentSanity < threshold ? NodeState.Success : NodeState.Failure;
+        }
+    }
+
+    /// <summary>
+    /// Check if any ally's sanity is below a threshold.
+    /// Stores the most stressed ally as "SanityTarget" on the blackboard.
+    /// </summary>
+    public class HasStressedAlly : BTNode
+    {
+        private readonly int threshold;
+
+        public HasStressedAlly(int threshold = 60) : base("StressedAlly?") { this.threshold = threshold; }
+
+        public override NodeState Tick(BattleContext context)
+        {
+            var stressed = context.Allies
+                .Where(a => a != null && a.IsAlive && a != context.Owner)
+                .OrderBy(a => a.CurrentSanity)
+                .FirstOrDefault(a => a.CurrentSanity < threshold);
+
+            if (stressed != null)
+            {
+                context.Set("SanityTarget", stressed);
+                return NodeState.Success;
+            }
+            return NodeState.Failure;
+        }
+    }
+
+    /// <summary>
+    /// Herald action: restore sanity to the most stressed nearby ally.
+    /// Requires "SanityTarget" on the blackboard (set by HasStressedAlly).
+    /// </summary>
+    public class BoostStressedAlly : BTNode
+    {
+        private readonly int sanityAmount;
+        private readonly float range;
+
+        public BoostStressedAlly(int sanityAmount = 15, float range = 6f) : base("BoostAlly")
+        {
+            this.sanityAmount = sanityAmount;
+            this.range = range;
+        }
+
+        public override NodeState Tick(BattleContext context)
+        {
+            var target = context.Get<UnitController>("SanityTarget");
+            if (target == null || !target.IsAlive) return NodeState.Failure;
+
+            float dist = Vector3.Distance(context.Owner.transform.position, target.transform.position);
+
+            if (dist > range)
+            {
+                // Move closer first
+                Vector3 dir = (target.transform.position - context.Owner.transform.position).normalized;
+                context.Owner.transform.position += dir * context.Owner.MoveSpeed * context.DeltaTime;
+                return NodeState.Running;
+            }
+
+            if (context.Owner.CanAttack())
+            {
+                target.ModifySanity(sanityAmount, "HeraldBoost");
+                context.Owner.ResetAttackCooldown();
+                return NodeState.Success;
+            }
+            return NodeState.Running;
+        }
+    }
+
+    /// <summary>
+    /// Herald action: position the unit at mid-range — far enough to avoid melee,
+    /// close enough to project its aura and support allies.
+    /// </summary>
+    public class MaintainMidRange : BTNode
+    {
+        private readonly float minRange;
+        private readonly float maxRange;
+
+        public MaintainMidRange(float minRange = 3f, float maxRange = 6f) : base("MidRange")
+        {
+            this.minRange = minRange;
+            this.maxRange = maxRange;
+        }
+
+        public override NodeState Tick(BattleContext context)
+        {
+            var nearest = context.Enemies
+                .Where(e => e != null && e.IsAlive)
+                .OrderBy(e => Vector3.Distance(context.Owner.transform.position, e.transform.position))
+                .FirstOrDefault();
+
+            if (nearest == null) return NodeState.Failure;
+
+            float dist = Vector3.Distance(context.Owner.transform.position, nearest.transform.position);
+            Vector3 dir = (context.Owner.transform.position - nearest.transform.position).normalized;
+
+            if (dist < minRange)
+            {
+                // Too close — back away
+                context.Owner.transform.position += dir * context.Owner.MoveSpeed * context.DeltaTime;
+                return NodeState.Running;
+            }
+
+            if (dist > maxRange)
+            {
+                // Too far — move in
+                context.Owner.transform.position -= dir * context.Owner.MoveSpeed * context.DeltaTime;
+                return NodeState.Running;
+            }
+
+            return NodeState.Success; // Already in sweet spot
+        }
+    }
+
+    /// <summary>
+    /// Shadow action: find the highest-HP enemy (proxy for "rival leader" / priority target).
+    /// Stores as "Target" on the blackboard.
+    /// </summary>
+    public class FindHighestHPEnemy : BTNode
+    {
+        public FindHighestHPEnemy() : base("FindLeader") { }
+
+        public override NodeState Tick(BattleContext context)
+        {
+            var leader = context.Enemies
+                .Where(e => e != null && e.IsAlive)
+                .OrderByDescending(e => e.CurrentHP)
+                .FirstOrDefault();
+
+            if (leader != null)
+            {
+                context.Set("Target", leader);
+                return NodeState.Success;
+            }
+            return NodeState.Failure;
+        }
+    }
+
+    /// <summary>
+    /// Shadow action: circle wide around the target to approach from the rear.
+    /// Moves perpendicular to the target direction, then closes in.
+    /// </summary>
+    public class CircleToFlank : BTNode
+    {
+        private bool _circlingRight;
+
+        public CircleToFlank() : base("CircleFlank") { }
+
+        public override NodeState Tick(BattleContext context)
+        {
+            var target = context.Get<UnitController>("Target");
+            if (target == null || !target.IsAlive) return NodeState.Failure;
+
+            Vector3 toTarget = target.transform.position - context.Owner.transform.position;
+            float dist = toTarget.magnitude;
+
+            // Once close enough, stop flanking and attack
+            if (dist <= context.Owner.AttackRange * 1.5f)
+                return NodeState.Success;
+
+            // Pick a consistent side to circle (decided once per approach)
+            if (!context.Has("FlankDir"))
+            {
+                _circlingRight = Random.value > 0.5f;
+                context.Set("FlankDir", _circlingRight ? 1 : -1);
+            }
+
+            // Move in an arc: forward + perpendicular
+            Vector3 forward = toTarget.normalized;
+            Vector3 perp    = Vector3.Cross(forward, Vector3.up) * context.Get<int>("FlankDir");
+            Vector3 arc     = (forward * 0.6f + perp * 0.4f).normalized;
+
+            context.Owner.transform.position += arc * context.Owner.MoveSpeed * context.DeltaTime;
+            return NodeState.Running;
+        }
+
+        public override void Reset()
+        {
+            _circlingRight = false;
+        }
+    }
+
+    /// <summary>
+    /// Investigator action: spend a full attack cooldown to "analyse" the current target,
+    /// writing its weakness tag to the blackboard for other units to exploit.
+    /// In future, this will hook into the Rivalry Engine to reveal rival weaknesses.
+    /// </summary>
+    public class AnalyseTarget : BTNode
+    {
+        public AnalyseTarget() : base("Analyse") { }
+
+        public override NodeState Tick(BattleContext context)
+        {
+            var target = context.Get<UnitController>("Target");
+            if (target == null || !target.IsAlive) return NodeState.Failure;
+
+            if (!context.Owner.CanAttack()) return NodeState.Running;
+
+            // Mark target as analysed — all allies can read this to deal bonus damage
+            string key = $"Analysed_{target.UnitId}";
+            context.Set(key, true);
+            context.Owner.ResetAttackCooldown();
+
+            Debug.Log($"[Investigator] {context.Owner.UnitName} analysed {target.UnitName}.");
+            return NodeState.Success;
+        }
+    }
+
     /// <summary>Heal the wounded ally stored on the blackboard.</summary>
     public class HealAlly : BTNode
     {

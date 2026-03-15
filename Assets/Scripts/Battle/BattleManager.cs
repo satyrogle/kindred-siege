@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using KindredSiege.Core;
 using KindredSiege.AI.BehaviourTree;
+using KindredSiege.Rivalry;
 
 namespace KindredSiege.Battle
 {
@@ -48,22 +49,23 @@ namespace KindredSiege.Battle
 
         private void Start()
         {
-            // Listen for state changes
             if (GameManager.Instance != null)
-            {
                 GameManager.Instance.OnStateChanged += OnGameStateChanged;
-            }
 
-            // Auto-start battle for testing
+            // Subscribe to unit events for sanity propagation
+            EventBus.Subscribe<UnitDefeatedEvent>(OnUnitDefeated);
+            EventBus.Subscribe<UnitLostEvent>(OnUnitLost);
+
             Invoke("StartBattle", 1f);
         }
 
         private void OnDestroy()
         {
             if (GameManager.Instance != null)
-            {
                 GameManager.Instance.OnStateChanged -= OnGameStateChanged;
-            }
+
+            EventBus.Unsubscribe<UnitDefeatedEvent>(OnUnitDefeated);
+            EventBus.Unsubscribe<UnitLostEvent>(OnUnitLost);
         }
 
         private void OnGameStateChanged(GameManager.GameState from, GameManager.GameState to)
@@ -207,9 +209,60 @@ namespace KindredSiege.Battle
             EndBattle(result);
         }
 
+        // ─── Sanity Event Handlers ───
+
+        /// <summary>
+        /// When any unit dies, notify all living units on the same team.
+        /// Each witness takes -15 sanity (GDD §5.2).
+        /// </summary>
+        private void OnUnitDefeated(UnitDefeatedEvent evt)
+        {
+            if (!battleActive) return;
+
+            var deadTeam = evt.TeamId == 1 ? team1 : team2;
+
+            foreach (var unit in deadTeam)
+            {
+                if (unit != null && unit.IsAlive && unit.UnitId != evt.UnitId)
+                    unit.OnWitnessAllyDeath(null);
+            }
+        }
+
+        /// <summary>
+        /// When a unit is Lost (sanity = 0), ALL surviving units on both teams take -20 sanity.
+        /// The horror of watching someone consumed by madness is universal (GDD §5.2).
+        /// </summary>
+        private void OnUnitLost(UnitLostEvent evt)
+        {
+            if (!battleActive) return;
+
+            foreach (var unit in allUnits)
+            {
+                if (unit != null && unit.IsAlive && unit.UnitId != evt.UnitId)
+                    unit.OnWitnessUnitLost();
+            }
+        }
+
         private void EndBattle(BattleEndEvent.Result result)
         {
             battleActive = false;
+
+            // Victory sanity boost for surviving player units (GDD §5.2: +10 on win)
+            if (result == BattleEndEvent.Result.Victory)
+            {
+                foreach (var unit in team1)
+                {
+                    if (unit != null && unit.IsAlive)
+                        unit.OnBattleVictory();
+                }
+            }
+
+            // Increment expedition count on surviving player units (veteran tracking)
+            foreach (var unit in team1)
+            {
+                if (unit != null && unit.IsAlive && unit.Data != null)
+                    unit.Data.ExpeditionCount++;
+            }
 
             // Calculate KP earned
             int kpEarned = CalculateKP(result);

@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using KindredSiege.AI.BehaviourTree;
 using KindredSiege.Core;
@@ -6,108 +8,391 @@ namespace KindredSiege.Battle
 {
     /// <summary>
     /// Runtime controller for a unit in battle.
-    /// Owns a behaviour tree and ticks it each frame during combat.
-    /// Attach this to unit prefabs.
+    /// Owns a behaviour tree AND a sanity state that directly degrades AI quality.
+    ///
+    /// PILLAR 1 — AI Behaviour: behaviour tree ticked every frame during combat.
+    /// PILLAR 2 — Psychological Simulation: sanity drains under stress, causing
+    ///            hesitation, afflictions, and eventually permanent loss.
+    ///
+    /// Attach to unit prefabs.
     /// </summary>
     public class UnitController : MonoBehaviour
     {
         [Header("Unit Config")]
         [SerializeField] private UnitData unitData;
 
-        // Runtime stats (can be modified by city bonuses)
-        public int MaxHP { get; private set; }
-        public int CurrentHP { get; private set; }
-        public int AttackDamage { get; private set; }
-        public float AttackRange { get; private set; }
-        public float MoveSpeed { get; private set; }
-        public int Armour { get; private set; }
+        // ─── Combat Stats ───
+        public int MaxHP          { get; private set; }
+        public int CurrentHP      { get; private set; }
+        public int AttackDamage   { get; private set; }
+        public float AttackRange  { get; private set; }
+        public float MoveSpeed    { get; private set; }
+        public int Armour         { get; private set; }
 
-        public bool IsAlive => CurrentHP > 0;
-        public string UnitType => unitData != null ? unitData.UnitType : "guardian";
-        public string UnitName => unitData != null ? unitData.UnitName : "Unit";
-        public UnitData Data => unitData;
+        // ─── Sanity ───
+        public int MaxSanity      { get; private set; }
+        public int CurrentSanity  { get; private set; }
 
-        public int TeamId { get; private set; }
-        public int UnitId { get; private set; }
+        public SanityState SanityState => SanitySystem.GetState(CurrentSanity);
 
-        // Behaviour tree
-        private BTNode behaviourTree;
+        // Active affliction / virtue — set when sanity first drops below StressedMin
+        public AfflictionType ActiveAffliction { get; private set; } = AfflictionType.None;
+        public VirtueType     ActiveVirtue     { get; private set; } = VirtueType.None;
+
+        private bool  _stressTraitRolled   = false;
+        private bool  _stalwartActive      = false;  // Immune to further sanity loss
+        private float _resoluteTimer       = 0f;     // Invincibility window (Resolute virtue)
+        private float _courageousAuraCooldown = 0f;
+
+        private const float ResoluteShieldDuration  = 10f;
+        private const float CourageousAuraInterval  = 8f;
+
+        // ─── Identity ───
+        public bool   IsAlive   => CurrentHP > 0;
+        public bool   IsVeteran => unitData != null && unitData.ExpeditionCount >= 5;
+        public string UnitType  => unitData != null ? unitData.UnitType : "warden";
+        public string UnitName  => unitData != null ? unitData.UnitName : "Unit";
+        public UnitData Data    => unitData;
+
+        public int TeamId  { get; private set; }
+        public int UnitId  { get; private set; }
+
+        // ─── Prolonged combat drain (GDD §5.2: -3 per round after round 5) ───
+        private float _combatTimer    = 0f;
+        private int   _drainRound     = 0;
+        private const float SecondsPerRound    = 5f;
+        private const int   RoundsBeforeDrain  = 5;
+
+        // ─── Behaviour Tree ───
+        private BTNode       behaviourTree;
         private BattleContext battleContext;
-        private float attackTimer = 0f;
-        private float attackCooldown = 1f;
+        private float         attackTimer   = 0f;
+        private float         attackCooldown = 1f;
 
-        // Battle recording — for replay system
-        public System.Collections.Generic.List<UnitActionRecord> ActionHistory { get; private set; } = new();
+        // ─── Battle Recording (replay system) ───
+        public List<UnitActionRecord> ActionHistory { get; private set; } = new();
 
         [System.Serializable]
         public struct UnitActionRecord
         {
-            public float Timestamp;
-            public string Action;
+            public float   Timestamp;
+            public string  Action;
             public Vector3 Position;
-            public int TargetId;
+            public int     TargetId;
         }
 
-        /// <summary>
-        /// Initialise the unit with data and team assignment.
-        /// Called by BattleManager when spawning units.
-        /// </summary>
+        // ════════════════════════════════════════════
+        // INITIALISATION
+        // ════════════════════════════════════════════
+
+        /// <summary>Called by BattleManager when spawning units.</summary>
         public void Initialise(UnitData data, int teamId, int unitId)
         {
             unitData = data;
-            TeamId = teamId;
-            UnitId = unitId;
+            TeamId   = teamId;
+            UnitId   = unitId;
 
-            // Set runtime stats from data
-            MaxHP = data.MaxHP;
-            CurrentHP = data.MaxHP;
-            AttackDamage = data.AttackDamage;
-            AttackRange = data.AttackRange;
-            MoveSpeed = data.MoveSpeed;
-            Armour = data.Armour;
+            // Combat stats
+            MaxHP         = data.MaxHP;
+            CurrentHP     = data.MaxHP;
+            AttackDamage  = data.AttackDamage;
+            AttackRange   = data.AttackRange;
+            MoveSpeed     = data.MoveSpeed;
+            Armour        = data.Armour;
             attackCooldown = data.AttackCooldown;
-            attackTimer = 0f;
+            attackTimer   = 0f;
 
-            // Create default behaviour tree for this unit type
+            // Sanity init
+            MaxSanity        = data.BaseSanity;
+            CurrentSanity    = MaxSanity;
+            ActiveAffliction = AfflictionType.None;
+            ActiveVirtue     = VirtueType.None;
+            _stressTraitRolled   = false;
+            _stalwartActive      = false;
+            _resoluteTimer       = 0f;
+            _courageousAuraCooldown = 0f;
+            _combatTimer = 0f;
+            _drainRound  = 0;
+
+            // Build default behaviour tree for this class
             behaviourTree = BTPresets.GetPreset(data.UnitType);
 
-            // Visual setup
             transform.localScale = Vector3.one * data.ModelScale;
-
             ActionHistory.Clear();
         }
 
-        /// <summary>
-        /// Apply stat modifiers from city buildings.
-        /// Called before battle starts.
-        /// </summary>
+        /// <summary>Apply building/upgrade stat multipliers before battle starts.</summary>
         public void ApplyModifiers(float hpMult = 1f, float dmgMult = 1f, float speedMult = 1f)
         {
-            MaxHP = Mathf.RoundToInt(unitData.MaxHP * hpMult);
-            CurrentHP = MaxHP;
+            MaxHP        = Mathf.RoundToInt(unitData.MaxHP * hpMult);
+            CurrentHP    = MaxHP;
             AttackDamage = Mathf.RoundToInt(unitData.AttackDamage * dmgMult);
-            MoveSpeed = unitData.MoveSpeed * speedMult;
+            MoveSpeed    = unitData.MoveSpeed * speedMult;
         }
 
-        /// <summary>Set the battle context for this tick. Called by BattleManager each frame.</summary>
-        public void SetContext(BattleContext context)
-        {
-            battleContext = context;
-        }
+        /// <summary>Set the shared battle context. Called by BattleManager each frame.</summary>
+        public void SetContext(BattleContext context) => battleContext = context;
 
-        /// <summary>Tick the behaviour tree. Called by BattleManager during battle phase.</summary>
+        // ════════════════════════════════════════════
+        // AI TICK — runs every frame during battle
+        // ════════════════════════════════════════════
+
+        /// <summary>
+        /// Tick the behaviour tree with sanity-based degradation applied first.
+        /// High sanity = full effectiveness. Low sanity = hesitation, affliction effects,
+        /// and eventually complete breakdown.
+        /// </summary>
         public void TickAI()
         {
             if (!IsAlive || battleContext == null) return;
 
-            attackTimer -= Time.deltaTime;
-            battleContext.DeltaTime = Time.deltaTime;
-            battleContext.Owner = this;
+            float dt = Time.deltaTime;
+            attackTimer  -= dt;
+            _combatTimer += dt;
 
+            battleContext.DeltaTime = dt;
+            battleContext.Owner     = this;
+
+            // ── Passive sanity drain (Vessel class) ──
+            if (unitData != null && unitData.PassiveSanityDrainPerSecond > 0)
+            {
+                // Spread drain probabilistically over frames to avoid float precision issues
+                if (Random.value < unitData.PassiveSanityDrainPerSecond * dt)
+                    ModifySanity(-1, "PassiveDrain");
+            }
+
+            // ── Prolonged combat drain (GDD §5.2: -3 per round after round 5) ──
+            int currentRound = Mathf.FloorToInt(_combatTimer / SecondsPerRound);
+            if (currentRound > RoundsBeforeDrain && currentRound > _drainRound)
+            {
+                _drainRound = currentRound;
+                ModifySanity(-3, "ProlongedCombat");
+            }
+
+            // ── Virtue timers ──
+            if (_resoluteTimer > 0f)
+                _resoluteTimer -= dt;
+
+            if (ActiveVirtue == VirtueType.Courageous)
+            {
+                _courageousAuraCooldown -= dt;
+                if (_courageousAuraCooldown <= 0f)
+                {
+                    _courageousAuraCooldown = CourageousAuraInterval;
+                    BoostNearbyAllySanity(amount: 10, range: 5f);
+                }
+            }
+
+            // ── Sanity hesitation (GDD §5.1) ──
+            float hesitation = SanitySystem.GetHesitationChance(SanityState);
+            if (hesitation > 0f && Random.value < hesitation)
+                return; // Unit hesitates — skip this tick
+
+            // ── Broken: cower and retreat ──
+            if (SanityState == SanityState.Broken && Random.value < 0.40f)
+            {
+                var nearestEnemy = battleContext.Enemies
+                    .Where(e => e != null && e.IsAlive)
+                    .OrderBy(e => Vector3.Distance(transform.position, e.transform.position))
+                    .FirstOrDefault();
+
+                if (nearestEnemy != null)
+                {
+                    Vector3 awayDir = (transform.position - nearestEnemy.transform.position).normalized;
+                    transform.position += awayDir * MoveSpeed * dt;
+                }
+                return;
+            }
+
+            // ── Affliction: Paranoid — 15% chance to attack a random ally ──
+            if (ActiveAffliction == AfflictionType.Paranoid && Random.value < 0.15f)
+            {
+                var randomAlly = battleContext.Allies
+                    .Where(a => a != null && a.IsAlive && a != this)
+                    .OrderBy(_ => Random.value)
+                    .FirstOrDefault();
+
+                if (randomAlly != null)
+                {
+                    battleContext.Set("Target", randomAlly);
+                    if (CanAttack()) PerformAttack(randomAlly);
+                    return;
+                }
+            }
+
+            // ── Affliction: Irrational — override targeting with a random enemy ──
+            if (ActiveAffliction == AfflictionType.Irrational)
+            {
+                var randomEnemy = battleContext.Enemies
+                    .Where(e => e != null && e.IsAlive)
+                    .OrderBy(_ => Random.value)
+                    .FirstOrDefault();
+
+                if (randomEnemy != null)
+                    battleContext.Set("Target", randomEnemy);
+            }
+
+            // ── Affliction: Selfish — strip heal targets so HealAlly can't fire ──
+            if (ActiveAffliction == AfflictionType.Selfish)
+                battleContext.Blackboard.Remove("HealTarget");
+
+            // ── Affliction: Hopeless — raise retreat threshold (BT nodes read this flag) ──
+            battleContext.Set("Hopeless", ActiveAffliction == AfflictionType.Hopeless);
+
+            // ── Normal BT execution ──
             behaviourTree.Tick(battleContext);
         }
 
-        // ─── Combat Methods (called by BT action nodes) ───
+        // ════════════════════════════════════════════
+        // SANITY SYSTEM
+        // ════════════════════════════════════════════
+
+        /// <summary>
+        /// Modify sanity, apply class-specific multipliers, clamp, and handle state transitions.
+        /// Positive delta = restore. Negative delta = stress.
+        /// </summary>
+        public void ModifySanity(int delta, string reason)
+        {
+            // Stalwart virtue: immune to sanity loss this battle
+            if (delta < 0 && _stalwartActive) return;
+
+            // Shadow: unaffected by ally deaths (loner trait)
+            if (delta < 0 && reason == "AllyDied"
+                && unitData != null && unitData.ImmuneToAllyDeathSanityLoss)
+                return;
+
+            // Herald: double sanity loss from ally-related events (empathic)
+            if (delta < 0 && unitData != null && unitData.AllySanityLossMultiplier > 1f)
+            {
+                if (reason == "AllyDied" || reason == "WitnessLost" || reason == "ProlongedCombat")
+                    delta = Mathf.RoundToInt(delta * unitData.AllySanityLossMultiplier);
+            }
+
+            int oldSanity = CurrentSanity;
+            CurrentSanity = Mathf.Clamp(CurrentSanity + delta, 0, MaxSanity);
+
+            EventBus.Publish(new SanityChangedEvent
+            {
+                UnitId     = UnitId,
+                UnitName   = UnitName,
+                OldSanity  = oldSanity,
+                NewSanity  = CurrentSanity,
+                Reason     = reason
+            });
+
+            // Roll a stress trait the first time sanity crosses below StressedMin (50)
+            if (!_stressTraitRolled
+                && oldSanity >= SanitySystem.StressedMin
+                && CurrentSanity < SanitySystem.StressedMin)
+            {
+                _stressTraitRolled = true;
+                RollStressTrait();
+            }
+
+            // Check for Lost (sanity = 0)
+            if (CurrentSanity == 0 && oldSanity > 0)
+                OnLost();
+        }
+
+        private void RollStressTrait()
+        {
+            var (affliction, virtue) = SanitySystem.RollStressTrait(IsVeteran);
+
+            if (virtue != VirtueType.None)
+            {
+                ActiveVirtue = virtue;
+
+                if (virtue == VirtueType.Stalwart)
+                    _stalwartActive = true;
+
+                if (virtue == VirtueType.Courageous)
+                    _courageousAuraCooldown = 0f; // Trigger aura immediately
+
+                if (virtue == VirtueType.Resolute)
+                    _resoluteTimer = ResoluteShieldDuration;
+
+                EventBus.Publish(new VirtueGainedEvent
+                {
+                    UnitId     = UnitId,
+                    UnitName   = UnitName,
+                    VirtueName = virtue.ToString()
+                });
+
+                Debug.Log($"[Sanity] {UnitName} gained Virtue: {virtue}");
+            }
+            else if (affliction != AfflictionType.None)
+            {
+                ActiveAffliction = affliction;
+
+                EventBus.Publish(new AfflictionGainedEvent
+                {
+                    UnitId          = UnitId,
+                    UnitName        = UnitName,
+                    AfflictionName  = affliction.ToString()
+                });
+
+                Debug.Log($"[Sanity] {UnitName} gained Affliction: {affliction}");
+            }
+        }
+
+        /// <summary>Called by BattleManager when an ally on this unit's team is defeated.</summary>
+        public void OnWitnessAllyDeath(UnitController deadAlly)
+        {
+            ModifySanity(-15, "AllyDied");
+        }
+
+        /// <summary>Called by BattleManager when ANY unit is Lost (sanity = 0). Hits everyone.</summary>
+        public void OnWitnessUnitLost()
+        {
+            ModifySanity(-20, "WitnessLost");
+        }
+
+        /// <summary>Called by BattleManager at end of a won battle.</summary>
+        public void OnBattleVictory()
+        {
+            ModifySanity(10, "Victory");
+        }
+
+        /// <summary>Called when this unit kills the rival who previously killed one of its allies.</summary>
+        public void OnKilledRival()
+        {
+            ModifySanity(25, "KilledRival");
+        }
+
+        /// <summary>Called after being saved by a Mercy Token.</summary>
+        public void OnSavedByMercy()
+        {
+            ModifySanity(15, "MercySaved");
+            CurrentHP = Mathf.RoundToInt(MaxHP * 0.30f);
+        }
+
+        private void OnLost()
+        {
+            EventBus.Publish(new UnitLostEvent
+            {
+                UnitId   = UnitId,
+                UnitName = UnitName,
+                UnitType = UnitType
+            });
+
+            Debug.Log($"[Sanity] {UnitName} is LOST — consumed by madness.");
+            OnDeath(null); // Treat as permanent death
+        }
+
+        private void BoostNearbyAllySanity(int amount, float range)
+        {
+            if (battleContext == null) return;
+            foreach (var ally in battleContext.Allies)
+            {
+                if (ally == null || !ally.IsAlive || ally == this) continue;
+                if (Vector3.Distance(transform.position, ally.transform.position) <= range)
+                    ally.ModifySanity(amount, "CourageousAura");
+            }
+        }
+
+        // ════════════════════════════════════════════
+        // COMBAT METHODS (called by BT action nodes)
+        // ════════════════════════════════════════════
 
         public bool CanAttack() => attackTimer <= 0f;
 
@@ -116,41 +401,50 @@ namespace KindredSiege.Battle
             if (!CanAttack() || target == null || !target.IsAlive) return;
 
             int damage = Mathf.Max(1, AttackDamage - target.Armour);
+
+            // Focused virtue: +25% damage
+            if (ActiveVirtue == VirtueType.Focused)
+                damage = Mathf.RoundToInt(damage * 1.25f);
+
             target.TakeDamage(damage, this);
             attackTimer = attackCooldown;
 
-            // Record action
             RecordAction("Attack", target.UnitId);
 
             EventBus.Publish(new UnitActionEvent
             {
-                UnitId = UnitId,
+                UnitId     = UnitId,
                 ActionName = "Attack",
-                Position = transform.position,
-                TargetId = target.UnitId
+                Position   = transform.position,
+                TargetId   = target.UnitId
             });
+
+            // Berserker: gains sanity from kills
+            if (!target.IsAlive && unitData != null && unitData.SanityOnKill > 0)
+                ModifySanity(unitData.SanityOnKill, "KilledEnemy");
         }
 
-        public void ResetAttackCooldown()
-        {
-            attackTimer = attackCooldown;
-        }
+        public void ResetAttackCooldown() => attackTimer = attackCooldown;
 
         public void TakeDamage(int damage, UnitController attacker)
         {
             if (!IsAlive) return;
 
+            // Resolute virtue: cannot drop below 1 HP while shield is active
+            if (ActiveVirtue == VirtueType.Resolute && _resoluteTimer > 0f)
+                damage = Mathf.Min(damage, CurrentHP - 1);
+
             CurrentHP = Mathf.Max(0, CurrentHP - damage);
 
             if (!IsAlive)
-            {
                 OnDeath(attacker);
-            }
         }
 
         public void Heal(int amount)
         {
             if (!IsAlive) return;
+            // Vessel cannot be healed — it is sustained by something else
+            if (unitData != null && unitData.CannotBeHealed) return;
             CurrentHP = Mathf.Min(MaxHP, CurrentHP + amount);
         }
 
@@ -160,12 +454,13 @@ namespace KindredSiege.Battle
 
             EventBus.Publish(new UnitDefeatedEvent
             {
-                UnitId = UnitId,
-                UnitType = UnitType,
+                UnitId           = UnitId,
+                UnitName         = UnitName,
+                UnitType         = UnitType,
+                TeamId           = TeamId,
                 DefeatedByUnitId = killedBy?.UnitId ?? -1
             });
 
-            // Visual death — disable but don't destroy (needed for replay)
             gameObject.SetActive(false);
         }
 
@@ -174,16 +469,13 @@ namespace KindredSiege.Battle
             ActionHistory.Add(new UnitActionRecord
             {
                 Timestamp = Time.time,
-                Action = action,
-                Position = transform.position,
-                TargetId = targetId
+                Action    = action,
+                Position  = transform.position,
+                TargetId  = targetId
             });
         }
 
-        /// <summary>Override the default behaviour tree (for player customisation).</summary>
-        public void SetBehaviourTree(BTNode tree)
-        {
-            behaviourTree = tree;
-        }
+        /// <summary>Override the default behaviour tree (used by the Card system).</summary>
+        public void SetBehaviourTree(BTNode tree) => behaviourTree = tree;
     }
 }
