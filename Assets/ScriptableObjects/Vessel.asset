@@ -12,31 +12,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb16f79b272eb1e4da14167a79540f60, type: 3}
   m_Name: Vessel
   m_EditorClassIdentifier: 
-  UnitName: Shadow
-  UnitType: shadow
-  Description: assassin, flanker , back stabber circles to the back
+  UnitName: Vessel
+  UnitType: vessel
+  Description: non combat, the longer it survives more tokens
   Portrait: {fileID: 0}
   Prefab: {fileID: 0}
-  MaxHP: 85
-  AttackDamage: 22
-  AttackRange: 2
-  AttackCooldown: 0.6
-  MoveSpeed: 4.5
+  MaxHP: 50
+  AttackDamage: 0
+  AttackRange: 0
+  AttackCooldown: 99
+  MoveSpeed: 2
   Armour: 0
   IsRanged: 0
-  CanHeal: 1
-  HealAmount: 15
-  IsCharityUnit: 0
-  BonusKPPerSurvival: 0
-  BaseSanity: 80
+  CanHeal: 0
+  HealAmount: 0
+  IsCharityUnit: 1
+  BonusKPPerSurvival: 20
+  BaseSanity: 40
   SanityOnKill: 0
-  ImmuneToAllyDeathSanityLoss: 1
+  ImmuneToAllyDeathSanityLoss: 0
   AllySanityLossMultiplier: 1
-  CannotBeHealed: 0
-  PassiveSanityDrainPerSecond: 0
+  CannotBeHealed: 1
+  PassiveSanityDrainPerSecond: 2
   ExpeditionCount: 0
-  GoldCost: 80
-  FoodCost: 15
+  GoldCost: 100
+  FoodCost: 10
   MaterialCost: 0
   TeamTint: {r: 0.036845837, g: 0.14785555, b: 0.8679245, a: 1}
-  ModelScale: 0.85
+  ModelScale: 0.8

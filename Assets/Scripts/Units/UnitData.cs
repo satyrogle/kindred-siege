@@ -37,6 +37,19 @@ namespace KindredSiege.Battle
         [Header("Sanity")]
         [Range(0, 100)]
         public int BaseSanity = 100;
+
+        // ─── Comprehension (GDD §5.3) ───────────────────────────────────────
+        // Multiplier applied to ALL eldritch-source sanity damage.
+        // High-Comprehension units understand the horror — and pay the price.
+        // Low-Comprehension units are too simple to be afraid.
+        //
+        // Defaults per class (set in Inspector on each UnitData asset):
+        //   Berserker 0.5 | Warden 0.6 | Shadow 0.7 | Marksman 0.8
+        //   Vessel 1.0 | Herald 1.1 | Occultist 1.3 | Investigator 1.5
+        [Header("Comprehension (GDD §5.3)")]
+        [Tooltip("Multiplier on all eldritch sanity damage. Smarter units suffer more from cosmic horror.")]
+        [Range(0.1f, 2.5f)]
+        public float Comprehension = 1.0f;
         // Berserker: feeds on violence — gains sanity from kills
         public int SanityOnKill = 0;
         // Shadow: loner — unaffected by ally deaths

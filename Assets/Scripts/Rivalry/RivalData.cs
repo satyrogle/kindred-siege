@@ -16,6 +16,62 @@ namespace KindredSiege.Rivalry
         public string Epithet;      // e.g. "the Drowned", "Hollow-Eye"
         public string FullName => $"{FirstName} {Epithet}";
 
+        // ─── Horror Rating (GDD §6.3) ───────────────────────────────────────
+        // Passive sanity drain applied to ALL player units every 5 seconds.
+        // Multiplied by each unit's Comprehension stat.
+        // Grunt: 0 | Lieutenant: 1 | Captain: 2 | Overlord: 4 | Undying: +2
+        public int HorrorRating
+        {
+            get
+            {
+                int baseRating = Rank switch
+                {
+                    RivalRank.Grunt       => 0,
+                    RivalRank.Lieutenant  => 1,
+                    RivalRank.Captain     => 2,
+                    RivalRank.Overlord    => 4,
+                    _                     => 0
+                };
+                return IsUndying ? baseRating + 2 : baseRating;
+            }
+        }
+
+        // Sanity drain per 5-second tick (GDD §6.3)
+        public int HorrorRatingDrainPerTick
+        {
+            get
+            {
+                return HorrorRating switch
+                {
+                    0 => 0,
+                    1 => 2,
+                    2 => 4,
+                    _ => HorrorRating * 2   // Rating 4 → 8, Rating 6 → 12, etc.
+                };
+            }
+        }
+
+        // ─── Dread Power (GDD §6.2) ─────────────────────────────────────────
+        // Base value for taunt contests: Rival Dread Power vs Unit Resistance.
+        // Grunt: 5 | Lieutenant: 10 | Captain: 18 | Overlord: 28 | Grudge: +3 | Undying: +10
+        public int DreadPower
+        {
+            get
+            {
+                int baseDread = Rank switch
+                {
+                    RivalRank.Grunt       => 5,
+                    RivalRank.Lieutenant  => 10,
+                    RivalRank.Captain     => 18,
+                    RivalRank.Overlord    => 28,
+                    _                     => 5
+                };
+                if (Memory.HasGrudge) baseDread += 3;
+                if (IsUndying)        baseDread += 10;
+                return baseDread;
+            }
+        }
+
         public RivalRank Rank = RivalRank.Grunt;
         public List<RivalTraitType> Traits = new();
         public RivalWeaknessType Weakness;

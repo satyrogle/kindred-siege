@@ -57,6 +57,21 @@ namespace KindredSiege.Battle
         public int TeamId  { get; private set; }
         public int UnitId  { get; private set; }
 
+        // ─── Comprehension (GDD §5.3) ───
+        // Applied as a multiplier to all eldritch-source sanity damage.
+        public float Comprehension => unitData != null ? unitData.Comprehension : 1f;
+
+        // ─── Gambit / Directive state ───
+        // Gambits and Directives can set these to modify combat behaviour.
+        public float GambitDamageMultiplier { get; set; } = 1f;
+        public bool  GambitIgnoreRetreat    { get; set; } = false;
+
+        // Spawn position — recorded in Initialise. Used by HoldTheLine gambit.
+        public Vector3 SpawnPosition { get; private set; }
+
+        // Set by DirectiveSystem when FocusFire is active; injected into BT blackboard each tick.
+        public UnitController ForcedTarget { get; set; }
+
         // ─── Prolonged combat drain (GDD §5.2: -3 per round after round 5) ───
         private float _combatTimer    = 0f;
         private int   _drainRound     = 0;
@@ -117,6 +132,14 @@ namespace KindredSiege.Battle
             // Build default behaviour tree for this class
             behaviourTree = BTPresets.GetPreset(data.UnitType);
 
+            // Record spawn position for HoldTheLine gambit
+            SpawnPosition = transform.position;
+
+            // Reset gambit / directive modifiers
+            GambitDamageMultiplier = 1f;
+            GambitIgnoreRetreat    = false;
+            ForcedTarget           = null;
+
             transform.localScale = Vector3.one * data.ModelScale;
             ActionHistory.Clear();
         }
@@ -152,6 +175,10 @@ namespace KindredSiege.Battle
 
             battleContext.DeltaTime = dt;
             battleContext.Owner     = this;
+
+            // Focus Fire directive: override target for all BT nodes this tick
+            if (ForcedTarget != null && ForcedTarget.IsAlive)
+                battleContext.Set("Target", ForcedTarget);
 
             // ── Passive sanity drain (Vessel class) ──
             if (unitData != null && unitData.PassiveSanityDrainPerSecond > 0)
@@ -267,6 +294,11 @@ namespace KindredSiege.Battle
                 if (reason == "AllyDied" || reason == "WitnessLost" || reason == "ProlongedCombat")
                     delta = Mathf.RoundToInt(delta * unitData.AllySanityLossMultiplier);
             }
+
+            // Comprehension (GDD §5.3): eldritch-source damage scaled by class multiplier.
+            // High-Comprehension units understand the horror and suffer more.
+            if (delta < 0 && IsEldritchSource(reason))
+                delta = Mathf.RoundToInt(delta * Comprehension);
 
             int oldSanity = CurrentSanity;
             CurrentSanity = Mathf.Clamp(CurrentSanity + delta, 0, MaxSanity);
@@ -406,6 +438,10 @@ namespace KindredSiege.Battle
             if (ActiveVirtue == VirtueType.Focused)
                 damage = Mathf.RoundToInt(damage * 1.25f);
 
+            // Gambit / Directive damage multiplier (Unleash, Reckless Abandon, etc.)
+            if (GambitDamageMultiplier != 1f)
+                damage = Mathf.RoundToInt(damage * GambitDamageMultiplier);
+
             target.TakeDamage(damage, this);
             attackTimer = attackCooldown;
 
@@ -477,5 +513,73 @@ namespace KindredSiege.Battle
 
         /// <summary>Override the default behaviour tree (used by the Card system).</summary>
         public void SetBehaviourTree(BTNode tree) => behaviourTree = tree;
+
+        // ════════════════════════════════════════════
+        // GAMBIT INJECTION (GDD §4.1)
+        // ════════════════════════════════════════════
+
+        /// <summary>
+        /// Inject up to two Pre-Built Gambits at the top of this unit's behaviour tree.
+        /// Gambit 1 has the highest priority; Gambit 2 is tried if Gambit 1 fails.
+        /// The unit's default class behaviour remains as a fallback below both gambits.
+        /// </summary>
+        public void SetGambits(BTNode gambit1, BTNode gambit2 = null)
+        {
+            // Rebuild: [Gambit1] → [Gambit2] → [Default class BT]
+            BTNode defaultTree = BTPresets.GetPreset(unitData != null ? unitData.UnitType : "warden");
+
+            if (gambit1 == null && gambit2 == null)
+            {
+                behaviourTree = defaultTree;
+                return;
+            }
+
+            var children = new System.Collections.Generic.List<BTNode>();
+            if (gambit1 != null) children.Add(gambit1);
+            if (gambit2 != null) children.Add(gambit2);
+            children.Add(defaultTree);
+
+            behaviourTree = new KindredSiege.AI.BehaviourTree.Selector("GambitRoot", children.ToArray());
+        }
+
+        // ════════════════════════════════════════════
+        // HORROR RATING (GDD §6.3)
+        // ════════════════════════════════════════════
+
+        /// <summary>
+        /// Called by BattleManager every 5 seconds when a rival with Horror Rating is present.
+        /// Drain is multiplied by this unit's Comprehension stat.
+        /// </summary>
+        public void ApplyHorrorRatingDrain(int baseDrain, string rivalName)
+        {
+            if (baseDrain <= 0) return;
+            int actual = Mathf.RoundToInt(baseDrain * Comprehension);
+            ModifySanity(-actual, "HorrorRatingAura");
+
+            EventBus.Publish(new HorrorRatingDrainEvent
+            {
+                UnitId     = UnitId,
+                SanityLost = actual,
+                RivalName  = rivalName
+            });
+        }
+
+        // ════════════════════════════════════════════
+        // HELPERS
+        // ════════════════════════════════════════════
+
+        /// <summary>
+        /// Returns true if the sanity damage source is eldritch in nature.
+        /// These sources are scaled by the unit's Comprehension stat (GDD §5.3).
+        /// </summary>
+        private static bool IsEldritchSource(string reason)
+        {
+            return reason is "EldritchHit"
+                         or "HorrorRatingAura"
+                         or "DreadContest"
+                         or "ForbiddenKnowledge"
+                         or "PassiveDrain"    // Vessel — already doomed by eldritch means
+                         or "RitualGambit";
+        }
     }
 }

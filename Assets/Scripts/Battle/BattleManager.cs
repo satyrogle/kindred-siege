@@ -4,6 +4,7 @@ using System.Linq;
 using KindredSiege.Core;
 using KindredSiege.AI.BehaviourTree;
 using KindredSiege.Rivalry;
+using KindredSiege.UI;
 
 namespace KindredSiege.Battle
 {
@@ -40,6 +41,16 @@ namespace KindredSiege.Battle
         // Results
         public float BattleDuration => battleTimer;
         public bool IsBattleActive => battleActive;
+
+        // ─── Horror Rating (GDD §6.3) ───
+        // The rival currently present on the battlefield. Set before StartBattle().
+        // Their Horror Rating passively drains all player units every 5 seconds.
+        private KindredSiege.Rivalry.RivalData _activeRival;
+        private float _horrorRatingTimer = 0f;
+        private const float HorrorRatingInterval = 5f;
+
+        /// <summary>Assign the rival that will appear in this battle (for Horror Rating drain).</summary>
+        public void SetActiveRival(KindredSiege.Rivalry.RivalData rival) => _activeRival = rival;
 
         private void Awake()
         {
@@ -80,6 +91,10 @@ namespace KindredSiege.Battle
 
             battleTimer += Time.deltaTime * battleSpeed;
 
+            // Inject FocusFire target before ticking AI (DirectiveSystem override)
+            if (DirectiveSystem.Instance != null)
+                DirectiveSystem.Instance.InjectFocusFireTarget(team1);
+
             // Tick all living units
             foreach (var unit in allUnits)
             {
@@ -88,6 +103,9 @@ namespace KindredSiege.Battle
                     unit.TickAI();
                 }
             }
+
+            // Horror Rating drain — every 5 seconds, active rival drains all player unit sanity
+            TickHorrorRating();
 
             // Check win conditions
             CheckBattleEnd();
@@ -100,6 +118,7 @@ namespace KindredSiege.Battle
         {
             ClearBattle();
             nextUnitId = 0;
+            _horrorRatingTimer = 0f;
 
             SpawnTeam(team1Units, 1, team1, grid.GetTeam1Zone());
             SpawnTeam(team2Units, 2, team2, grid.GetTeam2Zone());
@@ -167,6 +186,10 @@ namespace KindredSiege.Battle
 
                 controller.Initialise(data, teamId, nextUnitId);
                 nextUnitId++;
+
+                // Attach health/sanity bars (player team only — prototype shows enemy bars too)
+                var healthBar = unitGO.AddComponent<UnitHealthBar>();
+                healthBar.Initialise(controller);
 
                 // Place on grid
                 grid.PlaceUnit(controller, spawnZone[i]);
@@ -305,6 +328,30 @@ namespace KindredSiege.Battle
                 .Sum(u => u.Data.BonusKPPerSurvival);
 
             return baseKP + emissaryBonus;
+        }
+
+        // ─── Horror Rating Tick (GDD §6.3) ───
+
+        /// <summary>
+        /// Every 5 seconds, if a rival with Horror Rating > 0 is present,
+        /// all living player units take sanity damage scaled by their Comprehension.
+        /// </summary>
+        private void TickHorrorRating()
+        {
+            if (_activeRival == null || _activeRival.HorrorRatingDrainPerTick <= 0) return;
+
+            _horrorRatingTimer += Time.deltaTime * battleSpeed;
+            if (_horrorRatingTimer < HorrorRatingInterval) return;
+
+            _horrorRatingTimer = 0f;
+
+            foreach (var unit in team1)
+            {
+                if (unit != null && unit.IsAlive)
+                    unit.ApplyHorrorRatingDrain(_activeRival.HorrorRatingDrainPerTick, _activeRival.FullName);
+            }
+
+            Debug.Log($"[HorrorRating] {_activeRival.FullName} (HR {_activeRival.HorrorRating}) drained {_activeRival.HorrorRatingDrainPerTick} sanity from all player units.");
         }
 
         // ─── Battle Controls (UI hooks) ───

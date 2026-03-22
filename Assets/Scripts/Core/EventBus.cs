@@ -180,4 +180,37 @@ namespace KindredSiege.Core
         public int TotalKP;
         public int Season;
     }
+
+    // --- Horror Rating Events (GDD §6.3) ---
+    public struct HorrorRatingDrainEvent
+    {
+        public int    UnitId;
+        public int    SanityLost;
+        public string RivalName;
+    }
+
+    // --- Directive Events (GDD §4.2) ---
+    public struct DirectiveUsedEvent
+    {
+        public string DirectiveName;   // DirectiveType.ToString()
+        public int    UnitId;          // Target unit (-1 for global directives like FocusFire)
+        public int    PointsRemaining;
+    }
+
+    // Raised when a unit hits 0 HP — battle pauses for the Mercy Decision.
+    public struct MercyDecisionRequiredEvent
+    {
+        public int    UnitId;
+        public string UnitName;
+        public string UnitType;
+        public int    ExpeditionCount;
+        public int    MercyTokensAvailable;
+    }
+
+    // Raised when the player resolves the Mercy Decision (spend token or let die).
+    public struct MercyDecisionResolvedEvent
+    {
+        public int  UnitId;
+        public bool TokenSpent; // true = revived, false = permanent death
+    }
 }
