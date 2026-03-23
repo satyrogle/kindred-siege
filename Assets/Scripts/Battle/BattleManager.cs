@@ -42,6 +42,12 @@ namespace KindredSiege.Battle
         public float BattleDuration => battleTimer;
         public bool IsBattleActive => battleActive;
 
+        // ─── Team accessors (for GambitSetupPanel + FatigueSystem) ───
+        /// <summary>Returns the UnitData asset array for team 1 (used by GambitSetupPanel).</summary>
+        public UnitData[] GetTeam1Units() => team1Units;
+        /// <summary>Returns the live UnitController list for team 1 (used by FatigueSystem).</summary>
+        public List<UnitController> GetTeam1Controllers() => team1;
+
         // ─── Horror Rating (GDD §6.3) ───
         // The rival currently present on the battlefield. Set before StartBattle().
         // Their Horror Rating passively drains all player units every 5 seconds.
@@ -67,7 +73,11 @@ namespace KindredSiege.Battle
             EventBus.Subscribe<UnitDefeatedEvent>(OnUnitDefeated);
             EventBus.Subscribe<UnitLostEvent>(OnUnitLost);
 
-            Invoke("StartBattle", 1f);
+            // Show gambit setup panel if present, otherwise auto-start after 1 second
+            if (GambitSetupPanel.Instance != null)
+                GambitSetupPanel.Instance.Show();
+            else
+                Invoke("StartBattle", 1f);
         }
 
         private void OnDestroy()
@@ -122,6 +132,9 @@ namespace KindredSiege.Battle
 
             SpawnTeam(team1Units, 1, team1, grid.GetTeam1Zone());
             SpawnTeam(team2Units, 2, team2, grid.GetTeam2Zone());
+
+            // Apply pre-configured gambits to player team
+            GambitSetupPanel.Instance?.ApplyGambitsToTeam(team1);
 
             battleTimer = 0f;
             battleActive = true;
@@ -187,12 +200,22 @@ namespace KindredSiege.Battle
                 controller.Initialise(data, teamId, nextUnitId);
                 nextUnitId++;
 
+                // Apply fatigue penalties for player team (GDD §11.4)
+                if (teamId == 1 && !FatigueSystem.IsUndeployable(data))
+                {
+                    var (hpMult, dmgMult, extraHesitation) = FatigueSystem.GetFatigueModifiers(data.FatigueLevel);
+                    if (hpMult < 1f || dmgMult < 1f)
+                        controller.ApplyModifiers(hpMult, dmgMult);
+                    controller.ExtraHesitationFromFatigue = extraHesitation;
+                }
+
                 // Attach health/sanity bars (player team only — prototype shows enemy bars too)
                 var healthBar = unitGO.AddComponent<UnitHealthBar>();
                 healthBar.Initialise(controller);
 
                 // Place on grid
                 grid.PlaceUnit(controller, spawnZone[i]);
+                controller.SpawnPosition = controller.transform.position; // Record actual grid position
 
                 teamList.Add(controller);
                 allUnits.Add(controller);
@@ -356,10 +379,21 @@ namespace KindredSiege.Battle
 
         // ─── Battle Controls (UI hooks) ───
 
-        public void SetBattleSpeed(float speed) => battleSpeed = Mathf.Clamp(speed, 0.5f, 4f);
-        public void PauseBattle() => battleSpeed = 0f;
-        public void ResumeBattle() => battleSpeed = 1f;
-
+        public void SetBattleSpeed(float speed)
+        {
+            battleSpeed = Mathf.Clamp(speed, 0.5f, 4f);
+            Time.timeScale = battleSpeed;
+        }
+        public void PauseBattle()
+        {
+            battleSpeed = 0f;
+            Time.timeScale = 0f;
+        }
+        public void ResumeBattle()
+        {
+            battleSpeed = 1f;
+            Time.timeScale = 1f;
+        }
         private void ClearBattle()
         {
             foreach (var unit in allUnits)

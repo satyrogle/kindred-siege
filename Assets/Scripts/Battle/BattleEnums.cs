@@ -59,6 +59,22 @@ namespace KindredSiege.Battle
     }
 
     // ═══════════════════════════════════════════════════════════════════════
+    // PHOBIA TYPES  (GDD §5.5)
+    // Gained when a unit hits 0 sanity but is saved by a Mercy Token.
+    // The phobia persists on the UnitData ScriptableObject between battles.
+    // ═══════════════════════════════════════════════════════════════════════
+
+    public enum PhobiaType
+    {
+        None = 0,
+        BloodPhobia,      // Witnessing any death deals extra -8 sanity (stacks with AllyDied penalty)
+        EldritchPhobia,   // Comprehension multiplier on all eldritch hits raised by 0.5
+        SolitudePhobia,   // Takes -3 sanity per 5 seconds when no ally is within 4 units
+        ViolencePhobia,   // Takes -2 sanity each time this unit deals damage
+        DarkPhobia,       // Takes -4 sanity per 10 seconds in prolonged combat (stacks with ProlongedCombat)
+    }
+
+    // ═══════════════════════════════════════════════════════════════════════
     // DIRECTIVE TYPES  (GDD §4.2)
     // The player's limited during-battle interventions.
     // ═══════════════════════════════════════════════════════════════════════

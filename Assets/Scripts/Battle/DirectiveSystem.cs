@@ -183,6 +183,7 @@ namespace KindredSiege.Battle
 
         private IEnumerator HoldPositionCoroutine(UnitController unit, float duration)
         {
+            unit.DirectiveOverrideActive = true;
             Vector3 holdPos = unit.transform.position;
             float elapsed   = 0f;
 
@@ -193,6 +194,7 @@ namespace KindredSiege.Battle
                 elapsed += Time.deltaTime;
                 yield return null;
             }
+            if (unit != null) unit.DirectiveOverrideActive = false;
         }
 
         /// <summary>
@@ -231,6 +233,9 @@ namespace KindredSiege.Battle
                 elapsed += Time.deltaTime;
                 yield return null;
             }
+
+            if (unit != null) unit.DirectiveOverrideActive = false;
+
         }
 
         /// <summary>
@@ -246,6 +251,13 @@ namespace KindredSiege.Battle
 
             targetUnit.ModifySanity(-5, "EldritchHit"); // Sanity cost of unleashing
             _unleashActiveIds.Add(targetUnit.UnitId);
+            // Visual feedback — turn the unit yellow during Unleash
+            var renderer = targetUnit.GetComponent<Renderer>();
+            if (renderer != null)
+            {
+                var mat = renderer.material;
+                mat.color = Color.yellow;
+            }
             StartCoroutine(UnleashCoroutine(targetUnit, 10f));
             Debug.Log($"[Directives] Unleash → {targetUnit.UnitName} for 10s (+20% dmg, no retreat).");
             return true;
@@ -253,6 +265,7 @@ namespace KindredSiege.Battle
 
         private IEnumerator UnleashCoroutine(UnitController unit, float duration)
         {
+            unit.DirectiveOverrideActive = true;
             unit.GambitDamageMultiplier = 1.20f;
             unit.GambitIgnoreRetreat    = true;
 
@@ -261,8 +274,14 @@ namespace KindredSiege.Battle
             if (unit != null)
             {
                 unit.GambitDamageMultiplier = 1f;
-                unit.GambitIgnoreRetreat    = false;
+                unit.GambitIgnoreRetreat = false;
                 _unleashActiveIds.Remove(unit.UnitId);
+
+                // Restore team colour
+                var renderer = unit.GetComponent<Renderer>();
+                if (renderer != null)
+                    renderer.material.color = new Color(0.2f, 0.5f, 0.9f); // Blue team colour
+
                 Debug.Log($"[Directives] Unleash expired on {unit.UnitName}.");
             }
         }
@@ -285,20 +304,18 @@ namespace KindredSiege.Battle
 
         private IEnumerator SacrificeCoroutine(UnitController unit)
         {
+            unit.DirectiveOverrideActive = true;
             unit.GambitDamageMultiplier = 2.0f;
             unit.GambitIgnoreRetreat    = true;
 
-            // Find strongest enemy at the moment of sacrifice
-            if (BattleManager.Instance == null) yield break;
 
-            UnitController strongest = null;
             float elapsed = 0f;
             float maxDuration = 8f; // Safety cap — sacrifice charge lasts up to 8 seconds
 
             while (elapsed < maxDuration && unit != null && unit.IsAlive)
             {
                 // Find the strongest enemy each frame (in case it changes)
-                strongest = FindStrongestEnemy(unit);
+                var strongest = FindStrongestEnemy(unit);
                 if (strongest == null) break;
 
                 float dist = Vector3.Distance(unit.transform.position, strongest.transform.position);
@@ -321,6 +338,7 @@ namespace KindredSiege.Battle
             // Unit dies at the end of the charge
             if (unit != null && unit.IsAlive)
             {
+                unit.DirectiveOverrideActive = false;
                 unit.TakeDamage(unit.CurrentHP, null); // Instant death
                 Debug.Log($"[Directives] {unit.UnitName} died in the Sacrifice charge.");
             }
@@ -487,8 +505,9 @@ namespace KindredSiege.Battle
 
         private UnitController FindUnitById(int unitId)
         {
-            return Object.FindObjectsOfType<UnitController>()
-                .FirstOrDefault(u => u.UnitId == unitId);
+            foreach (var u in Object.FindObjectsByType<UnitController>(FindObjectsInactive.Include, FindObjectsSortMode.None))
+                if (u.UnitId == unitId) return u;
+            return null;
         }
 
         private UnitController FindStrongestEnemy(UnitController fromUnit)

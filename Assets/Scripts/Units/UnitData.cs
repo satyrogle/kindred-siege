@@ -61,6 +61,15 @@ namespace KindredSiege.Battle
         public bool CannotBeHealed = false;
         public int PassiveSanityDrainPerSecond = 0;
 
+        [Header("Trauma — Phobia (GDD §5.5)")]
+        [Tooltip("Phobia gained when this unit was saved from 0 sanity by a Mercy Token. Persists between battles.")]
+        public PhobiaType ActivePhobia = PhobiaType.None;
+
+        [Header("Fatigue (GDD §11.4)")]
+        [Range(0, 100)]
+        [Tooltip("0 = rested. 50+ = penalties to HP/damage. 80+ = severe penalties + hesitation.")]
+        public int FatigueLevel = 0;
+
         [Header("Progression")]
         // Incremented by the campaign manager after each survived expedition.
         // At 5+, unit is a Veteran — higher Virtue chance under stress.

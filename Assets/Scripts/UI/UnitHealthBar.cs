@@ -108,23 +108,21 @@ namespace KindredSiege.UI
             var go = new GameObject(name);
             go.transform.SetParent(parent, false);
             var rt = go.AddComponent<RectTransform>();
-            rt.anchorMin = new Vector2(0f, 0.5f);
-            rt.anchorMax = new Vector2(0f, 0.5f);
-            rt.pivot     = new Vector2(0f, 0.5f);
+            rt.anchorMin = new Vector2(0.5f, 0.5f);
+            rt.anchorMax = new Vector2(0.5f, 0.5f);
+            rt.pivot = new Vector2(0.5f, 0.5f);
 
             // Inset slightly from background
             float inset = 4f;
             float fullWidth = (BarWidth / CanvasScale) - inset * 2;
-            float height    = (BarHeight / CanvasScale) - inset;
+            float height = (BarHeight / CanvasScale) - inset;
 
-            rt.sizeDelta        = new Vector2(fullWidth, height);
-            rt.anchoredPosition = new Vector2(-fullWidth * 0.5f, yPos);
+
+            rt.sizeDelta = new Vector2(fullWidth, height);
+            rt.anchoredPosition = new Vector2(0f, yPos);
 
             var img = go.AddComponent<Image>();
-            img.color     = colour;
-            img.type      = Image.Type.Filled;
-            img.fillMethod = Image.FillMethod.Horizontal;
-            img.fillAmount = 1f;
+            img.color = colour;
             return img;
         }
 
@@ -173,24 +171,34 @@ namespace KindredSiege.UI
         {
             if (_unit == null) return;
 
-            // HP fill (green → red as HP drops)
+            float inset = 4f;
+            float maxWidth = (BarWidth / CanvasScale) - inset * 2;
+
+            // HP bar — resize width based on ratio
             if (_hpFill != null)
             {
                 float hpRatio = _unit.MaxHP > 0
                     ? (float)_unit.CurrentHP / _unit.MaxHP : 0f;
 
-                _hpFill.fillAmount = hpRatio;
-                _hpFill.color      = Color.Lerp(Color.red, Color.green, hpRatio);
+                var rt = _hpFill.GetComponent<RectTransform>();
+                rt.sizeDelta = new Vector2(maxWidth * hpRatio, rt.sizeDelta.y);
+                // Offset so bar shrinks from right to left
+                rt.anchoredPosition = new Vector2(-(maxWidth * (1f - hpRatio)) * 0.5f, rt.anchoredPosition.y);
+
+                _hpFill.color = Color.Lerp(Color.red, Color.green, hpRatio);
             }
 
-            // Sanity fill (colour shifts with state)
+            // Sanity bar — resize width based on ratio
             if (_sanityFill != null)
             {
                 float sanityRatio = _unit.MaxSanity > 0
                     ? (float)_unit.CurrentSanity / _unit.MaxSanity : 0f;
 
-                _sanityFill.fillAmount = sanityRatio;
-                _sanityFill.color      = SanityColour(_unit.SanityState);
+                var rt = _sanityFill.GetComponent<RectTransform>();
+                rt.sizeDelta = new Vector2(maxWidth * sanityRatio, rt.sizeDelta.y);
+                rt.anchoredPosition = new Vector2(-(maxWidth * (1f - sanityRatio)) * 0.5f, rt.anchoredPosition.y);
+
+                _sanityFill.color = SanityColour(_unit.SanityState);
             }
         }
 

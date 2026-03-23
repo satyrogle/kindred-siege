@@ -29,6 +29,8 @@ namespace KindredSiege.Battle
         public float MoveSpeed    { get; private set; }
         public int Armour         { get; private set; }
 
+        public bool DirectiveOverrideActive { get; set; } = false;
+
         // ─── Sanity ───
         public int MaxSanity      { get; private set; }
         public int CurrentSanity  { get; private set; }
@@ -61,13 +63,26 @@ namespace KindredSiege.Battle
         // Applied as a multiplier to all eldritch-source sanity damage.
         public float Comprehension => unitData != null ? unitData.Comprehension : 1f;
 
+        // ─── Phobia (GDD §5.5) ───
+        public PhobiaType ActivePhobia => unitData != null ? unitData.ActivePhobia : PhobiaType.None;
+
+        // SolitudePhobia + DarkPhobia: interval timers tracked per unit at runtime
+        private float _solitudePhobiaTimer = 0f;
+        private float _darkPhobiaTimer     = 0f;
+        private const float SolitudePhobiaInterval = 5f;
+        private const float DarkPhobiaInterval     = 10f;
+
+        // ─── Fatigue (GDD §11.4) ───
+        // Extra hesitation chance applied on top of sanity hesitation when unit is exhausted.
+        public float ExtraHesitationFromFatigue { get; set; } = 0f;
+
         // ─── Gambit / Directive state ───
         // Gambits and Directives can set these to modify combat behaviour.
         public float GambitDamageMultiplier { get; set; } = 1f;
         public bool  GambitIgnoreRetreat    { get; set; } = false;
 
         // Spawn position — recorded in Initialise. Used by HoldTheLine gambit.
-        public Vector3 SpawnPosition { get; private set; }
+        public Vector3 SpawnPosition { get; set; }
 
         // Set by DirectiveSystem when FocusFire is active; injected into BT blackboard each tick.
         public UnitController ForcedTarget { get; set; }
@@ -140,6 +155,11 @@ namespace KindredSiege.Battle
             GambitIgnoreRetreat    = false;
             ForcedTarget           = null;
 
+            // Reset phobia timers
+            _solitudePhobiaTimer  = 0f;
+            _darkPhobiaTimer      = 0f;
+            ExtraHesitationFromFatigue = 0f;
+
             transform.localScale = Vector3.one * data.ModelScale;
             ActionHistory.Clear();
         }
@@ -196,6 +216,9 @@ namespace KindredSiege.Battle
                 ModifySanity(-3, "ProlongedCombat");
             }
 
+            // ── Phobia tick effects (GDD §5.5) ──
+            TickPhobiaEffects(dt);
+
             // ── Virtue timers ──
             if (_resoluteTimer > 0f)
                 _resoluteTimer -= dt;
@@ -210,8 +233,8 @@ namespace KindredSiege.Battle
                 }
             }
 
-            // ── Sanity hesitation (GDD §5.1) ──
-            float hesitation = SanitySystem.GetHesitationChance(SanityState);
+            // ── Sanity hesitation (GDD §5.1) + fatigue hesitation (GDD §11.4) ──
+            float hesitation = SanitySystem.GetHesitationChance(SanityState) + ExtraHesitationFromFatigue;
             if (hesitation > 0f && Random.value < hesitation)
                 return; // Unit hesitates — skip this tick
 
@@ -266,6 +289,9 @@ namespace KindredSiege.Battle
             // ── Affliction: Hopeless — raise retreat threshold (BT nodes read this flag) ──
             battleContext.Set("Hopeless", ActiveAffliction == AfflictionType.Hopeless);
 
+            // ── Directive override: skip BT when a directive coroutine is controlling this unit ──
+            if (DirectiveOverrideActive) return;
+
             // ── Normal BT execution ──
             behaviourTree.Tick(battleContext);
         }
@@ -298,7 +324,13 @@ namespace KindredSiege.Battle
             // Comprehension (GDD §5.3): eldritch-source damage scaled by class multiplier.
             // High-Comprehension units understand the horror and suffer more.
             if (delta < 0 && IsEldritchSource(reason))
-                delta = Mathf.RoundToInt(delta * Comprehension);
+            {
+                float comp = Comprehension;
+                // EldritchPhobia: +0.5 to effective Comprehension for all eldritch hits
+                if (ActivePhobia == PhobiaType.EldritchPhobia)
+                    comp += 0.5f;
+                delta = Mathf.RoundToInt(delta * comp);
+            }
 
             int oldSanity = CurrentSanity;
             CurrentSanity = Mathf.Clamp(CurrentSanity + delta, 0, MaxSanity);
@@ -371,6 +403,10 @@ namespace KindredSiege.Battle
         public void OnWitnessAllyDeath(UnitController deadAlly)
         {
             ModifySanity(-15, "AllyDied");
+
+            // BloodPhobia: witnessing any death deals an extra -8 sanity
+            if (ActivePhobia == PhobiaType.BloodPhobia)
+                ModifySanity(-8, "BloodPhobia");
         }
 
         /// <summary>Called by BattleManager when ANY unit is Lost (sanity = 0). Hits everyone.</summary>
@@ -444,6 +480,10 @@ namespace KindredSiege.Battle
 
             target.TakeDamage(damage, this);
             attackTimer = attackCooldown;
+
+            // ViolencePhobia: every attack costs -2 sanity
+            if (ActivePhobia == PhobiaType.ViolencePhobia)
+                ModifySanity(-2, "ViolencePhobia");
 
             RecordAction("Attack", target.UnitId);
 
@@ -562,6 +602,45 @@ namespace KindredSiege.Battle
                 SanityLost = actual,
                 RivalName  = rivalName
             });
+        }
+
+        // ════════════════════════════════════════════
+        // PHOBIA PROCESSING (GDD §5.5)
+        // ════════════════════════════════════════════
+
+        /// <summary>
+        /// Tick interval-based phobia effects (SolitudePhobia, DarkPhobia).
+        /// Called each TickAI() frame.
+        /// </summary>
+        private void TickPhobiaEffects(float dt)
+        {
+            switch (ActivePhobia)
+            {
+                case PhobiaType.SolitudePhobia:
+                    _solitudePhobiaTimer += dt;
+                    if (_solitudePhobiaTimer >= SolitudePhobiaInterval)
+                    {
+                        _solitudePhobiaTimer = 0f;
+                        // Check if any ally is within 4 units
+                        bool allyNearby = battleContext != null && battleContext.Allies != null &&
+                            battleContext.Allies.Exists(a =>
+                                a != null && a.IsAlive && a != this &&
+                                Vector3.Distance(transform.position, a.transform.position) <= 4f);
+
+                        if (!allyNearby)
+                            ModifySanity(-3, "SolitudePhobia");
+                    }
+                    break;
+
+                case PhobiaType.DarkPhobia:
+                    _darkPhobiaTimer += dt;
+                    if (_darkPhobiaTimer >= DarkPhobiaInterval)
+                    {
+                        _darkPhobiaTimer = 0f;
+                        ModifySanity(-4, "DarkPhobia");
+                    }
+                    break;
+            }
         }
 
         // ════════════════════════════════════════════

@@ -213,4 +213,25 @@ namespace KindredSiege.Core
         public int  UnitId;
         public bool TokenSpent; // true = revived, false = permanent death
     }
+
+    // --- Phobia Events (GDD §5.5) ---
+
+    /// <summary>Raised when a unit gains a phobia after being saved from 0 sanity by Mercy.</summary>
+    public struct PhobiaGainedEvent
+    {
+        public int    UnitId;
+        public string UnitName;
+        public string PhobiaName;   // PhobiaType.ToString()
+    }
+
+    // --- Fatigue Events (GDD §11.4) ---
+
+    /// <summary>Raised by FatigueSystem at the end of each battle for each player unit.</summary>
+    public struct FatigueAppliedEvent
+    {
+        public int    UnitId;
+        public string UnitName;
+        public int    FatigueGained;
+        public int    TotalFatigue;
+    }
 }

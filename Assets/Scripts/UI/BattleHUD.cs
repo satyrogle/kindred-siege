@@ -76,6 +76,7 @@ namespace KindredSiege.UI
             EventBus.Subscribe<VirtueGainedEvent>(OnVirtueGained);
             EventBus.Subscribe<AfflictionGainedEvent>(OnAfflictionGained);
             EventBus.Subscribe<HorrorRatingDrainEvent>(OnHorrorDrain);
+            EventBus.Subscribe<PhobiaGainedEvent>(OnPhobiaGained);
         }
 
         private void OnDestroy()
@@ -85,6 +86,7 @@ namespace KindredSiege.UI
             EventBus.Unsubscribe<VirtueGainedEvent>(OnVirtueGained);
             EventBus.Unsubscribe<AfflictionGainedEvent>(OnAfflictionGained);
             EventBus.Unsubscribe<HorrorRatingDrainEvent>(OnHorrorDrain);
+            EventBus.Unsubscribe<PhobiaGainedEvent>(OnPhobiaGained);
         }
 
         private void Update()
@@ -110,21 +112,40 @@ namespace KindredSiege.UI
 
         private void HandleUnitSelection()
         {
-            if (!Input.GetMouseButtonDown(0)) return;
             if (_mainCamera == null) return;
+            if (GUIUtility.hotControl != 0) return;
 
-            Ray ray = _mainCamera.ScreenPointToRay(Input.mousePosition);
-            if (Physics.Raycast(ray, out RaycastHit hit))
+            // Left-click: select a player unit
+            if (Input.GetMouseButtonDown(0))
             {
-                var unit = hit.collider.GetComponentInParent<UnitController>();
-                if (unit != null && unit.TeamId == 1 && unit.IsAlive)
+                Ray ray = _mainCamera.ScreenPointToRay(Input.mousePosition);
+                if (Physics.Raycast(ray, out RaycastHit hit))
                 {
-                    _selectedUnit = unit;
-                    return;
+                    var unit = hit.collider.GetComponentInParent<UnitController>();
+                    if (unit != null && unit.TeamId == 1 && unit.IsAlive)
+                    {
+                        _selectedUnit = unit;
+                        return;
+                    }
+                }
+                _selectedUnit = null;
+            }
+
+            // Right-click: Focus Fire on an enemy unit (1pt directive)
+            if (Input.GetMouseButtonDown(1) && _directives != null)
+            {
+                Ray ray = _mainCamera.ScreenPointToRay(Input.mousePosition);
+                if (Physics.Raycast(ray, out RaycastHit hit))
+                {
+                    var unit = hit.collider.GetComponentInParent<UnitController>();
+                    if (unit != null && unit.TeamId != 1 && unit.IsAlive)
+                    {
+                        bool applied = _directives.SpendDirective(DirectiveType.FocusFire, unit);
+                        if (applied)
+                            Debug.Log($"[HUD] Right-click Focus Fire → {unit.UnitName}");
+                    }
                 }
             }
-            // Click on empty space — deselect
-            _selectedUnit = null;
         }
 
         // ════════════════════════════════════════════
@@ -153,26 +174,40 @@ namespace KindredSiege.UI
         {
             if (_directives == null) return;
 
-            int panelH = 80;
+            bool focusActive = _directives.FocusFireTarget != null;
+            int panelH = focusActive ? 104 : 82;
             Rect panel = new Rect(Margin, Margin, PanelW, panelH);
             GUI.Box(panel, GUIContent.none, _panelStyle);
 
             int pts    = _directives.DirectivePoints;
             int tokens = _directives.MercyTokens;
+            int ix     = Margin + 10;
+            int iy     = Margin + 8;
 
-            GUI.Label(new Rect(Margin + 10, Margin + 8,  PanelW - 20, 24),
-                $"Directive Points: {pts}", _labelStyle);
-
-            GUI.Label(new Rect(Margin + 10, Margin + 34, PanelW - 20, 24),
-                $"Mercy Tokens: {tokens}", _labelStyle);
+            GUI.Label(new Rect(ix, iy, PanelW - 20, 20),
+                $"Directive Points: {pts}   |   Mercy Tokens: {tokens}", _labelStyle);
+            iy += 22;
 
             // Battle timer
             string timer = _battle != null
                 ? $"Battle: {_battle.BattleDuration:F0}s"
                 : "Battle: --";
+            GUI.Label(new Rect(ix, iy, PanelW - 20, 18), timer, _labelStyle);
+            iy += 20;
 
-            GUI.Label(new Rect(Margin + 10, Margin + 58, PanelW - 20, 20),
-                timer, _labelStyle);
+            // Tip for Focus Fire
+            GUI.Label(new Rect(ix, iy, PanelW - 20, 16),
+                "Right-click enemy → Focus Fire (1pt)", _labelStyle);
+            iy += 18;
+
+            // Active Focus Fire status
+            if (focusActive)
+            {
+                GUI.color = new Color(1f, 0.85f, 0.2f);
+                GUI.Label(new Rect(ix, iy, PanelW - 20, 18),
+                    $"FOCUS: {_directives.FocusFireTarget.UnitName} ({_directives.FocusFireTimer:F0}s)", _labelStyle);
+                GUI.color = Color.white;
+            }
         }
 
         // ─── Speed controls (top-right) ───────────────────────────────────────
@@ -392,13 +427,18 @@ namespace KindredSiege.UI
                 PushToast($"Horror aura of {evt.RivalName} drains the battlefield.", new Color(0.5f, 0f, 0.8f));
         }
 
+        private void OnPhobiaGained(PhobiaGainedEvent evt)
+        {
+            PushToast($"✦ {evt.UnitName}: PHOBIA — {evt.PhobiaName}!", new Color(1.0f, 0.45f, 0.1f));
+        }
+
         // ════════════════════════════════════════════
         // HELPERS
         // ════════════════════════════════════════════
 
         private UnitController FindUnitById(int id)
         {
-            foreach (var u in FindObjectsOfType<UnitController>())
+            foreach (var u in FindObjectsByType<UnitController>(FindObjectsInactive.Include, FindObjectsSortMode.None))
                 if (u.UnitId == id) return u;
             return null;
         }
