@@ -77,6 +77,7 @@ namespace KindredSiege.UI
             EventBus.Subscribe<AfflictionGainedEvent>(OnAfflictionGained);
             EventBus.Subscribe<HorrorRatingDrainEvent>(OnHorrorDrain);
             EventBus.Subscribe<PhobiaGainedEvent>(OnPhobiaGained);
+            EventBus.Subscribe<ForbiddenKnowledgeEvent>(OnForbiddenKnowledge);
         }
 
         private void OnDestroy()
@@ -87,6 +88,7 @@ namespace KindredSiege.UI
             EventBus.Unsubscribe<AfflictionGainedEvent>(OnAfflictionGained);
             EventBus.Unsubscribe<HorrorRatingDrainEvent>(OnHorrorDrain);
             EventBus.Unsubscribe<PhobiaGainedEvent>(OnPhobiaGained);
+            EventBus.Unsubscribe<ForbiddenKnowledgeEvent>(OnForbiddenKnowledge);
         }
 
         private void Update()
@@ -430,6 +432,11 @@ namespace KindredSiege.UI
         private void OnPhobiaGained(PhobiaGainedEvent evt)
         {
             PushToast($"✦ {evt.UnitName}: PHOBIA — {evt.PhobiaName}!", new Color(1.0f, 0.45f, 0.1f));
+        }
+
+        private void OnForbiddenKnowledge(ForbiddenKnowledgeEvent evt)
+        {
+            PushToast($"✦ {evt.UnitName}: MaxSanity −{evt.MaxSanityLost} → {evt.NewMaxSanity} (Forbidden Knowledge)", new Color(0.4f, 0.8f, 1.0f));
         }
 
         // ════════════════════════════════════════════

@@ -72,7 +72,18 @@ namespace KindredSiege.Battle
             // Subscribe to unit events for sanity propagation
             EventBus.Subscribe<UnitDefeatedEvent>(OnUnitDefeated);
             EventBus.Subscribe<UnitLostEvent>(OnUnitLost);
-
+            // Reset runtime state on ScriptableObjects (prevents editor persistence bug)
+            if (team1Units != null)
+            {
+                foreach (var data in team1Units)
+                {
+                    if (data != null)
+                    {
+                        data.FatigueLevel = 0;
+                        data.ActivePhobia = PhobiaType.None;
+                    }
+                }
+            }
             // Show gambit setup panel if present, otherwise auto-start after 1 second
             if (GambitSetupPanel.Instance != null)
                 GambitSetupPanel.Instance.Show();

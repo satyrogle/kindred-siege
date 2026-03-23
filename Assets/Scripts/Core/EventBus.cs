@@ -214,6 +214,20 @@ namespace KindredSiege.Core
         public bool TokenSpent; // true = revived, false = permanent death
     }
 
+    // --- Forbidden Knowledge Events (GDD §5.4) ---
+
+    /// <summary>
+    /// Raised when an Investigator using ForbiddenScan reduces their own MaxSanity permanently.
+    /// </summary>
+    public struct ForbiddenKnowledgeEvent
+    {
+        public int    UnitId;
+        public string UnitName;
+        public int    MaxSanityLost;   // Amount reduced this scan
+        public int    NewMaxSanity;    // MaxSanity after penalty
+        public int    TotalPenalty;    // Cumulative MaxSanityPenalty on UnitData
+    }
+
     // --- Phobia Events (GDD §5.5) ---
 
     /// <summary>Raised when a unit gains a phobia after being saved from 0 sanity by Mercy.</summary>

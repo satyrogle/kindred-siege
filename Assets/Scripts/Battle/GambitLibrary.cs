@@ -538,9 +538,8 @@ namespace KindredSiege.Battle
                         if (!ctx.Get<bool>(key))
                         {
                             ctx.Set(key, true);
-                            // Forbidden Knowledge: -2 MaxSanity permanently
-                            ctx.Owner.ModifySanity(-2, "ForbiddenKnowledge");
-                            Debug.Log($"[ForbiddenScan] {ctx.Owner.UnitName} paid 2 MaxSanity to scan {enemy.UnitName}.");
+                            // Forbidden Knowledge: permanently lowers MaxSanity ceiling by 2 (GDD §5.4)
+                            ctx.Owner.ApplyForbiddenKnowledge(2);
                         }
                     }
 

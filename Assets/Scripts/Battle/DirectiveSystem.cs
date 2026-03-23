@@ -265,7 +265,6 @@ namespace KindredSiege.Battle
 
         private IEnumerator UnleashCoroutine(UnitController unit, float duration)
         {
-            unit.DirectiveOverrideActive = true;
             unit.GambitDamageMultiplier = 1.20f;
             unit.GambitIgnoreRetreat    = true;
 

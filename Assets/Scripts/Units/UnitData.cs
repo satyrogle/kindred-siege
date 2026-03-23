@@ -61,6 +61,11 @@ namespace KindredSiege.Battle
         public bool CannotBeHealed = false;
         public int PassiveSanityDrainPerSecond = 0;
 
+        [Header("Forbidden Knowledge (GDD §5.4)")]
+        [Tooltip("Permanent MaxSanity reduction from studying forbidden texts. Investigator ForbiddenScan gambit accumulates this. Reduced by Full Rest at the Apothecary.")]
+        [Range(0, 80)]
+        public int MaxSanityPenalty = 0;
+
         [Header("Trauma — Phobia (GDD §5.5)")]
         [Tooltip("Phobia gained when this unit was saved from 0 sanity by a Mercy Token. Persists between battles.")]
         public PhobiaType ActivePhobia = PhobiaType.None;

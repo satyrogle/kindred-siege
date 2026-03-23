@@ -132,9 +132,9 @@ namespace KindredSiege.Battle
             attackCooldown = data.AttackCooldown;
             attackTimer   = 0f;
 
-            // Sanity init
-            MaxSanity        = data.BaseSanity;
-            CurrentSanity    = MaxSanity;
+            // Sanity init — MaxSanityPenalty reduces the ceiling permanently (GDD §5.4)
+            MaxSanity     = Mathf.Max(1, data.BaseSanity - data.MaxSanityPenalty);
+            CurrentSanity = MaxSanity;
             ActiveAffliction = AfflictionType.None;
             ActiveVirtue     = VirtueType.None;
             _stressTraitRolled   = false;
@@ -602,6 +602,43 @@ namespace KindredSiege.Battle
                 SanityLost = actual,
                 RivalName  = rivalName
             });
+        }
+
+        // ════════════════════════════════════════════
+        // FORBIDDEN KNOWLEDGE (GDD §5.4)
+        // ════════════════════════════════════════════
+
+        /// <summary>
+        /// Permanently lower this unit's MaxSanity ceiling by <paramref name="amount"/>.
+        /// Called by the ForbiddenScan gambit each time a new enemy is analysed.
+        /// The penalty persists on UnitData between battles. Recovery requires Full Rest
+        /// at the city Apothecary (FatigueSystem.Rest with recoverForbiddenKnowledge = true).
+        /// </summary>
+        public void ApplyForbiddenKnowledge(int amount)
+        {
+            if (amount <= 0 || unitData == null) return;
+
+            unitData.MaxSanityPenalty = Mathf.Min(unitData.MaxSanityPenalty + amount,
+                unitData.BaseSanity - 1); // Always leave at least 1 MaxSanity
+
+            int newMax = Mathf.Max(1, unitData.BaseSanity - unitData.MaxSanityPenalty);
+            MaxSanity = newMax;
+
+            // Clamp current sanity to the new ceiling
+            if (CurrentSanity > MaxSanity)
+                CurrentSanity = MaxSanity;
+
+            EventBus.Publish(new ForbiddenKnowledgeEvent
+            {
+                UnitId        = UnitId,
+                UnitName      = UnitName,
+                MaxSanityLost = amount,
+                NewMaxSanity  = MaxSanity,
+                TotalPenalty  = unitData.MaxSanityPenalty
+            });
+
+            Debug.Log($"[ForbiddenKnowledge] {UnitName}: MaxSanity reduced by {amount} → {MaxSanity} " +
+                      $"(total penalty: {unitData.MaxSanityPenalty})");
         }
 
         // ════════════════════════════════════════════
