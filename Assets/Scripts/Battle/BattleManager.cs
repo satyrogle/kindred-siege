@@ -141,6 +141,12 @@ namespace KindredSiege.Battle
             nextUnitId = 0;
             _horrorRatingTimer = 0f;
 
+            // Prefer live roster from RosterManager (city-driven); fall back to Inspector array.
+            // Assign back to team1Units so GambitSetupPanel.GetTeam1Units() sees the same list.
+            var rosterMgr = RosterManager.Instance;
+            if (rosterMgr != null && rosterMgr.RosterCount > 0)
+                team1Units = rosterMgr.GetRosterAsArray();
+
             SpawnTeam(team1Units, 1, team1, grid.GetTeam1Zone());
             SpawnTeam(team2Units, 2, team2, grid.GetTeam2Zone());
 

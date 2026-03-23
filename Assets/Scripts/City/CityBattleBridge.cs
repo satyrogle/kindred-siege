@@ -24,10 +24,16 @@ namespace KindredSiege.City
         [SerializeField] private float unitSpeedBonus = 1f;
         [SerializeField] private int maxUnitSlots = 4;        // Increases with city level
 
-        public float UnitHPBonus => unitHPBonus;
+        public float UnitHPBonus     => unitHPBonus;
         public float UnitDamageBonus => unitDamageBonus;
-        public float UnitSpeedBonus => unitSpeedBonus;
-        public int MaxUnitSlots => maxUnitSlots;
+        public float UnitSpeedBonus  => unitSpeedBonus;
+        public int   MaxUnitSlots    => maxUnitSlots;
+
+        // ─── Special building bonuses (set by CityManager.RecalculateBonuses) ───
+        /// <summary>Extra Mercy Tokens per battle (from Shrine buildings).</summary>
+        public int ExtraMercyTokens     { get; set; } = 0;
+        /// <summary>Extra Directive Points per battle (from War Table buildings).</summary>
+        public int ExtraDirectivePoints { get; set; } = 0;
 
         private void Awake()
         {

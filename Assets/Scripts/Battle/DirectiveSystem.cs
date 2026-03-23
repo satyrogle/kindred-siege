@@ -74,6 +74,14 @@ namespace KindredSiege.Battle
             MercyPauseActive  = false;
             MercyPauseUnit    = null;
             _unleashActiveIds.Clear();
+
+            // City building bonuses: War Table → +Directive Points, Shrine → +Mercy Tokens
+            var bridge = KindredSiege.City.CityBattleBridge.Instance;
+            if (bridge != null)
+            {
+                DirectivePoints += bridge.ExtraDirectivePoints;
+                MercyTokens     += bridge.ExtraMercyTokens;
+            }
         }
 
         private void Update()
