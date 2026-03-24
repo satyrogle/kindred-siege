@@ -56,6 +56,8 @@ namespace KindredSiege.Battle
         public string UnitName  => unitData != null ? unitData.UnitName : "Unit";
         public UnitData Data    => unitData;
 
+        public bool IsTargetable => IsAlive && _shadowVanishedTimer <= 0f;
+
         public int TeamId  { get; private set; }
         public int UnitId  { get; private set; }
 
@@ -75,6 +77,13 @@ namespace KindredSiege.Battle
         // ─── Fatigue (GDD §11.4) ───
         // Extra hesitation chance applied on top of sanity hesitation when unit is exhausted.
         public float ExtraHesitationFromFatigue { get; set; } = 0f;
+
+        // ─── Reactive Core Skills (GDD §8.1) ───
+        private int   _bloodRageStacks        = 0;
+        private float _shadowVanishedTimer    = 0f;
+        private bool  _shadowVanishUsed       = false;
+        private bool  _heraldPulseUsed        = false;
+        private bool  _vesselDeathDeniedUsed  = false;
 
         // ─── Gambit / Directive state ───
         // Gambits and Directives can set these to modify combat behaviour.
@@ -160,6 +169,13 @@ namespace KindredSiege.Battle
             _darkPhobiaTimer      = 0f;
             ExtraHesitationFromFatigue = 0f;
 
+            // Reactive skills reset
+            _bloodRageStacks = 0;
+            _shadowVanishedTimer = 0f;
+            _shadowVanishUsed = false;
+            _heraldPulseUsed = false;
+            _vesselDeathDeniedUsed = false;
+
             transform.localScale = Vector3.one * data.ModelScale;
             ActionHistory.Clear();
         }
@@ -222,6 +238,21 @@ namespace KindredSiege.Battle
             // ── Virtue timers ──
             if (_resoluteTimer > 0f)
                 _resoluteTimer -= dt;
+
+            // ── Shadow Vanish timer ──
+            if (_shadowVanishedTimer > 0f)
+                _shadowVanishedTimer -= dt;
+
+            // ── Marksman Snap Shot ──
+            if (UnitType == "Marksman" && CanAttack() && battleContext.Enemies != null)
+            {
+                var snapTarget = battleContext.Enemies.FirstOrDefault(e => e != null && e.IsTargetable && e != this &&
+                    Vector3.Distance(transform.position, e.transform.position) <= AttackRange);
+                if (snapTarget != null)
+                {
+                    PerformAttack(snapTarget);
+                }
+            }
 
             if (ActiveVirtue == VirtueType.Courageous)
             {
@@ -470,6 +501,12 @@ namespace KindredSiege.Battle
 
             int damage = Mathf.Max(1, AttackDamage - target.Armour);
 
+            // Berserker (Blood Rage): +5% damage per hit taken
+            if (UnitType == "Berserker" && _bloodRageStacks > 0)
+            {
+                damage = Mathf.RoundToInt(damage * (1f + 0.05f * _bloodRageStacks));
+            }
+
             // Focused virtue: +25% damage
             if (ActiveVirtue == VirtueType.Focused)
                 damage = Mathf.RoundToInt(damage * 1.25f);
@@ -506,11 +543,69 @@ namespace KindredSiege.Battle
         {
             if (!IsAlive) return;
 
+            // Vessel (Death Denied): 20% chance to survive lethal hit (once)
+            if (UnitType == "Vessel" && damage >= CurrentHP && !_vesselDeathDeniedUsed)
+            {
+                if (Random.value < 0.20f)
+                {
+                    damage = CurrentHP - 1;
+                    _vesselDeathDeniedUsed = true;
+                }
+            }
+
             // Resolute virtue: cannot drop below 1 HP while shield is active
             if (ActiveVirtue == VirtueType.Resolute && _resoluteTimer > 0f)
                 damage = Mathf.Min(damage, CurrentHP - 1);
 
             CurrentHP = Mathf.Max(0, CurrentHP - damage);
+
+            // Berserker (Blood Rage): +5% damage per hit taken
+            if (UnitType == "Berserker" && _bloodRageStacks < 5)
+                _bloodRageStacks++;
+
+            // Investigator (Insight Flash): 20% auto-analyse
+            if (UnitType == "Investigator" && CurrentSanity >= 2 && attacker != null && attacker.IsTargetable)
+            {
+                if (Random.value < 0.20f && battleContext != null)
+                {
+                    ModifySanity(-2, "InsightFlash");
+                    battleContext.Set($"Analysed_{attacker.UnitId}", true);
+                }
+            }
+
+            // Shadow (Vanish): untargetable below 40% (once)
+            if (UnitType == "Shadow" && !_shadowVanishUsed && (float)CurrentHP / MaxHP < 0.40f)
+            {
+                _shadowVanishUsed = true;
+                _shadowVanishedTimer = 3f;
+            }
+
+            // Herald (Martyrdom Pulse): +8 sanity to allies below 50% (once) // Modified to 999f range to hit all
+            if (UnitType == "Herald" && !_heraldPulseUsed && (float)CurrentHP / MaxHP < 0.50f)
+            {
+                _heraldPulseUsed = true;
+                BoostNearbyAllySanity(8, 999f); 
+            }
+
+            // Warden (Brace): 30% counter-attack
+            if (UnitType == "Warden" && attacker != null && attacker.IsTargetable)
+            {
+                float dist = Vector3.Distance(transform.position, attacker.transform.position);
+                if (dist <= AttackRange && Random.value < 0.30f)
+                {
+                    attacker.TakeDamage(Mathf.Max(1, AttackDamage - attacker.Armour), this);
+                }
+            }
+
+            // Eldritch Hit + Occultist (Psychic Recoil)
+            if (attacker != null && attacker.TeamId != TeamId)
+            {
+                ModifySanity(-5, "EldritchHit");
+                if (UnitType == "Occultist" && Random.value < 0.25f)
+                {
+                    attacker.ModifySanity(-5, "PsychicRecoil");
+                }
+            }
 
             if (!IsAlive)
                 OnDeath(attacker);

@@ -15,7 +15,7 @@ namespace KindredSiege.AI.BehaviourTree
 
         public override NodeState Tick(BattleContext context)
         {
-            bool hasLiving = context.Enemies.Any(e => e != null && e.IsAlive);
+            bool hasLiving = context.Enemies.Any(e => e != null && e.IsTargetable);
             return hasLiving ? NodeState.Success : NodeState.Failure;
         }
     }
@@ -45,7 +45,7 @@ namespace KindredSiege.AI.BehaviourTree
         public override NodeState Tick(BattleContext context)
         {
             var target = context.Get<UnitController>("Target");
-            if (target == null || !target.IsAlive) return NodeState.Failure;
+            if (target == null || !target.IsTargetable) return NodeState.Failure;
 
             float dist = Vector3.Distance(
                 context.Owner.transform.position,
@@ -97,7 +97,7 @@ namespace KindredSiege.AI.BehaviourTree
 
             foreach (var enemy in context.Enemies)
             {
-                if (enemy == null || !enemy.IsAlive) continue;
+                if (enemy == null || !enemy.IsTargetable) continue;
 
                 float dist = Vector3.Distance(
                     context.Owner.transform.position,
@@ -128,7 +128,7 @@ namespace KindredSiege.AI.BehaviourTree
         public override NodeState Tick(BattleContext context)
         {
             var weakest = context.Enemies
-                .Where(e => e != null && e.IsAlive)
+                .Where(e => e != null && e.IsTargetable)
                 .OrderBy(e => e.CurrentHP)
                 .FirstOrDefault();
 
@@ -149,7 +149,7 @@ namespace KindredSiege.AI.BehaviourTree
         public override NodeState Tick(BattleContext context)
         {
             var target = context.Get<UnitController>("Target");
-            if (target == null || !target.IsAlive) return NodeState.Failure;
+            if (target == null || !target.IsTargetable) return NodeState.Failure;
 
             Vector3 direction = (target.transform.position - context.Owner.transform.position).normalized;
             float moveAmount = context.Owner.MoveSpeed * context.DeltaTime;
@@ -174,7 +174,7 @@ namespace KindredSiege.AI.BehaviourTree
         public override NodeState Tick(BattleContext context)
         {
             var target = context.Get<UnitController>("Target");
-            if (target == null || !target.IsAlive) return NodeState.Failure;
+            if (target == null || !target.IsTargetable) return NodeState.Failure;
 
             if (context.Owner.CanAttack())
             {
@@ -194,7 +194,7 @@ namespace KindredSiege.AI.BehaviourTree
         public override NodeState Tick(BattleContext context)
         {
             var nearest = context.Enemies
-                .Where(e => e != null && e.IsAlive)
+                .Where(e => e != null && e.IsTargetable)
                 .OrderBy(e => Vector3.Distance(context.Owner.transform.position, e.transform.position))
                 .FirstOrDefault();
 
@@ -304,7 +304,7 @@ namespace KindredSiege.AI.BehaviourTree
         public override NodeState Tick(BattleContext context)
         {
             var nearest = context.Enemies
-                .Where(e => e != null && e.IsAlive)
+                .Where(e => e != null && e.IsTargetable)
                 .OrderBy(e => Vector3.Distance(context.Owner.transform.position, e.transform.position))
                 .FirstOrDefault();
 
@@ -342,7 +342,7 @@ namespace KindredSiege.AI.BehaviourTree
         public override NodeState Tick(BattleContext context)
         {
             var leader = context.Enemies
-                .Where(e => e != null && e.IsAlive)
+                .Where(e => e != null && e.IsTargetable)
                 .OrderByDescending(e => e.CurrentHP)
                 .FirstOrDefault();
 
@@ -368,7 +368,7 @@ namespace KindredSiege.AI.BehaviourTree
         public override NodeState Tick(BattleContext context)
         {
             var target = context.Get<UnitController>("Target");
-            if (target == null || !target.IsAlive) return NodeState.Failure;
+            if (target == null || !target.IsTargetable) return NodeState.Failure;
 
             Vector3 toTarget = target.transform.position - context.Owner.transform.position;
             float dist = toTarget.magnitude;
@@ -411,7 +411,7 @@ namespace KindredSiege.AI.BehaviourTree
         public override NodeState Tick(BattleContext context)
         {
             var target = context.Get<UnitController>("Target");
-            if (target == null || !target.IsAlive) return NodeState.Failure;
+            if (target == null || !target.IsTargetable) return NodeState.Failure;
 
             if (!context.Owner.CanAttack()) return NodeState.Running;
 
