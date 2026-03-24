@@ -512,15 +512,16 @@ namespace KindredSiege.Battle
 
         private UnitController FindUnitById(int unitId)
         {
-            foreach (var u in Object.FindObjectsByType<UnitController>(FindObjectsInactive.Include, FindObjectsSortMode.None))
-                if (u.UnitId == unitId) return u;
-            return null;
+            return BattleManager.Instance?.GetUnitById(unitId);
         }
 
         private UnitController FindStrongestEnemy(UnitController fromUnit)
         {
-            return Object.FindObjectsOfType<UnitController>()
-                .Where(u => u != null && u.IsAlive && u.TeamId != fromUnit.TeamId)
+            var enemies = fromUnit.TeamId == 1 ? BattleManager.Instance?.GetTeam2Controllers() : BattleManager.Instance?.GetTeam1Controllers();
+            if (enemies == null) return null;
+
+            return enemies
+                .Where(u => u != null && u.IsAlive)
                 .OrderByDescending(u => u.CurrentHP)
                 .FirstOrDefault();
         }

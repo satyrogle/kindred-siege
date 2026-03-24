@@ -14,6 +14,7 @@ namespace KindredSiege.Battle
         [Header("Identity")]
         public string UnitName = "New Unit";
         public string UnitType = "guardian"; // Matches BTPresets key
+        public UnitClass UnitClass = UnitClass.None; // TODO: Migrate from UnitType string
         [TextArea(2, 4)]
         public string Description = "";
         public Sprite Portrait;

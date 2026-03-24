@@ -29,12 +29,16 @@ MonoBehaviour:
   IsCharityUnit: 0
   BonusKPPerSurvival: 0
   BaseSanity: 80
+  Comprehension: 0.7
   SanityOnKill: 0
   ImmuneToAllyDeathSanityLoss: 1
   AllySanityLossMultiplier: 1
   CannotBeHealed: 0
   PassiveSanityDrainPerSecond: 0
-  ExpeditionCount: 0
+  MaxSanityPenalty: 0
+  ActivePhobia: 0
+  FatigueLevel: 0
+  ExpeditionCount: 8
   GoldCost: 80
   FoodCost: 15
   MaterialCost: 0

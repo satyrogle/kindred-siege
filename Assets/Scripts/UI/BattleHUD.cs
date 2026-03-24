@@ -445,9 +445,7 @@ namespace KindredSiege.UI
 
         private UnitController FindUnitById(int id)
         {
-            foreach (var u in FindObjectsByType<UnitController>(FindObjectsInactive.Include, FindObjectsSortMode.None))
-                if (u.UnitId == id) return u;
-            return null;
+            return BattleManager.Instance?.GetUnitById(id);
         }
 
         private string FindUnitName(int id)

@@ -14,6 +14,7 @@ namespace KindredSiege.Battle
     /// 
     /// Attach to a "BattleArena" GameObject in your battle scene.
     /// </summary>
+    // TODO: Refactor — split into BattleSpawner, BattleFlowController, BattleRewardsCalculator (see peer review)
     public class BattleManager : MonoBehaviour
     {
         public static BattleManager Instance { get; private set; }
@@ -32,6 +33,7 @@ namespace KindredSiege.Battle
 
         // Runtime state
         private List<UnitController> allUnits = new();
+        private Dictionary<int, UnitController> _unitLookup = new();
         private List<UnitController> team1 = new();
         private List<UnitController> team2 = new();
         private bool battleActive = false;
@@ -47,6 +49,10 @@ namespace KindredSiege.Battle
         public UnitData[] GetTeam1Units() => team1Units;
         /// <summary>Returns the live UnitController list for team 1 (used by FatigueSystem).</summary>
         public List<UnitController> GetTeam1Controllers() => team1;
+        public List<UnitController> GetTeam2Controllers() => team2;
+
+        /// <summary>Fast lookup for systems finding units by ID.</summary>
+        public UnitController GetUnitById(int id) => _unitLookup.GetValueOrDefault(id);
 
         // ─── Horror Rating (GDD §6.3) ───
         // The rival currently present on the battlefield. Set before StartBattle().
@@ -236,6 +242,7 @@ namespace KindredSiege.Battle
 
                 teamList.Add(controller);
                 allUnits.Add(controller);
+                _unitLookup[controller.UnitId] = controller;
 
                 // Set up battle context
                 var context = new BattleContext
@@ -419,6 +426,7 @@ namespace KindredSiege.Battle
                     Destroy(unit.gameObject);
             }
             allUnits.Clear();
+            _unitLookup.Clear();
             team1.Clear();
             team2.Clear();
             grid.ClearGrid();

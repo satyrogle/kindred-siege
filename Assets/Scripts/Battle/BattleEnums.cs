@@ -89,4 +89,22 @@ namespace KindredSiege.Battle
         Sacrifice   = 5,   // 3pt — 2x damage charge, unit dies at end
         InvokeMercy = 6,   // Token — revive a unit at 30% HP + 15 sanity
     }
+
+    // ═══════════════════════════════════════════════════════════════════════
+    // UNIT CLASS TYPES 
+    // Used to replace magic strings across the codebase gradually.
+    // ═══════════════════════════════════════════════════════════════════════
+    
+    public enum UnitClass
+    {
+        None = 0,
+        Warden,
+        Marksman,
+        Occultist,
+        Berserker,
+        Investigator,
+        Shadow,
+        Herald,
+        Vessel
+    }
 }

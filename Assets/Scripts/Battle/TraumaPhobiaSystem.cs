@@ -143,12 +143,7 @@ namespace KindredSiege.Battle
 
         private static UnitController FindUnitById(int id)
         {
-            foreach (var u in Object.FindObjectsByType<UnitController>(
-                FindObjectsInactive.Include, FindObjectsSortMode.None))
-            {
-                if (u.UnitId == id) return u;
-            }
-            return null;
+            return BattleManager.Instance?.GetUnitById(id);
         }
     }
 }
