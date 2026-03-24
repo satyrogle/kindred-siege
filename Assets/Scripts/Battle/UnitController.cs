@@ -56,7 +56,8 @@ namespace KindredSiege.Battle
         public string UnitName  => unitData != null ? unitData.UnitName : "Unit";
         public UnitData Data    => unitData;
 
-        public bool IsTargetable => IsAlive && _shadowVanishedTimer <= 0f;
+        public bool IsTargetable  => IsAlive && _shadowVanishedTimer <= 0f;
+        public bool IsOnShrine    => _currentHazard == HazardType.Shrine;
 
         public int TeamId  { get; private set; }
         public int UnitId  { get; private set; }
@@ -84,6 +85,11 @@ namespace KindredSiege.Battle
         private bool  _shadowVanishUsed       = false;
         private bool  _heraldPulseUsed        = false;
         private bool  _vesselDeathDeniedUsed  = false;
+
+        // ─── Environmental Hazards (GDD §12) ───
+        private float     _baseMoveSpeed  = 3f;
+        private HazardType _currentHazard = HazardType.None;
+        private float     _hazardTimer    = 0f;
 
         // ─── Gambit / Directive state ───
         // Gambits and Directives can set these to modify combat behaviour.
@@ -176,6 +182,11 @@ namespace KindredSiege.Battle
             _heraldPulseUsed = false;
             _vesselDeathDeniedUsed = false;
 
+            // Hazard state reset
+            _baseMoveSpeed = data.MoveSpeed;
+            _currentHazard = HazardType.None;
+            _hazardTimer   = 0f;
+
             transform.localScale = Vector3.one * data.ModelScale;
             ActionHistory.Clear();
         }
@@ -183,10 +194,11 @@ namespace KindredSiege.Battle
         /// <summary>Apply building/upgrade stat multipliers before battle starts.</summary>
         public void ApplyModifiers(float hpMult = 1f, float dmgMult = 1f, float speedMult = 1f)
         {
-            MaxHP        = Mathf.RoundToInt(unitData.MaxHP * hpMult);
-            CurrentHP    = MaxHP;
-            AttackDamage = Mathf.RoundToInt(unitData.AttackDamage * dmgMult);
-            MoveSpeed    = unitData.MoveSpeed * speedMult;
+            MaxHP         = Mathf.RoundToInt(unitData.MaxHP * hpMult);
+            CurrentHP     = MaxHP;
+            AttackDamage  = Mathf.RoundToInt(unitData.AttackDamage * dmgMult);
+            MoveSpeed     = unitData.MoveSpeed * speedMult;
+            _baseMoveSpeed = MoveSpeed; // Update reference so hazard multiplier stays correct
         }
 
         /// <summary>Set the shared battle context. Called by BattleManager each frame.</summary>
@@ -242,6 +254,40 @@ namespace KindredSiege.Battle
             // ── Shadow Vanish timer ──
             if (_shadowVanishedTimer > 0f)
                 _shadowVanishedTimer -= dt;
+
+            // ── Environmental Hazard effects (GDD §12) ──
+            if (battleContext.Grid != null)
+            {
+                HazardType hazard = battleContext.Grid.GetHazardAt(transform.position);
+
+                // On hazard change — update movement speed multiplier
+                if (hazard != _currentHazard)
+                {
+                    _currentHazard = hazard;
+                    MoveSpeed = hazard == HazardType.DeepWater
+                        ? _baseMoveSpeed * 0.5f
+                        : _baseMoveSpeed;
+                }
+
+                // Per-second sanity tick
+                _hazardTimer += dt;
+                if (_hazardTimer >= 1f)
+                {
+                    _hazardTimer = 0f;
+                    switch (_currentHazard)
+                    {
+                        case HazardType.DeepWater:
+                            ModifySanity(-3, "DeepWater");
+                            break;
+                        case HazardType.Shrine:
+                            ModifySanity(2, "Shrine");
+                            break;
+                        case HazardType.EldritchGround:
+                            ModifySanity(-2, "EldritchGround");
+                            break;
+                    }
+                }
+            }
 
             // ── Marksman Snap Shot ──
             if (UnitType == "Marksman" && CanAttack() && battleContext.Enemies != null)
@@ -360,6 +406,9 @@ namespace KindredSiege.Battle
                 // EldritchPhobia: +0.5 to effective Comprehension for all eldritch hits
                 if (ActivePhobia == PhobiaType.EldritchPhobia)
                     comp += 0.5f;
+                // EldritchGround (GDD §12): standing on corrupted earth doubles comp multiplier
+                if (_currentHazard == HazardType.EldritchGround)
+                    comp *= 2f;
                 delta = Mathf.RoundToInt(delta * comp);
             }
 
@@ -539,7 +588,7 @@ namespace KindredSiege.Battle
 
         public void ResetAttackCooldown() => attackTimer = attackCooldown;
 
-        public void TakeDamage(int damage, UnitController attacker)
+        public void TakeDamage(int damage, UnitController attacker, bool isCounter = false)
         {
             if (!IsAlive) return;
 
@@ -588,12 +637,12 @@ namespace KindredSiege.Battle
             }
 
             // Warden (Brace): 30% counter-attack
-            if (UnitType == "Warden" && attacker != null && attacker.IsTargetable)
+            if (!isCounter && UnitType == "Warden" && attacker != null && attacker.IsTargetable)
             {
                 float dist = Vector3.Distance(transform.position, attacker.transform.position);
                 if (dist <= AttackRange && Random.value < 0.30f)
                 {
-                    attacker.TakeDamage(Mathf.Max(1, AttackDamage - attacker.Armour), this);
+                    attacker.TakeDamage(Mathf.Max(1, AttackDamage - attacker.Armour), this, true);
                 }
             }
 
@@ -688,6 +737,8 @@ namespace KindredSiege.Battle
         public void ApplyHorrorRatingDrain(int baseDrain, string rivalName)
         {
             if (baseDrain <= 0) return;
+            // Shrine protects — the rival's presence cannot reach those who stand on holy ground
+            if (IsOnShrine) return;
             int actual = Mathf.RoundToInt(baseDrain * Comprehension);
             ModifySanity(-actual, "HorrorRatingAura");
 

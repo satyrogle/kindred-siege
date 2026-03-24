@@ -27,9 +27,13 @@ namespace KindredSiege.Battle
         // Grid occupancy — which unit is at each cell
         private UnitController[,] occupancy;
 
+        // Hazard overlay — terrain effects per cell (GDD §12)
+        private HazardType[,] hazards;
+
         private void Awake()
         {
             occupancy = new UnitController[width, height];
+            hazards   = new HazardType[width, height];
         }
 
         // ─── Coordinate Conversion ───
@@ -96,6 +100,26 @@ namespace KindredSiege.Battle
         public void ClearGrid()
         {
             occupancy = new UnitController[width, height];
+            hazards   = new HazardType[width, height];
+        }
+
+        // ─── Hazard Overlay (GDD §12) ───
+
+        /// <summary>Set the hazard type for a grid cell.</summary>
+        public void SetHazard(int x, int y, HazardType type)
+        {
+            if (!IsInBounds(x, y)) return;
+            hazards[x, y] = type;
+        }
+
+        public void SetHazard(Vector2Int pos, HazardType type) => SetHazard(pos.x, pos.y, type);
+
+        /// <summary>Get the hazard type at a world-space position. Clamps to grid bounds — never throws.</summary>
+        public HazardType GetHazardAt(Vector3 worldPos)
+        {
+            if (hazards == null) return HazardType.None;
+            var cell = WorldToGrid(worldPos); // already clamped
+            return hazards[cell.x, cell.y];
         }
 
         public UnitController GetUnitAt(int x, int y)
@@ -144,7 +168,7 @@ namespace KindredSiege.Battle
                 {
                     Vector3 pos = GridToWorld(x, y);
 
-                    // Colour deployment zones
+                    // Base wireframe — deployment zones
                     if (x < width / 3)
                         Gizmos.color = team1Zone;
                     else if (x >= width - width / 3)
@@ -153,6 +177,24 @@ namespace KindredSiege.Battle
                         Gizmos.color = new Color(0.5f, 0.5f, 0.5f, 0.1f);
 
                     Gizmos.DrawWireCube(pos, new Vector3(cellSize * 0.9f, 0.05f, cellSize * 0.9f));
+
+                    // Hazard overlay — filled cube, colour-coded
+                    HazardType haz = (hazards != null) ? hazards[x, y] : HazardType.None;
+                    switch (haz)
+                    {
+                        case HazardType.DeepWater:
+                            Gizmos.color = new Color(0.1f, 0.3f, 0.9f, 0.45f);
+                            Gizmos.DrawCube(pos, new Vector3(cellSize * 0.85f, 0.08f, cellSize * 0.85f));
+                            break;
+                        case HazardType.Shrine:
+                            Gizmos.color = new Color(0.9f, 0.8f, 0.1f, 0.45f);
+                            Gizmos.DrawCube(pos, new Vector3(cellSize * 0.85f, 0.08f, cellSize * 0.85f));
+                            break;
+                        case HazardType.EldritchGround:
+                            Gizmos.color = new Color(0.6f, 0.1f, 0.9f, 0.45f);
+                            Gizmos.DrawCube(pos, new Vector3(cellSize * 0.85f, 0.08f, cellSize * 0.85f));
+                            break;
+                    }
                 }
             }
         }

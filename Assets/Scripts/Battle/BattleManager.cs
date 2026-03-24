@@ -156,6 +156,9 @@ namespace KindredSiege.Battle
             SpawnTeam(team1Units, 1, team1, grid.GetTeam1Zone());
             SpawnTeam(team2Units, 2, team2, grid.GetTeam2Zone());
 
+            // Scatter hazard tiles across the battlefield (GDD §12)
+            GenerateHazards();
+
             // Apply pre-configured gambits to player team
             GambitSetupPanel.Instance?.ApplyGambitsToTeam(team1);
 
@@ -418,6 +421,45 @@ namespace KindredSiege.Battle
             battleSpeed = 1f;
             Time.timeScale = 1f;
         }
+        // ─── Hazard Generation (GDD §12) ───
+
+        /// <summary>
+        /// Scatter terrain hazards across the neutral zone of the grid.
+        ///   • 1 Shrine at dead centre (static — always present as a strategic objective)
+        ///   • ~10% of neutral tiles become Deep Water (Harbour district flavour)
+        ///   • ~5% of neutral tiles become Eldritch Ground (corruption seeping in)
+        /// Spawn zones (left and right thirds) are kept clear so units aren't penalised at deploy.
+        /// </summary>
+        private void GenerateHazards()
+        {
+            if (grid == null) return;
+
+            int w = grid.Width;
+            int h = grid.Height;
+
+            // Shrine — dead centre of the battlefield
+            grid.SetHazard(w / 2, h / 2, HazardType.Shrine);
+
+            // Neutral zone bounds (middle third, avoiding team spawn zones)
+            int neutralStart = w / 3;
+            int neutralEnd   = w - w / 3;
+
+            for (int x = neutralStart; x < neutralEnd; x++)
+            {
+                for (int y = 0; y < h; y++)
+                {
+                    // Skip the shrine tile
+                    if (x == w / 2 && y == h / 2) continue;
+
+                    float roll = Random.value;
+                    if      (roll < 0.10f) grid.SetHazard(x, y, HazardType.DeepWater);
+                    else if (roll < 0.15f) grid.SetHazard(x, y, HazardType.EldritchGround);
+                }
+            }
+
+            Debug.Log("[Hazards] Battlefield hazards generated.");
+        }
+
         private void ClearBattle()
         {
             foreach (var unit in allUnits)
