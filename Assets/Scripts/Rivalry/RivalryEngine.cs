@@ -360,6 +360,27 @@ namespace KindredSiege.Rivalry
             GetRival(rivalId)?.Memory.GrudgeTargetUnitName == unitName;
 
         // ════════════════════════════════════════════
+        // SAVE / LOAD
+        // ════════════════════════════════════════════
+
+        public List<RivalData> GetActivesForSave()   => new List<RivalData>(_activeRivals);
+        public List<RivalData> GetDefeatedForSave()  => new List<RivalData>(_defeatedRivals);
+
+        /// <summary>Replace the rival pools with data restored from a save file.</summary>
+        public void LoadFromSave(List<RivalData> active, List<RivalData> defeated)
+        {
+            if (active   == null) active   = new List<RivalData>();
+            if (defeated == null) defeated = new List<RivalData>();
+
+            _activeRivals.Clear();
+            _defeatedRivals.Clear();
+            _activeRivals.AddRange(active);
+            _defeatedRivals.AddRange(defeated);
+
+            Debug.Log($"[Rivalry] Loaded: {_activeRivals.Count} active, {_defeatedRivals.Count} defeated rivals.");
+        }
+
+        // ════════════════════════════════════════════
         // EVENT HANDLERS
         // ════════════════════════════════════════════
 

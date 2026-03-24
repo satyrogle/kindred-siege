@@ -154,7 +154,13 @@ namespace KindredSiege.Battle
                 team1Units = rosterMgr.GetRosterAsArray();
 
             SpawnTeam(team1Units, 1, team1, grid.GetTeam1Zone());
-            SpawnTeam(team2Units, 2, team2, grid.GetTeam2Zone());
+
+            // Procedural enemy roster — RivalryEngine drives composition.
+            // Falls back to the Inspector array when RivalryEngine is absent (editor testing).
+            var enemies = (RivalryEngine.Instance != null)
+                ? GenerateEnemyRoster()
+                : team2Units;
+            SpawnTeam(enemies, 2, team2, grid.GetTeam2Zone());
 
             // Scatter hazard tiles across the battlefield (GDD §12)
             GenerateHazards();
@@ -421,6 +427,106 @@ namespace KindredSiege.Battle
             battleSpeed = 1f;
             Time.timeScale = 1f;
         }
+        // ─── Procedural Enemy Composition ───
+
+        /// <summary>
+        /// Build the enemy team dynamically each battle.
+        ///
+        /// Composition:
+        ///   Leader — the pending rival (if any), stats drawn from RivalData.
+        ///            Rank maps to a unit class archetype for BT purposes.
+        ///   Fodder — filler units whose HP and damage scale with season and battle index.
+        ///            Count grows by 1 each season (more pressure over time).
+        ///
+        /// All UnitData objects here are runtime ScriptableObject.CreateInstance<> —
+        /// they are never written to disk and do not contaminate project assets.
+        /// </summary>
+        private UnitData[] GenerateEnemyRoster()
+        {
+            int season = GameManager.Instance?.CurrentSeason    ?? 1;
+            int battle = GameManager.Instance?.BattlesCompleted ?? 0;
+
+            var roster = new List<UnitData>();
+
+            // ── Leader: pending rival (if an encounter was scheduled) ──
+            var rival = RivalEncounterSystem.Instance?.PendingRival;
+            if (rival != null)
+            {
+                var leader = ScriptableObject.CreateInstance<UnitData>();
+                leader.UnitName     = rival.FullName;
+                leader.UnitType     = RivalRankToUnitType(rival.Rank);
+                leader.MaxHP        = rival.BaseHP  + rival.PromotionCount * 20;
+                leader.AttackDamage = rival.BaseDamage + rival.PromotionCount * 3;
+                leader.MoveSpeed    = 2.5f;
+                leader.AttackRange  = 2f;
+                leader.AttackCooldown = 1.2f;
+                leader.BaseSanity   = 100;
+                leader.Comprehension = 0.4f; // enemies are less susceptible to cosmic horror
+                leader.TeamTint     = new Color(0.9f, 0.3f, 0.1f);
+                roster.Add(leader);
+                Debug.Log($"[Enemies] Leader spawned: {rival.FullName} [{rival.Rank}] " +
+                          $"HP:{leader.MaxHP} DMG:{leader.AttackDamage}");
+            }
+
+            // ── Fodder: filler units scaling with season difficulty ──
+            int maxSlots    = CityBattleBridge.Instance?.MaxUnitSlots ?? 4;
+            int fodderCount = Mathf.Min(maxSlots - roster.Count, 2 + (season - 1));
+            float scale     = 1f + (season - 1) * 0.15f + battle * 0.01f;
+
+            for (int i = 0; i < fodderCount; i++)
+            {
+                var fodder = ScriptableObject.CreateInstance<UnitData>();
+                fodder.UnitName      = s_FodderNames[i % s_FodderNames.Length];
+                fodder.UnitType      = s_FodderTypes[i % s_FodderTypes.Length];
+                fodder.MaxHP         = Mathf.RoundToInt(70 * scale);
+                fodder.AttackDamage  = Mathf.RoundToInt(8  * scale);
+                fodder.MoveSpeed     = 2.8f;
+                fodder.AttackRange   = 1.8f;
+                fodder.AttackCooldown = 1.1f;
+                fodder.BaseSanity    = 100;
+                fodder.Comprehension  = 0.4f;
+                fodder.TeamTint      = new Color(0.65f, 0.2f, 0.2f);
+                roster.Add(fodder);
+            }
+
+            // Safety: always at least 2 enemies
+            while (roster.Count < 2)
+            {
+                var fallback = ScriptableObject.CreateInstance<UnitData>();
+                fallback.UnitName    = "Drowned Wraith";
+                fallback.UnitType    = "warden";
+                fallback.MaxHP       = 70;
+                fallback.AttackDamage = 8;
+                fallback.MoveSpeed   = 2.8f;
+                fallback.AttackRange = 1.8f;
+                fallback.BaseSanity  = 100;
+                fallback.Comprehension = 0.4f;
+                fallback.TeamTint    = new Color(0.65f, 0.2f, 0.2f);
+                roster.Add(fallback);
+            }
+
+            return roster.ToArray();
+        }
+
+        private static string RivalRankToUnitType(KindredSiege.Rivalry.RivalRank rank) => rank switch
+        {
+            KindredSiege.Rivalry.RivalRank.Overlord    => "vessel",
+            KindredSiege.Rivalry.RivalRank.Captain     => "herald",
+            KindredSiege.Rivalry.RivalRank.Lieutenant  => "occultist",
+            _                                          => "warden"
+        };
+
+        private static readonly string[] s_FodderNames =
+        {
+            "Drowned Soldier", "Tide Wraith", "Hollow Guard",
+            "Sunken Cultist",  "Shore Lurker"
+        };
+
+        private static readonly string[] s_FodderTypes =
+        {
+            "warden", "marksman", "berserker", "warden", "shadow"
+        };
+
         // ─── Hazard Generation (GDD §12) ───
 
         /// <summary>

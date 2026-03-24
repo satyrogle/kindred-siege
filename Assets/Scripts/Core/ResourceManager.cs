@@ -143,6 +143,26 @@ namespace KindredSiege.Core
 
         public void ResetResources() => InitialiseResources();
 
+        // ─── Save / Load ───
+
+        public List<ResourceEntry> GetResourcesForSave()
+        {
+            var list = new List<ResourceEntry>();
+            foreach (var kvp in resources)
+                list.Add(new ResourceEntry { TypeName = kvp.Key.ToString(), Amount = kvp.Value });
+            return list;
+        }
+
+        public void LoadResources(List<ResourceEntry> entries)
+        {
+            if (entries == null) return;
+            foreach (var entry in entries)
+            {
+                if (System.Enum.TryParse<ResourceType>(entry.TypeName, out var type))
+                    resources[type] = entry.Amount;
+            }
+        }
+
         private int GetMaxForType(ResourceType type)
         {
             foreach (var config in resourceConfigs)

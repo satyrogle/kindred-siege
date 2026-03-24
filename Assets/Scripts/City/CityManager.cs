@@ -282,6 +282,36 @@ namespace KindredSiege.City
         // BONUS RECALCULATION
         // ════════════════════════════════════════════
 
+        // ════════════════════════════════════════════
+        // SAVE / LOAD
+        // ════════════════════════════════════════════
+
+        public List<BuildingSaveEntry> GetBuildingsForSave()
+        {
+            var list = new List<BuildingSaveEntry>();
+            foreach (var pb in _placed)
+                list.Add(new BuildingSaveEntry { BuildingName = pb.Data.BuildingName, Level = pb.Level });
+            return list;
+        }
+
+        /// <summary>
+        /// Restore placed buildings from a save file without spending any resources.
+        /// Matches by BuildingData.BuildingName against the live catalog.
+        /// </summary>
+        public void LoadFromSave(List<BuildingSaveEntry> entries)
+        {
+            if (entries == null) return;
+            _placed.Clear();
+            foreach (var entry in entries)
+            {
+                var bd = _catalog.FirstOrDefault(b => b.BuildingName == entry.BuildingName);
+                if (bd == null) continue;
+                _placed.Add(new PlacedBuilding { Data = bd, Level = entry.Level });
+            }
+            RecalculateBonuses();
+            Debug.Log($"[City] Loaded {_placed.Count} buildings from save.");
+        }
+
         private void RecalculateBonuses()
         {
             var bridge = CityBattleBridge.Instance;

@@ -357,7 +357,14 @@ namespace KindredSiege.UI
             iy += 32;
 
             if (GUI.Button(new Rect(ix + lw / 2 - 80, iy, 160, 36), "Return to City", _btnStyle))
+            {
                 _showPostBattle = false;
+                // Route to SeasonEnd if this was the last battle; otherwise back to city
+                if (_game != null && _game.BattlesRemaining <= 0)
+                    _game.TriggerSeasonEnd();
+                else
+                    _game?.ReturnToCity();
+            }
         }
 
         // ════════════════════════════════════════════
@@ -383,7 +390,7 @@ namespace KindredSiege.UI
             };
 
             _showPostBattle = true;
-            _game?.ReturnToCity();
+            // State transition happens when the player clicks "Return to City" in the popup.
         }
 
         // ════════════════════════════════════════════

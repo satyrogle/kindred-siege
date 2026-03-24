@@ -140,5 +140,17 @@ namespace KindredSiege.Core
             battlesCompleted = 0;
             ChangeState(GameState.CityPhase);
         }
+
+        /// <summary>
+        /// Restore serialized campaign progress directly without going through
+        /// the state machine. Called by SaveManager.LoadGame().
+        /// </summary>
+        public void LoadState(int season, int battles)
+        {
+            currentSeason    = season;
+            battlesCompleted = battles;
+            currentState     = GameState.CityPhase;
+            Debug.Log($"[GameManager] State loaded: Season {season}, Battles {battles}");
+        }
     }
 }

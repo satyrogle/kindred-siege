@@ -110,9 +110,77 @@ namespace KindredSiege.Battle
             Debug.Log($"[Roster] Dismissed: {name}. Roster: {_activeRoster.Count}/{MaxSlots}");
         }
 
-        /// <summary>
-        /// Snapshot the roster as a plain array for BattleManager.
-        /// </summary>
+        /// <summary>Snapshot the roster as a plain array for BattleManager.</summary>
         public UnitData[] GetRosterAsArray() => _activeRoster.ToArray();
+
+        // ════════════════════════════════════════════
+        // SAVE / LOAD
+        // ════════════════════════════════════════════
+
+        /// <summary>
+        /// Snapshot mutable state for every unit in the catalog (not just the roster).
+        /// Fatigue, phobias, FK penalty, and expedition count all persist between sessions.
+        /// </summary>
+        public List<UnitSaveEntry> GetUnitStatesForSave()
+        {
+            var list = new List<UnitSaveEntry>();
+            foreach (var unit in recruitCatalog)
+            {
+                if (unit == null) continue;
+                list.Add(new UnitSaveEntry
+                {
+                    AssetName        = unit.name,
+                    FatigueLevel     = unit.FatigueLevel,
+                    ActivePhobia     = (int)unit.ActivePhobia,
+                    MaxSanityPenalty = unit.MaxSanityPenalty,
+                    ExpeditionCount  = unit.ExpeditionCount
+                });
+            }
+            return list;
+        }
+
+        /// <summary>Returns the asset names of units currently in the active roster.</summary>
+        public List<string> GetRosterNamesForSave()
+        {
+            var list = new List<string>();
+            foreach (var unit in _activeRoster)
+                if (unit != null) list.Add(unit.name);
+            return list;
+        }
+
+        /// <summary>
+        /// Restore unit mutable state from a save file and rebuild the active roster.
+        /// Units are matched by ScriptableObject asset name.
+        /// </summary>
+        public void LoadRoster(List<UnitSaveEntry> unitStates, List<string> rosterNames)
+        {
+            // Restore mutable fields on every catalog unit
+            if (unitStates != null)
+            {
+                foreach (var entry in unitStates)
+                {
+                    var unit = System.Array.Find(recruitCatalog, u => u != null && u.name == entry.AssetName);
+                    if (unit == null) continue;
+                    unit.FatigueLevel     = entry.FatigueLevel;
+                    unit.ActivePhobia     = (KindredSiege.Battle.PhobiaType)entry.ActivePhobia;
+                    unit.MaxSanityPenalty = entry.MaxSanityPenalty;
+                    unit.ExpeditionCount  = entry.ExpeditionCount;
+                }
+            }
+
+            // Rebuild the active roster
+            _activeRoster.Clear();
+            if (rosterNames != null)
+            {
+                foreach (var assetName in rosterNames)
+                {
+                    var unit = System.Array.Find(recruitCatalog, u => u != null && u.name == assetName);
+                    if (unit != null && !_activeRoster.Contains(unit))
+                        _activeRoster.Add(unit);
+                }
+            }
+
+            Debug.Log($"[Roster] Loaded: {_activeRoster.Count} units in expedition.");
+        }
     }
 }
