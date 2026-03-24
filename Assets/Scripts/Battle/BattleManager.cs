@@ -5,6 +5,7 @@ using KindredSiege.Core;
 using KindredSiege.AI.BehaviourTree;
 using KindredSiege.Rivalry;
 using KindredSiege.UI;
+using KindredSiege.City;
 
 namespace KindredSiege.Battle
 {
