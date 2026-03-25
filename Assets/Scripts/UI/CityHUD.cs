@@ -323,13 +323,25 @@ namespace KindredSiege.UI
                     UnitRecruitPanel.Instance.Show();
             }
 
-            // Deploy Expedition
+            // Inspect Dominions (The War Table)
+            if (GUI.Button(new Rect(Margin + 340, barY + 8, 160, BtnH), "Inspect Dominions", _btnStyle))
+            {
+                // Auto-attach if missing from scene hierarchy so player doesn't have to manually bind
+                if (RivalryBoardPanel.Instance == null)
+                    gameObject.AddComponent<RivalryBoardPanel>();
+                
+                RivalryBoardPanel.Instance?.Show();
+            }
+
+            // To The Lighthouse (Expedition Map)
             int deployX = Screen.width - 220 - Margin;
             GUI.color = new Color(0.3f, 0.8f, 0.4f);
-            if (GUI.Button(new Rect(deployX, barY + 8, 220, BtnH), "DEPLOY EXPEDITION", _btnStyle))
+            if (GUI.Button(new Rect(deployX, barY + 8, 220, BtnH), "TO THE LIGHTHOUSE", _btnStyle))
             {
                 GUI.color = Color.white;
-                _game?.StartBattle(); // → PreBattle → GambitSetupPanel shows
+                if (LighthouseMapPanel.Instance == null)
+                    gameObject.AddComponent<LighthouseMapPanel>();
+                LighthouseMapPanel.Instance?.Show();
             }
             GUI.color = Color.white;
         }

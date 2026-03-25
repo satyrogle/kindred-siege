@@ -122,6 +122,23 @@ namespace KindredSiege.Battle
             if (DirectiveSystem.Instance != null)
                 DirectiveSystem.Instance.InjectFocusFireTarget(team1);
 
+            // --- GRUDGE AUTO-TARGETING (GDD §6.4) ---
+            if (_activeRival != null && _activeRival.Memory.HasGrudge && team2.Count > 0)
+            {
+                var rivalUnit = team2.FirstOrDefault(u => u != null && u.IsAlive && u.UnitName == _activeRival.FullName);
+                if (rivalUnit != null)
+                {
+                    // Find the grudge target
+                    var grudgeTarget = team1.FirstOrDefault(u => u != null && u.IsAlive && u.UnitName == _activeRival.Memory.GrudgeTargetUnitName);
+                    
+                    // Force the Rival AI to tunnel-vision the grudge target
+                    if (grudgeTarget != null)
+                        rivalUnit.ForcedTarget = grudgeTarget;
+                    else
+                        rivalUnit.ForcedTarget = null;
+                }
+            }
+
             // Tick all living units
             foreach (var unit in allUnits)
             {
@@ -308,6 +325,30 @@ namespace KindredSiege.Battle
             {
                 if (unit != null && unit.IsAlive && unit.UnitId != evt.UnitId)
                     unit.OnWitnessAllyDeath(null);
+            }
+
+            // --- GRUDGE SYSTEM HOOKS ---
+            if (evt.DefeatedByUnitId != -1)
+            {
+                var killer = GetUnitById(evt.DefeatedByUnitId);
+                var deadUnit = GetUnitById(evt.UnitId);
+
+                if (killer != null && deadUnit != null)
+                {
+                    // 1. If Rival kills Player, Rival forms Grudge against that player unit type
+                    if (killer.TeamId == 2 && deadUnit.TeamId == 1 && _activeRival != null && killer.UnitName == _activeRival.FullName)
+                    {
+                        KindredSiege.Rivalry.RivalryEngine.Instance?.RecordRivalKilledUnit(
+                            _activeRival.RivalId, deadUnit.UnitName, deadUnit.UnitType);
+                    }
+
+                    // 2. If Player kills Rival, Rival forms Grudge against the killer!
+                    if (killer.TeamId == 1 && deadUnit.TeamId == 2 && _activeRival != null && deadUnit.UnitName == _activeRival.FullName)
+                    {
+                        KindredSiege.Rivalry.RivalryEngine.Instance?.RecordRivalDefeatedByUnit(
+                            _activeRival.RivalId, killer.UnitName, killer.UnitType);
+                    }
+                }
             }
         }
 

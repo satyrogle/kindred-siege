@@ -166,6 +166,9 @@ namespace KindredSiege.Rivalry
             var rival = GetRival(rivalId);
             if (rival == null) return;
 
+            // Universal memory adaptation — rival learns from the composition they faced
+            AdaptToComp(rival, playerUnitTypes);
+
             if (playerWon)
             {
                 rival.Memory.LossesAgainstPlayer++;
@@ -216,6 +219,25 @@ namespace KindredSiege.Rivalry
                 rival.Memory.EncounterLog.Add($"Formed grudge against \"{playerUnitName}\" ({playerUnitType}).");
                 Debug.Log($"[Rivalry] {rival.FullName} formed a grudge against {playerUnitName}!");
             }
+        }
+
+        /// <summary>
+        /// Record that a rival was killed by a specific player unit.
+        /// They form a vendetta against that unit for the next encounter.
+        /// </summary>
+        public void RecordRivalDefeatedByUnit(string rivalId, string playerUnitName, string playerUnitType)
+        {
+            var rival = GetRival(rivalId);
+            if (rival == null) return;
+
+            // Update grudge to the unit that killed them (revenge focus)
+            rival.Memory.GrudgeTargetUnitName = playerUnitName;
+            
+            if (!rival.Traits.Contains(RivalTraitType.Grudge))
+                rival.Traits.Add(RivalTraitType.Grudge);
+
+            rival.Memory.EncounterLog.Add($"Formed vendetta against their killer: \"{playerUnitName}\" ({playerUnitType}).");
+            Debug.Log($"[Rivalry] {rival.FullName} formed a vendetta against {playerUnitName}!");
         }
 
         /// <summary>Track when the player avoids a rival entirely.</summary>
@@ -283,6 +305,36 @@ namespace KindredSiege.Rivalry
                 rival.Traits.Add(RivalTraitType.EldritchResistant);
                 rival.Memory.DefeatedByRitualCards = true;
                 rival.Memory.EncounterLog.Add("Adapted to eldritch attacks. Now resistant.");
+            }
+        }
+
+        private void AdaptToComp(RivalData rival, List<string> playerUnitTypes)
+        {
+            if (playerUnitTypes == null || playerUnitTypes.Count == 0) return;
+
+            int vanguardCount = playerUnitTypes.Count(u => u == "Vanguard");
+            int wardenCount   = playerUnitTypes.Count(u => u == "Warden");
+            int shadowCount   = playerUnitTypes.Count(u => u == "Shadow");
+
+            if (vanguardCount >= 2 && !rival.Traits.Contains(RivalTraitType.VanguardSlayer))
+            {
+                rival.Traits.Add(RivalTraitType.VanguardSlayer);
+                rival.Memory.EncounterLog.Add("Faced a Vanguard wall. Developed Vanguard-Slayer.");
+                Debug.Log($"[Rivalry] {rival.FullName} developed VanguardSlayer!");
+            }
+
+            if (wardenCount >= 2 && !rival.Traits.Contains(RivalTraitType.WardenBreaker))
+            {
+                rival.Traits.Add(RivalTraitType.WardenBreaker);
+                rival.Memory.EncounterLog.Add("Stonewalled by Wardens. Developed Warden-Breaker.");
+                Debug.Log($"[Rivalry] {rival.FullName} developed WardenBreaker!");
+            }
+
+            if (shadowCount >= 2 && !rival.Traits.Contains(RivalTraitType.ShadowCatcher))
+            {
+                rival.Traits.Add(RivalTraitType.ShadowCatcher);
+                rival.Memory.EncounterLog.Add("Ambushed by Shadows. Developed Shadow-Catcher.");
+                Debug.Log($"[Rivalry] {rival.FullName} developed ShadowCatcher!");
             }
         }
 

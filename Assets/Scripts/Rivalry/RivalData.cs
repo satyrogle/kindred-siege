@@ -152,6 +152,11 @@ namespace KindredSiege.Rivalry
         Vendetta,          // Gained when one of their allies is killed — more aggressive
         Grudge,            // Gained when they kill a player unit — taunts that unit type
         Bold,              // Gained when player avoids them repeatedly — starts ambushing
+
+        // Adaptive traits — specific class counters (Memory Adaptation)
+        VanguardSlayer,    // Gained after fighting multiple Vanguards. +20% dmg to them.
+        WardenBreaker,     // Gained after fighting multiple Wardens. Ignores Warden armor.
+        ShadowCatcher      // Gained after fighting multiple Shadows. Prevents Shadow vanish.
     }
 
     public enum RivalWeaknessType

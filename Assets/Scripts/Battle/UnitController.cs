@@ -108,6 +108,12 @@ namespace KindredSiege.Battle
         private const float SecondsPerRound    = 5f;
         private const int   RoundsBeforeDrain  = 5;
 
+        // ─── Dread Contest ───
+        private bool _skipNextAiTick = false;
+
+        // ─── Mutations ───
+        private float _fearIsPowerBonusTimer = 0f;
+
         // ─── Behaviour Tree ───
         private BTNode       behaviourTree;
         private BattleContext battleContext;
@@ -217,6 +223,12 @@ namespace KindredSiege.Battle
         {
             if (!IsAlive || battleContext == null) return;
 
+            if (_skipNextAiTick)
+            {
+                _skipNextAiTick = false;
+                return; // Stunned from failed Dread Contest
+            }
+
             float dt = Time.deltaTime;
             attackTimer  -= dt;
             _combatTimer += dt;
@@ -254,6 +266,18 @@ namespace KindredSiege.Battle
             // ── Shadow Vanish timer ──
             if (_shadowVanishedTimer > 0f)
                 _shadowVanishedTimer -= dt;
+
+            // ── Mutation: Fear Is Power timer ──
+            if (_fearIsPowerBonusTimer > 0f)
+                _fearIsPowerBonusTimer -= dt;
+
+            // ── Mutation: The Deep Calls (Tide) ──
+            if (KindredSiege.Modifiers.MutationEngine.Instance != null &&
+                KindredSiege.Modifiers.MutationEngine.Instance.HasMutation(KindredSiege.Modifiers.MutationType.TheDeepCalls))
+            {
+                Vector3 toCenter = (Vector3.zero - transform.position).normalized;
+                transform.position += toCenter * 0.5f * dt;
+            }
 
             // ── Environmental Hazard effects (GDD §12) ──
             if (battleContext.Grid != null)
@@ -312,6 +336,15 @@ namespace KindredSiege.Battle
 
             // ── Sanity hesitation (GDD §5.1) + fatigue hesitation (GDD §11.4) ──
             float hesitation = SanitySystem.GetHesitationChance(SanityState) + ExtraHesitationFromFatigue;
+
+            // Mutation: Clarity In Pain (Mind)
+            if (KindredSiege.Modifiers.MutationEngine.Instance != null &&
+                KindredSiege.Modifiers.MutationEngine.Instance.HasMutation(KindredSiege.Modifiers.MutationType.ClarityInPain) &&
+                CurrentSanity < 25)
+            {
+                hesitation = 0f;
+            }
+
             if (hesitation > 0f && Random.value < hesitation)
                 return; // Unit hesitates — skip this tick
 
@@ -414,6 +447,13 @@ namespace KindredSiege.Battle
 
             int oldSanity = CurrentSanity;
             CurrentSanity = Mathf.Clamp(CurrentSanity + delta, 0, MaxSanity);
+
+            // Mutation: Fear Is Power (Mind)
+            if (delta < 0 && KindredSiege.Modifiers.MutationEngine.Instance != null &&
+                KindredSiege.Modifiers.MutationEngine.Instance.HasMutation(KindredSiege.Modifiers.MutationType.FearIsPower))
+            {
+                _fearIsPowerBonusTimer = 5f;
+            }
 
             EventBus.Publish(new SanityChangedEvent
             {
@@ -548,7 +588,20 @@ namespace KindredSiege.Battle
         {
             if (!CanAttack() || target == null || !target.IsAlive) return;
 
-            int damage = Mathf.Max(1, AttackDamage - target.Armour);
+            int effectiveArmour = target.Armour;
+            float rivalDamageMult = 1f;
+
+            // --- Rival Memory Traits (Adaptive Counter-play) ---
+            var rival = KindredSiege.Battle.BattleManager.Instance?.GetActiveRival();
+            if (rival != null && UnitName == rival.FullName)
+            {
+                if (target.UnitType == "Vanguard" && rival.Traits.Contains(KindredSiege.Rivalry.RivalTraitType.VanguardSlayer))
+                    rivalDamageMult += 0.20f;
+                if (target.UnitType == "Warden" && rival.Traits.Contains(KindredSiege.Rivalry.RivalTraitType.WardenBreaker))
+                    effectiveArmour = 0; // Breaker ignores Warden armour entirely
+            }
+
+            int damage = Mathf.Max(1, AttackDamage - effectiveArmour);
 
             // Berserker (Blood Rage): +5% damage per hit taken
             if (UnitType == "Berserker" && _bloodRageStacks > 0)
@@ -563,6 +616,14 @@ namespace KindredSiege.Battle
             // Gambit / Directive damage multiplier (Unleash, Reckless Abandon, etc.)
             if (GambitDamageMultiplier != 1f)
                 damage = Mathf.RoundToInt(damage * GambitDamageMultiplier);
+            
+            // Rival Adaptive Trait modifier
+            if (rivalDamageMult != 1f)
+                damage = Mathf.RoundToInt(damage * rivalDamageMult);
+
+            // Mutation: Fear Is Power physical damage bonus (+40%)
+            if (_fearIsPowerBonusTimer > 0f)
+                damage = Mathf.RoundToInt(damage * 1.40f);
 
             target.TakeDamage(damage, this);
             attackTimer = attackCooldown;
@@ -608,6 +669,26 @@ namespace KindredSiege.Battle
 
             CurrentHP = Mathf.Max(0, CurrentHP - damage);
 
+            // Mutation: Pain Is Shared (Flesh)
+            if (damage > 0 && KindredSiege.Modifiers.MutationEngine.Instance != null &&
+                KindredSiege.Modifiers.MutationEngine.Instance.HasMutation(KindredSiege.Modifiers.MutationType.PainIsShared))
+            {
+                var nearestAlly = battleContext?.Allies
+                    .Where(a => a != null && a.IsAlive && a != this)
+                    .OrderBy(a => Vector3.Distance(transform.position, a.transform.position))
+                    .FirstOrDefault();
+
+                if (nearestAlly != null)
+                {
+                    int sharedDmg = Mathf.RoundToInt(damage * 0.30f);
+                    if (sharedDmg > 0)
+                    {
+                        nearestAlly.CurrentHP = Mathf.Max(0, nearestAlly.CurrentHP - sharedDmg);
+                        if (!nearestAlly.IsAlive) nearestAlly.OnDeath(attacker);
+                    }
+                }
+            }
+
             // Berserker (Blood Rage): +5% damage per hit taken
             if (UnitType == "Berserker" && _bloodRageStacks < 5)
                 _bloodRageStacks++;
@@ -623,7 +704,15 @@ namespace KindredSiege.Battle
             }
 
             // Shadow (Vanish): untargetable below 40% (once)
-            if (UnitType == "Shadow" && !_shadowVanishUsed && (float)CurrentHP / MaxHP < 0.40f)
+            bool canVanish = true;
+            if (attacker != null)
+            {
+                var rival = KindredSiege.Battle.BattleManager.Instance?.GetActiveRival();
+                if (rival != null && attacker.UnitName == rival.FullName && rival.Traits.Contains(KindredSiege.Rivalry.RivalTraitType.ShadowCatcher))
+                    canVanish = false; // Blocked by adaptive counter-trait
+            }
+
+            if (UnitType == "Shadow" && !_shadowVanishUsed && (float)CurrentHP / MaxHP < 0.40f && canVanish)
             {
                 _shadowVanishUsed = true;
                 _shadowVanishedTimer = 3f;
@@ -653,6 +742,22 @@ namespace KindredSiege.Battle
                 if (UnitType == "Occultist" && Random.value < 0.25f)
                 {
                     attacker.ModifySanity(-5, "PsychicRecoil");
+                }
+
+                // Dread Contest hook for high-ranking rivals (GDD §9)
+                if (attacker.UnitType == "Overlord" || attacker.UnitType == "Captain")
+                {
+                    var rival = KindredSiege.Battle.BattleManager.Instance?.GetActiveRival();
+                    if (rival != null && rival.FullName == attacker.UnitName)
+                    {
+                        RollDreadContest(rival.DreadPower, rival.FullName);
+                    }
+                    else
+                    {
+                        // Fallback if rival data is missing
+                        int fallback = attacker.UnitType == "Overlord" ? 28 : 18;
+                        RollDreadContest(fallback, attacker.UnitName);
+                    }
                 }
             }
 
@@ -724,6 +829,50 @@ namespace KindredSiege.Battle
             children.Add(defaultTree);
 
             behaviourTree = new KindredSiege.AI.BehaviourTree.Selector("GambitRoot", children.ToArray());
+        }
+
+        // ════════════════════════════════════════════
+        // DREAD CONTEST (GDD §9)
+        // ════════════════════════════════════════════
+
+        /// <summary>
+        /// Triggered when struck by a high-ranking rival.
+        /// </summary>
+        public void RollDreadContest(int dreadPower, string rivalName)
+        {
+            if (!IsAlive) return;
+
+            // Math: Roll(0, 100) + BaseSanity vs DreadPower
+            int roll = Random.Range(0, 101);
+            int resistance = roll + (unitData != null ? unitData.BaseSanity : 50);
+
+            if (resistance < dreadPower)
+            {
+                Debug.Log($"[Dread] {UnitName} failed Dread Contest against {rivalName}! (Res: {resistance} vs Pwr: {dreadPower})");
+                ModifySanity(-10, "DreadContestFailed");
+                _skipNextAiTick = true;
+                
+                // Visual feedback (magenta pulse)
+                var renderer = GetComponent<Renderer>();
+                if (renderer != null)
+                {
+                    StartCoroutine(StunVisualCoroutine(renderer));
+                }
+            }
+            else
+            {
+                Debug.Log($"[Dread] {UnitName} resisted Dread Contest from {rivalName}! (Res: {resistance} vs Pwr: {dreadPower})");
+                ModifySanity(2, "DreadContestResisted");
+            }
+        }
+
+        private System.Collections.IEnumerator StunVisualCoroutine(Renderer renderer)
+        {
+            var originalColor = renderer.material.color;
+            renderer.material.color = Color.magenta;
+            yield return new WaitForSeconds(0.4f);
+            if (this != null && IsAlive)
+                renderer.material.color = originalColor;
         }
 
         // ════════════════════════════════════════════

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; max-width: 800px; margin: 40px auto; color: #333; }
+        h1 { color: #2c3e50; border-bottom: 2px solid #3498db; padding-bottom: 10px; }
+        h2 { color: #2980b9; margin-top: 30px; }
+        ul { background: #f9f9f9; padding: 20px 40px; border-radius: 8px; border-left: 4px solid #3498db; }
+        li { margin-bottom: 10px; }
+        code { background: #eee; padding: 2px 6px; border-radius: 4px; font-family: Consolas, monospace; }
+        .highlight { font-weight: bold; color: #e74c3c; }
+    </style>
+</head>
+<body>
+    <h1>Kindred Siege - Phase 2 (Nemesis System) Integration Guide</h1>
+    <p>This document outlines how to handle the Phase 2 code changes inside the Unity Editor. Because the new systems were designed to inject cleanly into the existing runtime, <strong>the required Editor changes are extremely minimal!</strong></p>
+
+    <h2>1. The Rivalry Board UI (War Table)</h2>
+    <p>You <strong>do not</strong> need to manually build a UI Canvas or attach any new scripts for the Rivalry Board.</p>
+    <ul>
+        <li><strong>How it works:</strong> In <code>CityHUD.cs</code>, clicking the "Inspect Dominions" button will automatically call <code>gameObject.AddComponent&lt;RivalryBoardPanel&gt;()</code> if it doesn't already exist.</li>
+        <li><strong>Editor Action:</strong> <span class="highlight">None required!</span> The script uses Unity's immediate mode UI (<code>OnGUI</code>) to draw the panel dynamically on top of the City screen.</li>
+    </ul>
+
+    <h2>2. Rivalry Engine</h2>
+    <p>The memory and adaptation mathematics are managed entirely by <code>RivalryEngine.cs</code>.</p>
+    <ul>
+        <li><strong>Editor Action:</strong> Verify that the <code>RivalryEngine</code> script is attached to a permanent GameObject in your starting scene (such as your <code>GameManager</code> or a dedicated <code>Systems</code> prefab). It uses <code>DontDestroyOnLoad</code> to persist across battles.</li>
+    </ul>
+
+    <h2>3. Testing Adaptive Traits in the Inspector</h2>
+    <p>We added three new class-counter traits to the <code>RivalTraitType</code> enum:</p>
+    <ul>
+        <li><code>VanguardSlayer</code> (+20% damage to Vanguards)</li>
+        <li><code>WardenBreaker</code> (Ignores Warden armour)</li>
+        <li><code>ShadowCatcher</code> (Prevents Shadows from vanishing)</li>
+    </ul>
+    <ul>
+        <li><strong>Editor Action:</strong> If you have any pre-configured <code>RivalData</code> ScriptableObjects in your Assets folder for testing, you can now select these new traits from the inspector dropdown. Otherwise, the AI will learn them procedurally during the campaign.</li>
+    </ul>
+
+    <h2>4. The Grudge System &amp; Dread Contests</h2>
+    <p>These are pure backend mechanical hooks.</p>
+    <ul>
+        <li><strong>Dread Contests:</strong> Hooked directly into <code>UnitController.TakeDamage</code>. When hit by an Overlord, units will flash <strong>magenta</strong> if they fail the contest and get stunned.</li>
+        <li><strong>Grudges:</strong> Hooked into <code>BattleManager.OnUnitDefeated</code>. <code>BattleManager.Update()</code> will automatically force the Rival AI to hunt their grudge target.</li>
+        <li><strong>Editor Action:</strong> <span class="highlight">None required!</span> Just make sure your Overlord/Captain classes are properly mapped to your Rival definitions.</li>
+    </ul>
+
+    <p><em>Happy hunting! The Nemesis system is now fully autonomous.</em></p>
+</body>
+</html>

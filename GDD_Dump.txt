@@ -1,0 +1,1014 @@
+ 
+KINDRED SIEGE 
+ 
+THE DROWNED CITY 
+ 
+GAME DESIGN DOCUMENT  |  DEFINITIVE EDITION  |  v4.0 
+ 
+Three Pillars: AI Behaviour  ×  Psychological Simulation  ×  Rivalry Engine 
+ 
+19 Sections  |  40+ Pages  |  Complete Design Specification 
+ 
+Platform: Steam PC  |  Premium Purchase  |  Charity Integration 
+ 
+Unity 2022 LTS (C#)  |  Solo Developer  |  MSc Digital Games (Brunel University London) 
+March 2026  |  Confidential Working Document Kindred Siege: The Drowned City  |  GDD v4.0 Definitive Edition 
+Page 2 
+1. EXECUTIVE SUMMARY 
+ 
+The Elevator Pitch 
+A Lovecraftian auto-battler where you command AI-driven units against eldritch horrors 
+that remember you, adapt to your strategies, and come back stronger. Configure your army 
+with Pre-Built Gambits, issue Tactical Directives mid-battle, and manage your units’ 
+psychological resilience as sanity degrades under cosmic horror. A percentage of every sale 
+and all Charity DLC revenue goes directly to a UK mental health charity. 
+ 
+Working Title: KINDRED SIEGE: THE DROWNED CITY 
+Genre: Lovecraftian Auto-Battler with Procedural Rivalry and Psychological Simulation 
+Platform: PC (Steam) — keyboard/mouse, Steam Deck compatible 
+Price: £14.99–£19.99 (premium, no microtransactions, no ads, no loot boxes) 
+Engine: Unity 2022 LTS (C#) 
+Developer: Solo developer — MSc Digital Games (Brunel University London) 
+Target Audience: Fans of Darkest Dungeon, Slay the Spire, Shadow of Mordor, and cosmic 
+horror. Strategy gamers (20–40) who appreciate psychological depth and procedural storytelling. 
+ 
+1.1 The Three Design Pillars 
+Every design decision in Kindred Siege flows from three interconnected systems. Each pillar is a 
+standalone innovation; together they create emergent gameplay no existing game offers. 
+ 
+Pillar 1: AI Behaviour. Units fight autonomously using behaviour trees. Players don’t control 
+units directly in combat —  they shape AI beforehand with Pre-Built Gambits and intervene during 
+battle with limited Tactical Directives. The AI is the gameplay, not a hidden system. 
+Pillar 2: Psychological Simulation. Every unit has a Sanity stat that degrades under stress and 
+recovers through care. Low sanity causes hesitation, afflictions, and permanent breakdown. 
+High-comprehension units suffer more from horror. Trauma creates phobias linked to specific 
+rivals. This directly extends the developer’s MSc thesis on psychological resilience in life 
+simulations. 
+Pillar 3: The Rivalry Engine. Enemy leaders are procedurally generated with names, traits, 
+weaknesses, and persistent memory. They remember your strategies, develop grudges, get 
+promoted when they beat you, and can return from death as Undying horrors. Their rank 
+determines Dread Power and Horror Rating. This creates emergent narrative without hand-
+authored story. 
+ 
+1.2 Key Innovations 
+Innovation What Makes It Unique Pillar Kindred Siege: The Drowned City  |  GDD v4.0 Definitive Edition 
+Page 3 
+Pre-Built Gambits Player programs unit AI through named tactic presets 
+injected into behaviour trees 
+1 
+Tactical Directives Limited during-battle commands that override AI, 
+creating real-time decision pressure 
+1 
+Comprehension Stat Class-specific multiplier on eldritch sanity damage —  
+smarter units suffer more 
+2 
+Forbidden Knowledge Investigators lose max sanity permanently per rival 
+analysed —  knowledge costs your mind 
+1+2 
+Trauma-Linked 
+Phobias 
+Units develop specific fears tied to the rival trait that 
+broke them 
+2+3 
+Dread Contest Rival taunts are stat contests (rank vs resolve), not 
+flat damage 
+2+3 
+Horror Rating High-rank rivals passively drain sanity by mere 
+presence 
+2+3 
+Rival Memory & 
+Adaptation 
+Rivals counter your tactics, form grudges, and 
+develop new traits from experience 
+3 
+Reality Mutations Procedural rule changes per battle that stack and 
+interact with rival traits 
+All 
+Mercy Mechanic Permadeath moments connected to real-world charity 
+donation 
+2+Charity 
+ 
+  Kindred Siege: The Drowned City  |  GDD v4.0 Definitive Edition 
+Page 4 
+2. CORE GAMEPLAY LOOP 
+ 
+The game follows a Darkest Dungeon-inspired expedition cycle: prepare at the Hamlet, choose a 
+path, survive the auto-battle, return with rewards or losses, and rebuild. The entire campaign is a 
+roguelite structure of 15–20 expeditions culminating in an Arch-Rival confrontation. 
+ 
+2.1 The Expedition Cycle (One Loop) 
+1. HAMLET PHASE: Recruit and heal units at the Barracks and Sanatorium. Manage Pre-
+Built Gambit loadouts at the Archive. Review the Rivalry Board at the War Table. Spend 
+Talent Points on veteran units. Check the Mercy Ledger at the Shrine. 
+2. EXPEDITION MAP (Lighthouse): Choose from 2–3 paths. Each path shows: the 
+encounter type, the active Reality Mutation(s), the rival you’ll face (with visible traits and 
+rank), and the reward. Risk vs reward — harder paths yield better loot. 
+3. PREPARATION PHASE: Select 4–6 units. Assign 2 Pre-Built Gambits per unit from their 
+class dropdown. Review the mutation and rival information. Confirm and deploy. 
+4. AUTO-BATTLE PHASE: Units deploy on a grid and fight autonomously. Player watches 
+with speed controls (0.5x, 1x, 2x, 4x, pause). Sanity drains from combat events, Horror 
+Rating, and prolonged fighting. Player spends Tactical Directive points (5 base) to 
+intervene at critical moments. 
+5. THE MERCY DECISION: When a unit reaches 0 HP, battle pauses. The player sees the 
+unit’s name, class, expedition history, and traits. Spend a Mercy Token to revive them 
+(30% HP, +15 sanity) or let them die permanently. 
+6. POST-BATTLE: Rivalry Engine updates — rivals remember outcomes, gain traits, get 
+promoted or scarred. Units gain XP and stress. Loot earned. Fatigue applied to deployed 
+units. Return to Hamlet. 
+ 
+Design Principle 
+The player’s skill is expressed BEFORE and AROUND the battle — team selection, Gambit 
+configuration, path choice, and Directive timing — not through direct unit control. 
+The battle is the consequence of preparation. This is what makes it an auto-battler 
+with strategic depth rather than a passive spectacle. 
+ 
+2.2 Campaign Structure 
+• Each run lasts 15–20 expeditions across 4–5 Districts, culminating in an Arch-Rival boss. 
+• Permadeath: when units die, they’re gone forever. Veterans with invested Talent Points 
+are devastating to lose. 
+• Meta-progression between runs: Mythos Exposure carries forward, unlocking powerful 
+Gambits and harder rivals. 
+• Certain Undying rivals can persist across runs —  long-term emergent antagonists. 
+ 
+  Kindred Siege: The Drowned City  |  GDD v4.0 Definitive Edition 
+Page 5 
+3. THE HAMLET 
+ 
+The Hamlet is the player’s home base — a battered coastal settlement on the edge of the 
+Drowned City. Not a full city-builder; a focused hub with 6 upgradeable buildings, each serving a 
+specific gameplay function. Each building upgrades 3 times using expedition resources. 
+ 
+Building Function Upgrade Path 
+The Barracks Recruit new units. Roster 
+expands with upgrades. 
+Unlock higher-tier classes, larger roster 
+cap, faster recruitment 
+The Sanatorium Heal stress. Restore sanity 
+between expeditions. 
+Faster recovery, treat Afflictions, treat 
+Phobias (Level 3) 
+The War Table View the Rivalry Board. Track 
+rivals, traits, grudges. 
+Reveal weaknesses (L1), predict spawns 
+(L2), reveal rival mutations (L3) 
+The Archive Manage Pre-Built Gambits. 
+Unlock new tactics. 
+Larger Gambit pool, class-specific 
+advanced Gambits, 3rd Gambit slot (L3) 
+The Lighthouse Choose expedition path. Unlock 
+new Districts. 
+Reveal mutations (L1), scout rival info 
+(L2), reveal hidden paths (L3) 
+The Shrine Mercy Token hub. View the 
+Mercy Ledger. 
+Bonus Mercy Tokens per expedition, 
+Ledger milestones, community tracker 
+ 
+The Hamlet grows visually as buildings improve —  from ruined structures to fortified, lantern-lit 
+havens. This visual progression contrasts with the cold alien Drowned City and provides 
+screenshot-worthy moments for devlogs. 
+ 
+  Kindred Siege: The Drowned City  |  GDD v4.0 Definitive Edition 
+Page 6 
+4. PLAYER INTERACTION: GAMBITS & DIRECTIVES 
+ 
+These two systems replace the card system from earlier GDD versions. Pre-Built Gambits handle 
+pre-battle AI configuration. Tactical Directives handle during-battle intervention. Together they 
+give the player meaningful agency before AND during combat without breaking the auto-battler 
+format. 
+ 
+4.1 Pre-Built Gambits 
+Before each expedition, the player assigns 2 Pre-Built Gambits to each unit via a simple 
+dropdown menu. Each Gambit is a named, pre-packaged behaviour tree branch that injects at 
+the top of the unit’s AI priority list. 
+ 
+How It Works Under the Hood 
+• Each Gambit is a C# method returning a BTNode (Sequence or Selector). 
+• When the player selects a Gambit, the code takes that pre-built BT branch and injects it 
+at Priority 1 or 2 in the unit’s behaviour tree. 
+• The unit’s default class behaviour remains as a fallback below the Gambit priorities. 
+• No visual node editor, no drag-and-drop — just a dropdown menu calling existing 
+BattleActions.cs nodes. 
+• Buildable in 1 day using existing architecture. 
+ 
+Example Gambits (Warden Class) 
+Gambit Name Behaviour Unlock 
+Hold the Line Stay at initial position, attack anything in range, never 
+advance 
+Default 
+Protect the Weak IF ally HP < 30%, move to shield them and draw 
+aggro 
+Default 
+Hunt the Leader Target highest-HP enemy (rival proxy), ignore others Archive L1 
+Reckless Abandon Ignore all retreat thresholds, charge nearest enemy, 
++15% damage, -5 sanity/tick 
+Archive L2 
+Iron Bulwark Reduce incoming damage by 30%, movement speed 
+halved, taunt all enemies in range 
+Talent Tree 
+Vengeful March Prioritise any rival with a Grudge against this unit’s 
+team. +20% damage vs grudge holders. 
+Archive L3 
+ 
+Each of the 8 unit classes has 6–10 unlockable Gambits. Players start with 2–3 per class and 
+unlock more through Archive upgrades and the Talent Tree. This gives long-term progression 
+through expanding tactical options. 
+ 
+4.2 Tactical Directives (During-Battle Commands) Kindred Siege: The Drowned City  |  GDD v4.0 Definitive Edition 
+Page 7 
+The player starts each battle with 5 Directive Points (upgradeable via War Table). During the 
+auto-battle, clicking a unit and selecting a Directive forces an immediate AI override. Points don’t 
+regenerate — once spent, the rest of the battle is pure AI. 
+ 
+Directive Cost Effect 
+Focus Fire 1 All units target the clicked enemy for 8 seconds 
+Hold Position 1 Unit stops moving, attacks anything in range for 10 seconds 
+Fall Back 1 Unit retreats to rear of grid immediately 
+Unleash 2 Unit ignores retreat thresholds, +20% damage for 10 seconds, 
+costs 5 sanity 
+Sacrifice 3 Unit charges strongest enemy, deals 2x damage, dies at end of 
+charge 
+Invoke Mercy Token Spend a Mercy Token to revive a fallen unit (30% HP, +15 
+sanity) 
+ 
+Strategic Depth 
+5 points forces brutal prioritisation. Spend 3 on a Sacrifice early to eliminate a rival, 
+and you only have 2 left for emergencies. Save all 5 for the final phase and risk losing 
+units to preventable deaths. The Directive economy IS the during-battle strategy layer. 
+ 
+  Kindred Siege: The Drowned City  |  GDD v4.0 Definitive Edition 
+Page 8 
+5. PSYCHOLOGICAL SIMULATION (PILLAR 2) 
+ 
+This system directly implements the developer’s MSc thesis: “Psychological Resilience in Life 
+Simulations.” It is the deepest and most interconnected pillar, touching every other system in the 
+game. 
+ 
+5.1 The Sanity System 
+Sanity 
+Range 
+State AI Effect 
+80–100 Resolute Full effectiveness. May gain Virtues under pressure. 
+50–79 Stressed 10% chance per tick to hesitate (skip AI action). Slight accuracy 
+reduction. 
+25–49 Afflicted 25% hesitation. Gambits may partially fail. Random negative 
+behaviours. 
+1–24 Broken 50% hesitation. 40% chance per tick to cower and retreat. Severe 
+AI disruption. 
+0 Lost Permanently consumed by madness. Removed from roster. 
+Triggers -20 sanity to all witnesses. 
+ 
+5.2 Sanity Triggers 
+What Causes Sanity Loss 
+• Witnessing an ally die: -15 sanity (multiplied by AllySanityLossMultiplier for empathic 
+classes) 
+• Being attacked by eldritch enemy: -5 per hit (multiplied by Comprehension) 
+• Rival taunt (Dread Contest): variable damage based on rival rank vs unit resistance 
+• Horror Rating aura: -2 to -8 per 5 seconds based on rival rank (multiplied by 
+Comprehension) 
+• Ritual Gambits: variable sanity cost per use 
+• Prolonged combat: -3 per round after round 5 
+• Witnessing a unit go Lost: -20 to ALL surviving units on both sides 
+• Passive drain (Vessel class only): -1 per second 
+ 
+What Restores Sanity 
+• Resting at the Sanatorium: +20–40 per rest cycle 
+• Healer units (Occultist) during combat: +5 per heal action 
+• Victory: +10 to all surviving units 
+• Killing a rival who previously defeated your unit: +25 (revenge bonus) 
+• Mercy Token save: +15 to the saved unit 
+• Herald’s Courageous aura: +10 to nearby allies every 8 seconds 
+• Unit Bonds: +5 when bonded partner is within range Kindred Siege: The Drowned City  |  GDD v4.0 Definitive Edition 
+Page 9 
+ 
+5.3 The Comprehension Stat 
+Not all units process horror equally. Comprehension is a per-class float multiplier applied to ALL 
+eldritch-source sanity damage. High-Comprehension units understand the horror — and pay the 
+price. Low-Comprehension units are too simple to be afraid. 
+ 
+Class Comprehension Rationale 
+Warden 0.6 (Low) Simple soldier. Doesn’t think deeply. Reduced horror 
+impact. 
+Marksman 0.8 (Medium) Focused on targets, not cosmic implications. 
+Occultist 1.3 (High) Understands the Mythos. Pays the price. 
+Berserker 0.5 (Very Low) Pure instinct. Barely registers what they’re fighting. 
+Investigator 1.5 (Very High) Actively comprehends everything. Maximum 
+vulnerability. 
+Shadow 0.7 (Low-Med) Operates on instinct and training. 
+Herald 1.1 (High) Empathic awareness extends to the cosmic. 
+Vessel 1.0 (Baseline) Standard. Already doomed by other means. 
+ 
+Thesis Connection: Cognitive Appraisal 
+Comprehension models the psychological concept of “appraisal” —  how individuals evaluate 
+the significance of a stressful event. Research shows that cognitive appraisal is a stronger 
+predictor of PTSD than the event itself. High-Comprehension units appraise horror more 
+accurately and therefore suffer more — mirroring the clinical finding that awareness amplifies 
+trauma. 
+ 
+5.4 Forbidden Knowledge Trade-off 
+Every time an Investigator uses the AnalyseTarget action to reveal a rival’s weakness, their 
+MaxSanity permanently decreases by 2–3 points. This reduction persists across the entire 
+campaign and cannot be healed. 
+• Cap: maximum reduction of 40 points (MaxSanity cannot drop below 60% of base). 
+• Veteran Investigators (5+ expeditions) lose 1 point less per analysis. 
+• Creates a depreciating-asset dynamic: the Investigator becomes more valuable for intel 
+but more psychologically fragile with each use. 
+• At some point, the player must retire the Investigator or accept the risk of losing them to 
+madness. 
+ 
+5.5 Trauma-Linked Phobias Kindred Siege: The Drowned City  |  GDD v4.0 Definitive Edition 
+Page 10 
+When a unit’s sanity drops below 50 and an Affliction is rolled, the system checks what caused 
+the most sanity damage this battle and generates a specific phobia tied to that source. 
+ 
+Trigger Phobia Effect 
+Broken by rival with Rage 
+trait 
+Fear of Rage 2x sanity damage from any enemy with 
+Rage 
+Broken by rival with 
+Ambusher trait 
+Fear of Ambush -10 extra sanity at battle start 
+Broken by witnessing ally 
+die 
+Fear of Death -30 instead of -15 from ally deaths 
+Broken by rival’s taunt 
+(Grudge) 
+Fear of [Rival Name] 3x sanity damage from that specific rival 
+Broken by prolonged 
+combat 
+Battle Fatigue Sanity drain starts at round 3 instead of 5 
+Broken by witnessing unit 
+go Lost 
+Fear of Madness Panics and retreats 5 sec if any unit reaches 
+Broken state 
+Broken by Horror Rating 
+aura 
+Cosmic Dread 2x sanity damage from all Horror Rating 
+auras 
+ 
+• Phobias persist across expeditions. They do not heal naturally. 
+• Sanatorium Level 3 can treat phobias (costs resources + 1 full rest cycle). 
+• Phobias can stack — a unit broken twice by different causes carries two phobias. 
+• A unit with 3+ phobias is considered Traumatised and should be retired or treated. 
+ 
+Thesis Connection: Classical Conditioning & Exposure Therapy 
+Phobias model classical conditioning —  associating a specific stimulus with trauma. 
+Re-exposing a phobic unit to their trigger mirrors exposure therapy. 
+If they survive and gain a Virtue, the game models successful therapeutic outcome. 
+If they break further, it models re-traumatisation. Both are psychologically authentic. 
+ 
+5.6 Virtues and Afflictions 
+When sanity first crosses below 50, the system rolls for a stress trait. Veterans (5+ expeditions) 
+have a 30% Virtue chance vs 10% for rookies — modelling the thesis finding that resilience 
+grows from repeated stress exposure. 
+ 
+Type Name Effect 
+Affliction Paranoid AI targets allies as threats 15% of the time 
+Affliction Hopeless AI retreat threshold raised to 50% HP 
+Affliction Selfish Ignores heal/support orders, self-preservation only 
+Affliction Irrational Random targeting —  ignores all priority systems Kindred Siege: The Drowned City  |  GDD v4.0 Definitive Edition 
+Page 11 
+Virtue Stalwart Immune to further sanity loss this battle 
+Virtue Focused +25% damage, AI at peak efficiency 
+Virtue Courageous +10 sanity to all nearby allies every 8 seconds 
+Virtue Resolute Cannot drop below 1 HP for 10 seconds 
+ 
+  Kindred Siege: The Drowned City  |  GDD v4.0 Definitive Edition 
+Page 12 
+6. THE RIVALRY ENGINE (PILLAR 3) 
+ 
+Procedurally generates, tracks, and evolves enemy leaders across encounters. Creates 
+emergent narrative through algorithmic memory —  the game’s core differentiator. 
+ 
+6.1 Rival Generation 
+Component Generation Method Example 
+Name Two-part Lovecraftian generator 
+(name + epithet) 
+Vhaal the Drowned, Skrix Hollow-Eye 
+Rank Starts at Grunt. Promotes on 
+player defeat. 
+Grunt → Lieutenant → Captain → 
+Overlord 
+Traits (2–4) Random from base pool. 
+Adaptive traits earned from 
+memory. 
+Rage, Tactical, MarksmanHunter, Grudge 
+Weakness (1) Random. Exploitable by player. Flanking, Fire, Light, Isolation, Disruption 
+Memory Logs every encounter with 
+player. 
+Defeated player 2x. Scarred by 
+Marksmen. 
+Grudge Target Set when rival kills a player unit. Grudge against “Elara” (Marksman) 
+Visual Scars, size, colour based on 
+history. 
+Missing eye. 1.3x size from 2 promotions. 
+ 
+6.2 The Dread Contest 
+Rival taunts are stat contests, not flat damage. An Overlord taunting a Broken unit is devastating. 
+A Grunt taunting a Resolute Warden is ignored. 
+ 
+Dread Contest Formula 
+Rival Dread Power = Base (by rank) + Trait Bonuses + Grudge Bonus 
+Unit Resistance = (Current Sanity / 10) + Comprehension Modifier 
+Sanity Damage = max(0, Dread Power - Resistance) × 2 
+ 
+Damage > 20: unit gains 3-second Hesitation Lock (cannot act) 
+Damage > 35: phobia check triggers (if relevant phobia exists, it activates) 
+ 
+Rank Base Dread With Grudge With Vendetta 
+Grunt 5 8 7 
+Lieutenant 10 15 13 
+Captain 18 25 22 Kindred Siege: The Drowned City  |  GDD v4.0 Definitive Edition 
+Page 13 
+Overlord 28 38 33 
+Undying (any) +10 bonus +15 bonus +12 bonus 
+ 
+6.3 Horror Rating 
+High-rank rivals passively drain sanity from ALL player units by their mere presence on the 
+battlefield. 
+ 
+Rank Horror Rating Drain per 5 Sec Range 
+Grunt 0 None N/A 
+Lieutenant 1 -2 sanity Entire battlefield 
+Captain 2 -4 sanity Entire battlefield 
+Overlord 4 -8 sanity Entire battlefield 
+Undying (any) +2 bonus Added to rank Entire battlefield 
+ 
+• Drain multiplied by unit’s Comprehension stat. 
+• Multiple rivals stack: Captain (2) + Lieutenant (1) = -6 per tick before Comprehension. 
+• Visual: screen edges darken, chromatic aberration, low bass rumble. 
+ 
+6.4 Rival Lifecycle 
+7. SPAWNED: New rival with procedurally generated traits. Rank: Grunt. 
+8. ENCOUNTERED: Player fights rival. Outcome recorded in memory. 
+9. PROMOTED (rival wins): +1 rank, +1 new trait, +20% HP, +10% damage, +0.15 size. 
+10. SCARRED (rival barely survives): Gains scar, develops counter-traits to what hurt them. 
+11. DEFEATED: Dies. Drops unique loot. May trigger Vendetta from a subordinate rival. 
+12. RETURNED (rare, 12% chance): Previously defeated rival returns as Undying. +50% HP. 
+Minimum Captain rank. 
+ 
+6.5 Rival Memory & Adaptation 
+• Defeated by Marksmen → gains MarksmanHunter trait (prioritises killing Marksmen). 
+• Defeated by Ritual Gambits → gains EldritchResistant trait. 
+• Kills a player unit → forms Grudge against that unit type. Taunts them specifically. 
+• Avoided 3+ times → gains Bold trait. Starts ambushing. 
+• Ally killed by player → subordinate rival gains Vendetta trait. More aggressive. 
+ 
+  Kindred Siege: The Drowned City  |  GDD v4.0 Definitive Edition 
+Page 14 
+7. REALITY MUTATIONS 
+ 
+Procedural rule changes that alter fundamental game mechanics per battle. Mutations are 
+presented on the Expedition Map at the Lighthouse, allowing the player to evaluate risk vs 
+reward before choosing a path. 
+ 
+7.1 Mutation Stacking 
+• Initiate (Mythos 0–10): 1 mutation per battle 
+• Acolyte (11–25): 1–2 mutations 
+• Scholar (26–45): 2 mutations 
+• Adept (46–70): 2–3 mutations 
+• Seer (71+): 3 mutations, one hidden until battle starts 
+ 
+7.2 Four Mutation Families 
+ 
+Tide Mutations (Movement/Spatial) 
+• “THE DEEP CALLS” — All units pulled toward grid centre (1 unit/tick) 
+• “CURRENTS SHIFT” — Every 15 sec, all unit positions shuffle by 1–2 cells 
+• “DROWNED GROUND” — Bottom 2 rows deal 3 sanity damage/tick 
+• “RISING WATERS” — Playable grid shrinks by 1 row per side every 30 sec 
+ 
+Mind Mutations (Sanity/Psychology) 
+• “FEAR IS POWER” — Sanity damage converts to +damage bonus for 5 sec 
+• “MADNESS SPREADS” — When a unit gains an Affliction, a random ally also gains one 
+• “CLARITY IN PAIN” — Units below 25 sanity have 0% hesitation (the broken become 
+focused) 
+• “MEMORIES BLEED” — Veterans start with sanity equal to their lowest from previous 
+expedition 
+ 
+Flesh Mutations (Combat/HP) 
+• “PAIN IS SHARED” — 30% of damage dealt also hits nearest ally 
+• “DEATH FEEDS LIFE” — When a unit dies, all survivors heal 20% HP 
+• “IRON BLOOD” — Armour doubled, healing halved 
+• “THE WOUNDED STRIKE HARDER” — Units below 50% HP deal +40% damage 
+ 
+Void Mutations (Rivalry/Existential) 
+• “THE RIVAL KNOWS” — Rival reads your first Gambit slot and counters it (it fails) Kindred Siege: The Drowned City  |  GDD v4.0 Definitive Edition 
+Page 15 
+• “NAMES HAVE POWER” — Units with phobias matching rival traits take 3x sanity 
+damage 
+• “DEATH IS UNDONE” — Defeated enemies have 25% chance to respawn at 50% HP 
+• “THE WATCHER SEES” — Tactical Directives cost double points 
+ 
+7.3 Expedition Map (Risk vs Reward) 
+At the Lighthouse, the player sees 2–3 paths. Each shows the mutation(s), the rival, the 
+encounter type, and the reward. Harder paths yield better loot. Players evaluate the mutation-
+rival combination to find paths that suit their team. 
+• Example: Path A shows “FEAR IS POWER” + a rival with Ambusher trait (dangerous 
+combo). Reward: Rare Gambit unlock. 
+• Path B shows “IRON BLOOD” + a Fearful rival (manageable). Reward: Standard 
+resources. 
+• The player running a Berserker-heavy team might take Path A because Berserkers thrive 
+on taking damage. 
+ 
+7.4 Rival Resonance 
+Mutations interact with rival traits to create unique tactical puzzles. The system checks if the 
+active mutation amplifies any of the rival’s traits: 
+• “BLOOD IN THE WATER” (all units move 50% faster) + Ambusher rival = rival crosses 
+the map instantly 
+• “FEAR IS POWER” + rival with Horror Rating 4 = your units take massive sanity damage 
+that converts to a damage bonus, creating a race between psychological breakdown and 
+killing power 
+• The procedural mutation + procedural rival = a unique combat puzzle every battle 
+ 
+7.5 Arch-Rival Domain Expansion 
+At Mythos Exposure 100+, the Arch-Rival’s specific Reality Mutation is active across the ENTIRE 
+game — every battle, not just encounters with the Arch-Rival. The player can’t avoid the 
+mutation; they must hunt down and kill the Arch-Rival to break it. 
+• Example: Undying Overlord projects “DEATH IS MADNESS” globally. Every unit that dies 
+in any battle goes Lost instead, causing -20 sanity to everyone. 
+• This forces the player to build a team specifically designed to hunt the Arch-Rival and 
+end their domain. 
+ 
+  Kindred Siege: The Drowned City  |  GDD v4.0 Definitive Edition 
+Page 16 
+8. UNITS 
+ 
+Units are the player’s expedition members. Each has a procedurally generated name, a class, 
+stats, a sanity level, a behaviour tree, and (for veterans) a Talent Tree. Permadeath makes 
+attachment real. 
+ 
+8.1 Unit Classes (8 Classes) 
+Class Role Default AI Sanity Trait Reactive Skill 
+Warden Tank Engage nearest, 
+protect allies 
+High base. Hard to 
+break. 
+Brace: 30% counter-attack 
+on melee hit 
+Marksman Ranged 
+DPS 
+Keep distance, 
+focus weakest 
+Medium. Panics if 
+flanked. 
+Snap Shot: auto-fires 
+when enemy enters range 
+Occultist Healer Heal most damaged 
+ally 
+Low. Sees too 
+much. 
+Psychic Recoil: 25% 
+chance to deal 5 sanity 
+dmg to attacker when 
+taking sanity loss 
+Berserker Melee 
+DPS 
+Charge strongest, 
+never retreat 
+Gains sanity from 
+kills. 
+Blood Rage: +5% damage 
+per hit taken (stacks 5x) 
+Investigator Debuffer Analyse rivals, 
+reveal weakness 
+Very low. Curious 
+mind. 
+Insight Flash: 20% auto-
+analyse on being hit (costs 
+2 sanity) 
+Shadow Assassin Circle to rear, target 
+leaders 
+Loner. Immune to 
+ally death. 
+Vanish: untargetable for 3 
+sec when below 40% HP 
+(once per battle) 
+Herald Buffer Mid-range, boost 
+ally sanity 
+Empathic. 2x ally 
+stress. 
+Martyrdom Pulse: +8 
+sanity to all allies when 
+dropping below 50% HP 
+(once) 
+Vessel Mercy 
+Spec 
+Flee. Surviving = 
+Mercy Tokens. 
+Cannot be healed. 
+Drains. 
+Death Denied: 20% 
+chance to survive lethal hit 
+at 1 HP (once) 
+ 
+8.2 Unit Progression 
+• Units gain 1 XP per survived expedition. XP unlocks Talent Tree points. 
+• Veteran status at 5+ expeditions: 30% Virtue chance (vs 10% for rookies). 
+• Permadeath: units that die or go Lost are gone forever. Talent investment is lost. 
+• Units can be named by the player after their first expedition. 
+ 
+  Kindred Siege: The Drowned City  |  GDD v4.0 Definitive Edition 
+Page 17 
+9. TALENT TREE 
+ 
+Each unit class has 10 talent nodes in two branches of 5. Units earn 1 talent point per survived 
+expedition. A veteran with 8 expeditions has 8 points to spend across both branches. 
+ 
+9.1 Branch Structure (Warden Example) 
+Resolve Path (Psychological Durability) 
+• Node 1: +10 max sanity 
+• Node 2: Comprehension reduced by 0.1 
+• Node 3: Immune to first Affliction roll per battle 
+• Node 4: Ally death sanity loss halved (-7 instead of -15) 
+• Node 5: Passive aura — nearby allies take 25% less Horror Rating drain 
+ 
+Frontline Path (Combat Power) 
+• Node 1: +15% HP 
+• Node 2: +10% damage 
+• Node 3: Armour blocks first sanity hit too (absorbs 5 sanity damage, once per battle) 
+• Node 4: Taunt — enemies prioritise this unit for 5 seconds at battle start 
+• Node 5: Heroic Sacrifice — on death, allies gain +10 sanity instead of losing -15 
+ 
+Why This Matters 
+Talent Trees make veteran units dramatically more valuable than fresh recruits. 
+This raises the stakes for permadeath and the Mercy Token decision. 
+A unit with 8 invested talent points is agonising to lose. 
+Each path reflects Pillar 2: Resolve Path builds psychological resilience, 
+Frontline Path builds combat capability. The choice mirrors the thesis question: 
+does strength come from endurance or from power? 
+ 
+  Kindred Siege: The Drowned City  |  GDD v4.0 Definitive Edition 
+Page 18 
+10. ENCOUNTER TYPES & DISTRICTS 
+ 
+10.1 Encounter Types 
+Not every battle has the same “kill them all” objective. The Expedition Map shows the encounter 
+type for each path. 
+ 
+Encounter Objective Best Classes 
+Annihilation Eliminate all enemies. Standard combat. Warden, Berserker, Marksman 
+Survival Hold out for 60 seconds against endless 
+waves. Can’t win by killing. 
+Herald, Occultist, Warden 
+Extraction One unit carries an artefact across the 
+grid. Enemies try to stop them. 
+Shadow, Marksman (escort) 
+Rival Hunt Kill the rival leader (at the back, protected, 
+taunting). Fodder flees when rival dies. 
+Shadow, Investigator, Berserker 
+Escort Protect a Vessel as it crosses the 
+battlefield. Vessel death = loss. 
+Warden, Herald, Occultist 
+Sanity Siege No physical combat. Both sides project 
+psychological attacks. First team fully Lost 
+loses. 
+Herald, Occultist, high-Resolve 
+units 
+ 
+10.2 Districts 
+The Drowned City is divided into 4–5 districts, each controlled by a rival faction with a dominant 
+mutation family. Clearing all rivals in a district liberates it, unlocking a permanent Hamlet 
+upgrade. 
+ 
+District Theme Dominant Mutation 
+Family 
+Hamlet Unlock 
+The Harbour Flooded docks, sunken 
+ships, tidal ruins 
+Tide Mutations +1 Directive Point per 
+battle 
+The Asylum Collapsed sanatorium, 
+maddened spirits 
+Mind Mutations Sanatorium upgrade: 
+treat 2 units 
+simultaneously 
+The Foundry Industrial wreckage, twisted 
+metal, fire 
+Flesh Mutations Barracks upgrade: +2 
+roster slots 
+The Cathedral Eldritch temple, void energy, 
+cosmic horror 
+Void Mutations Archive upgrade: 
+unlock Tier 3 Gambits 
+The Abyss 
+(final) 
+The deepest ruin. Arch-
+Rival’s domain. 
+All families (random) Campaign completion 
+ Kindred Siege: The Drowned City  |  GDD v4.0 Definitive Edition 
+Page 19 
+  Kindred Siege: The Drowned City  |  GDD v4.0 Definitive Edition 
+Page 20 
+11. EMERGENT GAMEPLAY SYSTEMS 
+ 
+11.1 Unit Bonds 
+Units that survive 3+ expeditions together become Bonded. This is a counter, not a scripted 
+event. 
+• Bonded units: +5 sanity when within range of each other during battle. 
+• If one Bonded partner dies: survivor takes -25 sanity instead of -15 (the loss hits harder). 
+• Creates dilemmas: send both (Bond bonus but risk cascade) or split them (safe but 
+weaker). 
+ 
+11.2 Rivals Targeting Low-Sanity Units 
+Rivals with the Tactical trait actively prioritise low-sanity player units. They know the broken ones 
+will flee or attack allies. This connects Pillar 3 (rivalry AI) to Pillar 2 (psychological state) — your 
+mental weakness becomes a tactical vulnerability. 
+ 
+11.3 Event Cascades 
+The most memorable moments are chain reactions across systems: 
+13. Ally dies → teammates lose -15 sanity 
+14. One teammate drops below 50 → Affliction roll → gains Paranoid 
+15. Paranoid unit attacks ally → that ally takes damage 
+16. Damaged ally is a Herald → empathic trait = double sanity loss 
+17. Herald drops below 50 → Virtue roll → gains Courageous 
+18. Courageous aura restores sanity to the Paranoid unit 
+19. Paranoid unit stabilises and stops attacking allies 
+Seven systems interacting. No scripted sequence. Pure emergence. 
+ 
+11.4 Fatigue System 
+Units deployed on consecutive expeditions gain Fatigue: -10% all stats per consecutive 
+deployment. Two consecutive = -20%. Three = -30% and forced rest. This prevents “best team 
+every time” and forces roster rotation. 
+ 
+  Kindred Siege: The Drowned City  |  GDD v4.0 Definitive Edition 
+Page 21 
+12. ENVIRONMENTAL HAZARDS 
+ 
+The battle grid includes hazard tiles that affect units standing on them. No walls or cover (avoids 
+pathfinding complexity). Hazards are generated per district. 
+ 
+Tile Type Effect District 
+Deep Water -3 sanity/tick. 2x movement cost. “Drowned Compass” 
+Relic-holders immune. 
+Harbour 
+Eldritch Ground Active mutation effect is 2x for any unit standing here. Cathedral 
+Shrine (1 per map) +2 sanity/tick. Immune to Horror Rating. Contested 
+ground —  usually centre of map. 
+All 
+ 
+  Kindred Siege: The Drowned City  |  GDD v4.0 Definitive Edition 
+Page 22 
+13. MYTHOS EXPOSURE (META-PROGRESSION) 
+ 
+Campaign-level stat that only goes up. Tracks total immersion in the eldritch. Higher exposure 
+unlocks power but escalates danger. Carries across runs. 
+ 
+13.1 What Increases Exposure 
+Event Exposure Note 
+Complete any expedition +1 Baseline 
+Defeat a rival +2 Studying the dead 
+Defeat an Overlord +5 Major entity 
+Defeat an Undying rival +8 Defying death 
+Lose a unit to Lost +3 Witnessing madness 
+Use a Ritual Gambit +1 per use Forbidden power 
+Investigator analyses rival +1 per 
+analysis 
+Knowledge costs 
+Explore new district +2 Deeper truths 
+ 
+13.2 Tier Progression 
+Tier Threshold Unlock (Benefit) Escalation (Cost) 
+Initiate 0–10 Base game Normal difficulty 
+Acolyte 11–25 Tier 2 Ritual Gambits Rivals spawn +1 trait, Grunt HP 
++10% 
+Scholar 26–45 Tier 3 Rituals. Investigator 
+analyses 2 traits. 
+New rivals start at Lieutenant rank 
+Adept 46–70 Tier 4 Rituals. New district: The 
+Abyss. 
+Undying chance doubled. Faster 
+adaptation. 
+Seer 71–100 See rival weaknesses without 
+analysis. 
+All rivals have Horror Rating. -10 
+max sanity on recruits. 
+Beyond 100+ Maximum power. Arch-Rival Domain Expansion 
+active. Rivals spawn as Overlord. 
+ 
+  Kindred Siege: The Drowned City  |  GDD v4.0 Definitive Edition 
+Page 23 
+14. THE MERCY MECHANIC & CHARITY MODEL 
+ 
+No ads. No pay-to-win. The charity model works through three revenue streams on Steam. 
+ 
+14.1 Mercy Tokens (In-Game) 
+• Rare resource earned through gameplay: Vessel survival, Shrine upgrades, Mercy 
+Cards, Arch-Rival defeats. 
+• When a unit hits 0 HP, battle pauses. Player sees unit’s full history. 
+• Spend 1 Mercy Token: unit revives at 30% HP with +15 sanity. 
+• No token: unit dies permanently. 
+• Mercy Ledger on main menu tracks total lives saved across all playthroughs. 
+ 
+14.2 Charity Revenue Streams 
+Stream 1: Base Game Donation 
+• 10–15% of every sale donated to partnered UK mental health charity. 
+• At £14.99 with 10% after Steam’s 30% cut: ~£1.05 per sale. 
+ 
+Stream 2: Charity DLC Packs (£2.99–£4.99) 
+• Cosmetic DLC where 100% of developer revenue goes to charity. 
+• “The Mercy Collection” — skins, Hamlet themes, card backs. 
+• Clearly labelled: “All proceeds donated to [Charity Name].” 
+ 
+Stream 3: Community Milestones 
+• Global Mercy Ledger: all players’ token usage aggregated. 
+• Milestones (100k lives saved) trigger bonus donations and in-game events. 
+• Creates press moments: “Kindred Siege players save 100,000 lives, donating £1,000 to 
+Mind.” 
+ 
+14.3 Charity Partners 
+• Mind (mind.org.uk) — UK’s leading mental health charity 
+• Safe In Our World — mental health charity for the games industry 
+• CALM — suicide prevention 
+• SpecialEffect — gaming accessibility charity 
+ 
+  Kindred Siege: The Drowned City  |  GDD v4.0 Definitive Edition 
+Page 24 
+15. ACCESSIBILITY 
+ 
+Mandatory for Steam release. Low effort, high impact, professional standard. 
+ 
+• Colorblind Mode: Three palettes (Protanopia, Deuteranopia, Tritanopia). Global colour 
+ScriptableObject swap. 
+• Key Remapping: Full rebinding via Unity Input System. All Directives, speed controls, 
+menus. 
+• UI Scaling: 75%–150% slider. Canvas Scaler with global multiplier. Essential for Steam 
+Deck. 
+• Screen Reader Support: All names, states, mutations readable as text. On-screen 
+announcements for Virtues/Afflictions. 
+• Speed Controls: 0.5x, 1x, 2x, 4x, pause, step mode (advance one tick at a time). 
+• Difficulty Options: Standard, Forgiving (-30% sanity damage, 7 Directives), Merciless 
+(+30%, no Mercy Tokens, 3 Directives). 
+• Subtitles: All rival taunts, sanity events, lore. Adjustable text size. 
+ 
+  Kindred Siege: The Drowned City  |  GDD v4.0 Definitive Edition 
+Page 25 
+16. ART DIRECTION 
+ 
+• Stylised low-poly 3D with heavy atmospheric lighting. Darkest Dungeon’s mood in 3D. 
+• Colour palette: deep teals, sickly greens, bruised purples, gold for the Hamlet. 
+• Fog and particles: volumetric fog, floating ash, distant tentacles in skybox. 
+• Units: readable silhouettes with class-distinct shapes. No detailed faces needed. 
+• Hamlet: warm, lantern-lit — visual contrast to the cold Drowned City. 
+• UI: PC-first, mouse-driven with keyboard shortcuts. Tooltips on everything. 
+ 
+Phase Art Level Approach 
+Prototype (M1–3) Primitive shapes, colour 
+coding 
+Focus on gameplay. Already working. 
+Alpha (M4–7) Low-poly asset packs Unity Asset Store, itch.io, Kenney.nl 
+Demo (M8–11) Custom or commissioned 
+models 
+8 unit models, 6 buildings, key VFX 
+ 
+  Kindred Siege: The Drowned City  |  GDD v4.0 Definitive Edition 
+Page 26 
+17. STEAM PLATFORM FEATURES 
+ 
+17.1 Achievements (10) 
+Achievement Condition 
+First Blood Win your first auto-battle 
+Old Grudge Defeat a rival who killed one of your units 
+They Remember Encounter a rival promoted 3+ times 
+Unbreakable Unit gains a Virtue 3 times across expeditions 
+The Drowned King Falls Defeat your first Arch-Rival 
+No One Left Behind Complete a campaign with zero unit deaths 
+100 Lives Saved Use 100 Mercy Tokens across all playthroughs 
+Into the Abyss Have a unit reach 0 sanity and become Lost 
+Domain Breaker Defeat an Arch-Rival during Domain Expansion 
+They Never Stay Dead Encounter an Undying rival 
+ 
+17.2 Steam Deck 
+• Full controller support with radial menu for Directives. 
+• UI scales to 1280x800. All text readable at native resolution. 
+• Target 30 FPS. Low-poly art keeps performance light. 
+• Cloud saves via Steam Cloud. 
+ 
+17.3 Store Presence 
+• Tags: Auto Battler, Roguelite, Lovecraftian, Strategy, Psychological Horror, Indie 
+• Capsule art: lantern-lit hamlet against massive tentacled silhouette rising from dark water 
+• Key selling point: “Your enemies remember. Your units break. Every purchase helps.” 
+• Charity badge visible on store page. 
+ 
+  Kindred Siege: The Drowned City  |  GDD v4.0 Definitive Edition 
+Page 27 
+18. 11-MONTH DEVELOPMENT ROADMAP 
+ 
+Phase 1: Core Battle + Gambits (Months 1–3 | April–June 2026) 
+• Month 1: Health bars, battle HUD, 8 unit classes, reactive skills, Comprehension stat, 
+Horror Rating. [IN PROGRESS] 
+• Month 2: Pre-Built Gambit system (dropdown UI, 3–4 Gambits per class), Tactical 
+Directives (5-point system), environmental hazards. 
+• Month 3: Sanity system with Virtue/Affliction rolls, Forbidden Knowledge, Trauma-Linked 
+Phobias. Fatigue system. 
+Visa evidence: Weekly devlogs. AI architecture article. GitHub active with CI/CD. 
+ 
+Phase 2: Rivalry Engine + Campaign (Months 4–7 | July–October 2026) 
+• Month 4: Dread Contest, rival memory adaptation, grudge system, Rivalry Board UI. 
+• Month 5: Reality Mutations (4 families, stacking), Expedition Map at Lighthouse, Rival 
+Resonance. 
+• Month 6: Hamlet hub (6 buildings, upgrade progression), Talent Tree (10 nodes, 2 
+branches per class), Mercy Token system. 
+• Month 7: Districts (4 + Abyss), encounter types (4–6 types), Mythos Exposure, Arch-Rival 
+encounters, Unit Bonds. 
+Visa evidence: Begin endorsement application. Meetup talk. Rivalry Engine article. Charity 
+partner outreach. 
+ 
+Phase 3: Polish + Steam Demo (Months 8–11 | November 2026–February 
+2027) 
+• Month 8: Visual overhaul — replace primitives with models, atmospheric lighting, fog, 
+VFX. 
+• Month 9: Sound design. Tutorial/onboarding. Accessibility features. Game balance pass. 
+• Month 10: External playtesting. Bug fixing. Performance optimisation. Steam Deck 
+testing. 
+• Month 11: Steam page live. Playable demo. Charity partnership finalised. Visa 
+application completed. 
+Visa evidence: Conference talk. Charity LOI. Playtest testimonials. Press coverage. Steam page 
+as portfolio. 
+ 
+  Kindred Siege: The Drowned City  |  GDD v4.0 Definitive Edition 
+Page 28 
+19. POST-LAUNCH ROADMAP (CUT FEATURES) 
+ 
+These features were designed but deferred to post-launch to protect the 11-month deadline. 
+Each is scoped and ready for implementation once the base game ships. 
+ 
+Feature Description Est. Dev 
+Time 
+Update Type 
+Cursed Relics Per-unit equipment with benefit + curse. 
+ScriptableObject stat modifiers. 
+1–2 weeks Content 
+Update 
+Salvage Runs Non-combat expeditions. Units return 
+with loot, sanity damage, or get 
+captured. 
+2–3 weeks Major Update 
+Lore Fragments Collectible text. Complete sets reveal 
+secrets. 
+1 week Content 
+Update 
+Mid-Battle Phase 
+Shifts 
+2–3 phases per battle. Rival enters at 
+Phase 2. Hidden mutation at Phase 3. 
+2 weeks Major Update 
+Rival Interrupts Rivals call reinforcements, freeze units, 
+activate mutations mid-battle. 
+1–2 weeks Major Update 
+Rival-to-Rival 
+Relationships 
+Alliances, Feuds, Hierarchies between 
+rivals. Faction politics. 
+2–3 weeks Expansion 
+Daily/Weekly 
+Challenges 
+Seeded runs. Steam leaderboards. 
+Charity Week events. 
+2–3 weeks Live Service 
+Sanity-Fueled 
+Ultimates 
+Per-class ultimate abilities charged by 
+combat and stress. 
+2 weeks Major Update 
+Cover & Terrain Walls, chokepoints, cover cells. 
+Requires pathfinding rewrite. 
+3–4 weeks Expansion 
+Named Synergy 
+Combos 
+Specific mutation pairs create named 
+events. 
+3 days Content 
+Update 
+Mutation Codex Collectible log of discovered mutations 
+with win/loss stats. 
+4 days Content 
+Update 
+ 
+Visa Value of This Roadmap 
+A documented post-launch plan shows Tech Nation you have a 2-year product vision, 
+not just an 11-month sprint. Each update is a future devlog post, a future press moment, 
+and further evidence of sustained innovation in UK digital technology. 
+ 
+  Kindred Siege: The Drowned City  |  GDD v4.0 Definitive Edition 
+Page 29 
+THE THREE-PILLAR TEST 
+ 
+Before building ANY feature, ask: does this serve AI Behaviour (Pillar 1), Psychological 
+Simulation (Pillar 2), or the Rivalry Engine (Pillar 3)? 
+ 
+• If it serves one pillar: build it. 
+• If it connects two pillars: prioritise it. 
+• If it connects all three: it’s the most valuable feature in the game. 
+• If it serves no pillar: it’s scope creep. Cut it. 
+ 
+The Innovation Story 
+Pillar 1 (AI) drives combat. Gambits modify behaviour trees. Comprehension differentiates 
+classes. 
+Pillar 2 (Psych) tracks mental state. Phobias link to specific trauma. Knowledge has a cost. 
+Pillar 3 (Rivalry) drives escalation. Rivals cause dread, horror, phobias, and exposure. 
+ 
+No pillar operates in isolation. Every battle touches all three. 
+That interconnection IS the innovation. That is what makes this game unique. 
+That is the story the visa application tells. 
+ 
