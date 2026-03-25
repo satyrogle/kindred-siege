@@ -156,6 +156,8 @@ namespace KindredSiege.UI
 
         private void OnGUI()
         {
+            if (_battle == null || !_battle.IsBattleActive) return;
+
             EnsureStyles();
 
             if (_mercyPopupActive)

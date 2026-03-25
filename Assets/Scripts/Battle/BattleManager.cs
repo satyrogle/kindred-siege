@@ -91,11 +91,8 @@ namespace KindredSiege.Battle
                     }
                 }
             }
-            // Show gambit setup panel if present, otherwise auto-start after 1 second
-            if (GambitSetupPanel.Instance != null)
-                GambitSetupPanel.Instance.Show();
-            else
-                Invoke("StartBattle", 1f);
+            // Removed legacy auto-start block.
+            // GameManager now correctly dictates when BattlePhase begins.
         }
 
         private void OnDestroy()
@@ -109,7 +106,9 @@ namespace KindredSiege.Battle
 
         private void OnGameStateChanged(GameManager.GameState from, GameManager.GameState to)
         {
-            if (to == GameManager.GameState.BattlePhase)
+            if (to == GameManager.GameState.PreBattle)
+                PrepareRoster();
+            else if (to == GameManager.GameState.BattlePhase)
                 StartBattle();
         }
 
@@ -141,6 +140,14 @@ namespace KindredSiege.Battle
 
         // ─── Battle Setup ───
 
+        /// <summary>Sync player roster early so GambitSetupPanel can view it.</summary>
+        public void PrepareRoster()
+        {
+            var rosterMgr = RosterManager.Instance;
+            if (rosterMgr != null && rosterMgr.RosterCount > 0)
+                team1Units = rosterMgr.GetRosterAsArray();
+        }
+
         /// <summary>Start a battle with the configured teams.</summary>
         public void StartBattle()
         {
@@ -148,11 +155,7 @@ namespace KindredSiege.Battle
             nextUnitId = 0;
             _horrorRatingTimer = 0f;
 
-            // Prefer live roster from RosterManager (city-driven); fall back to Inspector array.
-            // Assign back to team1Units so GambitSetupPanel.GetTeam1Units() sees the same list.
-            var rosterMgr = RosterManager.Instance;
-            if (rosterMgr != null && rosterMgr.RosterCount > 0)
-                team1Units = rosterMgr.GetRosterAsArray();
+            PrepareRoster();
 
             SpawnTeam(team1Units, 1, team1, grid.GetTeam1Zone());
 

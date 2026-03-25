@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using KindredSiege.Battle;
 using KindredSiege.AI.BehaviourTree;
+using KindredSiege.Core;
 
 namespace KindredSiege.UI
 {
@@ -23,7 +24,7 @@ namespace KindredSiege.UI
         public static GambitSetupPanel Instance { get; private set; }
 
         // ─── State ───
-        private bool         _visible = true;
+        private bool         _visible = false;
         private BattleManager _battle;
 
         // Per-slot gambit selections (up to 8 unit slots)
@@ -62,6 +63,20 @@ namespace KindredSiege.UI
         private void Start()
         {
             _battle = BattleManager.Instance;
+            if (GameManager.Instance != null)
+                GameManager.Instance.OnStateChanged += OnGameStateChanged;
+        }
+
+        private void OnDestroy()
+        {
+            if (GameManager.Instance != null)
+                GameManager.Instance.OnStateChanged -= OnGameStateChanged;
+        }
+
+        private void OnGameStateChanged(GameManager.GameState from, GameManager.GameState to)
+        {
+            if (to == GameManager.GameState.PreBattle)
+                Show();
         }
 
         // ════════════════════════════════════════════
@@ -154,7 +169,10 @@ namespace KindredSiege.UI
                 "BEGIN EXPEDITION", _buttonStyle))
             {
                 Hide();
-                _battle?.StartBattle();
+                if (GameManager.Instance != null)
+                    GameManager.Instance.LaunchBattle();
+                else
+                    _battle?.StartBattle();
             }
         }
 

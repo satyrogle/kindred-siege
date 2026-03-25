@@ -52,8 +52,16 @@ namespace KindredSiege.Core
 
         private void Start()
         {
-            // Start in main menu — transition to city when ready
-            ChangeState(GameState.MainMenu);
+            // Temporary auto-boot into CityPhase since MainMenu UI isn't built yet
+            // If a save exists, load it. Otherwise, start fresh.
+            if (SaveManager.Instance != null && SaveManager.Instance.HasSave)
+            {
+                SaveManager.Instance.LoadGame(); // Sets state to CityPhase inside LoadGame
+            }
+            else
+            {
+                StartGame(); // Sets state to CityPhase
+            }
         }
 
         /// <summary>

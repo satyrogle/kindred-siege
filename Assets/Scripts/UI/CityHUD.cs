@@ -86,8 +86,8 @@ namespace KindredSiege.UI
 
         private void OnGUI()
         {
-            // Only show during city phase
-            if (_game == null || _game.CurrentState != GameManager.GameState.CityPhase) return;
+            // Show during city phase, or during PostBattle to display the popup
+            if (_game == null || (_game.CurrentState != GameManager.GameState.CityPhase && _game.CurrentState != GameManager.GameState.PostBattle)) return;
 
             EnsureStyles();
 
