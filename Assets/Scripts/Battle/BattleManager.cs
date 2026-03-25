@@ -65,6 +65,9 @@ namespace KindredSiege.Battle
         /// <summary>Assign the rival that will appear in this battle (for Horror Rating drain).</summary>
         public void SetActiveRival(KindredSiege.Rivalry.RivalData rival) => _activeRival = rival;
 
+        /// <summary>Returns the active rival in this battle.</summary>
+        public KindredSiege.Rivalry.RivalData GetActiveRival() => _activeRival;
+
         private void Awake()
         {
             if (Instance != null && Instance != this) { Destroy(gameObject); return; }
