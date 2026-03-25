@@ -146,7 +146,7 @@ namespace KindredSiege.UI
             }
 
             // Button
-            int by = (int)rect.y + rect.height - 45;
+            int by = (int)(rect.y + rect.height - 45);
             GUI.color = new Color(0.3f, 0.8f, 0.4f);
             if (GUI.Button(new Rect(px, by, lw, 30), "ENTER THE FOG", _btnStyle))
             {
