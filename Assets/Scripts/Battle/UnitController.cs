@@ -703,16 +703,9 @@ namespace KindredSiege.Battle
                 }
             }
 
-            // Shadow (Vanish): untargetable below 40% (once)
-            bool canVanish = true;
-            if (attacker != null)
-            {
-                var rival = KindredSiege.Battle.BattleManager.Instance?.GetActiveRival();
-                if (rival != null && attacker.UnitName == rival.FullName && rival.Traits.Contains(KindredSiege.Rivalry.RivalTraitType.ShadowCatcher))
-                    canVanish = false; // Blocked by adaptive counter-trait
-            }
-
-            if (UnitType == "Shadow" && !_shadowVanishUsed && (float)CurrentHP / MaxHP < 0.40f && canVanish)
+            // Shadow (Vanish): untargetable below 40% (once). Blocked if ShadowCatcher trait is present.
+            if (UnitType == "Shadow" && !_shadowVanishUsed && (float)CurrentHP / MaxHP < 0.40f && 
+                !(KindredSiege.Battle.BattleManager.Instance?.GetActiveRival()?.Traits.Contains(KindredSiege.Rivalry.RivalTraitType.ShadowCatcher) == true))
             {
                 _shadowVanishUsed = true;
                 _shadowVanishedTimer = 3f;
