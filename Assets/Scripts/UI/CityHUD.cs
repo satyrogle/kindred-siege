@@ -502,7 +502,7 @@ namespace KindredSiege.UI
             // Talent Trees
             if (GUI.Button(new Rect(Margin + 340, barY + 8, 140, BtnH), "Talent Trees", _btnStyle))
             {
-                var roster = KindredSiege.Battle.RosterManager.Instance?.GetRoster();
+                var roster = KindredSiege.Battle.RosterManager.Instance?.ActiveRoster?.ToList();
                 if (roster != null && roster.Count > 0)
                 {
                     if (TalentTreePanel.Instance == null)

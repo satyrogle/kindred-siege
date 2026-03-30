@@ -23,18 +23,18 @@ namespace KindredSiege.Battle
         [SerializeField] private UnitData unitData;
 
         // ─── Combat Stats ───
-        public int MaxHP          { get; private set; }
-        public int CurrentHP      { get; private set; }
-        public int AttackDamage   { get; private set; }
-        public float AttackRange  { get; private set; }
-        public float MoveSpeed    { get; private set; }
-        public int Armour         { get; private set; }
+        public int MaxHP          { get; internal set; }
+        public int CurrentHP      { get; internal set; }
+        public int AttackDamage   { get; internal set; }
+        public float AttackRange  { get; internal set; }
+        public float MoveSpeed    { get; internal set; }
+        public int Armour         { get; internal set; }
 
         public bool DirectiveOverrideActive { get; set; } = false;
 
         // ─── Sanity ───
-        public int MaxSanity      { get; private set; }
-        public int CurrentSanity  { get; private set; }
+        public int MaxSanity      { get; internal set; }
+        public int CurrentSanity  { get; internal set; }
 
         public SanityState SanityState => SanitySystem.GetState(CurrentSanity);
 
@@ -369,14 +369,14 @@ namespace KindredSiege.Battle
         {
             if (!IsAlive || battleContext == null) return;
 
+            float dt = Time.deltaTime;
+
             // ── Hesitation lock from Dread Contest (GDD §6.2) ──
             if (_hesitationLockTimer > 0f)
             {
                 _hesitationLockTimer -= dt;
                 return; // Cannot act while stunned
             }
-
-            float dt = Time.deltaTime;
             attackTimer  -= dt;
             _combatTimer += dt;
 
