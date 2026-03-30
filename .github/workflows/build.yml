@@ -20,8 +20,10 @@ jobs:
         uses: actions/cache@v4
         with:
           path: Library
-          key: Library-KindredSiege
-          restore-keys: Library-
+          key: Library-KindredSiege-${{ hashFiles('Assets/**/*.cs', 'ProjectSettings/ProjectVersion.txt') }}
+          restore-keys: |
+            Library-KindredSiege-
+            Library-
 
       - name: Build
         uses: game-ci/unity-builder@v4
