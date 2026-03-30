@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using KindredSiege.Battle;
 using KindredSiege.Modifiers;
 using KindredSiege.Rivalry;
 
@@ -44,21 +45,40 @@ namespace KindredSiege.UI
             var engine = RivalryEngine.Instance;
             var activeRivals = engine != null ? engine.GetActiveRivals() : new List<RivalData>();
 
-            string[] encounters = { "Annihilation", "Survival", "Rival Hunt" };
+            // Each path gets a distinct encounter type — no duplicates
+            var encounterPool = new List<EncounterType>
+            {
+                EncounterType.Annihilation,
+                EncounterType.Survival,
+                EncounterType.Ambush,
+                EncounterType.Ritual,
+                EncounterType.Rescue,
+                EncounterType.RivalHunt,
+            };
+            // Shuffle
+            for (int n = encounterPool.Count - 1; n > 0; n--)
+            {
+                int k = Random.Range(0, n + 1);
+                (encounterPool[n], encounterPool[k]) = (encounterPool[k], encounterPool[n]);
+            }
 
-            // Generate 3 random paths
             for (int i = 0; i < 3; i++)
             {
-                var rival = activeRivals.Count > 0 
-                    ? activeRivals[Random.Range(0, activeRivals.Count)] 
-                    : null;
+                var encounter = encounterPool[i];
+
+                // RivalHunt forces a rival to be present; other types use the random pool
+                var rival = encounter == EncounterType.RivalHunt && activeRivals.Count > 0
+                    ? activeRivals[0] // highest-rank rival
+                    : activeRivals.Count > 0 && Random.value < 0.5f
+                        ? activeRivals[Random.Range(0, activeRivals.Count)]
+                        : null;
 
                 _paths.Add(new ExpeditionPath
                 {
                     Mutations = MutationEngine.Instance?.GenerateMutationsForPath() ?? new List<MutationType>(),
-                    Rival = rival,
-                    EncounterType = encounters[Random.Range(0, encounters.Length)],
-                    Reward = Random.value > 0.5f ? "Standard Supplies" : "Archive Unlock"
+                    Rival     = rival,
+                    Encounter = encounter,
+                    Reward    = Random.value > 0.5f ? "Standard Supplies" : "Archive Unlock"
                 });
             }
         }
@@ -103,8 +123,10 @@ namespace KindredSiege.UI
             int py = (int)rect.y + 15;
             int lw = (int)rect.width - 30;
 
-            GUI.Label(new Rect(px, py, lw, 25), $"PATH {num}", _titleStyle);
-            py += 35;
+            GUI.Label(new Rect(px, py, lw, 25), $"PATH {num} — {EncounterTypeInfo.GetName(path.Encounter)}", _titleStyle);
+            py += 22;
+            GUI.Label(new Rect(px, py, lw, 20), EncounterTypeInfo.GetDescription(path.Encounter), _btnStyle);
+            py += 28;
 
             // Mutation Block
             GUI.Label(new Rect(px, py, lw, 20), "Reality Mutations:", _mutStyle);
@@ -158,15 +180,16 @@ namespace KindredSiege.UI
         private void ConfirmPath(ExpeditionPath path)
         {
             Hide();
-            
-            // Lock in the rule changes
+
             MutationEngine.Instance?.SetActiveMutations(path.Mutations);
 
-            // Lock in the rival
-            if (KindredSiege.Core.GameManager.Instance != null && KindredSiege.Battle.BattleManager.Instance != null)
+            var bm = BattleManager.Instance;
+            var gm = KindredSiege.Core.GameManager.Instance;
+            if (bm != null && gm != null)
             {
-                KindredSiege.Battle.BattleManager.Instance.SetActiveRival(path.Rival);
-                KindredSiege.Core.GameManager.Instance.StartBattle(); // Moves state to PreBattle
+                bm.SetActiveRival(path.Rival);
+                bm.SetActiveEncounterType(path.Encounter);
+                gm.StartBattle();
             }
         }
 

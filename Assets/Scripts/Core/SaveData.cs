@@ -37,6 +37,12 @@ namespace KindredSiege.Core
 
         // ─── City buildings ───
         public List<BuildingSaveEntry> PlacedBuildings = new();
+
+        // ─── Districts — unlocked district IDs (DistrictType cast to int) ───
+        public List<int> UnlockedDistricts = new();
+
+        // ─── Mythos Exposure (0–100) ───
+        public int MythosExposure = 0;
     }
 
     // ─────────────────────────────────────────────────────────────────────────
@@ -51,11 +57,14 @@ namespace KindredSiege.Core
     [Serializable]
     public class UnitSaveEntry
     {
-        public string AssetName;       // UnitData.name (Unity asset file name)
-        public int    FatigueLevel;
-        public int    ActivePhobia;    // PhobiaType cast to int
-        public int    MaxSanityPenalty;
-        public int    ExpeditionCount;
+        public string       AssetName;          // UnitData.name (Unity asset file name)
+        public int          FatigueLevel;
+        public int          ActivePhobia;       // PhobiaType cast to int
+        public int          MaxSanityPenalty;
+        public int          ExpeditionCount;
+        public List<int>    UnlockedTalentIds;  // TalentNodeId cast to int (JsonUtility-safe)
+        public List<string> CoSurvivedWith;     // Bond co-survival tracking (duplicates = count)
+        public List<string> BondedWith;         // Fully bonded unit asset names
     }
 
     [Serializable]

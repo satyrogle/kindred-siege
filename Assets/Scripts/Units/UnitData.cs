@@ -1,4 +1,6 @@
+using System.Collections.Generic;
 using UnityEngine;
+using KindredSiege.Units;
 
 namespace KindredSiege.Battle
 {
@@ -82,6 +84,22 @@ namespace KindredSiege.Battle
         // NOTE: ScriptableObject assets are shared; this field is runtime-modified
         //       and should be persisted via a separate save system in production.
         public int ExpeditionCount = 0;
+
+        [Header("Talent Tree (GDD §9)")]
+        [Tooltip("Talent nodes this unit has unlocked. Spend 1 point per node. Points = ExpeditionCount.")]
+        public List<TalentNodeId> UnlockedTalents = new List<TalentNodeId>();
+
+        /// <summary>Points available to spend = expeditions survived minus points already spent.</summary>
+        public int TalentPointsAvailable => ExpeditionCount - UnlockedTalents.Count;
+
+        /// <summary>Fast lookup used in combat — avoids List.Contains overhead in hot paths.</summary>
+        public bool HasTalent(TalentNodeId id) => UnlockedTalents != null && UnlockedTalents.Contains(id);
+
+        [Header("Unit Bonds (GDD §Bonds)")]
+        [Tooltip("Asset names of units this unit has co-survived with (duplicates = multiple expeditions).")]
+        public List<string> CoSurvivedWith = new List<string>();
+        [Tooltip("Asset names of units this unit has fully bonded with (BondThreshold met).")]
+        public List<string> BondedWith     = new List<string>();
 
         [Header("Recruitment Cost")]
         public int GoldCost = 50;

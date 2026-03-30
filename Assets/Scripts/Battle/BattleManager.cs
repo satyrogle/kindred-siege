@@ -56,17 +56,23 @@ namespace KindredSiege.Battle
         public UnitController GetUnitById(int id) => _unitLookup.GetValueOrDefault(id);
 
         // ─── Horror Rating (GDD §6.3) ───
-        // The rival currently present on the battlefield. Set before StartBattle().
-        // Their Horror Rating passively drains all player units every 5 seconds.
         private KindredSiege.Rivalry.RivalData _activeRival;
         private float _horrorRatingTimer = 0f;
         private const float HorrorRatingInterval = 5f;
 
-        /// <summary>Assign the rival that will appear in this battle (for Horror Rating drain).</summary>
         public void SetActiveRival(KindredSiege.Rivalry.RivalData rival) => _activeRival = rival;
-
-        /// <summary>Returns the active rival in this battle.</summary>
         public KindredSiege.Rivalry.RivalData GetActiveRival() => _activeRival;
+
+        // ─── Encounter Type (GDD §Encounter Types) ───
+        private EncounterType _activeEncounterType = EncounterType.Annihilation;
+        private float _encounterTimer = 0f;           // Survival countdown / Ritual deadline
+        private UnitController _rescueTarget;         // Rescue: the Vessel to protect
+
+        private const float SurvivalDuration = 90f;
+        private const float RitualDeadline   = 75f;
+
+        public void SetActiveEncounterType(EncounterType type) => _activeEncounterType = type;
+        public EncounterType ActiveEncounterType => _activeEncounterType;
 
         private void Awake()
         {
@@ -151,6 +157,9 @@ namespace KindredSiege.Battle
                 }
             }
 
+            // Encounter-specific timer (Survival countdown, Ritual deadline)
+            TickEncounterTimer();
+
             // Horror Rating drain — every 5 seconds, active rival drains all player unit sanity
             TickHorrorRating();
 
@@ -173,7 +182,9 @@ namespace KindredSiege.Battle
         {
             ClearBattle();
             nextUnitId = 0;
-            _horrorRatingTimer = 0f;
+            _horrorRatingTimer  = 0f;
+            _encounterTimer     = 0f;
+            _rescueTarget       = null;
 
             PrepareRoster();
 
@@ -188,6 +199,30 @@ namespace KindredSiege.Battle
 
             // Scatter hazard tiles across the battlefield (GDD §12)
             GenerateHazards();
+
+            // Apply encounter-specific rules after spawning
+            ApplyEncounterSetup();
+
+            // Apply bond buffs to any bonded pairs present on team1
+            KindredSiege.Units.BondSystem.ApplyBondEffects(team1);
+
+            // Apply Mythos Exposure battle-start sanity penalty
+            int mythospenalty = KindredSiege.City.MythosExposure.Instance?.BattleStartSanityPenalty ?? 0;
+            if (mythospenalty < 0)
+            {
+                foreach (var unit in team1)
+                    if (unit != null && unit.IsAlive)
+                        unit.ModifySanity(mythospenalty, "MythosExposure");
+            }
+
+            // Apply Void Gate Comprehension bonus (negative mod = less horror damage)
+            float voidBonus = CityBattleBridge.Instance?.VoidGateComprehensionBonus ?? 0f;
+            if (voidBonus > 0f)
+            {
+                foreach (var unit in team1)
+                    if (unit != null)
+                        unit.TalentComprehensionMod -= voidBonus;
+            }
 
             // Apply pre-configured gambits to player team
             GambitSetupPanel.Instance?.ApplyGambitsToTeam(team1);
@@ -289,25 +324,162 @@ namespace KindredSiege.Battle
             }
         }
 
+        // ─── Encounter Setup ───
+
+        private void ApplyEncounterSetup()
+        {
+            switch (_activeEncounterType)
+            {
+                case EncounterType.RivalHunt:
+                    if (_activeRival == null)
+                        _activeRival = KindredSiege.Rivalry.RivalryEngine.Instance?.GetActiveRivals()
+                            .FirstOrDefault();
+                    Debug.Log($"[Encounter] RivalHunt — target: {_activeRival?.FullName ?? "none"}");
+                    break;
+
+                case EncounterType.Ambush:
+                    // Re-spawn the last 2 team2 units (the flankers) into the player spawn zone
+                    var playerZone = grid.GetTeam1Zone();
+                    int flankerCount = 0;
+                    for (int i = team2.Count - 1; i >= 0 && flankerCount < 2; i--)
+                    {
+                        var flanker = team2[i];
+                        if (flanker == null || flanker.UnitName != "Ambush Flanker") continue;
+                        int zoneIdx = Random.Range(0, playerZone.Count);
+                        grid.PlaceUnit(flanker, playerZone[zoneIdx]);
+                        flanker.SpawnPosition = flanker.transform.position;
+                        flankerCount++;
+                    }
+                    Debug.Log($"[Encounter] Ambush — {flankerCount} flankers repositioned to player zone.");
+                    break;
+
+                case EncounterType.Rescue:
+                    // Spawn a friendly Vessel unit near the enemy zone that must survive
+                    var vesselData = ScriptableObject.CreateInstance<UnitData>();
+                    vesselData.UnitName      = "Stranded Vessel";
+                    vesselData.UnitType      = "vessel";
+                    vesselData.MaxHP         = 60;
+                    vesselData.AttackDamage  = 0;
+                    vesselData.MoveSpeed     = 1.5f;
+                    vesselData.AttackRange   = 0f;
+                    vesselData.BaseSanity    = 60;
+                    vesselData.Comprehension = 1.0f;
+                    vesselData.TeamTint      = new Color(0.6f, 0.9f, 1.0f);
+
+                    var rescueZone = grid.GetTeam2Zone();
+                    if (rescueZone.Count > 0)
+                    {
+                        var spawnPos = rescueZone[rescueZone.Count / 2]; // Middle of enemy zone
+                        var go = GameObject.CreatePrimitive(PrimitiveType.Capsule);
+                        go.transform.SetParent(unitParent);
+                        var rend = go.GetComponent<Renderer>();
+                        if (rend != null) rend.material.color = vesselData.TeamTint;
+
+                        var uc = go.AddComponent<UnitController>();
+                        uc.Initialise(vesselData, 1, nextUnitId++);
+                        grid.PlaceUnit(uc, spawnPos);
+                        uc.SpawnPosition = uc.transform.position;
+
+                        var ctx = new BattleContext { Owner = uc, Allies = team1, Enemies = team2, Grid = grid };
+                        uc.SetContext(ctx);
+
+                        team1.Add(uc);
+                        allUnits.Add(uc);
+                        _unitLookup[uc.UnitId] = uc;
+                        _rescueTarget = uc;
+                        Debug.Log($"[Encounter] Rescue — Vessel spawned in enemy zone.");
+                    }
+                    break;
+            }
+        }
+
+        // ─── Encounter Timer Tick ───
+
+        private void TickEncounterTimer()
+        {
+            if (_activeEncounterType != EncounterType.Survival &&
+                _activeEncounterType != EncounterType.Ritual) return;
+
+            _encounterTimer += Time.deltaTime * battleSpeed;
+        }
+
         // ─── Battle Resolution ───
 
         private void CheckBattleEnd()
         {
-            bool team1Alive = team1.Any(u => u.IsAlive);
-            bool team2Alive = team2.Any(u => u.IsAlive);
+            bool team1Alive = team1.Any(u => u != null && u.IsAlive && u != _rescueTarget);
+            bool team2Alive = team2.Any(u => u != null && u.IsAlive);
 
             BattleEndEvent.Result result;
 
-            if (!team1Alive && !team2Alive)
-                result = BattleEndEvent.Result.Draw;
-            else if (!team2Alive)
-                result = BattleEndEvent.Result.Victory;
-            else if (!team1Alive)
-                result = BattleEndEvent.Result.Defeat;
-            else if (battleTimer >= battleTimeLimit)
-                result = BattleEndEvent.Result.Draw; // Timeout
-            else
-                return; // Battle still in progress
+            switch (_activeEncounterType)
+            {
+                case EncounterType.Survival:
+                    if (!team1Alive)
+                        result = BattleEndEvent.Result.Defeat;
+                    else if (_encounterTimer >= SurvivalDuration)
+                        result = BattleEndEvent.Result.Victory; // Survived long enough
+                    else
+                        return;
+                    break;
+
+                case EncounterType.Ritual:
+                {
+                    // Find the ritual keeper (last unit spawned in team2)
+                    var keeper = team2.LastOrDefault(u => u != null && u.IsAlive);
+                    if (!team1Alive)
+                        result = BattleEndEvent.Result.Defeat;
+                    else if (!team2Alive)
+                        result = BattleEndEvent.Result.Victory;
+                    else if (_encounterTimer >= RitualDeadline)
+                        result = BattleEndEvent.Result.Defeat; // Ritual completed
+                    else
+                        return;
+                    break;
+                }
+
+                case EncounterType.Rescue:
+                    if (_rescueTarget == null || !_rescueTarget.IsAlive)
+                        result = BattleEndEvent.Result.Defeat; // Vessel died
+                    else if (!team2Alive)
+                        result = BattleEndEvent.Result.Victory;
+                    else if (!team1Alive)
+                        result = BattleEndEvent.Result.Defeat;
+                    else if (battleTimer >= battleTimeLimit)
+                        result = BattleEndEvent.Result.Draw;
+                    else
+                        return;
+                    break;
+
+                case EncounterType.RivalHunt:
+                    // Win only when the rival unit is dead; fodder don't count
+                    bool rivalAlive = _activeRival != null && team2.Any(
+                        u => u != null && u.IsAlive && u.UnitName == _activeRival.FullName);
+                    if (!team1Alive)
+                        result = BattleEndEvent.Result.Defeat;
+                    else if (!rivalAlive && _activeRival != null)
+                        result = BattleEndEvent.Result.Victory;
+                    else if (!team2Alive)
+                        result = BattleEndEvent.Result.Victory;
+                    else if (battleTimer >= battleTimeLimit)
+                        result = BattleEndEvent.Result.Defeat; // Rival escaped
+                    else
+                        return;
+                    break;
+
+                default: // Annihilation + Ambush
+                    if (!team1Alive && !team2Alive)
+                        result = BattleEndEvent.Result.Draw;
+                    else if (!team2Alive)
+                        result = BattleEndEvent.Result.Victory;
+                    else if (!team1Alive)
+                        result = BattleEndEvent.Result.Defeat;
+                    else if (battleTimer >= battleTimeLimit)
+                        result = BattleEndEvent.Result.Draw;
+                    else
+                        return;
+                    break;
+            }
 
             EndBattle(result);
         }
@@ -397,11 +569,17 @@ namespace KindredSiege.Battle
             }
 
             // Increment expedition count on surviving player units (veteran tracking)
+            // Record co-survivals for bond formation
+            var survivors = new List<UnitController>();
             foreach (var unit in team1)
             {
                 if (unit != null && unit.IsAlive && unit.Data != null)
+                {
                     unit.Data.ExpeditionCount++;
+                    if (unit != _rescueTarget) survivors.Add(unit);
+                }
             }
+            KindredSiege.Units.BondSystem.RecordCoSurvival(survivors);
 
             // Calculate KP earned
             int kpEarned = CalculateKP(result);
@@ -563,6 +741,44 @@ namespace KindredSiege.Battle
                 fallback.Comprehension = 0.4f;
                 fallback.TeamTint    = new Color(0.65f, 0.2f, 0.2f);
                 roster.Add(fallback);
+            }
+
+            // ── Encounter-specific additions ──
+
+            if (_activeEncounterType == EncounterType.Ambush)
+            {
+                // Add two flankers — spawned into the player zone by SpawnAmbushFlankers()
+                for (int i = 0; i < 2; i++)
+                {
+                    var flanker = ScriptableObject.CreateInstance<UnitData>();
+                    flanker.UnitName     = "Ambush Flanker";
+                    flanker.UnitType     = "shadow";
+                    flanker.MaxHP        = Mathf.RoundToInt(55 * scale);
+                    flanker.AttackDamage = Mathf.RoundToInt(10 * scale);
+                    flanker.MoveSpeed    = 3.5f;
+                    flanker.AttackRange  = 1.5f;
+                    flanker.BaseSanity   = 100;
+                    flanker.Comprehension = 0.3f;
+                    flanker.TeamTint     = new Color(0.3f, 0.1f, 0.5f);
+                    roster.Add(flanker);
+                }
+                Debug.Log("[Encounter] Ambush — 2 flankers added.");
+            }
+            else if (_activeEncounterType == EncounterType.Ritual)
+            {
+                // Ritual Keeper spawns last (back of enemy line) — tagged by name for win check
+                var keeper = ScriptableObject.CreateInstance<UnitData>();
+                keeper.UnitName     = "Ritual Keeper";
+                keeper.UnitType     = "occultist";
+                keeper.MaxHP        = Mathf.RoundToInt(120 * scale);
+                keeper.AttackDamage = Mathf.RoundToInt(5 * scale);
+                keeper.MoveSpeed    = 0.8f;  // Barely moves — stands at the back
+                keeper.AttackRange  = 3f;
+                keeper.BaseSanity   = 100;
+                keeper.Comprehension = 0.5f;
+                keeper.TeamTint     = new Color(0.5f, 0.0f, 0.8f);
+                roster.Add(keeper);
+                Debug.Log($"[Encounter] Ritual — Keeper added. Deadline: {RitualDeadline}s.");
             }
 
             return roster.ToArray();

@@ -31,9 +31,14 @@ namespace KindredSiege.City
 
         // ─── Special building bonuses (set by CityManager.RecalculateBonuses) ───
         /// <summary>Extra Mercy Tokens per battle (from Shrine buildings).</summary>
-        public int ExtraMercyTokens     { get; set; } = 0;
+        public int   ExtraMercyTokens           { get; set; } = 0;
         /// <summary>Extra Directive Points per battle (from War Table buildings).</summary>
-        public int ExtraDirectivePoints { get; set; } = 0;
+        public int   ExtraDirectivePoints        { get; set; } = 0;
+        /// <summary>
+        /// Comprehension reduction applied to all player units at battle start.
+        /// Each Void Gate contributes -0.1 (less cosmic horror damage taken).
+        /// </summary>
+        public float VoidGateComprehensionBonus { get; set; } = 0f;
 
         private void Awake()
         {

@@ -85,49 +85,95 @@ namespace KindredSiege.City
         {
             _catalog = new List<BuildingData>
             {
+                // ── Harbor District (always unlocked) ──
                 MakeBuilding("Watchtower",
                     category:    BuildingCategory.Economy,
+                    district:    DistrictType.Harbor,
                     desc:        "A watchtower overlooking the flood. Scouts recover salvage after each battle.",
                     goldCost: 30, matCost: 0,
                     produces:    ResourceType.Gold, productionAmt: 10),
 
                 MakeBuilding("Market",
                     category:    BuildingCategory.Economy,
+                    district:    DistrictType.Harbor,
                     desc:        "Traders brave the drowned streets. Generates Gold and Materials each phase.",
                     goldCost: 50, matCost: 20,
                     produces:    ResourceType.Gold, productionAmt: 20,
                     matProduction: 5),
 
+                // ── Military Ward (2+ battles) ──
                 MakeBuilding("Barracks",
                     category:    BuildingCategory.Military,
+                    district:    DistrictType.MilitaryWard,
                     desc:        "Drilled soldiers stand readier. All units enter battle with +10% max HP.",
                     goldCost: 50, matCost: 25,
                     hpMult: 1.10f),
 
                 MakeBuilding("Armory",
                     category:    BuildingCategory.Military,
+                    district:    DistrictType.MilitaryWard,
                     desc:        "Better weapons, sharper edges. All units deal +10% damage.",
                     goldCost: 75, matCost: 50,
                     dmgMult: 1.10f),
 
+                MakeBuilding("War Table",
+                    category:    BuildingCategory.Military,
+                    district:    DistrictType.MilitaryWard,
+                    desc:        "Tactical planning room. Commanders enter battle with +1 Directive Point.",
+                    goldCost: 80, matCost: 30),
+
+                // ── Charity Quarter (1+ rival defeated) ──
                 MakeBuilding("Shrine",
                     category:    BuildingCategory.Charity,
+                    district:    DistrictType.CharityQuarter,
                     desc:        "A shrine to those lost to the flood. Grants +1 Mercy Token per battle.",
                     goldCost: 60, matCost: 0),
 
-                MakeBuilding("War Table",
+                MakeBuilding("Almshouse",
+                    category:    BuildingCategory.Charity,
+                    district:    DistrictType.CharityQuarter,
+                    desc:        "Shelter for the desperate. Generates Kindness Points each city phase.",
+                    goldCost: 40, matCost: 10,
+                    kpProduction: 5),
+
+                // ── Scholars' Quarter (Season 2+) ──
+                MakeBuilding("Apothecary",
+                    category:    BuildingCategory.Utility,
+                    district:    DistrictType.ScholarsQuarter,
+                    desc:        "Herbal remedies and rest. Reduces unit Fatigue by 20 each city phase.",
+                    goldCost: 90, matCost: 40),
+
+                MakeBuilding("Library",
+                    category:    BuildingCategory.Tech,
+                    district:    DistrictType.ScholarsQuarter,
+                    desc:        "Ancient texts yield insight. Generates Tech Points each city phase.",
+                    goldCost: 100, matCost: 60,
+                    produces:    ResourceType.TechPoints, productionAmt: 3),
+
+                // ── The Abyss (Overlord defeated) ──
+                MakeBuilding("Void Gate",
+                    category:    BuildingCategory.Tech,
+                    district:    DistrictType.TheAbyss,
+                    desc:        "A tear between worlds. Units gain +5 Comprehension resistance before each battle.",
+                    goldCost: 150, matCost: 100),
+
+                MakeBuilding("Eldritch Pylon",
                     category:    BuildingCategory.Military,
-                    desc:        "Tactical planning room. Commanders enter battle with +1 Directive Point.",
-                    goldCost: 80, matCost: 30),
+                    district:    DistrictType.TheAbyss,
+                    desc:        "Channels void energy. All units deal +15% damage — sanity costs may apply.",
+                    goldCost: 200, matCost: 120,
+                    dmgMult: 1.15f),
             };
         }
 
         private BuildingData MakeBuilding(
             string name, BuildingCategory category, string desc,
             int goldCost, int matCost,
+            DistrictType district       = DistrictType.Harbor,
             ResourceType produces       = ResourceType.Gold,
             int productionAmt           = 0,
             int matProduction           = 0,
+            int kpProduction            = 0,
             float hpMult                = 1f,
             float dmgMult               = 1f)
         {
@@ -135,6 +181,7 @@ namespace KindredSiege.City
             b.name                  = name;
             b.BuildingName          = name;
             b.Category              = category;
+            b.District              = district;
             b.Description           = desc;
             b.GoldCost              = goldCost;
             b.MaterialCost          = matCost;
@@ -146,9 +193,12 @@ namespace KindredSiege.City
             b.UpgradeCostMultiplier = 1.5f;
             b.UpgradeProductionMultiplier = 1.3f;
 
-            // Store mat production in a tag for Market — we'll read it in TickProduction
-            if (matProduction > 0)
-                b.name += $"|mat:{matProduction}";
+            if (matProduction > 0) b.name += $"|mat:{matProduction}";
+            if (kpProduction   > 0)
+            {
+                b.GeneratesKP = true;
+                b.KPPerTick   = kpProduction;
+            }
 
             return b;
         }
@@ -157,13 +207,20 @@ namespace KindredSiege.City
         // PURCHASING + UPGRADING
         // ════════════════════════════════════════════
 
-        /// <summary>Purchase a building if the player can afford it. Returns true on success.</summary>
+        /// <summary>Purchase a building if the player can afford it and its district is unlocked. Returns true on success.</summary>
         public bool PurchaseBuilding(BuildingData building)
         {
             if (building == null) return false;
             if (IsBuilt(building))
             {
                 Debug.LogWarning($"[City] {building.BuildingName} is already built.");
+                return false;
+            }
+
+            var dm = DistrictManager.Instance;
+            if (dm != null && !dm.IsUnlocked(building.District))
+            {
+                Debug.Log($"[City] District '{DistrictManager.GetName(building.District)}' is not yet unlocked.");
                 return false;
             }
 
@@ -261,6 +318,23 @@ namespace KindredSiege.City
             }
 
             Debug.Log($"[City] Production tick: +{totalGold}G, +{totalMat}M, +{totalFood}F, +{totalKP}KP");
+
+            // ── Apothecary — reduce fatigue on all active roster units by 20 per phase ──
+            int apothecaryCount = _placed.Count(p => p.Data.BuildingName == "Apothecary");
+            if (apothecaryCount > 0)
+            {
+                var roster = KindredSiege.Battle.RosterManager.Instance;
+                if (roster != null)
+                {
+                    int reduction = 20 * apothecaryCount;
+                    foreach (var unit in roster.ActiveRoster)
+                    {
+                        if (unit == null) continue;
+                        KindredSiege.Battle.FatigueSystem.Rest(unit, reduction);
+                    }
+                    Debug.Log($"[City] Apothecary: −{reduction} fatigue to all active units.");
+                }
+            }
         }
 
         // ════════════════════════════════════════════
@@ -270,10 +344,14 @@ namespace KindredSiege.City
         public bool IsBuilt(BuildingData b)    => _placed.Any(p => p.Data == b);
         public int  GetLevel(BuildingData b)   => _placed.FirstOrDefault(p => p.Data == b)?.Level ?? 0;
 
+        public bool IsDistrictUnlocked(BuildingData b) =>
+            DistrictManager.Instance == null || DistrictManager.Instance.IsUnlocked(b.District);
+
         public bool CanAfford(BuildingData b)
         {
             var rm = ResourceManager.Instance;
             return rm != null
+                && IsDistrictUnlocked(b)
                 && rm.CanAfford(ResourceType.Gold,      b.GoldCost)
                 && rm.CanAfford(ResourceType.Materials,  b.MaterialCost);
         }
@@ -321,10 +399,13 @@ namespace KindredSiege.City
             bridge.RecalculateBonuses(_placed.Select(p => p.Data).ToList());
 
             // Special bonuses: Shrine → +1 MercyToken, War Table → +1 DirectivePoint
-            int shrineCount   = _placed.Count(p => p.Data.BuildingName == "Shrine");
-            int warTableCount = _placed.Count(p => p.Data.BuildingName == "War Table");
-            bridge.ExtraMercyTokens     = shrineCount;
-            bridge.ExtraDirectivePoints = warTableCount;
+            int shrineCount    = _placed.Count(p => p.Data.BuildingName == "Shrine");
+            int warTableCount  = _placed.Count(p => p.Data.BuildingName == "War Table");
+            int voidGateCount  = _placed.Count(p => p.Data.BuildingName == "Void Gate");
+            bridge.ExtraMercyTokens           = shrineCount;
+            bridge.ExtraDirectivePoints       = warTableCount;
+            // Each Void Gate reduces unit Comprehension by 0.1 at battle start (less horror damage)
+            bridge.VoidGateComprehensionBonus = voidGateCount * 0.1f;
         }
     }
 }

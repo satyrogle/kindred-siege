@@ -112,6 +112,14 @@ namespace KindredSiege.Core
             if (city != null)
                 data.PlacedBuildings = city.GetBuildingsForSave();
 
+            // ── Districts ──
+            var districts = DistrictManager.Instance;
+            if (districts != null)
+                data.UnlockedDistricts = districts.GetUnlockedForSave();
+
+            // ── Mythos Exposure ──
+            data.MythosExposure = KindredSiege.City.MythosExposure.Instance?.GetExposureForSave() ?? 0;
+
             // ── Write ──
             string json = JsonUtility.ToJson(data, prettyPrint: true);
             File.WriteAllText(SavePath, json);
@@ -157,6 +165,13 @@ namespace KindredSiege.Core
 
             // ── City buildings ──
             CityManager.Instance?.LoadFromSave(data.PlacedBuildings);
+
+            // ── Districts ──
+            DistrictManager.Instance?.LoadFromSave(data.UnlockedDistricts);
+            DistrictManager.Instance?.CheckUnlocks();
+
+            // ── Mythos Exposure ──
+            KindredSiege.City.MythosExposure.Instance?.LoadFromSave(data.MythosExposure);
 
             Debug.Log($"[Save] Campaign loaded. Season {data.CurrentSeason}, " +
                       $"Battles {data.BattlesCompleted}, Rivals {data.ActiveRivals.Count}");

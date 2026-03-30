@@ -1,5 +1,6 @@
 using UnityEngine;
 using KindredSiege.Battle;
+using KindredSiege.City;
 using KindredSiege.Core;
 
 namespace KindredSiege.UI
@@ -27,11 +28,13 @@ namespace KindredSiege.UI
         public static CityRestPanel Instance { get; private set; }
 
         // ─── Config ───
-        private const int LightRestCost    = 10;   // Gold
-        private const int LightRestAmount  = 20;   // Fatigue removed
-        private const int FullRestCost     = 25;   // Gold
-        private const int FullRestAmount   = 50;   // Fatigue removed
-        private const int FullRestFKReduce = 2;    // MaxSanityPenalty reduced
+        private const int LightRestCost           = 10;  // Gold
+        private const int LightRestAmount         = 20;  // Fatigue removed
+        private const int LightRestMythosReduce   = 1;   // Mythos Exposure reduced
+        private const int FullRestCost            = 25;  // Gold
+        private const int FullRestAmount          = 50;  // Fatigue removed
+        private const int FullRestFKReduce        = 2;   // MaxSanityPenalty reduced
+        private const int FullRestMythosReduce    = 3;   // Mythos Exposure reduced (Apothecary care)
 
         // ─── State ───
         private bool      _visible;
@@ -114,9 +117,13 @@ namespace KindredSiege.UI
                 $"Gold: {gold}", _labelStyle);
             iy += 32;
 
+            string mythosStr = KindredSiege.City.MythosExposure.Instance != null
+                ? $"  Mythos: {KindredSiege.City.MythosExposure.Instance.Exposure}/100 [{KindredSiege.City.MythosExposure.Instance.GetTierName()}]"
+                : "";
             GUI.Label(new Rect(ix, iy, lw, 18),
-                $"Light Rest: {LightRestCost}G  (−{LightRestAmount} fatigue)     " +
-                $"Full Rest: {FullRestCost}G  (−{FullRestAmount} fatigue, −{FullRestFKReduce} MaxSanity penalty)",
+                $"Light Rest: {LightRestCost}G  (−{LightRestAmount} fatigue, −{LightRestMythosReduce} Mythos)     " +
+                $"Full Rest: {FullRestCost}G  (−{FullRestAmount} fatigue, −{FullRestFKReduce} MaxSanity penalty, −{FullRestMythosReduce} Mythos)" +
+                mythosStr,
                 _subStyle);
             iy += 22;
 
@@ -197,7 +204,8 @@ namespace KindredSiege.UI
                     ResourceManager.Instance.Spend(ResourceType.Gold, LightRestCost))
                 {
                     FatigueSystem.Rest(data, LightRestAmount);
-                    currentGold -= LightRestCost; // Refresh local for button re-enable this frame
+                    MythosExposure.Instance?.Reduce(LightRestMythosReduce, "LightRest");
+                    currentGold -= LightRestCost;
                     Debug.Log($"[CityRest] {data.UnitName}: Light Rest — fatigue now {data.FatigueLevel}.");
                 }
             }
@@ -221,6 +229,9 @@ namespace KindredSiege.UI
                         data.MaxSanityPenalty = Mathf.Max(0, data.MaxSanityPenalty - recovered);
                         Debug.Log($"[CityRest] {data.UnitName}: Apothecary recovered {recovered} MaxSanity penalty → {data.MaxSanityPenalty} remaining.");
                     }
+
+                    // Apothecary care also cleanses some city-level corruption
+                    MythosExposure.Instance?.Reduce(FullRestMythosReduce, "FullRest");
 
                     Debug.Log($"[CityRest] {data.UnitName}: Full Rest — fatigue now {data.FatigueLevel}, FK penalty {data.MaxSanityPenalty}.");
                 }

@@ -785,7 +785,7 @@ namespace KindredSiege.Battle
             return new ActionNode("StayBehindWarden", ctx =>
             {
                 var warden = ctx.Allies
-                    .Where(a => a != null && a.IsAlive && a.UnitType == "warden")
+                    .Where(a => a != null && a.IsAlive && a.UnitClass == UnitClass.Warden)
                     .OrderBy(a => Vector3.Distance(ctx.Owner.transform.position, a.transform.position))
                     .FirstOrDefault();
 

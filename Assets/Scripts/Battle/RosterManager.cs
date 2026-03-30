@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using KindredSiege.Core;
 using KindredSiege.City;
+using KindredSiege.Units;
 
 namespace KindredSiege.Battle
 {
@@ -127,13 +128,20 @@ namespace KindredSiege.Battle
             foreach (var unit in recruitCatalog)
             {
                 if (unit == null) continue;
+                var talentIds = new List<int>();
+                if (unit.UnlockedTalents != null)
+                    foreach (var t in unit.UnlockedTalents) talentIds.Add((int)t);
+
                 list.Add(new UnitSaveEntry
                 {
-                    AssetName        = unit.name,
-                    FatigueLevel     = unit.FatigueLevel,
-                    ActivePhobia     = (int)unit.ActivePhobia,
-                    MaxSanityPenalty = unit.MaxSanityPenalty,
-                    ExpeditionCount  = unit.ExpeditionCount
+                    AssetName         = unit.name,
+                    FatigueLevel      = unit.FatigueLevel,
+                    ActivePhobia      = (int)unit.ActivePhobia,
+                    MaxSanityPenalty  = unit.MaxSanityPenalty,
+                    ExpeditionCount   = unit.ExpeditionCount,
+                    UnlockedTalentIds = talentIds,
+                    CoSurvivedWith    = new List<string>(unit.CoSurvivedWith ?? new List<string>()),
+                    BondedWith        = new List<string>(unit.BondedWith     ?? new List<string>()),
                 });
             }
             return list;
@@ -162,9 +170,19 @@ namespace KindredSiege.Battle
                     var unit = System.Array.Find(recruitCatalog, u => u != null && u.name == entry.AssetName);
                     if (unit == null) continue;
                     unit.FatigueLevel     = entry.FatigueLevel;
-                    unit.ActivePhobia     = (KindredSiege.Battle.PhobiaType)entry.ActivePhobia;
+                    unit.ActivePhobia     = (PhobiaType)entry.ActivePhobia;
                     unit.MaxSanityPenalty = entry.MaxSanityPenalty;
                     unit.ExpeditionCount  = entry.ExpeditionCount;
+
+                    unit.UnlockedTalents.Clear();
+                    if (entry.UnlockedTalentIds != null)
+                        foreach (int id in entry.UnlockedTalentIds)
+                            unit.UnlockedTalents.Add((TalentNodeId)id);
+
+                    unit.CoSurvivedWith = entry.CoSurvivedWith != null
+                        ? new List<string>(entry.CoSurvivedWith) : new List<string>();
+                    unit.BondedWith     = entry.BondedWith != null
+                        ? new List<string>(entry.BondedWith)     : new List<string>();
                 }
             }
 

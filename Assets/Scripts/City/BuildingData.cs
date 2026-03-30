@@ -23,6 +23,7 @@ namespace KindredSiege.City
         [Header("Identity")]
         public string BuildingName = "New Building";
         public BuildingCategory Category = BuildingCategory.Economy;
+        public DistrictType District = DistrictType.Harbor;
         [TextArea(2, 4)]
         public string Description = "";
         public Sprite Icon;

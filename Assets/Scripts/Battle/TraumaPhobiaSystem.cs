@@ -137,6 +137,28 @@ namespace KindredSiege.Battle
             };
         }
 
+        /// <summary>
+        /// Force-assign a phobia from a Dread Contest (GDD §6.2 — damage > 35).
+        /// Only fires if the unit has no phobia yet. Publishes PhobiaGainedEvent.
+        /// </summary>
+        public static void ForceRollPhobia(UnitController unit)
+        {
+            if (unit == null || unit.Data == null) return;
+            if (unit.Data.ActivePhobia != PhobiaType.None) return;
+
+            PhobiaType phobia = RollPhobia(unit);
+            unit.Data.ActivePhobia = phobia;
+
+            EventBus.Publish(new PhobiaGainedEvent
+            {
+                UnitId     = unit.UnitId,
+                UnitName   = unit.UnitName,
+                PhobiaName = phobia.ToString()
+            });
+
+            Debug.Log($"[Phobia] {unit.UnitName} gained phobia from Dread Contest: {phobia}");
+        }
+
         // ════════════════════════════════════════════
         // HELPER
         // ════════════════════════════════════════════

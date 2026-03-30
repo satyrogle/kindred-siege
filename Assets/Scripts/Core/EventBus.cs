@@ -248,4 +248,24 @@ namespace KindredSiege.Core
         public int    FatigueGained;
         public int    TotalFatigue;
     }
+
+    // --- Dread Contest Events (GDD §6.2) ---
+
+    /// <summary>
+    /// Raised each time a unit rolls a Dread Contest against a rival taunt.
+    /// SanityDamage = 0 means the unit resisted (sanity boost applied instead).
+    /// HesitationLock = true means the unit is stunned for 3 seconds.
+    /// PhobiaTriggered = true means the damage exceeded 35 and a phobia check fired.
+    /// </summary>
+    public struct DreadContestEvent
+    {
+        public int    UnitId;
+        public string UnitName;
+        public string RivalName;
+        public int    DreadPower;
+        public int    Resistance;
+        public int    SanityDamage;    // 0 = resisted
+        public bool   HesitationLock;
+        public bool   PhobiaTriggered;
+    }
 }

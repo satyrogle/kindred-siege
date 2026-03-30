@@ -272,15 +272,31 @@ namespace KindredSiege.AI.BehaviourTree
         // ══════════════════════════════════════════════════════
 
         /// <summary>
+        /// Get the default behaviour tree for a UnitClass enum value.
+        /// Preferred over the string overload — use this when UnitData.UnitClass is set.
+        /// </summary>
+        public static BTNode GetPreset(UnitClass unitClass) => unitClass switch
+        {
+            UnitClass.Warden       => CreateWarden(),
+            UnitClass.Marksman     => CreateMarksman(),
+            UnitClass.Occultist    => CreateOccultist(),
+            UnitClass.Berserker    => CreateBerserker(),
+            UnitClass.Investigator => CreateInvestigator(),
+            UnitClass.Shadow       => CreateShadow(),
+            UnitClass.Herald       => CreateHerald(),
+            UnitClass.Vessel       => CreateVessel(),
+            _                      => CreateWarden() // None / unknown → safe default
+        };
+
+        /// <summary>
         /// Get the default behaviour tree for a unit type string.
-        /// Matches UnitData.UnitType — use lowercase in your ScriptableObjects.
+        /// Kept for backward compatibility with legacy assets that haven't set UnitClass.
         /// Old names (guardian/ranger/healer/scout/emissary) are kept as aliases.
         /// </summary>
         public static BTNode GetPreset(string unitType)
         {
             return unitType?.ToLower() switch
             {
-                // ── Current GDD names ──
                 "warden"       => CreateWarden(),
                 "marksman"     => CreateMarksman(),
                 "occultist"    => CreateOccultist(),
@@ -290,14 +306,14 @@ namespace KindredSiege.AI.BehaviourTree
                 "herald"       => CreateHerald(),
                 "vessel"       => CreateVessel(),
 
-                // ── Legacy aliases (keeps old ScriptableObject assets working) ──
+                // Legacy aliases
                 "guardian"  => CreateWarden(),
                 "ranger"    => CreateMarksman(),
                 "healer"    => CreateOccultist(),
                 "scout"     => CreateShadow(),
                 "emissary"  => CreateVessel(),
 
-                _ => CreateWarden() // Safe default
+                _ => CreateWarden()
             };
         }
     }

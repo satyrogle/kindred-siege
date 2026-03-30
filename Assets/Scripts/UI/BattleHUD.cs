@@ -78,6 +78,7 @@ namespace KindredSiege.UI
             EventBus.Subscribe<HorrorRatingDrainEvent>(OnHorrorDrain);
             EventBus.Subscribe<PhobiaGainedEvent>(OnPhobiaGained);
             EventBus.Subscribe<ForbiddenKnowledgeEvent>(OnForbiddenKnowledge);
+            EventBus.Subscribe<DreadContestEvent>(OnDreadContest);
         }
 
         private void OnDestroy()
@@ -89,6 +90,7 @@ namespace KindredSiege.UI
             EventBus.Unsubscribe<HorrorRatingDrainEvent>(OnHorrorDrain);
             EventBus.Unsubscribe<PhobiaGainedEvent>(OnPhobiaGained);
             EventBus.Unsubscribe<ForbiddenKnowledgeEvent>(OnForbiddenKnowledge);
+            EventBus.Unsubscribe<DreadContestEvent>(OnDreadContest);
         }
 
         private void Update()
@@ -439,6 +441,22 @@ namespace KindredSiege.UI
         private void OnForbiddenKnowledge(ForbiddenKnowledgeEvent evt)
         {
             PushToast($"✦ {evt.UnitName}: MaxSanity −{evt.MaxSanityLost} → {evt.NewMaxSanity} (Forbidden Knowledge)", new Color(0.4f, 0.8f, 1.0f));
+        }
+
+        private void OnDreadContest(DreadContestEvent evt)
+        {
+            if (evt.SanityDamage == 0)
+            {
+                PushToast($"✦ {evt.UnitName} resisted {evt.RivalName}'s taunt!", new Color(0.4f, 1.0f, 0.5f));
+            }
+            else if (evt.HesitationLock)
+            {
+                PushToast($"✦ {evt.UnitName} BROKEN by {evt.RivalName}! −{evt.SanityDamage} sanity. STUNNED.", new Color(0.9f, 0.2f, 0.9f));
+            }
+            else
+            {
+                PushToast($"✦ {evt.UnitName} shaken by {evt.RivalName}. −{evt.SanityDamage} sanity.", new Color(0.8f, 0.5f, 0.1f));
+            }
         }
 
         // ════════════════════════════════════════════
