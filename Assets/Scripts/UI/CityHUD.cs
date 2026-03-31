@@ -291,15 +291,15 @@ namespace KindredSiege.UI
 
             var mythos   = KindredSiege.City.MythosExposure.Instance;
             int exposure = mythos?.Exposure ?? 0;
-            var tier     = mythos?.GetTier() ?? KindredSiege.City.ExposureTier.Calm;
-            string tierName = mythos?.GetTierName() ?? "Calm";
+            var tier     = mythos?.GetTier() ?? KindredSiege.City.ExposureTier.Initiate;
+            string tierName = mythos?.GetTierName() ?? "Initiate";
 
             Color mythosColor = tier switch
             {
-                KindredSiege.City.ExposureTier.Calm      => new Color(0.25f, 0.75f, 0.35f),
-                KindredSiege.City.ExposureTier.Unsettled => new Color(0.88f, 0.82f, 0.25f),
-                KindredSiege.City.ExposureTier.Haunted   => new Color(0.92f, 0.55f, 0.15f),
-                KindredSiege.City.ExposureTier.Corrupted => new Color(0.88f, 0.18f, 0.12f),
+                KindredSiege.City.ExposureTier.Initiate  => new Color(0.25f, 0.75f, 0.35f),
+                KindredSiege.City.ExposureTier.Acolyte   => new Color(0.88f, 0.82f, 0.25f),
+                KindredSiege.City.ExposureTier.Scholar   => new Color(0.92f, 0.55f, 0.15f),
+                KindredSiege.City.ExposureTier.Adept     => new Color(0.88f, 0.18f, 0.12f),
                 _                                         => new Color(0.58f, 0.10f, 0.78f)
             };
 
@@ -316,13 +316,13 @@ namespace KindredSiege.UI
 
             string effectStr = tier switch
             {
-                KindredSiege.City.ExposureTier.Calm      => "No current effect.",
-                KindredSiege.City.ExposureTier.Unsettled => "Battle start: -5 sanity to all units.",
-                KindredSiege.City.ExposureTier.Haunted   => "Battle start: -10 sanity.  Rival Dread +2.",
-                KindredSiege.City.ExposureTier.Corrupted => "Battle start: -15 sanity.  City sanity draining.",
+                KindredSiege.City.ExposureTier.Initiate  => "No current effect.",
+                KindredSiege.City.ExposureTier.Acolyte   => "Battle start: -5 sanity to all units.",
+                KindredSiege.City.ExposureTier.Scholar   => "Battle start: -10 sanity.  Rival Dread +2.",
+                KindredSiege.City.ExposureTier.Adept     => "Battle start: -15 sanity.  City sanity draining.",
                 _                                         => "THE CITY HAS FALLEN.",
             };
-            GUI.color = tier >= KindredSiege.City.ExposureTier.Unsettled
+            GUI.color = tier >= KindredSiege.City.ExposureTier.Acolyte
                 ? mythosColor : new Color(0.50f, 0.50f, 0.60f);
             GUI.Label(new Rect(ix, iy, lw, 18), effectStr, _subStyle);
             GUI.color = Color.white;

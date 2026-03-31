@@ -312,7 +312,7 @@ namespace KindredSiege.Battle
             ApplyEncounterSetup();
 
             // Apply Rival Resonance (GDD §7)
-            var activeRival = KindredSiege.Rivalry.RivalryEngine.Instance?.GetPendingRival();
+            var activeRival = KindredSiege.Rivalry.RivalryEngine.Instance?.PendingRival;
             var mutations = KindredSiege.Modifiers.MutationEngine.Instance?.ActiveMutations;
             if (activeRival != null && mutations != null && mutations.Count > 0)
             {
