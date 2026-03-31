@@ -188,7 +188,7 @@ namespace KindredSiege.Battle
             // VOID: Existential Dread (Unspent Directive Points rapidly drain max sanity)
             if (mutationEngine.HasMutation(KindredSiege.Modifiers.MutationType.ExistentialDread))
             {
-                int unspentPoints = DirectiveSystem.Instance?.Points ?? 0;
+                int unspentPoints = DirectiveSystem.Instance?.DirectivePoints ?? 0;
                 if (unspentPoints > 0)
                 {
                     float drainPerPointPerSec = 0.5f;
