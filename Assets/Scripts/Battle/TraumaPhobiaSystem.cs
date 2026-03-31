@@ -1,5 +1,6 @@
 using UnityEngine;
 using KindredSiege.Core;
+using KindredSiege.Units;
 
 namespace KindredSiege.Battle
 {
@@ -66,7 +67,7 @@ namespace KindredSiege.Battle
         // STATIC HELPERS
         // ════════════════════════════════════════════
 
-        public static void CurePhobia(KindredSiege.Units.UnitData unit)
+        public static void CurePhobia(UnitData unit)
         {
             if (unit != null)
                 unit.ActivePhobia = PhobiaType.None;
