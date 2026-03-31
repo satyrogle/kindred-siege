@@ -151,6 +151,13 @@ namespace KindredSiege.Core
                 return false;
             }
 
+            // ── Version Check ──
+            if (data.SaveVersion < 1)
+            {
+                Debug.LogWarning("[Save] Save file is incompatible (older than v1). The Mythos Progression system was heavily redesigned.");
+                return false;
+            }
+
             // ── GameManager ──
             GameManager.Instance?.LoadState(data.CurrentSeason, data.BattlesCompleted);
 

@@ -496,7 +496,7 @@ namespace KindredSiege.Battle
 
         public static int GetDirectiveCost(DirectiveType type)
         {
-            return type switch
+            int cost = type switch
             {
                 DirectiveType.FocusFire    => 1,
                 DirectiveType.HoldPosition => 1,
@@ -506,6 +506,15 @@ namespace KindredSiege.Battle
                 DirectiveType.InvokeMercy  => 0, // Token cost, not point cost
                 _                          => 0
             };
+
+            // VOID: The Watcher Sees (Directives cost double)
+            if (cost > 0 && KindredSiege.Modifiers.MutationEngine.Instance != null &&
+                KindredSiege.Modifiers.MutationEngine.Instance.HasMutation(KindredSiege.Modifiers.MutationType.TheWatcherSees))
+            {
+                cost *= 2;
+            }
+
+            return cost;
         }
 
         public bool IsUnleashActive(int unitId) => _unleashActiveIds.Contains(unitId);

@@ -22,6 +22,9 @@ namespace KindredSiege.Battle
         public Sprite Portrait;
         public GameObject Prefab;
 
+        [Header("AI Overrides")]
+        public bool IsTactical = false;
+
         [Header("Combat Stats")]
         public int MaxHP = 100;
         public int AttackDamage = 10;

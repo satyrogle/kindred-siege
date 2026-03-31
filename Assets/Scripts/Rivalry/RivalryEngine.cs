@@ -113,8 +113,11 @@ namespace KindredSiege.Rivalry
                 SizeMultiplier = 1f
             };
 
-            // Assign 2–4 random starting traits
+            // Assign 2–4 random starting traits + Danger scaling (Adept tier)
             int traitCount = Random.Range(2, 5);
+            if (KindredSiege.City.MythosExposure.Instance != null)
+                traitCount += KindredSiege.City.MythosExposure.Instance.ExtraRivalTraits;
+
             var selected = BaseTraitPool
                 .OrderBy(_ => Random.value)
                 .Take(traitCount);

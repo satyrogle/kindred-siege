@@ -1,3 +1,4 @@
+using System.Linq;
 using UnityEngine;
 using KindredSiege.Battle;
 using KindredSiege.City;
@@ -30,11 +31,10 @@ namespace KindredSiege.UI
         // ─── Config ───
         private const int LightRestCost           = 10;  // Gold
         private const int LightRestAmount         = 20;  // Fatigue removed
-        private const int LightRestMythosReduce   = 1;   // Mythos Exposure reduced
         private const int FullRestCost            = 25;  // Gold
+        private const int TreatmentCost           = 150; // Gold
         private const int FullRestAmount          = 50;  // Fatigue removed
         private const int FullRestFKReduce        = 2;   // MaxSanityPenalty reduced
-        private const int FullRestMythosReduce    = 3;   // Mythos Exposure reduced (Apothecary care)
 
         // ─── State ───
         private bool      _visible;
@@ -121,11 +121,19 @@ namespace KindredSiege.UI
                 ? $"  Mythos: {KindredSiege.City.MythosExposure.Instance.Exposure}/100 [{KindredSiege.City.MythosExposure.Instance.GetTierName()}]"
                 : "";
             GUI.Label(new Rect(ix, iy, lw, 18),
-                $"Light Rest: {LightRestCost}G  (−{LightRestAmount} fatigue, −{LightRestMythosReduce} Mythos)     " +
-                $"Full Rest: {FullRestCost}G  (−{FullRestAmount} fatigue, −{FullRestFKReduce} MaxSanity penalty, −{FullRestMythosReduce} Mythos)" +
+                $"Light Rest: {LightRestCost}G  (−{LightRestAmount} fatigue)     " +
+                $"Full Rest: {FullRestCost}G  (−{FullRestAmount} fatigue, −{FullRestFKReduce} MaxSanity penalty)" +
                 mythosStr,
                 _subStyle);
             iy += 22;
+
+            // ─── Apothecary check ───
+            int apothecaryLvl = 0;
+            if (CityManager.Instance != null)
+            {
+                var apo = CityManager.Instance.PlacedBuildings.FirstOrDefault(b => b.Data != null && b.Data.BuildingName == "Apothecary");
+                apothecaryLvl = apo != null ? apo.Level : 0;
+            }
 
             // ─── Unit rows ──────────────────────────────────────────────────
             if (unitCount == 0)
@@ -140,7 +148,7 @@ namespace KindredSiege.UI
                 {
                     var data = _roster![i];
                     if (data == null) { iy += RowH; continue; }
-                    DrawUnitRow(ix, iy, data, gold);
+                    DrawUnitRow(ix, iy, data, gold, apothecaryLvl);
                     iy += RowH;
                 }
             }
@@ -154,7 +162,7 @@ namespace KindredSiege.UI
 
         // ─── Single unit row ─────────────────────────────────────────────────
 
-        private void DrawUnitRow(int ix, int rowY, UnitData data, int currentGold)
+        private void DrawUnitRow(int ix, int rowY, UnitData data, int currentGold, int apothecaryLvl)
         {
             // Name + class
             GUI.Label(new Rect(ix, rowY + 4,  LabelW, 20), data.UnitName, _labelStyle);
@@ -191,20 +199,41 @@ namespace KindredSiege.UI
                     "BROKEN — must rest before deploying", _brokenStyle);
             }
 
-            // Rest buttons
-            int btnX = ix + PanelW - Margin * 2 - BtnW * 2 - 8;
+            // Rest & Treat buttons
+            int buttonsNeeded = data.ActivePhobia != PhobiaType.None ? 3 : 2;
+            int btnX = ix + PanelW - Margin * 2 - BtnW * buttonsNeeded - 8 * (buttonsNeeded - 1);
+
+            // Treatment button (if phobia exists)
+            if (data.ActivePhobia != PhobiaType.None)
+            {
+                if (apothecaryLvl >= 3)
+                {
+                    bool canTreat = currentGold >= TreatmentCost;
+                    GUI.enabled = canTreat;
+                    if (GUI.Button(new Rect(btnX, rowY + 20, BtnW, BtnH), $"Treat\n({TreatmentCost}G)", _buttonStyle))
+                    {
+                        if (ResourceManager.Instance != null && ResourceManager.Instance.Spend(ResourceType.Gold, TreatmentCost))
+                            data.ActivePhobia = PhobiaType.None;
+                    }
+                    GUI.enabled = true;
+                }
+                else
+                {
+                    GUI.Label(new Rect(btnX, rowY + 20, BtnW, BtnH), "Requires\nApothecary L3", _subStyle);
+                }
+                btnX += BtnW + 8;
+            }
 
             // Light Rest button
             bool canLight = currentGold >= LightRestCost && data.FatigueLevel > 0;
             GUI.enabled = canLight;
             if (GUI.Button(new Rect(btnX, rowY + 20, BtnW, BtnH),
-                $"Light Rest ({LightRestCost}G)", _buttonStyle))
+                $"Light Rest\n({LightRestCost}G)", _buttonStyle))
             {
                 if (ResourceManager.Instance != null &&
                     ResourceManager.Instance.Spend(ResourceType.Gold, LightRestCost))
                 {
                     FatigueSystem.Rest(data, LightRestAmount);
-                    MythosExposure.Instance?.Reduce(LightRestMythosReduce, "LightRest");
                     currentGold -= LightRestCost;
                     Debug.Log($"[CityRest] {data.UnitName}: Light Rest — fatigue now {data.FatigueLevel}.");
                 }
@@ -215,23 +244,19 @@ namespace KindredSiege.UI
             bool canFull = currentGold >= FullRestCost && (data.FatigueLevel > 0 || data.MaxSanityPenalty > 0);
             GUI.enabled = canFull;
             if (GUI.Button(new Rect(btnX + BtnW + 8, rowY + 20, BtnW, BtnH),
-                $"Full Rest ({FullRestCost}G)", _buttonStyle))
+                $"Full Rest\n({FullRestCost}G)", _buttonStyle))
             {
                 if (ResourceManager.Instance != null &&
                     ResourceManager.Instance.Spend(ResourceType.Gold, FullRestCost))
                 {
                     FatigueSystem.Rest(data, FullRestAmount);
 
-                    // Apothecary care: partially recover Forbidden Knowledge penalty
                     if (data.MaxSanityPenalty > 0)
                     {
                         int recovered = Mathf.Min(FullRestFKReduce, data.MaxSanityPenalty);
                         data.MaxSanityPenalty = Mathf.Max(0, data.MaxSanityPenalty - recovered);
                         Debug.Log($"[CityRest] {data.UnitName}: Apothecary recovered {recovered} MaxSanity penalty → {data.MaxSanityPenalty} remaining.");
                     }
-
-                    // Apothecary care also cleanses some city-level corruption
-                    MythosExposure.Instance?.Reduce(FullRestMythosReduce, "FullRest");
 
                     Debug.Log($"[CityRest] {data.UnitName}: Full Rest — fatigue now {data.FatigueLevel}, FK penalty {data.MaxSanityPenalty}.");
                 }

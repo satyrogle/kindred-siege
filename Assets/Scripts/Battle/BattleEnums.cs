@@ -72,6 +72,8 @@ namespace KindredSiege.Battle
         SolitudePhobia,   // Takes -3 sanity per 5 seconds when no ally is within 4 units
         ViolencePhobia,   // Takes -2 sanity each time this unit deals damage
         DarkPhobia,       // Takes -4 sanity per 10 seconds in prolonged combat (stacks with ProlongedCombat)
+        FailurePhobia,    // Takes -2 sanity each time an attack misses / is negated
+        Claustrophobia,   // Takes -1 sanity per second while surrounded by >= 2 enemies
     }
 
     // ═══════════════════════════════════════════════════════════════════════

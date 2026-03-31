@@ -150,6 +150,12 @@ namespace KindredSiege.City
                     goldCost: 100, matCost: 60,
                     produces:    ResourceType.TechPoints, productionAmt: 3),
 
+                MakeBuilding("Archive",
+                    category:    BuildingCategory.Tech,
+                    district:    DistrictType.ScholarsQuarter,
+                    desc:        "Stores forbidden knowledge. Unlocks advanced Gambit slots for all units.",
+                    goldCost: 400, matCost: 200),
+
                 // ── The Abyss (Overlord defeated) ──
                 MakeBuilding("Void Gate",
                     category:    BuildingCategory.Tech,

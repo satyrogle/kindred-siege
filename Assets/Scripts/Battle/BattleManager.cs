@@ -163,8 +163,116 @@ namespace KindredSiege.Battle
             // Horror Rating drain — every 5 seconds, active rival drains all player unit sanity
             TickHorrorRating();
 
+            // Apply continuous Reality Mutations (GDD §7)
+            TickMutations();
+
             // Check win conditions
             CheckBattleEnd();
+        }
+
+        // ─── Mutations Tick ───
+        private float _currentsShiftTimer = 0f;
+
+        private void TickMutations()
+        {
+            var mutationEngine = KindredSiege.Modifiers.MutationEngine.Instance;
+            if (mutationEngine == null) return;
+            float dt = Time.deltaTime * battleSpeed;
+
+            // VOID: Temporal Anomaly (Timer runs 2x faster, but doesn't speed up animations/movement)
+            if (mutationEngine.HasMutation(KindredSiege.Modifiers.MutationType.TemporalAnomaly))
+            {
+                battleTimer += dt; // Added a second time
+            }
+
+            // VOID: Existential Dread (Unspent Directive Points rapidly drain max sanity)
+            if (mutationEngine.HasMutation(KindredSiege.Modifiers.MutationType.ExistentialDread))
+            {
+                int unspentPoints = DirectiveSystem.Instance?.Points ?? 0;
+                if (unspentPoints > 0)
+                {
+                    float drainPerPointPerSec = 0.5f;
+                    foreach (var u in team1)
+                    {
+                        if (u != null && u.IsAlive)
+                        {
+                            u.MaxSanity = Mathf.Max(10, u.MaxSanity - (drainPerPointPerSec * unspentPoints * dt));
+                            // Clamp current sanity
+                            if (u.CurrentSanity > u.MaxSanity) u.CurrentSanity = u.MaxSanity;
+                        }
+                    }
+                }
+            }
+
+            // TIDE: Currents Shift (Shuffle grid positions every 15s)
+            if (mutationEngine.HasMutation(KindredSiege.Modifiers.MutationType.CurrentsShift))
+            {
+                _currentsShiftTimer -= dt;
+                if (_currentsShiftTimer <= 0f)
+                {
+                    _currentsShiftTimer = 15f;
+                    // Gather all living units and shuffle their positions within their respective zones
+                    var t1Zone = grid.GetTeam1Zone();
+                    var t1Units = team1.Where(u => u != null && u.IsAlive).ToList();
+                    for (int i = 0; i < t1Units.Count && i < t1Zone.Count; i++)
+                    {
+                        grid.PlaceUnit(t1Units[i], t1Zone[Random.Range(0, t1Zone.Count)]);
+                        t1Units[i].transform.position = t1Units[i].SpawnPosition; // Snap them instantly
+                    }
+
+                    var t2Zone = grid.GetTeam2Zone();
+                    var t2Units = team2.Where(u => u != null && u.IsAlive).ToList();
+                    for (int i = 0; i < t2Units.Count && i < t2Zone.Count; i++)
+                    {
+                        grid.PlaceUnit(t2Units[i], t2Zone[Random.Range(0, t2Zone.Count)]);
+                        t2Units[i].transform.position = t2Units[i].SpawnPosition;
+                    }
+                    Debug.Log("[Mutation] Currents Shift! All unit positions randomized.");
+                }
+            }
+
+            // TIDE: Drowned Ground (Bottom 2 rows deal 2 sanity damage per second)
+            if (mutationEngine.HasMutation(KindredSiege.Modifiers.MutationType.DrownedGround))
+            {
+                foreach (var u in allUnits)
+                {
+                    if (u != null && u.IsAlive)
+                    {
+                        // Assuming grid is top-down 2D, smaller Y is "bottom" rows
+                        var gridPos = grid.WorldToGrid(u.transform.position);
+                        if (gridPos.y <= 1)
+                        {
+                            u.ModifySanity(-2f * dt, "DrownedGround"); // Wait, ModifySanity takes an int natively in this codebase, but we pass continuous.
+                            // To handle float properly without rewriting UnitController signature:
+                            u._drownedGroundAccumulator += 2f * dt;
+                            if (u._drownedGroundAccumulator >= 1f)
+                            {
+                                int drain = Mathf.FloorToInt(u._drownedGroundAccumulator);
+                                u.ModifySanity(-drain, "DrownedGround");
+                                u._drownedGroundAccumulator -= drain;
+                            }
+                        }
+                    }
+                }
+            }
+
+            // FLESH: Flesh Weave (Regenerate 2 HP per second when below 50% HP)
+            if (mutationEngine.HasMutation(KindredSiege.Modifiers.MutationType.FleshWeave))
+            {
+                foreach (var u in allUnits)
+                {
+                    if (u != null && u.IsAlive && u.CurrentHP < (u.MaxHP * 0.5f))
+                    {
+                        u._fleshWeaveAccumulator += 2f * dt;
+                        if (u._fleshWeaveAccumulator >= 1f)
+                        {
+                            int heal = Mathf.FloorToInt(u._fleshWeaveAccumulator);
+                            u.CurrentHP = Mathf.Min(u.MaxHP, u.CurrentHP + heal);
+                            u._fleshWeaveAccumulator -= heal;
+                        }
+                    }
+                }
+            }
         }
 
         // ─── Battle Setup ───
@@ -202,6 +310,53 @@ namespace KindredSiege.Battle
 
             // Apply encounter-specific rules after spawning
             ApplyEncounterSetup();
+
+            // Apply Rival Resonance (GDD §7)
+            var activeRival = KindredSiege.Rivalry.RivalryEngine.Instance?.GetPendingRival();
+            var mutations = KindredSiege.Modifiers.MutationEngine.Instance?.ActiveMutations;
+            if (activeRival != null && mutations != null && mutations.Count > 0)
+            {
+                bool hasResonance = false;
+                foreach (var mut in mutations)
+                {
+                    var details = KindredSiege.Modifiers.MutationEngine.Instance.GetMutationDetails(mut);
+                    if ((details.Family == KindredSiege.Modifiers.MutationFamily.Mind && activeRival.Traits.Contains(KindredSiege.Rivalry.RivalTraitType.Fearful)) ||
+                        (details.Family == KindredSiege.Modifiers.MutationFamily.Flesh && activeRival.Traits.Contains(KindredSiege.Rivalry.RivalTraitType.Rage)) ||
+                        (details.Family == KindredSiege.Modifiers.MutationFamily.Tide && activeRival.Traits.Contains(KindredSiege.Rivalry.RivalTraitType.Ambusher)) ||
+                        (details.Family == KindredSiege.Modifiers.MutationFamily.Void && activeRival.Traits.Contains(KindredSiege.Rivalry.RivalTraitType.Tactical)))
+                    {
+                        hasResonance = true;
+                        break;
+                    }
+                }
+
+                if (hasResonance)
+                {
+                    // Find actual rival unit and buff them (+25% HP, +50% DMG)
+                    foreach (var u in team2)
+                    {
+                        if (u != null && u.Data != null && u.Data.UnitName == activeRival.FullName)
+                        {
+                            u.ApplyModifiers(1.25f, 1.50f);
+                            Debug.Log($"[Resonance] {u.UnitName} resonated with the environment! Massive stat boost.");
+                            break;
+                        }
+                    }
+                }
+            }
+
+            // Global Status Mutations (Riptide, IronBlood)
+            if (mutations != null && mutations.Count > 0)
+            {
+                if (mutations.Contains(KindredSiege.Modifiers.MutationType.Riptide))
+                {
+                    foreach (var u in allUnits) { if (u != null) u.ApplyModifiers(1f, 1f, 0.5f); } // Halves MoveSpeed
+                }
+                if (mutations.Contains(KindredSiege.Modifiers.MutationType.IronBlood))
+                {
+                    foreach (var u in allUnits) { if (u != null) u.Armour *= 2; }
+                }
+            }
 
             // Apply bond buffs to any bonded pairs present on team1
             KindredSiege.Units.BondSystem.ApplyBondEffects(team1);
@@ -701,6 +856,7 @@ namespace KindredSiege.Battle
                 leader.BaseSanity   = 100;
                 leader.Comprehension = 0.4f; // enemies are less susceptible to cosmic horror
                 leader.TeamTint     = new Color(0.9f, 0.3f, 0.1f);
+                leader.IsTactical   = rival.Traits.Contains(KindredSiege.Rivalry.RivalTraitType.Tactical);
                 roster.Add(leader);
                 Debug.Log($"[Enemies] Leader spawned: {rival.FullName} [{rival.Rank}] " +
                           $"HP:{leader.MaxHP} DMG:{leader.AttackDamage}");

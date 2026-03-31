@@ -88,10 +88,17 @@ namespace KindredSiege.AI.BehaviourTree
     /// <summary>Find the nearest enemy and store as "Target" on the blackboard.</summary>
     public class FindNearestEnemy : BTNode
     {
+        private FindTacticalEnemy _tacticalOverride = new FindTacticalEnemy();
+
         public FindNearestEnemy() : base("FindNearest") { }
 
         public override NodeState Tick(BattleContext context)
         {
+            if (context.Owner != null && context.Owner.Data != null && context.Owner.Data.IsTactical)
+            {
+                return _tacticalOverride.Tick(context);
+            }
+
             UnitController nearest = null;
             float bestDist = float.MaxValue;
 
@@ -135,6 +142,30 @@ namespace KindredSiege.AI.BehaviourTree
             if (weakest != null)
             {
                 context.Set("Target", weakest);
+                return NodeState.Success;
+            }
+            return NodeState.Failure;
+        }
+    }
+
+    /// <summary>Find a tactical target (lowest health ratio, or ranged threat). Replaces random wandering.</summary>
+    public class FindTacticalEnemy : BTNode
+    {
+        public FindTacticalEnemy() : base("FindTactical") { }
+
+        public override NodeState Tick(BattleContext context)
+        {
+            // Tactical logic: Prioritise low HP ratio, then ranged attackers, then distance.
+            var tactical = context.Enemies
+                .Where(e => e != null && e.IsTargetable)
+                .OrderBy(e => (float)e.CurrentHP / e.MaxHP)
+                .ThenBy(e => e.Data != null && e.Data.IsRanged ? 0 : 1)
+                .ThenBy(e => UnityEngine.Vector3.Distance(context.Owner.transform.position, e.transform.position))
+                .FirstOrDefault();
+
+            if (tactical != null)
+            {
+                context.Set("Target", tactical);
                 return NodeState.Success;
             }
             return NodeState.Failure;
@@ -413,14 +444,22 @@ namespace KindredSiege.AI.BehaviourTree
             var target = context.Get<UnitController>("Target");
             if (target == null || !target.IsTargetable) return NodeState.Failure;
 
-            if (!context.Owner.CanAttack()) return NodeState.Running;
+            bool isFree = KindredSiege.City.MythosExposure.Instance != null &&
+                          KindredSiege.City.MythosExposure.Instance.FreeAnalyses;
+
+            if (!isFree)
+            {
+                if (!context.Owner.CanAttack()) return NodeState.Running;
+            }
 
             // Mark target as analysed — all allies can read this to deal bonus damage
             string key = $"Analysed_{target.UnitId}";
             context.Set(key, true);
-            context.Owner.ResetAttackCooldown();
 
-            Debug.Log($"[Investigator] {context.Owner.UnitName} analysed {target.UnitName}.");
+            if (!isFree)
+                context.Owner.ResetAttackCooldown();
+
+            Debug.Log($"[Investigator] {context.Owner.UnitName} analysed {target.UnitName}. (Free? {isFree})");
             return NodeState.Success;
         }
     }

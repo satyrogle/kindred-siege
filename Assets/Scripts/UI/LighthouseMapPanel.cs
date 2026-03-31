@@ -45,6 +45,20 @@ namespace KindredSiege.UI
             var engine = RivalryEngine.Instance;
             var activeRivals = engine != null ? engine.GetActiveRivals() : new List<RivalData>();
 
+            bool isDomainExpansion = false;
+            KindredSiege.Modifiers.MutationFamily domainFamily = KindredSiege.Modifiers.MutationFamily.Void;
+            if (KindredSiege.City.MythosExposure.Instance != null && KindredSiege.City.MythosExposure.Instance.Exposure >= 75)
+            {
+                var pendingRival = KindredSiege.Rivalry.RivalryEngine.Instance?.GetPendingRival();
+                if (pendingRival != null && pendingRival.Rank == KindredSiege.Rivalry.RivalRank.Overlord)
+                {
+                    isDomainExpansion = true;
+                    // Hash the Rival's name to pick a deterministic family
+                    int pick = Mathf.Abs(pendingRival.FullName.GetHashCode()) % 4;
+                    domainFamily = (KindredSiege.Modifiers.MutationFamily)pick;
+                }
+            }
+
             // Each path gets a distinct encounter type — no duplicates
             var encounterPool = new List<EncounterType>
             {
@@ -75,10 +89,11 @@ namespace KindredSiege.UI
 
                 _paths.Add(new ExpeditionPath
                 {
-                    Mutations = MutationEngine.Instance?.GenerateMutationsForPath() ?? new List<MutationType>(),
+                    Mutations = MutationEngine.Instance?.GenerateMutationsForPath(isDomainExpansion, domainFamily) ?? new List<MutationType>(),
                     Rival     = rival,
                     Encounter = encounter,
-                    Reward    = Random.value > 0.5f ? "Standard Supplies" : "Archive Unlock"
+                    Reward    = Random.value > 0.5f ? "Standard Supplies" : "Archive Unlock",
+                    IsDomainExpansion = isDomainExpansion
                 });
             }
         }
@@ -129,8 +144,21 @@ namespace KindredSiege.UI
             py += 28;
 
             // Mutation Block
-            GUI.Label(new Rect(px, py, lw, 20), "Reality Mutations:", _mutStyle);
-            py += 22;
+            if (path.IsDomainExpansion)
+            {
+                GUI.color = new Color(0.9f, 0.1f, 0.2f);
+                GUI.Label(new Rect(px, py, lw, 30), "⚠ ANOMALY DETECTED ⚠", _titleStyle);
+                GUI.color = Color.white;
+                py += 35;
+                GUI.Label(new Rect(px, py, lw, 30), "DOMAIN EXPANSION", _titleStyle);
+                py += 35;
+            }
+            else
+            {
+                GUI.Label(new Rect(px, py, lw, 20), "Reality Mutations:", _mutStyle);
+                py += 22;
+            }
+            
             if (path.Mutations.Count == 0)
             {
                 GUI.Label(new Rect(px, py, lw, 20), "None", _btnStyle);
@@ -141,7 +169,7 @@ namespace KindredSiege.UI
                 foreach (var mut in path.Mutations)
                 {
                     var details = MutationEngine.Instance.GetMutationDetails(mut);
-                    GUI.color = new Color(0.8f, 0.3f, 0.9f); // Mutation colour
+                    GUI.color = path.IsDomainExpansion ? new Color(0.9f, 0.2f, 0.2f) : new Color(0.8f, 0.3f, 0.9f); // Red for domain, Purple for normal
                     GUI.Label(new Rect(px, py, lw, 20), details.Name, _btnStyle);
                     GUI.color = Color.white;
                     GUI.Label(new Rect(px, py + 20, lw, 35), details.Desc, _btnStyle);

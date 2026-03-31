@@ -1,8 +1,10 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using KindredSiege.Battle;
 using KindredSiege.AI.BehaviourTree;
 using KindredSiege.Core;
+using KindredSiege.City;
 
 namespace KindredSiege.UI
 {
@@ -102,6 +104,14 @@ namespace KindredSiege.UI
 
                 BTNode g1 = _slot1[i] != GambitType.None ? GambitLibrary.GetGambit(_slot1[i]) : null;
                 BTNode g2 = _slot2[i] != GambitType.None ? GambitLibrary.GetGambit(_slot2[i]) : null;
+
+                // VOID: The Rival Knows (First gambit automatically fails)
+                if (KindredSiege.Modifiers.MutationEngine.Instance != null &&
+                    KindredSiege.Modifiers.MutationEngine.Instance.HasMutation(KindredSiege.Modifiers.MutationType.TheRivalKnows))
+                {
+                    g1 = null;
+                }
+
                 unit.SetGambits(g1, g2);
 
                 if (g1 != null || g2 != null)
@@ -191,11 +201,25 @@ namespace KindredSiege.UI
                 GUI.Label(new Rect(ix, rowY + 42, LabelW, 16), fatTxt, _fatigueStyle);
             }
 
+            // Find Archive level
+            int archiveLevel = 2; // Default for testing without CityManager
+            if (CityManager.Instance != null)
+            {
+                var arch = CityManager.Instance.PlacedBuildings.FirstOrDefault(b => b.Data != null && b.Data.BuildingName == "Archive");
+                archiveLevel = arch != null ? arch.Level : 0;
+            }
+
             int g1x = ix + LabelW + 10;
-            DrawGambitCycler(g1x, rowY + 16, slotIdx, data.UnitType, isSlot1: true);
+            if (archiveLevel >= 1)
+                DrawGambitCycler(g1x, rowY + 16, slotIdx, data.UnitType, isSlot1: true);
+            else
+                GUI.Label(new Rect(g1x, rowY + 16, CyclerW, 30), "Requires Archive L1", _subStyle);
 
             int g2x = g1x + CyclerW + 16;
-            DrawGambitCycler(g2x, rowY + 16, slotIdx, data.UnitType, isSlot1: false);
+            if (archiveLevel >= 2)
+                DrawGambitCycler(g2x, rowY + 16, slotIdx, data.UnitType, isSlot1: false);
+            else
+                GUI.Label(new Rect(g2x, rowY + 16, CyclerW, 30), "Requires Archive L2", _subStyle);
         }
 
         // ─── Cycler: < GambitName > ───────────────────────────────────────────

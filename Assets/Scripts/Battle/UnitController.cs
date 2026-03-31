@@ -76,6 +76,9 @@ namespace KindredSiege.Battle
         private float _darkPhobiaTimer     = 0f;
         private const float SolitudePhobiaInterval = 5f;
         private const float DarkPhobiaInterval     = 10f;
+        
+        private float _claustrophobiaTimer = 0f;
+        private const float ClaustrophobiaInterval = 1f;
 
         // ─── Fatigue (GDD §11.4) ───
         // Extra hesitation chance applied on top of sanity hesitation when unit is exhausted.
@@ -182,6 +185,8 @@ namespace KindredSiege.Battle
 
         // ─── Mutations ───
         private float _fearIsPowerBonusTimer = 0f;
+        public float _drownedGroundAccumulator = 0f;
+        public float _fleshWeaveAccumulator = 0f;
 
         // ─── Behaviour Tree ───
         private BTNode       behaviourTree;
@@ -390,8 +395,15 @@ namespace KindredSiege.Battle
             // ── Passive sanity drain (Vessel class) ──
             if (unitData != null && unitData.PassiveSanityDrainPerSecond > 0)
             {
+                float multiplier = 1f;
+                if (KindredSiege.Modifiers.MutationEngine.Instance != null &&
+                    KindredSiege.Modifiers.MutationEngine.Instance.HasMutation(KindredSiege.Modifiers.MutationType.WhisperingShadows))
+                {
+                    multiplier = 2f;
+                }
+
                 // Spread drain probabilistically over frames to avoid float precision issues
-                if (Random.value < unitData.PassiveSanityDrainPerSecond * dt)
+                if (Random.value < unitData.PassiveSanityDrainPerSecond * multiplier * dt)
                     ModifySanity(-1, "PassiveDrain");
             }
 
@@ -709,6 +721,19 @@ namespace KindredSiege.Battle
                     AfflictionName  = affliction.ToString()
                 });
 
+                // Mutation: EchoesOfMadness (Mind) - jumps the affliction to an ally
+                if (KindredSiege.Modifiers.MutationEngine.Instance != null &&
+                    KindredSiege.Modifiers.MutationEngine.Instance.HasMutation(KindredSiege.Modifiers.MutationType.EchoesOfMadness))
+                {
+                    var ally = battleContext?.Allies?.FirstOrDefault(u => u != null && u.IsAlive && u != this && u.ActiveAffliction == AfflictionType.None);
+                    if (ally != null)
+                    {
+                        ally.ActiveAffliction = affliction;
+                        Debug.Log($"[Mutation] EchoesOfMadness: {affliction} spread to {ally.UnitName}!");
+                        EventBus.Publish(new AfflictionGainedEvent { UnitId = ally.UnitId, UnitName = ally.UnitName, AfflictionName = affliction.ToString() });
+                    }
+                }
+
                 Debug.Log($"[Sanity] {UnitName} gained Affliction: {affliction}");
             }
         }
@@ -884,7 +909,20 @@ namespace KindredSiege.Battle
 
             // Talent: Hit Ignore — 15% chance to negate the hit entirely
             if (TalentHitIgnoreChance > 0f && Random.value < TalentHitIgnoreChance)
+            {
+                // Check if attacker has FailurePhobia
+                if (attacker != null && attacker.ActivePhobia == PhobiaType.FailurePhobia)
+                    attacker.ModifySanity(-2, "FailurePhobia");
+
                 return;
+            }
+
+            // Mutation: Brittle Bones (Flesh) - All physical damage taken increased by 25%
+            if (KindredSiege.Modifiers.MutationEngine.Instance != null &&
+                KindredSiege.Modifiers.MutationEngine.Instance.HasMutation(KindredSiege.Modifiers.MutationType.BrittleBones))
+            {
+                damage = Mathf.RoundToInt(damage * 1.25f);
+            }
 
             // Vessel (Death Denied): survive lethal hit (chance from talent or default 20%)
             bool canDeathDeny = UnitClass == UnitClass.Vessel && damage >= CurrentHP &&
@@ -1022,6 +1060,14 @@ namespace KindredSiege.Battle
             if (!IsAlive) return;
             // Vessel cannot be healed — it is sustained by something else
             if (unitData != null && unitData.CannotBeHealed) return;
+
+            // Mutation: Iron Blood (Flesh) - healing is halved
+            if (KindredSiege.Modifiers.MutationEngine.Instance != null &&
+                KindredSiege.Modifiers.MutationEngine.Instance.HasMutation(KindredSiege.Modifiers.MutationType.IronBlood))
+            {
+                amount = Mathf.RoundToInt(amount * 0.5f);
+            }
+
             CurrentHP = Mathf.Min(MaxHP, CurrentHP + amount);
         }
 
@@ -1289,6 +1335,23 @@ namespace KindredSiege.Battle
                     {
                         _darkPhobiaTimer = 0f;
                         ModifySanity(-4, "DarkPhobia");
+                    }
+                    break;
+                    
+                case PhobiaType.Claustrophobia:
+                    _claustrophobiaTimer += dt;
+                    if (_claustrophobiaTimer >= ClaustrophobiaInterval)
+                    {
+                        _claustrophobiaTimer = 0f;
+                        if (battleContext != null && battleContext.Enemies != null)
+                        {
+                            int nearbyEnemies = battleContext.Enemies.Count(e =>
+                                e != null && e.IsAlive &&
+                                Vector3.Distance(transform.position, e.transform.position) <= 3f); // 3 units max melee distance
+                                
+                            if (nearbyEnemies >= 2)
+                                ModifySanity(-1, "Claustrophobia");
+                        }
                     }
                     break;
             }

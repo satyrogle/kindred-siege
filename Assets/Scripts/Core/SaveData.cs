@@ -17,6 +17,9 @@ namespace KindredSiege.Core
     [Serializable]
     public class SaveData
     {
+        // ─── Save Version ───
+        public int SaveVersion = 1;
+
         // ─── GameManager state ───
         public int CurrentSeason;
         public int BattlesCompleted;

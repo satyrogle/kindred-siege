@@ -10,5 +10,6 @@ namespace KindredSiege.Modifiers
         public RivalData          Rival;
         public EncounterType      Encounter;
         public string             Reward;
+        public bool               IsDomainExpansion;
     }
 }

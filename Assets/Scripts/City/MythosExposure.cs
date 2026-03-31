@@ -18,8 +18,8 @@ namespace KindredSiege.City
     ///   75–99  (Corrupted) — -15 sanity, passive sanity drain ticks in city phase
     ///   100    (Consumed)  — city falls; campaign ends in defeat
     ///
-    /// Exposure decreases by spending Kindness Points at the Shrine or Apothecary
-    /// (handled via ReduceExposure calls from CityRestPanel).
+    ///
+    /// Mythos Exposure is a ONE-WAY ticking clock. It persists across runs via PlayerPrefs.
     ///
     /// Attach to the persistent Manager GameObject.
     /// </summary>
@@ -37,11 +37,11 @@ namespace KindredSiege.City
         public event Action<int, int> OnExposureChanged; // old, new
         public event Action           OnCityFallen;
 
-        // ─── Thresholds ──────────────────────────────────────────────────────
-        public const int ThresholdUnsettled = 25;
-        public const int ThresholdHaunted   = 50;
-        public const int ThresholdCorrupted = 75;
-        public const int ThresholdConsumed  = 100;
+        // ─── Thresholds (One-Way Escalation) ─────────────────────────────────
+        public const int ThresholdAcolyte = 25;
+        public const int ThresholdScholar = 50;
+        public const int ThresholdAdept   = 75;
+        public const int ThresholdSeer    = 100;
 
         // ─── Gain rates ──────────────────────────────────────────────────────
         private const int GainOnDefeat      = 8;   // Battle lost
@@ -65,6 +65,8 @@ namespace KindredSiege.City
 
         private void Start()
         {
+            LoadFromPlayerPrefs();
+
             EventBus.Subscribe<BattleEndEvent>(OnBattleEnd);
             EventBus.Subscribe<UnitLostEvent>(OnUnitLost);
 
@@ -83,8 +85,8 @@ namespace KindredSiege.City
 
         private void Update()
         {
-            // Corrupted-tier: tick sanity drain on all roster units while in city phase
-            if (_exposure < ThresholdCorrupted) return;
+            // Adept-tier: tick sanity drain on all roster units while in city phase
+            if (_exposure < ThresholdAdept) return;
             if (GameManager.Instance?.CurrentState != GameManager.GameState.CityPhase) return;
 
             _drainTimer += Time.deltaTime;
@@ -99,7 +101,7 @@ namespace KindredSiege.City
                 // Reduce BaseSanity by 1 (permanent passive drain from corruption)
                 unit.BaseSanity = Mathf.Max(10, unit.BaseSanity - 1);
             }
-            Debug.Log($"[Mythos] Corrupted city tick — roster BaseSanity reduced by 1.");
+            Debug.Log($"[Mythos] Adept city tick — roster BaseSanity reduced by 1.");
         }
 
         // ════════════════════════════════════════════
@@ -112,8 +114,7 @@ namespace KindredSiege.City
             {
                 case BattleEndEvent.Result.Defeat: Gain(GainOnDefeat, "Defeat"); break;
                 case BattleEndEvent.Result.Draw:   Gain(GainOnDraw,   "Draw");   break;
-                // Victory reduces exposure slightly — hope is a ward against horror
-                case BattleEndEvent.Result.Victory: Reduce(2, "Victory");         break;
+                // Victory no longer reduces exposure — it only delays the inevitable.
             }
         }
 
@@ -133,26 +134,21 @@ namespace KindredSiege.City
 
         public void Gain(int amount, string reason = "")
         {
-            if (amount <= 0 || _exposure >= ThresholdConsumed) return;
+            if (amount <= 0 || _exposure >= ThresholdSeer) return;
             int old = _exposure;
-            _exposure = Mathf.Min(_exposure + amount, ThresholdConsumed);
+            _exposure = Mathf.Min(_exposure + amount, ThresholdSeer);
             Debug.Log($"[Mythos] Exposure +{amount} ({reason}) → {_exposure}  [{GetTierName()}]");
+            
+            // Auto-save exposure instantly for cross-run persistence
+            SaveToPlayerPrefs();
+            
             OnExposureChanged?.Invoke(old, _exposure);
 
-            if (_exposure >= ThresholdConsumed)
+            if (_exposure >= ThresholdSeer)
             {
                 Debug.LogWarning("[Mythos] Exposure 100 — THE CITY HAS FALLEN.");
                 OnCityFallen?.Invoke();
             }
-        }
-
-        public void Reduce(int amount, string reason = "")
-        {
-            if (amount <= 0 || _exposure <= 0) return;
-            int old = _exposure;
-            _exposure = Mathf.Max(0, _exposure - amount);
-            Debug.Log($"[Mythos] Exposure -{amount} ({reason}) → {_exposure}  [{GetTierName()}]");
-            OnExposureChanged?.Invoke(old, _exposure);
         }
 
         // ════════════════════════════════════════════
@@ -161,48 +157,68 @@ namespace KindredSiege.City
 
         public ExposureTier GetTier() => _exposure switch
         {
-            >= ThresholdConsumed  => ExposureTier.Consumed,
-            >= ThresholdCorrupted => ExposureTier.Corrupted,
-            >= ThresholdHaunted   => ExposureTier.Haunted,
-            >= ThresholdUnsettled => ExposureTier.Unsettled,
-            _                     => ExposureTier.Calm
+            >= ThresholdSeer    => ExposureTier.Seer,
+            >= ThresholdAdept   => ExposureTier.Adept,
+            >= ThresholdScholar => ExposureTier.Scholar,
+            >= ThresholdAcolyte => ExposureTier.Acolyte,
+            _                   => ExposureTier.Initiate
         };
 
         public string GetTierName() => GetTier() switch
         {
-            ExposureTier.Calm      => "Calm",
-            ExposureTier.Unsettled => "Unsettled",
-            ExposureTier.Haunted   => "Haunted",
-            ExposureTier.Corrupted => "Corrupted",
-            ExposureTier.Consumed  => "Consumed",
-            _                      => "Unknown"
+            ExposureTier.Initiate => "Initiate",
+            ExposureTier.Acolyte  => "Acolyte",
+            ExposureTier.Scholar  => "Scholar",
+            ExposureTier.Adept    => "Adept",
+            ExposureTier.Seer     => "Seer",
+            _                     => "Unknown"
         };
 
         /// <summary>
         /// Sanity penalty applied to all player units at battle start.
-        /// 0 at Calm, -5 at Unsettled, -10 at Haunted, -15 at Corrupted.
         /// </summary>
         public int BattleStartSanityPenalty => GetTier() switch
         {
-            ExposureTier.Unsettled => -5,
-            ExposureTier.Haunted   => -10,
-            ExposureTier.Corrupted => -15,
-            _                      => 0
+            ExposureTier.Acolyte => -5,
+            ExposureTier.Scholar => -10,
+            ExposureTier.Adept   => -15,
+            _                    => 0
         };
 
         /// <summary>
-        /// Bonus Dread Power added to ALL rival Dread Contests at Haunted+.
-        /// Makes rivals feel more terrifying as the city decays.
+        /// Bonus Dread Power added to ALL rival Dread Contests at Scholar+.
         /// </summary>
-        public int DreadContestBonus => _exposure >= ThresholdHaunted ? 2 : 0;
+        public int DreadContestBonus => _exposure >= ThresholdScholar ? 2 : 0;
+
+        /// <summary>
+        /// Danger Scaling: Extra traits awarded to rivals at Adept+ tier.
+        /// </summary>
+        public int ExtraRivalTraits => _exposure >= ThresholdAdept ? 1 : 0;
+
+        /// <summary>
+        /// Power Scaling: Investigation analyses are free at Scholar+ tier.
+        /// </summary>
+        public bool FreeAnalyses => _exposure >= ThresholdScholar;
 
         // ════════════════════════════════════════════
-        // SAVE / LOAD
+        // CROSS-RUN PERSISTENCE
         // ════════════════════════════════════════════
 
+        public void SaveToPlayerPrefs()
+        {
+            PlayerPrefs.SetInt("KS_MythosExposure", _exposure);
+            PlayerPrefs.Save();
+        }
+
+        public void LoadFromPlayerPrefs()
+        {
+            _exposure = PlayerPrefs.GetInt("KS_MythosExposure", 0);
+        }
+
+        // Keep stub for backwards compatibility with SaveManager until removed
         public int  GetExposureForSave()           => _exposure;
-        public void LoadFromSave(int savedExposure) => _exposure = Mathf.Clamp(savedExposure, 0, 100);
+        public void LoadFromSave(int savedExposure) { /* Ignored, handled by PlayerPrefs */ }
     }
 
-    public enum ExposureTier { Calm, Unsettled, Haunted, Corrupted, Consumed }
+    public enum ExposureTier { Initiate, Acolyte, Scholar, Adept, Seer }
 }

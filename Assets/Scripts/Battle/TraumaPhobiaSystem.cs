@@ -81,45 +81,51 @@ namespace KindredSiege.Battle
             switch (type)
             {
                 case "berserker":
-                    // Berserkers rarely fear violence — more likely to fear solitude
-                    if (roll < 0.40f) return PhobiaType.SolitudePhobia;
-                    if (roll < 0.65f) return PhobiaType.BloodPhobia;
-                    if (roll < 0.80f) return PhobiaType.EldritchPhobia;
-                    if (roll < 0.92f) return PhobiaType.DarkPhobia;
-                    return PhobiaType.ViolencePhobia;
+                    // Berserkers rarely fear violence — more likely to fear solitude or failure
+                    if (roll < 0.25f) return PhobiaType.SolitudePhobia;
+                    if (roll < 0.50f) return PhobiaType.BloodPhobia;
+                    if (roll < 0.70f) return PhobiaType.EldritchPhobia;
+                    if (roll < 0.85f) return PhobiaType.DarkPhobia;
+                    if (roll < 0.95f) return PhobiaType.FailurePhobia;
+                    return PhobiaType.Claustrophobia;
 
                 case "occultist":
                 case "investigator":
                     // Scholars and ritualists fear the eldritch above all
-                    if (roll < 0.45f) return PhobiaType.EldritchPhobia;
-                    if (roll < 0.70f) return PhobiaType.DarkPhobia;
-                    if (roll < 0.85f) return PhobiaType.BloodPhobia;
-                    if (roll < 0.94f) return PhobiaType.SolitudePhobia;
-                    return PhobiaType.ViolencePhobia;
+                    if (roll < 0.35f) return PhobiaType.EldritchPhobia;
+                    if (roll < 0.55f) return PhobiaType.DarkPhobia;
+                    if (roll < 0.70f) return PhobiaType.BloodPhobia;
+                    if (roll < 0.82f) return PhobiaType.SolitudePhobia;
+                    if (roll < 0.92f) return PhobiaType.Claustrophobia;
+                    return PhobiaType.FailurePhobia;
 
                 case "herald":
                     // Heralds bond with allies — losing them is the worst horror
-                    if (roll < 0.45f) return PhobiaType.BloodPhobia;
-                    if (roll < 0.70f) return PhobiaType.SolitudePhobia;
-                    if (roll < 0.85f) return PhobiaType.EldritchPhobia;
-                    if (roll < 0.94f) return PhobiaType.DarkPhobia;
-                    return PhobiaType.ViolencePhobia;
+                    if (roll < 0.35f) return PhobiaType.BloodPhobia;
+                    if (roll < 0.55f) return PhobiaType.SolitudePhobia;
+                    if (roll < 0.70f) return PhobiaType.EldritchPhobia;
+                    if (roll < 0.82f) return PhobiaType.DarkPhobia;
+                    if (roll < 0.92f) return PhobiaType.FailurePhobia;
+                    return PhobiaType.Claustrophobia;
 
                 case "vessel":
                     // Vessels are already doomed — dark and eldritch phobias dominant
-                    if (roll < 0.40f) return PhobiaType.DarkPhobia;
-                    if (roll < 0.70f) return PhobiaType.EldritchPhobia;
-                    if (roll < 0.85f) return PhobiaType.SolitudePhobia;
-                    if (roll < 0.94f) return PhobiaType.BloodPhobia;
+                    if (roll < 0.30f) return PhobiaType.DarkPhobia;
+                    if (roll < 0.55f) return PhobiaType.EldritchPhobia;
+                    if (roll < 0.70f) return PhobiaType.SolitudePhobia;
+                    if (roll < 0.85f) return PhobiaType.BloodPhobia;
+                    if (roll < 0.95f) return PhobiaType.Claustrophobia;
                     return PhobiaType.ViolencePhobia;
 
                 default:
                     // Warden, Marksman, Shadow — equal distribution
-                    if (roll < 0.20f) return PhobiaType.BloodPhobia;
-                    if (roll < 0.40f) return PhobiaType.EldritchPhobia;
-                    if (roll < 0.60f) return PhobiaType.SolitudePhobia;
-                    if (roll < 0.80f) return PhobiaType.ViolencePhobia;
-                    return PhobiaType.DarkPhobia;
+                    if (roll < 0.15f) return PhobiaType.BloodPhobia;
+                    if (roll < 0.30f) return PhobiaType.EldritchPhobia;
+                    if (roll < 0.45f) return PhobiaType.SolitudePhobia;
+                    if (roll < 0.60f) return PhobiaType.ViolencePhobia;
+                    if (roll < 0.75f) return PhobiaType.DarkPhobia;
+                    if (roll < 0.90f) return PhobiaType.FailurePhobia;
+                    return PhobiaType.Claustrophobia;
             }
         }
 
@@ -128,12 +134,14 @@ namespace KindredSiege.Battle
         {
             return phobia switch
             {
-                PhobiaType.BloodPhobia     => "Witnessing any death deals an extra −8 sanity.",
-                PhobiaType.EldritchPhobia  => "Eldritch attacks inflict 50% more sanity damage.",
-                PhobiaType.SolitudePhobia  => "Suffers −3 sanity every 5 s when no ally is within 4 units.",
-                PhobiaType.ViolencePhobia  => "Suffers −2 sanity each time they deal damage.",
-                PhobiaType.DarkPhobia      => "Suffers −4 extra sanity every 10 s of prolonged combat.",
-                _                          => "No phobia."
+                PhobiaType.BloodPhobia      => "Witnessing any death deals an extra −8 sanity.",
+                PhobiaType.EldritchPhobia   => "Eldritch attacks inflict 50% more sanity damage.",
+                PhobiaType.SolitudePhobia   => "Suffers −3 sanity every 5 s when no ally is within 4 units.",
+                PhobiaType.ViolencePhobia   => "Suffers −2 sanity each time they deal damage.",
+                PhobiaType.DarkPhobia       => "Suffers −4 extra sanity every 10 s of prolonged combat.",
+                PhobiaType.FailurePhobia    => "Suffers −2 sanity when their attacks are negated.",
+                PhobiaType.Claustrophobia   => "Suffers −1 sanity per second while surrounded by enemies.",
+                _                           => "No phobia."
             };
         }
 
