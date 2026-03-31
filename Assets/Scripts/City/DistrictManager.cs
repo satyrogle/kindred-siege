@@ -166,6 +166,25 @@ namespace KindredSiege.City
                 OnDistrictLiberated?.Invoke(district);
                 if (MythosExposure.Instance != null)
                     MythosExposure.Instance.Reduce(10);
+
+                // Check victory: all 5 districts liberated
+                if (AllDistrictsLiberated)
+                {
+                    Debug.Log("[District] ALL DISTRICTS LIBERATED. VICTORY!");
+                    KindredSiege.Core.GameManager.Instance?.ChangeState(
+                        KindredSiege.Core.GameManager.GameState.Victory);
+                }
+            }
+        }
+
+        /// <summary>True when every district in the city has been liberated.</summary>
+        public bool AllDistrictsLiberated
+        {
+            get
+            {
+                foreach (var d in AllDistricts())
+                    if (!_liberated.Contains(d)) return false;
+                return true;
             }
         }
 

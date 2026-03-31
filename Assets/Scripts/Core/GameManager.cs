@@ -19,7 +19,8 @@ namespace KindredSiege.Core
             BattlePhase,
             PostBattle,
             SeasonEnd,
-            GameOver
+            GameOver,
+            Victory
         }
 
         [Header("Current State")]
@@ -101,6 +102,10 @@ namespace KindredSiege.Core
                 (GameState.SeasonEnd, GameState.GameOver)    => true,
                 (GameState.GameOver, GameState.MainMenu)     => true,
                 (GameState.GameOver, GameState.CityPhase)    => true,  // Try Again
+                // Victory — reached when all districts are liberated
+                (GameState.CityPhase, GameState.Victory)     => true,
+                (GameState.PostBattle, GameState.Victory)    => true,
+                (GameState.Victory, GameState.MainMenu)      => true,
                 _ => false
             };
         }
@@ -171,6 +176,9 @@ namespace KindredSiege.Core
 
             // Delete save file
             SaveManager.Instance?.DeleteSave();
+
+            // Reset tutorial hints for the new run
+            UI.TutorialSystem.Instance?.ResetTutorial();
 
             ChangeState(GameState.CityPhase);
         }

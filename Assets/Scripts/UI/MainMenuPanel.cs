@@ -27,7 +27,7 @@ namespace KindredSiege.UI
         private GUIStyle _labelStyle;
 
         private const int PanelW = 480;
-        private const int PanelH = 380;
+        private const int PanelH = 440;
 
         private void Awake()
         {
@@ -100,6 +100,16 @@ namespace KindredSiege.UI
             GUI.color = Color.white;
             iy += btnH + 16;
 
+            // Settings button
+            GUI.color = new Color(0.45f, 0.45f, 0.55f);
+            if (GUI.Button(new Rect(bx, iy, btnW, btnH), "Settings", _btnStyle))
+            {
+                GUI.color = Color.white;
+                SettingsPanel.Instance?.Show();
+            }
+            GUI.color = Color.white;
+            iy += btnH + 16;
+
             // Quit button
             GUI.color = new Color(0.50f, 0.50f, 0.55f);
             if (GUI.Button(new Rect(bx, iy, btnW, btnH), "Quit", _btnStyle))
@@ -115,7 +125,7 @@ namespace KindredSiege.UI
 
             // Version / flavour at the bottom
             iy = py + PanelH - 32;
-            GUI.Label(new Rect(px, iy, PanelW, 20), "v0.2  —  Phase 2", _labelStyle);
+            GUI.Label(new Rect(px, iy, PanelW, 20), "v0.3  —  Phase 3", _labelStyle);
         }
 
         private void EnsureStyles()
