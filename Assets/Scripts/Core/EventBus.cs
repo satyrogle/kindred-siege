@@ -80,6 +80,8 @@ namespace KindredSiege.Core
         public Result BattleResult;
         public int KPEarned;
         public float Duration;
+        public KindredSiege.Battle.EncounterType ActiveEncounter;
+        public KindredSiege.City.DistrictType? TargetDistrict;
     }
 
     public struct UnitDefeatedEvent

@@ -32,7 +32,8 @@ namespace KindredSiege.UI
         private const int LightRestCost           = 10;  // Gold
         private const int LightRestAmount         = 20;  // Fatigue removed
         private const int FullRestCost            = 25;  // Gold
-        private const int TreatmentCost           = 150; // Gold
+        private const int TreatmentCost           = 300; // Gold
+        private const int TreatmentMercyCost      = 2;   // Mercy Tokens
         private const int FullRestAmount          = 50;  // Fatigue removed
         private const int FullRestFKReduce        = 2;   // MaxSanityPenalty reduced
 
@@ -208,12 +209,19 @@ namespace KindredSiege.UI
             {
                 if (apothecaryLvl >= 3)
                 {
-                    bool canTreat = currentGold >= TreatmentCost;
+                    int currentMercy = ResourceManager.Instance?.GetResource(ResourceType.MercyToken) ?? 0;
+                    bool canTreat = currentGold >= TreatmentCost && currentMercy >= TreatmentMercyCost;
                     GUI.enabled = canTreat;
-                    if (GUI.Button(new Rect(btnX, rowY + 20, BtnW, BtnH), $"Treat\n({TreatmentCost}G)", _buttonStyle))
+                    if (GUI.Button(new Rect(btnX, rowY + 10, BtnW, BtnH + 10), $"Treat Phobia\n({TreatmentCost}G, {TreatmentMercyCost}M)", _buttonStyle))
                     {
-                        if (ResourceManager.Instance != null && ResourceManager.Instance.Spend(ResourceType.Gold, TreatmentCost))
-                            data.ActivePhobia = PhobiaType.None;
+                        if (ResourceManager.Instance != null && 
+                            ResourceManager.Instance.GetResource(ResourceType.Gold) >= TreatmentCost &&
+                            ResourceManager.Instance.GetResource(ResourceType.MercyToken) >= TreatmentMercyCost)
+                        {
+                            ResourceManager.Instance.Spend(ResourceType.Gold, TreatmentCost);
+                            ResourceManager.Instance.Spend(ResourceType.MercyToken, TreatmentMercyCost);
+                            TraumaPhobiaSystem.CurePhobia(data);
+                        }
                     }
                     GUI.enabled = true;
                 }

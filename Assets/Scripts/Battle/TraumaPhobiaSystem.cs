@@ -66,6 +66,12 @@ namespace KindredSiege.Battle
         // STATIC HELPERS
         // ════════════════════════════════════════════
 
+        public static void CurePhobia(KindredSiege.Units.UnitData unit)
+        {
+            if (unit != null)
+                unit.ActivePhobia = PhobiaType.None;
+        }
+
         /// <summary>
         /// Roll a phobia type for the saved unit.
         /// Class-specific weights lean toward narratively fitting phobias,

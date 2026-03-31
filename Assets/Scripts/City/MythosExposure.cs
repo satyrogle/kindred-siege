@@ -132,23 +132,30 @@ namespace KindredSiege.City
         // GAIN / REDUCE
         // ════════════════════════════════════════════
 
-        public void Gain(int amount, string reason = "")
+        public void Gain(int amount, string reason)
         {
-            if (amount <= 0 || _exposure >= ThresholdSeer) return;
-            int old = _exposure;
-            _exposure = Mathf.Min(_exposure + amount, ThresholdSeer);
-            Debug.Log($"[Mythos] Exposure +{amount} ({reason}) → {_exposure}  [{GetTierName()}]");
-            
-            // Auto-save exposure instantly for cross-run persistence
-            SaveToPlayerPrefs();
-            
-            OnExposureChanged?.Invoke(old, _exposure);
+            if (CityFallen || amount <= 0) return;
 
-            if (_exposure >= ThresholdSeer)
+            int oldExposure = _exposure;
+            _exposure = Mathf.Min(100, _exposure + amount);
+
+            Debug.Log($"[City] Mythos Exposure increased by {amount} ({reason}). Now {_exposure}/100.");
+            OnExposureChanged?.Invoke(oldExposure, _exposure);
+
+            if (_exposure >= ThresholdSeer && oldExposure < ThresholdSeer)
             {
-                Debug.LogWarning("[Mythos] Exposure 100 — THE CITY HAS FALLEN.");
+                Debug.LogError("[City] THE CITY HAS FALLEN TO THE ABYSS.");
                 OnCityFallen?.Invoke();
             }
+        }
+
+        public void Reduce(int amount)
+        {
+            if (amount <= 0 || _exposure <= 0) return;
+            int oldExposure = _exposure;
+            _exposure = Mathf.Max(0, _exposure - amount);
+            Debug.Log($"[City] Mythos Exposure decreased by {amount}. Now {_exposure}/100.");
+            OnExposureChanged?.Invoke(oldExposure, _exposure);
         }
 
         // ════════════════════════════════════════════

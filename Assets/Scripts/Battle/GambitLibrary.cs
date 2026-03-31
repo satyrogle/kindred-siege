@@ -184,8 +184,15 @@ namespace KindredSiege.Battle
                     ctx.Owner.GambitIgnoreRetreat    = true;
                     ctx.Owner.GambitDamageMultiplier = 1.15f;
 
-                    // Sanity cost per tick
-                    if (Random.value < 5f * ctx.DeltaTime)   // ~5 sanity/sec
+                    // Sanity cost per tick (Dark Gambit)
+                    float procRate = 5f; // ~5 sanity/sec
+                    if (KindredSiege.City.MythosExposure.Instance != null &&
+                        KindredSiege.City.MythosExposure.Instance.Exposure >= 26) // Scholar Tier or higher
+                    {
+                        procRate = 3f; // ~3 sanity/sec (Discount applied)
+                    }
+
+                    if (Random.value < procRate * ctx.DeltaTime)
                         ctx.Owner.ModifySanity(-1, "RitualGambit");
 
                     return NodeState.Success; // Let rest of tree run

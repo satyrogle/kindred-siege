@@ -34,6 +34,13 @@ namespace KindredSiege.Battle
         /// Players win only if the Vessel survives to the end.
         /// </summary>
         Rescue          = 5,
+
+        /// <summary>
+        /// A 90 second battle where physical damage is disabled.
+        /// Players must survive using pure sanity retention and dread contests.
+        /// Liberates districts if victorious.
+        /// </summary>
+        SanitySiege     = 6,
     }
 
     public static class EncounterTypeInfo
@@ -46,6 +53,7 @@ namespace KindredSiege.Battle
             EncounterType.Ambush       => "Ambush",
             EncounterType.Ritual       => "Ritual",
             EncounterType.Rescue       => "Rescue",
+            EncounterType.SanitySiege  => "Sanity Siege",
             _                          => t.ToString()
         };
 
@@ -57,6 +65,7 @@ namespace KindredSiege.Battle
             EncounterType.Ambush       => "You've walked into a trap. Enemies encircle the position.",
             EncounterType.Ritual       => "A Keeper performs a dark rite. Kill them within 75 seconds or all is lost.",
             EncounterType.Rescue       => "A survivor is stranded behind enemy lines. Keep them alive.",
+            EncounterType.SanitySiege  => "The air warps with unreality. Weapons are useless. Hold your mind together for 90 seconds.",
             _                          => ""
         };
     }

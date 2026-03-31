@@ -87,6 +87,13 @@ namespace KindredSiege.City
 
         private void OnBattleEnd(BattleEndEvent e)
         {
+            if (e.BattleResult == BattleEndEvent.Result.Victory &&
+                e.ActiveEncounter == KindredSiege.Battle.EncounterType.SanitySiege &&
+                e.TargetDistrict.HasValue)
+            {
+                DistrictManager.Instance?.LiberateDistrict(e.TargetDistrict.Value);
+            }
+
             // Reward resources based on battle result
             int goldReward = e.BattleResult switch
             {

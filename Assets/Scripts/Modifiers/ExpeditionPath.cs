@@ -11,5 +11,6 @@ namespace KindredSiege.Modifiers
         public EncounterType      Encounter;
         public string             Reward;
         public bool               IsDomainExpansion;
+        public KindredSiege.City.DistrictType? TargetDistrict;
     }
 }

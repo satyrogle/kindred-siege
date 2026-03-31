@@ -60,6 +60,8 @@ namespace KindredSiege.UI
             }
 
             // Each path gets a distinct encounter type — no duplicates
+            var targetDistrict = KindredSiege.City.DistrictManager.Instance?.GetRandomUnliberatedDistrict();
+
             var encounterPool = new List<EncounterType>
             {
                 EncounterType.Annihilation,
@@ -69,11 +71,21 @@ namespace KindredSiege.UI
                 EncounterType.Rescue,
                 EncounterType.RivalHunt,
             };
+
+            if (targetDistrict != null)
+                encounterPool.Add(EncounterType.SanitySiege);
+
             // Shuffle
             for (int n = encounterPool.Count - 1; n > 0; n--)
             {
                 int k = Random.Range(0, n + 1);
                 (encounterPool[n], encounterPool[k]) = (encounterPool[k], encounterPool[n]);
+            }
+
+            // Guarantee one path is a Sanity Siege if there is a district available
+            if (targetDistrict != null && !encounterPool.GetRange(0, 3).Contains(EncounterType.SanitySiege))
+            {
+                encounterPool[0] = EncounterType.SanitySiege;
             }
 
             for (int i = 0; i < 3; i++)
@@ -93,7 +105,8 @@ namespace KindredSiege.UI
                     Rival     = rival,
                     Encounter = encounter,
                     Reward    = Random.value > 0.5f ? "Standard Supplies" : "Archive Unlock",
-                    IsDomainExpansion = isDomainExpansion
+                    IsDomainExpansion = isDomainExpansion,
+                    TargetDistrict = encounter == EncounterType.SanitySiege ? targetDistrict : null
                 });
             }
         }
@@ -217,6 +230,7 @@ namespace KindredSiege.UI
             {
                 bm.SetActiveRival(path.Rival);
                 bm.SetActiveEncounterType(path.Encounter);
+                bm.SetTargetDistrict(path.TargetDistrict);
                 gm.StartBattle();
             }
         }

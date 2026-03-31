@@ -64,7 +64,8 @@ namespace KindredSiege.Battle
         public KindredSiege.Rivalry.RivalData GetActiveRival() => _activeRival;
 
         // ─── Encounter Type (GDD §Encounter Types) ───
-        private EncounterType _activeEncounterType = EncounterType.Annihilation;
+        private EncounterType             _activeEncounterType = EncounterType.Annihilation;
+        private KindredSiege.City.DistrictType? _targetDistrict;
         private float _encounterTimer = 0f;           // Survival countdown / Ritual deadline
         private UnitController _rescueTarget;         // Rescue: the Vessel to protect
 
@@ -72,6 +73,7 @@ namespace KindredSiege.Battle
         private const float RitualDeadline   = 75f;
 
         public void SetActiveEncounterType(EncounterType type) => _activeEncounterType = type;
+        public void SetTargetDistrict(KindredSiege.City.DistrictType? district) => _targetDistrict = district;
         public EncounterType ActiveEncounterType => _activeEncounterType;
 
         private void Awake()
@@ -549,7 +551,8 @@ namespace KindredSiege.Battle
         private void TickEncounterTimer()
         {
             if (_activeEncounterType != EncounterType.Survival &&
-                _activeEncounterType != EncounterType.Ritual) return;
+                _activeEncounterType != EncounterType.Ritual &&
+                _activeEncounterType != EncounterType.SanitySiege) return;
 
             _encounterTimer += Time.deltaTime * battleSpeed;
         }
@@ -566,6 +569,7 @@ namespace KindredSiege.Battle
             switch (_activeEncounterType)
             {
                 case EncounterType.Survival:
+                case EncounterType.SanitySiege:
                     if (!team1Alive)
                         result = BattleEndEvent.Result.Defeat;
                     else if (_encounterTimer >= SurvivalDuration)
@@ -741,7 +745,9 @@ namespace KindredSiege.Battle
             {
                 BattleResult = result,
                 KPEarned = kpEarned,
-                Duration = battleTimer
+                Duration = battleTimer,
+                ActiveEncounter = _activeEncounterType,
+                TargetDistrict = _targetDistrict
             });
 
             // Add KP to resources

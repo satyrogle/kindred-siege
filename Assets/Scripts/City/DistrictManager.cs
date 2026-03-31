@@ -37,8 +37,10 @@ namespace KindredSiege.City
         public static DistrictManager Instance { get; private set; }
 
         private readonly HashSet<DistrictType> _unlocked = new();
+        private readonly HashSet<DistrictType> _liberated = new();
 
         public event Action<DistrictType> OnDistrictUnlocked;
+        public event Action<DistrictType> OnDistrictLiberated;
 
         // ─── Display data ────────────────────────────────────────────────────────
 
@@ -153,6 +155,18 @@ namespace KindredSiege.City
         // ════════════════════════════════════════════
 
         public bool IsUnlocked(DistrictType district) => _unlocked.Contains(district);
+        public bool IsLiberated(DistrictType district) => _liberated.Contains(district);
+
+        public void LiberateDistrict(DistrictType district)
+        {
+            if (_liberated.Add(district))
+            {
+                Debug.Log($"[District] Liberated: {GetName(district)}!");
+                OnDistrictLiberated?.Invoke(district);
+                if (MythosExposure.Instance != null)
+                    MythosExposure.Instance.Reduce(10);
+            }
+        }
 
         public IEnumerable<DistrictType> AllDistricts()
         {

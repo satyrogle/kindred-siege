@@ -907,6 +907,10 @@ namespace KindredSiege.Battle
         {
             if (!IsAlive) return;
 
+            // Sanity Siege prevents all physical damage
+            if (BattleManager.Instance != null && BattleManager.Instance.ActiveEncounterType == EncounterType.SanitySiege)
+                return;
+
             // Talent: Hit Ignore — 15% chance to negate the hit entirely
             if (TalentHitIgnoreChance > 0f && Random.value < TalentHitIgnoreChance)
             {
