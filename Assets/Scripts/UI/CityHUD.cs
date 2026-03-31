@@ -284,6 +284,11 @@ namespace KindredSiege.UI
             DrawProgressBar(ix, iy, lw, 16, battles, battles + remaining);
             iy += 28;
 
+            // ── City District Grid ──────────────────────────────────────────
+            Divider(ix, iy, lw); iy += 10;
+            int gridH = CityGridPanel.DrawGrid(ix, iy, lw);
+            iy += gridH + 8;
+
             // ── Mythos Exposure ──────────────────────────────────────────────
             Divider(ix, iy, lw); iy += 10;
             GUI.Label(new Rect(ix, iy, lw, 18), "MYTHOS EXPOSURE", _titleStyle);
