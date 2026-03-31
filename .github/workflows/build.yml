@@ -35,21 +35,26 @@ jobs:
         with:
           targetPlatform: StandaloneWindows64
 
-      - name: Print build errors on failure
+      - name: Extract build errors on failure
         if: failure() && steps.build.outcome == 'failure'
         run: |
-          echo "=== Searching for compiler errors ==="
-          find /github/workspace -name "*.log" -exec grep -l "error CS" {} \; 2>/dev/null || true
-          find /home -name "Editor.log" 2>/dev/null || true
-          # Print any .log files that contain compiler errors
-          for f in $(find / -name "*.log" -size +0 2>/dev/null | head -20); do
+          echo "## Build Errors" >> $GITHUB_STEP_SUMMARY
+          # Search everywhere for log files with compiler errors
+          FOUND=0
+          for f in $(find / -name "*.log" -o -name "*.txt" 2>/dev/null | head -50); do
             if grep -q "error CS" "$f" 2>/dev/null; then
-              echo "=== $f ==="
-              grep "error CS" "$f"
+              echo "### $f" >> $GITHUB_STEP_SUMMARY
+              echo '```' >> $GITHUB_STEP_SUMMARY
+              grep "error CS" "$f" | head -30 >> $GITHUB_STEP_SUMMARY
+              echo '```' >> $GITHUB_STEP_SUMMARY
+              FOUND=1
             fi
           done
-          # Also check stdout captured by game-ci
-          echo "=== Build step output ==="
+          if [ "$FOUND" = "0" ]; then
+            echo "No CS errors found in log files." >> $GITHUB_STEP_SUMMARY
+            echo "### All log files:" >> $GITHUB_STEP_SUMMARY
+            find / -name "*.log" 2>/dev/null | head -30 >> $GITHUB_STEP_SUMMARY
+          fi
 
       - name: Upload build
         if: success()
