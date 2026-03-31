@@ -175,9 +175,9 @@ namespace KindredSiege.Battle
         public float _sustainingAuraTimer                      = 0f;
 
         // ─── Bond (GDD §Unit Bonds) ───────────────────────────────────────────
-        /// <summary>Runtime display name of the active bonded partner (null = no active bond).</summary>
-        public string BondedPartnerName     { get; set; } = null;
-        /// <summary>Damage bonus from a live bond. Cleared when partner dies.</summary>
+        /// <summary>Runtime display names of all active bonded partners in this battle.</summary>
+        public HashSet<string> ActiveBondPartners { get; private set; } = new();
+        /// <summary>Total damage bonus from all live bonds. Decreased when a partner dies.</summary>
         public float  ActiveBondDamageBonus { get; set; } = 0f;
 
         // ─── Mutations ───

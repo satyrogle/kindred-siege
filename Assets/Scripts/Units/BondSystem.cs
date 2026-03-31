@@ -95,8 +95,8 @@ namespace KindredSiege.Units
                     if (!nameMap.TryGetValue(partnerName, out var partner)) continue;
 
                     // Both are present — activate bond
-                    uc.ActiveBondDamageBonus      += BondDamageBonus;
-                    uc.BondedPartnerName           = partner.UnitName; // Runtime display name
+                    uc.ActiveBondDamageBonus += BondDamageBonus;
+                    uc.ActiveBondPartners.Add(partner.UnitName); // Runtime display name
                     uc.ModifySanity(BondStartingSanity, "BondStart");
 
                     Debug.Log($"[Bond] Active: {uc.Data.UnitName} ↔ {partner.Data.UnitName} " +
@@ -116,12 +116,12 @@ namespace KindredSiege.Units
         public static bool NotifyPartnerDied(UnitController survivor, string deadUnitName)
         {
             if (survivor?.Data == null) return false;
-            if (string.IsNullOrEmpty(survivor.BondedPartnerName)) return false;
-            if (survivor.BondedPartnerName != deadUnitName) return false;
+            if (survivor.ActiveBondPartners.Count == 0) return false;
+            if (!survivor.ActiveBondPartners.Contains(deadUnitName)) return false;
 
             survivor.ModifySanity(ForThemSanityAmount, "ForThem");
-            survivor.ActiveBondDamageBonus = 0f; // Bond is severed on partner death
-            survivor.BondedPartnerName     = null;
+            survivor.ActiveBondDamageBonus = Mathf.Max(0f, survivor.ActiveBondDamageBonus - BondDamageBonus); // Remove just this bonded partner's bonus
+            survivor.ActiveBondPartners.Remove(deadUnitName);
             Debug.Log($"[Bond] {survivor.UnitName}: \"For them.\" (+{ForThemSanityAmount} sanity)");
             return true;
         }
