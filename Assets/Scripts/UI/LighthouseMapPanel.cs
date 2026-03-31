@@ -49,7 +49,7 @@ namespace KindredSiege.UI
             KindredSiege.Modifiers.MutationFamily domainFamily = KindredSiege.Modifiers.MutationFamily.Void;
             if (KindredSiege.City.MythosExposure.Instance != null && KindredSiege.City.MythosExposure.Instance.Exposure >= 75)
             {
-                var pendingRival = KindredSiege.Rivalry.RivalryEngine.Instance?.PendingRival;
+                var pendingRival = KindredSiege.Rivalry.RivalEncounterSystem.Instance?.PendingRival;
                 if (pendingRival != null && pendingRival.Rank == KindredSiege.Rivalry.RivalRank.Overlord)
                 {
                     isDomainExpansion = true;
