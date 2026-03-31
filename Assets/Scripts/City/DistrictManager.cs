@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using KindredSiege.Core;
 using KindredSiege.Rivalry;
@@ -166,6 +167,17 @@ namespace KindredSiege.City
                 if (MythosExposure.Instance != null)
                     MythosExposure.Instance.Reduce(10);
             }
+        }
+
+        /// <summary>
+        /// Pick a random unlocked-but-not-yet-liberated district for Sanity Siege encounters.
+        /// Returns null if every unlocked district has already been liberated.
+        /// </summary>
+        public DistrictType? GetRandomUnliberatedDistrict()
+        {
+            var candidates = _unlocked.Where(d => !_liberated.Contains(d)).ToList();
+            if (candidates.Count == 0) return null;
+            return candidates[UnityEngine.Random.Range(0, candidates.Count)];
         }
 
         public IEnumerable<DistrictType> AllDistricts()

@@ -52,3 +52,7 @@ Thumbs.db
 
 # Jetbrains
 .idea/
+
+# Build logs
+build_output.txt
+build_errors*.txt
