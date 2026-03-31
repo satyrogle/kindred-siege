@@ -18,7 +18,8 @@ namespace KindredSiege.Core
             PreBattle,
             BattlePhase,
             PostBattle,
-            SeasonEnd
+            SeasonEnd,
+            GameOver
         }
 
         [Header("Current State")]
@@ -52,16 +53,8 @@ namespace KindredSiege.Core
 
         private void Start()
         {
-            // Temporary auto-boot into CityPhase since MainMenu UI isn't built yet
-            // If a save exists, load it. Otherwise, start fresh.
-            if (SaveManager.Instance != null && SaveManager.Instance.HasSave)
-            {
-                SaveManager.Instance.LoadGame(); // Sets state to CityPhase inside LoadGame
-            }
-            else
-            {
-                StartGame(); // Sets state to CityPhase
-            }
+            // Stay on MainMenu — MainMenuPanel handles Continue / New Game
+            currentState = GameState.MainMenu;
         }
 
         /// <summary>
@@ -102,6 +95,12 @@ namespace KindredSiege.Core
                 (GameState.PostBattle, GameState.CityPhase) => true,
                 (GameState.PostBattle, GameState.SeasonEnd) => true,
                 (GameState.SeasonEnd, GameState.CityPhase) => true,  // New season
+                // GameOver can be reached from any active phase
+                (GameState.CityPhase, GameState.GameOver)   => true,
+                (GameState.PostBattle, GameState.GameOver)   => true,
+                (GameState.SeasonEnd, GameState.GameOver)    => true,
+                (GameState.GameOver, GameState.MainMenu)     => true,
+                (GameState.GameOver, GameState.CityPhase)    => true,  // Try Again
                 _ => false
             };
         }
@@ -150,14 +149,40 @@ namespace KindredSiege.Core
         }
 
         /// <summary>
-        /// Restore serialized campaign progress directly without going through
-        /// the state machine. Called by SaveManager.LoadGame().
+        /// Full campaign reset — wipe all systems and start a fresh run.
+        /// Called from MainMenuPanel "New Game" or CityFallenPanel "Try Again".
+        /// </summary>
+        public void NewGame()
+        {
+            currentSeason    = 1;
+            battlesCompleted = 0;
+
+            // Reset mythos exposure
+            City.MythosExposure.Instance?.LoadFromSave(0);
+
+            // Reset districts (Harbor only)
+            City.DistrictManager.Instance?.LoadFromSave(new System.Collections.Generic.List<int> { 0 });
+
+            // Reset resources
+            ResourceManager.Instance?.ResetResources();
+
+            // Clear roster
+            Battle.RosterManager.Instance?.ClearRoster();
+
+            // Delete save file
+            SaveManager.Instance?.DeleteSave();
+
+            ChangeState(GameState.CityPhase);
+        }
+
+        /// <summary>
+        /// Restore serialized campaign progress without changing state.
+        /// The caller (MainMenuPanel) is responsible for the state transition.
         /// </summary>
         public void LoadState(int season, int battles)
         {
             currentSeason    = season;
             battlesCompleted = battles;
-            currentState     = GameState.CityPhase;
             Debug.Log($"[GameManager] State loaded: Season {season}, Battles {battles}");
         }
     }

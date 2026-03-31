@@ -327,7 +327,7 @@ namespace KindredSiege.Battle
             _sustainingAuraTimer        = 0f;
 
             // Bond fields reset each battle (ApplyBondEffects re-sets them)
-            BondedPartnerName     = null;
+            ActiveBondPartners.Clear();
             ActiveBondDamageBonus = 0f;
 
             // Apply talent stat boosts and set runtime flags

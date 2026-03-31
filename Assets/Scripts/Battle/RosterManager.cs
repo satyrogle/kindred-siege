@@ -114,6 +114,13 @@ namespace KindredSiege.Battle
         /// <summary>Snapshot the roster as a plain array for BattleManager.</summary>
         public UnitData[] GetRosterAsArray() => _activeRoster.ToArray();
 
+        /// <summary>Remove all units from the active roster (used on NewGame).</summary>
+        public void ClearRoster()
+        {
+            _activeRoster.Clear();
+            Debug.Log("[Roster] Cleared.");
+        }
+
         // ════════════════════════════════════════════
         // SAVE / LOAD
         // ════════════════════════════════════════════
