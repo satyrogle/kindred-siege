@@ -35,7 +35,18 @@ jobs:
           targetPlatform: StandaloneWindows64
 
       - name: Upload build
+        if: success()
         uses: actions/upload-artifact@v4
         with:
           name: KindredSiege-Windows
           path: build
+
+      - name: Upload build log on failure
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-log
+          path: |
+            /github/workspace/Builds/
+            **/*build*.log
+            **/Editor.log

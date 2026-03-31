@@ -56,3 +56,6 @@ Thumbs.db
 # Build logs
 build_output.txt
 build_errors*.txt
+
+# Nested repo
+/kindred-siege/
