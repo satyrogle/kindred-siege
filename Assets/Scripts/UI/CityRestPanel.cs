@@ -209,14 +209,14 @@ namespace KindredSiege.UI
             {
                 if (apothecaryLvl >= 3)
                 {
-                    int currentKP = ResourceManager.Instance?.GetResource(ResourceType.KindnessPoints) ?? 0;
+                    int currentKP = ResourceManager.Instance?.GetAmount(ResourceType.KindnessPoints) ?? 0;
                     bool canTreat = currentGold >= TreatmentCost && currentKP >= TreatmentKPCost;
                     GUI.enabled = canTreat;
                     if (GUI.Button(new Rect(btnX, rowY + 10, BtnW, BtnH + 10), $"Treat Phobia\n({TreatmentCost}G, {TreatmentKPCost}KP)", _buttonStyle))
                     {
                         if (ResourceManager.Instance != null &&
-                            ResourceManager.Instance.GetResource(ResourceType.Gold) >= TreatmentCost &&
-                            ResourceManager.Instance.GetResource(ResourceType.KindnessPoints) >= TreatmentKPCost)
+                            ResourceManager.Instance.GetAmount(ResourceType.Gold) >= TreatmentCost &&
+                            ResourceManager.Instance.GetAmount(ResourceType.KindnessPoints) >= TreatmentKPCost)
                         {
                             ResourceManager.Instance.Spend(ResourceType.Gold, TreatmentCost);
                             ResourceManager.Instance.Spend(ResourceType.KindnessPoints, TreatmentKPCost);
