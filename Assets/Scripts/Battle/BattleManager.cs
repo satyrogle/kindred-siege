@@ -196,7 +196,7 @@ namespace KindredSiege.Battle
                     {
                         if (u != null && u.IsAlive)
                         {
-                            u.MaxSanity = Mathf.Max(10, u.MaxSanity - (drainPerPointPerSec * unspentPoints * dt));
+                            u.MaxSanity = Mathf.Max(10, Mathf.RoundToInt(u.MaxSanity - drainPerPointPerSec * unspentPoints * dt));
                             // Clamp current sanity
                             if (u.CurrentSanity > u.MaxSanity) u.CurrentSanity = u.MaxSanity;
                         }
@@ -217,7 +217,6 @@ namespace KindredSiege.Battle
                     for (int i = 0; i < t1Units.Count && i < t1Zone.Count; i++)
                     {
                         grid.PlaceUnit(t1Units[i], t1Zone[Random.Range(0, t1Zone.Count)]);
-                        t1Units[i].transform.position = t1Units[i].SpawnPosition; // Snap them instantly
                     }
 
                     var t2Zone = grid.GetTeam2Zone();
@@ -225,7 +224,6 @@ namespace KindredSiege.Battle
                     for (int i = 0; i < t2Units.Count && i < t2Zone.Count; i++)
                     {
                         grid.PlaceUnit(t2Units[i], t2Zone[Random.Range(0, t2Zone.Count)]);
-                        t2Units[i].transform.position = t2Units[i].SpawnPosition;
                     }
                     Debug.Log("[Mutation] Currents Shift! All unit positions randomized.");
                 }
@@ -242,8 +240,6 @@ namespace KindredSiege.Battle
                         var gridPos = grid.WorldToGrid(u.transform.position);
                         if (gridPos.y <= 1)
                         {
-                            u.ModifySanity(-2f * dt, "DrownedGround"); // Wait, ModifySanity takes an int natively in this codebase, but we pass continuous.
-                            // To handle float properly without rewriting UnitController signature:
                             u._drownedGroundAccumulator += 2f * dt;
                             if (u._drownedGroundAccumulator >= 1f)
                             {

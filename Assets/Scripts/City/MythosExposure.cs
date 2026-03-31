@@ -12,11 +12,11 @@ namespace KindredSiege.City
     /// has seeped into the player's stronghold. It rises through battle defeats,
     /// unit losses, and time. At thresholds it applies escalating penalties:
     ///
-    ///   0–24   (Calm)      — no effect
-    ///   25–49  (Unsettled) — all units start battles with -5 sanity
-    ///   50–74  (Haunted)   — -10 sanity, Dread Contest power +2 for all rivals
-    ///   75–99  (Corrupted) — -15 sanity, passive sanity drain ticks in city phase
-    ///   100    (Consumed)  — city falls; campaign ends in defeat
+    ///   0–24   (Initiate)  — no effect
+    ///   25–49  (Acolyte)   — all units start battles with -5 sanity
+    ///   50–74  (Scholar)   — -10 sanity, Dread Contest power +2 for all rivals
+    ///   75–99  (Adept)     — -15 sanity, passive sanity drain ticks in city phase
+    ///   100    (Seer)      — city falls; campaign ends in defeat
     ///
     ///
     /// Mythos Exposure is a ONE-WAY ticking clock. It persists across runs via PlayerPrefs.
