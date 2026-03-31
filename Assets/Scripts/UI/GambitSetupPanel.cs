@@ -65,19 +65,19 @@ namespace KindredSiege.UI
         private void Start()
         {
             _battle = BattleManager.Instance;
-            if (GameManager.Instance != null)
-                GameManager.Instance.OnStateChanged += OnGameStateChanged;
+            if (KindredSiege.Core.GameManager.Instance != null)
+                KindredSiege.Core.GameManager.Instance.OnStateChanged += OnGameStateChanged;
         }
 
         private void OnDestroy()
         {
-            if (GameManager.Instance != null)
-                GameManager.Instance.OnStateChanged -= OnGameStateChanged;
+            if (KindredSiege.Core.GameManager.Instance != null)
+                KindredSiege.Core.GameManager.Instance.OnStateChanged -= OnGameStateChanged;
         }
 
-        private void OnGameStateChanged(GameManager.GameState from, GameManager.GameState to)
+        private void OnGameStateChanged(KindredSiege.Core.GameManager.GameState from, KindredSiege.Core.GameManager.GameState to)
         {
-            if (to == GameManager.GameState.PreBattle)
+            if (to == KindredSiege.Core.GameManager.GameState.PreBattle)
                 Show();
         }
 
@@ -179,8 +179,8 @@ namespace KindredSiege.UI
                 "BEGIN EXPEDITION", _buttonStyle))
             {
                 Hide();
-                if (GameManager.Instance != null)
-                    GameManager.Instance.LaunchBattle();
+                if (KindredSiege.Core.GameManager.Instance != null)
+                    KindredSiege.Core.GameManager.Instance.LaunchBattle();
                 else
                     _battle?.StartBattle();
             }

@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(grep -n \"class RivalryEngine\\\\|class RivalEncounterSystem\" \"C:/Users/jacob/KindredSiege-Clean/Assets/Scripts/Rivalry/\"*.cs)",
+      "Bash(xargs grep:*)",
+      "Bash(xargs wc:*)",
+      "Bash(grep -n \"FatigueSystem.Rest\" Assets/Scripts/**/*.cs)"
+    ]
+  }
+}
