@@ -26,6 +26,7 @@ jobs:
             Library-
 
       - name: Build
+        id: build
         uses: game-ci/unity-builder@v4
         env:
           UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
@@ -34,19 +35,25 @@ jobs:
         with:
           targetPlatform: StandaloneWindows64
 
+      - name: Print build errors on failure
+        if: failure() && steps.build.outcome == 'failure'
+        run: |
+          echo "=== Searching for compiler errors ==="
+          find /github/workspace -name "*.log" -exec grep -l "error CS" {} \; 2>/dev/null || true
+          find /home -name "Editor.log" 2>/dev/null || true
+          # Print any .log files that contain compiler errors
+          for f in $(find / -name "*.log" -size +0 2>/dev/null | head -20); do
+            if grep -q "error CS" "$f" 2>/dev/null; then
+              echo "=== $f ==="
+              grep "error CS" "$f"
+            fi
+          done
+          # Also check stdout captured by game-ci
+          echo "=== Build step output ==="
+
       - name: Upload build
         if: success()
         uses: actions/upload-artifact@v4
         with:
           name: KindredSiege-Windows
           path: build
-
-      - name: Upload build log on failure
-        if: failure()
-        uses: actions/upload-artifact@v4
-        with:
-          name: build-log
-          path: |
-            /github/workspace/Builds/
-            **/*build*.log
-            **/Editor.log
