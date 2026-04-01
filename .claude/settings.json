@@ -4,7 +4,12 @@
       "Bash(grep -n \"class RivalryEngine\\\\|class RivalEncounterSystem\" \"C:/Users/jacob/KindredSiege-Clean/Assets/Scripts/Rivalry/\"*.cs)",
       "Bash(xargs grep:*)",
       "Bash(xargs wc:*)",
-      "Bash(grep -n \"FatigueSystem.Rest\" Assets/Scripts/**/*.cs)"
+      "Bash(grep -n \"FatigueSystem.Rest\" Assets/Scripts/**/*.cs)",
+      "Bash(git rm:*)",
+      "Bash(git ls-tree:*)",
+      "WebFetch(domain:github.com)",
+      "Bash(grep -v \"//\")",
+      "Bash(grep \"\\\\.cs$\")"
     ]
   }
 }
