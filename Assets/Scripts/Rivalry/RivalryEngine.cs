@@ -302,12 +302,13 @@ namespace KindredSiege.Rivalry
                 Debug.Log($"[Rivalry] {rival.FullName} developed MarksmanHunter after being scarred.");
             }
 
-            // Defeated by Ritual cards — develops eldritch resistance
-            if (playerUnitTypes.Contains("ritual") && !rival.Traits.Contains(RivalTraitType.EldritchResistant))
+            // Defeated by Occultists — develops eldritch resistance
+            if (playerUnitTypes.Contains("occultist") && !rival.Traits.Contains(RivalTraitType.EldritchResistant))
             {
                 rival.Traits.Add(RivalTraitType.EldritchResistant);
                 rival.Memory.DefeatedByRitualCards = true;
-                rival.Memory.EncounterLog.Add("Adapted to eldritch attacks. Now resistant.");
+                rival.Memory.EncounterLog.Add("Adapted to eldritch attacks. Now resistant to sanity damage.");
+                Debug.Log($"[Rivalry] {rival.FullName} developed EldritchResistant after being scarred by Occultists.");
             }
         }
 

@@ -46,6 +46,7 @@ namespace KindredSiege.Battle
         private bool  _stalwartActive      = false;  // Immune to further sanity loss
         private float _resoluteTimer       = 0f;     // Invincibility window (Resolute virtue)
         private float _courageousAuraCooldown = 0f;
+        public string LastDefeatReason { get; private set; } = "";
 
         private const float ResoluteShieldDuration  = 10f;
         private const float CourageousAuraInterval  = 8f;
@@ -182,6 +183,10 @@ namespace KindredSiege.Battle
         public HashSet<string> ActiveBondPartners { get; private set; } = new();
         /// <summary>Total damage bonus from all live bonds. Decreased when a partner dies.</summary>
         public float  ActiveBondDamageBonus { get; set; } = 0f;
+        private float _bondProximityTimer = 0f;
+        private const float BondProximityInterval = 10f;
+        private const int   BondProximitySanity   = 2;
+        private const float BondProximityRange    = 5f;
 
         // ─── Mutations ───
         private float _fearIsPowerBonusTimer = 0f;
@@ -334,6 +339,7 @@ namespace KindredSiege.Battle
             // Bond fields reset each battle (ApplyBondEffects re-sets them)
             ActiveBondPartners.Clear();
             ActiveBondDamageBonus = 0f;
+            _bondProximityTimer   = BondProximityInterval;
 
             // Apply talent stat boosts and set runtime flags
             TalentSystem.ApplyTalents(this);
@@ -524,6 +530,26 @@ namespace KindredSiege.Battle
                 }
             }
 
+            // ── Bond proximity sanity (GDD §Unit Bonds) ──
+            if (ActiveBondPartners.Count > 0 && battleContext != null)
+            {
+                _bondProximityTimer -= dt;
+                if (_bondProximityTimer <= 0f)
+                {
+                    _bondProximityTimer = BondProximityInterval;
+                    foreach (var ally in battleContext.Allies)
+                    {
+                        if (ally == null || !ally.IsAlive || ally == this) continue;
+                        if (!ActiveBondPartners.Contains(ally.UnitName)) continue;
+                        if (Vector3.Distance(transform.position, ally.transform.position) <= BondProximityRange)
+                        {
+                            ModifySanity(BondProximitySanity, "BondProximity");
+                            break; // one pulse per tick regardless of how many partners are near
+                        }
+                    }
+                }
+            }
+
             // ── Sanity hesitation (GDD §5.1) + fatigue hesitation (GDD §11.4) ──
             float hesitation = SanitySystem.GetHesitationChance(SanityState) + ExtraHesitationFromFatigue;
 
@@ -606,6 +632,8 @@ namespace KindredSiege.Battle
         /// </summary>
         public void ModifySanity(int delta, string reason)
         {
+            if (delta < 0) LastDefeatReason = reason;
+
             // Talent: Armour Sanity Absorb (Warden F3) — first 5 sanity damage blocked by armour, once
             if (delta < 0 && TalentArmourSanityAbsorb && Armour > 0)
             {
@@ -641,6 +669,14 @@ namespace KindredSiege.Battle
                 if (_currentHazard == HazardType.EldritchGround)
                     comp *= 2f;
                 delta = Mathf.RoundToInt(delta * comp);
+
+                // EldritchResistant: rival trait — halves all eldritch sanity damage
+                var rival = BattleManager.Instance?.GetActiveRival();
+                if (rival != null && UnitName == rival.FullName &&
+                    rival.Traits.Contains(KindredSiege.Rivalry.RivalTraitType.EldritchResistant))
+                {
+                    delta /= 2;
+                }
             }
 
             int oldSanity = CurrentSanity;
@@ -1065,6 +1101,9 @@ namespace KindredSiege.Battle
             // Vessel cannot be healed — it is sustained by something else
             if (unitData != null && unitData.CannotBeHealed) return;
 
+            // Enforce Phobia Healing Prevention (GDD §5.5)
+            if (ActivePhobia != PhobiaType.None) return;
+
             // Mutation: Iron Blood (Flesh) - healing is halved
             if (KindredSiege.Modifiers.MutationEngine.Instance != null &&
                 KindredSiege.Modifiers.MutationEngine.Instance.HasMutation(KindredSiege.Modifiers.MutationType.IronBlood))
@@ -1105,6 +1144,8 @@ namespace KindredSiege.Battle
                     .FirstOrDefault();
                 nearest?.TakeDamage(30, this);
             }
+            if (killedBy != null) LastDefeatReason = "Violence";
+            else if (string.IsNullOrEmpty(LastDefeatReason)) LastDefeatReason = "Unknown";
 
             EventBus.Publish(new UnitDefeatedEvent
             {
@@ -1112,9 +1153,9 @@ namespace KindredSiege.Battle
                 UnitName         = UnitName,
                 UnitType         = UnitType,
                 TeamId           = TeamId,
-                DefeatedByUnitId = killedBy?.UnitId ?? -1
+                DefeatedByUnitId = killedBy?.UnitId ?? -1,
+                DefeatReason     = LastDefeatReason
             });
-
             gameObject.SetActive(false);
         }
 
