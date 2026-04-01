@@ -91,6 +91,7 @@ namespace KindredSiege.Core
         public string UnitType;
         public int TeamId;
         public int DefeatedByUnitId;
+        public string DefeatReason;
     }
 
     public struct UnitActionEvent
@@ -207,6 +208,7 @@ namespace KindredSiege.Core
         public string UnitType;
         public int    ExpeditionCount;
         public int    MercyTokensAvailable;
+        public string DefeatReason;
     }
 
     // Raised when the player resolves the Mercy Decision (spend token or let die).
@@ -214,6 +216,7 @@ namespace KindredSiege.Core
     {
         public int  UnitId;
         public bool TokenSpent; // true = revived, false = permanent death
+        public string DefeatReason;
     }
 
     // --- Forbidden Knowledge Events (GDD §5.4) ---

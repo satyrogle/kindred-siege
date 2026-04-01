@@ -376,8 +376,9 @@ namespace KindredSiege.Battle
 
             EventBus.Publish(new MercyDecisionResolvedEvent
             {
-                UnitId     = targetUnit.UnitId,
-                TokenSpent = true
+                UnitId       = targetUnit.UnitId,
+                TokenSpent   = true,
+                DefeatReason = _pendingMercyReason
             });
 
             Debug.Log($"[Directives] Mercy Token used on {targetUnit.UnitName}. Tokens remaining: {MercyTokens}");
@@ -388,13 +389,17 @@ namespace KindredSiege.Battle
         // MERCY DECISION PAUSE
         // ════════════════════════════════════════════
 
+        private string _pendingMercyReason = "";
+
         /// <summary>
         /// Called by BattleManager when a unit hits 0 HP.
         /// Raises MercyDecisionRequiredEvent for the HUD to pause and prompt the player.
         /// </summary>
-        public void RaiseMercyDecision(UnitController unit)
+        public void RaiseMercyDecision(UnitController unit, string reason)
         {
             if (unit == null) return;
+
+            _pendingMercyReason = reason;
 
             MercyPauseActive = true;
             MercyPauseUnit   = unit;
@@ -408,7 +413,8 @@ namespace KindredSiege.Battle
                 UnitName               = unit.UnitName,
                 UnitType               = unit.UnitType,
                 ExpeditionCount        = unit.Data != null ? unit.Data.ExpeditionCount : 0,
-                MercyTokensAvailable   = MercyTokens
+                MercyTokensAvailable   = MercyTokens,
+                DefeatReason           = reason
             });
 
             Debug.Log($"[Mercy] Decision required for {unit.UnitName}. Tokens: {MercyTokens}");
@@ -421,8 +427,9 @@ namespace KindredSiege.Battle
 
             EventBus.Publish(new MercyDecisionResolvedEvent
             {
-                UnitId     = MercyPauseUnit.UnitId,
-                TokenSpent = false
+                UnitId       = MercyPauseUnit.UnitId,
+                TokenSpent   = false,
+                DefeatReason = _pendingMercyReason
             });
 
             ResolveMercyPause(tokenSpent: false);
@@ -480,7 +487,7 @@ namespace KindredSiege.Battle
 
             var unit = FindUnitById(evt.UnitId);
             if (unit != null)
-                RaiseMercyDecision(unit);
+                RaiseMercyDecision(unit, evt.DefeatReason);
         }
 
         private void OnMercyResolved(MercyDecisionResolvedEvent evt)

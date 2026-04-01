@@ -233,7 +233,7 @@ namespace KindredSiege.UI
             }
 
             // Light Rest button
-            bool canLight = currentGold >= LightRestCost && data.FatigueLevel > 0;
+            bool canLight = currentGold >= LightRestCost && data.FatigueLevel > 0 && data.ActivePhobia == PhobiaType.None;
             GUI.enabled = canLight;
             if (GUI.Button(new Rect(btnX, rowY + 20, BtnW, BtnH),
                 $"Light Rest\n({LightRestCost}G)", _buttonStyle))
@@ -249,7 +249,7 @@ namespace KindredSiege.UI
             GUI.enabled = true;
 
             // Full Rest button
-            bool canFull = currentGold >= FullRestCost && (data.FatigueLevel > 0 || data.MaxSanityPenalty > 0);
+            bool canFull = currentGold >= FullRestCost && (data.FatigueLevel > 0 || data.MaxSanityPenalty > 0) && data.ActivePhobia == PhobiaType.None;
             GUI.enabled = canFull;
             if (GUI.Button(new Rect(btnX + BtnW + 8, rowY + 20, BtnW, BtnH),
                 $"Full Rest\n({FullRestCost}G)", _buttonStyle))

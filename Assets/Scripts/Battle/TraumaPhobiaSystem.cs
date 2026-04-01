@@ -50,7 +50,7 @@ namespace KindredSiege.Battle
             if (unit == null || unit.Data == null) return;
             if (unit.Data.ActivePhobia != PhobiaType.None) return; // Already scarred
 
-            PhobiaType phobia = RollPhobia(unit);
+            PhobiaType phobia = RollPhobia(unit, evt.DefeatReason);
             unit.Data.ActivePhobia = phobia;
 
             EventBus.Publish(new PhobiaGainedEvent
@@ -69,17 +69,31 @@ namespace KindredSiege.Battle
 
         public static void CurePhobia(UnitData unit)
         {
-            if (unit != null)
+            if (unit != null && unit.ActivePhobia != PhobiaType.None)
+            {
+                Debug.Log($"[Sanatorium] {unit.UnitName} has been treated. {unit.ActivePhobia} cured.");
                 unit.ActivePhobia = PhobiaType.None;
+            }
         }
 
         /// <summary>
-        /// Roll a phobia type for the saved unit.
-        /// Class-specific weights lean toward narratively fitting phobias,
-        /// but any class can gain any phobia on bad luck.
+        /// Roll a phobia type for the saved unit based on the trigger cause.
+        /// If the cause is unknown, falls back to class-specific weighted rolls.
         /// </summary>
-        public static PhobiaType RollPhobia(UnitController unit)
+        public static PhobiaType RollPhobia(UnitController unit, string triggerReason = "")
         {
+            if (!string.IsNullOrEmpty(triggerReason))
+            {
+                string r = triggerReason.ToLowerInvariant();
+                if (r.Contains("violence") || r.Contains("attack") || r.Contains("damage")) return PhobiaType.ViolencePhobia;
+                if (r.Contains("eldritch") || r.Contains("ritual") || r.Contains("horror")) return PhobiaType.EldritchPhobia;
+                if (r.Contains("hazard") || r.Contains("drowned") || r.Contains("terrain") || r.Contains("trap")) return PhobiaType.Claustrophobia;
+                if (r.Contains("blood") || r.Contains("death") || r.Contains("killed") || r.Contains("ally")) return PhobiaType.BloodPhobia;
+                if (r.Contains("dark") || r.Contains("shadow") || r.Contains("night")) return PhobiaType.DarkPhobia;
+                if (r.Contains("failure") || r.Contains("negated") || r.Contains("block")) return PhobiaType.FailurePhobia;
+                if (r.Contains("solitude") || r.Contains("abandon") || r.Contains("alone")) return PhobiaType.SolitudePhobia;
+            }
+
             // Unit-type weighted rolls — class personality informs the scar
             string type = unit?.UnitType ?? "";
 
@@ -156,12 +170,12 @@ namespace KindredSiege.Battle
         /// Force-assign a phobia from a Dread Contest (GDD §6.2 — damage > 35).
         /// Only fires if the unit has no phobia yet. Publishes PhobiaGainedEvent.
         /// </summary>
-        public static void ForceRollPhobia(UnitController unit)
+        public static void ForceRollPhobia(UnitController unit, string triggerReason = "dread")
         {
             if (unit == null || unit.Data == null) return;
             if (unit.Data.ActivePhobia != PhobiaType.None) return;
 
-            PhobiaType phobia = RollPhobia(unit);
+            PhobiaType phobia = RollPhobia(unit, triggerReason);
             unit.Data.ActivePhobia = phobia;
 
             EventBus.Publish(new PhobiaGainedEvent
