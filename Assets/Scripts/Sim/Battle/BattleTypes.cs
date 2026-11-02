@@ -770,6 +770,9 @@ namespace KindredSiege.Sim.Battle
 
         /// From rules 28 (BattleSimulation.Shade.cs), Echo: what his echo holds this Unleash, and the first one he recorded.
         public int EchoStored { get; internal set; }
+
+        /// From rules 34 (BattleSimulation.DuoMoves.cs): how many percent a Gorge star has grown this fight.
+        public int GorgePercent { get; internal set; }
         public string EchoTargetId { get; internal set; } = string.Empty;
 
         /// Every status on this fighter (Statuses.cs; DESIGN_LOCKS, "Builds: one theme per Pal", step 1, 30 Oct 2026): panic,

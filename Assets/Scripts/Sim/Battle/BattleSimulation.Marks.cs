@@ -136,6 +136,8 @@ namespace KindredSiege.Sim.Battle
             }
             // Crowned Marks (rules 30): the star who set it off casts again.
             if (_duosOn) DuoBurst(by);
+            // Chain Reaction (rules 34, BattleSimulation.DuoMoves.cs): it splashes on.
+            if (_duoMovesOn) Chain(by, target, mark);
         }
 
         // A Stasis burst: a big move he was winding up starts over, from its whole wind up, as if he had only begun it: his

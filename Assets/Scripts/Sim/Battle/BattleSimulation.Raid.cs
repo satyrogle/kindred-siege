@@ -54,7 +54,9 @@ namespace KindredSiege.Sim.Battle
             // From rules 22 your chief spell costs no points: the parry meter pays for it (BattleSimulation.Meter.cs).
             if (directive == Directive.Eclipse && MeterFor(side)) return 0;
             // From rules 23 the cheaper hook (BattleSimulation.Shade.cs).
-            return Cheaper(side, _raidOn && side == 0 && directive == Directive.Hold ? 0 : Directives.Cost(directive));
+            int cost = Cheaper(side, _raidOn && side == 0 && directive == Directive.Hold ? 0 : Directives.Cost(directive));
+            // Blood Parry's catch (rules 34, BattleSimulation.DuoMoves.cs).
+            return _duoMovesOn ? BloodParryCost(side, directive, cost) : cost;
         }
 
         /// What this order costs this side right now, in points, after every rule that changes it: the raid chief's free Hold,

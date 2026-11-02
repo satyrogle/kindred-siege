@@ -190,6 +190,8 @@ namespace KindredSiege.Sim.Learning
             // From rules 30 the duos held (Campaign.Duos.cs).
             if (rules < PalDuoRules) return kit;
             kit = kit.WithDuos(_duos);
+            // From rules 34 the duos' streak (Campaign.Duos.cs).
+            if (rules >= DuoMovesRules && _duoLevel > 0) kit = kit.WithDuoLevel(_duoLevel);
             // From rules 33 each ranked fighter's vow.
             if (rules < VowFlavourRules) return kit;
             var vows = new List<KeyValuePair<string, StarVow>>();

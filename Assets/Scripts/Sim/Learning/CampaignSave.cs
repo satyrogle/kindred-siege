@@ -6,7 +6,8 @@ using KindredSiege.Sim.Battle;
 
 namespace KindredSiege.Sim.Learning
 {
-    /// Writes a campaign down and reads it back. Version 31 (2 Nov 2026, the Whisperer's vows, campaign rules 33) keeps each
+    /// Writes a campaign down and reads it back. Version 32 (2 Nov 2026, the duos that change a move, campaign rules 34) keeps
+    /// the duos' streak (duolevel). Version 31 (2 Nov 2026, the Whisperer's vows, campaign rules 33) keeps each
     /// ranked fighter's vow (vow: the fighter and the Battle.StarVow), and a Whisperer pick on offer can carry one (whisperpick's
     /// seventh field, written only when set). Version 30 (1 Nov 2026, the Pals' duos, campaign rules 30) keeps the run's duos
     /// held and the ones a card has shown (duo: two masks, one bit a Battle.PalDuo), and can hold a duo on a card
@@ -71,7 +72,7 @@ namespace KindredSiege.Sim.Learning
     public static partial class CampaignSave
     {
         public const string Header = "kindred-siege-campaign";
-        public const int Version = 31;
+        public const int Version = 32;
 
         public const string OldSaveNote =
             "This save is from the old respect campaign, so you are back at camp. What the tribes learned about you and your codex are kept.";
@@ -87,7 +88,7 @@ namespace KindredSiege.Sim.Learning
         {
             "joined", "fighter", "assist", "gear", "piece", "spoils", "grudge", "run", "road", "feat", "offer", "fight", "proof", "squad", "order",
             "bounty", "beaten", "promoted", "favour", "favouroffer", "routepick", "beast", "lives", "bond", "streak", "clearroad",
-            "roadpals", "palroad", "talent", "route", "pair", "rank", "slot2", "habitup", "whisperpick", "feed", "hedge", "duo", "vow"
+            "roadpals", "palroad", "talent", "route", "pair", "rank", "slot2", "habitup", "whisperpick", "feed", "hedge", "duo", "vow", "duolevel"
         };
 
         public static string Write(Campaign c)
@@ -173,6 +174,8 @@ namespace KindredSiege.Sim.Learning
             if (c.HedgesUsed > 0) Line(b, "hedge", N(c.HedgesUsed));
             // The duos (version 30, rules 30): held, and shown.
             if (c.DuoMask != 0 || c.DuosShownMask != 0) Line(b, "duo", N(c.DuoMask), N(c.DuosShownMask));
+            // The duos' streak (version 32, rules 34).
+            if (c.DuoLevel > 0) Line(b, "duolevel", N(c.DuoLevel));
             for (int i = 0; i < c.ShadeRoutes.Count; i++) Line(b, "route", N((int)c.ShadeRoutes[i].Route), N(c.ShadeRoutes[i].Form));
             for (int i = 0; i < c.Habits.Count; i++) Line(b, "palhabit", N((int)c.Habits[i].Habit));
             // The habits the run upgraded (version 27, rules 24).
@@ -738,6 +741,10 @@ namespace KindredSiege.Sim.Learning
                     case "rank":
                         if (version < 26 || f.Length != 3 || !TryInt(f[2], out int fighterRank) || !c.RestoreRank(f[1], fighterRank))
                             return Fail(where + "bad or repeated rank record.", out failure);
+                        break;
+                    case "duolevel":
+                        if (version < 32 || f.Length != 2 || !TryInt(f[1], out int duoLevel) || !c.RestoreDuoLevel(duoLevel))
+                            return Fail(where + "bad duo streak record.", out failure);
                         break;
                     case "vow":
                         // A ranked fighter's vow (version 31), after his rank.

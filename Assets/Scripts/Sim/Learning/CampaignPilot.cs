@@ -70,6 +70,11 @@ namespace KindredSiege.Sim.Learning
         /// style, how well a player parries, for measuring duels.
         public int DuelParryPermille { get; set; }
 
+        /// In any fight, how often in a thousand the pilot parries a beat coming at it, a Hold on the tick before it, one roll a
+        /// beat; 0, the default, never, so every pilot plays as before. For measuring what answering big moves is worth (the
+        /// rules 34 duos' streak).
+        public int ParryPermille { get; set; }
+
         /// Which offer to take.
         public int PickOffer(Campaign c)
         {
@@ -143,6 +148,21 @@ namespace KindredSiege.Sim.Learning
                 {
                     if (!threat.ParryWindow || threat.BeatTicks != 1) continue;
                     if (_parryRng.Next(1000) < DuelParryPermille && fight.TryOrder(Directive.Hold, null, out _))
+                    {
+                        _lastHold = t;
+                        return;
+                    }
+                    break;
+                }
+            }
+
+            // Any fight: Hold on the tick before a beat, ParryPermille of the time, one roll a beat.
+            if (ParryPermille > 0 && (_lastHold < 0 || t - _lastHold >= RaidRules.MashTicks))
+            {
+                foreach (Threat threat in sim.Threats(0))
+                {
+                    if (!threat.ParryWindow || threat.BeatTicks != 1) continue;
+                    if (_parryRng.Next(1000) < ParryPermille && fight.TryOrder(Directive.Hold, null, out _))
                     {
                         _lastHold = t;
                         return;

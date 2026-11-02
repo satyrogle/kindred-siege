@@ -131,7 +131,15 @@ namespace KindredSiege.Sim.Learning
         DuoGorgedBursts = 76,
         DuoShadowStar = 77,
         DuoFattenedStar = 78,
-        DuoGorgedTricks = 79
+        DuoGorgedTricks = 79,
+
+        // From rules 34 the duos are these (Battle.PalDuo.BloodParry to Gorge), in the same order.
+        DuoBloodParry = 80,
+        DuoChainReaction = 81,
+        DuoExecutioner = 82,
+        DuoEndlessUnleash = 83,
+        DuoShadowTwin = 84,
+        DuoGorge = 85
     }
 
     /// One of the Whisperer's picks on offer (rules 24): its kind, and the fighter it ranks up, the pair it sets or the habit it
@@ -316,7 +324,7 @@ namespace KindredSiege.Sim.Learning
         /// True for a duo pick (rules 30).
         public static bool IsDuo(Favour favour)
         {
-            return favour >= Favour.DuoCrownedMarks && favour <= Favour.DuoGorgedTricks;
+            return favour >= Favour.DuoCrownedMarks && favour <= Favour.DuoGorge;
         }
 
         /// The duo a duo pick holds; None for any other favour.
@@ -338,10 +346,16 @@ namespace KindredSiege.Sim.Learning
             {
                 case PalDuo.CrownedMarks:
                 case PalDuo.MarkedTricks:
-                case PalDuo.GorgedBursts: return Pal.Butcher;
+                case PalDuo.GorgedBursts:
+                case PalDuo.BloodParry:
+                case PalDuo.ChainReaction:
+                case PalDuo.Executioner: return Pal.Butcher;
                 case PalDuo.ShadowStar:
-                case PalDuo.FattenedStar: return Pal.Whisperer;
-                case PalDuo.GorgedTricks: return Pal.Shade;
+                case PalDuo.FattenedStar:
+                case PalDuo.ShadowTwin:
+                case PalDuo.Gorge: return Pal.Whisperer;
+                case PalDuo.GorgedTricks:
+                case PalDuo.EndlessUnleash: return Pal.Shade;
                 default: return Pal.None;
             }
         }
@@ -350,12 +364,18 @@ namespace KindredSiege.Sim.Learning
         {
             switch (duo)
             {
-                case PalDuo.CrownedMarks: return Pal.Whisperer;
+                case PalDuo.CrownedMarks:
+                case PalDuo.Executioner: return Pal.Whisperer;
                 case PalDuo.MarkedTricks:
-                case PalDuo.ShadowStar: return Pal.Shade;
+                case PalDuo.ShadowStar:
+                case PalDuo.BloodParry:
+                case PalDuo.ShadowTwin: return Pal.Shade;
                 case PalDuo.GorgedBursts:
                 case PalDuo.FattenedStar:
-                case PalDuo.GorgedTricks: return Pal.Glutton;
+                case PalDuo.GorgedTricks:
+                case PalDuo.ChainReaction:
+                case PalDuo.EndlessUnleash:
+                case PalDuo.Gorge: return Pal.Glutton;
                 default: return Pal.None;
             }
         }

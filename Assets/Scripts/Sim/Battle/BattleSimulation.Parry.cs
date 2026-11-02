@@ -361,6 +361,8 @@ namespace KindredSiege.Sim.Battle
             // From rules 26 every parry hits him back for the move's damage, once the tick's moves are done; counter is it
             // when the caller knows it, else his heavy blow (BattleSimulation.Tight.cs).
             if (_tightOn) OweCounter(doer, counter);
+            // Blood Parry (rules 34, BattleSimulation.DuoMoves.cs): the marks on him burst.
+            if (_duoMovesOn) BloodParry(facing, doer);
             theirs.HoldTicks = 0;
             theirs.LastParryTick = _tick;
             theirs.ParriedCasterId = doer.Id;

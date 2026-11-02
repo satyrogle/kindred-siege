@@ -227,7 +227,8 @@ namespace KindredSiege.Sim.Tests
         [Test]
         public void ACardShowsTheDuoOnceTheRunHoldsBothPalsAndItSavesAndPlays()
         {
-            var easy = new CampaignTuning { EnemyScaleTier1 = 40 };
+            // The first six duos show up to rules 33; from 34 the six that change a move take their place (DuoMoveTests).
+            var easy = new CampaignTuning { EnemyScaleTier1 = 40, RulesCap = Campaign.VowFlavourRules };
             bool seen = false;
             for (ulong seed = 6600; seed < 6660 && !seen; seed++)
             {

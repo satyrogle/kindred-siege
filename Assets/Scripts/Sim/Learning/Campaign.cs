@@ -626,7 +626,10 @@ namespace KindredSiege.Sim.Learning
         /// 33 those, the Whisperer's vows and the Butcher's flavour fights (Jacob in chat, 2 Nov 2026: "whisperer - 1", "butcher
         /// - 1 and 2"; Battle.FightRules.Vows and MarksOnHits; VowFlavourRules): a rank 2 fighter takes one of his class's two
         /// vows from her card, each Butcher fight offers one flavour, and a combo's wearer marks with every blow.
-        public const int RulesVersion = 33;
+        /// 34 those and the duos that change a move (Jacob in chat, 2 Nov 2026: "merge first, then build the duos on top. Go";
+        /// Battle.FightRules.DuoMoves; DuoMovesRules): six new duos, each needing one exact pick from each of its Pals, free to
+        /// take, growing with the streak of big moves answered, each with its catch.
+        public const int RulesVersion = 34;
         public const int SquadScreenRules = 14;
         public const int ClearRoadRules = 13;
 
@@ -728,6 +731,10 @@ namespace KindredSiege.Sim.Learning
         /// The campaign rules version from which the Whisperer's vows and the Butcher's flavour fights play (Jacob in chat, 2 Nov
         /// 2026: "whisperer - 1", "butcher - 1 and 2"; Campaign.Vows.cs, Battle.BattleSimulation.Vows.cs and Flavours.cs).
         public const int VowFlavourRules = 33;
+
+        /// The campaign rules version from which the duos are the six that change a move (Campaign.Duos.cs, Battle.BattleSimulation
+        /// .DuoMoves.cs): Blood Parry, Chain Reaction, Executioner, Endless Unleash, Shadow Twin and Gorge.
+        public const int DuoMovesRules = 34;
 
         /// Whether this run's roads carry a Pal on every fight (fix 5): set when the run starts under PalRoadRules, and kept
         /// with the run, so its roads come back the same when it loads.
@@ -1508,6 +1515,12 @@ namespace KindredSiege.Sim.Learning
         {
             if (!CanTakeFavour(choice, out why)) return false;
             Favour favour = _favourOffer.Choices[choice];
+            // From rules 34 a duo is free: it leaves the card standing (Campaign.Duos.cs).
+            if (FavourRules.IsDuo(favour) && DuoRules.IsMove(FavourRules.DuoOf(favour)) && DuoMovesRun)
+            {
+                TakeFreeDuo(choice);
+                return true;
+            }
             _materials -= _spoilsMaterials;
             string name = FavourRules.Name(favour);
             string pals = FavourRules.PalName(FavourRules.PalOf(favour));
@@ -1555,7 +1568,7 @@ namespace KindredSiege.Sim.Learning
         {
             FavourOffer offer = MakePalOffer(node, rules);
             // From rules 30 a card can show a duo of its Pal as one more pick (Campaign.Duos.cs).
-            return rules >= PalDuoRules ? WithDuos(node, offer) : offer;
+            return rules >= PalDuoRules ? WithDuos(node, offer, rules) : offer;
         }
 
         // The Pal's own picks on that card.
@@ -2083,6 +2096,8 @@ namespace KindredSiege.Sim.Learning
             if (beast) _beastFights++;
             bool timedOut = EndedOnTime(record);
             bool won = Outcome(encounter.Kind, record.Winner, fight.Sim.BrokenSide, timedOut);
+            // From rules 34 the duos' streak comes back from the fight, and a lost one drops it (Campaign.Duos.cs).
+            if (fight.RulesVersion >= DuoMovesRules) StreakAfter(fight, won);
 
             var result = new EncounterResult
             {
@@ -3249,6 +3264,8 @@ namespace KindredSiege.Sim.Learning
                 if (rules >= ButcherFlavourRules) fightRules = fightRules.WithFlavours();
                 // From rules 33 the vows and marks on every hit. Last, after the flavours.
                 if (rules >= VowFlavourRules) fightRules = fightRules.WithVows();
+                // From rules 34 the duos that change a move. Last, after the vows.
+                if (rules >= DuoMovesRules) fightRules = fightRules.WithDuoMoves();
             }
             // From rules 25 a beast fight plays its moves as the approved scenes show them (Jacob, 1 Nov 2026). Last, after the
             // Whisperer.

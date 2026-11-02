@@ -128,6 +128,12 @@ namespace KindredSiege.Sim.Battle
             // 2 Crowned Marks, 0 none), and when Shadow Star can call the next.
             public int StarCastDue;
             public long ShadowStarAt;
+            // The rules 34 duos (BattleSimulation.DuoMoves.cs): the streak, Endless Unleash's stacks and whether its Unleash ran,
+            // and how long the side is still tired.
+            public int DuoLevel;
+            public int UnleashStacks;
+            public bool UnleashRan;
+            public int TiredTicks;
             public int Nerve;
             public int StartHp;
             public int NerveRemainder;
@@ -399,6 +405,8 @@ namespace KindredSiege.Sim.Battle
             // campaign rules 33.
             _vowsOn = _floorOn && _fight.Whisper && _fight.Vows;
             _marksOnHitsOn = _marksOn && _floorOn && _fight.MarksOnHits;
+            // The duos that change a move (BattleSimulation.DuoMoves.cs, campaign rules 34).
+            _duoMovesOn = _floorOn && _fight.DuoMoves;
             // Payoffs that spread (BattleSimulation.Payoffs.cs, campaign rules 20).
             _payoffsOn = _fight.Payoffs;
             // Danger (BattleSimulation.Danger.cs, campaign rules 21).
@@ -474,6 +482,8 @@ namespace KindredSiege.Sim.Battle
             for (int i = 0; i < _units.Count; i++)
                 _units[i].Cooldown = 1 + _rng.Next(_units[i].Stats.CooldownTicks);
             if (_classOn) StartSpellClocks();
+            // The rules 34 duos' streak and Shadow Twin's half health (BattleSimulation.DuoMoves.cs).
+            if (_duoMovesOn) StartDuoMoves();
             if (_kitsOn) StartKitClocks();
             if (_beastOn) StartBeast();
         }
@@ -749,11 +759,14 @@ namespace KindredSiege.Sim.Battle
                     if (_parryOn && Braced(unit)) continue; // a Thick Hide hunter you focus braces and cannot swing (BattleSimulation.Band.cs)
                     if (_kitsTwoOn && _sides[unit.Side].OverclockTicks > 0) unit.Cooldown--; // her Overclock: twice as fast
                     if (HalfSpeed(unit)) continue; // a Time Snare's half speed (BattleSimulation.Combos.cs)
+                    if (_duoMovesOn && Tired(unit)) continue; // tired after an Endless Unleash (BattleSimulation.DuoMoves.cs)
                     unit.Cooldown--;
                     if (unit.Cooldown > 0) continue;
                     Act(unit);
                     // Heavy slows a Gravity Well Warden's and Medic's turns (BattleSimulation.Combos.cs).
                     if (unit.Alive) unit.Cooldown += HeavyTurn(unit, NextCooldown(unit));
+                    // A gorged star's turns slow by half of what he grew (rules 34, BattleSimulation.DuoMoves.cs).
+                    if (_duoMovesOn && unit.Alive && unit.GorgePercent > 0) unit.Cooldown += NextCooldown(unit) * unit.GorgePercent / 200;
                     CheckWipe();
                 }
 
@@ -761,6 +774,8 @@ namespace KindredSiege.Sim.Battle
                 if (_whisperOn && !Stopped) TickWhisper();
                 // A star's spell a duo called (BattleSimulation.Duos.cs, rules 30).
                 if (_duosOn && !Stopped) TickDuos();
+                // The rules 34 duos' Endless Unleash (BattleSimulation.DuoMoves.cs).
+                if (_duoMovesOn && !Stopped) TickDuoMoves();
 
                 // Class spells (BattleSimulation.Class.cs, 20 Oct 2026): aims run on, and a finished one fires.
                 if (_classOn && !Stopped) AdvanceAims();
@@ -1026,6 +1041,7 @@ namespace KindredSiege.Sim.Battle
                     if (_whisperOn) AppendWhisperSide(b, state);
                     if (_shadeOn) AppendShadeSide(b, state);
                     if (_duosOn) AppendDuoSide(b, state);
+                    if (_duoMovesOn) AppendDuoMovesSide(b, state);
                     if (_nerveOn)
                     {
                         b.Field("nerve", state.Nerve);
@@ -1277,6 +1293,7 @@ namespace KindredSiege.Sim.Battle
                         // And the Shade's forms, only where they play (rules 28).
                         if (_shadeOn) AppendShadeUnit(b, u);
                         if (_gluttonOn) AppendGluttonUnit(b, u);
+                        if (_duoMovesOn) AppendDuoMovesUnit(b, u);
                     }
                 }
                 b.Section("events");
@@ -1981,7 +1998,8 @@ namespace KindredSiege.Sim.Battle
         private void Blow(BattleUnit attacker, BattleUnit target, int power, BlowKind kind, int comboPercent = 0)
         {
             // Under the road kit Fall Back is a pure dodge: nobody of the falling side attacks (BattleSimulation.Boosts.cs).
-            if (FallingBack(attacker.Side)) return;
+            // From rules 34 a Shadow Twin star's shadow fights on (BattleSimulation.DuoMoves.cs).
+            if (FallingBack(attacker.Side) && !(_duoMovesOn && ShadowFights(attacker))) return;
             // Rift Mine (rules 28): striking one of a side with a mine sets it off, and a blast that drops him stops the blow.
             if (_shadeOn && MineGoesOff(attacker, target)) return;
             int roll = 85 + _rng.Next(31);
@@ -2482,6 +2500,12 @@ namespace KindredSiege.Sim.Battle
                 if (_floorOn && (sourceSide == 0 || sourceSide == 1) && sourceSide != victim.Side) Fear(sourceSide, victim);
                 // Bleeder (rules 33, BattleSimulation.Vows.cs): his wound jumps on.
                 if (_vowsOn) BledOn(sourceSide, victim);
+                // Executioner and Gorge (rules 34, BattleSimulation.DuoMoves.cs).
+                if (_duoMovesOn)
+                {
+                    Executed(sourceSide, victim);
+                    Gorged(source, sourceSide, victim);
+                }
                 // A beast's part broke (BattleSimulation.Beast.cs).
                 if (_beastOn && victim.Side == _beastSide) Severed(source, sourceSide, victim);
                 // Her last Warden fell: her Lockdown wall is down for good (BattleSimulation.Skullpeak.cs).
@@ -2776,10 +2800,13 @@ namespace KindredSiege.Sim.Battle
                 _events.Insert(_events.Count - 1, e);
                 _eventHash = FnvOffset;
                 for (int i = 0; i < _events.Count; i++) HashEvent(_events[i]);
+                if (_duoMovesOn) DuoStreak(e);
                 return;
             }
             _events.Add(e);
             HashEvent(e);
+            // From rules 34 the duos' streak reads every answer and every miss (BattleSimulation.DuoMoves.cs).
+            if (_duoMovesOn) DuoStreak(e);
         }
 
         private void HashEvent(BattleEvent e)

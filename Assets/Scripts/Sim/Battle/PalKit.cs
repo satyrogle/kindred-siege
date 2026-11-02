@@ -669,7 +669,30 @@ namespace KindredSiege.Sim.Battle
         FattenedStar = 5,
 
         /// The Shade and the Glutton: her tricks hit harder for each talent held, and her route prices are halved.
-        GorgedTricks = 6
+        GorgedTricks = 6,
+
+        // From campaign rules 34 the duos are these six instead (Jacob in chat, 2 Nov 2026: "merge first, then build the duos on
+        // top. Go"; BattleSimulation.DuoMoves.cs): each turns a move into a new one, grows with the streak of big moves answered
+        // (DuoRules.MaxLevel), and has a catch.
+
+        /// The Butcher and the Shade: a parry bursts every mark on the one parried. Catch: Fall Back costs double.
+        BloodParry = 7,
+
+        /// The Butcher and the Glutton: a burst splashes its mark onto the ones beside. Catch: plain hits are smaller.
+        ChainReaction = 8,
+
+        /// The Butcher and the Whisperer: your Focus Fire target's marks jump to others when he falls. Catch: the star takes more.
+        Executioner = 9,
+
+        /// The Shade and the Glutton: each big move answered while Unleash runs makes it last longer and hit harder. Catch: when it
+        /// ends, your side is tired.
+        EndlessUnleash = 10,
+
+        /// The Whisperer and the Shade: your star's shadow keeps fighting while you Fall Back. Catch: the star has half his health.
+        ShadowTwin = 11,
+
+        /// The Whisperer and the Glutton: each kill the star makes, he grows. Catch: he slows, and his fall shakes your side.
+        Gorge = 12
     }
 
     /// The duos' numbers. Every number is a starting value, sized to the builds test (HANDOFF_LOG, 1 Nov 2026): a duo should add
@@ -677,7 +700,46 @@ namespace KindredSiege.Sim.Battle
     public static class DuoRules
     {
         /// One past the last duo.
-        public const int Count = 7;
+        public const int Count = 13;
+
+        /// The first of the rules 34 duos.
+        public const PalDuo FirstMove = PalDuo.BloodParry;
+
+        /// Whether this is one of the rules 34 duos.
+        public static bool IsMove(PalDuo duo) => duo >= FirstMove && (int)duo < Count;
+
+        /// The duos' streak: big moves answered in a row raise it to MaxLevel; one that lands in full, or a fighter falling,
+        /// drops it to 1. It carries from fight to fight.
+        public const int MaxLevel = 3;
+
+        /// Endless Unleash: each answer while Unleash runs adds this many ticks a level, and this many percent a stack.
+        public const int EndlessTicks = SimClock.TicksPerSecond;
+        public const int EndlessPercent = 10;
+
+        /// Endless Unleash's catch: your side is tired this long after an Unleash ends, at half speed.
+        public const int TiredTicks = 2 * SimClock.TicksPerSecond;
+
+        /// Chain Reaction's catch: plain hits this many percent smaller.
+        public const int ChainCutPercent = 15;
+
+        /// Chain Reaction: how many bursts deep one chain goes.
+        public const int ChainDepth = 6;
+
+        /// Executioner's catch: the star takes this many percent more.
+        public const int ExecutionerTakenPercent = 30;
+
+        /// Shadow Twin: his shadow's blows while you Fall Back, by level.
+        public const int ShadowPercent1 = 30, ShadowPercent2 = 60, ShadowPercent3 = 100;
+
+        /// Gorge: each kill grows him this many percent a level (health and blows), and his turns slow by half of it.
+        public const int GorgePercent = 5;
+
+        /// Gorge's catch: his fall costs his side this much of each fighter's nerve for each kill he ate.
+        public const int GorgeNervePerKill = 60;
+
+        /// The Burst and Whisper event details of the rules 34 duos.
+        public const string BloodParryDetail = "bloodparry", ChainDetail = "chain", ExecutionerDetail = "executioner",
+            EndlessDetail = "endless", ShadowDetail = "shadow", GorgeDetail = "gorge", LevelDetail = "duolevel";
 
         /// Crowned Marks: the star lays this many times his combo's stacks.
         public const int CrownStacks = 2;
@@ -722,6 +784,12 @@ namespace KindredSiege.Sim.Battle
                 case PalDuo.ShadowStar: return "Shadow Star";
                 case PalDuo.FattenedStar: return "Fattened Star";
                 case PalDuo.GorgedTricks: return "Gorged Tricks";
+                case PalDuo.BloodParry: return "Blood Parry";
+                case PalDuo.ChainReaction: return "Chain Reaction";
+                case PalDuo.Executioner: return "Executioner";
+                case PalDuo.EndlessUnleash: return "Endless Unleash";
+                case PalDuo.ShadowTwin: return "Shadow Twin";
+                case PalDuo.Gorge: return "Gorge";
                 default: return "None";
             }
         }
@@ -736,6 +804,12 @@ namespace KindredSiege.Sim.Battle
                 case PalDuo.ShadowStar: return "Each of the Shade's tricks also gives your star his spell at once, at most once every 3 s.";
                 case PalDuo.FattenedStar: return "Every talent you hold counts as fed on your star.";
                 case PalDuo.GorgedTricks: return "The Shade's tricks hit 15% harder for each talent you hold, and her route prices are halved.";
+                case PalDuo.BloodParry: return "Parry + marks = boom. Catch: Fall Back costs double.";
+                case PalDuo.ChainReaction: return "Burst + streak = it spreads. Catch: plain hits 15% smaller.";
+                case PalDuo.Executioner: return "Focus Fire kill + marks = they jump. Catch: your star takes 30% more.";
+                case PalDuo.EndlessUnleash: return "Unleash + answers = it keeps going. Catch: tired when it ends.";
+                case PalDuo.ShadowTwin: return "Fall Back + star = his shadow fights on. Catch: star at half health.";
+                case PalDuo.Gorge: return "Star kill = star grows. Catch: he slows, and his fall shakes you.";
                 default: return string.Empty;
             }
         }
@@ -772,6 +846,7 @@ namespace KindredSiege.Sim.Battle
             Array.Copy(routes._talents, _talents, _talents.Length);
             _duos = routes._duos;
             _vows.AddRange(routes._vows);
+            _duoLevel = routes._duoLevel;
             OrderCostPercent = routes.OrderCostPercent;
             var taken = new bool[(int)UnitClass.Medic + 1];
             for (int h = 1; habits != null && h < habits.Length && h <= WhisperRules.HabitCount; h++)
@@ -826,6 +901,19 @@ namespace KindredSiege.Sim.Battle
         public int DuoMask => _duos;
 
         public bool HasDuo(PalDuo duo) => DuoRules.Valid(duo) && (_duos & (1 << (int)duo)) != 0;
+
+        /// The duos' streak this side brings into the fight (rules 34): 1 to DuoRules.MaxLevel, 0 for none.
+        public int DuoLevel => _duoLevel;
+
+        private int _duoLevel;
+
+        /// The same kit with this streak (rules 34).
+        public PalKit WithDuoLevel(int level)
+        {
+            var kit = new PalKit(this, _habits, Pair);
+            kit._duoLevel = Math.Max(0, Math.Min(DuoRules.MaxLevel, level));
+            return kit;
+        }
 
         /// The same kit with these fighters' vows (rules 33), by fighter id; a fighter named twice keeps his first.
         public PalKit WithVows(IReadOnlyList<KeyValuePair<string, StarVow>> vows)
@@ -910,7 +998,7 @@ namespace KindredSiege.Sim.Battle
         {
             get
             {
-                if (OrderCostPercent != 0 || Pair != SquadPair.None || _duos != 0 || _vows.Count > 0) return false;
+                if (OrderCostPercent != 0 || Pair != SquadPair.None || _duos != 0 || _vows.Count > 0 || _duoLevel != 0) return false;
                 for (int r = 1; r < ShadeRules.RouteCount; r++) if (_forms[r] > 0) return false;
                 for (int h = 1; h <= WhisperRules.HabitCount; h++) if (_habits[h] > 0) return false;
                 for (int t = 1; t <= GluttonRules.TalentCount; t++) if (_talents[t] > 0) return false;
@@ -950,6 +1038,8 @@ namespace KindredSiege.Sim.Battle
                 if ((_duos & (1 << d)) != 0) b.Field(prefix + "duo." + ((PalDuo)d).ToString().ToLowerInvariant(), true);
             // The vows (rules 33), the same way.
             for (int i = 0; i < _vows.Count; i++) b.Field(prefix + "vow." + _vows[i].Key, (int)_vows[i].Value);
+            // The duos' streak (rules 34), the same way.
+            if (_duoLevel != 0) b.Field(prefix + "duoLevel", _duoLevel);
         }
     }
 }

@@ -41,6 +41,14 @@ namespace KindredSiege.Sim.Battle
                 int flavour = FlavourHitPercent(source, detail);
                 if (flavour > 0) hit.Add(HitLayer.Pal, flavour);
             }
+            // From rules 34 Endless Unleash's stacks, and Executioner's catch on the star (BattleSimulation.DuoMoves.cs).
+            if (foe && _duoMovesOn)
+            {
+                int endless = EndlessPercent(sourceSide);
+                if (endless > 0) hit.Add(HitLayer.Pal, endless);
+                int taken = ExecutionerTaken(victim);
+                if (taken > 0) hit.Add(HitLayer.Guard, taken);
+            }
             // From rules 30 Gorged Tricks on one of her tricks (BattleSimulation.Duos.cs).
             if (foe && _duosOn && ShadeRules.IsTrickDetail(detail))
             {
@@ -130,6 +138,14 @@ namespace KindredSiege.Sim.Battle
                 hit.Add(HitLayer.Increased, BeastKits.ScarPercent - 100);
             // From rules 29 the strikers' and shooters' talents (BattleSimulation.Glutton.cs).
             if (_gluttonOn) GluttonBlow(attacker, target, hit);
+            // From rules 34 (BattleSimulation.DuoMoves.cs): Chain Reaction's smaller plain hits, Shadow Twin's shadow, a gorged star.
+            if (_duoMovesOn && attacker.Side >= 0 && attacker.Side <= 1 && target.Side != attacker.Side)
+            {
+                if (HasMove(attacker.Side, PalDuo.ChainReaction)) hit.Add(HitLayer.Pal, -DuoRules.ChainCutPercent);
+                int shadow = ShadowCut(attacker);
+                if (shadow != 0) hit.Add(HitLayer.Pal, shadow);
+                if (attacker.GorgePercent > 0) hit.Add(HitLayer.Pal, attacker.GorgePercent);
+            }
             return hit;
         }
 

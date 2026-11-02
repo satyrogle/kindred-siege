@@ -74,7 +74,9 @@ namespace KindredSiege.Sim.Learning
         // reads it as off.
         // Format 38 (2 Nov 2026, the vows and marks on every hit, campaign rules 33) adds those two switches and each side's vows
         // (fighter id and vow) after format 37's; older evidence reads them as off and none.
-        private const int FormatVersion = 38;
+        // Format 39 (2 Nov 2026, the duos that change a move, campaign rules 34) adds that switch and each side's streak after
+        // format 38's; older evidence reads them as off and none.
+        private const int FormatVersion = 39;
 
         // The longest move name a learned wait out or feint can sit on, read back.
         private const int MaxMoveName = 64;
@@ -117,6 +119,7 @@ namespace KindredSiege.Sim.Learning
         // piece, else 9.
         private static int FormatUsed(BattleSetup setup)
         {
+            if (setup.Fight.DuoMoves) return 39;
             if (setup.Fight.Vows || setup.Fight.MarksOnHits) return 38;
             if (setup.Fight.Flavours) return 37;
             if (setup.Fight.Sized) return 36;
@@ -506,6 +509,10 @@ namespace KindredSiege.Sim.Learning
                     w.Write((int)vows[i].Value);
                 }
             }
+            if (format < 39) return;
+            // Format 39: the duos that change a move (rules 34): the switch, then each side's streak.
+            w.Write(fight.DuoMoves);
+            for (int side = 0; side < 2; side++) w.Write(s.Rules(side).Pals.DuoLevel);
         }
 
         private static BattleSetup ReadSetup(BinaryReader r, int version)
@@ -749,7 +756,8 @@ namespace KindredSiege.Sim.Learning
                     parryCenter, squadFirst, raidChief, roadCombat, roadKit, clearRoad, squadScreen, duel, layers, marks, payoffs, danger,
                     meter, floor, whisper, beastScenes, tight, beastRaid, shadeForms, glutton, duos, version >= 36 && r.ReadBoolean(), version >= 37 && r.ReadBoolean(),
                     version >= 38 && r.ReadBoolean(), version >= 38 && r.ReadBoolean());
-                if (version >= 38)
+                bool readVows = version >= 38;
+                if (readVows)
                     for (int side = 0; side < 2; side++)
                     {
                         int count = Range(r.ReadInt32(), 0, 64);
@@ -761,6 +769,14 @@ namespace KindredSiege.Sim.Learning
                         }
                         rules[side] = rules[side].WithPals(rules[side].Pals.WithVows(vows));
                     }
+                // Format 39: the duos that change a move (rules 34), then each side's streak.
+                if (version >= 39)
+                {
+                    bool duoMoves = r.ReadBoolean();
+                    for (int side = 0; side < 2; side++)
+                        rules[side] = rules[side].WithPals(rules[side].Pals.WithDuoLevel(Range(r.ReadInt32(), 0, DuoRules.MaxLevel)));
+                    if (duoMoves) fight = fight.WithDuoMoves();
+                }
                 // A beast's side is exactly its parts, or the fight cannot be played back (the audit, 22 Oct 2026); from rules 27 the
                 // shark's sand pups come after them.
                 for (int side = 0; side < 2 && beasts; side++)
