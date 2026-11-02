@@ -84,7 +84,7 @@ namespace KindredSiege.Sim.Tests
             Assert.AreEqual(2, sim.DuoLevelOf(0), "the parry raised it");
             // Then nothing: the next Cleave lands in full, or one of yours falls.
             while (!sim.IsFinished && sim.DuoLevelOf(0) > 1 && sim.CurrentTick < BattleSetup.DefaultTickLimit) session.Tick();
-            Assert.AreEqual(1, sim.DuoLevelOf(0), "a miss drops it to 1");
+            Assert.AreEqual(1, sim.DuoLevelOf(0), "a miss takes one off");
             Assert.AreEqual(0, Cleaver("none", PalKit.None, Chief34).DuoLevelOf(0), "no duo, no streak");
             Assert.AreEqual(Directives.Cost(Directive.FallBack) * 2, sim.OrderCost(0, Directive.FallBack), "Blood Parry's catch");
         }

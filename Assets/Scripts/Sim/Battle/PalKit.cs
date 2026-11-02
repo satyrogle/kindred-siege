@@ -708,8 +708,8 @@ namespace KindredSiege.Sim.Battle
         /// Whether this is one of the rules 34 duos.
         public static bool IsMove(PalDuo duo) => duo >= FirstMove && (int)duo < Count;
 
-        /// The duos' streak: big moves answered in a row raise it to MaxLevel; one that lands in full, or a fighter falling,
-        /// drops it to 1. It carries from fight to fight.
+        /// The duos' streak: each big move answered raises it, up to MaxLevel; one that lands in full, or a fighter falling,
+        /// takes one off, never below 1. It carries from fight to fight.
         public const int MaxLevel = 3;
 
         /// Endless Unleash: each answer while Unleash runs adds this many ticks a level, and this many percent a stack.

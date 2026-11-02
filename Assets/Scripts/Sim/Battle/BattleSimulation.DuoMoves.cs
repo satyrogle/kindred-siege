@@ -6,8 +6,8 @@ namespace KindredSiege.Sim.Battle
     /// The duos that change a move (campaign rules 34; FightRules.DuoMoves; Jacob in chat, 2 Nov 2026: "merge first, then build
     /// the duos on top. Go", after "take some pointers from returnal and nex machina"). Each side brings its duos and its streak
     /// in its PalKit. The streak: each big move of theirs your side answers (a parry, a Fall Back that dodges it, a Focus Fire
-    /// that breaks it) raises it by one, up to DuoRules.MaxLevel; one that lands in full on you, or one of yours falling, drops it
-    /// to 1. Every duo grows with it, and every duo has its catch. A side without one of these duos keeps no streak. Every
+    /// that breaks it) raises it by one, up to DuoRules.MaxLevel; one that lands in full on you, or one of yours falling, takes
+    /// one off, never below 1. Every duo grows with it, and every duo has its catch. A side without one of these duos keeps no streak. Every
     /// number is a starting value.
     public sealed partial class BattleSimulation
     {
@@ -98,10 +98,12 @@ namespace KindredSiege.Sim.Battle
             }
         }
 
+        // A miss costs one level, never below 1 (Jacob in chat, 2 Nov 2026: "do 1 more job"; it dropped to 1 at first, and the
+        // streak then averaged 1.2 to 1.6 and rarely reached 3).
         private void Missed(int side)
         {
             if (side < 0 || side > 1 || _sides[side].DuoLevel <= 0) return;
-            _sides[side].DuoLevel = 1;
+            _sides[side].DuoLevel = Math.Max(1, _sides[side].DuoLevel - 1);
         }
 
         // ------------------------------------------------------------ Blood Parry (Butcher and Shade)
