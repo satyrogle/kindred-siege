@@ -124,13 +124,18 @@ namespace KindredSiege.Sim.Battle
         // upgraded Breaker's strike sends a wind up back to its start.
         private void Strikes(BattleUnit unit, BattleUnit target)
         {
+            bool alive = target.Alive;
             Blow(unit, target, unit.Power, BlowKind.Strike);
             Broke(unit, target);
+            // Reaver (rules 30, BattleSimulation.Vows.cs).
+            if (_vowsOn) Reaved(unit, target, alive);
             if (!RankTwo(unit) || _finished || !unit.Alive) return;
             BattleUnit next = target.Alive ? target : SpellTarget(unit, false);
             if (next == null) return;
+            alive = next.Alive;
             Blow(unit, next, unit.Power, BlowKind.Strike);
             Broke(unit, next);
+            if (_vowsOn) Reaved(unit, next, alive);
         }
 
         private void Broke(BattleUnit unit, BattleUnit target)
@@ -142,6 +147,8 @@ namespace KindredSiege.Sim.Battle
         private void Shots(BattleUnit unit, BattleUnit target)
         {
             Blow(unit, target, unit.Power, BlowKind.AimedShot);
+            // Sniper and Ranger (rules 30, BattleSimulation.Vows.cs) on the first shot.
+            if (_vowsOn) ShotVows(unit, target);
             if (!RankTwo(unit) || _finished || !unit.Alive) return;
             BattleUnit next = target.Alive ? target : SpellTarget(unit, true);
             if (next != null) Blow(unit, next, unit.Power, BlowKind.AimedShot);
@@ -256,6 +263,8 @@ namespace KindredSiege.Sim.Battle
         private bool AlsoGuards(BattleUnit warden, BattleUnit target)
         {
             if (warden.GuardTargetId2.Length > 0 && string.Equals(warden.GuardTargetId2, target.Id, StringComparison.Ordinal)) return true;
+            // Bastion (rules 30, BattleSimulation.Vows.cs).
+            if (_vowsOn && BastionCovers(warden, target)) return true;
             return target.Row == Row.Back && HabitUp(warden, WhispererHabit.Bodyguard) && AimingAlly(warden) != null;
         }
 
@@ -311,6 +320,8 @@ namespace KindredSiege.Sim.Battle
         {
             int amount = Treat(medic, patient);
             _sides[medic.Side].LastPatientId = patient.Id;
+            // Hierophant (rules 30, BattleSimulation.Vows.cs).
+            if (_vowsOn) Splashed(medic, patient, amount);
             if (HabitUp(medic, WhispererHabit.FrontFirst) && patient.Row == Row.Front && amount > 0)
                 for (int i = 0; i < _units.Count && !Stopped; i++)
                 {

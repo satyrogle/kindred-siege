@@ -92,7 +92,7 @@ public static class PalSweep
                 {
                     for (int n = 0; c.Stage == CampaignStage.InRun && n < 80; n++)
                     {
-                        int offer = picker.PickOffer(c, lean);
+                        int offer = picker.PickOffer(c, lean, themed);
                         Encounter e = c.Offers[offer];
                         if (e.Node != null && e.Node.Pal == lean) palFights++;
                         CampaignFight f = c.StartEncounter(offer);

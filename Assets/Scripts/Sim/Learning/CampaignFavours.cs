@@ -138,13 +138,17 @@ namespace KindredSiege.Sim.Learning
     /// upgrades.
     public sealed class WhisperPick
     {
-        internal WhisperPick(Favour kind, string fighterId, WhispererHabit habit, SquadPair pair)
+        internal WhisperPick(Favour kind, string fighterId, WhispererHabit habit, SquadPair pair, StarVow vow = StarVow.None)
         {
             Kind = kind;
             FighterId = fighterId ?? string.Empty;
             Habit = habit;
             Pair = pair;
+            Vow = vow;
         }
+
+        /// WhisperRankUp to rank 2 from rules 30: the vow it gives him. None otherwise.
+        public StarVow Vow { get; }
 
         public Favour Kind { get; }
 

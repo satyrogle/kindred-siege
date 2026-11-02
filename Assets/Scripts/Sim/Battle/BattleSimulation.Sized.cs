@@ -64,6 +64,9 @@ namespace KindredSiege.Sim.Battle
         /// Exposed burst's wide open jumps on to the next enemy beside him when it is spent, ExposedJumps times; a Stasis burst
         /// freezes every enemy for StasisAllTicks.
         public const int FinalRanks = 3;
+
+        /// From rules 30, the stacks of his combo's mark every blow of a fighter wearing one lays.
+        public const int HitStacks = 1;
         public const int ExposedJumps = 1;
         public const int StasisAllTicks = SimClock.TicksPerSecond;
 

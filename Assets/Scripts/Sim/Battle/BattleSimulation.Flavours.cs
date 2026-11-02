@@ -10,6 +10,10 @@ namespace KindredSiege.Sim.Battle
     public sealed partial class BattleSimulation
     {
         private readonly bool _flavoursOn;
+        private readonly bool _marksOnHitsOn;
+
+        /// Whether a combo's wearer marks with every blow: campaign rules 30.
+        public bool MarksOnHitsOn => _marksOnHitsOn;
 
         /// Whether this fight plays the Butcher's flavours: campaign rules 29.
         public bool FlavoursOn => _flavoursOn;
@@ -63,6 +67,24 @@ namespace KindredSiege.Sim.Battle
         {
             if (!_flavoursOn || by == null) return 0;
             return SizeRules.FlavourReach * Math.Max(0, FlavourRanks(by.Side, StatusKind.Crush) - 1);
+        }
+
+        // ------------------------------------------------------------ marks on every hit (rules 30)
+
+        // A blow of a fighter wearing a combo landed: SizeRules.HitStacks stacks of his deepest combo's mark on him, bursting at
+        // the cap. A chief whose band stands shrugs it off.
+        private void HitMark(BattleUnit attacker, BattleUnit target)
+        {
+            if (attacker == null || target.Side == attacker.Side || ShrugsMarks(target) || SizeRules.HitStacks <= 0) return;
+            ClassBend combo = ClassSpells.IsCombo(BendOf(attacker)) ? BendOf(attacker) : ClassBend.None;
+            ClassBend second = Bend2Of(attacker);
+            if (ClassSpells.IsCombo(second) && (combo == ClassBend.None || MoreRanks(attacker, second) > MoreRanks(attacker, combo))) combo = second;
+            if (combo == ClassBend.None) return;
+            StatusKind mark = MarkRules.Of(combo);
+            target.Statuses.Apply(mark, MarkRules.Ticks, sourceId: attacker.Id, stacks: SizeRules.HitStacks);
+            Emit(new BattleEvent(_tick, BattleEventKind.Mark, attacker.Side, attacker.Id, (int)attacker.Class, target.Id, (int)target.Class,
+                MarkRules.Ticks, MarkRules.Name(mark)));
+            if (target.Statuses[mark].Stacks >= MarkRules.MaxStacks) Burst(attacker, target, mark);
         }
 
         // ------------------------------------------------------------ the final forms

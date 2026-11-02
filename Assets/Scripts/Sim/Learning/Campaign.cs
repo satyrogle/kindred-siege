@@ -41,6 +41,10 @@ namespace KindredSiege.Sim.Learning
         /// core" and "The floor under the three Pals"). It goes when the run does.
         public int Rank { get; internal set; } = 1;
 
+        /// Their vow this run, from rank 2 (campaign rules 30, the Whisperer's vows: Battle.VowRules). None below rank 2; it goes
+        /// with the rank that brought it, and when the run does.
+        public StarVow Vow { get; internal set; }
+
         /// The piece in their second slot, open at rank 3 (rules 23), or empty.
         public string GearId2 { get; internal set; } = string.Empty;
 
@@ -612,7 +616,10 @@ namespace KindredSiege.Sim.Learning
         /// picks sized with the builds test to decide fights.
         /// 29 those and the Butcher's flavours (Jacob in chat, 2 Nov 2026: "both 1 and 2"; Battle.FightRules.Flavours;
         /// ButcherFlavourRules): combos growing with their flavour, and each flavour's final form.
-        public const int RulesVersion = 29;
+        /// 30 those, the Whisperer's vows and the Butcher's flavour fights (Jacob in chat, 2 Nov 2026: "whisperer - 1", "butcher
+        /// - 1 and 2"; Battle.FightRules.Vows and MarksOnHits; VowFlavourRules): a rank 2 fighter takes one of his class's two
+        /// vows from her card, each Butcher fight offers one flavour, and a combo's wearer marks with every blow.
+        public const int RulesVersion = 30;
         public const int SquadScreenRules = 14;
         public const int ClearRoadRules = 13;
 
@@ -693,6 +700,10 @@ namespace KindredSiege.Sim.Learning
         /// Battle.BattleSimulation.Flavours.cs): a combo grows with the ranks of its flavour the side wears, and three ranks of
         /// one flavour unlock its final form.
         public const int ButcherFlavourRules = 29;
+
+        /// The campaign rules version from which the Whisperer's vows and the Butcher's flavour fights play (Jacob in chat, 2 Nov
+        /// 2026: "whisperer - 1", "butcher - 1 and 2"; Campaign.Vows.cs, Battle.BattleSimulation.Vows.cs and Flavours.cs).
+        public const int VowFlavourRules = 30;
 
         /// Whether this run's roads carry a Pal on every fight (fix 5): set when the run starts under PalRoadRules, and kept
         /// with the run, so its roads come back the same when it loads.
@@ -1538,7 +1549,7 @@ namespace KindredSiege.Sim.Learning
             if (pal == Pal.Butcher && rules >= ButcherComboRules)
             {
                 IReadOnlyList<Favour> combos = FavourRules.Combos(pal);
-                if (rules >= MarksRules) return WeightedComboOffer(node, pal, combos);
+                if (rules >= MarksRules) return WeightedComboOffer(node, pal, combos, rules);
                 for (int i = 0; i < combos.Count; i++)
                 {
                     ClassBend bend = FavourRules.ComboBend(combos[i]);
@@ -1559,14 +1570,22 @@ namespace KindredSiege.Sim.Learning
 
         // From MarksRules (DESIGN_LOCKS, "The Butcher's theme"): every combo for a class in your squad that the run does not
         // hold at its top rank, by its ComboOfferWeight, three drawn by weight from the node's own dice, in his order.
-        private FavourOffer WeightedComboOffer(RoadNode node, Pal pal, IReadOnlyList<Favour> combos)
+        private FavourOffer WeightedComboOffer(RoadNode node, Pal pal, IReadOnlyList<Favour> combos, int rules = 0)
         {
             var pool = new List<Favour>();
             var weights = new List<int>();
+            // From rules 30 only the node's flavour (Campaign.Vows.cs); a card with none of it left offers them all.
+            bool anyOfFlavour = false;
+            for (int i = 0; i < combos.Count && rules >= VowFlavourRules; i++)
+            {
+                ClassBend bend = FavourRules.ComboBend(combos[i]);
+                if (FlavourAllows(node, bend, rules) && SquadHas(ClassSpells.ClassOf(bend)) && ComboOfferWeight(bend) > 0) anyOfFlavour = true;
+            }
             for (int i = 0; i < combos.Count; i++)
             {
                 ClassBend bend = FavourRules.ComboBend(combos[i]);
                 int weight = SquadHas(ClassSpells.ClassOf(bend)) ? ComboOfferWeight(bend) : 0;
+                if (anyOfFlavour && !FlavourAllows(node, bend, rules)) weight = 0;
                 if (weight <= 0) continue;
                 pool.Add(combos[i]);
                 weights.Add(weight);
@@ -3204,6 +3223,8 @@ namespace KindredSiege.Sim.Learning
                 if (rules >= SizedRules) fightRules = fightRules.WithSized();
                 // From rules 29 the Butcher's flavours. Last, after sizing.
                 if (rules >= ButcherFlavourRules) fightRules = fightRules.WithFlavours();
+                // From rules 30 the vows and marks on every hit. Last, after the flavours.
+                if (rules >= VowFlavourRules) fightRules = fightRules.WithVows();
             }
             bool raidChief = IsRaidChief(tribe, encounter.Kind, rules);
             if (raidChief) MakeRaidChief(side1);

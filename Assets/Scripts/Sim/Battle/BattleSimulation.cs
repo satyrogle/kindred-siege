@@ -392,6 +392,10 @@ namespace KindredSiege.Sim.Battle
             _layersOn = _fight.Layers;
             // The Butcher's marks (BattleSimulation.Marks.cs, campaign rules 18): only where someone wears a combo to lay them.
             _marksOn = _comboOn && _fight.Marks;
+            // The Whisperer's vows (BattleSimulation.Vows.cs) and the Butcher's marks on every hit (BattleSimulation.Flavours.cs),
+            // campaign rules 30.
+            _vowsOn = _floorOn && _fight.Whisper && _fight.Vows;
+            _marksOnHitsOn = _marksOn && _floorOn && _fight.MarksOnHits;
             // Payoffs that spread (BattleSimulation.Payoffs.cs, campaign rules 20).
             _payoffsOn = _fight.Payoffs;
             // Danger (BattleSimulation.Danger.cs, campaign rules 21).
@@ -2026,7 +2030,15 @@ namespace KindredSiege.Sim.Battle
                 damage = More(damage, hit, HitLayer.Cash, ShadeSized(attacker.Side, ShadeRoute.Backstab, ShadeRules.BackstabCashPercent));
                 Emit(EventFor(BattleEventKind.Cash, attacker, target, (hit != null ? hit.Points : damage) - before, ShadeRules.BackstabDetail));
             }
-            if (_fight.Misses && !wideOpen && !(_classOn && (target.SnareTicks > 0 || target.PinTicks > 0)) && target.HookTicks <= 0 && !_timeShot &&
+            // A Duelist's strike on her Focus Fire target never misses and crits (rules 30, BattleSimulation.Vows.cs).
+            bool duel = _vowsOn && DuelistSure(attacker, target, kind);
+            if (duel)
+            {
+                int before = hit != null ? hit.Points : damage;
+                damage = More(damage, hit, HitLayer.Cash, DuelistPercent(attacker));
+                Emit(EventFor(BattleEventKind.Cash, attacker, target, (hit != null ? hit.Points : damage) - before, VowRules.DuelistDetail));
+            }
+            if (_fight.Misses && !wideOpen && !duel && !(_classOn && (target.SnareTicks > 0 || target.PinTicks > 0)) && target.HookTicks <= 0 && !_timeShot &&
                 Missed(attacker, target)) return;
             // Under road combat a Marksman's Step Back makes a melee blow at him miss (BattleSimulation.Defence.cs).
             if (_roadCombatOn && !wideOpen && SteppedBack(attacker, target)) return;
@@ -2061,6 +2073,8 @@ namespace KindredSiege.Sim.Battle
                 // A burning fighter's blow burns whoever it lands on (BattleSimulation.Burn.cs).
                 if (_roadKitOn) Burned(attacker, warden);
                 if (_classOn) Retaliate(warden, attacker);
+                // Reprisal (rules 30, BattleSimulation.Vows.cs).
+                if (_vowsOn) Reprisal(warden, attacker);
                 if (door)
                 {
                     Wound(warden, attacker);
@@ -2087,6 +2101,8 @@ namespace KindredSiege.Sim.Battle
             // A blow on a chief whose ring spins or whose Sun Mantle burns (ChiefKits, 22 Oct 2026).
             if (_kitsTwoOn) KitStruck(attacker, target);
             if (kind != BlowKind.Auto) AfterSpellBlow(attacker, target, kind, detail);
+            // From rules 30 a combo's wearer marks with every blow (BattleSimulation.Flavours.cs).
+            if (_marksOnHitsOn && !_finished && target.Alive) HitMark(attacker, target);
             SnareSpent(target, detail);
             Bleed(attacker, target);
         }
@@ -2441,6 +2457,8 @@ namespace KindredSiege.Sim.Battle
                 killed = true;
                 // Fear, the Shade's Focus Fire trick (rules 23, BattleSimulation.Shade.cs).
                 if (_floorOn && (sourceSide == 0 || sourceSide == 1) && sourceSide != victim.Side) Fear(sourceSide, victim);
+                // Bleeder (rules 30, BattleSimulation.Vows.cs): his wound jumps on.
+                if (_vowsOn) BledOn(sourceSide, victim);
                 // A beast's part broke (BattleSimulation.Beast.cs).
                 if (_beastOn && victim.Side == _beastSide) Severed(source, sourceSide, victim);
                 // Her last Warden fell: her Lockdown wall is down for good (BattleSimulation.Skullpeak.cs).

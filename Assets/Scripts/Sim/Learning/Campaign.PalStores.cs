@@ -119,6 +119,15 @@ namespace KindredSiege.Sim.Learning
             return true;
         }
 
+        /// A rank up to rank 2 with one of his class's vows (rules 30), as her card's pick gives it.
+        public bool TryRankUp(string fighterId, StarVow vow)
+        {
+            CampaignFighter f = FindFighter(fighterId);
+            if (!VowsRun || f == null || f.Rank != 1 || !VowRules.Valid(vow) || VowRules.ClassOf(vow) != f.Class || !TryRankUp(fighterId)) return false;
+            f.Vow = vow;
+            return true;
+        }
+
         /// A rank up for one fighter, up to PalStoreRules.MaxRank.
         public bool TryRankUp(string fighterId)
         {
@@ -166,7 +175,14 @@ namespace KindredSiege.Sim.Learning
             for (int t = 1; t <= GluttonRules.TalentCount; t++) levels[t] = TalentLevel((GluttonTalent)t);
             kit = kit.WithTalents(levels);
             // From rules 27 the duos held (Campaign.Duos.cs).
-            return rules < PalDuoRules ? kit : kit.WithDuos(_duos);
+            if (rules < PalDuoRules) return kit;
+            kit = kit.WithDuos(_duos);
+            // From rules 30 each ranked fighter's vow.
+            if (rules < VowFlavourRules) return kit;
+            var vows = new List<KeyValuePair<string, StarVow>>();
+            for (int i = 0; i < _reserve.Count; i++)
+                if (_reserve[i].Rank >= 2 && _reserve[i].Vow != StarVow.None) vows.Add(new KeyValuePair<string, StarVow>(_reserve[i].Id, _reserve[i].Vow));
+            return kit.WithVows(vows);
         }
 
         // ------------------------------------------------------------ the Glutton's tree (rules 26)
@@ -457,6 +473,15 @@ namespace KindredSiege.Sim.Learning
             {
                 CampaignFighter f = _reserve[i];
                 if (f.Rank >= PalStoreRules.MaxRank) continue;
+                // From rules 30 a rank up to rank 2 comes once for each of his class's two vows (Campaign.Vows.cs).
+                if (f.Rank == 1 && VowsRun)
+                {
+                    pool.Add(new WhisperPick(Favour.WhisperRankUp, f.Id, WhispererHabit.None, SquadPair.None, VowRules.FirstOf(f.Class)));
+                    weights.Add(1);
+                    pool.Add(new WhisperPick(Favour.WhisperRankUp, f.Id, WhispererHabit.None, SquadPair.None, VowRules.SecondOf(f.Class)));
+                    weights.Add(1);
+                    continue;
+                }
                 pool.Add(new WhisperPick(Favour.WhisperRankUp, f.Id, WhispererHabit.None, SquadPair.None));
                 weights.Add(f.Rank > 1 ? RankUpWeight : 1);
             }
@@ -508,8 +533,17 @@ namespace KindredSiege.Sim.Learning
             switch (pick.Kind)
             {
                 case Favour.WhisperRankUp:
+                {
                     TryRankUp(pick.FighterId);
+                    // From rules 30 the vow it brings (Campaign.Vows.cs).
+                    CampaignFighter f = FindFighter(pick.FighterId);
+                    if (f != null && f.Rank == 2 && VowRules.Valid(pick.Vow) && VowRules.ClassOf(pick.Vow) == f.Class)
+                    {
+                        f.Vow = pick.Vow;
+                        return "Rank up: " + VowRules.Name(pick.Vow);
+                    }
                     return "Rank up";
+                }
                 case Favour.WhisperPair:
                     TrySetPair(pick.Pair);
                     return FavourRules.PairName(pick.Pair);
@@ -530,6 +564,8 @@ namespace KindredSiege.Sim.Learning
                 if (f.Rank <= 1) continue;
                 f.Rank--;
                 if (f.Rank < PalStoreRules.SecondSlotRank) f.GearId2 = string.Empty;
+                // His vow goes with rank 2 (rules 30).
+                if (f.Rank < 2) f.Vow = StarVow.None;
                 lost.Add(f);
             }
             return lost;
@@ -542,6 +578,7 @@ namespace KindredSiege.Sim.Learning
             if (second != null) _gear.Remove(second);
             f.GearId2 = string.Empty;
             f.Rank = 1;
+            f.Vow = StarVow.None;
         }
 
         // ------------------------------------------------------------ the Shade's road card (rules 25)
@@ -645,6 +682,7 @@ namespace KindredSiege.Sim.Learning
             {
                 _reserve[i].Rank = 1;
                 _reserve[i].GearId2 = string.Empty;
+                _reserve[i].Vow = StarVow.None;
             }
         }
 
@@ -714,7 +752,7 @@ namespace KindredSiege.Sim.Learning
         }
 
         // One of her picks on offer (version 27), in its place: it must match the offer's choice there.
-        internal bool RestoreWhisperPick(int index, Favour kind, string fighterId, WhispererHabit habit, SquadPair pair)
+        internal bool RestoreWhisperPick(int index, Favour kind, string fighterId, WhispererHabit habit, SquadPair pair, StarVow vow = StarVow.None)
         {
             FavourOffer offer = _favourOffer;
             if (offer == null || offer.Pal != Pal.Whisperer || index != offer.Picks.Count || index >= offer.Choices.Count ||
@@ -722,7 +760,8 @@ namespace KindredSiege.Sim.Learning
             if (kind == Favour.WhisperRankUp && FindFighter(fighterId) == null) return false;
             if (kind == Favour.WhisperPair && (pair <= SquadPair.None || (int)pair > PalStoreRules.PairCount)) return false;
             if (kind == Favour.WhisperHabitUp && (habit <= WhispererHabit.None || (int)habit > PalStoreRules.HabitCount)) return false;
-            offer.AddPick(new WhisperPick(kind, fighterId ?? string.Empty, habit, pair));
+            if (vow != StarVow.None && (kind != Favour.WhisperRankUp || !VowRules.Valid(vow))) return false;
+            offer.AddPick(new WhisperPick(kind, fighterId ?? string.Empty, habit, pair, vow));
             return true;
         }
 
@@ -730,6 +769,15 @@ namespace KindredSiege.Sim.Learning
         {
             if (pair <= SquadPair.None || (int)pair > PalStoreRules.PairCount || Pair != SquadPair.None) return false;
             Pair = pair;
+            return true;
+        }
+
+        // For CampaignSave (version 31): a fighter's vow, after his rank.
+        internal bool RestoreVow(string fighterId, StarVow vow)
+        {
+            CampaignFighter f = FindFighter(fighterId);
+            if (f == null || f.Rank < 2 || f.Vow != StarVow.None || !VowRules.Valid(vow) || VowRules.ClassOf(vow) != f.Class) return false;
+            f.Vow = vow;
             return true;
         }
 

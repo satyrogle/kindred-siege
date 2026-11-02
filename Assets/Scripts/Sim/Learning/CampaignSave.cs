@@ -6,7 +6,9 @@ using KindredSiege.Sim.Battle;
 
 namespace KindredSiege.Sim.Learning
 {
-    /// Writes a campaign down and reads it back. Version 30 (1 Nov 2026, the Pals' duos, campaign rules 27) keeps the run's duos
+    /// Writes a campaign down and reads it back. Version 31 (2 Nov 2026, the Whisperer's vows, campaign rules 30) keeps each
+    /// ranked fighter's vow (vow: the fighter and the Battle.StarVow), and a Whisperer pick on offer can carry one (whisperpick's
+    /// seventh field, written only when set). Version 30 (1 Nov 2026, the Pals' duos, campaign rules 27) keeps the run's duos
     /// held and the ones a card has shown (duo: two masks, one bit a Battle.PalDuo), and can hold a duo on a card
     /// (Favour.DuoCrownedMarks to Favour.DuoGorgedTricks). Version 29 (1 Nov 2026, the Glutton, campaign rules 26) keeps the talents bought
     /// at camp (owned, a camp record, in the order bought), the run's Feed (feed: the talent fed and the one eaten, 0 for none)
@@ -69,7 +71,7 @@ namespace KindredSiege.Sim.Learning
     public static partial class CampaignSave
     {
         public const string Header = "kindred-siege-campaign";
-        public const int Version = 30;
+        public const int Version = 31;
 
         public const string OldSaveNote =
             "This save is from the old respect campaign, so you are back at camp. What the tribes learned about you and your codex are kept.";
@@ -85,7 +87,7 @@ namespace KindredSiege.Sim.Learning
         {
             "joined", "fighter", "assist", "gear", "piece", "spoils", "grudge", "run", "road", "feat", "offer", "fight", "proof", "squad", "order",
             "bounty", "beaten", "promoted", "favour", "favouroffer", "routepick", "beast", "lives", "bond", "streak", "clearroad",
-            "roadpals", "palroad", "talent", "route", "pair", "rank", "slot2", "habitup", "whisperpick", "feed", "hedge", "duo"
+            "roadpals", "palroad", "talent", "route", "pair", "rank", "slot2", "habitup", "whisperpick", "feed", "hedge", "duo", "vow"
         };
 
         public static string Write(Campaign c)
@@ -179,6 +181,8 @@ namespace KindredSiege.Sim.Learning
             for (int i = 0; i < c.Reserve.Count; i++)
             {
                 if (c.Reserve[i].Rank > 1) Line(b, "rank", c.Reserve[i].Id, N(c.Reserve[i].Rank));
+                // The vow (version 31, rules 30), after the rank.
+                if (c.Reserve[i].Rank > 1 && c.Reserve[i].Vow != StarVow.None) Line(b, "vow", c.Reserve[i].Id, N((int)c.Reserve[i].Vow));
                 if (c.Reserve[i].GearId2.Length > 0) Line(b, "slot2", c.Reserve[i].Id, c.Reserve[i].GearId2);
             }
             if (c.FavourOffer != null)
@@ -190,7 +194,8 @@ namespace KindredSiege.Sim.Learning
                 for (int i = 0; i < c.FavourOffer.Picks.Count; i++)
                 {
                     WhisperPick pick = c.FavourOffer.Picks[i];
-                    Line(b, "whisperpick", N(i), N((int)pick.Kind), pick.FighterId, N((int)pick.Habit), N((int)pick.Pair));
+                    if (pick.Vow == StarVow.None) Line(b, "whisperpick", N(i), N((int)pick.Kind), pick.FighterId, N((int)pick.Habit), N((int)pick.Pair));
+                    else Line(b, "whisperpick", N(i), N((int)pick.Kind), pick.FighterId, N((int)pick.Habit), N((int)pick.Pair), N((int)pick.Vow));
                 }
             }
             for (int i = 0; i < c.Grudges.Count; i++) Line(b, "grudge", c.Grudges[i]);
@@ -322,14 +327,17 @@ namespace KindredSiege.Sim.Learning
         // A Whisperer's pick on offer, read before the offer it belongs to is restored.
         private sealed class WhisperPickRecord
         {
-            internal WhisperPickRecord(int index, Favour kind, string fighterId, WhispererHabit habit, SquadPair pair)
+            internal WhisperPickRecord(int index, Favour kind, string fighterId, WhispererHabit habit, SquadPair pair, StarVow vow)
             {
                 Index = index;
                 Kind = kind;
                 FighterId = fighterId;
                 Habit = habit;
                 Pair = pair;
+                Vow = vow;
             }
+
+            internal StarVow Vow { get; }
 
             internal int Index { get; }
             internal Favour Kind { get; }
@@ -714,10 +722,14 @@ namespace KindredSiege.Sim.Learning
                         break;
                     case "whisperpick":
                         // Restored with the favour offer below.
-                        if (version < 27 || f.Length != 6 || !TryInt(f[1], out int pickIndex) || !TryInt(f[2], out int pickKind) ||
+                        // A seventh field, the vow, from version 31.
+                        int pickVow = 0;
+                        if (version < 27 || (f.Length != 6 && !(f.Length == 7 && version >= 31 && TryInt(f[6], out pickVow))) ||
+                            !TryInt(f[1], out int pickIndex) || !TryInt(f[2], out int pickKind) ||
                             !TryInt(f[4], out int pickHabit) || !TryInt(f[5], out int pickPair))
                             return Fail(where + "bad Whisperer pick record.", out failure);
-                        whisperPicks.Add(new WhisperPickRecord(pickIndex, (Favour)pickKind, f[3], (WhispererHabit)pickHabit, (SquadPair)pickPair));
+                        whisperPicks.Add(new WhisperPickRecord(pickIndex, (Favour)pickKind, f[3], (WhispererHabit)pickHabit, (SquadPair)pickPair,
+                            (StarVow)pickVow));
                         break;
                     case "pair":
                         if (version < 26 || f.Length != 2 || !TryInt(f[1], out int pairId) || !c.RestorePair((SquadPair)pairId))
@@ -726,6 +738,11 @@ namespace KindredSiege.Sim.Learning
                     case "rank":
                         if (version < 26 || f.Length != 3 || !TryInt(f[2], out int fighterRank) || !c.RestoreRank(f[1], fighterRank))
                             return Fail(where + "bad or repeated rank record.", out failure);
+                        break;
+                    case "vow":
+                        // A ranked fighter's vow (version 31), after his rank.
+                        if (version < 31 || f.Length != 3 || !TryInt(f[2], out int vowId) || !c.RestoreVow(f[1], (StarVow)vowId))
+                            return Fail(where + "bad or repeated vow record.", out failure);
                         break;
                     case "slot2":
                         // Restored with the worn pieces below, once the run's gear is read.
@@ -868,7 +885,7 @@ namespace KindredSiege.Sim.Learning
             for (int i = 0; i < whisperPicks.Count; i++)
             {
                 WhisperPickRecord w = whisperPicks[i];
-                if (!c.RestoreWhisperPick(w.Index, w.Kind, w.FighterId, w.Habit, w.Pair))
+                if (!c.RestoreWhisperPick(w.Index, w.Kind, w.FighterId, w.Habit, w.Pair, w.Vow))
                     return Fail("The Whisperer's picks on offer cannot be read.", out failure);
             }
             if (c.FavourOffer != null)

@@ -84,6 +84,12 @@ namespace KindredSiege.Sim.Battle
             }
             // From rules 26 Matter Printer and Recompile (BattleSimulation.Glutton.cs).
             if (_gluttonOn) GluttonHeal(healer, patient, heal);
+            // From rules 30 a Martyr heals more the less health she has (BattleSimulation.Vows.cs).
+            if (_vowsOn && healer != null)
+            {
+                int martyr = MartyrPercent(healer);
+                if (martyr > 0) heal.Add(HitLayer.Pal, martyr);
+            }
             // From rules 28 a ranked healer heals more (BattleSimulation.Sized.cs).
             if (_sizedOn && healer != null)
             {

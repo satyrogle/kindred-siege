@@ -72,7 +72,9 @@ namespace KindredSiege.Sim.Learning
         // as off.
         // Format 34 (2 Nov 2026, the Butcher's flavours, campaign rules 29) adds that switch after format 33's; older evidence
         // reads it as off.
-        private const int FormatVersion = 34;
+        // Format 35 (2 Nov 2026, the vows and marks on every hit, campaign rules 30) adds those two switches and each side's vows
+        // (fighter id and vow) after format 34's; older evidence reads them as off and none.
+        private const int FormatVersion = 35;
 
         // The longest move name a learned wait out or feint can sit on, read back.
         private const int MaxMoveName = 64;
@@ -112,6 +114,7 @@ namespace KindredSiege.Sim.Learning
         // piece, else 9.
         private static int FormatUsed(BattleSetup setup)
         {
+            if (setup.Fight.Vows || setup.Fight.MarksOnHits) return 35;
             if (setup.Fight.Flavours) return 34;
             if (setup.Fight.Sized) return 33;
             if (setup.Fight.Duos) return 32;
@@ -474,6 +477,20 @@ namespace KindredSiege.Sim.Learning
             if (format < 34) return;
             // Format 34: the Butcher's flavours (rules 29): the switch.
             w.Write(fight.Flavours);
+            if (format < 35) return;
+            // Format 35: the vows and marks on every hit (rules 30): both switches, then each side's vows.
+            w.Write(fight.Vows);
+            w.Write(fight.MarksOnHits);
+            for (int side = 0; side < 2; side++)
+            {
+                var vows = s.Rules(side).Pals.Vows;
+                w.Write(vows.Count);
+                for (int i = 0; i < vows.Count; i++)
+                {
+                    w.Write(vows[i].Key);
+                    w.Write((int)vows[i].Value);
+                }
+            }
         }
 
         private static BattleSetup ReadSetup(BinaryReader r, int version)
@@ -709,7 +726,20 @@ namespace KindredSiege.Sim.Learning
                 }
                 fight = new FightRules(misses, earned, perfectHold, snaps, classSpells, chiefRules, chiefKits, beasts, chiefTactics,
                     parryCenter, squadFirst, raidChief, roadCombat, roadKit, clearRoad, squadScreen, duel, layers, marks, payoffs, danger,
-                    meter, floor, whisper, shadeForms, glutton, duos, version >= 33 && r.ReadBoolean(), version >= 34 && r.ReadBoolean());
+                    meter, floor, whisper, shadeForms, glutton, duos, version >= 33 && r.ReadBoolean(), version >= 34 && r.ReadBoolean(),
+                    version >= 35 && r.ReadBoolean(), version >= 35 && r.ReadBoolean());
+                if (version >= 35)
+                    for (int side = 0; side < 2; side++)
+                    {
+                        int count = Range(r.ReadInt32(), 0, 64);
+                        var vows = new List<KeyValuePair<string, StarVow>>();
+                        for (int k = 0; k < count; k++)
+                        {
+                            string fighter = r.ReadString();
+                            vows.Add(new KeyValuePair<string, StarVow>(fighter, (StarVow)Range(r.ReadInt32(), 0, VowRules.Count - 1)));
+                        }
+                        rules[side] = rules[side].WithPals(rules[side].Pals.WithVows(vows));
+                    }
                 // A beast's side is exactly its parts, or the fight cannot be played back (the audit, 22 Oct 2026).
                 for (int side = 0; side < 2 && beasts; side++)
                     if (rules[side].Beast != BeastKit.None && units[side].Count != BeastKits.PartCount)

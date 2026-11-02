@@ -289,6 +289,8 @@ namespace KindredSiege.Sim.Battle
                 // Singularity Net and Time Snare ride on the hold (BattleSimulation.Combos.cs).
                 if (_comboOn && trapper != null) SnareCombos(trapper, victim, hold);
             }
+            // Netter (rules 30, BattleSimulation.Vows.cs): her trap catches more.
+            if (_vowsOn) Netted(trapper, side, victim);
             // The Stoneveil chief's band's barbs cut no more once your Clean Hands broke his rite, and his Red Rite makes your
             // wounds bleed twice as long (BattleSimulation.Stoneveil.cs).
             if (_riteOn && !RiteWounds(side)) return;

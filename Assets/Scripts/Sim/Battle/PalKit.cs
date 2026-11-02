@@ -569,6 +569,83 @@ namespace KindredSiege.Sim.Battle
         }
     }
 
+    /// The Whisperer's vows (campaign rules 30; Jacob in chat, 2 Nov 2026: "whisperer - 1"; BattleSimulation.Vows.cs): when a
+    /// fighter reaches rank 2 he takes one of his class's two vows, and it changes how his spell works; at rank 3 it takes its
+    /// final form. Saves and replays keep the numbers; never reorder.
+    public enum StarVow
+    {
+        None = 0,
+        Bastion = 1, Reprisal = 2,
+        Sniper = 3, Ranger = 4,
+        Reaver = 5, Duelist = 6,
+        Netter = 7, Bleeder = 8,
+        Hierophant = 9, Martyr = 10
+    }
+
+    /// The vows' rules and numbers. Tier 1 is rank 2, tier 2 rank 3. Every number is a starting value.
+    public static class VowRules
+    {
+        /// One past the last vow.
+        public const int Count = 11;
+
+        /// Reprisal: every blow his Guard takes, he hits back for this percent of his power, and at tier 2 leaves an Opening.
+        public const int ReprisalPercent = 50, ReprisalFinalPercent = 100;
+
+        /// Sniper: the shot goes through to the first enemy behind, for this percent of its weight.
+        public const int SniperPercent = 50, SniperFinalPercent = 100;
+
+        /// Ranger: the shot bounces to this many more enemies, each for this percent of its weight.
+        public const int RangerBounces = 2, RangerFinalBounces = 3;
+        public const int RangerPercent = 50, RangerFinalPercent = 75;
+
+        /// Duelist: his strike on your Focus Fire target never misses, and crits for this percent.
+        public const int DuelistPercent = 200, DuelistFinalPercent = 300;
+
+        /// Netter: her trap catches this many more beside the one who sprang it.
+        public const int NetterMore = 1, NetterFinalMore = 2;
+
+        /// Hierophant: her treatment splashes this percent of itself onto the allies beside the patient.
+        public const int HierophantPercent = 50, HierophantFinalPercent = 100;
+
+        /// Martyr: her heals are up to this many percent bigger, all of it at no health left, none at full.
+        public const int MartyrPercent = 100, MartyrFinalPercent = 200;
+
+        /// The Whisper event details of each vow going off.
+        public const string ReprisalDetail = "reprisal", SniperDetail = "sniper", RangerDetail = "ranger", ReaverDetail = "reaver",
+            DuelistDetail = "duelist", NetterDetail = "netter", BleederDetail = "bleeder", HierophantDetail = "hierophant";
+
+        public static bool Valid(StarVow vow) => vow > StarVow.None && (int)vow < Count;
+
+        /// The class a vow is for.
+        public static UnitClass ClassOf(StarVow vow) => (UnitClass)(((int)vow - 1) / 2);
+
+        /// A class's two vows.
+        public static StarVow FirstOf(UnitClass cls) => (StarVow)((int)cls * 2 + 1);
+        public static StarVow SecondOf(UnitClass cls) => (StarVow)((int)cls * 2 + 2);
+
+        public static string Name(StarVow vow) => Valid(vow) ? vow.ToString() : "None";
+
+        /// What it does at tier 1 (rank 2) or 2 (rank 3), in one line.
+        public static string Describe(StarVow vow, int tier)
+        {
+            bool final = tier >= 2;
+            switch (vow)
+            {
+                case StarVow.Bastion: return final ? "His Guard covers everyone in his ward's row." : "His Guard also covers whoever stands beside his ward.";
+                case StarVow.Reprisal: return "Every blow his Guard takes, he hits back for " + (final ? ReprisalFinalPercent + "% of his power and leaves an Opening." : ReprisalPercent + "% of his power.");
+                case StarVow.Sniper: return "His shot goes through to the first enemy behind for " + (final ? SniperFinalPercent : SniperPercent) + "% of it.";
+                case StarVow.Ranger: return "His shot bounces to " + (final ? RangerFinalBounces : RangerBounces) + " more enemies for " + (final ? RangerFinalPercent : RangerPercent) + "% of it.";
+                case StarVow.Reaver: return final ? "A kill gives him his strike back, and he strikes again at once." : "A kill gives him his strike back.";
+                case StarVow.Duelist: return "His strike on your Focus Fire target never misses and crits for " + (final ? DuelistFinalPercent : DuelistPercent) + "%.";
+                case StarVow.Netter: return "Her trap catches " + (final ? NetterFinalMore : NetterMore) + " more beside the one who springs it.";
+                case StarVow.Bleeder: return final ? "When a bleeding enemy dies, his wound jumps to everyone beside him." : "When a bleeding enemy dies, his wound jumps to the next one beside him.";
+                case StarVow.Hierophant: return "Her treatment splashes " + (final ? HierophantFinalPercent : HierophantPercent) + "% of itself onto the allies beside.";
+                case StarVow.Martyr: return "Her heals are up to " + (final ? MartyrFinalPercent : MartyrPercent) + "% bigger the less health she has left.";
+                default: return string.Empty;
+            }
+        }
+    }
+
     /// The Pals' duos (campaign rules 27; Jacob in chat, 1 Nov 2026: "go write them"; BattleSimulation.Duos.cs): one pick that
     /// joins two Pals' themes, offered once a run holds a pick from both. One for each pair of the four.
     public enum PalDuo
@@ -686,11 +763,15 @@ namespace KindredSiege.Sim.Battle
         // From rules 27 the duos held, one bit a duo (1 << (int)PalDuo).
         private int _duos;
 
+        // From rules 30 each fighter's vow, by id, in the order given.
+        private readonly List<KeyValuePair<string, StarVow>> _vows = new List<KeyValuePair<string, StarVow>>();
+
         private PalKit(PalKit routes, int[] habits, SquadPair pair)
         {
             Array.Copy(routes._forms, _forms, _forms.Length);
             Array.Copy(routes._talents, _talents, _talents.Length);
             _duos = routes._duos;
+            _vows.AddRange(routes._vows);
             OrderCostPercent = routes.OrderCostPercent;
             var taken = new bool[(int)UnitClass.Medic + 1];
             for (int h = 1; habits != null && h < habits.Length && h <= WhisperRules.HabitCount; h++)
@@ -745,6 +826,27 @@ namespace KindredSiege.Sim.Battle
         public int DuoMask => _duos;
 
         public bool HasDuo(PalDuo duo) => DuoRules.Valid(duo) && (_duos & (1 << (int)duo)) != 0;
+
+        /// The same kit with these fighters' vows (rules 30), by fighter id; a fighter named twice keeps his first.
+        public PalKit WithVows(IReadOnlyList<KeyValuePair<string, StarVow>> vows)
+        {
+            var kit = new PalKit(this, _habits, Pair);
+            kit._vows.Clear();
+            for (int i = 0; vows != null && i < vows.Count; i++)
+                if (VowRules.Valid(vows[i].Value) && !string.IsNullOrEmpty(vows[i].Key) && kit.VowOf(vows[i].Key) == StarVow.None)
+                    kit._vows.Add(vows[i]);
+            return kit;
+        }
+
+        /// This fighter's vow, None for none.
+        public StarVow VowOf(string fighterId)
+        {
+            for (int i = 0; i < _vows.Count; i++) if (string.Equals(_vows[i].Key, fighterId, StringComparison.Ordinal)) return _vows[i].Value;
+            return StarVow.None;
+        }
+
+        /// Every fighter's vow, in order, for the replay evidence.
+        public IReadOnlyList<KeyValuePair<string, StarVow>> Vows => _vows;
 
         /// The squad's pair, None for none.
         public SquadPair Pair { get; }
@@ -808,7 +910,7 @@ namespace KindredSiege.Sim.Battle
         {
             get
             {
-                if (OrderCostPercent != 0 || Pair != SquadPair.None || _duos != 0) return false;
+                if (OrderCostPercent != 0 || Pair != SquadPair.None || _duos != 0 || _vows.Count > 0) return false;
                 for (int r = 1; r < ShadeRules.RouteCount; r++) if (_forms[r] > 0) return false;
                 for (int h = 1; h <= WhisperRules.HabitCount; h++) if (_habits[h] > 0) return false;
                 for (int t = 1; t <= GluttonRules.TalentCount; t++) if (_talents[t] > 0) return false;
@@ -846,6 +948,8 @@ namespace KindredSiege.Sim.Battle
             // The duos (rules 27), the same way.
             for (int d = 1; d < DuoRules.Count; d++)
                 if ((_duos & (1 << d)) != 0) b.Field(prefix + "duo." + ((PalDuo)d).ToString().ToLowerInvariant(), true);
+            // The vows (rules 30), the same way.
+            for (int i = 0; i < _vows.Count; i++) b.Field(prefix + "vow." + _vows[i].Key, (int)_vows[i].Value);
         }
     }
 }

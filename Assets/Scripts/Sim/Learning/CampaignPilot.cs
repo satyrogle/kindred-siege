@@ -339,14 +339,34 @@ namespace KindredSiege.Sim.Learning
 
         /// Which offer to take for a run leaning into one Pal: the first of his fights whose win would offer his picks, else
         /// PickOffer's own.
-        public int PickOffer(Campaign c, Pal lean)
+        public int PickOffer(Campaign c, Pal lean) => PickOffer(c, lean, false);
+
+        /// The same, and themed from rules 30 a Butcher run goes to the fight of its leading flavour (ThemeLine before it holds
+        /// a combo) when one is on offer (Campaign.NodeFlavour).
+        public int PickOffer(Campaign c, Pal lean, bool themed)
         {
+            Augment want = themed && lean == Pal.Butcher ? LeadingFlavour(c) : Augment.None;
+            int first = -1;
             for (int i = 0; lean != Pal.None && i < c.Offers.Count; i++)
             {
                 Encounter e = c.Offers[i];
-                if (e.Node != null && e.Node.Pal == lean && c.PalPickOffered(e.Node)) return i;
+                if (e.Node == null || e.Node.Pal != lean || !c.PalPickOffered(e.Node)) continue;
+                if (first < 0) first = i;
+                if (want == Augment.None || c.NodeFlavour(e.Node) == want) return i;
             }
-            return PickOffer(c);
+            return first >= 0 ? first : PickOffer(c);
+        }
+
+        // The flavour the run's combos carry most, counting ranks; ThemeLine's with none held; None without either.
+        private Augment LeadingFlavour(Campaign c)
+        {
+            var counts = new int[4];
+            for (int g = 0; g < c.Gear.Count; g++)
+                if (ClassSpells.IsCombo(c.Gear[g].Bend)) counts[(int)ClassSpells.AugmentOf(c.Gear[g].Bend)] += c.Gear[g].Rank;
+            int best = 0;
+            for (int a = 1; a < counts.Length; a++) if (counts[a] > counts[best]) best = a;
+            if (counts[best] > 0) return (Augment)best;
+            return ThemeLine >= 1 && ThemeLine <= 3 ? (Augment)ThemeLine : Augment.None;
         }
 
         /// Which of the standing Pal card's picks to take: at random from the pilot's own dice, or themed, leaning into his
