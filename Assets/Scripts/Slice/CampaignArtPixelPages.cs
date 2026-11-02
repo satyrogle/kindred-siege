@@ -252,6 +252,7 @@ namespace KindredSiege.Slice
                 }
             }
             else lines.Add("Training fight: no run roster lost.",PxMuted);
+            foreach(var fighter in r.RanksLost)lines.Add(fighter.Name+" / RANK LOST / now R"+fighter.Rank,PxOrange);
             lines.Gap().Add("Recruited: "+r.JoinedFighters.Count,r.JoinedFighters.Count>0?PxMint:PxMuted);
             if(r.JoinedFighters.Count>0)
             {

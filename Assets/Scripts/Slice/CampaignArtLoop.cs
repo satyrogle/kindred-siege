@@ -38,6 +38,7 @@ namespace KindredSiege.Slice
         Button _resultButton;
         RenderTexture _captureTarget;
         Texture2D _capturePixels;
+        readonly CampaignSave.FileWriter _saveWriter = new CampaignSave.FileWriter();
         void Start()
         {
             Application.runInBackground=true;
@@ -77,6 +78,7 @@ namespace KindredSiege.Slice
         }
         void Update()
         {
+            ReportSaveError();
             // Whole number scales only (Jacob, 11 Oct 2026: "scaling is shit"): the 1440x900 canvas is shown at
             // 1x, 2x and so on with a dark border, and shrinks only when the window is smaller than 1440x900.
             float fit=Mathf.Min(Screen.width/W,Screen.height/H);
@@ -133,6 +135,7 @@ namespace KindredSiege.Slice
         }
         void OnDestroy()
         {
+            _saveWriter.Dispose();
             ClearSound();
             ClearBattle();
             ClearInnerCircle();
@@ -145,6 +148,7 @@ namespace KindredSiege.Slice
         /// a damaged or missing save opens the last good backup, and the title says so.
         void ShowTitle()
         {
+            _saveWriter.Flush(); ReportSaveError();
             _saveSummary = string.Empty;
             if (FileExists())
             {
@@ -173,6 +177,7 @@ namespace KindredSiege.Slice
         /// A save that cannot be read is reported and left alone; it is never replaced by a new campaign.
         void ContinueSaved()
         {
+            _saveWriter.Flush(); ReportSaveError();
             if (!FileExists())
             {
                 _notice = "No save found.";
@@ -225,17 +230,24 @@ namespace KindredSiege.Slice
         /// when a fight starts, after every order, after every fight, and when the game closes or loses focus.
         /// Since 11 Oct 2026 through Codex's safe writer (CampaignSave version 4): a temp file is written and
         /// checked, then replaces the save, and the old save is kept as a .bak backup.
-        void Save()
+        void Save(bool background = false)
         {
             if (_campaign == null) return;
             try
             {
-                CampaignSave.WriteFile(_savePath, _campaign);
+                _saveWriter.Submit(_savePath, CampaignSave.CaptureFile(_campaign));
+                if (!background || _auto) { _saveWriter.Flush(); ReportSaveError(); }
             }
             catch (Exception e)
             {
                 _notice = "Saving failed: " + e.Message;
             }
+        }
+
+        void ReportSaveError()
+        {
+            string error = _saveWriter.TakeError();
+            if (!string.IsNullOrEmpty(error)) { _notice = error; Debug.LogWarning(error); }
         }
 
         // The automatic validation saves where it chooses, so closing it never writes over its save.
@@ -247,6 +259,11 @@ namespace KindredSiege.Slice
         void OnApplicationPause(bool paused)
         {
             if (paused && !_auto) Save();
+        }
+
+        void OnApplicationFocus(bool focused)
+        {
+            if (!focused && !_auto) Save();
         }
 
         void GoAfter(string tribeId)
@@ -386,7 +403,7 @@ namespace KindredSiege.Slice
                 HoldAccepted();
                 _notice = string.Empty;
                 DrainEvents(); // the order shows on the fighters at once, even while paused
-                Save();
+                Save(background: true);
             }
         }
 
@@ -401,7 +418,7 @@ namespace KindredSiege.Slice
                 HoldAccepted();
                 _notice = string.Empty;
                 DrainEvents();
-                Save();
+                Save(background: true);
             }
         }
 

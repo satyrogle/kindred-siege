@@ -191,7 +191,7 @@ namespace KindredSiege.Slice
         void ShowChiefMoves()
         {
             _paused = true;
-            if(RaidHud){Modal("RAID CHIEF",RaidGuide);return;}
+            if(RaidHud){Modal("RAID CHIEF",ViewSim.TightParryOn?"SOLO BLOODRIDGE CHIEF\nHealth weakens his posture recovery. Empty his posture to make him kneel. Spare recruits; Execute takes his gear.\n\n"+TightGuide:RaidGuide);return;}
             var sim = ViewSim;
             var text = new StringBuilder(_playback!=null?"PAUSED. Moves in this recorded fight:\n\n":"PAUSED. This chief has these moves:\n\n");
             foreach (ChiefMove move in Enum.GetValues(typeof(ChiefMove)))

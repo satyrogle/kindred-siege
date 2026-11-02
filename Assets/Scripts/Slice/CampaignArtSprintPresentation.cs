@@ -30,17 +30,20 @@ namespace KindredSiege.Slice
                 CastName(e)=="Eclipse" && (e.Detail==Moves.Full || e.Detail==Moves.Soaked);
             if (!kill&&!parry&&!riposte&&!eclipse&&!classFinish&&!phase) return;
             if(parry&&actor==null)actor=FindFigure(_parriedGuard);
+            if(parry&&actor==null&&ViewSim.TightParryOn&&target!=null)
+                foreach(var threat in _threatReads)
+                    if(threat.ActorId==target.unit.Id){actor=FindFigure(threat.TargetId);break;}
             // A multi-kill or row hit is one moment, not a chain of screen flashes.
-            if (_visualTime-_majorLast<.45f) return;
+            if (_visualTime-_majorLast<.45f&&!parry) return;
             float hold=kill?.33f:classFinish?.2f:.15f;
             _majorLast=_visualTime;_majorUntil=_visualTime+hold;
             _majorActor=actor==null?e.ActorId:actor.unit.Id;_majorTarget=e.TargetId;
-            _majorSide=eclipse?1-e.ActorSide:parry&&actor==null?e.ActorSide:-1;
+            _majorSide=eclipse?1-e.ActorSide:parry&&actor==null&&!ViewSim.TightParryOn?e.ActorSide:-1;
             foreach(var f in _figures)
                 if(f==actor||f==target||f.unit.Side==_majorSide)
                 {
                     f.poseHold=Mathf.Max(f.poseHold,hold);f.majorFreeze=true;
-                    f.majorWhiteUntil=_visualTime+.065f;
+                    f.majorWhiteUntil=parry&&ViewSim.TightParryOn?(f==target?_visualTime+1f/12:-100):_visualTime+.065f;
                 }
         }
 

@@ -2,6 +2,8 @@ using System;
 using System.IO;
 using System.Security.Cryptography;
 using System.Text;
+using System.Collections.Generic;
+using System.Threading;
 
 namespace KindredSiege.Sim.Learning
 {
@@ -15,13 +17,33 @@ namespace KindredSiege.Sim.Learning
         /// The caller owns its save path and when to save. Use TryReadFile for backup recovery.
         public static void WriteFile(string path, Campaign campaign)
         {
+            WriteFileSnapshot(path, CaptureFile(campaign));
+        }
+
+        /// Capture on the campaign's owning thread. The returned value has no live campaign state.
+        public static FileSnapshot CaptureFile(Campaign campaign)
+        {
             if (campaign == null) throw new ArgumentNullException(nameof(campaign));
+            return new FileSnapshot(Write(campaign), campaign.Tuning.Clone());
+        }
+
+        public sealed class FileSnapshot
+        {
+            internal readonly string Payload;
+            internal readonly CampaignTuning Tuning;
+            internal FileSnapshot(string payload, CampaignTuning tuning) { Payload = payload; Tuning = tuning; }
+        }
+
+        /// The same durable writer, accepting a previously captured immutable snapshot on any thread.
+        public static void WriteFileSnapshot(string path, FileSnapshot snapshot)
+        {
+            if (snapshot == null) throw new ArgumentNullException(nameof(snapshot));
             path = Path.GetFullPath(path);
             Directory.CreateDirectory(Path.GetDirectoryName(path));
             // A persistent empty lock file avoids races caused by unlinking another writer's lock.
             using (var guard = new FileStream(path + ".lock", FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.None))
             {
-                string payload = Write(campaign);
+                string payload = snapshot.Payload;
                 string sealedText = Seal(payload);
                 string temp = path + "." + Guid.NewGuid().ToString("N") + ".tmp";
                 try
@@ -53,7 +75,7 @@ namespace KindredSiege.Sim.Learning
                         }
                         else
                         {
-                            readable = TryRead(previous, campaign.Tuning, out Campaign old, out _);
+                            readable = TryRead(previous, snapshot.Tuning, out Campaign old, out _);
                             complete = readable && string.IsNullOrEmpty(old.LoadNote);
                         }
                         // A damaged primary must never displace a usable backup.
@@ -67,6 +89,67 @@ namespace KindredSiege.Sim.Learning
                     // Only this invocation's temp. Orphans from a process crash are never treated as committed saves.
                     if (File.Exists(temp)) File.Delete(temp);
                 }
+            }
+        }
+
+        /// One ordered disk writer. Only adjacent pending snapshots for the same path are coalesced;
+        /// an in-flight write is always allowed to finish before the next one starts.
+        public sealed class FileWriter : IDisposable
+        {
+            sealed class Pending
+            {
+                public string Path;
+                public FileSnapshot Snapshot;
+            }
+            readonly object _gate = new object();
+            readonly List<Pending> _pending = new List<Pending>();
+            bool _running, _disposed;
+            string _error;
+
+            public void Submit(string path, FileSnapshot snapshot)
+            {
+                if (snapshot == null) throw new ArgumentNullException(nameof(snapshot));
+                path = System.IO.Path.GetFullPath(path);
+                lock (_gate)
+                {
+                    if (_disposed) throw new ObjectDisposedException(nameof(FileWriter));
+                    var request = new Pending { Path = path, Snapshot = snapshot };
+                    int last = _pending.Count - 1;
+                    if (last >= 0 && string.Equals(_pending[last].Path, path, StringComparison.OrdinalIgnoreCase))
+                        _pending[last] = request;
+                    else _pending.Add(request);
+                    if (_running) return;
+                    _running = true;
+                    ThreadPool.QueueUserWorkItem(_ => Drain());
+                }
+            }
+
+            void Drain()
+            {
+                while (true)
+                {
+                    Pending next;
+                    lock (_gate)
+                    {
+                        if (_pending.Count == 0)
+                        {
+                            _running = false;
+                            Monitor.PulseAll(_gate);
+                            return;
+                        }
+                        next = _pending[0]; _pending.RemoveAt(0);
+                    }
+                    try { WriteFileSnapshot(next.Path, next.Snapshot); }
+                    catch (Exception e) { lock (_gate) _error = "Saving failed: " + e.Message; }
+                }
+            }
+
+            // Call on load, pause and shutdown boundaries. Failures are reported on the caller's thread.
+            public void Flush() { lock (_gate) while (_running) Monitor.Wait(_gate); }
+            public string TakeError() { lock (_gate) { var error = _error; _error = null; return error; } }
+            public void Dispose()
+            {
+                lock (_gate) { _disposed = true; while (_running) Monitor.Wait(_gate); }
             }
         }
 

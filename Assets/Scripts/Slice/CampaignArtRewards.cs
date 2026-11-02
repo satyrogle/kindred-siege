@@ -28,6 +28,7 @@ namespace KindredSiege.Slice
                     lines.Add(SliceClasses.Name(ClassSpells.ClassOf(bend))+" / "+MarkRules.Name(MarkRules.Of(bend)),ComboColour(bend));
                 }
                 else lines.Add(FavourRules.PalName(offer.Pal),PxMuted);
+                if(FavourRules.IsWhisper(favour))lines=WhisperLines(choice,true);
                 PxPanel(x,108,216,88,lines,_modal);
                 PxButton("reward-pal-"+i,"VIEW PAL PICK",x,200,216,26,()=>ShowRewardDetail(true,choice),_modal);
             }
@@ -50,7 +51,7 @@ namespace KindredSiege.Slice
             int price=_campaign.SpoilsMaterials;bool allowed;string why;PxLines lines,full;string title,action;
             if(pal)
             {
-                var favour=offer.Choices[choice];title="PAL PICK";full=FavourChoiceLines(favour);lines=CompactFavourLines(favour);
+                var favour=offer.Choices[choice];title="PAL PICK";full=FavourChoiceLines(favour,choice);lines=FavourRules.IsWhisper(favour)?WhisperLines(choice):CompactFavourLines(favour);
                 if(FavourRules.IsCombo(favour))full.Gap().Add(_campaign.FavourRank(favour)>0?
                     "Ranks up this piece. Its current wearer stays the same.":
                     "Auto-equips the first class fighter without a combo; otherwise stays in run gear.",PxMuted);

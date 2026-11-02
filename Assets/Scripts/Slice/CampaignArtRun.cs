@@ -232,9 +232,11 @@ namespace KindredSiege.Slice
                 });
                 if(!piece.Fits(f.Class))SetPx(_pxButtonLabels["equip-"+piece.Id],Fit(GearClass(piece)+" ONLY: "+piece.Name,282),PxMuted);
             }
-            if(worn!=null&&gearSlot==0)PxButton("unequip","TAKE IT OFF",42,350,200,28,()=>
+            if(worn!=null)PxButton("unequip","TAKE IT OFF",42,350,200,28,()=>
             {
-                if(!_campaign.TryUnequip(f.Id,out string why)){_notice=why;return;}
+                string why;
+                bool removed=gearSlot==0?_campaign.TryUnequip(f.Id,out why):_campaign.TryUnequipSecond(f.Id,out why);
+                if(!removed){_notice=why;return;}
                 Save();SetPage(Page.Squad);SelectControl("gear-"+f.Id);
             },_modal);
             if(PalFloorRun)

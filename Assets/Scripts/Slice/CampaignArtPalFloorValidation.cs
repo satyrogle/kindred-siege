@@ -56,6 +56,10 @@ namespace KindredSiege.Slice
             string before=CampaignSave.Write(_campaign);
             Check(Click("equip-"+Campaign.ComboGearId(bends[0])),"attempt to reuse the first slot item uses the real command");
             Check(CampaignSave.Write(_campaign)==before,"Campaign rejects already-worn second piece without mutation");Capture("floor-slot2");CloseModal();
+            ShowGearPicker(fighterId,0,1);yield return null;
+            Check(Click("unequip"),"second slot removes through handed-back Campaign API");yield return null;
+            Check(FindReserve(fighterId).GearId==Campaign.ComboGearId(bends[0])&&FindReserve(fighterId).GearId2=="","removing slot2 preserves slot1");
+            ShowGearPicker(fighterId,0,1);yield return null;Check(Click("equip-"+Campaign.ComboGearId(bends[1])),"restore second piece through actual picker");yield return null;
             ShowGearPicker(fighterId);yield return null;Check(Click("unequip"),"remove first piece through its supported control");yield return null;
             Check(FindReserve(fighterId).GearId==""&&FindReserve(fighterId).GearId2==Campaign.ComboGearId(bends[1]),"removing slot1 preserves equipped slot2");
             ShowGearPicker(fighterId);yield return null;Check(Click("equip-"+Campaign.ComboGearId(bends[0])),"restore first piece while retaining second");yield return null;
