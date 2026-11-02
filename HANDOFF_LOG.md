@@ -13240,3 +13240,19 @@ Jacob, in the same cloud chat, after "i dont want to play until everything is wi
 **For Codex.** New files need .meta: Assets/Scripts/Sim/Battle/BattleSimulation.Sized.cs, Assets/Tests/EditMode/SizedTests.cs. HitLayer.Pal is new, after Parry. Pal card and tooltip text from ShadeRules.Describe, GluttonRules.Describe and DuoRules.Describe does not show the sized numbers yet: BattleSimulation.SizedOn says when they play.
 
 Files: Assets/Scripts/Sim/Battle/BattleSimulation.Sized.cs (new), Hits.cs, FightRules.cs, BattleSimulation.cs, BattleSimulation.Layers.cs, BattleSimulation.Shade.cs, BattleSimulation.Glutton.cs, BattleSimulation.Duos.cs, BattleSimulation.Marks.cs; Assets/Scripts/Sim/Learning/Campaign.cs, ReplayEvidence.cs, CampaignPilot.cs; Assets/Tests/EditMode/SizedTests.cs (new); tools/sim_checks/sweep/PalSweep.cs, PairSweep.cs; HANDOFF_LOG.md.
+
+## 2026-11-02 - Claude (cloud session) to Codex / Jacob / local Claude - Hand back: the Butcher's flavours (campaign rules 29)
+
+Jacob, in the same cloud chat, on the Butcher's options after the sizing pass: "i think both 1 and 2 and if that doesn't work need to rework". Built behind campaign rules 29 (Campaign.ButcherFlavourRules, Battle.FightRules.Flavours). Save version stays 30; evidence format 34. Every number is a starting value.
+
+**What is in** (BattleSimulation.Flavours.cs; numbers in Battle.SizeRules).
+- 1, combos grow with their flavour: for each rank past the first of combos of a combo's flavour the side wears, its hits (Black Hole Round's crush, Event Horizon's cleave, Execution Corridor's blow, a Frozen Flurry's thaw) are 300% bigger, its pins, freezes and slows (Collapse, Stopped Bullets, Frozen Flurry, Still Wall, Time Snare, the Crush and Stasis bursts) 200% longer, and Gravity's pulls reach 1 place further.
+- 2, final forms at 3 ranks of one flavour: a Crush burst crushes every other standing enemy of his row as hard and pins them (Burst "crush.row"); an Exposed burst's wide open jumps on to the next enemy beside him when it is spent, once (Burst "exposed.jump"); a Stasis burst freezes every other enemy of his side for 1 s (Burst "stasis.all"). A chief whose band stands shrugs each off. Read: BattleSimulation.FlavoursOn, FlavourRanksOf(side, mark).
+
+**The builds test**, run once in my scratchpad: it still fails. Themed against random, runs in 100: +2.0 with orders, +5.0 without (it was +2.7 and +2.0). Final forms at 2 ranks instead of 3 gave +3.0 and +5.3. By Jacob's own condition the Butcher now needs a rework; the design is with him.
+
+**Checked:** 574 passed, 1 failed (the Windows file locking test), 7 skipped; a new SizedTests check that three ranks of Gravity crush the row from rules 29 and not at 28. Old against new, against the sizing commit (c3a69ef2): a copy with RulesVersion 28 and format 33 matches it byte for byte on every probe output and all 32 saves; this build plays every capped run fight for fight the same (only save hashes differ); rules 29 runs play with no exceptions. **Not checked:** nothing in Unity.
+
+**For Codex.** New file needs .meta: Assets/Scripts/Sim/Battle/BattleSimulation.Flavours.cs. Burst details to show: crush.row, exposed.jump, stasis.all.
+
+Files: Assets/Scripts/Sim/Battle/BattleSimulation.Flavours.cs (new), BattleSimulation.Sized.cs, BattleSimulation.Marks.cs, BattleSimulation.Combos.cs, BattleSimulation.Layers.cs, BattleSimulation.cs, FightRules.cs; Assets/Scripts/Sim/Learning/Campaign.cs, ReplayEvidence.cs; Assets/Tests/EditMode/SizedTests.cs; HANDOFF_LOG.md.

@@ -125,6 +125,8 @@ namespace KindredSiege.Sim.Battle
         private List<BattleUnit> PulledIn(BattleUnit by, BattleUnit mark, int reach = 1)
         {
             // Neutron Mass and Stasis Wind Up (rules 26) reach further.
+            // The Butcher's flavours (rules 29): Gravity pulls further.
+            if (_flavoursOn) reach += FlavourReachOf(by);
             List<BattleUnit> beside = Beside(mark, reach);
             var pulled = new List<BattleUnit>();
             for (int k = 1; k < beside.Count; k++)
@@ -203,7 +205,7 @@ namespace KindredSiege.Sim.Battle
             bool rips = mark.BleedTicks > 0;
             if ((!rips && skirmisher.ComboCount % ClassSpells.CollapseEvery != 0) || _finished || !mark.Alive || ShrugsMarks(mark)) return;
             Emit(EventFor(BattleEventKind.Pull, skirmisher, mark, 0, ClassSpells.Name(ClassBend.Collapse)));
-            Pin(mark, ClassSpells.CollapseTicks);
+            Pin(mark, FlavourHold(skirmisher, ClassBend.Collapse, ClassSpells.CollapseTicks));
             Lay(skirmisher, mark, ClassBend.Collapse);
         }
 
@@ -255,7 +257,7 @@ namespace KindredSiege.Sim.Battle
             }
             else if (Wears(trapper, ClassBend.TimeSnare))
             {
-                caught.Statuses.Apply(StatusKind.Slow, hold + ClassSpells.TimeSnareTicks);
+                caught.Statuses.Apply(StatusKind.Slow, hold + FlavourHold(trapper, ClassBend.TimeSnare, ClassSpells.TimeSnareTicks));
                 Emit(EventFor(BattleEventKind.Freeze, trapper, caught, caught.SlowTicks, ClassSpells.Name(ClassBend.TimeSnare)));
                 Lay(trapper, caught, ClassBend.TimeSnare);
             }
@@ -449,7 +451,7 @@ namespace KindredSiege.Sim.Battle
                 if (!_finished && mark.Alive)
                 {
                     Open(marksman, mark);
-                    Pin(mark, FreezeTicks(marksman));
+                    Pin(mark, FlavourHold(marksman, ClassBend.StoppedBullets, FreezeTicks(marksman)));
                     Lay(marksman, mark, ClassBend.StoppedBullets);
                 }
                 return 0;
@@ -463,9 +465,10 @@ namespace KindredSiege.Sim.Battle
         private void FlurryStruck(BattleUnit skirmisher, BattleUnit mark)
         {
             if (_finished || !mark.Alive || mark.FlurryTicks > 0 || ShrugsMarks(mark)) return;
-            mark.Statuses.Apply(StatusKind.Flurry, ClassSpells.FlurryTicks, sourceId: skirmisher.Id);
-            Pin(mark, ClassSpells.FlurryTicks);
-            Emit(EventFor(BattleEventKind.Freeze, skirmisher, mark, ClassSpells.FlurryTicks, ClassSpells.Name(ClassBend.FrozenFlurry)));
+            int flurry = FlavourHold(skirmisher, ClassBend.FrozenFlurry, ClassSpells.FlurryTicks);
+            mark.Statuses.Apply(StatusKind.Flurry, flurry, sourceId: skirmisher.Id);
+            Pin(mark, flurry);
+            Emit(EventFor(BattleEventKind.Freeze, skirmisher, mark, flurry, ClassSpells.Name(ClassBend.FrozenFlurry)));
             Lay(skirmisher, mark, ClassBend.FrozenFlurry);
         }
 
@@ -510,8 +513,9 @@ namespace KindredSiege.Sim.Battle
             if (warden.ComboTicks > 0 || !warden.Alive || !striker.Alive || ShrugsMarks(striker) || !Wears(warden, ClassBend.StillWall))
                 return;
             warden.ComboTicks = ClassSpells.StillWallEveryTicks;
-            Pin(striker, ClassSpells.StillWallTicks);
-            Emit(EventFor(BattleEventKind.Freeze, warden, striker, ClassSpells.StillWallTicks, ClassSpells.Name(ClassBend.StillWall)));
+            int wall = FlavourHold(warden, ClassBend.StillWall, ClassSpells.StillWallTicks);
+            Pin(striker, wall);
+            Emit(EventFor(BattleEventKind.Freeze, warden, striker, wall, ClassSpells.Name(ClassBend.StillWall)));
             Open(warden, striker);
             Lay(warden, striker, ClassBend.StillWall);
         }

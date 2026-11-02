@@ -51,6 +51,26 @@ namespace KindredSiege.Sim.Battle
         public const int GorgedPricePercent = 25;
         public const int ShadowStarTicks = 3 * SimClock.TicksPerSecond / 2;
         public const int FattenedPercent = 200;
+
+        /// The Butcher's flavours (campaign rules 29, BattleSimulation.Flavours.cs). For each rank past the first of combos of a
+        /// combo's flavour the side wears: its hits (Black Hole Round's crush, Event Horizon's cleave, Execution Corridor's blow,
+        /// a Frozen Flurry's thaw) this many percent bigger, its pins, freezes and slows this many percent longer, and its pulls
+        /// this many places further.
+        public const int FlavourComboPercent = 300;
+        public const int FlavourHoldPercent = 200;
+        public const int FlavourReach = 1;
+
+        /// At this many ranks of one flavour, its final form: a Crush burst crushes the whole row of the one it burst on; an
+        /// Exposed burst's wide open jumps on to the next enemy beside him when it is spent, ExposedJumps times; a Stasis burst
+        /// freezes every enemy for StasisAllTicks.
+        public const int FinalRanks = 3;
+        public const int ExposedJumps = 1;
+        public const int StasisAllTicks = SimClock.TicksPerSecond;
+
+        /// The final forms' Burst event details.
+        public const string CrushRowDetail = "crush.row";
+        public const string ExposedJumpDetail = "exposed.jump";
+        public const string StasisAllDetail = "stasis.all";
     }
 
     public sealed partial class BattleSimulation

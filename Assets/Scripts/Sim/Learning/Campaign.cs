@@ -610,7 +610,9 @@ namespace KindredSiege.Sim.Learning
         /// a card once the run holds a pick from both of its Pals, and the six in the fight.
         /// 28 those and the sizing pass (Jacob in chat, 1 Nov 2026: "okay go"; Battle.FightRules.Sized; SizedRules): the Pals'
         /// picks sized with the builds test to decide fights.
-        public const int RulesVersion = 28;
+        /// 29 those and the Butcher's flavours (Jacob in chat, 2 Nov 2026: "both 1 and 2"; Battle.FightRules.Flavours;
+        /// ButcherFlavourRules): combos growing with their flavour, and each flavour's final form.
+        public const int RulesVersion = 29;
         public const int SquadScreenRules = 14;
         public const int ClearRoadRules = 13;
 
@@ -686,6 +688,11 @@ namespace KindredSiege.Sim.Learning
         /// The campaign rules version from which the Pals' picks play sized (Jacob in chat, 1 Nov 2026: "okay go";
         /// Battle.BattleSimulation.Sized.cs, Battle.SizeRules): big enough that leaning into one Pal decides runs.
         public const int SizedRules = 28;
+
+        /// The campaign rules version from which the Butcher's flavours play (Jacob in chat, 2 Nov 2026: "both 1 and 2";
+        /// Battle.BattleSimulation.Flavours.cs): a combo grows with the ranks of its flavour the side wears, and three ranks of
+        /// one flavour unlock its final form.
+        public const int ButcherFlavourRules = 29;
 
         /// Whether this run's roads carry a Pal on every fight (fix 5): set when the run starts under PalRoadRules, and kept
         /// with the run, so its roads come back the same when it loads.
@@ -3195,6 +3202,8 @@ namespace KindredSiege.Sim.Learning
                 if (rules >= PalDuoRules) fightRules = fightRules.WithDuos();
                 // From rules 28 the sized picks. Last, after the duos.
                 if (rules >= SizedRules) fightRules = fightRules.WithSized();
+                // From rules 29 the Butcher's flavours. Last, after sizing.
+                if (rules >= ButcherFlavourRules) fightRules = fightRules.WithFlavours();
             }
             bool raidChief = IsRaidChief(tribe, encounter.Kind, rules);
             if (raidChief) MakeRaidChief(side1);

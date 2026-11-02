@@ -33,6 +33,12 @@ namespace KindredSiege.Sim.Battle
                 int rank = source != null && source.Side == sourceSide ? RankSized(source) : 0;
                 if (rank > 0) hit.Add(HitLayer.Pal, rank);
             }
+            // From rules 29 a combo's hit grows with its flavour (BattleSimulation.Flavours.cs).
+            if (foe && _flavoursOn)
+            {
+                int flavour = FlavourHitPercent(source, detail);
+                if (flavour > 0) hit.Add(HitLayer.Pal, flavour);
+            }
             // From rules 27 Gorged Tricks on one of her tricks (BattleSimulation.Duos.cs).
             if (foe && _duosOn && ShadeRules.IsTrickDetail(detail))
             {

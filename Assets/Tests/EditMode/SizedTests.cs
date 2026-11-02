@@ -129,6 +129,24 @@ namespace KindredSiege.Sim.Tests
         }
 
         [Test]
+        public void ThreeRanksOfGravityCrushTheWholeRow()
+        {
+            // Black Hole Round at rank 2 and Event Horizon: three ranks of Gravity, its final form from rules 29.
+            UnitSpec round = new UnitSpec("m", UnitClass.Marksman).WithBend(ClassBend.BlackHoleRound).WithComboRank(2);
+            UnitSpec horizon = new UnitSpec("w", UnitClass.Warden).WithBend(ClassBend.EventHorizon);
+            FightRules road29 = Road28.WithFlavours();
+            bool Row(FightRules rules)
+            {
+                BattleSimulation sim = MedicRow("row", PalKit.None, rules, round, horizon);
+                BattleEvent e = First(sim, new SimSession(sim), x => x.Kind == BattleEventKind.Burst && x.Detail == SizeRules.CrushRowDetail, 9000);
+                return e.Detail == SizeRules.CrushRowDetail;
+            }
+            Assert.IsTrue(Row(road29), "no row crushed");
+            Assert.IsFalse(Row(Road28), "not before rules 29");
+            Assert.AreEqual(3, MedicRow("count", PalKit.None, road29, round, horizon).FlavourRanksOf(0, StatusKind.Crush));
+        }
+
+        [Test]
         public void ASecondComboOfAFlavourBurstsSoonerAndBigger()
         {
             // Black Hole Round and Event Horizon both lay Crush: two ranks of one flavour.

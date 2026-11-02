@@ -102,26 +102,36 @@ namespace KindredSiege.Sim.Battle
                 case StatusKind.Crush:
                     // A hit for the power of whoever laid the last stack, through the damage layers; it is a combo's payoff,
                     // so whatever raises the Combo layer will raise it. Then he is pinned.
+                {
                     Emit(EventFor(BattleEventKind.Burst, by, target, by.Power, MarkRules.Crush));
+                    Hit crush = null;
                     if (_layersOn)
                     {
-                        var crush = new Hit(by.Power);
+                        crush = new Hit(by.Power);
                         if (gorged > 0) crush.Add(HitLayer.Combo, gorged);
-                        ApplyHit(by, by.Side, target, crush, MarkRules.CrushedDetail);
+                        ApplyHit(by, by.Side, target, crush.Copy(), MarkRules.CrushedDetail);
                     }
                     else ApplyDamage(by, by.Side, target, by.Power * (100 + gorged) / 100, MarkRules.CrushedDetail);
-                    if (!_finished && target.Alive) Pin(target, MarkRules.CrushPinTicks);
+                    // The Butcher's flavours (rules 29, BattleSimulation.Flavours.cs): a longer pin, and at the final form the row.
+                    int pin = FlavourHold(by, StatusKind.Crush, MarkRules.CrushPinTicks);
+                    if (!_finished && target.Alive) Pin(target, pin);
+                    if (!_finished && _flavoursOn) CrushRow(by, target, crush, by.Power * (100 + gorged) / 100, pin);
                     break;
+                }
                 case StatusKind.Exposed:
                     target.Statuses.Apply(StatusKind.WideOpen, MarkRules.WideOpenTicks, size: gorged, sourceId: by.Id);
+                    // The Fold Door's final form (rules 29): it can jump on.
+                    if (FinalForm(by.Side, StatusKind.Exposed)) target.Statuses[StatusKind.WideOpen].Store = SizeRules.ExposedJumps;
                     Emit(EventFor(BattleEventKind.Burst, by, target, MarkRules.WideOpenTicks, MarkRules.Exposed));
                     break;
                 case StatusKind.Stasis:
                     // Frozen as a time combo freezes (a pin), and his wind up starts over.
-                    int freeze = MarkRules.StasisFreezeTicks * (100 + gorged) / 100;
+                    int freeze = FlavourHold(by, StatusKind.Stasis, MarkRules.StasisFreezeTicks * (100 + gorged) / 100);
                     Emit(EventFor(BattleEventKind.Burst, by, target, freeze, MarkRules.Stasis));
                     Pin(target, freeze);
                     RestartWindUp(target);
+                    // Time Stop's final form (rules 29): their whole side.
+                    if (!_finished && _flavoursOn) StasisAll(by, target);
                     break;
             }
             // Crowned Marks (rules 27): the star who set it off casts again.
@@ -150,7 +160,12 @@ namespace KindredSiege.Sim.Battle
         private bool SpendWideOpen(BattleUnit attacker, BattleUnit target)
         {
             if (!_marksOn || attacker.Side == target.Side || !target.Statuses[StatusKind.WideOpen].On) return false;
+            Status open = target.Statuses[StatusKind.WideOpen];
+            int jumps = open.Store, size = open.Size;
+            string source = open.SourceId;
             target.Statuses.Clear(StatusKind.WideOpen);
+            // The Fold Door's final form (rules 29): it jumps on to the next one.
+            if (_flavoursOn) JumpWideOpen(target, jumps, size, source);
             return true;
         }
 

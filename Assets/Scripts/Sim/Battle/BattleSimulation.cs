@@ -384,6 +384,8 @@ namespace KindredSiege.Sim.Battle
             _duosOn = _floorOn && _fight.Duos;
             // The sizing pass (BattleSimulation.Sized.cs, campaign rules 28) too.
             _sizedOn = _floorOn && _fight.Sized;
+            // The Butcher's flavours (BattleSimulation.Flavours.cs, campaign rules 29) too.
+            _flavoursOn = _floorOn && _fight.Flavours;
             // The Butcher's combos (BattleSimulation.Combos.cs, 29 Oct 2026): only a fight where someone wears one plays them.
             _comboOn = _classOn && AnyCombo();
             // The damage layers (BattleSimulation.Layers.cs, campaign rules 17): every hit and heal through one pipeline.
