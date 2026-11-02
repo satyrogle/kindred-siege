@@ -109,7 +109,7 @@ namespace KindredSiege.Sim.Battle
             public long AvengeTick = -1;
             public int ForcedWardTicks;
             public string ForcedWardId = string.Empty;
-            // From rules 25 (BattleSimulation.Shade.cs): Sanctuary's field and its Relay pool, whether its Last Refuge is spent,
+            // From rules 28 (BattleSimulation.Shade.cs): Sanctuary's field and its Relay pool, whether its Last Refuge is spent,
             // and how long Backstab's price keeps Fall Back waiting.
             public int FieldTicks;
             public int RelaySize;
@@ -124,7 +124,7 @@ namespace KindredSiege.Sim.Battle
             public int ReturnTicks;
             public int ExposedTicks;
             public int BreachTicks;
-            // The duos (rules 27, BattleSimulation.Duos.cs): a free cast of the star's spell called this tick (1 Shadow Star,
+            // The duos (rules 30, BattleSimulation.Duos.cs): a free cast of the star's spell called this tick (1 Shadow Star,
             // 2 Crowned Marks, 0 none), and when Shadow Star can call the next.
             public int StarCastDue;
             public long ShadowStarAt;
@@ -192,6 +192,9 @@ namespace KindredSiege.Sim.Battle
             public bool SwungLast;
             // From rules 22 (BattleSimulation.Meter.cs): the bars your parries have filled.
             public int ParryBars;
+            // From rules 26 (BattleSimulation.Tight.cs): ticks left open after a whiff, and the tick it came.
+            public int WhiffTicks;
+            public long WhiffTick;
             public long BrandNext;
             public int SunEclipses;
             public bool SaidParry;
@@ -376,15 +379,15 @@ namespace KindredSiege.Sim.Battle
             _floorOn = _fight.Floor;
             // The Whisperer (BattleSimulation.Whisperer.cs, campaign rules 24) rides on the floor.
             _whisperOn = _floorOn && _fight.Whisper;
-            // The Shade's forms (BattleSimulation.Shade.cs, campaign rules 25) ride on the floor too.
+            // The Shade's forms (BattleSimulation.Shade.cs, campaign rules 28) ride on the floor too.
             _shadeOn = _floorOn && _fight.ShadeForms;
-            // The Glutton's talents (BattleSimulation.Glutton.cs, campaign rules 26) ride on the floor too.
+            // The Glutton's talents (BattleSimulation.Glutton.cs, campaign rules 29) ride on the floor too.
             _gluttonOn = _floorOn && _fight.Glutton;
-            // The Pals' duos (BattleSimulation.Duos.cs, campaign rules 27) too.
+            // The Pals' duos (BattleSimulation.Duos.cs, campaign rules 30) too.
             _duosOn = _floorOn && _fight.Duos;
-            // The sizing pass (BattleSimulation.Sized.cs, campaign rules 28) too.
+            // The sizing pass (BattleSimulation.Sized.cs, campaign rules 31) too.
             _sizedOn = _floorOn && _fight.Sized;
-            // The Butcher's flavours (BattleSimulation.Flavours.cs, campaign rules 29) too.
+            // The Butcher's flavours (BattleSimulation.Flavours.cs, campaign rules 32) too.
             _flavoursOn = _floorOn && _fight.Flavours;
             // The Butcher's combos (BattleSimulation.Combos.cs, 29 Oct 2026): only a fight where someone wears one plays them.
             _comboOn = _classOn && AnyCombo();
@@ -393,7 +396,7 @@ namespace KindredSiege.Sim.Battle
             // The Butcher's marks (BattleSimulation.Marks.cs, campaign rules 18): only where someone wears a combo to lay them.
             _marksOn = _comboOn && _fight.Marks;
             // The Whisperer's vows (BattleSimulation.Vows.cs) and the Butcher's marks on every hit (BattleSimulation.Flavours.cs),
-            // campaign rules 30.
+            // campaign rules 33.
             _vowsOn = _floorOn && _fight.Whisper && _fight.Vows;
             _marksOnHitsOn = _marksOn && _floorOn && _fight.MarksOnHits;
             // Payoffs that spread (BattleSimulation.Payoffs.cs, campaign rules 20).
@@ -402,6 +405,8 @@ namespace KindredSiege.Sim.Battle
             _dangerOn = _fight.Danger;
             // The parry meter (BattleSimulation.Meter.cs, campaign rules 22).
             _meterOn = _fight.Meter;
+            // The tight parry (BattleSimulation.Tight.cs, campaign rules 26), on the parry at the center.
+            _tightOn = _parryOn && _fight.Tight;
             // The chief rules (BattleSimulation.Chief.cs, 20 Oct 2026): his reserves wait out of the fight.
             _chiefOn = _fight.ChiefRules;
             if (_chiefOn) BenchReserves();
@@ -423,6 +428,10 @@ namespace KindredSiege.Sim.Battle
             _beastSide = !_fight.Beasts ? -1 : _rules[1].Beast != BeastKit.None ? 1 : _rules[0].Beast != BeastKit.None ? 0 : -1;
             _beastOn = _beastSide >= 0;
             _beastKit = _beastOn ? _rules[_beastSide].Beast : BeastKit.None;
+            // The beasts as their approved scenes show them (BattleSimulation.Beast.cs, campaign rules 25).
+            _beastScenesOn = _beastOn && _fight.BeastScenes;
+            // The beasts as raid bosses (BattleSimulation.BeastRaid.cs, campaign rules 27).
+            _beastRaidOn = _beastOn && _fight.BeastRaid;
 
             _sides[0].Points = setup.StartingDirectivePoints;
             _sides[1].Points = setup.StartingDirectivePoints;
@@ -650,7 +659,7 @@ namespace KindredSiege.Sim.Battle
             }
             else if (directive == Directive.FallBack && _shadeOn && state.FallBackLockTicks > 0)
             {
-                // Backstab's price (rules 25, BattleSimulation.Shade.cs).
+                // Backstab's price (rules 28, BattleSimulation.Shade.cs).
                 failure = "Fall Back is back in " + SecondsLeft(state.FallBackLockTicks) + ".";
                 return false;
             }
@@ -731,6 +740,7 @@ namespace KindredSiege.Sim.Battle
                     if (!unit.Alive) continue;
                     if (_beastOn && unit.Side == _beastSide) continue; // a beast's parts only move by their clocks
                     if (_beastOn && IsHeld(unit)) continue; // in the cage bear's claw, out of the fight
+                    if (_beastRaidOn && Frozen(unit)) continue; // frozen by the cage bear's frost (BattleSimulation.BeastRaid.cs)
                     if (unit.PanicTicks > 0) continue; // a panicking fighter does nothing (FightRules.NerveSnaps)
                     if (_heavyOn && IsSwingingHeavy(unit)) continue; // winding up a heavy swing, nothing else
                     if (_chiefOn && unit.Yielded) continue; // a chief who yielded does nothing more (BattleSimulation.Chief.cs)
@@ -749,7 +759,7 @@ namespace KindredSiege.Sim.Battle
 
                 // The Whisperer's upgraded Rescuers and Avengers (BattleSimulation.Whisperer.cs, rules 24).
                 if (_whisperOn && !Stopped) TickWhisper();
-                // A star's spell a duo called (BattleSimulation.Duos.cs, rules 27).
+                // A star's spell a duo called (BattleSimulation.Duos.cs, rules 30).
                 if (_duosOn && !Stopped) TickDuos();
 
                 // Class spells (BattleSimulation.Class.cs, 20 Oct 2026): aims run on, and a finished one fires.
@@ -824,6 +834,9 @@ namespace KindredSiege.Sim.Battle
                 if (_bandOn)
                     for (int s = 0; s < 2 && !Stopped; s++) TryMend(s);
 
+                // The tick's parries hit back (rules 26, BattleSimulation.Tight.cs).
+                if (_tightOn && _counters.Count > 0) DealCounters();
+
                 // Counted down after the tick's actions, so an order given on tick t is in force
                 // for exactly its length: ticks t to t + length - 1.
                 for (int s = 0; s < 2; s++) CountDownEffects(_sides[s]);
@@ -837,6 +850,11 @@ namespace KindredSiege.Sim.Battle
                 if (_floorOn) CountDownFloor();
                 if (_shadeOn) CountDownShade();
                 if (_kitsOn) CountDownKit();
+                if (_tightOn)
+                {
+                    CountDownWhiff();
+                    if (_counters.Count > 0) DealCounters();
+                }
 
                 if (!_finished && _tick + 1 >= _setup.TickLimit)
                 {
@@ -893,7 +911,7 @@ namespace KindredSiege.Sim.Battle
             if (_halted)
                 return TryVerdict(side, directive, command.TargetId, "side" + side.ToString(CultureInfo.InvariantCulture), out failure);
 
-            // The Shade's follow up presses (rules 25, BattleSimulation.Shade.cs): free, and never the plain order.
+            // The Shade's follow up presses (rules 28, BattleSimulation.Shade.cs): free, and never the plain order.
             if (_shadeOn)
             {
                 int followed = FollowUp(side, directive, command.TargetId, out failure);
@@ -1072,6 +1090,8 @@ namespace KindredSiege.Sim.Battle
                     }
                     // Written only under the parry meter (rules 22), so every older fight keeps its checksum.
                     if (_meterOn) b.Field("parryBars", state.ParryBars);
+                    // Written only under the tight parry (rules 26), so every older fight keeps its checksum.
+                    if (_tightOn) AppendTight(b, state);
                     // Written only in fights with the chief kits, so every older fight keeps its checksum.
                     if (_kitsOn)
                     {
@@ -1254,7 +1274,7 @@ namespace KindredSiege.Sim.Battle
                         b.Field(u.Id + ".backstab", u.Statuses[StatusKind.Backstab].Ticks);
                         // And the Whisperer's, only where she plays (BattleSimulation.Whisperer.cs).
                         if (_whisperOn) AppendWhisperUnit(b, u);
-                        // And the Shade's forms, only where they play (rules 25).
+                        // And the Shade's forms, only where they play (rules 28).
                         if (_shadeOn) AppendShadeUnit(b, u);
                         if (_gluttonOn) AppendGluttonUnit(b, u);
                     }
@@ -1300,14 +1320,14 @@ namespace KindredSiege.Sim.Battle
                     break;
                 case Directive.FallBack:
                     state.FallBackTicks = Longer(FallBackTicks * percent / 100, _rules[side].Favours.FallBackLongerPercent);
-                    // Backstab's price (rules 25): the next Fall Back waits until a while after this one runs out.
+                    // Backstab's price (rules 28): the next Fall Back waits until a while after this one runs out.
                     if (_shadeOn && KitOf(side).Has(ShadeRoute.Backstab))
                         state.FallBackLockTicks = state.FallBackTicks + ShadeRules.BackstabLockTicks * PriceLeft(side) / 100;
                     if (ordered) state.LastFallBackTick = _tick;
                     ReflexPressOnFallBack(1 - side);
                     // Backstab, the Shade's Fall Back trick (rules 23, BattleSimulation.Shade.cs).
                     if (_floorOn) Backstab(side);
-                    // Rift Mine, her other Fall Back route (rules 25).
+                    // Rift Mine, her other Fall Back route (rules 28).
                     if (_shadeOn) RiftMine(side, state);
                     break;
                 case Directive.FocusFire:
@@ -1315,7 +1335,7 @@ namespace KindredSiege.Sim.Battle
                     if (_parryOn && HasBand(target.Side, BandTrait.ThickHide)) Fired(target.Side, LessonFiring.ThickHide, target, null);
                     state.FocusTargetId = target.Id;
                     state.FocusTicks = FearPriced(side, Longer(FocusTicks * percent / 100, _rules[side].Favours.FocusLongerPercent));
-                    // Rupture (rules 25): a new Focus Fire starts its weak point over (BattleSimulation.Shade.cs).
+                    // Rupture (rules 28): a new Focus Fire starts its weak point over (BattleSimulation.Shade.cs).
                     if (_shadeOn) RuptureOn(side, state, target);
                     if (ordered)
                     {
@@ -1345,7 +1365,7 @@ namespace KindredSiege.Sim.Battle
                     ReflexHoldOnUnleash(1 - side);
                     ReflexKite(1 - side);
                     if (_nerveOn) UnleashScare(side);
-                    // Echo and Breach, the Shade's Unleash routes (rules 25, BattleSimulation.Shade.cs).
+                    // Echo and Breach, the Shade's Unleash routes (rules 28, BattleSimulation.Shade.cs).
                     if (_shadeOn) ShadeUnleash(side, state);
                     break;
                 case Directive.Sacrifice:
@@ -1457,7 +1477,7 @@ namespace KindredSiege.Sim.Battle
         // What a holding front row takes from a blow or a heavy swing, in percent; the Glutton's favour lowers it.
         private int HoldSoak(int side)
         {
-            // Glancing Fold (rules 26, BattleSimulation.Glutton.cs) soaks more.
+            // Glancing Fold (rules 29, BattleSimulation.Glutton.cs) soaks more.
             return Glanced(side, HoldDamagePercent - _rules[side].Favours.HoldSoakCut);
         }
 
@@ -1962,7 +1982,7 @@ namespace KindredSiege.Sim.Battle
         {
             // Under the road kit Fall Back is a pure dodge: nobody of the falling side attacks (BattleSimulation.Boosts.cs).
             if (FallingBack(attacker.Side)) return;
-            // Rift Mine (rules 25): striking one of a side with a mine sets it off, and a blast that drops him stops the blow.
+            // Rift Mine (rules 28): striking one of a side with a mine sets it off, and a blast that drops him stops the blow.
             if (_shadeOn && MineGoesOff(attacker, target)) return;
             int roll = 85 + _rng.Next(31);
             int damage = power * roll / 100;
@@ -2012,7 +2032,7 @@ namespace KindredSiege.Sim.Battle
             // (BattleSimulation.Combos.cs).
             // An Exposed burst left him wide open: this blow from the other side spends it, can't miss and can't be Guarded,
             // and its crit doubles, in the Cash layer (BattleSimulation.Marks.cs).
-            // Gorged Bursts (rules 27) left the burst's own percent more on it.
+            // Gorged Bursts (rules 30) left the burst's own percent more on it.
             int wideMore = _duosOn || _sizedOn ? target.Statuses[StatusKind.WideOpen].Size : 0;
             bool wideOpen = SpendWideOpen(attacker, target);
             if (wideOpen)
@@ -2026,11 +2046,11 @@ namespace KindredSiege.Sim.Battle
             if (SpendBackstab(attacker, target))
             {
                 int before = hit != null ? hit.Points : damage;
-                // Sized (rules 28) at Backstab's form.
+                // Sized (rules 31) at Backstab's form.
                 damage = More(damage, hit, HitLayer.Cash, ShadeSized(attacker.Side, ShadeRoute.Backstab, ShadeRules.BackstabCashPercent));
                 Emit(EventFor(BattleEventKind.Cash, attacker, target, (hit != null ? hit.Points : damage) - before, ShadeRules.BackstabDetail));
             }
-            // A Duelist's strike on her Focus Fire target never misses and crits (rules 30, BattleSimulation.Vows.cs).
+            // A Duelist's strike on her Focus Fire target never misses and crits (rules 33, BattleSimulation.Vows.cs).
             bool duel = _vowsOn && DuelistSure(attacker, target, kind);
             if (duel)
             {
@@ -2073,7 +2093,7 @@ namespace KindredSiege.Sim.Battle
                 // A burning fighter's blow burns whoever it lands on (BattleSimulation.Burn.cs).
                 if (_roadKitOn) Burned(attacker, warden);
                 if (_classOn) Retaliate(warden, attacker);
-                // Reprisal (rules 30, BattleSimulation.Vows.cs).
+                // Reprisal (rules 33, BattleSimulation.Vows.cs).
                 if (_vowsOn) Reprisal(warden, attacker);
                 if (door)
                 {
@@ -2101,7 +2121,7 @@ namespace KindredSiege.Sim.Battle
             // A blow on a chief whose ring spins or whose Sun Mantle burns (ChiefKits, 22 Oct 2026).
             if (_kitsTwoOn) KitStruck(attacker, target);
             if (kind != BlowKind.Auto) AfterSpellBlow(attacker, target, kind, detail);
-            // From rules 30 a combo's wearer marks with every blow (BattleSimulation.Flavours.cs).
+            // From rules 33 a combo's wearer marks with every blow (BattleSimulation.Flavours.cs).
             if (_marksOnHitsOn && !_finished && target.Alive) HitMark(attacker, target);
             SnareSpent(target, detail);
             Bleed(attacker, target);
@@ -2263,9 +2283,9 @@ namespace KindredSiege.Sim.Battle
             SideState mine = _sides[attacker.Side];
             SideState theirs = _sides[1 - attacker.Side];
             // A band with Long Reach still reaches you through your Fall Back (BandTrait.LongReach), not through its own.
-            // Shadow Strike, Backstab's last form (rules 25): your side keeps striking while it falls back, and they still can't
+            // Shadow Strike, Backstab's last form (rules 28): your side keeps striking while it falls back, and they still can't
             // reach you (BattleSimulation.Shade.cs).
-            // Rift Mine's price (rules 25): your attacks wait out its return too.
+            // Rift Mine's price (rules 28): your attacks wait out its return too.
             if ((mine.FallBackTicks > 0 && !ShadowStrike(attacker.Side)) || (_shadeOn && mine.ReturnTicks > 0) ||
                 (theirs.FallBackTicks > 0 && !HasBand(attacker.Side, BandTrait.LongReach)))
                 return StrikeBlock.FallBack;
@@ -2414,6 +2434,9 @@ namespace KindredSiege.Sim.Battle
             // Turned Hunt: your blows on the hunt captain land double (BattleSimulation.Hunt.cs).
             if (_huntOn && Turned(victim) && sourceSide == 1 - victim.Side) amount = amount * ChiefKits.TurnedPercent / 100;
 
+            // After a whiff the side lands open for a second (rules 26, BattleSimulation.Tight.cs).
+            if (_tightOn) amount = WhiffDamage(victim, sourceSide, amount);
+
             // Gear that guards against big hits takes a share off an Eclipse (Learning.CampaignGear).
             int guard = SpecOf(victim).BigHitArmorPercent;
             if (guard > 0 && detail == Moves.EclipseDetail) amount = Math.Max(1, amount * (100 - guard) / 100);
@@ -2432,7 +2455,7 @@ namespace KindredSiege.Sim.Battle
                 source == null ? string.Empty : source.Id, source == null ? -1 : (int)source.Class,
                 victim.Id, (int)victim.Class, amount, detail));
             ConfirmTeamwork(source, victim, detail);
-            // Rupture's steps and Echo's record (rules 25, BattleSimulation.Shade.cs).
+            // Rupture's steps and Echo's record (rules 28, BattleSimulation.Shade.cs).
             if (_shadeOn) ShadeLanded(source, sourceSide, victim, hpLost, detail);
             // What he lost and who struck him, for a Rewind; and a Medic's Evac pulls a falling fighter out alive
             // (BattleSimulation.Combos.cs).
@@ -2457,7 +2480,7 @@ namespace KindredSiege.Sim.Battle
                 killed = true;
                 // Fear, the Shade's Focus Fire trick (rules 23, BattleSimulation.Shade.cs).
                 if (_floorOn && (sourceSide == 0 || sourceSide == 1) && sourceSide != victim.Side) Fear(sourceSide, victim);
-                // Bleeder (rules 30, BattleSimulation.Vows.cs): his wound jumps on.
+                // Bleeder (rules 33, BattleSimulation.Vows.cs): his wound jumps on.
                 if (_vowsOn) BledOn(sourceSide, victim);
                 // A beast's part broke (BattleSimulation.Beast.cs).
                 if (_beastOn && victim.Side == _beastSide) Severed(source, sourceSide, victim);
@@ -2532,7 +2555,7 @@ namespace KindredSiege.Sim.Battle
             // A side whose Pal or Chief drops breaks on the spot.
             if (killed && victim.IsLeader) LeaderDown(victim.Side);
 
-            // Her tricks under the duos: Marked Tricks and Shadow Star (rules 27, BattleSimulation.Duos.cs).
+            // Her tricks under the duos: Marked Tricks and Shadow Star (rules 30, BattleSimulation.Duos.cs).
             if (_duosOn && !_finished) DuoLanded(sourceSide, victim, detail);
         }
 

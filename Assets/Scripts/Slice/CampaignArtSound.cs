@@ -27,7 +27,7 @@ namespace KindredSiege.Slice
         SoundSettings _soundSettings=new SoundSettings();
         readonly AudioClip[] _soundClips=new AudioClip[CueCount];
         readonly bool[] _soundMade=new bool[CueCount];
-        readonly AudioSource[] _soundVoices=new AudioSource[4];
+        readonly AudioSource[] _soundVoices=new AudioSource[5];
         readonly double[] _cueAt=new double[CueCount];
         readonly int[] _cuePlayed=new int[CueCount];
         readonly Dictionary<string,AudioClip> _named=new Dictionary<string,AudioClip>();
@@ -55,7 +55,7 @@ namespace KindredSiege.Slice
             for(int i=0;i<_soundVoices.Length;i++)
             {
                 var s=gameObject.AddComponent<AudioSource>();s.playOnAwake=false;s.spatialBlend=0;
-                s.loop=false;s.dopplerLevel=0;s.priority=i==3?32:128;_soundVoices[i]=s;
+                s.loop=false;s.dopplerLevel=0;s.priority=i>=3?32:128;_soundVoices[i]=s;
             }
             _lineVoice=gameObject.AddComponent<AudioSource>();_lineVoice.playOnAwake=false;_lineVoice.spatialBlend=0;
             _lineVoice.loop=false;_lineVoice.dopplerLevel=0;_lineVoice.priority=16;
@@ -116,7 +116,7 @@ namespace KindredSiege.Slice
             _cueAt[n]=now;
             // Reserve a voice for warnings, nerve breaks, rewards and fight results; ordinary feedback cannot steal it.
             bool alert=cue==Cue.Cast||cue==Cue.Break||cue==Cue.Reward||cue==Cue.Win||cue==Cue.Lose;
-            var source=_soundVoices[alert?3:_voiceCursor++%3];if(source==null)return;
+            var source=_soundVoices[cue==Cue.Shield?4:alert?3:_voiceCursor++%3];if(source==null)return;
             source.Stop();source.clip=_soundClips[n];source.volume=_soundSettings.volume*CueLevel[n];
             source.Play();_cuePlayed[n]++;
         }
@@ -136,7 +136,7 @@ namespace KindredSiege.Slice
             double now=AudioSettings.dspTime;
             if(_namedAt.TryGetValue(name,out double at)&&now-at<cooldown)return;
             _namedAt[name]=now;
-            var source=_soundVoices[alert?3:_voiceCursor++%3];if(source==null)return;
+            var source=_soundVoices[name=="parry"||name=="whiff"?4:alert?3:_voiceCursor++%3];if(source==null)return;
             source.Stop();source.clip=clip;source.volume=_soundSettings.volume*level;
             if(startAt>0)source.time=Mathf.Min(startAt,clip.length*.95f);
             source.Play();
@@ -153,7 +153,7 @@ namespace KindredSiege.Slice
         {
             if(_seeking||_soundSettings.muted||_soundSettings.volume<=0)return;
             object sim=SwellSim;if(sim!=_swellSim){_swells.Clear();_swellSim=sim;}
-            if(sim!=null&&_swells.Count<4)_swells.Add((e.Tick,e.Tick+Math.Max(0,e.Amount-FightRules.PerfectHoldTicks+2)));
+            if(sim!=null&&_swells.Count<4)_swells.Add((e.Tick,e.Tick+Math.Max(0,e.Amount-((BattleSimulation)sim).ParryWindowTicks+2)));
         }
         void SwellTick()
         {
@@ -291,7 +291,8 @@ namespace KindredSiege.Slice
                 case BattleEventKind.Snap:PlaySound(low==FightRules.Rise||low=="frenzy"?"snap_rise":"snap_panic",.9f,.2);break;
                 case BattleEventKind.Earn:if(e.ActorSide==0)PlaySound("point_earned",.5f,.2);break;
                 case BattleEventKind.Reaction:
-                    if(low=="bannertorn")PlaySound("banner_down",1,.5,alert:true);
+                    if(low==TightRules.WhiffDetail)PlaySound("whiff",1,0);
+                    else if(low=="bannertorn")PlaySound("banner_down",1,.5,alert:true);
                     else if(low=="berserk")PlaySound("snap_rise",.9f,.3);
                     else if(low=="secondwind")PlaySound("heal",.8f,.3);
                     else if(low=="rally")PlaySound("order_unleash",.7f,.5);

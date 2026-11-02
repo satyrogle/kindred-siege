@@ -7,7 +7,7 @@ using NUnit.Framework;
 
 namespace KindredSiege.Sim.Tests
 {
-    /// The Glutton (Jacob in chat, 1 Nov 2026: "go" on Claude's calls; FightRules.Glutton, campaign rules 26): his camp tree paid
+    /// The Glutton (Jacob in chat, 1 Nov 2026: "go" on Claude's calls; FightRules.Glutton, campaign rules 29): his camp tree paid
     /// with codex points, his road card, Feed, and the talents in the fight. One quick test per piece, only to prove each runs
     /// (Jacob, 12 Oct 2026: build first). Nothing here is tuning.
     public class GluttonTests
@@ -324,9 +324,9 @@ namespace KindredSiege.Sim.Tests
         }
 
         [Test]
-        public void BelowRules26TalentsDoNothing()
+        public void BelowRules29TalentsDoNothing()
         {
-            // A kit holding every talent, fed and not, plays exactly as an empty one under rules 25.
+            // A kit holding every talent, fed and not, plays exactly as an empty one under rules 28.
             var all = Enumerable.Range(1, GluttonRules.TalentCount).Select(i => (GluttonTalent)i).ToArray();
             string Played(PalKit kit)
             {

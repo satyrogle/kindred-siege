@@ -7,7 +7,7 @@ using NUnit.Framework;
 
 namespace KindredSiege.Sim.Tests
 {
-    /// The Pals' duos (Jacob in chat, 1 Nov 2026: "go write them"; FightRules.Duos, campaign rules 27): the card showing a duo
+    /// The Pals' duos (Jacob in chat, 1 Nov 2026: "go write them"; FightRules.Duos, campaign rules 30): the card showing a duo
     /// once a run holds a pick from both of its Pals, the save, and each of the six in the fight. One quick test per piece, only
     /// to prove each runs (Jacob, 12 Oct 2026: build first). Nothing here is tuning.
     public class DuoTests
@@ -202,7 +202,7 @@ namespace KindredSiege.Sim.Tests
         }
 
         [Test]
-        public void BelowRules27DuosDoNothing()
+        public void BelowRules30DuosDoNothing()
         {
             UnitSpec round = new UnitSpec("m", UnitClass.Marksman).WithBend(ClassBend.BlackHoleRound).WithRank(2);
             GluttonTalent[] some = { GluttonTalent.NucleusEdge, GluttonRules.At(2, 0) };
@@ -273,7 +273,7 @@ namespace KindredSiege.Sim.Tests
         }
 
         [Test]
-        public void CappedAtRules26NoCardShowsADuo()
+        public void CappedAtRules29NoCardShowsADuo()
         {
             var old = new CampaignTuning { EnemyScaleTier1 = 40, RulesCap = Campaign.GluttonTreeRules };
             int cards = 0;

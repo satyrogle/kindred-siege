@@ -1,0 +1,176 @@
+{
+ "1": {
+  "class_type": "UNETLoader",
+  "inputs": {
+   "unet_name": "ideogram4_int8_convrot.safetensors",
+   "weight_dtype": "default"
+  }
+ },
+ "2": {
+  "class_type": "CLIPLoader",
+  "inputs": {
+   "clip_name": "qwen3vl_8b_fp8_scaled.safetensors",
+   "type": "ideogram4",
+   "device": "default"
+  }
+ },
+ "3": {
+  "class_type": "VAELoader",
+  "inputs": {
+   "vae_name": "flux2-vae.safetensors"
+  }
+ },
+ "4": {
+  "class_type": "CLIPTextEncode",
+  "inputs": {
+   "clip": [
+    "2",
+    0
+   ],
+   "text": "{\"high_level_description\": \"A battle stage in the land of the Bloodridge, a sun cult of faceless hooded guardians, the same people as their settlement in the camp: low tents of rotted sepia and ash brown rags, tall black stone obelisks with thin glowing ember cracks, ragged banners with a dark red sun disc on poles, bronze braziers, ram skulls and burial bandages hung on poles, temples in the manner of ancient Egypt. Ash brown, sepia and corroded bronze with ember light, in bright clear full colour. Ember light glows only in the cracks of the obelisks and in braziers, never on the ground. Only the few things named for this place stand here, along the far edge; nothing else is built anywhere in the picture. Rendered entirely in crisp, deliberately clustered pixel art. Modern high quality pixel art like Sea of Stars: bright, colourful and readable, never muddy. No people anywhere, the fighters are added later. This place: the sun shrine, their ritual ground in the late afternoon.\", \"style_description\": {\"medium\": \"pixel_art\", \"art_style\": \"Authentic hand pixelled 2D game battle stage background. Visible square pixel clusters and stair stepped contours everywhere. Flat colour clusters, two to four shades per material. Crisp pixel edges without antialiasing. Clean readable shapes. No paint brushwork, no gradients except a dithered sky, no noise texture.\", \"aesthetics\": \"a bright readable battle stage in a real lived in place of a sun cult, coherent pixel clusters, a real place with depth and scale, readable silhouettes, the open ground calm and even so fighters read on it\", \"lighting\": \"Warm late afternoon sun from the right, long violet shadows, as discrete flat pixel colour planes, the ground in calm even light.\", \"color_palette\": [\"#3a78c8\", \"#9cc8ec\", \"#f8d890\", \"#f0a850\", \"#b0443a\", \"#6a2a2a\", \"#e4d8c8\", \"#c0b0a0\", \"#3e302c\", \"#7a6250\", \"#96703e\", \"#f07828\"]}, \"compositional_deconstruction\": {\"background\": \"One battle stage seen from a fixed side oblique camera like a classic arcade fighting game stage, no people. The top third is sky and distant land, and the landmarks stand along the far edge of the open ground with their feet on one line a third of the way down. Everything below that line is one wide open flat ground where two armies will fight, calm and empty from the left edge to the right edge, with nothing standing on it.\", \"elements\": [{\"type\": \"obj\", \"bbox\": [0, 0, 221, 1000], \"desc\": \"a warm late afternoon sky, clear blue above fading to warm gold at the horizon, a big bright sun low on the right\"}, {\"type\": \"obj\", \"bbox\": [156, 0, 325, 1000], \"desc\": \"the jagged crests of the blood red ridge running away into the distance, lit warm gold, two small flying sun boats with crescent hulls and rag sails far away\"}, {\"type\": \"obj\", \"bbox\": [292, 0, 377, 1000], \"desc\": \"a low wall of dark stone along the far edge of the court, burial bandages fluttering from lines strung over it\"}, {\"type\": \"obj\", \"bbox\": [65, 334, 377, 668], \"desc\": \"a huge round sun disc of corroded bronze standing upright on a stepped altar of dark stone, ember light in the bowls at its foot\"}, {\"type\": \"obj\", \"bbox\": [91, 101, 377, 239], \"desc\": \"two tall black stone obelisks with thin glowing ember cracks, a pole hung with ram skulls between them\"}, {\"type\": \"obj\", \"bbox\": [91, 763, 377, 901], \"desc\": \"two tall black stone obelisks with thin glowing ember cracks, a ragged banner with a dark red sun disc between them\"}, {\"type\": \"obj\", \"bbox\": [373, 0, 1000, 1000], \"desc\": \"flat pale sand coloured paving stones of the shrine court, big worn slabs, crisp and clear, calm and even, no dust and no fog, nothing glowing on the floor\"}, {\"type\": \"obj\", \"bbox\": [846, 0, 1000, 123], \"desc\": \"a dark broken stone edge in the near foreground, in shadow\"}, {\"type\": \"obj\", \"bbox\": [846, 886, 1000, 1000], \"desc\": \"a bronze offering bowl tipped over and some sepia rags in the near foreground, in shadow\"}]}}"
+  }
+ },
+ "5": {
+  "class_type": "CLIPTextEncode",
+  "inputs": {
+   "clip": [
+    "2",
+    0
+   ],
+   "text": "photograph, painterly, digital painting, concept painting, brush strokes, realistic render, 3D render, noisy texture, fine gravel, pebbles, tiny cobblestones, scattered debris, dithering, speckles, smooth gradients, blur, antialiasing, glossy, high contrast floor, repeating tile grid, voxel cubes, people, guards, human figures, UI, border, frame, vector art, flat cartoon, smooth shapes, muddy brown, grunge, dull, desaturated, gore, tiny figures, characters, soldiers, warriors, units, sprites, people standing on the floor, square floor tiles, repeated buildings, duplicated landmarks, seams, panels, split screen, collage, borders, watermark, signature, user interface, HUD, health bar, inventory slots, icons, buttons, game UI, cannon, cannonballs, gun barrel, gunpowder, lava, molten rock, glowing ground, glowing cracks in the floor, fire on the ground, fog, mist, haze over the ground, dust clouds, sand drifts, dunes, floating pyramids, buildings on the clouds, translucent buildings, ghost buildings, see through stone, giant stone head, colossal face, giant sword stuck in the ground"
+  }
+ },
+ "6": {
+  "class_type": "CFGOverride",
+  "inputs": {
+   "model": [
+    "1",
+    0
+   ],
+   "cfg": 3.0,
+   "start_percent": 0.7,
+   "end_percent": 1.0
+  }
+ },
+ "7": {
+  "class_type": "DualModelGuider",
+  "inputs": {
+   "model": [
+    "6",
+    0
+   ],
+   "positive": [
+    "4",
+    0
+   ],
+   "cfg": 7.0,
+   "model_negative": [
+    "6",
+    0
+   ],
+   "negative": [
+    "5",
+    0
+   ]
+  }
+ },
+ "9": {
+  "class_type": "KSamplerSelect",
+  "inputs": {
+   "sampler_name": "euler"
+  }
+ },
+ "10": {
+  "class_type": "Ideogram4Scheduler",
+  "inputs": {
+   "steps": 20,
+   "width": 1376,
+   "height": 768,
+   "mu": 0.0,
+   "std": 1.75
+  }
+ },
+ "11": {
+  "class_type": "RandomNoise",
+  "inputs": {
+   "noise_seed": 2026103113
+  }
+ },
+ "12": {
+  "class_type": "SamplerCustomAdvanced",
+  "inputs": {
+   "noise": [
+    "11",
+    0
+   ],
+   "guider": [
+    "7",
+    0
+   ],
+   "sampler": [
+    "9",
+    0
+   ],
+   "sigmas": [
+    "18",
+    1
+   ],
+   "latent_image": [
+    "16",
+    0
+   ]
+  }
+ },
+ "13": {
+  "class_type": "VAEDecode",
+  "inputs": {
+   "samples": [
+    "12",
+    0
+   ],
+   "vae": [
+    "3",
+    0
+   ]
+  }
+ },
+ "14": {
+  "class_type": "SaveImage",
+  "inputs": {
+   "images": [
+    "13",
+    0
+   ],
+   "filename_prefix": "KS-Bloodridge-Stages-20261030/stage-1-option-3"
+  }
+ },
+ "15": {
+  "class_type": "LoadImage",
+  "inputs": {
+   "image": "ks-bloodridge-stages/stage-1-option-3-init.png"
+  }
+ },
+ "16": {
+  "class_type": "VAEEncode",
+  "inputs": {
+   "pixels": [
+    "15",
+    0
+   ],
+   "vae": [
+    "3",
+    0
+   ]
+  }
+ },
+ "18": {
+  "class_type": "SplitSigmas",
+  "inputs": {
+   "sigmas": [
+    "10",
+    0
+   ],
+   "step": 2
+  }
+ }
+}

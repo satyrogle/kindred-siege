@@ -60,9 +60,10 @@ namespace KindredSiege.Sim.Battle
 
         public Threat(string name, ThreatTier tier, string actorId, string targetId, int ticksLeft, int amount, ThreatAnswer answers,
             string focusId, int beatTicks = -1, bool fakeFirst = false, bool waitsOutHold = false, bool duel = false,
-            bool castBar = false)
+            bool castBar = false, int windowTicks = FightRules.PerfectHoldTicks)
         {
             CastBar = castBar;
+            WindowTicks = windowTicks;
             Name = name ?? string.Empty;
             Tier = tier;
             ActorId = actorId ?? string.Empty;
@@ -127,13 +128,18 @@ namespace KindredSiege.Sim.Battle
         public bool Duel { get; }
 
         /// True only while a Hold given now would really parry its next beat: inside the parry window, and neither a fake nor a
-        /// beat that waits out a fresh Hold. The Hold button's beat ring is full.
-        public bool ParryWindow => BeatTicks >= 1 && BeatTicks <= FightRules.PerfectHoldTicks + 1 && !FakeFirst && !WaitsOutHold;
+        /// beat that waits out a fresh Hold. The Hold button's beat ring is full. From rules 26 (the tight parry) this is the
+        /// 0.2 s window, and ActorId is the one whose body flashes gold.
+        public bool ParryWindow => BeatTicks >= 1 && BeatTicks <= WindowTicks + 1 && !FakeFirst && !WaitsOutHold;
 
-        internal Threat WithBeat(bool fakeFirst, bool waitsOutHold, bool duel)
+        /// The parry window this threat was read under, in ticks: FightRules.PerfectHoldTicks, or TightRules.WindowTicks from
+        /// rules 26.
+        public int WindowTicks { get; }
+
+        internal Threat WithBeat(bool fakeFirst, bool waitsOutHold, bool duel, int windowTicks)
         {
             return new Threat(Name, Tier, ActorId, TargetId, TicksLeft, Amount, Answers, FocusId, BeatTicks, fakeFirst, waitsOutHold, duel,
-                CastBar);
+                CastBar, windowTicks);
         }
 
         /// Under the raid chief (FightRules.RaidChief, 25 Oct 2026): true for a cast the screen shows as a cast bar, which Focus
@@ -190,7 +196,7 @@ namespace KindredSiege.Sim.Battle
                 bool fake = !second && (flags & BeatFeinted) == 0 && FeintsOn(foe, t.Name);
                 bool waits = !second && !fake && (flags & BeatWaited) == 0 && !(_squadOn && (flags & BeatFeinted) != 0) &&
                              WaitsOutOn(foe, t.Name);
-                list[i] = t.WithBeat(fake, waits, BigHeavies || t.Name != HeavyRules.Heavy);
+                list[i] = t.WithBeat(fake, waits, BigHeavies || t.Name != HeavyRules.Heavy, ParryWindowTicks);
             }
         }
 

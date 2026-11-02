@@ -38,7 +38,7 @@ namespace KindredSiege.Sim.Battle
         /// The held parry bars (DESIGN_LOCKS, 28 Oct 2026). Nothing pays into it until they are built.
         Parry,
 
-        /// The Pals' sized picks (campaign rules 28, BattleSimulation.Sized.cs): a Shade trick's form, a star's rank.
+        /// The Pals' sized picks (campaign rules 31, BattleSimulation.Sized.cs): a Shade trick's form, a star's rank.
         Pal,
 
         /// Cuts: a Hold's soak, a Warden's Guard, a wall, the cage bear's ribcage.

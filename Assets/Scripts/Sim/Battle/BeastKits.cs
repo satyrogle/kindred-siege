@@ -156,6 +156,9 @@ namespace KindredSiege.Sim.Battle
         /// The claw closing on whoever it grabs, or on the shield of a Warden who blocks it.
         public const int GrabPercent = 10;
 
+        /// Rules 25: the ice wave of the Slam and Grab on each of your fighters, before the claw.
+        public const int SlamPercent = 10;
+
         /// Each second in the claw; in its Overdrive this percent of that.
         public const int CrushPercent = 4;
         public const int OverdriveCrushPercent = 200;
@@ -187,6 +190,47 @@ namespace KindredSiege.Sim.Battle
         /// A scarred fighter's own spell works this percent as well against a beast.
         public const int ScarPercent = 125;
 
+        // ------------------------------------------------------------ rules 27, the beasts as raid bosses
+
+        /// The shark's Feeding frenzy: at its second broken part it is under the sand this long, its moves stopped and its parts
+        /// beyond reach; for the last ChurnTicks the sand churns under all of you; then it bursts up through all of you for
+        /// BurstPercent of each one's health.
+        public const int FeedingTicks = 4 * SimClock.TicksPerSecond;
+        public const int ChurnTicks = 3 * SimClock.TicksPerSecond;
+        public const int BurstPercent = 20;
+
+        /// An armed trap snares the burst on top instead: its parts take this percent for this long.
+        public const int ExposedPercent = 200;
+        public const int ExposedTicks = 4 * SimClock.TicksPerSecond;
+
+        /// Its sand pups: how many, each this percent of its parts' average health, biting whom they hold every PupBiteTicks
+        /// for PupBitePercent of their health with a PupBleedPercent bleed.
+        public const int PupCount = 2;
+        public const int PupHealthPercent = 25;
+        public const int PupBitePercent = 2;
+        public const int PupBiteTicks = SimClock.TicksPerSecond;
+        public const int PupBleedPercent = 2;
+
+        /// The cage bear's Overload: when its ribcage breaks, frost cracks race across the floor this long; anyone of yours not
+        /// falling back as they land is frozen this long.
+        public const int FrostTicks = 4 * SimClock.TicksPerSecond;
+        public const int FrozenTicks = 3 * SimClock.TicksPerSecond;
+
+        /// In its Last stand each Pulse hits this many percent harder than the last.
+        public const int PulseRampPercent = 20;
+
+        /// Whether a beast's side of this many units fits it: its parts, and from rules 27 the shark's parts and its pups.
+        public static bool SideFits(BeastKit kit, int count, bool raid)
+        {
+            return count == PartCount || (raid && kit == BeastKit.SandShark && count == PartCount + PupCount);
+        }
+
+        /// The n-th sand pup's id (1 and 2) in a fight: "camp.5.bloodridge.beast.shark.pup1".
+        public static string PupId(string fightId, int n)
+        {
+            return fightId + "." + Id(BeastKit.SandShark) + ".pup" + n.ToString(System.Globalization.CultureInfo.InvariantCulture);
+        }
+
         // ------------------------------------------------------------ names and details
 
         public const string BiteName = "Bite";
@@ -194,6 +238,21 @@ namespace KindredSiege.Sim.Battle
         public const string VolleyName = "Volley";
         public const string SweepName = "Sweep";
         public const string GrabName = "Grab";
+
+        /// Rules 25: the ice wave of the cage bear's Slam and Grab, landed as its own move ("Slam.full" and the rest) just before
+        /// the Grab's.
+        public const string SlamName = "Slam";
+
+        /// Rules 27: the shark's intermission (its Phase, Tell and Land events, "Feeding frenzy.full" and the rest), its sand pups
+        /// (their Join events), the cage bear's intermission (its Phase event) and its frost (Tell and Land, "Frost cracks.full").
+        public const string FeedingName = "Feeding frenzy";
+        public const string PupName = "Sand pup";
+        public const string OverloadName = "Overload";
+        public const string FrostName = "Frost cracks";
+
+        /// Rules 27: the warning lines while the burst and the frost tell.
+        public const string ChurnWarning = "THE SAND CHURNS: FALL BACK";
+        public const string FrostWarning = "FROST CRACKS: FALL BACK";
         public const string RoarName = "Roar";
         public const string PulseName = "Pulse";
 
@@ -208,6 +267,10 @@ namespace KindredSiege.Sim.Battle
         public const string VolleyDetail = "volley";
         public const string SweepDetail = "sweep";
         public const string GrabDetail = "grab";
+        public const string SlamDetail = "slam";
+        public const string BurstDetail = "burst";
+        public const string PupDetail = "pup";
+        public const string FrozenDetail = "frozen";
         public const string CrushDetail = "crush";
         public const string PulseDetail = "pulse";
 

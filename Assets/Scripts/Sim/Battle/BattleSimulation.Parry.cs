@@ -310,9 +310,17 @@ namespace KindredSiege.Sim.Battle
         {
             SideState s = _sides[facing];
             if (s.HoldTicks <= 0) return BeatMet.Open;
-            // Precognition (rules 26) widens the window.
+            // Precognition (rules 29) widens the window, the tight one from rules 26.
             bool fresh = _fight.PerfectHold && s.LastHoldTick >= 0 && _tick - s.LastHoldTick <= ParryWindow(facing);
-            return fresh ? BeatMet.Parry : BeatMet.Block;
+            if (fresh) return BeatMet.Parry;
+            // From rules 26 a Hold out of the window is a whiff: it ends, soaks nothing, and the blow lands in full
+            // (BattleSimulation.Tight.cs).
+            if (_tightOn)
+            {
+                Whiff(facing);
+                return BeatMet.Open;
+            }
+            return BeatMet.Block;
         }
 
         // The side facing the doer parried his beat, after the move's own "parried" event. He staggers and reels, he is left
@@ -329,15 +337,15 @@ namespace KindredSiege.Sim.Battle
         // The parry's first half: everything but the crack, which it returns (chained, and doubled for a weak band). A small
         // beat's parry (duel false) steps no chain and returns no crack. Under the squad first every parry gives back only
         // the Hold's point.
-        private int ParryLands(int side, BattleUnit doer, string move, int crack, int points, bool duel = true)
+        private int ParryLands(int side, BattleUnit doer, string move, int crack, int points, bool duel = true, int counter = 0)
         {
             if (_squadOn) points = ParryRules.SquadParryPoints;
             int facing = 1 - side;
             SideState theirs = _sides[facing];
-            // Sanctuary's price (rules 25): the parrying side's parries do not stagger (BattleSimulation.Shade.cs).
-            // Command Relay (rules 26) gives part of it back.
+            // Sanctuary's price (rules 28): the parrying side's parries do not stagger (BattleSimulation.Shade.cs).
+            // Command Relay (rules 29) gives part of it back.
             int stagger = SanctuaryPriced(facing) ? FightRules.StaggerTicks * (100 - PriceLeft(facing)) / 100 : FightRules.StaggerTicks;
-            // Answer the Parry (rules 26) remembers who was parried, and by whom.
+            // Answer the Parry (rules 29) remembers who was parried, and by whom.
             if (_gluttonOn)
             {
                 doer.ParriedAtTick = _tick;
@@ -350,6 +358,9 @@ namespace KindredSiege.Sim.Battle
                 doer.Cooldown += stagger;
                 doer.ReelTicks = stagger;
             }
+            // From rules 26 every parry hits him back for the move's damage, once the tick's moves are done; counter is it
+            // when the caller knows it, else his heavy blow (BattleSimulation.Tight.cs).
+            if (_tightOn) OweCounter(doer, counter);
             theirs.HoldTicks = 0;
             theirs.LastParryTick = _tick;
             theirs.ParriedCasterId = doer.Id;
@@ -357,7 +368,7 @@ namespace KindredSiege.Sim.Battle
             if (_floorOn) Sanctuary(facing);
             if (_classOn && doer.Alive)
             {
-                // Strip (rules 26) makes it last longer.
+                // Strip (rules 29) makes it last longer.
                 int opening = Stripped(facing, ClassSpells.OpeningTicks);
                 doer.Statuses.Apply(StatusKind.Opening, opening);
                 MarkEvent(facing, null, doer, opening, ClassSpells.OpeningMark);
@@ -365,7 +376,7 @@ namespace KindredSiege.Sim.Battle
             if (!duel)
             {
                 Earn(facing, points, FightRules.ParryReason);
-                // Mirror, the Shade's other Hold route (rules 25, BattleSimulation.Shade.cs): a small beat counts one.
+                // Mirror, the Shade's other Hold route (rules 28, BattleSimulation.Shade.cs): a small beat counts one.
                 if (_shadeOn) Mirror(facing, doer, 1);
                 return 0;
             }
@@ -576,7 +587,7 @@ namespace KindredSiege.Sim.Battle
                 _sides[side].LockSnared = false;
                 if (Kit(side) == ChiefKit.Skullpeak) _sides[1 - side].Chain++;
             }
-            int cracked = ParryLands(side, caster, name, crack, FightRules.ParryPoints);
+            int cracked = ParryLands(side, caster, name, crack, FightRules.ParryPoints, true, _tightOn ? CastCounter(side, percent) : 0);
             if (kit && Kit(side) == ChiefKit.Bloodridge) KitEclipseParried(side, caster, percent, cracked);
             else ParryCracks(side, caster, cracked, FightRules.ParryPoints, kit);
         }

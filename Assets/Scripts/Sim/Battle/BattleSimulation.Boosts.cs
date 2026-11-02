@@ -63,11 +63,11 @@ namespace KindredSiege.Sim.Battle
             }
         }
 
-        // While a side falls back nobody of it attacks (the road kit), unless it plays Shadow Strike (rules 25).
+        // While a side falls back nobody of it attacks (the road kit), unless it plays Shadow Strike (rules 28).
         private bool FallingBack(int side)
         {
             if (!_roadKitOn || side < 0 || side > 1) return false;
-            // Rift Mine's price (rules 25): the side's attacks wait out its return as well.
+            // Rift Mine's price (rules 28): the side's attacks wait out its return as well.
             if (_shadeOn && _sides[side].ReturnTicks > 0) return true;
             return _sides[side].FallBackTicks > 0 && !ShadowStrike(side);
         }

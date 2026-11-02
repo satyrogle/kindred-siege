@@ -23,9 +23,11 @@ namespace KindredSiege.Sim.Battle
             bool foe = sourceSide == 1 - victim.Side;
             // From rules 22 held parry bars make your payoffs stronger (BattleSimulation.Meter.cs).
             if (foe) MeterBoost(sourceSide, hit);
-            // From rules 26 Dark Matter Plating and Deep Node (BattleSimulation.Glutton.cs).
+            // From rules 26 a side that whiffed a parry takes more for a second (BattleSimulation.Tight.cs).
+            if (_tightOn) WhiffHit(victim, foe, hit);
+            // From rules 29 Dark Matter Plating and Deep Node (BattleSimulation.Glutton.cs).
             if (foe && _gluttonOn) GluttonHit(sourceSide, victim, hit, detail);
-            // From rules 28 the sized picks (BattleSimulation.Sized.cs): her trick at its route's form, a ranked fighter's hit.
+            // From rules 31 the sized picks (BattleSimulation.Sized.cs): her trick at its route's form, a ranked fighter's hit.
             if (foe && _sizedOn)
             {
                 int form = ShadeRules.IsTrickDetail(detail) ? ShadeSized(sourceSide, RouteOfTrick(detail)) : 0;
@@ -33,20 +35,20 @@ namespace KindredSiege.Sim.Battle
                 int rank = source != null && source.Side == sourceSide ? RankSized(source) : 0;
                 if (rank > 0) hit.Add(HitLayer.Pal, rank);
             }
-            // From rules 29 a combo's hit grows with its flavour (BattleSimulation.Flavours.cs).
+            // From rules 32 a combo's hit grows with its flavour (BattleSimulation.Flavours.cs).
             if (foe && _flavoursOn)
             {
                 int flavour = FlavourHitPercent(source, detail);
                 if (flavour > 0) hit.Add(HitLayer.Pal, flavour);
             }
-            // From rules 27 Gorged Tricks on one of her tricks (BattleSimulation.Duos.cs).
+            // From rules 30 Gorged Tricks on one of her tricks (BattleSimulation.Duos.cs).
             if (foe && _duosOn && ShadeRules.IsTrickDetail(detail))
             {
                 int gorged = GorgedTrickPercent(sourceSide);
                 if (gorged > 0) hit.Add(HitLayer.Kit, gorged);
             }
             if (_spellsOn && _sides[victim.Side].WallTicks > 0 && foe) hit.Add(HitLayer.Guard, WallPercentOf(victim.Side) - 100);
-            // Breach's price (rules 25): a side that breaches takes more while it is exposed (BattleSimulation.Shade.cs).
+            // Breach's price (rules 28): a side that breaches takes more while it is exposed (BattleSimulation.Shade.cs).
             if (_shadeOn && foe && _sides[victim.Side].ExposedTicks > 0) hit.Add(HitLayer.Guard, ShadeRules.ExposedPercent * PriceLeft(victim.Side) / 100);
             else if (_kitsTwoOn && foe && LockdownHolds(victim.Side)) hit.Add(HitLayer.Guard, ChiefSpells.WallDamagePercent - 100);
             if (_beastOn && victim.Side == _beastSide && foe && !CageHit(victim, sourceSide, hit)) return;
@@ -64,7 +66,7 @@ namespace KindredSiege.Sim.Battle
             amount = Shielded(victim, amount);
             if (amount <= 0 && unshielded > 0) return;
             if (amount <= 0) return;
-            // Last Refuge, Sanctuary's last form (rules 25): once a fight a killing blow under the field leaves him at 1 health.
+            // Last Refuge, Sanctuary's last form (rules 28): once a fight a killing blow under the field leaves him at 1 health.
             if (_shadeOn) amount = LastRefuge(victim, amount);
             if (amount <= 0) return;
             // Who hit one of yours, for Avenger and Counter Shot (rules 24, BattleSimulation.Whisperer.cs).
@@ -82,15 +84,15 @@ namespace KindredSiege.Sim.Battle
                 RiteTreated(healer, patient);
                 if (Stopped) return;
             }
-            // From rules 26 Matter Printer and Recompile (BattleSimulation.Glutton.cs).
+            // From rules 29 Matter Printer and Recompile (BattleSimulation.Glutton.cs).
             if (_gluttonOn) GluttonHeal(healer, patient, heal);
-            // From rules 30 a Martyr heals more the less health she has (BattleSimulation.Vows.cs).
+            // From rules 33 a Martyr heals more the less health she has (BattleSimulation.Vows.cs).
             if (_vowsOn && healer != null)
             {
                 int martyr = MartyrPercent(healer);
                 if (martyr > 0) heal.Add(HitLayer.Pal, martyr);
             }
-            // From rules 28 a ranked healer heals more (BattleSimulation.Sized.cs).
+            // From rules 31 a ranked healer heals more (BattleSimulation.Sized.cs).
             if (_sizedOn && healer != null)
             {
                 int rank = RankSized(healer);
@@ -126,7 +128,7 @@ namespace KindredSiege.Sim.Battle
             if (kind == BlowKind.AimedShot && _shotsAtOnce > 1) hit.Times(_shotsAtOnce);
             if (_beastOn && kind != BlowKind.Auto && IsPart(target) && SpecOf(attacker).BeastScars > 0)
                 hit.Add(HitLayer.Increased, BeastKits.ScarPercent - 100);
-            // From rules 26 the strikers' and shooters' talents (BattleSimulation.Glutton.cs).
+            // From rules 29 the strikers' and shooters' talents (BattleSimulation.Glutton.cs).
             if (_gluttonOn) GluttonBlow(attacker, target, hit);
             return hit;
         }
@@ -141,8 +143,8 @@ namespace KindredSiege.Sim.Battle
             ApplyHit(attacker, attacker.Side, warden, Armor(warden, hit), GuardedDetail);
         }
 
-        // A unit's armour as a cut on the hit (Armored, before rules 17): thinner when Cracked (rules 25), and against a Marksman
-        // with Dark Matter Rounds (rules 26).
+        // A unit's armour as a cut on the hit (Armored, before rules 17): thinner when Cracked (rules 28), and against a Marksman
+        // with Dark Matter Rounds (rules 29).
         private Hit Armor(BattleUnit victim, Hit hit, BattleUnit attacker = null)
         {
             int armor = ArmorAgainst(attacker, Cracked(victim, SpecOf(victim).ArmorPercent));

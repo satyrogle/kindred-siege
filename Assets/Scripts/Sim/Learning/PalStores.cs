@@ -3,7 +3,7 @@ using KindredSiege.Sim.Battle;
 
 namespace KindredSiege.Sim.Learning
 {
-    // GluttonTalent lives in Battle (PalKit.cs) from rules 26, with the same names and numbers, where the fight reads it.
+    // GluttonTalent lives in Battle (PalKit.cs) from rules 29, with the same names and numbers, where the fight reads it.
     // WhispererHabit and SquadPair live in Battle (PalKit.cs), where the fight reads them (rules 24).
 
     /// A talent the Glutton lent this run, and whether Feed doubled it.

@@ -7,7 +7,7 @@ using NUnit.Framework;
 
 namespace KindredSiege.Sim.Tests
 {
-    /// The Shade's forms (Jacob in chat, 31 Oct 2026: "go" on Claude's Shade design; FightRules.ShadeForms, campaign rules 25).
+    /// The Shade's forms (Jacob in chat, 31 Oct 2026: "go" on Claude's Shade design; FightRules.ShadeForms, campaign rules 28).
     /// One quick test per piece, only to prove each runs (Jacob, 12 Oct 2026: build first). Nothing here is tuning.
     public class ShadeFormsTests
     {
@@ -186,7 +186,7 @@ namespace KindredSiege.Sim.Tests
             }
             Assert.AreEqual(0, Blows(2, Road25), "at Twin Knives a Fall Back stops your attacks");
             Assert.Greater(Blows(3, Road25), 0, "at Shadow Strike your side keeps hitting");
-            Assert.AreEqual(0, Blows(3, Road24), "below rules 25 only the first form plays");
+            Assert.AreEqual(0, Blows(3, Road24), "below rules 28 only the first form plays");
         }
 
         [Test]
@@ -203,7 +203,7 @@ namespace KindredSiege.Sim.Tests
             while (sim.FallBackLockLeft(0) > 0 && !sim.IsFinished) session.Tick();
             Assert.IsTrue(sim.CanUse(0, Directive.FallBack, out why), why);
 
-            // Below rules 25 there is no wait.
+            // Below rules 28 there is no wait.
             BattleSimulation old = Cleaver("lock", Kit(ShadeRoute.Backstab, 1), Chief24);
             var oldSession = new SimSession(old);
             oldSession.Tick();
@@ -226,7 +226,7 @@ namespace KindredSiege.Sim.Tests
                 return sim.FocusTicksLeft(0);
             }
             Assert.AreEqual(BattleSimulation.FocusTicks * ShadeRules.FearFocusPercent / 100, Focus(Chief25, ShadeRoute.Fear));
-            Assert.AreEqual(BattleSimulation.FocusTicks, Focus(Chief24, ShadeRoute.Fear), "below rules 25 no price");
+            Assert.AreEqual(BattleSimulation.FocusTicks, Focus(Chief24, ShadeRoute.Fear), "below rules 28 no price");
             Assert.AreEqual(BattleSimulation.FocusTicks, Focus(Chief25, ShadeRoute.Backstab), "only with Fear");
         }
 
@@ -266,7 +266,7 @@ namespace KindredSiege.Sim.Tests
         // ------------------------------------------------------------ the old rules and the road card
 
         [Test]
-        public void BelowRules25AKitAtItsLastFormsPlaysItsFirst()
+        public void BelowRules28AKitAtItsLastFormsPlaysItsFirst()
         {
             // The same fight with each route at form 3 and at form 1 under rules 24: the same events.
             foreach (ShadeRoute route in new[] { ShadeRoute.Sanctuary, ShadeRoute.Backstab, ShadeRoute.Fear })

@@ -6,7 +6,7 @@ using NUnit.Framework;
 
 namespace KindredSiege.Sim.Tests
 {
-    /// The sizing pass (Jacob in chat, 1 Nov 2026: "okay go"; FightRules.Sized, campaign rules 28): each Pal's sized numbers
+    /// The sizing pass (Jacob in chat, 1 Nov 2026: "okay go"; FightRules.Sized, campaign rules 31): each Pal's sized numbers
     /// play, and leaning pays more than spreading. One quick test per piece, only to prove each runs. The numbers themselves
     /// came from the builds test (tools/sim_checks/sweep/PalSweep.cs), not from here.
     public class SizedTests
@@ -131,7 +131,7 @@ namespace KindredSiege.Sim.Tests
         [Test]
         public void ThreeRanksOfGravityCrushTheWholeRow()
         {
-            // Black Hole Round at rank 2 and Event Horizon: three ranks of Gravity, its final form from rules 29.
+            // Black Hole Round at rank 2 and Event Horizon: three ranks of Gravity, its final form from rules 32.
             UnitSpec round = new UnitSpec("m", UnitClass.Marksman).WithBend(ClassBend.BlackHoleRound).WithComboRank(2);
             UnitSpec horizon = new UnitSpec("w", UnitClass.Warden).WithBend(ClassBend.EventHorizon);
             FightRules road29 = Road28.WithFlavours();
@@ -142,7 +142,7 @@ namespace KindredSiege.Sim.Tests
                 return e.Detail == SizeRules.CrushRowDetail;
             }
             Assert.IsTrue(Row(road29), "no row crushed");
-            Assert.IsFalse(Row(Road28), "not before rules 29");
+            Assert.IsFalse(Row(Road28), "not before rules 32");
             Assert.AreEqual(3, MedicRow("count", PalKit.None, road29, round, horizon).FlavourRanksOf(0, StatusKind.Crush));
         }
 

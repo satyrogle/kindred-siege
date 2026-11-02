@@ -8,7 +8,7 @@ namespace KindredSiege.Sim.Battle
     /// FightRules.Floor, campaign rules 23), the fight's half: a fighter's second piece (UnitSpec.Bend2, read through
     /// HasBend in BattleSimulation.Class.cs), the faster hook on a fighter's clocks (UnitSpec.ClockPercent), the cheaper hook on
     /// a side's order costs (PalKit.OrderCostPercent), and the Shade's three tricks built so far, each route's first form:
-    /// Sanctuary's shield, Backstab and Fear (ShadeRules). From campaign rules 25 (FightRules.ShadeForms; Jacob in chat, 31 Oct
+    /// Sanctuary's shield, Backstab and Fear (ShadeRules). From campaign rules 28 (FightRules.ShadeForms; Jacob in chat, 31 Oct
     /// 2026: "go" on Claude's Shade design) their second and third forms and each route's price: Sanctuary's Relay and Last
     /// Refuge (its parries do not stagger), Backstab's Twin Knives and Shadow Strike (Fall Back waits longer), and Fear's
     /// Spreading Dread and Turncoat (Focus Fire is shorter). Every number is a starting value.
@@ -20,29 +20,29 @@ namespace KindredSiege.Sim.Battle
         /// Whether this fight plays the floor under the three Pals: campaign rules 23.
         public bool FloorOn => _floorOn;
 
-        /// Whether this fight plays the Shade's forms: campaign rules 25.
+        /// Whether this fight plays the Shade's forms: campaign rules 28.
         public bool ShadeFormsOn => _shadeOn;
 
-        /// The ticks Sanctuary's field still runs on this side, 0 when it is down (rules 25).
+        /// The ticks Sanctuary's field still runs on this side, 0 when it is down (rules 28).
         public int FieldTicksLeft(int side) => _shadeOn && side >= 0 && side <= 1 ? _sides[side].FieldTicks : 0;
 
-        /// What Relay's pool can still soak on this side (rules 25).
+        /// What Relay's pool can still soak on this side (rules 28).
         public int RelayLeft(int side) => _shadeOn && side >= 0 && side <= 1 ? _sides[side].RelaySize : 0;
 
-        /// Whether this side spent its Last Refuge this fight (rules 25).
+        /// Whether this side spent its Last Refuge this fight (rules 28).
         public bool RefugeSpent(int side) => _shadeOn && side >= 0 && side <= 1 && _sides[side].RefugeUsed;
 
-        /// The ticks until this side can Fall Back again, under Backstab's price (rules 25).
+        /// The ticks until this side can Fall Back again, under Backstab's price (rules 28).
         public int FallBackLockLeft(int side) => _shadeOn && side >= 0 && side <= 1 ? _sides[side].FallBackLockTicks : 0;
 
-        /// How many of his next hits still land double from behind (rules 25; before it, 1 while his Backstab is on).
+        /// How many of his next hits still land double from behind (rules 28; before it, 1 while his Backstab is on).
         public int BackstabHitsLeft(BattleUnit unit)
         {
             if (unit == null || !unit.Statuses[StatusKind.Backstab].On) return 0;
             return _shadeOn ? Math.Max(1, unit.Statuses[StatusKind.Backstab].Store) : 1;
         }
 
-        // A route's form on this side: below rules 25 only first forms play, whatever the kit holds.
+        // A route's form on this side: below rules 28 only first forms play, whatever the kit holds.
         private int FormOf(int side, ShadeRoute route)
         {
             int form = KitOf(side).FormOf(route);
@@ -59,7 +59,7 @@ namespace KindredSiege.Sim.Battle
         private int Clock(BattleUnit unit, int ticks)
         {
             if (!_floorOn || unit == null) return ticks;
-            // Entropy Sink (rules 26, BattleSimulation.Glutton.cs) on the same percent.
+            // Entropy Sink (rules 29, BattleSimulation.Glutton.cs) on the same percent.
             int percent = SpecOf(unit).ClockPercent - SinkPercent(unit);
             return percent == 0 ? ticks : Math.Max(1, ticks * (100 + percent) / 100);
         }
@@ -84,28 +84,28 @@ namespace KindredSiege.Sim.Battle
             {
                 BattleUnit u = _units[i];
                 if (!u.Alive || u.Side != side || u.Benched) continue;
-                // Branch Anchor (rules 26) thickens it on the front row.
-                // Sized (rules 28) at Sanctuary's form.
+                // Branch Anchor (rules 29) thickens it on the front row.
+                // Sized (rules 31) at Sanctuary's form.
                 int size = Anchored(u, Math.Max(1, ShadeSized(side, ShadeRoute.Sanctuary, u.MaxHp * ShadeRules.ShieldPercent / 100)));
                 u.Statuses.Apply(StatusKind.Shield, ShadeRules.ShieldTicks, size);
                 shielded++;
                 given += size;
             }
             if (shielded > 0) Emit(new BattleEvent(_tick, BattleEventKind.Trick, side, string.Empty, -1, string.Empty, -1, shielded, ShadeRules.SanctuaryDetail));
-            // From rules 25 the shields are one field for their length, and from Relay it also makes a pool of a share of them.
+            // From rules 28 the shields are one field for their length, and from Relay it also makes a pool of a share of them.
             if (!_shadeOn || shielded == 0) return;
             SideState s = _sides[side];
             s.FieldTicks = ShadeRules.ShieldTicks;
             s.RelaySize = FormOf(side, ShadeRoute.Sanctuary) >= 2 ? (int)Math.Max(1, given * ShadeRules.RelayPercent / 100) : 0;
         }
 
-        // Sanctuary's price (rules 25): while it is equipped this side's parries do not stagger.
+        // Sanctuary's price (rules 28): while it is equipped this side's parries do not stagger.
         private bool SanctuaryPriced(int side)
         {
             return _shadeOn && side >= 0 && side <= 1 && KitOf(side).Has(ShadeRoute.Sanctuary);
         }
 
-        // Relay (rules 25): a hit broke his shield, and the field's pool soaks what it can of the rest. What it soaked.
+        // Relay (rules 28): a hit broke his shield, and the field's pool soaks what it can of the rest. What it soaked.
         private int Relayed(BattleUnit victim, int rest)
         {
             SideState s = _sides[victim.Side];
@@ -117,7 +117,7 @@ namespace KindredSiege.Sim.Battle
             return soaked;
         }
 
-        // Last Refuge (rules 25): once a fight, a hit that would kill one of the side while its field is up leaves him at 1
+        // Last Refuge (rules 28): once a fight, a hit that would kill one of the side while its field is up leaves him at 1
         // health, and the field shatters, every shield of it with it. What lands of the hit.
         private int LastRefuge(BattleUnit victim, int amount)
         {
@@ -149,7 +149,7 @@ namespace KindredSiege.Sim.Battle
             if (shield.Size <= 0)
             {
                 victim.Statuses.Clear(StatusKind.Shield);
-                // Relay (rules 25): the field's pool soaks what is left.
+                // Relay (rules 28): the field's pool soaks what is left.
                 if (_shadeOn) soaked += Relayed(victim, amount - soaked);
             }
             return amount - soaked;
@@ -161,7 +161,7 @@ namespace KindredSiege.Sim.Battle
         private void Backstab(int side)
         {
             if (!KitOf(side).Has(ShadeRoute.Backstab)) return;
-            // From rules 25 his hits from behind are counted: Twin Knives gives two.
+            // From rules 28 his hits from behind are counted: Twin Knives gives two.
             int hits = FormOf(side, ShadeRoute.Backstab) >= 2 ? ShadeRules.TwinKnivesHits : 1;
             int stepped = 0;
             for (int i = 0; i < _units.Count; i++)
@@ -180,7 +180,7 @@ namespace KindredSiege.Sim.Battle
         {
             if (!_floorOn || attacker.Side == target.Side || !attacker.Statuses[StatusKind.Backstab].On) return false;
             Status stab = attacker.Statuses[StatusKind.Backstab];
-            // Twin Knives (rules 25): a hit from behind left over stays for his next blow.
+            // Twin Knives (rules 28): a hit from behind left over stays for his next blow.
             if (_shadeOn && stab.Store > 1)
             {
                 stab.Store--;
@@ -191,17 +191,17 @@ namespace KindredSiege.Sim.Battle
             return true;
         }
 
-        // Shadow Strike, Backstab's last form (rules 25): this side keeps attacking while it falls back.
+        // Shadow Strike, Backstab's last form (rules 28): this side keeps attacking while it falls back.
         private bool ShadowStrike(int side)
         {
             return _shadeOn && side >= 0 && side <= 1 && FormOf(side, ShadeRoute.Backstab) >= 3;
         }
 
-        // Fear's price (rules 25): with Fear equipped Focus Fire runs a quarter shorter.
+        // Fear's price (rules 28): with Fear equipped Focus Fire runs a quarter shorter.
         private int FearPriced(int side, int ticks)
         {
             if (!_shadeOn || side < 0 || side > 1 || !KitOf(side).Has(ShadeRoute.Fear)) return ticks;
-            // Command Relay (rules 26) shrinks the price.
+            // Command Relay (rules 29) shrinks the price.
             return Math.Max(1, ticks * (100 - (100 - ShadeRules.FearFocusPercent) * PriceLeft(side) / 100) / 100);
         }
 
@@ -226,7 +226,7 @@ namespace KindredSiege.Sim.Battle
             FearAround(side, fallen, form, ShadeRules.FearDetail, ref spreads);
         }
 
-        // Fear around one who fell: those beside him lose nerve and the one of them left with the least panics. From rules 25,
+        // Fear around one who fell: those beside him lose nerve and the one of them left with the least panics. From rules 28,
         // Spreading Dread: each of them it breaks (he flees or makes his last stand) sets it off again around him, while spreads
         // last; and Turncoat: the one it panics hits the one beside him once.
         private void FearAround(int side, BattleUnit center, int form, string detail, ref int spreads)
@@ -258,7 +258,7 @@ namespace KindredSiege.Sim.Battle
             }
         }
 
-        // Turncoat (rules 25): the one Fear panicked hits the first of his own side beside him once, for his power. The blow is
+        // Turncoat (rules 28): the one Fear panicked hits the first of his own side beside him once, for his power. The blow is
         // the trick's, so it counts for the side whose Fear it was.
         private void Turncoat(int side, BattleUnit turned)
         {
@@ -286,7 +286,7 @@ namespace KindredSiege.Sim.Battle
             }
         }
 
-        // From rules 25 the field, Backstab's lock, the mine, its return and Breach's exposure run out; a backstab that ran
+        // From rules 28 the field, Backstab's lock, the mine, its return and Breach's exposure run out; a backstab that ran
         // out keeps no hits; Rupture's steps go with the Focus; Crack and Gap run out; and an Unleash that ran out lets its
         // echoes go.
         private void CountDownShade()
@@ -342,7 +342,7 @@ namespace KindredSiege.Sim.Battle
             b.Field(u.Id + ".echoTarget", u.EchoTargetId);
         }
 
-        // ------------------------------------------------------------ the other five routes: reads (rules 25)
+        // ------------------------------------------------------------ the other five routes: reads (rules 28)
 
         /// The ticks this side's Rift Mine is still armed, and its return still keeps its attacks waiting.
         public int MineTicksLeft(int side) => _shadeOn && side >= 0 && side <= 1 ? _sides[side].MineTicks : 0;
@@ -359,7 +359,7 @@ namespace KindredSiege.Sim.Battle
         public bool EchoRecordingOf(int side) => _shadeOn && side >= 0 && side <= 1 && _sides[side].EchoRecording;
         public int EchoStoredOf(BattleUnit unit) => _shadeOn && unit != null ? unit.EchoStored : 0;
 
-        // ------------------------------------------------------------ the follow up presses (rules 25)
+        // ------------------------------------------------------------ the follow up presses (rules 28)
 
         /// What pressing this order now would do instead of the plain order, for the button: "Rupture", "Ram" or "Release"
         /// (with Converge, still "Release"), or empty for the plain order. A follow up costs nothing.
@@ -446,7 +446,7 @@ namespace KindredSiege.Sim.Battle
             }
             if (state.EchoRecording && state.UnleashTicks > 0)
             {
-                // Echo Strike (rules 26) keeps more of a Skirmisher's.
+                // Echo Strike (rules 29) keeps more of a Skirmisher's.
                 int kept = hpLost * EchoShare(source) / 100;
                 if (kept <= 0) return;
                 source.EchoStored += kept;
@@ -649,7 +649,7 @@ namespace KindredSiege.Sim.Battle
         private int UnleashPercent(int side)
         {
             if (!_shadeOn || side < 0 || side > 1 || !KitOf(side).Has(ShadeRoute.Echo)) return UnleashDamagePercent;
-            // Half the bonus, less of a cut with Command Relay (rules 26).
+            // Half the bonus, less of a cut with Command Relay (rules 29).
             return 100 + (UnleashDamagePercent - 100) * (100 - 50 * PriceLeft(side) / 100) / 100;
         }
 

@@ -6,14 +6,14 @@ using KindredSiege.Sim.Battle;
 
 namespace KindredSiege.Sim.Learning
 {
-    /// Writes a campaign down and reads it back. Version 31 (2 Nov 2026, the Whisperer's vows, campaign rules 30) keeps each
+    /// Writes a campaign down and reads it back. Version 31 (2 Nov 2026, the Whisperer's vows, campaign rules 33) keeps each
     /// ranked fighter's vow (vow: the fighter and the Battle.StarVow), and a Whisperer pick on offer can carry one (whisperpick's
-    /// seventh field, written only when set). Version 30 (1 Nov 2026, the Pals' duos, campaign rules 27) keeps the run's duos
+    /// seventh field, written only when set). Version 30 (1 Nov 2026, the Pals' duos, campaign rules 30) keeps the run's duos
     /// held and the ones a card has shown (duo: two masks, one bit a Battle.PalDuo), and can hold a duo on a card
-    /// (Favour.DuoCrownedMarks to Favour.DuoGorgedTricks). Version 29 (1 Nov 2026, the Glutton, campaign rules 26) keeps the talents bought
+    /// (Favour.DuoCrownedMarks to Favour.DuoGorgedTricks). Version 29 (1 Nov 2026, the Glutton, campaign rules 29) keeps the talents bought
     /// at camp (owned, a camp record, in the order bought), the run's Feed (feed: the talent fed and the one eaten, 0 for none)
     /// and the losses Branch Hedge kept the streak through (hedge), and can hold his road card on offer (Favour.GluttonDarkMatterPlating
-    /// to Favour.GluttonNodeCache) and a card of up to FavourRules.MaxOffered picks. Version 28 (31 Oct 2026, the Shade's forms, campaign rules 25) can hold her road
+    /// to Favour.GluttonNodeCache) and a card of up to FavourRules.MaxOffered picks. Version 28 (31 Oct 2026, the Shade's forms, campaign rules 28) can hold her road
     /// card on offer: favour offer choices from Favour.ShadeMirror to Favour.ShadeEcho, one a route; an older game refuses it by
     /// its version. Version 27 (31 Oct 2026, the Whisperer, campaign rules 24) reads the habits
     /// as camp records, kept between runs, and keeps the run's habit upgrades (habitup) and her picks on offer (whisperpick,
@@ -167,11 +167,11 @@ namespace KindredSiege.Sim.Learning
             // The Pals' stores (version 26, rules 23): the Glutton's talents, the Shade's routes, the Whisperer's habits and
             // pair, each fighter's rank above 1 and his second slot.
             for (int i = 0; i < c.Talents.Count; i++) Line(b, "talent", N((int)c.Talents[i].Talent), c.Talents[i].Fed ? "1" : "0");
-            // The Glutton's (version 29, rules 26): the talents bought at camp, the run's Feed and its Branch Hedge.
+            // The Glutton's (version 29, rules 29): the talents bought at camp, the run's Feed and its Branch Hedge.
             for (int i = 0; i < c.OwnedTalents.Count; i++) Line(b, "owned", N((int)c.OwnedTalents[i]));
             if (c.FedTalent != GluttonTalent.None) Line(b, "feed", N((int)c.FedTalent), N((int)c.EatenTalent));
             if (c.HedgesUsed > 0) Line(b, "hedge", N(c.HedgesUsed));
-            // The duos (version 30, rules 27): held, and shown.
+            // The duos (version 30, rules 30): held, and shown.
             if (c.DuoMask != 0 || c.DuosShownMask != 0) Line(b, "duo", N(c.DuoMask), N(c.DuosShownMask));
             for (int i = 0; i < c.ShadeRoutes.Count; i++) Line(b, "route", N((int)c.ShadeRoutes[i].Route), N(c.ShadeRoutes[i].Form));
             for (int i = 0; i < c.Habits.Count; i++) Line(b, "palhabit", N((int)c.Habits[i].Habit));
@@ -181,7 +181,7 @@ namespace KindredSiege.Sim.Learning
             for (int i = 0; i < c.Reserve.Count; i++)
             {
                 if (c.Reserve[i].Rank > 1) Line(b, "rank", c.Reserve[i].Id, N(c.Reserve[i].Rank));
-                // The vow (version 31, rules 30), after the rank.
+                // The vow (version 31, rules 33), after the rank.
                 if (c.Reserve[i].Rank > 1 && c.Reserve[i].Vow != StarVow.None) Line(b, "vow", c.Reserve[i].Id, N((int)c.Reserve[i].Vow));
                 if (c.Reserve[i].GearId2.Length > 0) Line(b, "slot2", c.Reserve[i].Id, c.Reserve[i].GearId2);
             }

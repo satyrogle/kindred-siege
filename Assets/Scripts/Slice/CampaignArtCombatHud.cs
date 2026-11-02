@@ -28,6 +28,8 @@ namespace KindredSiege.Slice
             if(order==Directive.Eclipse&&(_fight!=null||_playback!=null)&&ViewSim.MeterOn)
                 return (_fight!=null&&(_fight.Assist==null||_fight.AssistUsed)?ChiefOrderHint()+" / ":"")+MeterHint()+
                     (ViewSim.CanUse(0,order,out string meterWhy)?"":" / "+meterWhy);
+            if(order==Directive.Hold&&(_fight!=null||_playback!=null)&&ViewSim.TightParryOn)
+                return "Watch the attacker flash gold: live Hold in 0.2s parries, counters and fills a bar. Mistime: full hit and +50% incoming damage for1s. Paused Hold cannot parry.";
             if(order==Directive.Hold&&(_fight!=null||_playback!=null)&&ViewSim.DangerOn)
                 return "SWINGS: Hold guards the front. BLASTS: time a live parry"+(_fight!=null&&_fight.Encounter.NoFallBack?"":" or dodge")+"; an early or paused Hold stops nothing.";
             if(RoadHud&&order==Directive.Unleash)return "Unleash boosts damage and scares enemies. No own nerve drain in road combat.";

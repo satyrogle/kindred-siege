@@ -71,8 +71,8 @@ namespace KindredSiege.Sim.Learning
         WhisperPair = 29,
         WhisperHabitUp = 30,
 
-        // The Shade's road card (campaign rules 25; Jacob in chat, 31 Oct 2026: "go" on Claude's Shade design): one a route, in
-        // Battle.ShadeRoute's order. From rules 25 her road fights offer three of these in place of her three favours above.
+        // The Shade's road card (campaign rules 28; Jacob in chat, 31 Oct 2026: "go" on Claude's Shade design): one a route, in
+        // Battle.ShadeRoute's order. From rules 28 her road fights offer three of these in place of her three favours above.
         // Taking one gives that route its next form, or puts it on its plain button at form 1 (Campaign.TryTakeRoute). Only
         // Sanctuary, Backstab and Fear are offered so far (Battle.ShadeRules.Built).
         ShadeMirror = 31,
@@ -84,8 +84,8 @@ namespace KindredSiege.Sim.Learning
         ShadeBreach = 37,
         ShadeEcho = 38,
 
-        // The Glutton's road card (campaign rules 26; Jacob in chat, 1 Nov 2026: "go"): one a talent, in Battle.GluttonTalent's
-        // order. From rules 26 his road fights offer three of these in place of his three favours above. Taking one lends that
+        // The Glutton's road card (campaign rules 29; Jacob in chat, 1 Nov 2026: "go"): one a talent, in Battle.GluttonTalent's
+        // order. From rules 29 his road fights offer three of these in place of his three favours above. Taking one lends that
         // talent for the run, and a tier 3 talent brings its limb's keystone with it (Campaign.PalStores.cs).
         GluttonDarkMatterPlating = 39,
         GluttonEntropySink = 40,
@@ -123,7 +123,7 @@ namespace KindredSiege.Sim.Learning
         GluttonGeneLibrary = 72,
         GluttonNodeCache = 73,
 
-        // The Pals' duos (campaign rules 27; Jacob in chat, 1 Nov 2026: "go write them"): one a duo, in Battle.PalDuo's order.
+        // The Pals' duos (campaign rules 30; Jacob in chat, 1 Nov 2026: "go write them"): one a duo, in Battle.PalDuo's order.
         // Once a run holds a pick from both Pals of a pair, a card of either can show their duo as one more pick
         // (Campaign.Duos.cs). Taking it holds it for the run.
         DuoCrownedMarks = 74,
@@ -147,7 +147,7 @@ namespace KindredSiege.Sim.Learning
             Vow = vow;
         }
 
-        /// WhisperRankUp to rank 2 from rules 30: the vow it gives him. None otherwise.
+        /// WhisperRankUp to rank 2 from rules 33: the vow it gives him. None otherwise.
         public StarVow Vow { get; }
 
         public Favour Kind { get; }
@@ -292,7 +292,7 @@ namespace KindredSiege.Sim.Learning
             return favour >= Favour.WhisperRankUp && favour <= Favour.WhisperHabitUp;
         }
 
-        /// True for one of the Glutton's road card picks (rules 26): a talent lent for the run.
+        /// True for one of the Glutton's road card picks (rules 29): a talent lent for the run.
         public static bool IsGlutton(Favour favour)
         {
             return favour >= Favour.GluttonDarkMatterPlating && favour <= Favour.GluttonNodeCache;
@@ -310,10 +310,10 @@ namespace KindredSiege.Sim.Learning
             return GluttonRules.Valid(talent) ? (Favour)((int)talent - 1 + (int)Favour.GluttonDarkMatterPlating) : Favour.None;
         }
 
-        /// The most picks a card can show: FavourRules.Offered, more with Node Cache (rules 26), and a Pal's three duos (rules 27).
+        /// The most picks a card can show: FavourRules.Offered, more with Node Cache (rules 29), and a Pal's three duos (rules 30).
         public const int MaxOffered = Offered + 2 * GluttonRules.CacheMore + 3;
 
-        /// True for a duo pick (rules 27).
+        /// True for a duo pick (rules 30).
         public static bool IsDuo(Favour favour)
         {
             return favour >= Favour.DuoCrownedMarks && favour <= Favour.DuoGorgedTricks;
@@ -363,7 +363,7 @@ namespace KindredSiege.Sim.Learning
         /// Whether this Pal is one of the duo's two.
         public static bool DuoHas(PalDuo duo, Pal pal) => pal != Pal.None && (FirstOf(duo) == pal || SecondOf(duo) == pal);
 
-        /// True for one of the Shade's road card picks (rules 25): a route, its form in the run's store.
+        /// True for one of the Shade's road card picks (rules 28): a route, its form in the run's store.
         public static bool IsShade(Favour favour)
         {
             return favour >= Favour.ShadeMirror && favour <= Favour.ShadeEcho;

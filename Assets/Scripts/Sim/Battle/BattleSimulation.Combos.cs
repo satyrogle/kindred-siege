@@ -91,7 +91,7 @@ namespace KindredSiege.Sim.Battle
                 {
                     BattleUnit u = _units[i];
                     if (u.Side != s || !HasAugment(u, Augment.FoldDoor)) continue;
-                    // Synthesis Discount, Fold Shield and Entropy Purge (rules 26) cut it.
+                    // Synthesis Discount, Fold Shield and Entropy Purge (rules 29) cut it.
                     int percent = UnnervingPercent(u);
                     if (_unitNerveOn) u.UnitNerve -= u.UnitNerve * percent / (100 * ClassSpells.UnnervingEighths);
                     else _sides[s].Nerve = Math.Max(1, _sides[s].Nerve - share * percent / (100 * ClassSpells.UnnervingEighths));
@@ -124,8 +124,8 @@ namespace KindredSiege.Sim.Battle
         // BrandedAndBeside), standing and not spared.
         private List<BattleUnit> PulledIn(BattleUnit by, BattleUnit mark, int reach = 1)
         {
-            // Neutron Mass and Stasis Wind Up (rules 26) reach further.
-            // The Butcher's flavours (rules 29): Gravity pulls further.
+            // Neutron Mass and Stasis Wind Up (rules 29) reach further.
+            // The Butcher's flavours (rules 32): Gravity pulls further.
             if (_flavoursOn) reach += FlavourReachOf(by);
             List<BattleUnit> beside = Beside(mark, reach);
             var pulled = new List<BattleUnit>();
@@ -547,11 +547,11 @@ namespace KindredSiege.Sim.Battle
                 victim.HurtLost[slot] = 0;
             }
             victim.HurtLost[slot] += hpLost;
-            // Rewind Wound's longer memory (rules 26, BattleSimulation.Glutton.cs).
+            // Rewind Wound's longer memory (rules 29, BattleSimulation.Glutton.cs).
             if (_gluttonOn) HurtLonger(victim, hpLost);
         }
 
-        // What a Medic's Rewind gives back: the last RewindSeconds, or with Rewind Wound (rules 26) the longer memory.
+        // What a Medic's Rewind gives back: the last RewindSeconds, or with Rewind Wound (rules 29) the longer memory.
         private int RewindLost(BattleUnit medic, BattleUnit unit)
         {
             int seconds = RewindSecondsOf(medic);

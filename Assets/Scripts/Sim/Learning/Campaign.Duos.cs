@@ -4,7 +4,7 @@ using KindredSiege.Sim.Battle;
 
 namespace KindredSiege.Sim.Learning
 {
-    /// The Pals' duos on the road (campaign rules 27; Jacob in chat, 1 Nov 2026: "go write them"; Battle.BattleSimulation.Duos.cs
+    /// The Pals' duos on the road (campaign rules 30; Jacob in chat, 1 Nov 2026: "go write them"; Battle.BattleSimulation.Duos.cs
     /// plays them). Once the run holds a pick from both Pals of a pair, the first card of either shows their duo as one more
     /// pick, and after that one card of theirs in DuoAgainOneIn, until it is taken. Taking it is a pick like any: it costs the
     /// fight's gear. A duo is held for the run. Every number is a starting value.
@@ -22,7 +22,7 @@ namespace KindredSiege.Sim.Learning
         private int _duos;
         private int _duosShown;
 
-        /// Whether this run plays the duos: campaign rules 27.
+        /// Whether this run plays the duos: campaign rules 30.
         public bool DuosRun => Math.Min(RulesVersion, _tuning.RulesCap) >= PalDuoRules;
 
         /// The duos the run holds, in PalDuo's order.
@@ -61,7 +61,7 @@ namespace KindredSiege.Sim.Learning
             }
         }
 
-        /// A duo for the run, as its pick gives it. False outside a run, before rules 27, or held already.
+        /// A duo for the run, as its pick gives it. False outside a run, before rules 30, or held already.
         public bool TryTakeDuo(PalDuo duo)
         {
             if (!DuosRun || Stage != CampaignStage.InRun || !DuoRules.Valid(duo) || HoldsDuo(duo)) return false;

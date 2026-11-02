@@ -323,7 +323,7 @@ namespace KindredSiege.Sim.Battle
                 return;
             }
             if (!_parryOn && _fight.PerfectHold && theirs.HoldTicks > 0 && theirs.LastHoldTick >= 0 &&
-                _tick - theirs.LastHoldTick <= FightRules.PerfectHoldTicks)
+                _tick - theirs.LastHoldTick <= ParryWindowTicks)
             {
                 Emit(EventFor(BattleEventKind.Land, captain, prey, 0, name + ChiefKits.Parried));
                 Emit(new BattleEvent(_tick, BattleEventKind.Parry, foe, string.Empty, -1, captain.Id, (int)captain.Class,

@@ -49,7 +49,7 @@ namespace KindredSiege.Sim.Battle
         public const string BackstabDetail = "backstab";
         public const string FearDetail = "fear";
 
-        // ------------------------------------------------------------ the forms (campaign rules 25)
+        // ------------------------------------------------------------ the forms (campaign rules 28)
         // Jacob in chat, 31 Oct 2026: "go" on Claude's Shade design (HANDOFF_LOG, "Claim: the Shade's forms"). Every number is a
         // starting value.
 
@@ -61,12 +61,12 @@ namespace KindredSiege.Sim.Battle
         /// health, and every shield of the field shatters.
         public const int RefugeHealth = 1;
 
-        // Sanctuary's price from rules 25: the side's parries do not stagger (BattleSimulation.ParryLands).
+        // Sanctuary's price from rules 28: the side's parries do not stagger (BattleSimulation.ParryLands).
 
         /// Backstab 2, Twin Knives: each fighter's next this many hits land double, not one.
         public const int TwinKnivesHits = 2;
 
-        /// Backstab 3, Shadow Strike: the side keeps attacking while it falls back. Backstab's price from rules 25: the next Fall
+        /// Backstab 3, Shadow Strike: the side keeps attacking while it falls back. Backstab's price from rules 28: the next Fall
         /// Back waits until this long after the last one ran out.
         public const int BackstabLockTicks = 2 * SimClock.TicksPerSecond;
 
@@ -74,7 +74,7 @@ namespace KindredSiege.Sim.Battle
         /// fall.
         public const int DreadSpreads = 2;
 
-        /// Fear's price from rules 25: Focus Fire lasts this percent as long.
+        /// Fear's price from rules 28: Focus Fire lasts this percent as long.
         public const int FearFocusPercent = 75;
 
         /// The events' details for the forms: Relay's pool soaking (Shield), Last Refuge (Trick, its target the one saved),
@@ -84,7 +84,7 @@ namespace KindredSiege.Sim.Battle
         public const string DreadDetail = "dread";
         public const string TurncoatDetail = "turncoat";
 
-        // ------------------------------------------------------------ the other five routes (campaign rules 25)
+        // ------------------------------------------------------------ the other five routes (campaign rules 28)
         // Jacob, 1 Nov 2026: "finish shade". Their forms are the ones locked on 31 Oct ("The Shade's core": "as in Codex's paper
         // and the 28 Oct names"), in the sim's timing versions (finding F4: the sim has no positions, so a push is a delay and
         // "nearby" is the one beside him). Every number is a starting value inside the paper's ranges.
@@ -154,7 +154,7 @@ namespace KindredSiege.Sim.Battle
                 detail == RamDetail || detail == EchoDetail || detail == TurncoatDetail;
         }
 
-        /// The routes the road offers from rules 25: all eight.
+        /// The routes the road offers from rules 28: all eight.
         public static bool Built(ShadeRoute route)
         {
             return route > ShadeRoute.None && (int)route < RouteCount;
@@ -249,7 +249,7 @@ namespace KindredSiege.Sim.Battle
     }
 
     /// The Glutton's 35 talents, his seven limbs of five as locked on 28 Oct 2026 (DESIGN_LOCKS, "The Butcher, Glutton and Shade
-    /// locked" and its later fixes): tier 1, tier 2, the tier 3 pair, then the keystone. From rules 26 each does what
+    /// locked" and its later fixes): tier 1, tier 2, the tier 3 pair, then the keystone. From rules 29 each does what
     /// GluttonRules.Describe says (Jacob in chat, 1 Nov 2026: "go" on Claude's calls for the open ones). Saves keep the numbers; never reorder.
     public enum GluttonTalent
     {
@@ -263,7 +263,7 @@ namespace KindredSiege.Sim.Battle
         RoguePlanetProspecting = 31, BranchHedge = 32, SynthesisDiscount = 33, GeneLibrary = 34, NodeCache = 35
     }
 
-    /// The Glutton's tree in the fight and at camp (campaign rules 26; Jacob in chat, 1 Nov 2026: "go" on Claude's calls;
+    /// The Glutton's tree in the fight and at camp (campaign rules 29; Jacob in chat, 1 Nov 2026: "go" on Claude's calls;
     /// DESIGN_LOCKS, "The Butcher, Glutton and Shade locked" and "The Glutton's theme: one limb"). Seven limbs of five, each
     /// tier 1, tier 2, a tier 3 pair you pick one of, and a keystone, in GluttonTalent's order. Every talent makes something you
     /// already have bigger, longer, faster or cheaper; fed (Feed, once a run) its bonus doubles. Every number is a starting value.
@@ -569,7 +569,7 @@ namespace KindredSiege.Sim.Battle
         }
     }
 
-    /// The Whisperer's vows (campaign rules 30; Jacob in chat, 2 Nov 2026: "whisperer - 1"; BattleSimulation.Vows.cs): when a
+    /// The Whisperer's vows (campaign rules 33; Jacob in chat, 2 Nov 2026: "whisperer - 1"; BattleSimulation.Vows.cs): when a
     /// fighter reaches rank 2 he takes one of his class's two vows, and it changes how his spell works; at rank 3 it takes its
     /// final form. Saves and replays keep the numbers; never reorder.
     public enum StarVow
@@ -646,7 +646,7 @@ namespace KindredSiege.Sim.Battle
         }
     }
 
-    /// The Pals' duos (campaign rules 27; Jacob in chat, 1 Nov 2026: "go write them"; BattleSimulation.Duos.cs): one pick that
+    /// The Pals' duos (campaign rules 30; Jacob in chat, 1 Nov 2026: "go write them"; BattleSimulation.Duos.cs): one pick that
     /// joins two Pals' themes, offered once a run holds a pick from both. One for each pair of the four.
     public enum PalDuo
     {
@@ -757,13 +757,13 @@ namespace KindredSiege.Sim.Battle
         // Each habit: 0 not set, 1 set, 2 set and upgraded, at most one a class.
         private readonly int[] _habits = new int[WhisperRules.HabitCount + 1];
 
-        // From rules 26 each of the Glutton's talents: 0 none, GluttonRules.Held, or GluttonRules.Fed.
+        // From rules 29 each of the Glutton's talents: 0 none, GluttonRules.Held, or GluttonRules.Fed.
         private readonly int[] _talents = new int[GluttonRules.TalentCount + 1];
 
-        // From rules 27 the duos held, one bit a duo (1 << (int)PalDuo).
+        // From rules 30 the duos held, one bit a duo (1 << (int)PalDuo).
         private int _duos;
 
-        // From rules 30 each fighter's vow, by id, in the order given.
+        // From rules 33 each fighter's vow, by id, in the order given.
         private readonly List<KeyValuePair<string, StarVow>> _vows = new List<KeyValuePair<string, StarVow>>();
 
         private PalKit(PalKit routes, int[] habits, SquadPair pair)
@@ -793,7 +793,7 @@ namespace KindredSiege.Sim.Battle
             return new PalKit(this, copy, pair);
         }
 
-        /// The same kit with the Glutton's talents (rules 26): each at 0, GluttonRules.Held or GluttonRules.Fed, in GluttonTalent's
+        /// The same kit with the Glutton's talents (rules 29): each at 0, GluttonRules.Held or GluttonRules.Fed, in GluttonTalent's
         /// order from index 1.
         public PalKit WithTalents(IReadOnlyList<int> levels)
         {
@@ -812,7 +812,7 @@ namespace KindredSiege.Sim.Battle
             return (int[])_talents.Clone();
         }
 
-        /// The same kit with these duos (rules 27), one bit a duo (1 << (int)PalDuo); bits for no duo are dropped.
+        /// The same kit with these duos (rules 30), one bit a duo (1 << (int)PalDuo); bits for no duo are dropped.
         public PalKit WithDuos(int mask)
         {
             var kit = new PalKit(this, _habits, Pair);
@@ -827,7 +827,7 @@ namespace KindredSiege.Sim.Battle
 
         public bool HasDuo(PalDuo duo) => DuoRules.Valid(duo) && (_duos & (1 << (int)duo)) != 0;
 
-        /// The same kit with these fighters' vows (rules 30), by fighter id; a fighter named twice keeps his first.
+        /// The same kit with these fighters' vows (rules 33), by fighter id; a fighter named twice keeps his first.
         public PalKit WithVows(IReadOnlyList<KeyValuePair<string, StarVow>> vows)
         {
             var kit = new PalKit(this, _habits, Pair);
@@ -942,13 +942,13 @@ namespace KindredSiege.Sim.Battle
             for (int h = 1; h <= WhisperRules.HabitCount; h++)
                 if (_habits[h] > 0) b.Field(prefix + "habit." + ((WhispererHabit)h).ToString().ToLowerInvariant(), _habits[h]);
             if (Pair != SquadPair.None) b.Field(prefix + "pair", (int)Pair);
-            // The Glutton's (rules 26), the same way.
+            // The Glutton's (rules 29), the same way.
             for (int t = 1; t <= GluttonRules.TalentCount; t++)
                 if (_talents[t] > 0) b.Field(prefix + "talent." + ((GluttonTalent)t).ToString().ToLowerInvariant(), _talents[t]);
-            // The duos (rules 27), the same way.
+            // The duos (rules 30), the same way.
             for (int d = 1; d < DuoRules.Count; d++)
                 if ((_duos & (1 << d)) != 0) b.Field(prefix + "duo." + ((PalDuo)d).ToString().ToLowerInvariant(), true);
-            // The vows (rules 30), the same way.
+            // The vows (rules 33), the same way.
             for (int i = 0; i < _vows.Count; i++) b.Field(prefix + "vow." + _vows[i].Key, (int)_vows[i].Value);
         }
     }

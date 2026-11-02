@@ -8,7 +8,7 @@ using NUnit.Framework;
 namespace KindredSiege.Sim.Tests
 {
     /// The Shade's other five routes (Jacob, 1 Nov 2026: "finish shade"; their forms as locked on 31 Oct, "The Shade's core";
-    /// FightRules.ShadeForms, campaign rules 25): Mirror, Rift Mine, Rupture, Breach and Echo. One quick test per piece, only
+    /// FightRules.ShadeForms, campaign rules 28): Mirror, Rift Mine, Rupture, Breach and Echo. One quick test per piece, only
     /// to prove each runs (Jacob, 12 Oct 2026: build first). Nothing here is tuning.
     public class ShadeRoutesTests
     {
@@ -99,7 +99,7 @@ namespace KindredSiege.Sim.Tests
 
             BattleSimulation old = Cleaver("mirror", Kit(ShadeRoute.Mirror, 1), Chief24);
             Assert.IsTrue(ParryNextCleave(old, new SimSession(old)));
-            Assert.IsEmpty(Tricks(old, ShadeRules.MirrorDetail), "below rules 25 Mirror does nothing");
+            Assert.IsEmpty(Tricks(old, ShadeRules.MirrorDetail), "below rules 28 Mirror does nothing");
         }
 
         [Test]

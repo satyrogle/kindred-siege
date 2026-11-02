@@ -35,24 +35,26 @@ namespace KindredSiege.Slice
         string BeastGuide(BeastKit kit, bool parryCenter = false)
         {
             bool lives=(_fight!=null||_playback!=null)?ViewSim.RoadCombatOn:LivesRun;
+            bool scenes=(_fight!=null||_playback!=null)?ViewSim.BeastScenesOn:ReviewRulesCap>=Campaign.BeastSceneRules;
             string shared = "Optional fight. Costs no road step. No enemy nerve: break parts. Your nerve and leader still matter.\n" +
                 (lives?"Win: broken parts become trophies at camp. Lose: no trophies or life lost; your whole squad returns.\n":
                 "Win: broken parts become trophies at camp, safe even if the run is lost. Lose: no trophies; fallen stay down; nobody captured.\n") +
                 "Each breaker earns a road scar for this run, strengthening their spell against beasts.\n\n";
-            if(parryCenter) shared += "EVERY TOLD BEAT: time a fresh live Hold in its last half second to parry. Paused Hold never parries. Early Hold costs nerve. The following are safe alternatives.\n";
+            if((_fight!=null||_playback!=null)&&ViewSim.TightParryOn) shared += TightGuide+"\n\n";
+            else if(parryCenter) shared += "EVERY TOLD BEAT: time a fresh live Hold in its last half second to parry. Paused Hold never parries. Early Hold costs nerve. The following are safe alternatives.\n";
             if (kit == BeastKit.CageBear) return shared +
                 "RIBCAGE: halves hits on the bear and seals the heart. Unleash doubles hits on the cage while active.\n" +
-                "CLAW / GRAB: Fall Back or Warden cover. Held fighters cannot act or be healed. Break the claw to free them.\n" +
+                (scenes?"CLAW / SLAM + GRAB: wave hits both rows before the grab. Fall Back dodges both; Warden halves the wave and blocks the grab.":"CLAW / GRAB: Fall Back or Warden cover.")+" Held fighters cannot act or be healed. Break the claw to free them.\n" +
                 "MAW / ROAR: Hold blocks it. Focus the maw during its tell to interrupt.\n" +
                 "HEART / PULSE: mends parts while caged; hits your whole squad once exposed. Hold or Medic; no dodge.\n" +
                 "Break the heart to kill it. Other standing parts drop without trophies.\n" +
                 "OVERDRIVE: after two broken parts, faster moves and doubled crush. LAST STAND: only heart remains, Pulse every 4s.\n" +
                 "It never flees. Time runs out: you lose.";
             return shared +
-                "JAW / BITE: time Hold while running to parry, or Warden cover reflects the bite. Paused Hold never parries.\n" +
+                (scenes?"JAW / BITE: hits the marked fighter's whole row. ":"JAW / BITE: ")+"Time Hold while running to parry, or Warden cover reflects the bite. Paused Hold never parries.\n" +
                 "FIN / DIVE: mostly avoids your hits while submerged. Fall Back dodges; a Trapper snare holds it up.\n" +
                 "SPINE / VOLLEY: back row hit. Fall Back or Warden cover.\n" +
-                "TAIL / SWEEP: front row hit. Fall Back, Warden cover or Medic." + (parryCenter ? " Time Hold to parry.\n" : " Hold does not soak it.\n") +
+                "TAIL / SWEEP: "+(((_fight!=null||_playback!=null)?ViewSim.BeastScenesOn:ReviewRulesCap>=Campaign.BeastSceneRules)?"both rows hit.":"front row hit.")+" Fall Back, Warden cover or Medic." + (parryCenter ? " Time Hold to parry.\n" : " Hold does not soak it.\n") +
                 "BLOOD FRENZY: after two parts break, faster moves and bleeding hits.\n" +
                 "LAST STAND: after three break, 15s to break the last; otherwise it flees with three trophies left behind.\n" +
                 "Break all four to kill it. At the fight time limit it flees; keep what you broke.";
@@ -66,7 +68,7 @@ namespace KindredSiege.Slice
                     "Crack the ribcage to reach the heart. Break the heart to kill it; only broken parts give trophies. Timeout: you lose." :
                     "Break all four, or hold out until it flees. Last stand: 15s to break the last part.", PxBone)
                 .Add(LivesRun?"Win: trophies safe at camp. Lose: no trophies or life lost; your whole squad returns.":"Win: trophies safe at camp. Lose: none; fallen stay down, nobody captured.", PxMuted)
-                .Add("Creature art pending. Named part markers show the targets.", PxMuted);
+                .Add(encounter.Beast==BeastKit.SandShark?"Named parts share one shark. Select a part to Focus it.":"Bear art pending. Named part markers show the targets.", PxMuted);
             PxButton("beast-guide", "BEAST MOVES", 464, 362, 232, 26, () => { CloseModal(); Modal("BEAST MOVES", BeastGuide(encounter.Beast, true)); });
         }
 
@@ -102,6 +104,7 @@ namespace KindredSiege.Slice
             string answer = part==BeastPart.Jaw?(_playback!=null?"REPLAY / RECORDED DEFENCE":_pilotOn?"AUTO / TIMED DEFENCE":_paused?"RESUME TO PARRY":jawNow?"HOLD NOW / PARRY":"TIME HOLD / WARDEN GUARD"):
                 part==BeastPart.Maw?"HOLD / FOCUS MAW":part==BeastPart.Heart?(sim.BeastCaged?"SEALED / MENDS PARTS":"HOLD / MEDIC; NO DODGE"):
                 part==BeastPart.Fin?"FALL BACK / TRAPPER":part==BeastPart.Tail?"FALL BACK / COVER / MEDIC":"FALL BACK / COVER";
+            if(sim.TightParryOn&&part==BeastPart.Jaw)answer="PARRY / WATCH BODY";
             return hp + "\n" + BeastKits.MoveName(part) + (tell > 0 ? " NOW " + Seconds(tell) : " IN " + Seconds(sim.BeastNextTicks(part)))+"\n"+(tell>0?answer:part==BeastPart.Heart&&sim.BeastCaged?"SEALED / BACK":unit.Row==Row.Front?"FRONT":"BACK");
         }
 
@@ -147,7 +150,14 @@ namespace KindredSiege.Slice
                 {
                     if(sim.BeastHeldId==f.unit.Id) marks.Add("HELD / BREAK CLAW");
                     foreach(var part in BeastKits.Parts(kit))
-                        if(sim.BeastTellTicks(part)>0&&sim.BeastTellTargetId(part)==f.unit.Id) marks.Add(BeastKits.MoveName(part)+" TARGET");
+                        if(sim.BeastTellTicks(part)>0)
+                        {
+                            var victim=sim.FindById(sim.BeastTellTargetId(part));
+                            bool marked=sim.BeastTellTargetId(part)==f.unit.Id;
+                            if(sim.BeastScenesOn&&f.unit.Side==0)
+                                marked=part==BeastPart.Tail||part==BeastPart.Claw||part==BeastPart.Jaw&&victim!=null&&victim.Row==f.unit.Row;
+                            if(marked)marks.Add(BeastKits.MoveName(part)+" TARGET");
+                        }
                 }
                 SetTacticsLines(_beastMarks[f.unit.Id],string.Join("\n",marks),PxYellow);
             }

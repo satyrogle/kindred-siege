@@ -127,7 +127,7 @@ namespace KindredSiege.Sim.Battle
             bool alive = target.Alive;
             Blow(unit, target, unit.Power, BlowKind.Strike);
             Broke(unit, target);
-            // Reaver (rules 30, BattleSimulation.Vows.cs).
+            // Reaver (rules 33, BattleSimulation.Vows.cs).
             if (_vowsOn) Reaved(unit, target, alive);
             if (!RankTwo(unit) || _finished || !unit.Alive) return;
             BattleUnit next = target.Alive ? target : SpellTarget(unit, false);
@@ -147,7 +147,7 @@ namespace KindredSiege.Sim.Battle
         private void Shots(BattleUnit unit, BattleUnit target)
         {
             Blow(unit, target, unit.Power, BlowKind.AimedShot);
-            // Sniper and Ranger (rules 30, BattleSimulation.Vows.cs) on the first shot.
+            // Sniper and Ranger (rules 33, BattleSimulation.Vows.cs) on the first shot.
             if (_vowsOn) ShotVows(unit, target);
             if (!RankTwo(unit) || _finished || !unit.Alive) return;
             BattleUnit next = target.Alive ? target : SpellTarget(unit, true);
@@ -263,7 +263,7 @@ namespace KindredSiege.Sim.Battle
         private bool AlsoGuards(BattleUnit warden, BattleUnit target)
         {
             if (warden.GuardTargetId2.Length > 0 && string.Equals(warden.GuardTargetId2, target.Id, StringComparison.Ordinal)) return true;
-            // Bastion (rules 30, BattleSimulation.Vows.cs).
+            // Bastion (rules 33, BattleSimulation.Vows.cs).
             if (_vowsOn && BastionCovers(warden, target)) return true;
             return target.Row == Row.Back && HabitUp(warden, WhispererHabit.Bodyguard) && AimingAlly(warden) != null;
         }
@@ -320,7 +320,7 @@ namespace KindredSiege.Sim.Battle
         {
             int amount = Treat(medic, patient);
             _sides[medic.Side].LastPatientId = patient.Id;
-            // Hierophant (rules 30, BattleSimulation.Vows.cs).
+            // Hierophant (rules 33, BattleSimulation.Vows.cs).
             if (_vowsOn) Splashed(medic, patient, amount);
             if (HabitUp(medic, WhispererHabit.FrontFirst) && patient.Row == Row.Front && amount > 0)
                 for (int i = 0; i < _units.Count && !Stopped; i++)

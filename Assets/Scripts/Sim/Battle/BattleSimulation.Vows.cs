@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace KindredSiege.Sim.Battle
 {
-    /// The Whisperer's vows in the fight (campaign rules 30; FightRules.Vows; Jacob in chat, 2 Nov 2026: "whisperer - 1"). A
+    /// The Whisperer's vows in the fight (campaign rules 33; FightRules.Vows; Jacob in chat, 2 Nov 2026: "whisperer - 1"). A
     /// fighter of rank 2 or more brings his vow in his side's PalKit (StarVow, VowRules); rank 2 plays it at tier 1, rank 3 at
     /// its final form. A vow adds to rank 2's spell once more; it never replaces it. Every number is a starting value.
     public sealed partial class BattleSimulation
@@ -13,10 +13,10 @@ namespace KindredSiege.Sim.Battle
         // A Netter's trap catching more is itself a snare; this keeps that from catching more again. Never set between ticks.
         private bool _netting;
 
-        /// Whether this fight plays the vows: campaign rules 30.
+        /// Whether this fight plays the vows: campaign rules 33.
         public bool VowsOn => _vowsOn;
 
-        /// This fighter's vow in this fight: None below rank 2, outside rules 30, or for a vow not of his class.
+        /// This fighter's vow in this fight: None below rank 2, outside rules 33, or for a vow not of his class.
         public StarVow VowOf(BattleUnit unit)
         {
             if (!_vowsOn || unit == null || unit.Side < 0 || unit.Side > 1 || FighterRank(unit) < 2) return StarVow.None;

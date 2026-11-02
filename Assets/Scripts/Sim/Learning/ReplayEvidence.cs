@@ -62,19 +62,19 @@ namespace KindredSiege.Sim.Learning
         // The rules just before 13 Oct. Each 13 Oct rule and doctrine is a switch that stays off unless a fight
         // turns it on, so a fight recorded under these that turned none on plays the same in this build.
         private const string PreSkillRulesIdentity = "ks-battle-20261011-3";
-        // Format 30 (31 Oct 2026, the Shade's forms, campaign rules 25) adds that switch after format 29's; the forms themselves
+        // Format 33 (31 Oct 2026, the Shade's forms, campaign rules 28) adds that switch after format 32's; the forms themselves
         // were already in each side's Pal kit (format 28). Older evidence reads it as off.
-        // Format 31 (1 Nov 2026, the Glutton, campaign rules 26) adds that switch and each side's talent levels after format
-        // 30's; older evidence reads them as off and none.
-        // Format 32 (1 Nov 2026, the Pals' duos, campaign rules 27) adds that switch and each side's duos held after format 31's;
+        // Format 34 (1 Nov 2026, the Glutton, campaign rules 29) adds that switch and each side's talent levels after format
+        // 33's; older evidence reads them as off and none.
+        // Format 35 (1 Nov 2026, the Pals' duos, campaign rules 30) adds that switch and each side's duos held after format 34's;
         // older evidence reads them as off and none.
-        // Format 33 (1 Nov 2026, the sizing pass, campaign rules 28) adds that switch after format 32's; older evidence reads it
+        // Format 36 (1 Nov 2026, the sizing pass, campaign rules 31) adds that switch after format 35's; older evidence reads it
         // as off.
-        // Format 34 (2 Nov 2026, the Butcher's flavours, campaign rules 29) adds that switch after format 33's; older evidence
+        // Format 37 (2 Nov 2026, the Butcher's flavours, campaign rules 32) adds that switch after format 36's; older evidence
         // reads it as off.
-        // Format 35 (2 Nov 2026, the vows and marks on every hit, campaign rules 30) adds those two switches and each side's vows
-        // (fighter id and vow) after format 34's; older evidence reads them as off and none.
-        private const int FormatVersion = 35;
+        // Format 38 (2 Nov 2026, the vows and marks on every hit, campaign rules 33) adds those two switches and each side's vows
+        // (fighter id and vow) after format 37's; older evidence reads them as off and none.
+        private const int FormatVersion = 38;
 
         // The longest move name a learned wait out or feint can sit on, read back.
         private const int MaxMoveName = 64;
@@ -100,7 +100,10 @@ namespace KindredSiege.Sim.Learning
             }
         }
 
-        // The oldest format that holds everything this setup uses: 27 for the parry meter (rules 22), 26 for danger (rules 21,
+        // The oldest format that holds everything this setup uses: 32 for the beasts as raid bosses (rules 27), 31 for the tight
+        // parry (rules 26), 30 for the beasts as their
+        // scenes show them (rules 25), 29 for
+        // the Whisperer (rules 24), 28 for the floor (rules 23), 27 for the parry meter (rules 22), 26 for danger (rules 21,
         // Jacob's playtest fixes 3, 7 and 9),
         // 25 for payoffs that spread (rules 20, Jacob's playtest fix 1),
         // 24 for the Butcher's marks and each fighter's combo rank (rules
@@ -114,12 +117,15 @@ namespace KindredSiege.Sim.Learning
         // piece, else 9.
         private static int FormatUsed(BattleSetup setup)
         {
-            if (setup.Fight.Vows || setup.Fight.MarksOnHits) return 35;
-            if (setup.Fight.Flavours) return 34;
-            if (setup.Fight.Sized) return 33;
-            if (setup.Fight.Duos) return 32;
-            if (setup.Fight.Glutton) return 31;
-            if (setup.Fight.ShadeForms) return 30;
+            if (setup.Fight.Vows || setup.Fight.MarksOnHits) return 38;
+            if (setup.Fight.Flavours) return 37;
+            if (setup.Fight.Sized) return 36;
+            if (setup.Fight.Duos) return 35;
+            if (setup.Fight.Glutton) return 34;
+            if (setup.Fight.ShadeForms) return 33;
+            if (setup.Fight.BeastRaid) return 32;
+            if (setup.Fight.Tight) return 31;
+            if (setup.Fight.BeastScenes) return 30;
             if (setup.Fight.Whisper) return 29;
             if (setup.Fight.Floor) return 28;
             if (setup.Fight.Meter) return 27;
@@ -456,10 +462,19 @@ namespace KindredSiege.Sim.Learning
                 w.Write((int)kit.Pair);
             }
             if (format < 30) return;
-            // Format 30: the Shade's forms (rules 25): the switch.
-            w.Write(fight.ShadeForms);
+            // Format 30: the beasts as their scenes show them (rules 25): the switch.
+            w.Write(fight.BeastScenes);
             if (format < 31) return;
-            // Format 31: the Glutton (rules 26): the switch, then each side's talent levels in GluttonTalent's order.
+            // Format 31: the tight parry (rules 26); older evidence reads it as off.
+            w.Write(fight.Tight);
+            if (format < 32) return;
+            // Format 32: the beasts as raid bosses (rules 27): the switch.
+            w.Write(fight.BeastRaid);
+            if (format < 33) return;
+            // Format 33: the Shade's forms (rules 28): the switch.
+            w.Write(fight.ShadeForms);
+            if (format < 34) return;
+            // Format 34: the Glutton (rules 29): the switch, then each side's talent levels in GluttonTalent's order.
             w.Write(fight.Glutton);
             for (int side = 0; side < 2; side++)
             {
@@ -467,18 +482,18 @@ namespace KindredSiege.Sim.Learning
                 w.Write(talents.Length);
                 for (int i = 0; i < talents.Length; i++) w.Write(talents[i]);
             }
-            if (format < 32) return;
-            // Format 32: the duos (rules 27): the switch, then each side's duos, one bit a Battle.PalDuo.
+            if (format < 35) return;
+            // Format 35: the duos (rules 30): the switch, then each side's duos, one bit a Battle.PalDuo.
             w.Write(fight.Duos);
             for (int side = 0; side < 2; side++) w.Write(s.Rules(side).Pals.DuoMask);
-            if (format < 33) return;
-            // Format 33: the sizing pass (rules 28): the switch.
+            if (format < 36) return;
+            // Format 36: the sizing pass (rules 31): the switch.
             w.Write(fight.Sized);
-            if (format < 34) return;
-            // Format 34: the Butcher's flavours (rules 29): the switch.
+            if (format < 37) return;
+            // Format 37: the Butcher's flavours (rules 32): the switch.
             w.Write(fight.Flavours);
-            if (format < 35) return;
-            // Format 35: the vows and marks on every hit (rules 30): both switches, then each side's vows.
+            if (format < 38) return;
+            // Format 38: the vows and marks on every hit (rules 33): both switches, then each side's vows.
             w.Write(fight.Vows);
             w.Write(fight.MarksOnHits);
             for (int side = 0; side < 2; side++)
@@ -704,9 +719,15 @@ namespace KindredSiege.Sim.Learning
                         rules[side] = rules[side].WithPals(rules[side].Pals.WithWhisper(habits, pair));
                     }
                 }
-                bool shadeForms = version >= 30 && r.ReadBoolean();
+                // Format 30: the beasts as their scenes show them (rules 25); older evidence reads it as off.
+                bool beastScenes = version >= 30 && r.ReadBoolean();
+                // Format 31: the tight parry (rules 26); older evidence reads it as off.
+                bool tight = version >= 31 && r.ReadBoolean();
+                // Format 32: the beasts as raid bosses (rules 27); older evidence reads it as off.
+                bool beastRaid = version >= 32 && r.ReadBoolean();
+                bool shadeForms = version >= 33 && r.ReadBoolean();
                 bool glutton = false;
-                if (version >= 31)
+                if (version >= 34)
                 {
                     glutton = r.ReadBoolean();
                     for (int side = 0; side < 2; side++)
@@ -718,7 +739,7 @@ namespace KindredSiege.Sim.Learning
                     }
                 }
                 bool duos = false;
-                if (version >= 32)
+                if (version >= 35)
                 {
                     duos = r.ReadBoolean();
                     for (int side = 0; side < 2; side++)
@@ -726,9 +747,9 @@ namespace KindredSiege.Sim.Learning
                 }
                 fight = new FightRules(misses, earned, perfectHold, snaps, classSpells, chiefRules, chiefKits, beasts, chiefTactics,
                     parryCenter, squadFirst, raidChief, roadCombat, roadKit, clearRoad, squadScreen, duel, layers, marks, payoffs, danger,
-                    meter, floor, whisper, shadeForms, glutton, duos, version >= 33 && r.ReadBoolean(), version >= 34 && r.ReadBoolean(),
-                    version >= 35 && r.ReadBoolean(), version >= 35 && r.ReadBoolean());
-                if (version >= 35)
+                    meter, floor, whisper, beastScenes, tight, beastRaid, shadeForms, glutton, duos, version >= 36 && r.ReadBoolean(), version >= 37 && r.ReadBoolean(),
+                    version >= 38 && r.ReadBoolean(), version >= 38 && r.ReadBoolean());
+                if (version >= 38)
                     for (int side = 0; side < 2; side++)
                     {
                         int count = Range(r.ReadInt32(), 0, 64);
@@ -740,9 +761,10 @@ namespace KindredSiege.Sim.Learning
                         }
                         rules[side] = rules[side].WithPals(rules[side].Pals.WithVows(vows));
                     }
-                // A beast's side is exactly its parts, or the fight cannot be played back (the audit, 22 Oct 2026).
+                // A beast's side is exactly its parts, or the fight cannot be played back (the audit, 22 Oct 2026); from rules 27 the
+                // shark's sand pups come after them.
                 for (int side = 0; side < 2 && beasts; side++)
-                    if (rules[side].Beast != BeastKit.None && units[side].Count != BeastKits.PartCount)
+                    if (rules[side].Beast != BeastKit.None && !BeastKits.SideFits(rules[side].Beast, units[side].Count, beastRaid))
                         throw new FormatException("A beast fight's beast side is not its parts.");
             }
             return new BattleSetup(id, seed, units[0], units[1], tactics[0], tactics[1], limit, points,

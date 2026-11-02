@@ -41,7 +41,7 @@ namespace KindredSiege.Sim.Learning
         /// core" and "The floor under the three Pals"). It goes when the run does.
         public int Rank { get; internal set; } = 1;
 
-        /// Their vow this run, from rank 2 (campaign rules 30, the Whisperer's vows: Battle.VowRules). None below rank 2; it goes
+        /// Their vow this run, from rank 2 (campaign rules 33, the Whisperer's vows: Battle.VowRules). None below rank 2; it goes
         /// with the rank that brought it, and when the run does.
         public StarVow Vow { get; internal set; }
 
@@ -606,20 +606,27 @@ namespace KindredSiege.Sim.Learning
         /// 23 those and the floor under the three Pals (31 Oct 2026, "Go, sprint it"; Battle.FightRules.Floor; FloorRules).
         /// 24 those and the Whisperer (31 Oct 2026, "Go, build her"; Battle.FightRules.Whisper; WhispererRules): habits set at
         /// camp and kept, her road card, the habits, pairs and rank 2 in the fight, and a fallen fighter's rank.
-        /// 25 those and the Shade's forms (Jacob in chat, 31 Oct 2026: "go" on Claude's Shade design; Battle.FightRules.ShadeForms;
+        /// 25 those and the beasts as their approved scenes show them (1 Nov 2026, "Sim follows scenes", then "Go as written";
+        /// Battle.FightRules.BeastScenes; BeastSceneRules): the shark's Bite on a whole row and its Sweep on all of them, and the
+        /// cage bear's Slam and Grab.
+        /// 26 those and the tight parry (1 Nov 2026, "Go, build it"; Battle.FightRules.Tight; TightParryRules): a 0.2 s window, a
+        /// Hold out of it that lands in full and opens your side for a second, and a counter on every parry.
+        /// 27 those and the beasts as raid bosses (1 Nov 2026, "Full plan", then "Go as written"; Battle.FightRules.BeastRaid;
+        /// BeastRaidRules): the shark's Feeding frenzy and its sand pups, the cage bear's Overload and its climbing Pulse.
+        /// 28 those and the Shade's forms (Jacob in chat, 31 Oct 2026: "go" on Claude's Shade design; Battle.FightRules.ShadeForms;
         /// ShadeFormsRules): her road card, and Sanctuary, Backstab and Fear at their second and third forms, each with its price.
-        /// 26 those and the Glutton (Jacob in chat, 1 Nov 2026: "go" on Claude's calls; Battle.FightRules.Glutton; GluttonTreeRules):
+        /// 29 those and the Glutton (Jacob in chat, 1 Nov 2026: "go" on Claude's calls; Battle.FightRules.Glutton; GluttonTreeRules):
         /// his camp tree paid with codex points, his road card lending a limb's next talent, Feed, and the 35 talents.
-        /// 27 those and the Pals' duos (Jacob in chat, 1 Nov 2026: "go write them"; Battle.FightRules.Duos; PalDuoRules): a duo on
+        /// 30 those and the Pals' duos (Jacob in chat, 1 Nov 2026: "go write them"; Battle.FightRules.Duos; PalDuoRules): a duo on
         /// a card once the run holds a pick from both of its Pals, and the six in the fight.
-        /// 28 those and the sizing pass (Jacob in chat, 1 Nov 2026: "okay go"; Battle.FightRules.Sized; SizedRules): the Pals'
+        /// 31 those and the sizing pass (Jacob in chat, 1 Nov 2026: "okay go"; Battle.FightRules.Sized; SizedRules): the Pals'
         /// picks sized with the builds test to decide fights.
-        /// 29 those and the Butcher's flavours (Jacob in chat, 2 Nov 2026: "both 1 and 2"; Battle.FightRules.Flavours;
+        /// 32 those and the Butcher's flavours (Jacob in chat, 2 Nov 2026: "both 1 and 2"; Battle.FightRules.Flavours;
         /// ButcherFlavourRules): combos growing with their flavour, and each flavour's final form.
-        /// 30 those, the Whisperer's vows and the Butcher's flavour fights (Jacob in chat, 2 Nov 2026: "whisperer - 1", "butcher
+        /// 33 those, the Whisperer's vows and the Butcher's flavour fights (Jacob in chat, 2 Nov 2026: "whisperer - 1", "butcher
         /// - 1 and 2"; Battle.FightRules.Vows and MarksOnHits; VowFlavourRules): a rank 2 fighter takes one of his class's two
         /// vows from her card, each Butcher fight offers one flavour, and a combo's wearer marks with every blow.
-        public const int RulesVersion = 30;
+        public const int RulesVersion = 33;
         public const int SquadScreenRules = 14;
         public const int ClearRoadRules = 13;
 
@@ -674,36 +681,53 @@ namespace KindredSiege.Sim.Learning
         /// in the fight, and a fighter who falls in a lost fight losing his top rank.
         public const int WhispererRules = 24;
 
+        /// The campaign rules version from which a beast fight plays its moves as the approved scenes show them (Jacob, 1 Nov
+        /// 2026: "Sim follows scenes", then "Go as written"; Battle.FightRules.BeastScenes, Battle.BattleSimulation.Beast.cs): the
+        /// sand shark's Bite takes the marked one's whole row and its tail's Sweep all of them, and the cage bear's Grab is a Slam
+        /// and Grab, an ice wave on all of them and then the claw. Every number is a starting value.
+        public const int BeastSceneRules = 25;
+
+        /// The campaign rules version from which every fight plays the tight parry (DESIGN_LOCKS, "The parry: tight window, big
+        /// payoff, a gold flash on the attacker"; Battle.BattleSimulation.Tight.cs): the 0.2 s window, the whiff and the counter.
+        public const int TightParryRules = 26;
+
+        /// The campaign rules version from which a beast fight plays its beast as a raid boss (Jacob, 1 Nov 2026: "can we finish
+        /// the bear and shark just like a wow boss", then "Full plan" and "Go as written"; Battle.FightRules.BeastRaid,
+        /// Battle.BattleSimulation.BeastRaid.cs): the shark's Feeding frenzy at its second broken part and then its two sand pups
+        /// (after its parts on its side), the cage bear's Overload when its ribcage breaks, and its Last stand Pulse climbing.
+        /// Built as 26 and renumbered to 27 the same day, after the tight parry took 26.
+        public const int BeastRaidRules = 27;
+
         /// The campaign rules version from which the Shade's forms play (Jacob in chat, 31 Oct 2026: "go" on Claude's Shade
         /// design; Campaign.PalStores.cs and Battle.BattleSimulation.Shade.cs): her road card (a new route on a plain button, or
         /// the next form of one you hold), Sanctuary's Relay and Last Refuge, Backstab's Twin Knives and Shadow Strike, Fear's
         /// Spreading Dread and Turncoat, and each route's price: Sanctuary's parries do not stagger, Backstab's Fall Back waits
         /// longer, and Fear's Focus Fire is shorter.
-        public const int ShadeFormsRules = 25;
+        public const int ShadeFormsRules = 28;
 
         /// The campaign rules version from which the Glutton plays (Jacob in chat, 1 Nov 2026: "go" on Claude's calls;
         /// Campaign.PalStores.cs and Battle.BattleSimulation.Glutton.cs): his tree at camp, bought with talent points the codex
         /// pays, kept between runs; his road card, lending the next talent of a limb for the run (a tier 3 one with its keystone);
         /// Feed doubling one talent and eating another of its limb; and every talent's effect.
-        public const int GluttonTreeRules = 26;
+        public const int GluttonTreeRules = 29;
 
         /// The campaign rules version from which the Pals' duos play (Jacob in chat, 1 Nov 2026: "go write them"; Campaign.Duos.cs
         /// and Battle.BattleSimulation.Duos.cs): a pick joining two Pals' themes, shown on a card once the run holds a pick from
         /// both.
-        public const int PalDuoRules = 27;
+        public const int PalDuoRules = 30;
 
         /// The campaign rules version from which the Pals' picks play sized (Jacob in chat, 1 Nov 2026: "okay go";
         /// Battle.BattleSimulation.Sized.cs, Battle.SizeRules): big enough that leaning into one Pal decides runs.
-        public const int SizedRules = 28;
+        public const int SizedRules = 31;
 
         /// The campaign rules version from which the Butcher's flavours play (Jacob in chat, 2 Nov 2026: "both 1 and 2";
         /// Battle.BattleSimulation.Flavours.cs): a combo grows with the ranks of its flavour the side wears, and three ranks of
         /// one flavour unlock its final form.
-        public const int ButcherFlavourRules = 29;
+        public const int ButcherFlavourRules = 32;
 
         /// The campaign rules version from which the Whisperer's vows and the Butcher's flavour fights play (Jacob in chat, 2 Nov
         /// 2026: "whisperer - 1", "butcher - 1 and 2"; Campaign.Vows.cs, Battle.BattleSimulation.Vows.cs and Flavours.cs).
-        public const int VowFlavourRules = 30;
+        public const int VowFlavourRules = 33;
 
         /// Whether this run's roads carry a Pal on every fight (fix 5): set when the run starts under PalRoadRules, and kept
         /// with the run, so its roads come back the same when it loads.
@@ -937,11 +961,11 @@ namespace KindredSiege.Sim.Learning
                 CampaignGear piece = ComboPiece(FavourRules.ComboBend(favour));
                 return piece == null ? 0 : piece.Rank;
             }
-            // A duo's rank is 1 once the run holds it (rules 27).
+            // A duo's rank is 1 once the run holds it (rules 30).
             if (FavourRules.IsDuo(favour)) return HoldsDuo(FavourRules.DuoOf(favour)) ? 1 : 0;
-            // A Glutton pick's rank is 1 once the run holds that talent (rules 26).
+            // A Glutton pick's rank is 1 once the run holds that talent (rules 29).
             if (FavourRules.IsGlutton(favour)) return Holds(FavourRules.TalentOf(favour)) ? 1 : 0;
-            // A Shade pick's rank is its route's form (rules 25).
+            // A Shade pick's rank is its route's form (rules 28).
             if (FavourRules.IsShade(favour))
             {
                 HeldRoute route = FindRoute(FavourRules.RouteOf(favour));
@@ -1487,7 +1511,7 @@ namespace KindredSiege.Sim.Learning
             _materials -= _spoilsMaterials;
             string name = FavourRules.Name(favour);
             string pals = FavourRules.PalName(FavourRules.PalOf(favour));
-            // A duo (rules 27, Campaign.Duos.cs).
+            // A duo (rules 30, Campaign.Duos.cs).
             if (FavourRules.IsDuo(favour))
             {
                 name = TakeDuo(favour);
@@ -1497,9 +1521,9 @@ namespace KindredSiege.Sim.Learning
             else if (FavourRules.IsCombo(favour)) TakeCombo(favour);
             // Her road card (rules 24, Campaign.PalStores.cs).
             else if (FavourRules.IsWhisper(favour)) name = TakeWhisper(_favourOffer.Picks[choice]);
-            // Hers (rules 25, Campaign.PalStores.cs).
+            // Hers (rules 28, Campaign.PalStores.cs).
             else if (FavourRules.IsShade(favour)) name = TakeShade(favour);
-            // His (rules 26).
+            // His (rules 29).
             else if (FavourRules.IsGlutton(favour)) name = TakeGlutton(favour);
             else
             {
@@ -1530,7 +1554,7 @@ namespace KindredSiege.Sim.Learning
         private FavourOffer MakeFavourOffer(RoadNode node, int rules)
         {
             FavourOffer offer = MakePalOffer(node, rules);
-            // From rules 27 a card can show a duo of its Pal as one more pick (Campaign.Duos.cs).
+            // From rules 30 a card can show a duo of its Pal as one more pick (Campaign.Duos.cs).
             return rules >= PalDuoRules ? WithDuos(node, offer) : offer;
         }
 
@@ -1541,9 +1565,9 @@ namespace KindredSiege.Sim.Learning
             if (pal == Pal.None) return null;
             // From rules 24 the Whisperer offers her road card (Campaign.PalStores.cs).
             if (pal == Pal.Whisperer && rules >= WhispererRules) return WhisperOffer(node);
-            // From rules 25 the Shade offers her road card (Campaign.PalStores.cs).
+            // From rules 28 the Shade offers her road card (Campaign.PalStores.cs).
             if (pal == Pal.Shade && rules >= ShadeFormsRules) return ShadeOffer(node);
-            // From rules 26 the Glutton offers his road card (Campaign.PalStores.cs).
+            // From rules 29 the Glutton offers his road card (Campaign.PalStores.cs).
             if (pal == Pal.Glutton && rules >= GluttonTreeRules) return GluttonOffer(node);
             var choices = new List<Favour>();
             if (pal == Pal.Butcher && rules >= ButcherComboRules)
@@ -1574,7 +1598,7 @@ namespace KindredSiege.Sim.Learning
         {
             var pool = new List<Favour>();
             var weights = new List<int>();
-            // From rules 30 only the node's flavour (Campaign.Vows.cs); a card with none of it left offers them all.
+            // From rules 33 only the node's flavour (Campaign.Vows.cs); a card with none of it left offers them all.
             bool anyOfFlavour = false;
             for (int i = 0; i < combos.Count && rules >= VowFlavourRules; i++)
             {
@@ -1658,9 +1682,9 @@ namespace KindredSiege.Sim.Learning
             int held = 0;
             for (int i = 0; i < _gear.Count; i++) if (ClassSpells.IsCombo(_gear[i].Bend)) held |= 1 << (int)Pal.Butcher;
             for (int i = 0; i < _favours.Count; i++) held |= 1 << (int)FavourRules.PalOf(_favours[i].Favour);
-            // From rules 25 a route she gave counts as a pick of hers.
+            // From rules 28 a route she gave counts as a pick of hers.
             if (ShadeFormsRun && _routes.Count > 0) held |= 1 << (int)Pal.Shade;
-            // From rules 26 a talent he lent counts as a pick of his.
+            // From rules 29 a talent he lent counts as a pick of his.
             if (GluttonRun && _talents.Count > 0) held |= 1 << (int)Pal.Glutton;
             return held;
         }
@@ -2163,7 +2187,7 @@ namespace KindredSiege.Sim.Learning
                 // From rules 24 each of yours who fell loses his top rank (DESIGN_LOCKS, "The Whisperer's core").
                 if (fight.RulesVersion >= WhispererRules) result.RanksLost = DropRanks(fallen);
                 // The streak is lost with the life (rules 12).
-                // From rules 26 Branch Hedge keeps it through a loss a run (Campaign.PalStores.cs).
+                // From rules 29 Branch Hedge keeps it through a loss a run (Campaign.PalStores.cs).
                 if (fight.RulesVersion >= RoadKitRules && !(fight.RulesVersion >= GluttonTreeRules && Hedged())) Streak = 0;
                 string taker = hunt || ambush ? AlphaHunt.Id : tribe.Id;
                 if (!_grudges.Contains(taker)) _grudges.Add(taker);
@@ -2235,7 +2259,7 @@ namespace KindredSiege.Sim.Learning
             if (hunter != null) materials += HunterRules.Reward(_company.Rank(hunter));
             // Each omen picked adds to what the run earns (Jacob, 13 Oct 2026).
             materials = materials * (100 + OmenRules.MaterialsPercentEach * _omens.Count) / 100;
-            // From rules 26 Rogue Planet Prospecting sends home more (Campaign.PalStores.cs).
+            // From rules 29 Rogue Planet Prospecting sends home more (Campaign.PalStores.cs).
             if (fight.RulesVersion >= GluttonTreeRules) materials = Prospected(materials);
             // A chief with his own kit, and from rules 6 the hunt, sends home more for a better grade (Battle.ChiefKits).
             bool graded = (encounter.Kind == EncounterKind.Chief || hunt) && fight.Sim.GloryOn(0);
@@ -3213,18 +3237,31 @@ namespace KindredSiege.Sim.Learning
                     fightRules = fightRules.WithWhisper();
                     if (encounter.Kind != EncounterKind.Tutorial) RankSpecs(side0);
                 }
-                // From rules 25 the Shade's forms and prices play. Last, after the Whisperer.
+                // From rules 28 the Shade's forms and prices play. Last, after the Whisperer.
                 if (rules >= ShadeFormsRules) fightRules = fightRules.WithShadeForms();
-                // From rules 26 the Glutton's talents play. Last, after the Shade's forms.
+                // From rules 29 the Glutton's talents play. Last, after the Shade's forms.
                 if (rules >= GluttonTreeRules) fightRules = fightRules.WithGlutton();
-                // From rules 27 the duos play. Last, after the Glutton.
+                // From rules 30 the duos play. Last, after the Glutton.
                 if (rules >= PalDuoRules) fightRules = fightRules.WithDuos();
-                // From rules 28 the sized picks. Last, after the duos.
+                // From rules 31 the sized picks. Last, after the duos.
                 if (rules >= SizedRules) fightRules = fightRules.WithSized();
-                // From rules 29 the Butcher's flavours. Last, after sizing.
+                // From rules 32 the Butcher's flavours. Last, after sizing.
                 if (rules >= ButcherFlavourRules) fightRules = fightRules.WithFlavours();
-                // From rules 30 the vows and marks on every hit. Last, after the flavours.
+                // From rules 33 the vows and marks on every hit. Last, after the flavours.
                 if (rules >= VowFlavourRules) fightRules = fightRules.WithVows();
+            }
+            // From rules 25 a beast fight plays its moves as the approved scenes show them (Jacob, 1 Nov 2026). Last, after the
+            // Whisperer.
+            if (rules >= BeastSceneRules && beasts) fightRules = fightRules.WithBeastScenes();
+            // From rules 26 the tight parry (DESIGN_LOCKS, "The parry: tight window, big payoff, a gold flash on the attacker").
+            // Last, after the beasts.
+            if (rules >= TightParryRules) fightRules = fightRules.WithTight();
+            // From rules 27 the beast is a raid boss, and the shark brings its two sand pups, after its parts. Last, after the
+            // tight parry.
+            if (rules >= BeastRaidRules && beasts)
+            {
+                fightRules = fightRules.WithBeastRaid();
+                if (encounter.Beast == BeastKit.SandShark) AddPups(side1, fightId);
             }
             bool raidChief = IsRaidChief(tribe, encounter.Kind, rules);
             if (raidChief) MakeRaidChief(side1);
@@ -3619,6 +3656,18 @@ namespace KindredSiege.Sim.Learning
                 if (HasOmen(Omen.BloodMoon)) s = WithPower(s, 100 + OmenRules.BloodMoonPercent, keepBleed);
                 specs.Add(s.AsReserve());
             }
+        }
+
+        // The shark's sand pups (rules 27, Battle.BeastKits): after its parts, each BeastKits.PupHealthPercent of their average
+        // health, at their power.
+        private static void AddPups(List<UnitSpec> side1, string fightId)
+        {
+            int health = 0;
+            for (int p = 0; p < BeastKits.PartCount; p++) health += side1[p].HealthPercent;
+            health /= BeastKits.PartCount;
+            for (int n = 1; n <= BeastKits.PupCount; n++)
+                side1.Add(new UnitSpec(BeastKits.PupId(fightId, n), UnitClass.Skirmisher, Row.Front, UnitRole.Fighter, side1[0].PowerPercent,
+                    Math.Max(1, health * BeastKits.PupHealthPercent / 100)));
         }
 
         private List<UnitSpec> EnemySpecs(Encounter encounter, string fightId, bool keepBleed)

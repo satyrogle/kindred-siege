@@ -79,9 +79,9 @@ namespace KindredSiege.Sim.Battle
             if (!_marksOn || _finished || wearer == null || target == null || !target.Alive || target.Side == wearer.Side) return;
             if (!ClassSpells.IsCombo(combo) || !HasBend(wearer, combo) || ShrugsMarks(target)) return;
             StatusKind mark = MarkRules.Of(combo);
-            // Crowned Marks (rules 27, BattleSimulation.Duos.cs): the star lays more.
+            // Crowned Marks (rules 30, BattleSimulation.Duos.cs): the star lays more.
             int stacks = _duosOn ? CrownedStacks(wearer, RankOf(wearer, combo)) : RankOf(wearer, combo);
-            // The sizing pass (rules 28): more for a side leaning into the flavour.
+            // The sizing pass (rules 31): more for a side leaning into the flavour.
             if (_sizedOn) stacks = StacksSized(wearer, mark, stacks);
             target.Statuses.Apply(mark, MarkRules.Ticks, sourceId: wearer.Id, stacks: stacks);
             Emit(new BattleEvent(_tick, BattleEventKind.Mark, wearer.Side, wearer.Id, (int)wearer.Class, target.Id, (int)target.Class,
@@ -93,9 +93,9 @@ namespace KindredSiege.Sim.Battle
         private void Burst(BattleUnit by, BattleUnit target, StatusKind mark)
         {
             target.Statuses.Clear(mark);
-            // Gorged Bursts (rules 27, BattleSimulation.Duos.cs): each burst this percent bigger.
+            // Gorged Bursts (rules 30, BattleSimulation.Duos.cs): each burst this percent bigger.
             int gorged = _duosOn ? GorgedPercent(by) : 0;
-            // The sizing pass (rules 28, BattleSimulation.Sized.cs): every burst bigger, more for its flavour's combos.
+            // The sizing pass (rules 31, BattleSimulation.Sized.cs): every burst bigger, more for its flavour's combos.
             if (_sizedOn) gorged += BurstSized(by, mark);
             switch (mark)
             {
@@ -112,7 +112,7 @@ namespace KindredSiege.Sim.Battle
                         ApplyHit(by, by.Side, target, crush.Copy(), MarkRules.CrushedDetail);
                     }
                     else ApplyDamage(by, by.Side, target, by.Power * (100 + gorged) / 100, MarkRules.CrushedDetail);
-                    // The Butcher's flavours (rules 29, BattleSimulation.Flavours.cs): a longer pin, and at the final form the row.
+                    // The Butcher's flavours (rules 32, BattleSimulation.Flavours.cs): a longer pin, and at the final form the row.
                     int pin = FlavourHold(by, StatusKind.Crush, MarkRules.CrushPinTicks);
                     if (!_finished && target.Alive) Pin(target, pin);
                     if (!_finished && _flavoursOn) CrushRow(by, target, crush, by.Power * (100 + gorged) / 100, pin);
@@ -120,7 +120,7 @@ namespace KindredSiege.Sim.Battle
                 }
                 case StatusKind.Exposed:
                     target.Statuses.Apply(StatusKind.WideOpen, MarkRules.WideOpenTicks, size: gorged, sourceId: by.Id);
-                    // The Fold Door's final form (rules 29): it can jump on.
+                    // The Fold Door's final form (rules 32): it can jump on.
                     if (FinalForm(by.Side, StatusKind.Exposed)) target.Statuses[StatusKind.WideOpen].Store = SizeRules.ExposedJumps;
                     Emit(EventFor(BattleEventKind.Burst, by, target, MarkRules.WideOpenTicks, MarkRules.Exposed));
                     break;
@@ -130,11 +130,11 @@ namespace KindredSiege.Sim.Battle
                     Emit(EventFor(BattleEventKind.Burst, by, target, freeze, MarkRules.Stasis));
                     Pin(target, freeze);
                     RestartWindUp(target);
-                    // Time Stop's final form (rules 29): their whole side.
+                    // Time Stop's final form (rules 32): their whole side.
                     if (!_finished && _flavoursOn) StasisAll(by, target);
                     break;
             }
-            // Crowned Marks (rules 27): the star who set it off casts again.
+            // Crowned Marks (rules 30): the star who set it off casts again.
             if (_duosOn) DuoBurst(by);
         }
 
@@ -164,7 +164,7 @@ namespace KindredSiege.Sim.Battle
             int jumps = open.Store, size = open.Size;
             string source = open.SourceId;
             target.Statuses.Clear(StatusKind.WideOpen);
-            // The Fold Door's final form (rules 29): it jumps on to the next one.
+            // The Fold Door's final form (rules 32): it jumps on to the next one.
             if (_flavoursOn) JumpWideOpen(target, jumps, size, source);
             return true;
         }

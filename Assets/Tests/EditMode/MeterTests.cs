@@ -84,6 +84,7 @@ namespace KindredSiege.Sim.Tests
             StringAssert.Contains("parry bars", failure);
             for (int n = 0; n < MeterRules.Bars; n++) ParryNextCleave(session, sim);
             Assert.IsTrue(sim.CanUse(0, Directive.Eclipse, out failure), failure);
+            Assert.AreEqual(0, sim.OrderCost(0, Directive.Eclipse), "OrderCost does not read the meter's free spell");
             int points = sim.DirectivePoints(0);
             Assert.IsTrue(Order(session, Directives.Name(Directive.Eclipse)));
             Assert.AreEqual(points, sim.DirectivePoints(0), "the spell cost points");
@@ -94,6 +95,7 @@ namespace KindredSiege.Sim.Tests
             var then = new SimSession(old);
             Assert.IsTrue(old.CanUse(0, Directive.Eclipse, out failure), failure);
             int before = old.DirectivePoints(0);
+            Assert.AreEqual(Directives.Cost(Directive.Eclipse), old.OrderCost(0, Directive.Eclipse));
             Assert.IsTrue(Order(then, Directives.Name(Directive.Eclipse)));
             Assert.AreEqual(before - Directives.Cost(Directive.Eclipse), old.DirectivePoints(0));
         }

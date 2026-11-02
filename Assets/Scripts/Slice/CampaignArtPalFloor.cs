@@ -25,16 +25,17 @@ namespace KindredSiege.Slice
 
         string PalFloorText()
         {
-            var lines=new List<string>{"PAL PROGRESSION", "These picks leave when the run ends."};
+            var lines=new List<string>{"PAL PROGRESSION", WhispererRun?"Base habits stay. Other picks and habit upgrades leave when the run ends.":"These picks leave when the run ends."};
             lines.Add("Glutton talents: "+_campaign.Talents.Count);
             foreach(var held in _campaign.Talents)lines.Add(PalPickName(held.Talent)+(held.Fed?" / FED":" / LENT")+". Effect not available in this build.");
             lines.Add("Shade buttons: "+_campaign.ShadeRoutes.Count+" / "+ShadeRules.MaxButtons);
             foreach(var held in _campaign.ShadeRoutes)
                 lines.Add(OrderName(ShadeRules.ButtonOf(held.Route))+": "+held.Route+" / form "+held.Form+". "+ShadeRouteHint(held.Route,held.Form));
             lines.Add("Whisperer habits: "+_campaign.Habits.Count);
-            foreach(var held in _campaign.Habits)lines.Add(SliceClasses.Name(held.Class)+": "+PalPickName(held.Habit)+". Effect not available in this build.");
-            lines.Add("Pair: "+PalPickName(_campaign.Pair)+(_campaign.Pair==SquadPair.None?".":". Effect not available in this build."));
-            lines.Add("New progression picks are not offered on the road in this build.");
+            foreach(var held in _campaign.Habits)lines.Add(SliceClasses.Name(held.Class)+": "+PalPickName(held.Habit)+
+                (WhispererRun?(held.Upgraded?" / UPGRADED. ":". ")+HabitEffect(held.Habit,held.Upgraded):". Effect not available in this build."));
+            lines.Add("Pair: "+PalPickName(_campaign.Pair)+(_campaign.Pair==SquadPair.None?".":WhispererRun?". "+PairEffect(_campaign.Pair):". Effect not available in this build."));
+            lines.Add(WhispererRun?"Whisperer roads offer fighter ranks, pairs and habit upgrades.":"New progression picks are not offered on the road in this build.");
             return string.Join("\n",lines);
         }
 

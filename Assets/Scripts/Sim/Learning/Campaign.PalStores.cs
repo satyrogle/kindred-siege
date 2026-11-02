@@ -35,13 +35,13 @@ namespace KindredSiege.Sim.Learning
         /// Whether this campaign plays the Whisperer (rules 24): its rules version, under the tuning's cap.
         public bool WhispererRun => Math.Min(RulesVersion, _tuning.RulesCap) >= WhispererRules;
 
-        /// Whether this campaign plays the Shade's forms and her road card (rules 25): its rules version, under the tuning's cap.
+        /// Whether this campaign plays the Shade's forms and her road card (rules 28): its rules version, under the tuning's cap.
         public bool ShadeFormsRun => Math.Min(RulesVersion, _tuning.RulesCap) >= ShadeFormsRules;
 
-        /// Whether this campaign plays the Glutton's tree (rules 26): its rules version, under the tuning's cap.
+        /// Whether this campaign plays the Glutton's tree (rules 29): its rules version, under the tuning's cap.
         public bool GluttonRun => Math.Min(RulesVersion, _tuning.RulesCap) >= GluttonTreeRules;
 
-        /// The Glutton lends this talent for the run. False when the run holds it already, or plays rules below 23; from rules 26
+        /// The Glutton lends this talent for the run. False when the run holds it already, or plays rules below 23; from rules 29
         /// also when you own it at camp.
         public bool TryLendTalent(GluttonTalent talent)
         {
@@ -52,7 +52,7 @@ namespace KindredSiege.Sim.Learning
             return true;
         }
 
-        /// Feed doubles one talent the run holds, once a run. From rules 26 he eats another of the same limb for it: the first
+        /// Feed doubles one talent the run holds, once a run. From rules 29 he eats another of the same limb for it: the first
         /// you hold, by its place in the limb (TryFeed lets you pick which), or nothing when you hold no other there.
         public bool TryFeedTalent(GluttonTalent talent)
         {
@@ -119,7 +119,7 @@ namespace KindredSiege.Sim.Learning
             return true;
         }
 
-        /// A rank up to rank 2 with one of his class's vows (rules 30), as her card's pick gives it.
+        /// A rank up to rank 2 with one of his class's vows (rules 33), as her card's pick gives it.
         public bool TryRankUp(string fighterId, StarVow vow)
         {
             CampaignFighter f = FindFighter(fighterId);
@@ -158,8 +158,21 @@ namespace KindredSiege.Sim.Learning
             return true;
         }
 
+        /// Takes the piece off this fighter's second slot, back to the run's gear, as TryUnequip does the first. Not in the
+        /// middle of a fight. A fighter with nothing there stays as he is.
+        public bool TryUnequipSecond(string fighterId, out string why)
+        {
+            why = string.Empty;
+            CampaignFighter f = FindFighter(fighterId);
+            if (_active != null) why = "Not in the middle of a fight.";
+            else if (f == null) why = (fighterId ?? string.Empty) + " is not one of your fighters.";
+            if (why.Length > 0) return false;
+            f.GearId2 = string.Empty;
+            return true;
+        }
+
         // What your side brings into a fight from the stores: the Shade's routes at their forms, and from rules 24 the habits,
-        // upgraded or not, and the pair; from rules 26 the Glutton's talents, owned or lent, fed or not, less the one he ate. No
+        // upgraded or not, and the pair; from rules 29 the Glutton's talents, owned or lent, fed or not, less the one he ate. No
         // talent sets the cheaper hook.
         private PalKit RunPalKit(int rules)
         {
@@ -174,10 +187,10 @@ namespace KindredSiege.Sim.Learning
             var levels = new int[GluttonRules.TalentCount + 1];
             for (int t = 1; t <= GluttonRules.TalentCount; t++) levels[t] = TalentLevel((GluttonTalent)t);
             kit = kit.WithTalents(levels);
-            // From rules 27 the duos held (Campaign.Duos.cs).
+            // From rules 30 the duos held (Campaign.Duos.cs).
             if (rules < PalDuoRules) return kit;
             kit = kit.WithDuos(_duos);
-            // From rules 30 each ranked fighter's vow.
+            // From rules 33 each ranked fighter's vow.
             if (rules < VowFlavourRules) return kit;
             var vows = new List<KeyValuePair<string, StarVow>>();
             for (int i = 0; i < _reserve.Count; i++)
@@ -185,11 +198,11 @@ namespace KindredSiege.Sim.Learning
             return kit.WithVows(vows);
         }
 
-        // ------------------------------------------------------------ the Glutton's tree (rules 26)
+        // ------------------------------------------------------------ the Glutton's tree (rules 29)
 
         private readonly List<GluttonTalent> _owned = new List<GluttonTalent>();
 
-        /// The talents bought at camp (rules 26), kept between runs, in the order bought.
+        /// The talents bought at camp (rules 29), kept between runs, in the order bought.
         public IReadOnlyList<GluttonTalent> OwnedTalents => _owned;
 
         /// This run's Feed: the talent it doubles and the one he ate for it; None before it.
@@ -312,7 +325,7 @@ namespace KindredSiege.Sim.Learning
             return why.Length == 0;
         }
 
-        /// Feed (rules 26): once a run, this talent you hold doubles for the run, and he eats another you hold in the same limb
+        /// Feed (rules 29): once a run, this talent you hold doubles for the run, and he eats another you hold in the same limb
         /// for it. Eaten None only when you hold no other talent in that limb: then he eats nothing.
         public bool TryFeed(GluttonTalent fed, GluttonTalent eaten, out string why)
         {
@@ -346,7 +359,7 @@ namespace KindredSiege.Sim.Learning
             return false;
         }
 
-        // ------------------------------------------------------------ the Glutton's road card (rules 26)
+        // ------------------------------------------------------------ the Glutton's road card (rules 29)
 
         // The road node's own dice for his picks: a stream of its seed nothing else draws from.
         private const ulong GluttonOfferStream = 18UL;
@@ -355,7 +368,7 @@ namespace KindredSiege.Sim.Learning
         /// run climbs one limb (the Butcher's ComboRankUpWeight). A starting value.
         public const int ClimbWeight = 2;
 
-        /// How many picks a Pal card shows: FavourRules.Offered, more with Node Cache (rules 26).
+        /// How many picks a Pal card shows: FavourRules.Offered, more with Node Cache (rules 29).
         public int OfferSize => FavourRules.Offered + (GluttonRun ? GluttonRules.Bonus(TalentLevel(GluttonTalent.NodeCache), GluttonRules.CacheMore) : 0);
 
         // His card: the next talent of each limb you don't hold yet (tier 1, tier 2, both of the tier 3 pair, then the keystone),
@@ -428,7 +441,7 @@ namespace KindredSiege.Sim.Learning
             return name;
         }
 
-        // Branch Hedge (rules 26): a lost fight keeps the streak while the run has hedges left. True when it kept it.
+        // Branch Hedge (rules 29): a lost fight keeps the streak while the run has hedges left. True when it kept it.
         private bool Hedged()
         {
             if (!GluttonRun || HedgesUsed >= GluttonRules.Bonus(TalentLevel(GluttonTalent.BranchHedge), GluttonRules.HedgeLosses)) return false;
@@ -436,7 +449,7 @@ namespace KindredSiege.Sim.Learning
             return true;
         }
 
-        // Rogue Planet Prospecting (rules 26): what a won fight sends home, more.
+        // Rogue Planet Prospecting (rules 29): what a won fight sends home, more.
         private int Prospected(int materials)
         {
             if (!GluttonRun) return materials;
@@ -473,7 +486,7 @@ namespace KindredSiege.Sim.Learning
             {
                 CampaignFighter f = _reserve[i];
                 if (f.Rank >= PalStoreRules.MaxRank) continue;
-                // From rules 30 a rank up to rank 2 comes once for each of his class's two vows (Campaign.Vows.cs).
+                // From rules 33 a rank up to rank 2 comes once for each of his class's two vows (Campaign.Vows.cs).
                 if (f.Rank == 1 && VowsRun)
                 {
                     pool.Add(new WhisperPick(Favour.WhisperRankUp, f.Id, WhispererHabit.None, SquadPair.None, VowRules.FirstOf(f.Class)));
@@ -535,7 +548,7 @@ namespace KindredSiege.Sim.Learning
                 case Favour.WhisperRankUp:
                 {
                     TryRankUp(pick.FighterId);
-                    // From rules 30 the vow it brings (Campaign.Vows.cs).
+                    // From rules 33 the vow it brings (Campaign.Vows.cs).
                     CampaignFighter f = FindFighter(pick.FighterId);
                     if (f != null && f.Rank == 2 && VowRules.Valid(pick.Vow) && VowRules.ClassOf(pick.Vow) == f.Class)
                     {
@@ -564,7 +577,7 @@ namespace KindredSiege.Sim.Learning
                 if (f.Rank <= 1) continue;
                 f.Rank--;
                 if (f.Rank < PalStoreRules.SecondSlotRank) f.GearId2 = string.Empty;
-                // His vow goes with rank 2 (rules 30).
+                // His vow goes with rank 2 (rules 33).
                 if (f.Rank < 2) f.Vow = StarVow.None;
                 lost.Add(f);
             }
@@ -581,7 +594,7 @@ namespace KindredSiege.Sim.Learning
             f.Vow = StarVow.None;
         }
 
-        // ------------------------------------------------------------ the Shade's road card (rules 25)
+        // ------------------------------------------------------------ the Shade's road card (rules 28)
 
         // The road node's own dice for her three picks: a stream of its seed nothing else draws from.
         private const ulong ShadeOfferStream = 17UL;

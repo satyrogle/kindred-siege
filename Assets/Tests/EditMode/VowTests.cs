@@ -7,7 +7,7 @@ using NUnit.Framework;
 
 namespace KindredSiege.Sim.Tests
 {
-    /// The Whisperer's vows (Jacob in chat, 2 Nov 2026: "whisperer - 1"; FightRules.Vows, campaign rules 30): her card offering a
+    /// The Whisperer's vows (Jacob in chat, 2 Nov 2026: "whisperer - 1"; FightRules.Vows, campaign rules 33): her card offering a
     /// rank up with a vow, the save, and vows going off in the fight. One quick test per piece, only to prove each runs.
     public class VowTests
     {
@@ -67,7 +67,7 @@ namespace KindredSiege.Sim.Tests
             BattleSimulation Ranger(FightRules rules) =>
                 Fight("ranger", Vows(("m", StarVow.Ranger)), rules, Side(U("m", UnitClass.Marksman, 2), U("w", UnitClass.Warden)), Medics(5));
             Assert.IsTrue(Seen(Ranger(Road30), hit(VowRules.RangerDetail)), "no bounce");
-            Assert.IsFalse(Seen(Ranger(Road29), hit(VowRules.RangerDetail)), "not before rules 30");
+            Assert.IsFalse(Seen(Ranger(Road29), hit(VowRules.RangerDetail)), "not before rules 33");
 
             var theirs = Medics(2);
             theirs.Add(new UnitSpec("back", UnitClass.Marksman, Row.Back, UnitRole.Fighter, 100, 3000));
@@ -132,7 +132,7 @@ namespace KindredSiege.Sim.Tests
         }
 
         [Test]
-        public void BelowRules30VowsDoNothing()
+        public void BelowRules33VowsDoNothing()
         {
             var all = new[] { ("w", StarVow.Reprisal), ("m", StarVow.Ranger), ("s", StarVow.Duelist), ("t", StarVow.Netter), ("h", StarVow.Martyr) };
             string Played(PalKit kit)

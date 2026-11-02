@@ -356,8 +356,9 @@ namespace KindredSiege.Sim.Tests
         [Test]
         public void FixturePartialBreakWinSendsTrophiesHomeAndScarsTheBreakers()
         {
-            // A short clock, so it dives away before every part breaks.
-            var t = new CampaignTuning { FightTicks = 40 * SimClock.TicksPerSecond };
+            // A short clock, so it dives away before every part breaks. 30 s from rules 25 (1 Nov 2026), whose Bite on a whole row
+            // sends more back into the jaw, so a 40 s clock saw it die in all forty.
+            var t = new CampaignTuning { FightTicks = 30 * SimClock.TicksPerSecond };
             for (ulong seed = 5200; seed < 5240; seed++)
             {
                 Campaign c = OnTheFirstRoad(seed, t);

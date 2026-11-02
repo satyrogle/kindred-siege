@@ -13,6 +13,7 @@ namespace KindredSiege.Slice
         int _favourReceiptRank;
         int _favourReceiptCost;
         string _favourReceiptPlacement;
+        string _whisperReceiptTitle, _whisperReceiptEffect;
 
         bool FavourExchanged(EncounterResult r)=>r!=null&&r==_favourReceiptResult;
 
@@ -77,8 +78,9 @@ namespace KindredSiege.Slice
                 "freeze + restart the big wind-up.");
         }
 
-        PxLines FavourChoiceLines(Favour favour)
+        PxLines FavourChoiceLines(Favour favour,int choice=-1)
         {
+            if(FavourRules.IsWhisper(favour))return WhisperLines(choice);
             int rank=_campaign.FavourRank(favour),next=rank+1;
             if(FavourRules.IsCombo(favour))
             {
@@ -149,7 +151,7 @@ namespace KindredSiege.Slice
             {
                 int choice=i,x=26+i*226;var favour=offer.Choices[i];
                 int rank=_campaign.FavourRank(favour);
-                var lines=FavourChoiceLines(favour);
+                var lines=FavourChoiceLines(favour,choice);
                 bool can=_campaign.CanTakeFavour(choice,out string why);
                 if(!can)lines.Gap().Add(why,PxRed);
                 int top=combos?112:94;
@@ -169,14 +171,18 @@ namespace KindredSiege.Slice
             var offer=_campaign.FavourOffer;
             if(offer==null||choice<0||choice>=offer.Choices.Count)return;
             var favour=offer.Choices[choice];
+            var whisper=WhisperChoice(choice);
+            string whisperTitle=whisper==null?null:WhisperTitle(whisper), whisperEffect=whisper==null?null:WhisperEffect(whisper);
             int cost=_campaign.SpoilsMaterials;
             if(!_campaign.TryTakeFavour(choice,out string why)){_notice=why;ShowFavours();return;}
             _favourReceiptResult=_page==Page.Result?_result:null;
             _favourReceipt=favour;_favourReceiptRank=_campaign.FavourRank(favour);
             _favourReceiptCost=cost;
+            _whisperReceiptTitle=whisperTitle;_whisperReceiptEffect=whisperEffect;
             _favourReceiptPlacement=FavourRules.IsCombo(favour)?ComboPlacement(FavourRules.ComboBend(favour)):"";
             _notice=FavourRules.IsCombo(favour)?FavourRules.Name(favour)+(ThemePresentation?" - rank "+_favourReceiptRank:"")+". "+_favourReceiptPlacement:
                 FavourRules.Name(favour)+" - rank "+_favourReceiptRank+". For this run.";
+            if(whisper!=null)_notice=whisperTitle+". "+whisperEffect+" For this run.";
             PlaySound("favour");
             Save();SetPage(_page);
         }
@@ -185,6 +191,12 @@ namespace KindredSiege.Slice
         {
             if(FavourExchanged(r))
             {
+                if(!string.IsNullOrEmpty(_whisperReceiptTitle))
+                {
+                    lines.Gap().Add(_whisperReceiptTitle,PxMint).Add(_whisperReceiptEffect,PxBone)
+                        .Add("For this run. Paid "+_favourReceiptCost+" materials.",PxMuted);
+                    return;
+                }
                 bool combo=FavourRules.IsCombo(_favourReceipt);
                 lines.Gap().Add((combo?"Combo taken: ":"Favour taken: ")+FavourRules.Name(_favourReceipt)+(!combo||ThemePresentation?" - rank "+_favourReceiptRank:""),PxGold)
                     .Add(FavourRules.Describe(_favourReceipt,_favourReceiptRank),PxBone);

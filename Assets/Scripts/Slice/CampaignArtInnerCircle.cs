@@ -83,6 +83,7 @@ namespace KindredSiege.Slice
             SetPx(PxLabel(_modal, 14, 8), "CAMP", PxBone);
             SetPx(PxLabel(_modal, 14, 21), "The four who stayed with you. Point at one to watch them work.", PxMuted);
             if(_campaign!=null)PxButton("pal-forge","BUTCHER'S FORGE",16,420,216,28,()=>ShowForge(),_modal);
+            if(WhispererRun)PxButton("pal-habits","SQUAD HABITS",488,420,216,28,ShowHabits,_modal);
             var close = PxButton("camp-close", "RETURN", 264, 420, 192, 28, CloseCamp, _modal);
             if (EventSystem.current != null) EventSystem.current.SetSelectedGameObject(close.gameObject);
         }

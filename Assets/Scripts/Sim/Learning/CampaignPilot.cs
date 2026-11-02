@@ -341,7 +341,7 @@ namespace KindredSiege.Sim.Learning
         /// PickOffer's own.
         public int PickOffer(Campaign c, Pal lean) => PickOffer(c, lean, false);
 
-        /// The same, and themed from rules 30 a Butcher run goes to the fight of its leading flavour (ThemeLine before it holds
+        /// The same, and themed from rules 33 a Butcher run goes to the fight of its leading flavour (ThemeLine before it holds
         /// a combo) when one is on offer (Campaign.NodeFlavour).
         public int PickOffer(Campaign c, Pal lean, bool themed)
         {
@@ -381,7 +381,7 @@ namespace KindredSiege.Sim.Learning
             int best = 0, bestScore = int.MinValue;
             for (int i = 0; i < offer.Choices.Count; i++)
             {
-                // duos false: never a duo (rules 27), for measuring what one adds.
+                // duos false: never a duo (rules 30), for measuring what one adds.
                 if (!duos && FavourRules.IsDuo(offer.Choices[i])) continue;
                 int score = Themed(c, offer, i) * 100 + (InLine(c, offer, i) ? 50 : 0) + Prefer(offer, i);
                 if (score > bestScore)
@@ -447,7 +447,7 @@ namespace KindredSiege.Sim.Learning
         private static int Themed(Campaign c, FavourOffer offer, int i)
         {
             Favour f = offer.Choices[i];
-            // A duo (rules 27) joins two themes: always first.
+            // A duo (rules 30) joins two themes: always first.
             if (FavourRules.IsDuo(f)) return 1000;
             switch (offer.Pal)
             {
@@ -521,7 +521,7 @@ namespace KindredSiege.Sim.Learning
             return false;
         }
 
-        // The Shade's follow up presses (rules 25), free: Rupture once its weak point is full, Ram at half the Unleash, and
+        // The Shade's follow up presses (rules 28), free: Rupture once its weak point is full, Ram at half the Unleash, and
         // Release (Converge with a target) in the Unleash's last half second. True when one went.
         private static bool FollowUps(CampaignFight fight, BattleSimulation sim)
         {

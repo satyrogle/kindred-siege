@@ -8,7 +8,7 @@ using KindredSiege.Sim.Learning;
 
 // The duo check, 1 Nov 2026. When a run leaning into two Pals first holds picks from both, how many of their cards stand after
 // that, how often their duo shows and when it is taken; and the runs won by a themed pilot taking the duo first, a random one,
-// the themed one never taking a duo, and the themed one capped at rules 26, before the duos. Routes to either Pal's fight and takes every pick of both. One CSV
+// the themed one never taking a duo, and the themed one capped at rules 29, before the duos. Routes to either Pal's fight and takes every pick of both. One CSV
 // line a run: seed, both Pals, scale, style, mode, run won, fights won, fights, picks of each, the fight both were first held after (-1 never), their cards
 // after, cards showing the duo, the fight the duo was taken after (-1 never), and the star's casts from a duo.
 //   args: palA palB seedStart seedCount enemyScale style
@@ -20,7 +20,7 @@ public static class PairSweep
         ulong seed0 = ulong.Parse(args[2]);
         int count = int.Parse(args[3]), scale = int.Parse(args[4]);
         PilotStyle style = (PilotStyle)Enum.Parse(typeof(PilotStyle), args[5]);
-        // The modes: themed and random at the current rules, and themed capped at rules 26, before the duos.
+        // The modes: themed and random at the current rules, and themed capped at rules 29, before the duos.
         var modes = new[] { ("themed", true, 0), ("random", false, 0), ("noduo", true, 0), ("themed26", true, Campaign.GluttonTreeRules) };
         for (ulong seed = seed0; seed < seed0 + (ulong)count; seed++)
             foreach (var (mode, themed, cap) in modes)

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace KindredSiege.Sim.Battle
 {
-    /// The Butcher's flavours (campaign rules 29; FightRules.Flavours; Jacob in chat, 2 Nov 2026: "i think both 1 and 2"). A
+    /// The Butcher's flavours (campaign rules 32; FightRules.Flavours; Jacob in chat, 2 Nov 2026: "i think both 1 and 2"). A
     /// combo grows with the ranks of combos of its flavour the side wears (SizeRules.FlavourComboPercent, FlavourHoldPercent,
     /// FlavourReach), and SizeRules.FinalRanks of one flavour unlock its final form: Gravity's Crush crushes a whole row,
     /// the Fold Door's wide open jumps on, Time Stop's Stasis freezes their whole side. Every number is a starting value.
@@ -12,10 +12,10 @@ namespace KindredSiege.Sim.Battle
         private readonly bool _flavoursOn;
         private readonly bool _marksOnHitsOn;
 
-        /// Whether a combo's wearer marks with every blow: campaign rules 30.
+        /// Whether a combo's wearer marks with every blow: campaign rules 33.
         public bool MarksOnHitsOn => _marksOnHitsOn;
 
-        /// Whether this fight plays the Butcher's flavours: campaign rules 29.
+        /// Whether this fight plays the Butcher's flavours: campaign rules 32.
         public bool FlavoursOn => _flavoursOn;
 
         /// The ranks of combos laying this mark that this side wears, for the screen's flavour count.
@@ -69,7 +69,7 @@ namespace KindredSiege.Sim.Battle
             return SizeRules.FlavourReach * Math.Max(0, FlavourRanks(by.Side, StatusKind.Crush) - 1);
         }
 
-        // ------------------------------------------------------------ marks on every hit (rules 30)
+        // ------------------------------------------------------------ marks on every hit (rules 33)
 
         // A blow of a fighter wearing a combo landed: SizeRules.HitStacks stacks of his deepest combo's mark on him, bursting at
         // the cap. A chief whose band stands shrugs it off.

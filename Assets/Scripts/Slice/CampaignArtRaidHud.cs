@@ -20,7 +20,7 @@ namespace KindredSiege.Slice
 
         // Cost presentation only. Eligibility and spending remain authoritative in CanUse/TryOrder.
         static int DisplayOrderCost(BattleSimulation sim, Directive order) =>
-            sim.MeterOn && order == Directive.Eclipse ? 0 : sim.RaidChiefOn && order == Directive.Hold ? 0 : Directives.Cost(order);
+            sim.OrderCost(0, order);
 
         void EnsureRaidHud()
         {

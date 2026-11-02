@@ -10,6 +10,7 @@ namespace KindredSiege.Slice
     {
         IEnumerator ValidateHoldRecoveryHud()
         {
+            IntegrationCap(23); // Historical ring/recovery contract; tight26 has its own validator.
             _savePath = Path.Combine(_capture, "hold-recovery-save.txt");
             _campaign = FreshRaidPreview(); _fight = _campaign.Active; _playback = null;
             BeginFight(); _pilotOn = false; _paused = true;

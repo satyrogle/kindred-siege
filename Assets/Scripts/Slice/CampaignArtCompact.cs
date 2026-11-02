@@ -63,7 +63,7 @@ namespace KindredSiege.Slice
         {
             if(_paused)return;
             var t=CurrentThreat;
-            bool now=LiveParryCue(sim,t);
+            bool now=!sim.TightParryOn&&LiveParryCue(sim,t);
             string move=t.IsNone?"":t.Name.ToUpperInvariant();
             SetPx(_threatHeading,Fit(move+(t.IsNone||t.BeatTicks<0?"":" / "+BeatTime(t.RealBeatTicks)),566),now?PxGold:PxBone);
             SetPx(_threatTarget,t.IsNone?"":Fit(FighterLabel(t.ActorId)+" TO "+FighterLabel(t.TargetId),566),PxMuted);
@@ -74,7 +74,7 @@ namespace KindredSiege.Slice
                 else
                 {
                     if((t.Answers&ThreatAnswer.Parry)!=0)
-                        answer=now?"1 PARRY":sim.HoldRefreshTicksLeft(0)>0?"1 / "+HoldRecoveryTime(sim.HoldRefreshTicksLeft(0)):"1 / WAIT";
+                        answer=sim.TightParryOn?"1 PARRY / WATCH ATTACKER":now?"1 PARRY":sim.HoldRefreshTicksLeft(0)>0?"1 / "+HoldRecoveryTime(sim.HoldRefreshTicksLeft(0)):"1 / WAIT";
                     else if((t.Answers&ThreatAnswer.Hold)!=0)answer="1 GUARD";
                     if((t.Answers&ThreatAnswer.FallBack)!=0&&(_fight==null||!_fight.Encounter.NoFallBack))answer+=(answer.Length>0?" / ":"")+"2 DODGE";
                     if((t.Answers&ThreatAnswer.FocusFire)!=0)answer+=(answer.Length>0?" / ":"")+"3 FOCUS";

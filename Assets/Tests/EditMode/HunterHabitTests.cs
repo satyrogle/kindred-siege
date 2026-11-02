@@ -29,11 +29,13 @@ namespace KindredSiege.Sim.Tests
             Assert.IsTrue(hunt.Sim.WaitsOutParry(1));
             while (!hunt.Over && hunt.Sim.Events.All(e => e.Kind != BattleEventKind.Release))
             {
-                if (hunt.Sim.HeavyTicks(1) == 10 && hunt.Sim.HoldTicksLeft(0) == 0) hunt.TryOrder(Directive.Hold, null, out _);
+                // Inside the parry window: 0.2 s from rules 26 (the tight parry).
+                if (hunt.Sim.HeavyTicks(1) == 4 && hunt.Sim.HoldTicksLeft(0) == 0) hunt.TryOrder(Directive.Hold, null, out _);
                 hunt.Tick();
             }
             Assert.IsTrue(hunt.Sim.Events.Any(e => e.Detail == BattleSimulation.WaitOutDetail), "the first heavy swing waited out the Hold");
-            Assert.AreEqual(Moves.Soaked, hunt.Sim.Events.First(e => e.Kind == BattleEventKind.Release).Detail, "so it only soaks");
+            // From rules 26 the Hold it waited out is a whiff by the swing: it lands in full.
+            Assert.AreEqual(Moves.Full, hunt.Sim.Events.First(e => e.Kind == BattleEventKind.Release).Detail, "so the stale Hold whiffs");
         }
     }
 }

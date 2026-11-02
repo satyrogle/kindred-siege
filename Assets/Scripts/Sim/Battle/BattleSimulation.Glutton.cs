@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace KindredSiege.Sim.Battle
 {
-    /// The Glutton's tree in the fight (campaign rules 26; FightRules.Glutton; Jacob in chat, 1 Nov 2026: "go" on Claude's calls;
+    /// The Glutton's tree in the fight (campaign rules 29; FightRules.Glutton; Jacob in chat, 1 Nov 2026: "go" on Claude's calls;
     /// DESIGN_LOCKS, "The Butcher, Glutton and Shade locked" and "The Glutton's theme: one limb"). Each side brings its talents in
     /// its PalKit, held or fed. Every talent makes something the side already has bigger, longer, faster or cheaper, and a fed
     /// one's bonus doubles (GluttonRules.Bonus). The limbs are roles: the front line is the side's front row, the strikers its
@@ -13,7 +13,7 @@ namespace KindredSiege.Sim.Battle
     {
         private readonly bool _gluttonOn;
 
-        /// Whether this fight plays the Glutton's talents: campaign rules 26.
+        /// Whether this fight plays the Glutton's talents: campaign rules 29.
         public bool GluttonOn => _gluttonOn;
 
         /// This side's level of this talent in this fight: 0, GluttonRules.Held or GluttonRules.Fed.
@@ -25,7 +25,7 @@ namespace KindredSiege.Sim.Battle
         // A talent's bonus on this side.
         private int Bonus(int side, GluttonTalent talent, int bonus)
         {
-            // Sized from rules 28 (BattleSimulation.Sized.cs).
+            // Sized from rules 31 (BattleSimulation.Sized.cs).
             return GluttonRules.Bonus(TalentLevelOf(side, talent), _sizedOn ? GluttonSized(side, talent, bonus) : bonus);
         }
 
@@ -207,7 +207,7 @@ namespace KindredSiege.Sim.Battle
         {
             if (!_gluttonOn || side < 0 || side > 1) return 100;
             int left = Math.Max(0, 100 - Bonus(side, GluttonTalent.SynthesisDiscount, GluttonRules.DiscountPercent));
-            // The sizing pass (rules 28, BattleSimulation.Sized.cs).
+            // The sizing pass (rules 31, BattleSimulation.Sized.cs).
             return _sizedOn ? left * SizeRules.PactPercent / 100 : left;
         }
 
@@ -266,7 +266,7 @@ namespace KindredSiege.Sim.Battle
         {
             if (side < 0 || side > 1) return 100;
             int left = _gluttonOn ? Math.Max(0, 100 - Bonus(side, GluttonTalent.CommandRelay, GluttonRules.RelayPricePercent)) : 100;
-            // Gorged Tricks (rules 27, BattleSimulation.Duos.cs) halves what is left, and the sizing pass (rules 28) sizes it.
+            // Gorged Tricks (rules 30, BattleSimulation.Duos.cs) halves what is left, and the sizing pass (rules 31) sizes it.
             if (_duosOn) left = GorgedPrice(side, left);
             return _sizedOn ? PriceSized(left) : left;
         }
@@ -274,8 +274,9 @@ namespace KindredSiege.Sim.Battle
         // Precognition: how many ticks before a beat a live Hold parries it.
         private int ParryWindow(int side)
         {
-            if (!_gluttonOn || side < 0 || side > 1) return FightRules.PerfectHoldTicks;
-            return FightRules.PerfectHoldTicks * (100 + Bonus(side, GluttonTalent.Precognition, GluttonRules.PrecognitionPercent)) / 100;
+            // The window it widens is the tight parry's from rules 26 (BattleSimulation.Tight.cs).
+            if (!_gluttonOn || side < 0 || side > 1) return ParryWindowTicks;
+            return ParryWindowTicks * (100 + Bonus(side, GluttonTalent.Precognition, GluttonRules.PrecognitionPercent)) / 100;
         }
 
         // Glancing Fold: a Hold that soaks takes this percent of the hit, soaking more.

@@ -2,7 +2,7 @@ using System;
 
 namespace KindredSiege.Sim.Battle
 {
-    /// The Pals' duos in the fight (campaign rules 27; FightRules.Duos; Jacob in chat, 1 Nov 2026: "go write them"). Each side
+    /// The Pals' duos in the fight (campaign rules 30; FightRules.Duos; Jacob in chat, 1 Nov 2026: "go write them"). Each side
     /// brings the duos it holds in its PalKit (PalDuo, DuoRules). The star is the side's fighter of the highest rank, 2 or more,
     /// the first of a tie in setup order; he stays the star if he falls, so a duo on him dies with him. Her tricks are those
     /// that hit (ShadeRules.IsTrickDetail): Mirror, Rift Mine, Rupture, Breach, Ram, Echo and Turncoat. Every number is a
@@ -11,7 +11,7 @@ namespace KindredSiege.Sim.Battle
     {
         private readonly bool _duosOn;
 
-        /// Whether this fight plays the duos: campaign rules 27.
+        /// Whether this fight plays the duos: campaign rules 30.
         public bool DuosOn => _duosOn;
 
         /// Whether this side holds this duo in this fight.
@@ -155,7 +155,7 @@ namespace KindredSiege.Sim.Battle
 
         private int Bonus(BattleUnit unit, GluttonTalent talent, int bonus)
         {
-            // Sized from rules 28 (BattleSimulation.Sized.cs), and more again on a Fattened Star.
+            // Sized from rules 31 (BattleSimulation.Sized.cs), and more again on a Fattened Star.
             if (!_sizedOn) return GluttonRules.Bonus(TalentLevelOf(unit, talent), bonus);
             int sized = GluttonSized(unit.Side, talent, bonus);
             if (SizeRules.FattenedPercent > 0 && sized >= SizeRules.GluttonMinBonus && HasDuo(unit.Side, PalDuo.FattenedStar) && IsStar(unit))

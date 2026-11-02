@@ -37,7 +37,7 @@ namespace KindredSiege.Sim.Battle
         /// hit points it still soaks, and Backstab, a Fall Back's next hit from behind.
         Shield,
         Backstab,
-        /// The Shade's other routes (campaign rules 25; BattleSimulation.Shade.cs): Rupture's Crack thins his armour, and
+        /// The Shade's other routes (campaign rules 28; BattleSimulation.Shade.cs): Rupture's Crack thins his armour, and
         /// Breach's Gap stops him covering anyone.
         Crack,
         NoCover

@@ -98,7 +98,7 @@ namespace KindredSiege.Slice
                 _threatPanel = Rect(_readoutLayer, "Priority threat", 0, 0, W, H);
                 // Beasts keep their selectable part cards. Other chief panels stay in their own scope.
                 int y = sim.BeastOn ? 161 : 102;
-                Panel(_threatPanel, 22*Px, y*Px, 676*Px, 70*Px, new Color(.06f,.05f,.07f,.94f));
+                Panel(_threatPanel, 22*Px, y*Px, 676*Px, (sim.BeastOn&&sim.TightParryOn?32:70)*Px, new Color(.06f,.05f,.07f,.94f));
                 _threatHeading = PxLabel(_threatPanel, 28, y+5);
                 _threatTarget = PxLabel(_threatPanel, 28, y+18);
                 _threatAnswers = PxLabel(_threatPanel, 28, y+34);
@@ -112,6 +112,18 @@ namespace KindredSiege.Slice
             // Preserve forecast target markers and the MOVES modal, but replace the competing text wall.
             if (_tacticsPanel != null) _tacticsPanel.gameObject.SetActive(false);
             var t = CurrentThreat;
+            if(sim.BeastOn&&sim.TightParryOn)
+            {
+                SetPx(_threatHeading,t.IsNone?"SQUAD ATTACKING":Fit(t.Name.ToUpperInvariant(),578),PxBone);
+                string answers=sim.WhiffTicksLeft(0)>0?"WHIFF / VULNERABLE "+Seconds(sim.WhiffTicksLeft(0)):
+                    _paused?"PAUSED / SPACE TO RESUME":t.IsNone?"3 FOCUS A PART":
+                    ((t.Answers&ThreatAnswer.Parry)!=0?"1 PARRY / WATCH ATTACKER":"")+
+                    ((t.Answers&ThreatAnswer.FallBack)!=0?" / 2 DODGE":"")+
+                    ((t.Answers&ThreatAnswer.FocusFire)!=0?" / 3 FOCUS":"");
+                SetPx(_threatTarget,Fit(answers,578),PxMint);
+                SetPx(_threatAnswers,"",PxMuted);SetPx(_threatOthers,"",PxMuted);SetPx(_orderReceipt,"",PxMuted);
+                return;
+            }
             string glory = sim.GloryOn(0) ? " / GLORY " + ChiefKits.Letter(sim.GloryRankOf(0)) : "";
             string beat = t.BeatTicks >= 0 ? " / BEAT " + Seconds(t.BeatTicks) : " / " + Seconds(t.TicksLeft) + " LEFT";
             SetPx(_threatHeading, Fit(t.IsNone ? "WATCH THEIR NEXT MOVE" + glory : "ANSWER FIRST: " + t.Name + beat + glory, 578), LiveParryCue(sim,t) ? PxGold : PxYellow);
@@ -188,7 +200,7 @@ namespace KindredSiege.Slice
                 if(_pxGoal!=null)text.Append(_pxGoal.key.Split('|')[0]).Append("\n");
                 text.Append("\n");
             }
-            text.Append(sim.DangerOn?"SWINGS: Hold guards your front row; a timed live Hold parries.\nBLASTS (Eclipse, Brand, Burning Ring): time a live parry. Early or paused Hold does not reduce their damage.\nA parry opens the Riposte. Where allowed, Fall Back dodges but stops your attacks.\n\n":sim.SquadFirstOn ? "SQUAD FIRST: fighters attack automatically. Cashing marks earns a point and cracks enemy nerve.\nHOLD guards the front row. No block nerve cost. A live timed Hold can parry.\nSMALL beats: parry opens the attacker; no nerve crack or chain step. BIG beats also reward other safe answers.\nPAUSED HOLD: guards but never parries.\n\n" : sim.ParryCenterOn ? "PERFECT HOLD: live, in the last half second of a beat. Negates the move and staggers its doer.\nEARLY HOLD: may soak, but costs your nerve.\nPAUSED HOLD: never parries. Resume, then issue a fresh Hold.\n\n" : "Historical fight: its original parry and counter rules apply.\n\n");
+            text.Append(sim.TightParryOn?TightGuide+"\n\n":sim.DangerOn?"SWINGS: Hold guards your front row; a timed live Hold parries.\nBLASTS (Eclipse, Brand, Burning Ring): time a live parry. Early or paused Hold does not reduce their damage.\nA parry opens the Riposte. Where allowed, Fall Back dodges but stops your attacks.\n\n":sim.SquadFirstOn ? "SQUAD FIRST: fighters attack automatically. Cashing marks earns a point and cracks enemy nerve.\nHOLD guards the front row. No block nerve cost. A live timed Hold can parry.\nSMALL beats: parry opens the attacker; no nerve crack or chain step. BIG beats also reward other safe answers.\nPAUSED HOLD: guards but never parries.\n\n" : sim.ParryCenterOn ? "PERFECT HOLD: live, in the last half second of a beat. Negates the move and staggers its doer.\nEARLY HOLD: may soak, but costs your nerve.\nPAUSED HOLD: never parries. Resume, then issue a fresh Hold.\n\n" : "Historical fight: its original parry and counter rules apply.\n\n");
 
             foreach (var t in _threatReads)
                 text.Append(t.Name).Append(" / ").Append(NameOf(t.ActorId)).Append(" -> ").Append(t.TargetId.Length==0?"area or variable target":NameOf(t.TargetId))

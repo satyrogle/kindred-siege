@@ -86,8 +86,9 @@ namespace KindredSiege.Sim.Battle
             bool chiefRules = false, bool chiefKits = false, bool beasts = false, bool chiefTactics = false, bool parryCenter = false,
             bool squadFirst = false, bool raidChief = false, bool roadCombat = false, bool roadKit = false, int clearRoadStage = 0, bool squadScreen = false,
             bool championDuel = false, bool layers = false, bool marks = false, bool payoffs = false, bool danger = false,
-            bool meter = false, bool floor = false, bool whisper = false, bool shadeForms = false, bool glutton = false,
-            bool duos = false, bool sized = false, bool flavours = false, bool vows = false, bool marksOnHits = false)
+            bool meter = false, bool floor = false, bool whisper = false, bool beastScenes = false, bool tight = false, bool beastRaid = false,
+            bool shadeForms = false, bool glutton = false, bool duos = false, bool sized = false, bool flavours = false, bool vows = false,
+            bool marksOnHits = false)
         {
             ChampionDuel = championDuel;
             Layers = layers;
@@ -97,6 +98,9 @@ namespace KindredSiege.Sim.Battle
             Meter = meter;
             Floor = floor;
             Whisper = whisper;
+            BeastScenes = beastScenes;
+            Tight = tight;
+            BeastRaid = beastRaid;
             ShadeForms = shadeForms;
             Glutton = glutton;
             Duos = duos;
@@ -164,7 +168,7 @@ namespace KindredSiege.Sim.Battle
         /// These rules for a champion duel: what a duel plays from campaign rules version 16.
         public FightRules WithChampionDuel() => ChampionDuel ? this : new FightRules(Misses, EarnedPoints, PerfectHold, NerveSnaps,
             ClassSpells, ChiefRules, ChiefKits, Beasts, ChiefTactics, ParryCenter, SquadFirst, RaidChief, RoadCombat, RoadKit,
-            ClearRoadStage, SquadScreen, true, Layers, Marks, Payoffs, Danger, Meter, Floor, Whisper, ShadeForms, Glutton, Duos, Sized, Flavours, Vows, MarksOnHits);
+            ClearRoadStage, SquadScreen, true, Layers, Marks, Payoffs, Danger, Meter, Floor, Whisper, BeastScenes, Tight, BeastRaid, ShadeForms, Glutton, Duos, Sized, Flavours, Vows, MarksOnHits);
 
         /// Rules 17: the damage layers (BattleSimulation.Layers.cs; DESIGN_LOCKS, "Builds: one theme per Pal", step 2). Every hit
         /// and heal goes through one pipeline: bonuses of one layer add, the layers multiply, and it rounds once.
@@ -174,7 +178,7 @@ namespace KindredSiege.Sim.Battle
         /// drop it, so it comes last, as the champion duel does.
         public FightRules WithLayers() => Layers ? this : new FightRules(Misses, EarnedPoints, PerfectHold, NerveSnaps,
             ClassSpells, ChiefRules, ChiefKits, Beasts, ChiefTactics, ParryCenter, SquadFirst, RaidChief, RoadCombat, RoadKit,
-            ClearRoadStage, SquadScreen, ChampionDuel, true, Marks, Payoffs, Danger, Meter, Floor, Whisper, ShadeForms, Glutton, Duos, Sized, Flavours, Vows, MarksOnHits);
+            ClearRoadStage, SquadScreen, ChampionDuel, true, Marks, Payoffs, Danger, Meter, Floor, Whisper, BeastScenes, Tight, BeastRaid, ShadeForms, Glutton, Duos, Sized, Flavours, Vows, MarksOnHits);
 
         /// Rules 18: the Butcher's theme (BattleSimulation.Marks.cs; DESIGN_LOCKS, "The Butcher's theme", builds step 3). His
         /// combos lay Crush, Exposed and Stasis, which stack to 3 and burst.
@@ -183,7 +187,7 @@ namespace KindredSiege.Sim.Battle
         /// These rules with the Butcher's marks: what every fight plays from campaign rules version 18. Last, after the layers.
         public FightRules WithMarks() => Marks ? this : new FightRules(Misses, EarnedPoints, PerfectHold, NerveSnaps,
             ClassSpells, ChiefRules, ChiefKits, Beasts, ChiefTactics, ParryCenter, SquadFirst, RaidChief, RoadCombat, RoadKit,
-            ClearRoadStage, SquadScreen, ChampionDuel, Layers, true, Payoffs, Danger, Meter, Floor, Whisper, ShadeForms, Glutton, Duos, Sized, Flavours, Vows, MarksOnHits);
+            ClearRoadStage, SquadScreen, ChampionDuel, Layers, true, Payoffs, Danger, Meter, Floor, Whisper, BeastScenes, Tight, BeastRaid, ShadeForms, Glutton, Duos, Sized, Flavours, Vows, MarksOnHits);
 
         /// Rules 20: payoffs that spread (BattleSimulation.Payoffs.cs; Jacob's playtest, HANDOFF_LOG 12797, fix 1). A snare pays
         /// one Aimed Shot crit and breaks, and bleeding counts at most PayoffRules.PercentHealthCap of a big target's health.
@@ -192,7 +196,7 @@ namespace KindredSiege.Sim.Battle
         /// These rules with payoffs that spread: what every fight plays from campaign rules version 20. Last, after the marks.
         public FightRules WithPayoffs() => Payoffs ? this : new FightRules(Misses, EarnedPoints, PerfectHold, NerveSnaps,
             ClassSpells, ChiefRules, ChiefKits, Beasts, ChiefTactics, ParryCenter, SquadFirst, RaidChief, RoadCombat, RoadKit,
-            ClearRoadStage, SquadScreen, ChampionDuel, Layers, Marks, true, Danger, Meter, Floor, Whisper, ShadeForms, Glutton, Duos, Sized, Flavours, Vows, MarksOnHits);
+            ClearRoadStage, SquadScreen, ChampionDuel, Layers, Marks, true, Danger, Meter, Floor, Whisper, BeastScenes, Tight, BeastRaid, ShadeForms, Glutton, Duos, Sized, Flavours, Vows, MarksOnHits);
 
         /// Rules 21: danger (BattleSimulation.Danger.cs; DESIGN_LOCKS, "Jacob's playtest fixes 3, 7 and 9"). A Hold that is not a
         /// parry soaks nothing from a blast, Bloodridge's road bands carry their chief's moves from the first fight and hit for a
@@ -202,7 +206,7 @@ namespace KindredSiege.Sim.Battle
         /// These rules with danger: what every fight plays from campaign rules version 21. Last, after payoffs.
         public FightRules WithDanger() => Danger ? this : new FightRules(Misses, EarnedPoints, PerfectHold, NerveSnaps,
             ClassSpells, ChiefRules, ChiefKits, Beasts, ChiefTactics, ParryCenter, SquadFirst, RaidChief, RoadCombat, RoadKit,
-            ClearRoadStage, SquadScreen, ChampionDuel, Layers, Marks, Payoffs, true, Meter, Floor, Whisper, ShadeForms, Glutton, Duos, Sized, Flavours, Vows, MarksOnHits);
+            ClearRoadStage, SquadScreen, ChampionDuel, Layers, Marks, Payoffs, true, Meter, Floor, Whisper, BeastScenes, Tight, BeastRaid, ShadeForms, Glutton, Duos, Sized, Flavours, Vows, MarksOnHits);
 
         /// Rules 22: the parry meter (BattleSimulation.Meter.cs; DESIGN_LOCKS, "The parry meter"). Your parries fill 3 bars, your
         /// chief spell is cast with all 3, and each held bar makes your combos and cash ins 10% stronger.
@@ -211,7 +215,7 @@ namespace KindredSiege.Sim.Battle
         /// These rules with the parry meter: what every fight plays from campaign rules version 22. Last, after danger.
         public FightRules WithMeter() => Meter ? this : new FightRules(Misses, EarnedPoints, PerfectHold, NerveSnaps,
             ClassSpells, ChiefRules, ChiefKits, Beasts, ChiefTactics, ParryCenter, SquadFirst, RaidChief, RoadCombat, RoadKit,
-            ClearRoadStage, SquadScreen, ChampionDuel, Layers, Marks, Payoffs, Danger, true, Floor, Whisper, ShadeForms, Glutton, Duos, Sized, Flavours, Vows, MarksOnHits);
+            ClearRoadStage, SquadScreen, ChampionDuel, Layers, Marks, Payoffs, Danger, true, Floor, Whisper, BeastScenes, Tight, BeastRaid, ShadeForms, Glutton, Duos, Sized, Flavours, Vows, MarksOnHits);
 
         /// Rules 23: the floor under the three Pals (BattleSimulation.Shade.cs; DESIGN_LOCKS, "The floor under the three Pals"): a
         /// fighter's second piece, the faster and cheaper hooks and the Shade's tricks.
@@ -220,7 +224,7 @@ namespace KindredSiege.Sim.Battle
         /// These rules with the floor: what every fight plays from campaign rules version 23. Last, after the meter.
         public FightRules WithFloor() => Floor ? this : new FightRules(Misses, EarnedPoints, PerfectHold, NerveSnaps,
             ClassSpells, ChiefRules, ChiefKits, Beasts, ChiefTactics, ParryCenter, SquadFirst, RaidChief, RoadCombat, RoadKit,
-            ClearRoadStage, SquadScreen, ChampionDuel, Layers, Marks, Payoffs, Danger, Meter, true, Whisper, ShadeForms, Glutton, Duos, Sized, Flavours, Vows, MarksOnHits);
+            ClearRoadStage, SquadScreen, ChampionDuel, Layers, Marks, Payoffs, Danger, Meter, true, Whisper, BeastScenes, Tight, BeastRaid, ShadeForms, Glutton, Duos, Sized, Flavours, Vows, MarksOnHits);
 
         /// Rules 24: the Whisperer (BattleSimulation.Whisperer.cs; DESIGN_LOCKS, "Habits come with the game, the Whisperer upgrades
         /// them"): each class's habit and its upgrade, the squad's pair on the bonds, and a fighter's rank 2.
@@ -229,64 +233,97 @@ namespace KindredSiege.Sim.Battle
         /// These rules with the Whisperer: what every fight plays from campaign rules version 24. Last, after the floor.
         public FightRules WithWhisper() => Whisper ? this : new FightRules(Misses, EarnedPoints, PerfectHold, NerveSnaps,
             ClassSpells, ChiefRules, ChiefKits, Beasts, ChiefTactics, ParryCenter, SquadFirst, RaidChief, RoadCombat, RoadKit,
-            ClearRoadStage, SquadScreen, ChampionDuel, Layers, Marks, Payoffs, Danger, Meter, Floor, true, ShadeForms, Glutton, Duos, Sized, Flavours, Vows, MarksOnHits);
-        /// Rules 25: the Shade's forms (BattleSimulation.Shade.cs; Jacob in chat, 31 Oct 2026: "go" on Claude's Shade design):
+            ClearRoadStage, SquadScreen, ChampionDuel, Layers, Marks, Payoffs, Danger, Meter, Floor, true, BeastScenes, Tight, BeastRaid, ShadeForms, Glutton, Duos, Sized, Flavours, Vows, MarksOnHits);
+
+        /// Rules 25: the beasts as their approved scenes show them (Jacob, 1 Nov 2026: "Sim follows scenes", then "Go as written";
+        /// BattleSimulation.Beast.cs). The shark's Bite takes the marked one's whole row and its tail's Sweep all of them; the
+        /// cage bear's Grab is a Slam and Grab, an ice wave on all of them and then the claw. A beast fight only.
+        public bool BeastScenes { get; }
+
+        /// These rules with the beasts as their scenes show them: what a beast fight plays from campaign rules version 25. Last,
+        /// after the Whisperer.
+        public FightRules WithBeastScenes() => BeastScenes ? this : new FightRules(Misses, EarnedPoints, PerfectHold, NerveSnaps,
+            ClassSpells, ChiefRules, ChiefKits, Beasts, ChiefTactics, ParryCenter, SquadFirst, RaidChief, RoadCombat, RoadKit,
+            ClearRoadStage, SquadScreen, ChampionDuel, Layers, Marks, Payoffs, Danger, Meter, Floor, Whisper, true, Tight, BeastRaid, ShadeForms, Glutton, Duos, Sized, Flavours, Vows, MarksOnHits);
+
+        /// Rules 26: the tight parry (BattleSimulation.Tight.cs; DESIGN_LOCKS, "The parry: tight window, big payoff, a gold flash
+        /// on the attacker"): a 0.2 s window, a whiff that lands in full and opens your side, and a counter on every parry.
+        public bool Tight { get; }
+
+        /// These rules with the tight parry: what every fight plays from campaign rules version 26. Last, after the beasts.
+        public FightRules WithTight() => Tight ? this : new FightRules(Misses, EarnedPoints, PerfectHold, NerveSnaps,
+            ClassSpells, ChiefRules, ChiefKits, Beasts, ChiefTactics, ParryCenter, SquadFirst, RaidChief, RoadCombat, RoadKit,
+            ClearRoadStage, SquadScreen, ChampionDuel, Layers, Marks, Payoffs, Danger, Meter, Floor, Whisper, BeastScenes, true, BeastRaid, ShadeForms, Glutton, Duos, Sized, Flavours, Vows, MarksOnHits);
+
+        /// Rules 27: the beasts as raid bosses (Jacob, 1 Nov 2026: "can we finish the bear and shark just like a wow boss", then
+        /// "Full plan" and "Go as written"; BattleSimulation.BeastRaid.cs). The shark's Feeding frenzy at its second broken part, then
+        /// its sand pups; the cage bear's Overload when its ribcage breaks, and its Last stand Pulse climbing. A beast fight only.
+        /// Built as rules 26 and renumbered to 27 the same day, after the tight parry took 26.
+        public bool BeastRaid { get; }
+
+        /// These rules with the beasts as raid bosses: what a beast fight plays from campaign rules version 27. Last, after the
+        /// tight parry.
+        public FightRules WithBeastRaid() => BeastRaid ? this : new FightRules(Misses, EarnedPoints, PerfectHold, NerveSnaps,
+            ClassSpells, ChiefRules, ChiefKits, Beasts, ChiefTactics, ParryCenter, SquadFirst, RaidChief, RoadCombat, RoadKit,
+            ClearRoadStage, SquadScreen, ChampionDuel, Layers, Marks, Payoffs, Danger, Meter, Floor, Whisper, BeastScenes, Tight, true, ShadeForms, Glutton, Duos, Sized, Flavours, Vows, MarksOnHits);
+
+        /// Rules 28: the Shade's forms (BattleSimulation.Shade.cs; Jacob in chat, 31 Oct 2026: "go" on Claude's Shade design):
         /// Sanctuary's Relay and Last Refuge, Backstab's Twin Knives and Shadow Strike, Fear's Spreading Dread and Turncoat, and
         /// each route's price.
         public bool ShadeForms { get; }
 
-        /// These rules with the Shade's forms: what every fight plays from campaign rules version 25. Last, after the Whisperer.
+        /// These rules with the Shade's forms: what every fight plays from campaign rules version 28. Last, after the Whisperer.
         public FightRules WithShadeForms() => ShadeForms ? this : new FightRules(Misses, EarnedPoints, PerfectHold, NerveSnaps,
             ClassSpells, ChiefRules, ChiefKits, Beasts, ChiefTactics, ParryCenter, SquadFirst, RaidChief, RoadCombat, RoadKit,
-            ClearRoadStage, SquadScreen, ChampionDuel, Layers, Marks, Payoffs, Danger, Meter, Floor, Whisper, true, Glutton, Duos, Sized, Flavours, Vows, MarksOnHits);
-        /// Rules 26: the Glutton's tree (BattleSimulation.Glutton.cs; Jacob in chat, 1 Nov 2026: "go" on Claude's calls): each
+            ClearRoadStage, SquadScreen, ChampionDuel, Layers, Marks, Payoffs, Danger, Meter, Floor, Whisper, BeastScenes, Tight, BeastRaid, true, Glutton, Duos, Sized, Flavours, Vows, MarksOnHits);
+        /// Rules 29: the Glutton's tree (BattleSimulation.Glutton.cs; Jacob in chat, 1 Nov 2026: "go" on Claude's calls): each
         /// side's talents make what it has bigger, longer, faster or cheaper.
         public bool Glutton { get; }
 
-        /// These rules with the Glutton: what every fight plays from campaign rules version 26. Last, after the Shade's forms.
+        /// These rules with the Glutton: what every fight plays from campaign rules version 29. Last, after the Shade's forms.
         public FightRules WithGlutton() => Glutton ? this : new FightRules(Misses, EarnedPoints, PerfectHold, NerveSnaps,
             ClassSpells, ChiefRules, ChiefKits, Beasts, ChiefTactics, ParryCenter, SquadFirst, RaidChief, RoadCombat, RoadKit,
-            ClearRoadStage, SquadScreen, ChampionDuel, Layers, Marks, Payoffs, Danger, Meter, Floor, Whisper, ShadeForms, true, Duos, Sized, Flavours, Vows, MarksOnHits);
+            ClearRoadStage, SquadScreen, ChampionDuel, Layers, Marks, Payoffs, Danger, Meter, Floor, Whisper, BeastScenes, Tight, BeastRaid, ShadeForms, true, Duos, Sized, Flavours, Vows, MarksOnHits);
 
-        /// Rules 27: the Pals' duos (BattleSimulation.Duos.cs; Jacob in chat, 1 Nov 2026: "go write them"): a pick that joins two
+        /// Rules 30: the Pals' duos (BattleSimulation.Duos.cs; Jacob in chat, 1 Nov 2026: "go write them"): a pick that joins two
         /// Pals' themes, held in the side's PalKit.
         public bool Duos { get; }
 
-        /// These rules with the duos: what every fight plays from campaign rules version 27. Last, after the Glutton.
+        /// These rules with the duos: what every fight plays from campaign rules version 30. Last, after the Glutton.
         public FightRules WithDuos() => Duos ? this : new FightRules(Misses, EarnedPoints, PerfectHold, NerveSnaps,
             ClassSpells, ChiefRules, ChiefKits, Beasts, ChiefTactics, ParryCenter, SquadFirst, RaidChief, RoadCombat, RoadKit,
-            ClearRoadStage, SquadScreen, ChampionDuel, Layers, Marks, Payoffs, Danger, Meter, Floor, Whisper, ShadeForms, Glutton, true, Sized, Flavours, Vows, MarksOnHits);
+            ClearRoadStage, SquadScreen, ChampionDuel, Layers, Marks, Payoffs, Danger, Meter, Floor, Whisper, BeastScenes, Tight, BeastRaid, ShadeForms, Glutton, true, Sized, Flavours, Vows, MarksOnHits);
 
-        /// Rules 28: the sizing pass (BattleSimulation.Sized.cs; Jacob in chat, 1 Nov 2026: "okay go"): the Pals' picks sized to
+        /// Rules 31: the sizing pass (BattleSimulation.Sized.cs; Jacob in chat, 1 Nov 2026: "okay go"): the Pals' picks sized to
         /// decide fights.
         public bool Sized { get; }
 
-        /// These rules with the sized picks: what every fight plays from campaign rules version 28. Last, after the duos.
+        /// These rules with the sized picks: what every fight plays from campaign rules version 31. Last, after the duos.
         public FightRules WithSized() => Sized ? this : new FightRules(Misses, EarnedPoints, PerfectHold, NerveSnaps,
             ClassSpells, ChiefRules, ChiefKits, Beasts, ChiefTactics, ParryCenter, SquadFirst, RaidChief, RoadCombat, RoadKit,
-            ClearRoadStage, SquadScreen, ChampionDuel, Layers, Marks, Payoffs, Danger, Meter, Floor, Whisper, ShadeForms, Glutton, Duos, true, Flavours, Vows, MarksOnHits);
+            ClearRoadStage, SquadScreen, ChampionDuel, Layers, Marks, Payoffs, Danger, Meter, Floor, Whisper, BeastScenes, Tight, BeastRaid, ShadeForms, Glutton, Duos, true, Flavours, Vows, MarksOnHits);
 
-        /// Rules 29: the Butcher's flavours (BattleSimulation.Flavours.cs; Jacob in chat, 2 Nov 2026: "both 1 and 2"): a combo grows
+        /// Rules 32: the Butcher's flavours (BattleSimulation.Flavours.cs; Jacob in chat, 2 Nov 2026: "both 1 and 2"): a combo grows
         /// with the combos of its flavour the side wears, and three ranks of one flavour unlock its final form.
         public bool Flavours { get; }
 
-        /// These rules with the Butcher's flavours: what every fight plays from campaign rules version 29. Last, after sizing.
+        /// These rules with the Butcher's flavours: what every fight plays from campaign rules version 32. Last, after sizing.
         public FightRules WithFlavours() => Flavours ? this : new FightRules(Misses, EarnedPoints, PerfectHold, NerveSnaps,
             ClassSpells, ChiefRules, ChiefKits, Beasts, ChiefTactics, ParryCenter, SquadFirst, RaidChief, RoadCombat, RoadKit,
-            ClearRoadStage, SquadScreen, ChampionDuel, Layers, Marks, Payoffs, Danger, Meter, Floor, Whisper, ShadeForms, Glutton, Duos, Sized, true, Vows, MarksOnHits);
+            ClearRoadStage, SquadScreen, ChampionDuel, Layers, Marks, Payoffs, Danger, Meter, Floor, Whisper, BeastScenes, Tight, BeastRaid, ShadeForms, Glutton, Duos, Sized, true, Vows, MarksOnHits);
 
-        /// Rules 30: the Whisperer's vows (BattleSimulation.Vows.cs; Jacob in chat, 2 Nov 2026: "whisperer - 1"): a fighter's vow
+        /// Rules 33: the Whisperer's vows (BattleSimulation.Vows.cs; Jacob in chat, 2 Nov 2026: "whisperer - 1"): a fighter's vow
         /// changes how his spell works from rank 2.
         public bool Vows { get; }
 
-        /// Rules 30 too: the Butcher's marks on every hit (BattleSimulation.Flavours.cs; Jacob in chat, 2 Nov 2026: "butcher - 1
+        /// Rules 33 too: the Butcher's marks on every hit (BattleSimulation.Flavours.cs; Jacob in chat, 2 Nov 2026: "butcher - 1
         /// and 2"): every blow of a fighter wearing a combo lays a stack of its flavour.
         public bool MarksOnHits { get; }
 
-        /// These rules with both: what every fight plays from campaign rules version 30. Last, after the flavours.
+        /// These rules with both: what every fight plays from campaign rules version 33. Last, after the flavours.
         public FightRules WithVows() => Vows && MarksOnHits ? this : new FightRules(Misses, EarnedPoints, PerfectHold, NerveSnaps,
             ClassSpells, ChiefRules, ChiefKits, Beasts, ChiefTactics, ParryCenter, SquadFirst, RaidChief, RoadCombat, RoadKit,
-            ClearRoadStage, SquadScreen, ChampionDuel, Layers, Marks, Payoffs, Danger, Meter, Floor, Whisper, ShadeForms, Glutton, Duos, Sized,
+            ClearRoadStage, SquadScreen, ChampionDuel, Layers, Marks, Payoffs, Danger, Meter, Floor, Whisper, BeastScenes, Tight, BeastRaid, ShadeForms, Glutton, Duos, Sized,
             Flavours, true, true);
         public FightRules WithSquadScreen() => new FightRules(Misses, EarnedPoints, PerfectHold, NerveSnaps,
             ClassSpells, ChiefRules, ChiefKits, Beasts, ChiefTactics, true, true, true, true, true,
@@ -436,6 +473,9 @@ namespace KindredSiege.Sim.Battle
             if (Meter) b.Field("rules.meter", true);
             if (Floor) b.Field("rules.floor", true);
             if (Whisper) b.Field("rules.whisper", true);
+            if (BeastScenes) b.Field("rules.beastScenes", true);
+            if (Tight) b.Field("rules.tight", true);
+            if (BeastRaid) b.Field("rules.beastRaid", true);
             if (ShadeForms) b.Field("rules.shadeForms", true);
             if (Glutton) b.Field("rules.glutton", true);
             if (Duos) b.Field("rules.duos", true);

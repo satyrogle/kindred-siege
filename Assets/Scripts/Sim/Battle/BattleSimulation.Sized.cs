@@ -2,7 +2,7 @@ using System;
 
 namespace KindredSiege.Sim.Battle
 {
-    /// The sizing pass (campaign rules 28; FightRules.Sized; Jacob in chat, 1 Nov 2026: "okay go"). The Pals' picks made big
+    /// The sizing pass (campaign rules 31; FightRules.Sized; Jacob in chat, 1 Nov 2026: "okay go"). The Pals' picks made big
     /// enough to decide fights, sized with the builds test (tools/sim_checks/sweep/PalSweep.cs): a run leaning into one Pal should
     /// win about 10 more runs in 100 than the same number of random picks. Leaning pays most: a route's later forms, a limb's
     /// later talents, a star's higher rank and a flavour's later combos each give more than the one before. Every number is a
@@ -40,7 +40,7 @@ namespace KindredSiege.Sim.Battle
         /// What his pacts cost keeps, in percent (Heavy's slower turns, Unnerving's nerve, Borrowed time's health).
         public const int PactPercent = 50;
 
-        /// The duos, sized (DuoRules has their numbers before rules 28). Crowned Marks: the star lays this many times his stacks.
+        /// The duos, sized (DuoRules has their numbers before rules 31). Crowned Marks: the star lays this many times his stacks.
         /// Marked Tricks: each trick hit lays this many stacks. Gorged Bursts and Gorged Tricks: percent a talent level. Gorged
         /// Tricks: what her prices keep. Shadow Star: the star casts from her tricks at most once in this long. Fattened Star:
         /// his talents' bonuses this many percent bigger again on the star.
@@ -52,7 +52,7 @@ namespace KindredSiege.Sim.Battle
         public const int ShadowStarTicks = 3 * SimClock.TicksPerSecond / 2;
         public const int FattenedPercent = 200;
 
-        /// The Butcher's flavours (campaign rules 29, BattleSimulation.Flavours.cs). For each rank past the first of combos of a
+        /// The Butcher's flavours (campaign rules 32, BattleSimulation.Flavours.cs). For each rank past the first of combos of a
         /// combo's flavour the side wears: its hits (Black Hole Round's crush, Event Horizon's cleave, Execution Corridor's blow,
         /// a Frozen Flurry's thaw) this many percent bigger, its pins, freezes and slows this many percent longer, and its pulls
         /// this many places further.
@@ -65,7 +65,7 @@ namespace KindredSiege.Sim.Battle
         /// freezes every enemy for StasisAllTicks.
         public const int FinalRanks = 3;
 
-        /// From rules 30, the stacks of his combo's mark every blow of a fighter wearing one lays.
+        /// From rules 33, the stacks of his combo's mark every blow of a fighter wearing one lays.
         public const int HitStacks = 1;
         public const int ExposedJumps = 1;
         public const int StasisAllTicks = SimClock.TicksPerSecond;
@@ -80,7 +80,7 @@ namespace KindredSiege.Sim.Battle
     {
         private readonly bool _sizedOn;
 
-        /// Whether this fight plays the sized picks: campaign rules 28.
+        /// Whether this fight plays the sized picks: campaign rules 31.
         public bool SizedOn => _sizedOn;
 
         // ------------------------------------------------------------ the Shade

@@ -57,6 +57,15 @@ namespace KindredSiege.Sim.Battle
             return Cheaper(side, _raidOn && side == 0 && directive == Directive.Hold ? 0 : Directives.Cost(directive));
         }
 
+        /// What this order costs this side right now, in points, after every rule that changes it: the raid chief's free Hold,
+        /// the meter's free chief spell and the cheaper hook (PalKit.OrderCostPercent). Read only, for the screen, so it never
+        /// works the cost out itself.
+        public int OrderCost(int side, Directive directive)
+        {
+            if (side < 0 || side >= _sides.Length) throw new ArgumentOutOfRangeException(nameof(side));
+            return CostOf(side, directive);
+        }
+
         /// Ticks until a new Hold press can refresh its parry timestamp. Hold may still be accepted as a guard while
         /// this is positive. Read only: the HUD must not advertise a fresh parry based on CanUse alone.
         public int HoldRefreshTicksLeft(int side)

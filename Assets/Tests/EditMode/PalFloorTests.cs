@@ -132,6 +132,13 @@ namespace KindredSiege.Sim.Tests
             Assert.AreEqual(3, back.Reserve.First(f => f.Id == star.Id).Rank);
             Assert.AreEqual(Campaign.ComboGearId(bend), back.Reserve.First(f => f.Id == star.Id).GearId2);
 
+            // TryUnequipSecond takes it off again, and it can go back on.
+            Campaign off = CampaignSave.Read(saved, easy);
+            Assert.IsTrue(off.TryUnequipSecond(star.Id, out why), why);
+            Assert.AreEqual(string.Empty, off.Reserve.First(f => f.Id == star.Id).GearId2);
+            Assert.IsTrue(off.TryEquipSecond(star.Id, Campaign.ComboGearId(bend), out why), why);
+            Assert.IsFalse(off.TryUnequipSecond("nobody", out _), "not one of yours");
+
             // And the second piece rides into his next fight.
             CampaignFight fight = back.StartEncounter(new CampaignPilot(PilotStyle.Reference, 5400).PickOffer(back));
             UnitSpec spec = fight.Setup.Side(0).SingleOrDefault(s => s.Id == star.Id);

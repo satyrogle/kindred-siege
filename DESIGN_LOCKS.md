@@ -1177,6 +1177,51 @@ Claude's Whisperer proposal kept the 28 Oct road flip's habit card. Jacob: "aren
 
 Still open: whether a habit can be upgraded more than once; what counts as a heavy blow for Ambusher; the rest of Claude's 31 Oct Whisperer proposal (a rank up for a fighter already ranked weighing 2 in her offer, and building her behind campaign rules 24) waits for his go. Nothing here is built or played.
 
+## The sand shark's look and land boss scene, owner decision, 1 Nov 2026
+
+Jacob on 24 Oct picked PixelLab's shark 2 ("bear 1 and refine shark 2"), then asked "if i told you the shark can breathe out of water", so it hauls out and fights on land. Later he asked for the bite to be redone and to "put half fish in ground half on top". On 31 Oct he rejected it walking on land ("its walking is weird as fuck") and said "make it behave the same way it would underwater", then "sweet" to the result, and on 1 Nov picked "Lock the shark". This look replaces the 23 Oct brief's look where they differ. The fight rules stay as built.
+- Look, drawn in PixelLab: a huge dusty red shark with cracked, scaly hide, a row of bone spines down its back, old harpoons and spears with red rags stuck in it from generations of Clarth hunts, a cream belly and jaw, and rows of yellow teeth.
+- Size: drawn at 256 px and shown at 2x, so it is as big as your whole squad. It stands alone on its side.
+- On land it sits half in the sand. The sand line cuts it just under the jaw, so its jaws, back and spines show and its belly, front fins and lower tail are under. A rim of sand moves along the cut all the time: a rippling lip, a wave of sand piled ahead of whatever part pushes forward, a furrow behind that fills back in, and sand pouring off its back.
+- It never walks. Anywhere it moves, it moves the way it does under the sand.
+- What it does on screen: its fin and shadow patrol under the sand, gliding and kicking; it bursts out, flies, and lands with a splash along its whole length, sinking to half depth; it breathes, gills working; it dives head first, swims under the sand to your squad as a fin and shadow, and bursts up half in the sand in front of them; it bites, its jaws clamping shut on your front row, then thrashes; it spins and its tail sweeps a blast of sand spikes through all five of your fighters; it dives head first and its fin patrols again.
+- Files: Art/Studies/Beast-Concepts-20261022/directions/anim2 (shark-land-256.png and the shark_haul, shark_breathe, shark_bite2 and shark_sweep clips of 40 frames), the scene in make/shark_land2.py and the video shark-land2.mp4, on the branch art/beast-bosses. The video is not on GitHub yet.
+- Open: in the sim the Bite hits whoever stands in front and the Sweep hits the front row; in this scene the bite takes the whole front row and the tail blast all five. The scene has no Volley. Whether the scene's hits become sim moves is not decided.
+- Not built: anything in Unity. Its pixels are twice the size of your fighters' pixels.
+
+## The beasts hit as their scenes show (rules 25), owner decision, 1 Nov 2026
+
+Jacob picked "Sim follows scenes" for the open lines in "The cage bear's look and boss scene" and "The sand shark's look and land boss scene", then "Go as written" to Claude's three rules. Built in the sim as campaign rules version 25 (HANDOFF_LOG has the details). This answers both open lines. Every number is a starting value.
+- The sand shark's Bite takes everyone in the marked fighter's row (your front row, your back row once the front has fallen), 18% of each one's health, instead of one fighter. The answers stay: a Hold as it lands parries the whole Bite; a Warden takes the share of whoever he covers on his shield, his own too, and the jaw takes half of each share back; any other Hold soaks the front row.
+- Its tail's Sweep hits all five, both rows, 10% each, instead of your front row. Fall Back dodges it, a covering Warden halves a share, and the Medic heals through it.
+- The cage bear's Grab becomes Slam and Grab: an ice wave on all five, 10% each, then the claw grabs the one it marked, as before. Fall Back dodges the whole move; a covering Warden halves the wave and blocks the grab.
+- Dive, Volley, Roar, Crush and Pulse do not change. Older fights, saves and replays keep the old rules.
+- Not done: the fight screen's move guide still describes the old hits, and nobody has played it.
+
+## The parry: tight window, big payoff, a gold flash on the attacker, owner decisions, 1 Nov 2026
+
+After his rules 19 playtest ("parry idk what im parrying or why or when"), Jacob set the bar: "it should be risky with a lot of reward and parry window should be very less", like Expedition 33, Sekiro, Ghost of Tsushima and Nioh 2, "parry is very imporatnt but its not everywhere"; the cue must work "irrespective of units and act like a universal visual cue"; and every fight keeps parry chances ("then by your proposal all other fights will be boring since no parry"). Claude mocked three cues on the attacker as clips on his fight with the chief's own sprites and the game's sounds (a glint on the weapon, a gold flash of the whole body, a floor ring closing to the feet). Jacob picked "2", then "Go, lock it". Where this differs from the sections above, this wins. Every number is a starting value.
+
+- **The window is 0.2 s.** Hold in the last 0.2 s before a parryable blow lands and it is parried. This replaces Perfect Hold's last half second.
+- **Parry chances in every fight, but not on every blow.** Band heavies, chief moves and carried moves are parryable; normal blows never are. The 24 Oct line stays: nothing big is unparryable.
+- **Reward.** A parry cancels the move, staggers the attacker for 2 s, fills one bar of the parry meter, and counters for the move's damage.
+- **Risk.** A Hold that misses the window lets the blow land in full, and your squad takes 50% more for 1 s.
+- **The cue: the attacker flashes gold.** During the 0.2 s window the whole body of whoever is swinging flashes gold, twice, with a normal frame between. The same flash on every unit, so it reads the same on a band heavy, a carrier or a chief. Nothing on the HUD carries the cue. The landed parry gets a flat white frame on the attacker, a clash spark where the blow is stopped, a short freeze and shake, the game's parry sound, then he reels on his hit frames and a meter bar lights.
+
+**What gets built, when Jacob says go (this lock is not a build order).** Claude: the window, the parryable blows, the reward and the risk behind a new campaign rules version, with the sim telling the screen when each window opens and closes and on whom, one quick test per piece, and the old against new proof. The final flash, spark and white frame are drawn with the PixelLab workbench, not taken from the ComfyUI mock. Codex: the flash on the attacker, the landed parry stack and the meter on screen.
+
+Still open: every number; whether tribes that learned your parry (14 Oct) keep holding their casts against a 0.2 s window; the colour of the flash for a blow you must not parry, if one is ever added.
+
+## The beasts as raid bosses (rules 27), owner decision, 1 Nov 2026
+
+Jacob: "can we finish the bear and shark just like a wow boss", then "Full plan" to Claude's plan and "Go as written" to its rules. Built in the sim as campaign rules version 27 (built as 26, then renumbered the same day after the tight parry took 26; HANDOFF_LOG has the details). Every number is a starting value.
+- Sand shark, Feeding frenzy: when its second part breaks it dives for 4 s; its moves stop and nothing reaches its parts. For the last 3 s the sand churns under all five, then it bursts up through all five for 20% of each one's health. Fall Back dodges it; an armed Trapper's trap snares it on top instead, nobody is hit and its parts take double damage for 4 s; a covering Warden halves a share; the Medic heals through it. Then its Blood frenzy, as built.
+- Sand pups: as it bursts, 2 small sand sharks come up and latch onto your back row, one each, biting whoever they hold for 2% of their health every second with a bleed until you kill them. Each has a quarter of its parts' average health; they can be targeted and Focus Fired, give no trophies, and die with the shark.
+- Cage bear, Overload: when its ribcage breaks the skull bolts it and it roars (its Roar's nerve hit, which nothing blocks or cuts off), then frost cracks race across the floor for 4 s. Anyone of yours not in Fall Back as they land is frozen for 3 s and does nothing.
+- Its Last stand: each Pulse hits 20% harder than the last.
+- The screens: the sim gives each intermission's name and time left, the warning lines ("THE SAND CHURNS: FALL BACK", "FROST CRACKS: FALL BACK"), the pups and whom they hold, and who is frozen, for the boss bar, cast bars, warnings and phase banners.
+- Not built: those screens and the pups' art (a PixelLab clip). Nobody has played it.
+
 ## The Shade's forms and road card, owner decisions, 31 Oct 2026 (cloud chat)
 
 After research on kit upgrade systems (Outriders, World of Warcraft, Ori, Hollow Knight, Vampire Survivors, Hades), Jacob in a cloud chat picked "Finish her routes" over replacing them, said "go" on Claude's forms for the three routes built in rules 23, and on 1 Nov said "lock it". Where this differs from the sections above, this wins. Every number is a starting value. Built behind campaign rules 25 (HANDOFF_LOG, "Hand back: the Shade's forms").
@@ -1209,3 +1254,8 @@ Jacob: "lets move onto glutton", "go" on Claude's plan and nine calls for the op
 - The limbs are roles: front line your front row, strikers your Skirmishers, shooters your Marksmen, control your Trappers, healers your Medics, command your side, war chest the run. Each talent makes something you have bigger, longer, faster or cheaper, as written in GluttonRules.Describe.
 - Claude's calls, his to change: Probability Lock adds 25% damage on a snared enemy (its old "can't miss" already held); Fold Step makes Execution Corridor hit 50% harder (no wait was found to cut); Gravity Mesh is all or nothing; a talent you own is never lent again.
 - Still open: beast parts broken and chief moves seen are not codex entries yet, so they pay no points; how many points the whole codex gives past the slice.
+
+## Renumbered on the merge with game-one, 2 Nov 2026
+
+Jacob: "merge first, then build the duos on top. Go". game-one took campaign rules 25 (the beasts as their scenes show them), 26 (the tight parry) and 27 (the beasts as raid bosses) while the cloud chat built its own 25 to 30. The cloud chat's move up by three, in the same order, with nothing else changed: the Shade's forms and her other routes play from 28, the Glutton from 29, the Pals' duos from 30, the sizing pass from 31, the Butcher's flavours from 32, and the Whisperer's vows with the Butcher's flavour fights from 33. The sections above keep the numbers they were locked with.
+
