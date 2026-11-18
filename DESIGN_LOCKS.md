@@ -693,6 +693,21 @@ Jacob on 28 Oct, on the war camp: "our camp looks desolate no debris from the wi
 - The Shade: Jacob asked to join two takes into one: "the circular thing on the bottom, which is number 2, and the first one which he leaves the shadow behind, can you club both of them together". He said "the whisperer", but the circle and the shadow left behind are the Shade's Rift Mine and Ghost Step. Not built yet.
 - Placeholder art, like all of camp 5 (22 Oct). Files: Art/Studies/Camp-War-20261028/, the v4 files.
 
+## The camp in PixelLab's style, owner decisions, 6 and 7 Nov 2026
+
+Jacob on 6 Nov reopened the camp 5 lock to try PixelLab's own style for the whole scene: "we lock camp first then we move onto the next regions since we are going for new approach". On 7 Nov, on the v16 build: "need better models and more depth to the world bro there is no vegetation nothing just plain ass brown land". Codex drew three takes of the whole camp (meadow, grove, spring), and Jacob picked: "hybrid of 2 and 3 go bro this is final lock get props right add more debris and a little makeshift". After Claude's audit of that build (v17), "yes go" to Claude's call: fix its motion bugs, put the Pals back as their own sprites with their approved loops, and rewrite these camp lines. Where this differs from the two camp sections above, this wins. On 7 Nov, after Claude's self audit of v18, "yes go" again to Claude's call: the camp is not locked yet, and the lines below now say which calls were Claude's and not Jacob's.
+
+- The camp is the grove of take 2 with the spring, stream and waterfall of take 3, on the plateau over the sea of clouds: alien trees with glowing pods and hanging moss, plants and moss, and small grey critters at the water. This replaces "a bare, desolate stretch of natural land. Nothing grows there" (27 Oct). Claude's call, not Jacob's words: it also takes oases off the banned list, and the glowing pods stay although Claude's v17 audit said they read as lanterns.
+- Debris from the wipeout lies across the camp: cracked pearly shell plates and broken shell pieces with glowing orange cracks. This replaces the 28 Oct rule that debris lies only in the landing ring. Claude's call, not Jacob's: "broken shell pieces" is Claude's name for what its v17 audit called wrecks, and wrecks are still banned.
+- A little makeshift: a table leg bound with cable, and a cable from the lounger to the mirror.
+- Not in this camp, Claude's call and not Jacob's: the landing ring, the rose gold teleport anchor and the supply cases. The anchor and the cases were Jacob's 28 Oct answer to "no advance tech of any sort", so dropping them waits for his word. The mirror stands on a rock by the spring in the middle.
+- The stations follow Jacob's page 11 mock: the Butcher behind a long bench with a jagged blade on it, the Glutton asleep in a round lounger whose curved arm holds the talent tree hologram, the Shade by a round orb basin she feeds with pink ghost hands, and the Whisperer by a table of small figures and domes, fed by an orange beam from her hand. No cylinders on the bench (the 29 Oct tech ban). Claude's call, not Jacob's: the flame under the Shade in the mock is not used, because her approved loop has none.
+- The Pals are their own sprites: the four 40 frame camp loops Jacob called okay on 10 Oct, at 1x, on their locked looks (10 Oct). The Butcher works his bowl behind the bench, which hides the bowl. The Glutton sleeps in the lounger, behind its front rim. The Shade and the Whisperer float at their stations over their ground shadows. Each loop runs a whole number of times in the camp's 30 s loop.
+- Still banned (27 Oct): campfires, wood, tents, cloth on the ground, laundry, racks, shelves, books, candles, banners, signs, crates, joke props, ruins, wrecks and a crashed ship.
+- Unchanged: the Clarth camp and the Bloodridge raid move on the far isles with the v14 sky behind the camp, stray shots stop on the shield dome, and layer 2 always moves (27 Oct).
+- How it is made: Codex draws the whole scene, then a copy with the sky keyed green; PixelLab image_to_pixelart turns it into pixel art in six 512x448 tiles, stitched on the cheapest seams; motion is added in code; Pals and figures stay their own sprites. Claude's call, not Jacob's: using this as the kit for the regions.
+- Placeholder art like all camp art (22 Oct); the final art is the paid artist's. Files: KS-Painter/Art/Camp/PixelLab-20261106/v18/ (camp-v18.mp4, the layers, and camp-v18-plan.json with the stack order, where each Pal sits and how its loop is cut), made by campx_v18.py in Claude's session scratchpad, not yet in a repo.
+
 ## The four Pals' verbs and costs, owner decisions, 28 Oct 2026
 
 Jacob on 27 Oct set the four Pals' jobs: the Butcher "augments to their weapons", the Glutton "talent tree", the Shade "enhance buttons", the Whisperer "unit upgrades", "thats it". The Butcher's tech should "enhance the gunshot from the marksman or the medic's heals, the tank's defensive cooldowns". The talent tree is universal across tribes and grows, and "glutton will only enhance talent trees he manages them". He approved the Butcher's 15 combos with "go" the same night. On 28 Oct, after Claude's audit found the four Pals giving the same effects, he said "yes, stop the mockups and give each Pal its own verbs first", then picked "Yes, costs next" on Claude's verb list and "Yes, lock it in" on Claude's costs (buttons under each list). Every number is a starting value.
@@ -1259,3 +1274,899 @@ Jacob: "lets move onto glutton", "go" on Claude's plan and nine calls for the op
 
 Jacob: "merge first, then build the duos on top. Go". game-one took campaign rules 25 (the beasts as their scenes show them), 26 (the tight parry) and 27 (the beasts as raid bosses) while the cloud chat built its own 25 to 30. The cloud chat's move up by three, in the same order, with nothing else changed: the Shade's forms and her other routes play from 28, the Glutton from 29, the Pals' duos from 30, the sizing pass from 31, the Butcher's flavours from 32, and the Whisperer's vows with the Butcher's flavour fights from 33. The sections above keep the numbers they were locked with.
 
+## The parry meter's look: three brass suns, owner decision, 2 Nov 2026
+
+From three looks for the parry meter on the fight HUD (gems, a molten bar, sun discs), Jacob picked "Look 3, suns", then "Go, free cut" (PixelLab's subscription had run out). Where this differs from the sections above, this wins.
+
+- The meter is three small brass sun discs on one dark iron bar. A filled bar is a lit gold sun with rays; an empty one is a dull bronze socket. They light left to right, one per parry.
+- The art is 144 x 32 art px (the meter's own size on the HUD), four states: none, one, two and three lit. Cut from the approved ComfyUI mock, one shared palette for all four.
+
+Still open: whether the empty discs should be darker; final PixelLab art once the subscription is back.
+
+## A warning before the parry flash, owner decision, 2 Nov 2026
+
+Jacob played the Pals30 build: "there was no cue to parry". His road fight opened seven parry windows on raiders' heavy swings, and the gold flash does draw (Codex's capture 26-attacker-gold shows it on the chief), but half a second of gold on one small raider out of six, with nothing before it, can't be caught. Claude proposed a warning step; Jacob: "Go, add the warning". Where this differs from "The parry: tight window, big payoff, a gold flash on the attacker", this wins.
+
+- **Rim means coming.** From the moment a parryable move starts winding up, at most 1 s before its beat, the attacker wears a steady gold outline (the flash's own rim, no fill). Every unit, the same.
+- **Fill means now.** In the 0.2 s window the existing double gold flash plays as locked.
+- A move you can't parry gets neither. The sim's rules and numbers don't change: the screen reads both steps from Threat (ActorId, BeatTicks, WindowTicks, Answers).
+
+Still open: whether 1 s is the right lead; whether a fake or a wait out keeps its rim.
+
+## Marks you can read and one metal for the parry, owner decisions, 1 Nov 2026
+
+Jacob's playtest point 5 ("combos firing and synergies cant see") and the parry's sound. From the reference board of 31 Oct (one row each for the parry tell, the marks and the parry sound), Jacob picked marks 3 and sound 1 ("1. 3 1"), then "Go, lock and make". Where this differs from the sections above, this wins. Every word, colour and number is a starting value.
+
+**Marks 3: name the cash in.** The chain that does most of the damage is the brightest, slowest thing on screen, and its payoff is named where it lands.
+- The shot or blow that lays a mark travels slowly enough for the eye to follow it from the setter to the target.
+- When another fighter spends the mark, one short word pops at the target in that mark's colour, with the hit's number bigger than a normal hit's. One word, never a sentence (Jacob's playtest point 4: too much text). The words, in the game's 32 px pixel font: a snare cashed, PINNED; an Opening cashed, OPENED; a bleed ripped, RIPPED; the Butcher's Crush bursting, CRUSHED; a blow that spends wide open (Exposed), EXPOSED; a Stasis burst, FROZEN.
+- The colours, from the fight screen's own palette: PINNED mint, OPENED orange, RIPPED red, CRUSHED lilac, EXPOSED blue, FROZEN yellow. The parry's gold stays the parry's alone.
+- Copy risk: floating element glyphs read as Genshin, so these are our own words in our own font, no icons.
+
+**Sound 1: one metal, two tones.** A perfect parry is a bright, ringing clang. A Hold that misses the window is a dull clunk from the same metal. You hear which one you got without looking. From rules 26 a Hold out of the window is a whiff, not a soak, so the clunk is the whiff's sound.
+- Copy risk: Sekiro's clang is famous, so ours must not sound like it.
+
+Still open: every word, colour and length; whether the counter Hit gets its own sound apart from the riposte.
+
+## Focus Fire and Fear you can read, owner decision, 2 Nov 2026
+
+Jacob's playtest point 6 ("idk if focus fire does somehting or no"), and his Pals30 play, where his Focus ran out 0.8 s before its target died so Fear never fired and nothing said so (Codex's review, HANDOFF_LOG 13423). Claude proposed four steps; Jacob: "Go, lock it". Screen only: no rule or number changes. Where this differs from the sections above, this wins.
+
+1. **While it runs.** The red Focus crosshair stays over the focused enemy's head, with a ring round it that drains as its time runs out.
+2. **Proof it works.** Your hits on the focused enemy pop bigger, in red, and a running total of them sits under the crosshair.
+3. **How it ends.** He falls in time: the crosshair snaps shut with KILLED. He breaks and flees in time: BROKE. Time runs out first: it fades grey with RAN OUT.
+4. **With Fear.** With Fear equipped the crosshair has a purple edge, so a kill will spread panic. When Fear fires, the panic shows on the enemies beside him. When the Focus runs out first, it ends NO FEAR, in grey.
+
+At most one short word, and only when a Focus ends.
+
+Still open: every colour and length; whether the running total should count only hits that landed during the Focus.
+
+## Beasts as rolls, tier 1 to 50, owner decision, 2 Nov 2026
+
+Jacob: "integrate beasts as rolls they appear in 1 in 5 run pure randomness every time it comes back after defeat it will be even more powerful tier 1 to tier 50 do what you want with it". Design only, nothing built. Where this differs from the beast sections above, this wins. The details below the first two points are Claude's calls, his to change. Every number is a starting value.
+
+- **A roll, 1 in 5 runs.** When a run starts it rolls once: a 1 in 5 chance that a beast shows up on that run's road. Pure chance for the player; in the sim the roll comes from the run's own seed (a stream nothing else draws from), so a saved run always keeps its beast or its lack of one.
+- **It comes back stronger.** Each beast has its own tier, 1 to 50, kept at camp between runs. It starts at tier 1. Every time you beat it, its tier goes up one, and the next time it rolls in it comes back at that tier. Losing to it leaves its tier as it was. At tier 50 it stays at 50.
+- Claude's calls: which beast is a second roll, even between the beasts built (the cage bear and the sand shark). It takes one fight node in a random row of the road, never the chief's, marked on the map so you can go round it.
+- Claude's calls on power: each tier above 1 adds 8% to its parts' health and 5% to their damage (tier 50 is about 5 times the health and 3.5 times the damage of tier 1). Every 10 tiers (10, 20, 30, 40, 50) it adds one step of its raid kit: its intermission comes at a higher health, its last stand hits harder, and from tier 30 the shark brings one more pup and the bear's frost lasts a second longer. The parry window and the warnings never change, so it stays readable.
+- Claude's call on reward (risk, reward, punish): its trophies and materials grow with its tier, so the higher it climbs, the more beating it pays. Punish: it is a real wall at high tiers, and going round it pays nothing.
+
+Still open: every number; whether the tier shows on the map before you commit; whether a run can roll two beasts later in the campaign.
+
+## The leaders, the champion and the Warden in the middle, owner decisions, 8 Nov 2026
+
+Jacob on the big moments clip (rules 42, seed 5100 road fight 9): "it is okay" and the lunges are coherent, then "the leader of the other tribe shouldn't be attacked, we should always go for the units. Once the units are done, the leader automatically retreats", "Warden should always be in the middle, guarding the party", "if the warden has low stats on defense and all, he is more prone for making the other units come through" and "The leaders cannot be touched until he is alone in the last stage where he has three phase or four phase fights". Then, on Claude's route: "the sim side is actually fine", "in stage 4, instead of leader, the champion steps in and takes control of all the units and we have to kill the champion to go to the tribe's leader", "the 3 phases, I think you already designed them in another chat", "our warden holds the middle and his defense decides how many enemies blows get past him. Yes", "every unit should get their own art and you have full permissions to use Pixel Lab", and for the three older pieces that hit a chief while his band stands, "you can move them to a leader solo phase or you can actually attach them to the champion".
+
+- A tribe's leader can't be hit while any of his fighters stand. Units go for units. When the last one falls, he retreats and the fight is won.
+- Stage 4, the last fight of a tribe's road: the tribe's champion steps in instead of the leader and leads the band. Kill him and they break, and you go on to the leader.
+- The last stage is the leader himself, in the three phases built for Bloodridge's chief as rules 10 (25 Oct): learn him, his transformation at half health, his desperation under 30%.
+- Your Warden holds the middle of your squad and guards everyone. His Defence decides how many enemy blows get past him.
+- Every unit gets its own move art, made in PixelLab.
+- Built on 8 Nov as campaign rules 43 (HANDOFF_LOG, Claude's entry that day). Claude's calls, his to change:
+  - A leader is any chief role on the far side: a tribe's chief, the hunt captain, a trial's shaman. He still fights and casts while he can't be hit. He steps around traps, nothing chains at him, and he covers nobody.
+  - In a chief's own fight he stays when his band falls and fights on alone, so his half health phase, his kneel and his worn out turn after his spell all come once he is alone: the three older pieces moved to his solo phase. Turned Hunt now turns on the hunters: for its 6 s nobody covers them and your blows on them land double.
+  - The champion is his tribe's duel champion (its first Warden or Skirmisher) with a chief's power and a lieutenant's health, in the front row. He takes one fighter's place in the band (a trial's shaman makes way for him instead), winds up his tribe's spell at a duel's grade for your leader to parry, and can be hit from the start. Stage 4 is the last row of the road, however long it is (the fourth on Bloodridge's staged road).
+  - Both sides' Wardens hold the middle. Only melee blows meet him, his chance is half his Defence (50% for a Warden), and a snared, stunned, panicking or kneeling Warden holds nothing. A blow he holds lands on his shield as a Guard's does.
+
+Still open: the other leaders' three or four phases (only Bloodridge's are built); the champions' own looks and moves (they borrow the duel champion); every number.
+
+## Grid rules and kit move swaps, owner decisions, 9 Nov 2026
+
+Jacob, 9 Nov, after the champion fight films: "since they are behaving like grid based battle ground.. why not use megaman battle network rules not they jsut teleport where they want then wahts the point of having traits when unis can behave how ever thy want". Claude's call: each band fights on its own 3 by 3 panels (back, middle and front rows across three lanes) and every class gets a panel shape, built as a new rules version, with old saves on their old rules. He picked "Page first", then said "i wanna see them in action", then asked "cant we alter the way they do their attacks like warden puts up ghost shield etc ? some one buffing up the group etc ?", picked "Five first", said "i kinda like them all" on the kit moves page, and "Yes, Whisperer" to the call below.
+
+- The five built classes' defence and boost moves each have three versions on the Grid Kit Moves page (https://claude.ai/artifact/2uVXB4jiJgUmKnEotPE8f4). Option 1 is the move as the sim plays it today, put on the grid. Options 2 and 3 are new: Ghost Shield and Ghost Wall for Brace, Bash and shove and Shield Line for Shield Bash, Roll aside and Behind cover for Step Back, Ricochet and Spotter for Steady, Afterimage and Duck back for Sidestep, Scissor and Open season for Twin Cut, Front snare and Spiked guard for Snap Trap, Double set and Caltrops for Rearm, Patch and slip and Shared patch for Self Patch, Stim lane and Stim panel for Stim.
+- Every class starts each run with option 1. Options 2 and 3 are the Whisperer's road picks, since unit upgrades are his job (27 Oct) and every Pal pick is on the road for one run while camp only unlocks (28 Oct): one swap per move per run, and camp decides which swaps can appear.
+
+Still open: the grid itself is Claude's proposal and not built; the Grid Class Shapes page (https://claude.ai/artifact/TAmC7bXYBJ9Re3q6CbhbgK, three shapes for each of the 17 classes) got its picks the same day, below; the other twelve classes' kits; how a swap is offered and priced next to the Whisperer's habits, pairs, traits and ranks; every number.
+
+## Grid class shapes, owner decision, 9 Nov 2026
+
+Jacob on the Grid Class Shapes page (https://claude.ai/artifact/TAmC7bXYBJ9Re3q6CbhbgK): "they all are good again", then "Yes, lock it" to Claude's call.
+
+- Every class's base shape is option 1, except the Warden's, which is option 2, Guard the cross: he stands in the centre panel and takes the blows aimed at the four panels touching his, because the 8 Nov lock puts him in the middle guarding everyone.
+- Each class's other two shapes are the Whisperer's road picks, one swap per run, the same rule as the kit moves above.
+- The bases: Warden 2, Guard the cross. Vanguard 1, Ram the lane. Duelist 1, Across. Berserker 1, Wide swing. Skirmisher 1, Lane dash. Marksman 1, Lane shot. Artillerist 1, Square. Infiltrator 1, Flank lane. Trapper 1, Their front. Recon 1, Lane scan. Medic 1, Touch. Herald 1, Ring. Chemist 1, Square cloud. Field Engineer 1, Lane sentry. Disruptor 1, Lane pulse. Binder 1, Reel in. Conduit 1, Lane beam.
+
+Still open: building the grid as a new rules version (each band on its own 3 by 3 panels, Claude's proposal the same day, not built); how swaps are offered and priced next to the Whisperer's habits, pairs, traits and ranks; the other twelve classes' kits; every number.
+
+## Locked pairs, owner decision, 9 Nov 2026
+
+Jacob on Codex's grid plus contact mock (Builds/KindredSiege-Grid-Contact-Mock-20261109, the rules 44 fight with the reactive fighting animations): "even tho its fine i still cant see the coherence of the combat and the units theya re doing whatever they want". Claude's read of that fight's sim dump (camp 2, the Stoneveil war party): every blow of our band already stays in its lane, but about 5 fighters swing every second on their own clocks, there are 22 different who hits whom pairs in 30 seconds, and nobody answers a blow. Claude's call was locked pairs. He picked "Yes, page first" (Locked Pairs page, https://claude.ai/artifact/NG2xvzbSf3Rw92s8hREYKv), then "Lock all six".
+
+- One opponent each. At the start, and whenever he has none, a fighter takes the nearest enemy his class shape reaches who has no opponent yet. The fastest picks first. He keeps him until one of them falls or an order breaks the pair.
+- They trade. The faster one (Speed, one of the six stats) swings first. The other answers with the attack table's dodge, parry, block or hit, then swings back. Nobody swings twice before the other has answered. Speed sets how quickly each answer comes.
+- The back row joins the beat. A shooter whose lane already has a fight fires on his partner's swing, so the lane keeps one rhythm (Jacob, 25 Oct: "back row is constant combo doers"). With no fight in his lane, he takes his own opponent.
+- The Warden and the Medic stay out of pairs. The Warden guards his cross and steps into blows aimed next to him, as rules 44 built it. The Medic treats whoever touches her and steps toward a hurt ally between beats.
+- Every pair fights at once. Nothing waits for another pair; the rules 41 call stands (units "just head on fight", no "1 after other").
+- Orders break pairs on purpose. Focus Fire: everyone who can reach the mark drops his opponent and gangs up on him. Fall Back: every pair breaks, the band steps back a row, and pairs form again after. Hold stays the parry: a big swing in any pair still goes through the leader's parry circle.
+
+Still open: building it, as a new rules version on top of the grid (rules 44); whether a trade's rhythm changes the leader's parry timing; chief moves still pick targets by row; the gap between a swing and its answer, and every other number; how the screen draws a pair (Codex).
+
+## Phase, the orbit lock animation, owner decision, 12 Nov 2026
+
+Jacob on the first Phase loop (cyan holograms, scan lines, tears): "bro so much noise", then "need soemthing solid bro that is very easy to spot and has very advance type 4 civ vibes to the animation". Claude sent three solid looks (void cut, orbit lock, prism). He picked "2", the orbit lock, and on the full loop in that look: "yeah fine bro lock this animation".
+
+- Phase lands: the enemy flashes white for one frame and a thin cyan ring lies flat at his feet. That ring is the phased mark.
+- Each delayed swing is caught where it would land: one white frame, then a cyan ring snaps round him and holds for about half a second. He recovers with the ring still turning round him. A white light runs along each ring.
+- One ring per delayed attack, up to three, each at its own tilt, like a gyroscope. You count the delays by counting the rings.
+- At three the rings spin and crush into him and he flashes white. Then he winds up the merged tank buster and flashes gold twice. The leader parries on the second flash.
+- Phase itself is cyan and white only. Gold stays the parry's alone. No scan lines, tears or glitch. This replaces the "broken hologram" look written on 12 Nov.
+- The art is PixelLab VFX workbench renders, saved in My effects as "KS Phase orbit lock" (mark, 1 ring, 2 rings, 3 rings, lands, catch 1 to 3, tank buster). The loop clip and its builder sit outside the repo in the side session notes folder, phase-20261112 (phase-orbit-loop.gif, build_orbit.py).
+
+Still open: who Phase hits and why; what a missed pile does; whether the pile parry is one hit; every number. Not in the sim, not in Unity, not with Codex.
+
+## The cult's tech is Type 4 in every animation, standing rule, owner decision, 12 Nov 2026
+
+Jacob on the mind link clip, where a gold line ran from the enemy to the leader's hand: "instead of a lodged tracking thing can you make it more suited for an advance 25th century type 4 civilisation species i dont think a lodged ray will suffice bro haha and can you lock it every time you make animations you make with this theme always nothing generic nothing shit".
+
+- Every animation of the leader's powers, and of anything else the cult's own tech does, is made in this theme: a 25th century species from a Type 4 civilisation (see "The camp", 27 Oct: "The cult is an intergalactic species from a Type 4 civilization").
+- Nothing generic. A ray or line lodged between two units is out. The gold link clip (phase-link-loop.gif) is rejected.
+- Claude's reading, not his words: their tech moves space and time, it does not shoot something across the room. New effects build on what is already locked: the relic over the leader's palm (10 Oct), the orbit lock rings, cyan and white, with gold kept for the parry alone.
+
+Still open: the look that replaces the gold link, for how a phased pile reaches the leader's parry.
+
+## The leader's species is argon based life; Phase is stasis plus a rift, owner decision, 13 Nov 2026
+
+He rejected all five species options in the 12 Nov research (type4-research.md, side notes, not in the repo), then gave references (Warframe Limbo's Banish, Borderlands Phaselock, Mass Effect Stasis, Apex void, Destiny Suspend) and picked "stasis with limbos rift".
+
+The lore, his words, after quoting that argon life is implausible because argon is an inert noble gas: "this statement is super true because it is what it is, but the leaders species worked a way around it that is their potential bro making statis and 2 dimensions clash is what is called a piss for them".
+
+- The leader's species is argon based life. They made the impossible work, and that is where their power comes from.
+- Freezing a thing in stasis and clashing two dimensions is easy for them.
+- Phase looks like stasis plus Limbo's rift: the effect is on the enemy's own body (sealed, frozen, half in another dimension), not a ring or line beside him.
+- Claude's reading, not his words: their light is argon's real glow (violet in a discharge, blue and green in an argon laser), which sits on the locked colours; the phased enemy turns argon coloured and see through; the merged blow comes out of a rift in front of the leader, so nothing crosses the room. "Noble gas, noble species" is a joke offered, not locked.
+
+Still open: which take (bubble, vortex) or neither; who Phase hits and why; every number. Not in the sim, not in Unity, not with Codex.
+
+## Phase on a unit and on a boss, owner decision, 14 Nov 2026
+
+Jacob on the Warden clip (phase-warden.gif, three PixelLab takes of Phase on the Bloodridge Warden's shield bash): "Take 2 But where is Parry?", then "leader has to face a unit, not his attack. When it comes to 5-on-5 battles, but when it comes to the champion fight and the chief fight, the attacks should face rather than the boss", "if we use attacks as a phasing option, we will never get there" and "does the enemy get the advantage or we get the advantage? When they are phased". Claude's call below. He said "Yes, lock it".
+
+- At the champion and the chief, Phase takes their attack. His 12 Nov rule stands (GDD_CURRENT, Tool 1): it delays a boss attack, delays pile up and land together, tank busters and casts can never be phased.
+- On the road, Phase takes an enemy unit himself, not his swing.
+- A phased unit is held in place, half out of this dimension. While held he can't hit anyone and nobody can hit him.
+- That breaks his pair. Our fighter who was trading with him is free and joins the nearest pair, two on one. Phase is the leader's way to break a pair, as Focus Fire and Fall Back are the orders' way (locked pairs, 9 Nov).
+- When the hold breaks he slams back in with one big stored hit on whoever his shape reaches. It flashes gold and goes through the leader's parry circle (rules 41, the mind link).
+- Both sides gain. We get time two on one and a parry chance we made ourselves. He gets a hit bigger than his normal swing. Miss the parry and it lands hard. A held man can't be killed, so holding one who is nearly dead saves him. The safe use (save a fighter who is losing his pair) pays less than the risky one (set up the parry).
+- One line for both fights: Phase buys time now and makes one big parry later. On a boss it holds the attack; on a unit it holds the man.
+- This answers "who Phase hits and why", left open on 12 and 13 Nov.
+- He picked take 2 of the Warden clip (side notes, phase-20261112: the violet bands grip him while he leans into them, hold, shatter, then he bashes). A pick, not a locked animation. The leader and his parry were not in that clip.
+
+Still open: the tiers (Claude's proposal with Jacob, 14 Nov); how long a hold lasts and how big the stored hit is; what a parried stored hit pays; what a missed pile does; every number. Not in the sim, not in Unity, not with Codex.
+
+## The build up, owner decision, 14 Nov 2026
+
+Jacob after Claude's Phase tiers: "what if the phased attacks and other buttons add up to something that gives advantage to enemies and gives us a heavy super duper big attack like all these buttons add up to something then the chief will be like here bro take this big time build up we all have in expedition 33 style multiple parry attack that will melt the group". On Claude's call: "A perfect string pays the biggest tag in the game. Yes, love it" and "Champion gets a short version. Yes". He asked for a road version and for a cap of two marks ("you have four, right? So you can only put two. In like combos"), then asked whether the string depends on which marks the boss holds. He said "yea okay" to the four halves and the whole build up below.
+
+- Every button the leader presses puts one mark on the enemy who will throw the string: the chief, the champion, or on the road their leader. Each attack you phase counts as a press.
+- He holds two marks at most: your last two buttons. A third press pushes out the oldest. Marks never lock a button; you can press any of the four at any time.
+- Each of the four buttons has one half string. His string is the older mark's half, then the newer mark's half. Four halves make sixteen strings, counting the same button twice. One mark throws a half string; no marks, no string. After a string both marks clear.
+- Each half is your own button turned against you and takes its feel from that button. The void half (Phase): hits that hang in the air and drop late. Each chief throws the halves with his own weapon; the rhythm stays the button's.
+- Every hit in a string flashes gold, is parry only and can never be phased, like tank busters and casts.
+- Every hit you miss lands on our whole group. Parry every hit and the squad throws one huge counter back. Only a clean string pays it. (Expedition 33's rule as Claude read it: the guides disagree on whether every hit or only the last needs the parry; Claude went with every hit.)
+- The chief throws his at his two locked turns, half health and under 30%. A clean string at the chief pays the biggest attack in the game.
+- The champion throws a short version.
+- On the road their leader throws the shortest version when half his band is down. He can't be hit, so a clean string's counter lands on his band.
+- Both sides gain: he gets a string that can melt the group, we get the counter. What you press last before his turn decides what you parry. No new meter: you read the two marks on him.
+
+Still open: the halves of the other three buttons (call 1); the void half's real hits; when the champion throws his; the Phase tiers (Jacob said "I like it" on 14 Nov, not locked); every number (hits in a half, the gap between hits, the counter, what a missed hit does). Not in the sim, not in Unity, not with Codex.
+
+## Phase tiers, owner decision, 14 Nov 2026
+
+Claude's proposal after the unit and boss split above. Jacob: "I like it", then "Yes, lock tiers". This settles the tiers left open in the two sections above.
+
+- The same three tiers in both fights. Each tier adds a thing you can do, not only a bigger number. What grows: how long the hold lasts, how many blows it stores (the rings, up to three, the 12 Nov look), and what the parry does with them.
+- On the road (a unit):
+  - Tier 1: a short hold. He stores one blow and slams back with it. The parry pays as a normal parry.
+  - Tier 2: a longer hold. He stores a blow for every swing he would have thrown while held, up to three rings, and slams back with all of them as one hit. The parry pays for each ring; a miss lands all of it.
+  - Tier 3: the hold is as long as tier 2. A parried slam goes back into him: he eats his own stored hit, and with three rings it can kill him.
+- At the champion and the chief (an attack):
+  - Tier 1: delays one attack a short time. Phase a second while the first is held and they pile, two at most. They land together and one parry handles both.
+  - Tier 2: a longer delay; the pile goes up to three.
+  - Tier 3: the negate. Parry the pile and it goes back into the boss instead. Tank busters and casts can still never be phased.
+- The negate happens through the parry, so his 12 Nov words ("higher tiers negate them") and "only the parry cancels a boss attack" both hold.
+- Bigger piles are bigger risk: at tiers 2 and 3 a missed parry hurts more. The player who waits for three rings is paid more than the one who lets one go.
+- Every attack phased is still a press for the build up.
+
+Still open: how a tier is raised (the leader is the button enhancer, 12 Nov); every number (hold and delay lengths, the stored hit, what each ring pays). Not in the sim, not in Unity, not with Codex.
+
+## Every class is a fighter: the Warden is a bruiser, the Medic is a mage, owner decision, 14 Nov 2026
+
+Jacob after Codex's duel and support mocks (Builds/KindredSiege-Duel120-Mock-20261113 through Builds/KindredSiege-Support-Brains-Mock-20261114, where he said "WTF is happening here ?"): "we don't need tank and healer. We just need all out blown out units fighting each other. I mean, Warden and the medic still should exist, but they be doing their own thing in a different way, not like healing or DPS", "Medic is a healer in any language, so I don't know what to do about it" and "what if they're just damage doers instead of tank and healers?". He said "Change it" to Claude's first call (a Warden whose blocks load a slam, a Medic who finishes the most hurt enemy), then "yea bro" to the call below.
+
+- Every class is a fighter. No tank and no healer. Each one kills in its own way, and they fight until someone drops. The leader already protects the squad: big hits come to him through the mind link and he parries them (rules 41).
+- The Warden is the bruiser. He has no blocking job. He walks in and swings. His hits are heavy bashes: each one staggers the man it hits, so he loses his next swing, and leaves him with an Opening for the Skirmisher. He is slow, so fast enemies hit him first. A bash that misses leaves him wide open.
+- The Medic is the mage. Her blast bursts on her target and splashes the men next to him. She is fragile and slow to cast. Each tribe's piece is already a caster's weapon: the tooth totem staff (Clarth), the sceptre with its ember lantern (Bloodridge), the injector needles and turquoise vials (Skullpeak).
+- She no longer heals, so she gets a new name. Names are a taste call: three options next.
+- Claude's readings, his to change: the bash's stagger and Opening are the Warden's Shield Bash boost (rules 12) made into his main attack; the blast is the first thing in the sim to read Spirit against Will, the way a blow reads Attack against Defence (rules 42); the size ladder holds, since the bruiser stays the biggest and the mage stays small.
+
+This replaces the class rule "tank cant heal and heal cant dps" (20 Oct, line 411); Guard and Treatment as the Warden's and the Medic's spells, and "she never attacks" (line 412); the Warden holding the middle and guarding everyone (8 Nov, line 1343); Guard the cross as his base shape (9 Nov, line 1366); and the Warden and the Medic staying out of pairs (9 Nov, line 1379). Both now take an opponent and trade blows like everyone else. Codex's proposal the same day (a Warden whose shield is a committed action, a Medic with a finite supply, HANDOFF_LOG) is not taken.
+
+Parked, each its own call later, because each was built on guarding others or on healing: the Guard mark; the Medic's three Butcher combos (Mercy Well, Evac, Rewind) and the Warden's Wrong Door; the Glutton's Healers limb; the habits Bodyguard, Rescuer, Triage and Front First; the Mend and Hold pair; Covered Treatment; the Medic's Self Patch and Stim. Event Horizon and Still Wall stay, since both work off his bash and his shield.
+
+Still open: her name; both classes' shapes and their slot 2 and slot 3 moves (Shield Bash moves out of his slot 3 into his attack); whether the Artillerist, the roster's splash class, changes now that the mage splashes; every number. Not in the sim (rules 43 to 45 still play the old Warden and Medic), not in Unity. Codex is told in HANDOFF_LOG, with no job.
+
+## The nine cult soldiers are class templates, owner decision, 15 Nov 2026
+
+Jacob asked whether the trailer's unit art could be shared across the 17 classes. Claude's call: not as the classes, because the nine cult soldiers (18 Oct; fronts in Art/PixelLab/Cult/2026-10-17, sheets in Assets/Resources/CampaignArt/cult_*) are the leader's own species, whose army the prologue wipes out, and every class is fielded by a tribe in that tribe's own look; but as shape templates. Jacob: "Yes, as templates".
+
+- The nine stay the prologue and trailer army. They never join a squad.
+- Each is the starting shape for one class when that class's tribe versions are made: the heavy tank for the Warden, shield and spear for the Vanguard, the skull raider for the Berserker, the hooded zealot for the Duelist, the sharpshooter for the Marksman, the preacher for the mage, the hook hunter for the Binder, the blade dancer for the Infiltrator, the standard bearer for the Herald. A tribe's version keeps the shape and the weapon's read and takes the tribe's own race, colours and signature piece.
+- The Artillerist, Recon, Field Engineer, Disruptor, Chemist and Conduit have no template.
+
+Still open: the 17 class rewrite itself (Claude's proposal of 15 Nov, not locked); whether PixelLab keeps a template's pose when it redraws it in a tribe's look; every tribe's look for the twelve new classes. No art made.
+
+## The 17 classes rewritten: who beats who, two new per tier, the tier sets strength, owner decision, 15 Nov 2026
+
+Jacob on 15 Nov, after the 14 Nov "every class is a fighter" lock: "You made a class with no spread", "the classes should have advantage and disadvantage over each other, like Pokemon types, but in stat variation", "special attack is always negating against speed ... spells need to travel and he can dash and negate the spell", "the bruiser ... archer arrows won't do shit to him because of his huge shield" and "If you give player whatever they want, they will not play it". Then "do fo all 17 rewrite classes to to match the vibe of the war torn planet". He rejected Claude's first placement, which used only the six regions with art ("in tier 2, Thunder Coast, and tier 3, whatever it is, you get most of the units"), asked "the guys from tier 1 can beat tier 5 guys. Then what's the point of having them?", and said "Lock it" to the chart, two new classes per tier, and the tier setting strength.
+
+**Every class is a damage dealer with a kind of hit, and each kind meets one stopping stat.**
+- Blade: Defence cuts it, Speed dodges some of it, and the Duelist's parry turns it.
+- Shot (arrows, rifles, harpoons): too fast to dodge. Defence cuts it and a shield blocks most of it.
+- Shell (the Artillerist): comes late and from above. No shield blocks it, and Speed gets out of it.
+- Spell: it travels, so Speed dodges it. Will softens it.
+- Gas (the Chemist): a cloud. Speed walks out of it and Will softens it.
+- Sound (the Herald): can't be dodged. Only Will softens it.
+- Hold (the Trapper's snare, the Binder's tether): takes the man's Speed while it holds, so he can't dodge. The Binder can't pull a heavy man (the Warden, the Vanguard).
+- Claude's working rule, a starting value: a weak stop doubles a hit, a strong stop halves it, as Pokemon's super effective and resisted.
+
+**The chart in four lines.** Armour stops blades and shots. Spells beat the slow and the armoured. Speed dodges spells. Shots and holds catch the fast.
+
+**The spreads**, on the 7 Nov ladder (Health, Attack, Defence, Speed, Spirit, Will):
+
+| Class | Hit | Health | Attack | Defence | Speed | Spirit | Will | Its twist |
+|---|---|---|---|---|---|---|---|---|
+| Warden | blade | high | mid | very high | very low | very low | low | Shield; heavy bash staggers and leaves an Opening (14 Nov) |
+| Marksman | shot | low | very high | very low | mid | low | mid | Aimed Shot |
+| Skirmisher | blade | mid | very high | very low | very high | low | low | Dashes in |
+| Trapper | blade, hold | mid | mid | low | high | high | mid | Snare |
+| Mage (name open) | spell | low | very low | low | mid | very high | very high | Small splash (14 Nov) |
+| Vanguard | blade | high | high | mid | low | very low | very low | Charge staggers the first man; heavy |
+| Duelist | blade | low | high | low | high | very low | low | Parries blades |
+| Berserker | blade | high | very high | very low | mid | very low | very low | Hits harder as he bleeds |
+| Conduit | spell | mid | very low | low | low | very high | high | A beam paid with his own health |
+| Artillerist | shell | mid | high | mid | very low | very low | mid | Shells |
+| Recon | shot | low | mid | low | very high | low | mid | Marks a man |
+| Field Engineer | shot | mid | high | high | very low | low | low | Sets down a sentry gun |
+| Disruptor | spell | mid | very low | low | high | high | high | Breaks a unit's wind up, on the road only |
+| Infiltrator | blade | mid | high | very low | very high | very low | low | Flanks to the back row |
+| Binder | blade, hold | high | mid | mid | mid | high | mid | Tether pulls a man out of their line |
+| Chemist | gas | mid | very low | low | low | very high | high | Gas cloud |
+| Herald | sound | mid | very low | low | mid | high | high | War horn |
+
+In Claude's paper model (one on one, not the sim) every class beats between 4 and 10 of the other 16. The Warden beats every blade and every shot and loses to every spell, gas, sound and shell. The two slice lines that flipped from Claude's first chart of five: the Warden beats the Skirmisher, and the Marksman beats the mage. Jacob's own two examples hold: the Skirmisher beats the mage, and the Warden beats the Marksman.
+
+**Two new classes per tier.** The five from the start (Warden, Marksman, Skirmisher, Trapper, mage) are fielded by every tribe in its own gear. Each tier adds two, and every tribe of that tier fields them too. Beat any tribe of a tier and that tier's two unlock at camp for good.
+
+| Tier | New classes | Beaten by what you already have |
+|---|---|---|
+| 1 | Vanguard, Berserker | The Warden beats both; the Skirmisher beats the Berserker |
+| 2 | Artillerist, Field Engineer | The mage beats both |
+| 3 | Duelist, Infiltrator | The Warden and the Field Engineer beat both |
+| 4 | Binder, Recon | The Warden, the Vanguard and the Field Engineer beat both |
+| 5 | Chemist, Disruptor | The Marksman, Skirmisher, Recon and Infiltrator beat both |
+| 6 | Conduit, Herald | The Marksman and the mage beat both |
+
+**Class is the type, the tier is the strength.** The chart holds between equal fighters. A tribe's tier raises its fighters' spreads in every class (Jacob, 12 Nov: "this what it makes to go up the tiers to get better pokemon logic"), so a tier 1 Marksman beats a tier 5 Chemist only once he is grown (Whisperer ranks) or is a higher tier tribe's Marksman himself. New classes are new tools, not bigger numbers.
+
+Claude's examples of one tribe's version each, his to change: Bloodridge's Vanguard rams behind a bronze tomb door; Stoneveil's Berserker drinks from the blood pools; Skullpeak's Artillerist has a mortar grafted onto his arm; Thundercoast's Field Engineer bolts a harpoon gun from a wreck to the floor. The nine cult soldiers are the shape templates (the section above).
+
+This replaces: line 18's "how class unlocks connect to tiers remains to be decided"; the roles and signatures in `CLASS_ROSTER.json` where they differ (no class heals, restores sanity or only supports: the Medic, Herald, Chemist, Disruptor and Recon fight); the 7 Nov spreads of the Warden (Health, Attack, Spirit, Will) and the Skirmisher (Attack); rules 42's dodge from Speed against every blow and block against every blow, which become per kind of hit. The two 30 Sep tier tables stay rejected.
+
+Still open: the mage's name; every number (the ladder's values, the doubling and halving, how much a tier raises a spread); the tribes of tiers 3 to 6 and their looks for the new classes; whether a rival who learns your squad brings what beats it (Claude's proposal); `CLASS_ROSTER.json` still holds the old text. Not in the sim (the table in BattleSimulation.Table.cs still has the 7 Nov spreads and one dodge rule), not in Unity.
+
+## The mage is the Hexer, owner decision, 15 Nov 2026
+
+Jacob picked option 2 of Claude's three names (1 Mage, 2 Hexer, 3 Quack): "The name is Hexer. Lock it."
+
+- The class that was the Medic, and the mage since 14 Nov, is the Hexer. Dark folk magic: she throws curses. Her blast bursts on her target and splashes the men next to him, as locked on 14 Nov, with the spread in the 15 Nov table above.
+- Every lock that says the Medic or the mage for this class now means the Hexer. Her tribe pieces stay: the tooth totem staff (Clarth), the sceptre with its ember lantern (Bloodridge), the injector needles and turquoise vials (Skullpeak).
+
+Still open: the code still calls her Medic (UnitClass.Medic) and `CLASS_ROSTER.json` still has the Medic.
+
+## The Hex replaces the Guard mark, owner decision, 15 Nov 2026
+
+Jacob answered "tes" (his yes) to Claude's call: "Replace the Guard mark with the Hex? Yes, or change it?"
+
+- The Guard mark is gone. Since 14 Nov nobody guards or heals, so nothing could lay it or cash it.
+- The Hex takes its place. The Hexer's blast curses her target and the men it splashes.
+- The Warden's heavy bash on a cursed man lands double and uses up the curse.
+- The curse wears off after a few seconds. That length is a starting value.
+- The four marks are now Snare, Bleed, Opening and Hex. One class lays a mark and another cashes it, as locked on 20 Oct.
+- Speed dodges spells (15 Nov), so a fast man often escapes the curse.
+- Why, in Claude's words: the Hexer was the only class with no mark, and the Warden laid an Opening but cashed nothing. The Hex links the two classes that changed on 14 Nov. On the chart the Hexer beats the slow and armoured, and the Warden is the slow and armoured man, so pairing them covers his weak spot and spends her curse where his bash is strongest.
+
+Risk, reward, punish:
+- Reward: curse plus bash is a double hit from your slowest, heaviest swing.
+- Risk: the bash is slow and the cursed man may be across the field. Bashing whoever is near is the safe play, and it pays less.
+- Punish for you: fast enemies dodge the curse. Their Skirmisher goes for your fragile Hexer, and if she dies nothing gets cursed.
+- Their side: their Hexer and Warden can crush your men the same way. Your answer is your Skirmisher diving their Hexer.
+
+This replaces Guard as the fourth mark (20 Oct, line 414) and the Guard mark in the 14 Nov parked list (line 1485). Covered Treatment, the old way the Guard mark paid out, stays parked with the habits.
+
+Still open: how long the curse lasts; whether double stays double; what gear bends on it (gear bends only its own class's spell: which mark it leaves, or how hard it cashes one). Not in the sim, not in Unity.
+
+## The Warden's slot 3 and the Hexer's slots 2 and 3, owner decision, 15 Nov 2026
+
+Jacob said "Yes, lock them" to Claude's call: Shield Pin, Evil Eye and Bad Blood.
+
+- Warden, slot 3 (his boost), Shield Pin: about every 15 s, on its own, he slams his shield on the man in front of him. That man is pinned for 2 s and can't dodge. It uses the pin status the sim already has (the Butcher combos). It takes the empty slot 3 left when Shield Bash became his attack on 14 Nov.
+- Hexer, slot 2 (her defence), Evil Eye: when a melee man's blow lands on her, he gets the Hex. The same shape as the Trapper's Snap Trap. It replaces Self Patch, which healed her.
+- Hexer, slot 3 (her boost), Bad Blood: about every 15 s, on its own, she points at a bleeding man and his bleed jumps to the men next to him, so the Skirmisher's strike rips them all open. It replaces Stim, which sped up an ally's spell.
+- Why, in Claude's words: every slot 2 and slot 3 move feeds another class. Pin, then curse, then bash kills one man fast; Evil Eye punishes whoever dives her; Bad Blood turns the Trapper's and the Skirmisher's bleeds into more for the Skirmisher to rip. The curse is a spell and Speed dodges spells, so the pin takes away the dodge the curse would miss on.
+
+Risk, reward, punish:
+- Reward: one man dies fast, the diver eats a double bash, one bleed becomes three.
+- Risk: Bad Blood fires only on a bleeding man, so it needs the Trapper's snare or the Skirmisher's Twin Cut. Evil Eye pays only while your Warden lives to bash.
+- Punish for you: Evil Eye fires after the blow lands, so she still takes the hit, and a Skirmisher crit can kill her first.
+- Their side: your melee man who hits their Hexer gets cursed, so the answer to her is your Marksman, whose shots can't be dodged and who beats her on the chart.
+
+This replaces the Medic's Self Patch (rules 11) and Stim (rules 12), and the Warden's slot 3 left open on 14 Nov. Both are taken off the 14 Nov parked list (line 1485).
+
+Still open: every number (the 15 s, the 2 s, how far the bleed jumps); the Warden's slot 2 stays Brace as the sim plays it; Claude's 12 Nov route mapping (Last Refuge for the Medic) is untouched. Not in the sim, not in Unity.
+
+## The Warden's and the Hexer's grid shapes, PARKED, 15 Nov 2026
+
+Jacob said "Yes, lock them" to Claude's call below, then the same day asked "wait what for youre doing grids ? since codex is doing combat for units ???" and said "Yes, park it". Not locked. Codex owns the unit combat, and his duel and exchange mocks since 14 Nov have no grid, so these shapes wait until his combat settles. The real sim still has the grid (rules 44), and Codex's pairs (rules 45, 13 Nov) pick opponents on it.
+
+Claude's proposal, kept for then:
+- Warden, front row: 1 Bash across (base), he bashes the enemy straight across. 2 Shield swing, he can bash any of the three enemy front panels and picks a cursed man first. 3 Bowl over, he knocks the man across into the man behind him and both stagger.
+- Hexer, back row, casting on her lane partner's swing as a shooter does: 1 Lane hex (base), the curse flies down her lane to the first enemy and splashes the panels touching his. 2 Over the top, the curse arcs over their front row to the first enemy behind it. 3 Crowd hex, the curse goes to whichever enemy has the most men touching him, in any lane.
+
+The 9 Nov bases, Guard the cross and Touch (line 1366), guard and heal, which the 14 Nov lock took away, so the two classes' shapes are open.
+
+## The four parked Butcher combos, owner decision, 15 Nov 2026
+
+Jacob said "Yes, lock them" to Claude's call: Curse Well, Split Hex, Old Wounds and the new Wrong Door. A combo is a fighter's own attack plus the Butcher's augment, one bigger attack you can see (27 Oct). Three were heals and one a guard, so all four became attacks. The verbs stay: pull, portal, stop time. The names are working names.
+
+- Hexer with Gravity Well, Curse Well (was Mercy Well): before her blast bursts it drags the men around her target in on him, so the splash hits them all and every one is cursed. It lays the Crush stack, as every pull does.
+- Hexer with Fold Door, Split Hex (was Evac): a portal carries half her burst to the enemy furthest from her target. He is cursed too and left Exposed, as everyone a portal hits is.
+- Hexer with Time Stop, Old Wounds (was Rewind): her curse rewinds the man 3 s, so every hit he took in those 3 s lands again. It lays the Stasis stack, as every time combo does.
+- Warden with Fold Door, Wrong Door (keeps the name): his bash also comes out of a portal onto a man in their back row. The door's edge cuts him and leaves him bleeding, the 30 Oct hook, kept.
+- Why, in Claude's words: each one is her blast or his bash made bigger, and each feeds the marks, curses for the Warden and bleeds for Bad Blood and the Skirmisher.
+
+Risk, reward, punish:
+- Reward: a cursed crowd for the Warden; a curse that reaches far; a man the squad has focused takes his last hits again; a bash that reaches their back row.
+- Risk: Curse Well pays only when they stand close together; Old Wounds pays nothing on a man nobody has just hit; Wrong Door needs a man in their back row.
+- Punish: the pacts stay as they are (halved, 29 Oct), so each combo still costs time, nerve or health, and Old Wounds on the wrong man pays that cost for nothing.
+
+This replaces Mercy Well, Evac and Rewind (27 and 28 Oct, line 725 to 727), the old Wrong Door (line 726, and line 840), their 29 Oct rethinks (line 930) and their 30 Oct mark hooks (lines 962 to 964), and takes all four off the 14 Nov parked list (line 1485). Claude's correction before the lock: Wrong Door first said "the back row man in his lane", and lanes belong to the parked grid.
+
+Still open: every number (3 s, half the burst, how far the pull reaches); the Glutton's talents that grew the old four (Rewind Wound, Matter Printer, the Healers limb) wait for that call. Evac and Rewind led every other combo by 6 to 10 points in the 29 Oct sim measure; the new four are not measured, and wait for Jacob's play (build first, 12 Oct). Not in the sim (rules 15 still plays the old four), not in Unity.
+
+## The habits and the Mend and Hold pair are parked, Covered Treatment is dropped, owner decision, 15 Nov 2026
+
+Jacob said "Yes, park them" to Claude's call, after he asked why Claude was doing grids while Codex does the unit combat.
+
+- Parked until Codex's unit combat settles, next to the grid shapes: the habits Bodyguard, Rescuer, Triage and Front First, and the Mend and Hold pair. Habits are how a unit picks who to go for, and a pair decides who the second fighter goes for, and Codex's brains (Builds/KindredSiege-Support-Brains-Mock-20261114) make that choice per unit. Designing them now would build on top of his work.
+- Covered Treatment is dropped for good. It paid out the Guard mark on a heal, and both are gone. The Hex pays out on the Warden's bash instead.
+
+Still open: all five parked pieces, once Codex's combat settles. Nothing here is in the sim's new rules; rules 15 to 45 still play the old habits and pair.
+
+## The Glutton's Healers limb becomes Casters, owner decision, 15 Nov 2026
+
+Jacob said "Yes, lock it" to Claude's call. Every Healers talent made heals bigger, and nobody heals since 14 Nov.
+
+- The limb is renamed Casters. It covers every class whose hit is a spell, gas or sound: the Hexer now, and the Conduit, Disruptor, Chemist and Herald when they unlock.
+- Same shape and cost as every limb (1, 2, 3 and 5 points):
+  - Tier 1, Matter Printer: caster blasts land bigger.
+  - Tier 2, Rewind Wound: Old Wounds replays 5 s, not 3.
+  - Tier 3, pick one: Half Life (the Hex lasts twice as long), a new name in place of Synth Armour; or Entropy Purge (caster portals cost half the nerve, so Split Hex is cheaper).
+  - Keystone Recompile: caster blasts are twice as big on anyone under a quarter health.
+- The Glutton's rule holds: each talent only makes what another Pal gives bigger, longer, faster or cheaper, and adds no effect of its own.
+- Risk, reward, punish: the tier 3 pick is the choice. Half Life gives the slow Warden time to reach the cursed man; Entropy Purge saves nerve but does nothing without Split Hex; Recompile is wasted on fresh men and finishes hurt ones.
+
+This replaces the Healers limb (28 Oct, line 767) and takes it off the 14 Nov parked list (line 1485).
+
+Still open: every number. Not in the sim, not in Unity.
+
+## Ranks for the Warden and the Hexer, and the rank 3 promotion, owner decision, 15 Nov 2026
+
+Jacob said "Yes, lock it" to Claude's call. He had asked twice whether a fighter changes class at rank 3, as a mage becomes an archmage.
+
+- Rank 2 keeps the rule every class has: the class spell happens one more time. The Warden bashes twice in a row; the Hexer casts twice in a row. The extra hit is plain, as locked on 28 Oct (line 835): it fires no combo and cashes no mark, so the second bash does not use up the Hex.
+- Rank 3 is a promotion, by name and look only. The fighter keeps his class, his moves and the second slot rank 3 already gives, and takes a promoted name and the Whisperer's full regalia, worn on top of his own sprite. No bigger move, because bigger, longer, faster and cheaper are the Glutton's. No new sprite per tribe: one regalia set per class.
+- This holds for every class, so every one of the 17 gets a promoted name. The names are a taste call, three options per class.
+- Changing into a different class stays withdrawn (27 Oct): the 17 stay 17.
+- Risk, reward, punish: you pour road picks into one fighter for a second slot and a title, and every rank goes when the run ends, so the promotion is earned again each run. (Claude first said a captured fighter loses it, but nobody is captured since rules 11.)
+
+This replaces rank 2's "the Warden Guards two allies at once" and "the Medic keeps one treatment in hand so she can treat twice in a row" (28 Oct, lines 814 and 1124), and takes ranks off the 14 Nov parked list. Every piece the 14 Nov class change parked is now settled or parked behind Codex's unit combat.
+
+Still open: the 17 promoted names; the regalia sets; every number. Not in the sim, not in Unity.
+
+## The 17 promoted names, owner decision, 15 Nov 2026
+
+Claude offered three directions for the rank 3 names: 1 Arch in front of the class name, 2 a new grim war word, 3 a cult church office. Jacob: "mix of 2 and 3 no 1 i hate 1". Claude made one mix by a rule (the cult office where the church job is the class's own job, the new word where the office is a stretch or obscure, or where the word ties to approved art), and Jacob said "yes mlock".
+
+| Class | Rank 3 name |
+|---|---|
+| Warden | Bulwark |
+| Marksman | Canon |
+| Skirmisher | Zealot |
+| Trapper | Jawsetter |
+| Hexer | Crone |
+| Vanguard | Templar |
+| Berserker | Flagellant |
+| Artillerist | Bombardier |
+| Field Engineer | Siegewright |
+| Duelist | Bladesaint |
+| Infiltrator | Confessor |
+| Binder | Exorcist |
+| Recon | Pathfinder |
+| Chemist | Plaguewright |
+| Disruptor | Heretic |
+| Conduit | Martyr |
+| Herald | Cantor |
+
+- Rejected: Arch in front of the class name, for every class.
+- The fighter keeps his class; the name and the Whisperer's full regalia are the promotion, as locked above.
+
+Still open: the regalia sets. Not in the sim, not in Unity.
+
+## The 12 new classes' defence and boost moves, owner decision, 15 Nov 2026
+
+Jacob asked "what is left in class design how do they behave", picked item 1 of Claude's list ("Let's do 1": the 12 new classes' defence and boost moves), and said "Yea okay" to Claude's call. Each move is built from the class's roster signature and its 15 Nov spread. None uses a Pal's verb (pull, portal, time stop, shield, mirror, decoy, mine, push, echo), and none takes away the class's weakness on the chart. The defence fires when he is hit; the boost fires on its own about every 15 s, only with a real target.
+
+| Tier | Class | Defence (slot 2) | Boost (slot 3) |
+|---|---|---|---|
+| 1 | Vanguard | Headbutt: the melee man who hits him staggers and loses his next swing | Crack Armour: his heavy blow halves the man's Defence for 4 s, so blades and shots get through |
+| 1 | Berserker | Blood Rage: a hit makes him bleed, and his next swing hits harder | Bloodrush: for 4 s he hits half again as hard, and double on a staggered man, but his Defence is gone |
+| 2 | Artillerist | Point Blank: a melee man who reaches him eats a shell at their feet, and both take the blast | Concussion Shell: every man the shell hits staggers |
+| 2 | Field Engineer | Cover Fire: his sentry turns and shoots the melee man who hits him | Redeploy: a destroyed sentry is set again at once |
+| 3 | Duelist | Riposte: a blade he parries is answered at once with a cut that lands double | Disarm: the man in front of him can't block or parry for 2 s |
+| 3 | Infiltrator | Smoke Bomb: smoke bursts, and every man next to him misses his next swing | Ambush: his strike crits on a man who is busy fighting one of yours |
+| 4 | Binder | Lash: whoever hits him is tethered and held 2 s, so he can't dodge | Gauntlet: the man he pulls takes a free swing from each of your fighters next to him |
+| 4 | Recon | Scramble: a blow at him misses, and he fires a shot as he runs | Range Finder: for 3 s the man he marked can't dodge or escape spells, shells or gas |
+| 5 | Chemist | Cracked Vial: the man who hits him is gassed | Accelerant: his cloud turns flammable, and the next spell or shell into it sets everyone inside on fire |
+| 5 | Disruptor | Static: the man who hits him restarts any big move he is winding up (road only, as his attack) | Jam: the man he hits loses his defence move for 5 s |
+| 6 | Conduit | Ground Out: a hit cuts his beam, and the stored charge bursts on the men next to him | Overchannel: for 3 s his beam hits twice as hard and costs twice the health |
+| 6 | Herald | Bellow: the man who hits him lands his next swing at half | Dread Horn: everyone who hears it loses Will for 4 s, so spells, gas and sound hit them harder |
+
+- How they link, in Claude's words: stagger feeds the Berserker (from the Vanguard, the Artillerist and the Warden's bash). Lash, Range Finder, Accelerant and Dread Horn feed the casters, since Speed is what stops spells, shells and gas. Crack Armour and Disarm help everyone. Ambush pays when two of yours gang up on one man.
+
+Risk, reward, punish:
+- Every defence fires after the blow lands, so he still takes the hit.
+- Four moves cost their own man: Blood Rage (their Skirmisher can rip his bleed), Bloodrush (no Defence for 4 s), Point Blank (he takes the blast too), Overchannel (double the health cost).
+- The feeding moves pay only when the partner class is in your squad.
+
+This settles "the other twelve classes' kits" left open on 9 Nov (lines 1360 and 1370) and replaces the roster signatures in `CLASS_ROSTER.json` where they differ (Rally, Suppressant and Field Treatment style support no longer apply).
+
+Still open: which marks the new classes lay or cash with their attacks; their Butcher combos; their rank 3 regalia; every number (15 s, 2 s, 3 s, 4 s, 5 s, half, double are starting values); whether stagger becomes a mark. Not in the sim, not in Unity.
+
+## The 12 new classes' Butcher combos, owner decision, 15 Nov 2026
+
+Jacob said "Butcher combos now", then "Yes, lock them" to Claude's 36. Three per class, one per flavour: Gravity Well (pull), Fold Door (portal), Time Stop (time). Each is the class's own attack made into one bigger attack you can see, as the 27 Oct rule. None uses a Shade verb (shield, mirror, decoy, mine, chain, push, echo), copies another class's identity, or repeats one of the first 15 (line 711) or the four for the Warden and the Hexer (line 1618). The names are working names.
+
+| Class (attack) | Gravity Well (pull) | Fold Door (portal) | Time Stop (time) |
+|---|---|---|---|
+| Vanguard (charge) | Wrecking Ball: a black hole rides his charge, drags the men near his path along and crushes them at the end | Through Charge: he charges into a portal and comes out behind their front, staggering their back row man | Standstill Charge: time freezes as he charges, so the first man can't dodge or block |
+| Berserker (rush) | Red Giant: his rush ends in a black hole that grows with how much he is bleeding | Scent Door: his rush comes out of a portal at their most hurt man, anywhere | Overtime: for 3 s time runs double for him, twice the swings |
+| Artillerist (shell) | Gravity Shell: the shell lands as a black hole, so nobody steps out before it blows | Trapdoor Shell: the shell drops through a portal with no delay and no warning | Frozen Crater: everyone the blast hits freezes for 1.5 s |
+| Field Engineer (sentry) | Lodestone Sentry: the sentry drags men in front of its barrel, then fires a burst | Muzzle Door: the sentry's shots come out of a door right beside the man, so a shield can't block them | Stopwatch Sentry: men the sentry hits move at half speed for 3 s |
+| Duelist (parry) | Dead Weight: a blade he parries turns heavy and the man can't swing for 2 s | Private Door: a portal takes him and the man in front of him out of the crowd for 3 s, one on one | Stolen Second: time stops when he parries, and he gets two free cuts |
+| Infiltrator (flank) | Undertow: the black hole he leaves in their back row drags them together, and his strike hits them all | Shortcut: he steps through a portal straight to their back row and strikes at once | Between Seconds: he reaches the back row while time is stopped, strikes, and is gone |
+| Binder (tether) | Heavy Hook: his tether can pull a heavy man too, and he is crushed when he lands | Long Hook: his tether goes through a portal and pulls a man from their back row | Still Hook: the man he pulls is frozen for 2 s when he lands |
+| Recon (marking shot) | Lens: shots fired near the marked man bend into him | Peephole: his shot and his mark go through a portal, so they reach anyone | Rerun: his shot hits, then rewinds and hits again |
+| Chemist (gas) | Choke Well: the cloud is sucked into a tight knot that hits twice as hard but covers less | Vent: the cloud comes out of a portal in their back row | Thick Air: men in the cloud move at half speed, so they can't walk out in time |
+| Disruptor (breaks a wind up) | Implosion: the broken move's power collapses on its maker and drags the men next to him in | Short Circuit: his pulse goes through a portal to whoever is winding up the biggest move | Lost Time: the man he breaks waits twice as long for his next big move |
+| Conduit (beam) | Accretion: the beam drags the men around his target into its path | Bent Beam: the beam goes in one door and out another, hitting two men | Standing Beam: the beam keeps burning for 3 s after he stops paying for it |
+| Herald (horn) | Low Note: the deepest note drags everyone who hears it into a knot and crushes them | Earshot: the horn sounds from a portal in the middle of their band, full strength on all | Hush: everyone who hears it freezes for 1 s |
+
+- Each combo lays its flavour's stack (line 1018): Crush for Gravity Well, Exposed for Fold Door, Stasis for Time Stop.
+- The pacts stay as they are, halved (line 897, fix 1): Heavy, Unnerving, Borrowed time.
+- The Disruptor's combos work on the road only, as his attack.
+
+Risk, reward, punish:
+- Four trade the class's weakness on the chart (line 1499) for the pact: Heavy Hook pulls a heavy man, Trapdoor Shell has no delay to step out of, Private Door keeps the Duelist from being ganged, Thick Air keeps men from walking out of the gas.
+- You pay the pact on every fight for it, and an enemy with the same combo does the same to you.
+
+This settles "their Butcher combos" left open in the section above.
+
+Still open: how these 36 hook into the Snare, Opening, Bleed and Hex marks, as line 938 did for the first 15; the marks the new classes lay or cash with their attacks; their rank 3 regalia; every number (1 s, 1.5 s, 2 s, 3 s, half, double, twice are starting values); the art. Not in the sim, not in Unity.
+
+## The leader's relic parries the Phase blow, owner decision, 15 Nov 2026
+
+Jacob over a day of takes, then on the last one: "Yes looks good" and "Yes, lock it". His words that set it: "keep the relic as it is just use it as a shield and it blocks the attack and leader parry's using thunder fist not hammer", then "can't you just use the one in the first hand", then "let the relic hover during the strike, and he just punches the relic back".
+
+- The relic is the one already on his battle sprite: the small spiky crystal he holds in his first hand at idle (his look, L120). It never opens, grows or changes shape. There is only ever one relic on screen.
+- It floats out of his hand and over his palm in his own cast frames (leader_se_attack 6, 8, 16, 20).
+- The Phase blow comes to him and stops on the relic. The relic hovers in front of him and holds the blow back.
+- Violet lightning charges on his fist while he winds up (argon violet, L1417).
+- He punches the relic. It bursts into the blow. That burst is the parry cue: gold, at the relic, and the only gold the leader shows (gold is the parry's alone). His body never turns gold.
+- On that same frame the chief flashes white and one sun on the parry meter (L1277) lights where it sits, with one white pop. Nothing flies to the meter.
+- The blow is knocked back and breaks into violet pieces that fly off and are gone. Nothing crosses the room.
+- The relic floats back over his palm, then back into his hand in his own cast frames 22 to 32.
+- Rejected on the way, do not bring back: a sun or star inside rings, layered crescent ribs, any relic that opens or changes shape, the concept sheet relic pasted on (two relics showed), the meter disc flying up, a gold screen, pieces thrown back at the chief, the hammer fist, the backhand and the blink.
+- The art is in `Art/Studies/Relic-Parry-20261115/`: `phase-punch-relic.gif` (the whole parry at 12 fps), `pr_5/` (the PixelLab clip, 17 frames, made from his cast frame 20 cut at 40,24; frame 8 is not used because it drew a beam along his arm), `c20.png` and `c20_hit.png` (its inputs). In the punch frames his body is PixelLab's redraw of his sprite. The frames before and after are his real sprite.
+
+Still open: the parry look for the other three buttons; whether this same parry is used for every blow that reaches him or only Phase's; every number. Not in the sim, not in Unity.
+
+## The 12 new classes' marks, owner decision, 15 Nov 2026
+
+Jacob said "delegate the work for codex and next on the list", then "Yes, lock them" to Claude's call: each new class's attack does one mark job, and each tier has one class that lays and one that cashes. Only attacks lay or cash marks; the defence and boost moves (line 1706) do not. A cash lands double and spends the mark, as the five do (line 414, line 1567). The cash pops its mark's word (line 1296).
+
+| Tier | Class | Mark | How |
+|---|---|---|---|
+| 1 | Vanguard | lays Opening | His charge staggers the first man and leaves him open |
+| 1 | Berserker | cashes Bleed | His swing on a bleeding man lands double |
+| 2 | Artillerist | cashes Snare | A snared man can't step out, so the shell lands double |
+| 2 | Field Engineer | lays Bleed | His sentry's rounds leave the man bleeding |
+| 3 | Duelist | cashes Opening | His cut on an opened man lands double |
+| 3 | Infiltrator | lays Bleed | His strike from behind leaves a deep bleed in their back row |
+| 4 | Binder | cashes Opening | His tether on an opened man lands double |
+| 4 | Recon | lays Opening | His marking shot leaves an Opening (the old roster's Expose) |
+| 5 | Chemist | cashes Snare | A snared man can't walk out of the gas, so it hits double |
+| 5 | Disruptor | lays Hex | The man whose wind up he breaks is cursed (road only, as his attack) |
+| 6 | Conduit | cashes Hex | His beam on a cursed man burns double |
+| 6 | Herald | lays Hex | Everyone who hears the horn is cursed |
+
+The whole web with the five:
+- Snare: only the Trapper lays it (20 Oct). The Marksman, the Artillerist and the Chemist cash it.
+- Bleed: the Trapper, the Field Engineer and the Infiltrator lay it. The Skirmisher and the Berserker cash it.
+- Opening: the Warden, the Marksman, the Vanguard and the Recon lay it. The Skirmisher, the Duelist and the Binder cash it.
+- Hex: the Hexer, the Disruptor and the Herald lay it. The Warden and the Conduit cash it.
+
+Why, in Claude's words:
+- Every new class links to at least one of the five you start with, so a new unlock works in your squad the day you get it.
+- Each cash follows the chart (line 1499). Speed escapes shells and gas, and a snare takes Speed away. A spell beats the cursed man.
+- Snare stays the Trapper's alone, so it is the scarce mark and its payoffs are the prize. Opening is the common one.
+
+Risk, reward, punish:
+- Reward: a cash lands double and pops its word.
+- Risk: a casher with no layer in your squad never doubles. A layer does little damage on its own. Three classes want one Trapper.
+- Punish: the enemy has the same web. Kill their layer and their casher hits plain. Their Herald curses your whole band and sound can't be dodged, so only Will is cover.
+
+This settles "which marks the new classes lay or cash with their attacks", left open at lines 1734 and 1765.
+
+Still open: how the 36 combos hook into these marks (as line 938 did for the first 15); whether double stays double; how long each mark lasts; the Hex's cash word; whether stagger becomes a mark. Not in the sim, not in Unity. Codex holds the class build (HANDOFF_LOG, 15 Nov).
+
+## Which classes each tribe fields, rolled once, owner decision, 15 Nov 2026
+
+Jacob said tribes are shuffled and never field every class ("all the tribes dont have all units they are shuffled right so a artlier cant be in stoneveil since they are nocturnal and cave dwellers"), then "need to write a randomizer for it". He picked "Roll once" over a roll every run, then said "Lock it" to the table below. The roll ran once with `python tools/class_roll/class_roll.py --seed kindred-siege-class-roll-2`, and the table is now fixed. It does not roll again in the game.
+
+The rules the roll kept, Claude's calls, which Jacob saw before "Lock it":
+- Each tribe fields 5 classes, picked from the classes unlocked up to its tier (the five starters plus the two of every tier up to its own).
+- Every tribe fields at least one of its own tier's two, so beating it unlocks a class you have fought.
+- Four musts from Claude's examples at line 1552: Bloodridge the Vanguard, Stoneveil the Berserker, Skullpeak the Artillerist, Thundercoast the Field Engineer.
+- Stoneveil bans the Artillerist (his words). As a tier 1 tribe it could not roll one anyway.
+- No two tribes of a tier field the same five.
+- Clarth (yours) and the hunters are not in the roll. The 19 tribes with no name yet are slots: nothing was ruled out for them because they have no lore.
+
+| Tier | Tribe | Classes it fields |
+|---|---|---|
+| 1 | Bloodridge | Skirmisher, Trapper, Hexer, Vanguard, Berserker |
+| 1 | Stoneveil | Warden, Skirmisher, Trapper, Hexer, Berserker |
+| 1 | Tier 1 tribe C | Warden, Marksman, Skirmisher, Hexer, Vanguard |
+| 1 | Tier 1 tribe D | Marksman, Trapper, Hexer, Vanguard, Berserker |
+| 2 | Skullpeak | Skirmisher, Trapper, Hexer, Vanguard, Artillerist |
+| 2 | Thundercoast | Skirmisher, Vanguard, Berserker, Artillerist, Field Engineer |
+| 2 | Tier 2 tribe C | Warden, Skirmisher, Hexer, Berserker, Artillerist |
+| 2 | Tier 2 tribe D | Marksman, Skirmisher, Hexer, Vanguard, Field Engineer |
+| 3 | Tier 3 tribe A | Warden, Marksman, Trapper, Berserker, Infiltrator |
+| 3 | Tier 3 tribe B | Skirmisher, Hexer, Vanguard, Berserker, Duelist |
+| 3 | Tier 3 tribe C | Hexer, Vanguard, Artillerist, Field Engineer, Duelist |
+| 3 | Tier 3 tribe D | Trapper, Hexer, Artillerist, Field Engineer, Duelist |
+| 4 | Tier 4 tribe A | Skirmisher, Trapper, Vanguard, Infiltrator, Binder |
+| 4 | Tier 4 tribe B | Skirmisher, Trapper, Field Engineer, Infiltrator, Binder |
+| 4 | Tier 4 tribe C | Warden, Marksman, Trapper, Infiltrator, Recon |
+| 4 | Tier 4 tribe D | Trapper, Berserker, Artillerist, Field Engineer, Binder |
+| 5 | Tier 5 tribe A | Trapper, Hexer, Vanguard, Binder, Chemist |
+| 5 | Tier 5 tribe B | Marksman, Hexer, Vanguard, Artillerist, Disruptor |
+| 5 | Tier 5 tribe C | Marksman, Skirmisher, Hexer, Field Engineer, Disruptor |
+| 5 | Tier 5 tribe D | Vanguard, Berserker, Artillerist, Duelist, Disruptor |
+| 6 | Tier 6 tribe A | Marksman, Vanguard, Duelist, Disruptor, Conduit |
+| 6 | Tier 6 tribe B | Trapper, Field Engineer, Chemist, Disruptor, Conduit |
+| 6 | Tier 6 tribe C | Hexer, Vanguard, Duelist, Disruptor, Herald |
+
+That is 115 tribe and class pairs. Jacob on rank 3, the same evening: "1 upgrade for 1 class in 1 tribe", a unique morph sprite, so one morph per pair. If Clarth fields all 17, that adds 17.
+
+This replaces line 1539's "The five from the start (Warden, Marksman, Skirmisher, Trapper, mage) are fielded by every tribe in its own gear. Each tier adds two, and every tribe of that tier fields them too." The unlock stands: beat any tribe of a tier and that tier's two unlock at camp for good. The 19 slots take their names, lore and looks later (line 1556 keeps the tribes of tiers 3 to 6 open; tiers 1 and 2 each have two slots too). A slot keeps its row when it gets a name.
+
+Still open:
+- Two chiefs no longer match their tribe. In the code (`CampaignRules.cs`) Bloodridge's chief is a Marksman and Thundercoast's chief is a Warden, and their rows field neither.
+- The 8 Dec slice (line 70) is Clarth against Bloodridge with five classes. Bloodridge's row brings the Vanguard and the Berserker into it.
+- Art: sheets that no tribe now uses are Bloodridge's Warden and Marksman, Skullpeak's Warden and Marksman, Stoneveil's Marksman, and Thundercoast's Warden, Marksman, Trapper and Medic. Missing for the four named tribes: Bloodridge's Vanguard and Berserker, Stoneveil's Berserker, Skullpeak's Vanguard and Artillerist, Thundercoast's Vanguard, Berserker, Artillerist and Field Engineer.
+- The top tier classes come out rare: one tribe each fields the Recon and the Herald, two each the Chemist and the Conduit.
+- The rank 3 morph: line 1663 still says regalia over his own sprite and no new sprite per tribe.
+- The script's default seed is 1, which gives two tribes of one tier the same five. The locked table is seed 2.
+- Not in the sim (`CampaignRules.cs` still holds the hand written rosters), not in Unity.
+
+## A chief stands apart from his tribe's five, owner decision, 15 Nov 2026
+
+Jacob said "Stand apart" to Claude's question: do chiefs stand apart from their tribe's five, or must each chief's class be one of them? A chief's class does not have to be one of the five his tribe fields (line 1823). Bloodridge's chief stays a Marksman and Thundercoast's chief stays a Warden, as in `CampaignRules.cs`, though their bands field no Marksman and no Warden. The chief is his own unit with his own sprite and kit.
+
+This settles the first open item of line 1823. Not in the sim, not in Unity.
+
+## Rank 3 morphs the fighter into a new sprite, owner decision, 15 Nov 2026
+
+Claude's three regalia looks (crown, halo, orbit of the Whisperer's crescents over the Clarth Warden) were rejected: "there are marks then there are debuffs a lot of stuff on screen these will get lost in background". Jacob instead: "it is less tax to morph them into something else unique sprite so it adds variety and cool factor rather than feathers", and "1 upgrade for 1 class in 1 tribe". Then "Lock the morph" to Claude's question.
+
+- At rank 3 the fighter morphs into a new, unique sprite. One morph per tribe and class pair, only for the classes that tribe fields (line 1823): 115 for the 23 tribes, and 17 more if Clarth fields all 17.
+- The rest of rank 3 stands (line 1663): he keeps his class and his moves, takes the second slot and his promoted name (line 1677). The 17 stay 17.
+- Nothing floats on or around the fighter for rank 3.
+
+This replaces line 1668's "the Whisperer's full regalia, worn on top of his own sprite ... No new sprite per tribe: one regalia set per class", line 1702's "the name and the Whisperer's full regalia are the promotion", and, for rank 3, line 720's "Her rank ups show as new regalia on the fighter". The regalia sets left open at lines 1675, 1704, 1734 and 1765 are now the morphs, and the rank 3 item left open at line 1870 is settled.
+
+Still open: what each morph looks like (a taste call, three options); whether rank 2 still adds a regalia piece (line 813); the morph moment on screen; the art. Not in the sim, not in Unity.
+
+## Rank 2 shows nothing on the fighter, owner decision, 15 Nov 2026
+
+Jacob said "Show nothing" to Claude's question: does rank 2 still add a regalia piece, or show nothing? Rank 2 changes nothing on the fighter's sprite: no regalia piece, no new sprite. Its effect stands (line 1667: the class spell happens one more time, as a plain hit). Only rank 3 changes the look, with the morph (line 1880).
+
+This replaces line 813's "Each rank adds a piece of the Whisperer's regalia to the fighter" and the rest of line 720's "Her rank ups show as new regalia on the fighter". No rank wears regalia now. Not in the sim, not in Unity.
+
+## The Butcher's combos cut to 12, one per effect, owner decision, 16 Nov 2026
+
+Jacob asked Claude to check the 36 new combo hooks again for overlaps "across all 4 pals". Claude and a separate read of the locks found that almost every hook, and 16 of the 36 combos under them (line 1740), copied another Pal's verb, a class's own move or a Butcher burst. Jacob picked "Combos first". Claude's 16 replacements failed a second separate check: only Falling Door passed. Claude then proposed one theme per flavour repeated across classes, as Hades repeats a god's effect across slots; Jacob: "Theme is overlap". Claude counted about 13 different effects in the Butcher's three verbs; Jacob: "Yes, cut to 13". It came out at 12, because Dead Weight's heavy blade is the stagger the Warden and the Vanguard already have (lines 1478, 1712). Jacob: "Lock these 12". Where this differs from the sections above, this wins.
+
+**The rule.** Each combo has an effect no other combo has, and a theme repeated across classes counts as overlap. Each effect sits on one class, a different class where it can be, using only combos that passed both checks or are locked and built. The Binder carries two, because both of his effects only work with his tether.
+
+**The 12**
+
+| Effect | Combo | Class | Flavour | What it does |
+|---|---|---|---|---|
+| Drag men into one spot and crush them | Wrecking Ball | Vanguard | pull | A black hole rides his charge, drags the men near his path along and crushes them at the end (line 1742) |
+| Pin one man flat | Collapse | Skirmisher | pull | Her second strike drops a black hole that pins the man flat for 2 s (line 725) |
+| Pull in a heavy man | Heavy Hook | Binder | pull | His tether can pull a heavy man too, and he is crushed when he lands (line 1748) |
+| Reach their back row | Vent | Chemist | portal | The cloud comes out of a door in their back row (line 1750) |
+| Split the hit onto a second man | Split Hex | Hexer | portal | A door carries half her burst to the enemy furthest from her target (line 1623) |
+| Drop a charger into a trap | Doorway | Trapper | portal | A charging enemy falls through a door into her snare, and shooters spring her trap too (lines 726, 838) |
+| Take one man out, one on one | Private Door | Duelist | portal | A door takes him and the man in front of him out of the crowd for 3 s (line 1746) |
+| Drop down from above | Falling Door | Berserker | portal | His rush goes into a door, and he drops out of one above the man, landing on him and every man around him. New, in place of Scent Door |
+| Drag a back row man through a door | Long Hook | Binder | portal | His tether goes through a door and pulls a man out of their back row (line 1748) |
+| Freeze a man | Still Wall | Warden | time | Whoever hits his shield freezes for 2 s while your squad hits him (line 727) |
+| Hang a hit and land it later | Stopped Bullets | Marksman | time | Three shots hang frozen, then all hit at once (line 727) |
+| Slow a man | Stopwatch Sentry | Field Engineer | time | Men the sentry hits move at half speed for 3 s (line 1745) |
+
+- Stopped Bullets goes back to its first form. Its 29 Oct rethink (line 926) is dropped: "cannot miss or be guarded" is the Exposed burst, and each hanging bullet freezing its mark is Still Wall's freeze.
+- The pacts (line 897, fix 1), the flavour stacks (line 1018) and the rank ups (line 1028) stay. Pull and time have three combos each and portal six, so a pull or time build leans on rank ups to burst.
+
+**Cut, 40 combos.** 51 were locked; 11 stay and Falling Door is new.
+- From the first 15 as amended on 15 Nov: Black Hole Round, Around the Corner, Execution Corridor, Frozen Flurry, Event Horizon, Singularity Net, Time Snare, Curse Well, Old Wounds and Wrong Door.
+- From the 36 at line 1740: Through Charge, Standstill Charge, Red Giant, Scent Door, Overtime, Gravity Shell, Trapdoor Shell, Frozen Crater, Lodestone Sentry, Muzzle Door, Dead Weight, Stolen Second, Undertow, Shortcut, Between Seconds, Still Hook, Lens, Peephole, Rerun, Choke Well, Thick Air, Implosion, Short Circuit, Lost Time, Accretion, Bent Beam, Standing Beam, Low Note, Earshot and Hush.
+
+**What else this changes**
+- Six classes have no Butcher combo: the Artillerist, Infiltrator, Recon, Disruptor, Conduit and Herald. The Butcher's road offer shows only combos for classes in your squad (line 875).
+- Six Glutton talents boosted a cut combo and have nothing to boost until they are reworded: Light Stake (Black Hole Round), Gravity Mesh and the Stasis Wind Up keystone (Singularity Net), Time Lock and Crawl Field (Time Snare), and Rewind Wound (Old Wounds). Three of them are the Control limb.
+- Shield Pin, the Warden's boost (line 1593), uses the same 2 s pin as Collapse.
+- The mark hooks of the cut combos go with them (lines 950 to 964, and the 36 hooks Claude proposed on 15 and 16 Nov, never locked).
+
+This replaces: line 724's 15 combos and lines 725 to 727 where they differ; the four at line 1618; line 1738's three per class, one per flavour, and the 36 at line 1740; the 29 Oct rethinks of Around the Corner, Stopped Bullets and Time Snare (lines 926 to 932).
+
+Still open: the mark hook of each of the 12; new targets for the six Glutton talents; every number. Not in the sim (rules 15 still plays the first 15), not in Unity.
+
+## Four hooks, six talents, stagger and the slice's classes, owner decisions, 16 Nov 2026
+
+After the cut to 12 (the section above), Claude ran four jobs at once and brought back five calls. Jacob: "Yes to all four", to the four yes or no calls: hooks on only four combos, the six Glutton talents reworded, stagger stays a plain status, and the 8 Dec slice keeps the old five classes. The fifth, the Hex's cash word, is still his pick. Where this differs from the sections above, this wins.
+
+**Hooks on four of the 12.** A hook is one mark a combo lays or cashes (line 940), and a cash lands double. None of the 12 lays a Hex and only the Trapper lays a Snare, so only about six hook jobs are free. A separate check found the other hooks pair up: three lay an Opening, two cash a Hex, two cash a Bleed, two cash an Opening and two lay a Bleed. By "Theme is overlap" a pair is one hook, so hooks go only where a job is free and the picture is good.
+
+| Combo | Class | Hook | What you see |
+|---|---|---|---|
+| Wrecking Ball | Vanguard | cashes the Snare | A snared man in his path is torn out of the trap, and the crush lands double and spends the Snare |
+| Doorway | Trapper | lays an Opening | The charger lands face down in her snare and is left with an Opening |
+| Private Door | Duelist | lays a Bleed | The man comes back out of the door cut and bleeding |
+| Stopped Bullets | Marksman | cashes the Bleed | On a bleeding man the three bullets land in one wound, double, and spend the Bleed |
+
+- Each hook is a different job: one Snare cash, one Opening lay, one Bleed lay, one Bleed cash.
+- The other eight have no hook: Collapse, Heavy Hook, Long Hook, Vent, Split Hex, Falling Door, Still Wall and Stopwatch Sentry. No combo cashes a Hex or an Opening.
+- This replaces the 29 Oct hooks of the combos that survived (lines 951, 952, 957 and 959): Stopped Bullets' Opening per frozen bullet went with its rethink, Still Wall no longer leaves an Opening, Collapse no longer cashes a Bleed, and Doorway's shooters springing her trap is now part of the combo itself (the 12 table above).
+
+**Six Glutton talents get new targets.** Same names, limbs and costs. Each still only makes another Pal's piece bigger, longer, faster or cheaper (line 1073).
+
+| Talent | Limb and tier | Was | Now |
+|---|---|---|---|
+| Gravity Mesh | Control 1 | Singularity Net crushes harder (line 853) | Spells, shells, gas and sound can spring Doorway's trap too, not only shots |
+| Time Lock | Control 2 | Time Snare's slow lasts twice as long (line 853) | A Snare takes two cashes before it is spent |
+| Crawl Field | Control 3, the other pick to Fold Trap | Time Snare makes big moves wind up three times as slowly (line 766) | Heavy Hook's crush hits twice as hard |
+| Stasis Wind Up | Control keystone | Singularity Net drags in twice as many (line 766) | On a snared or tethered man, the Butcher's flavour stacks (line 1018) burst at 2, not 3 |
+| Light Stake | Shooters 3, the other pick to Probability Lock | Black Hole Round crushes twice as hard (line 765) | Stopwatch Sentry slows men to a quarter speed, not half |
+| Rewind Wound | Casters 2 | Old Wounds replays 5 s, not 3 (line 1653) | Vent's cloud is twice as wide |
+
+- The Control limb is now the two classes that hold men: the Trapper (Snare, Doorway) and the Binder (tether, Heavy Hook). In the 8 Dec slice only the Trapper exists, so only Gravity Mesh and Time Lock work there.
+- These six had no separate overlap check before Jacob's yes. The second pass on the rest of the tree checks them against every other talent.
+- Still broken, for that second pass: Neutron Mass, Fold Step, Fold Shield and Glancing Blow boost nothing now, and three pairs do the same thing: Fold Shield and Entropy Purge, Strip and Half Life, Nucleus Edge and Matter Printer.
+
+**Stagger stays a plain status.** It has no cash word, no cash, and it is not a mark. The Warden's bash, the Vanguard's charge and Headbutt, and the Artillerist's Concussion Shell stagger (lines 1478, 1712, 1714, 1790). The bash, the charge and a parried duel champion (line 983) already leave an Opening on the same blow, so a stagger mark would be the same moment twice. The sim needs one plain timer, staggered until a tick, that Bloodrush (line 1713) can read; today a stagger only pushes back the man's next swing. This settles line 1821's "whether stagger becomes a mark".
+
+**The 8 Dec slice keeps the old five classes.** For the slice only, Bloodridge and Skullpeak field the Warden, Marksman, Skirmisher, Trapper and Hexer (the old Medic), as line 70 says. All five have battle art in both facings. The rolled rows (lines 1837 and 1841) start after 8 Dec, with the new classes. Why: the rolled rows bring three classes into the slice, Bloodridge's Vanguard and Berserker and Skullpeak's Artillerist, with no art and none in the sim, 22 days before the endorsement. This answers line 1867.
+
+Still open: the Hex's cash word (HEXED, DOOMED or BLIGHTED, his pick); the second pass on the rest of the tree; who draws the new classes' battle sheets after 8 Dec (CLAUDE.md gives sprite animation to Codex, HANDOFF_LOG 15608 moved unit animation to Claude); every number. Not in the sim, not in Unity.
+
+## The Glutton's whole tree retargeted, owner decisions, 16 Nov 2026
+
+The second pass on the tree (the section above left four talents boosting nothing and three overlapping pairs) failed its separate check, 2 of 11 clean. Claude asked whether overlap means the same thing boosted or the same kind of boost. Jacob: "Yes, same thing". Claude ran a third pass with three more separate checks. Jacob said "Yes, lock it" to all 35, with Fold Trap on Gauntlet. Where this differs from the sections above, this wins.
+
+**What overlap means for a talent.** Two talents overlap when they boost the same property of the same piece. Two talents that give the same kind of boost (two "hits harder", two "lasts longer") to different pieces do not. A talent also fails when it copies, onto another piece:
+- the Whisperer's rank 2, the class spell one more time;
+- a Whisperer habit upgrade, such as Spotter's Opening that stays until someone cashes it (line 1186);
+- the Butcher's rank up (more stacks) or his bursts;
+- a Shade verb, such as Mirror's return (line 1253);
+- a class move, a mark's cash, or a gear piece (ClassBend in ClassSpells.cs, such as Barbs, the snare's bleed twice as hard).
+
+The Glutton's rule stands (line 1073): a talent only makes what another Pal, a class, or the parry and its meter give bigger, longer, faster or cheaper. It adds no effect of its own and is not a plain stat boost.
+
+**The parry stays risky** (lines 1218 to 1223). No talent may soften the parry's risk, the 0.2 s window and the whiff, or pay the safe answer more: Brace, Sidestep, Fall Back and its routes. Brace and Sidestep only answer a band heavy while Hold is down, so boosting them makes skipping the parry cheaper. The parry's reward (line 1222: it cancels the move, staggers 2 s, fills a bar and counters) may be boosted.
+
+**The 18 that change.** Same names, limbs and costs.
+
+| Talent | Limb and tier | Was | Now | Why it moved |
+|---|---|---|---|---|
+| Dark Matter Plating | Front line 1 | Every hit on the front line loses some of its weight | Shield Pin (line 1593) comes round every 10 s, not 15 | A plain stat boost; "front line" is row wording |
+| Entropy Sink | Front line 2 | Front line cooldowns refill faster | The Warden's bash on a cursed man (line 1573) lands triple, not double | A plain stat boost |
+| Fold Shield | Front line 3, the other pick to Neutron Mass | Front line portals cost half the nerve | Still Wall (line 1917) freezes 3 s, not 2 | No front line portal since Wrong Door was cut; it also matched Entropy Purge |
+| Neutron Mass | Front line 3, the other pick to Fold Shield | Event Horizon pulls from twice as far | Wrecking Ball (line 1908) drags men from twice as far | Event Horizon was cut |
+| Branch Anchor | Front line keystone | Sanctuary's shields on the front line are twice as thick | Sanctuary's shields (line 1244) are twice as thick | Wording only: drops "front line" |
+| Nucleus Edge | Strikers 1 | Strikes hit harder | Twin Cut's two cuts hit twice as hard | A plain stat boost; it matched Matter Printer |
+| Strip | Strikers 2 | Openings last twice as long | Her strike rips a bleed open half again as hard (Twin Cut's bleed, which her next strike rips open) | A longer Opening is the Whisperer's Spotter upgrade (line 1186) |
+| Fold Step | Strikers 3, the other pick to Echo Strike | Execution Corridor hits 50% harder | Collapse's own pin (line 1909) lasts 3 s, not 2. Shield Pin stays 2 s | Execution Corridor was cut |
+| Answer the Parry | Strikers keystone | Strikers hit twice as hard on a parried enemy for 2 s | The Duelist's Riposte (line 1716) lands triple, not double | A parry staggers for 2 s, so it was Bloodrush's double on a staggered man |
+| Slow Light Rounds | Shooters 1 | Stopped Bullets' freeze lasts 1 s longer | On a bleeding man, Stopped Bullets (its hook, line 1949) lands triple, not double | The freeze was dropped from Stopped Bullets |
+| Dark Matter Rounds | Shooters 2 | Marksmen's shots go through half of armour | Steady's shot goes through at full power, not half | Through armour copied Crack Armour |
+| Matter Printer | Casters 1 | Caster blasts land bigger | Bad Blood's bleed (line 1595) jumps twice as far | A plain stat boost; it matched Recompile and Nucleus Edge |
+| Precognition | Command 1 | The parry window is wider | A man you parry is staggered 3 s, not 2 (line 1222) | A wider window makes the parry easier |
+| Glancing Blow (Glancing Fold, line 768) | Command 2 | A Hold that soaks soaks half as much again | Mirror (line 1253) sends back twice as much | Since rules 26 a missed Hold is a whiff, not a soak |
+| Deep Node | Command 3, the other pick to Charged Branches | The Shade's tricks hit a third harder | Rupture's Crack (line 1255) thins armour twice as much | A Rift Mine version paid Fall Back, the safe answer |
+| Command Relay | Command keystone | The Shade's route prices are halved | Your chief spell (line 1140) hits twice as hard | Halved prices made Fall Back's routes cheaper too |
+| Synthesis Discount | War chest 3, the other pick to Gene Library | The Butcher's pacts cost a third less | The forge (line 884: tabard, trophies, chief gear) costs a third less | Cheaper pacts copied Entropy Purge's cheaper portal |
+| Fold Trap | Control 3, the other pick to Crawl Field | Doorway catches two chargers, not one | Gauntlet (line 1718): the free swings on the man the Binder pulls hit twice as hard | A second charger is the Trapper's rank 2; every other Trapper piece is taken (Barbs, Long Snare, Time Lock, Gravity Mesh, instant Rearm) |
+
+**The 17 that keep their meaning.**
+- Strikers: Echo Strike, Echo replays Skirmishers' hits at full strength.
+- Shooters: Light Stake, Stopwatch Sentry slows men to a quarter speed, not half (16 Nov). Probability Lock, Marksmen hit a snared enemy 25% harder. Nothing Wasted (keystone), Marksmen hit your Focus Fire target twice as hard.
+- Control: Gravity Mesh, Time Lock, Crawl Field and Stasis Wind Up, as the section above words them.
+- Casters: Rewind Wound, Vent's cloud is twice as wide (16 Nov). Half Life, the Hex lasts twice as long. Entropy Purge, caster portals cost half the nerve. Recompile (keystone), caster blasts are twice as big on anyone under a quarter health.
+- Command: Charged Branches, each held parry bar adds more to combos.
+- War chest: Rogue Planet Prospecting, won fights send home more. Branch Hedge, your streak survives one lost fight a run. Gene Library, pairs answer twice as often. Node Cache (keystone), every Pal card shows 4 picks.
+
+**Numbers to watch when it is built.** Every number is a starting value.
+- Precognition: the 30 Oct duel tune was set with a 2 s stagger, so the duels need a rerun.
+- Glancing Blow: with Mirror's Catch, every parry sends back 30% of the man's health.
+- Command Relay: a grade 3 chief spell would take 100% of health.
+
+**At risk.**
+- Branch Anchor, Echo Strike, Glancing Blow and Deep Node sit on the Shade's routes. GDD_CURRENT says (SAID 12 Nov, not locked) the routes become unit moves handed out by the Whisperer and Echo is dropped. If that is locked, Echo Strike needs a new target; the other three follow their route to its unit.
+- Sanctuary's price (your parries no longer stagger, line 1244) switches Precognition off.
+- Fold Trap and Crawl Field, the Control tier 3 pair, both make the man the Binder holds take more, so the pick is close.
+- Gene Library rests on pairs, parked on 15 Nov.
+
+**Dead in the 8 Dec slice,** which fields only the old five classes: Neutron Mass, Answer the Parry, Light Stake, Crawl Field, Rewind Wound and Fold Trap. The Control tier 3 pair has no live pick there, and Rewind Wound, Casters tier 2, costs 2 points for nothing.
+
+**Not in the sim.** GluttonRules.Describe in PalKit.cs still has the 1 Nov words, and the limb names still say Healers. Line 1269 made that text the meaning; from now on this section is the meaning, and the code follows it when it is built. The enum keeps its order and numbers, so saves keep working (SynthArmour is Half Life).
+
+This replaces: every older wording of the 18 above, including the 28 Oct tree (lines 764 to 769), Command Relay at lines 781, 848 and 1115, Jacob's calls 4, 5, 6 (the Synthesis Discount half) and 8 at line 1266, Claude's Fold Step call at line 1270, and the "still broken" note in the section above.
+
+Still open: which classes each limb covers (each talent above names its own piece); the Hex's cash word (HEXED, DOOMED or BLIGHTED); who draws the new classes' battle sheets after 8 Dec; every number. Not built, not in Unity. The sim work waits for Jacob's go.
+
+## The Hex's cash word, owner decision, 16 Nov 2026
+
+Claude gave three words for the moment a Hex is cashed: HEXED, DOOMED or BLIGHTED. Jacob picked 1, HEXED. The Hex is cashed when the Warden's bash on a cursed man lands double and spends the curse (line 1573), and when the Conduit's beam on a cursed man burns double (line 1800).
+
+- HEXED pops over the man when his Hex is cashed, the way PINNED, OPENED, RIPPED and EXPOSED pop for the other marks.
+- It is made like the other cash words: the game's 32 px logo font (Menu/font_logo), filled with the mark's colour, with a 1 px dark edge (28, 18, 14), by make_words.py in Art/Studies/Attack-Table-20261107/words. The file will be cash_hexed.png next to the others in CampaignArt/UI/Marks.
+- At 5 letters it is narrower than RIPPED, so it crowds the brain plates less.
+
+This settles "the Hex's cash word" at line 1821 and in the two sections above.
+
+Still open: the Hex's colour (Codex suggested green, HANDOFF_LOG 15620; the nearest colour in use is the Snare's mint on PINNED); which classes each Glutton limb covers; who draws the new classes' battle sheets after 8 Dec; every number. cash_hexed.png is not made yet. Not built, not in Unity.
+
+## The cash words at pixel size 2, and the Hex's colour, owner decisions, 16 Nov 2026
+
+Claude showed HEXED in three colours beside the six cash words. Jacob: "they need to be more pixelated". Claude showed two ways; Jacob picked 1, "obviously 1": the same letters on a grid twice as coarse. Then the colour: "blak", the black curse.
+
+- Every cash word is drawn at pixel size 2, the pixel size the rest of the UI uses (Px=2 in CampaignArtPixelUI.cs). The 1 Nov words were 1x, finer than everything else on screen. Same font (Menu/font_logo), same letters, same colours and the same one cell dark edge. Each letter is shrunk to the coarser grid, and the R is drawn by hand so it does not read as an A.
+- HEXED is near black (46, 26, 54) with a bone edge (239, 223, 190), the reverse of the other six. It is the only cash word with a light edge.
+- The seven files are in Art/Studies/Marks-CashIn-20261116: cash_pinned, cash_opened, cash_ripped, cash_crushed, cash_exposed, cash_frozen and cash_hexed, made by make_cash_px2.py there. They sit on the same 34 px tall canvas as the 1 Nov files, so they swap in by file name. Art/Studies is git ignored.
+
+This replaces the 1 Nov cash word art (HANDOFF_LOG 13594) and settles the Hex's colour, left open in the section above.
+
+Not changed: the table words (DODGE, PARRY, BLOCK, CRIT) and the status words (BLEED, SNARED and the rest) were made the same way and are still 1x. Not in Unity: the new files are not in Assets yet.
+
+Still open: which classes each Glutton limb covers; who draws the new classes' battle sheets after 8 Dec; every number.
+
+## Which classes each Glutton limb covers, owner decision, 16 Nov 2026
+
+Jacob: "group classes in one tree like mdps in one limb that spits and rdps in one curse guys in one big guys in one limb etc". Claude grouped the 17 classes by role, and Jacob said "Yes, lock it". Where this differs from the sections above, this wins.
+
+| Limb | Role | Classes |
+|---|---|---|
+| Front line | the big guys | Warden, Vanguard |
+| Strikers | melee damage | Skirmisher, Duelist, Berserker, Infiltrator |
+| Shooters | ranged damage | Marksman, Recon, Field Engineer, Artillerist |
+| Control | the holders | Trapper, Binder |
+| Casters | the curse guys | Hexer, Conduit, Disruptor, Chemist, Herald (as locked on 15 Nov) |
+
+- Command and War chest cover no class: Command is your side and War chest is the run (line 1269).
+- The Berserker has high health, but his kit is all damage, so he is a Striker, not a big guy.
+- Each limb holds one of the 8 Dec slice's five classes: Warden, Skirmisher, Marksman, Trapper and Hexer.
+- The talents already point at these classes' pieces (the whole tree section above): Front line boosts Shield Pin and Wrecking Ball, Strikers boost Twin Cut and Riposte, Shooters boost Steady and the sentry, Control boosts the Snare and Gauntlet.
+
+This replaces line 1269's limbs as rows and roles ("front line your front row, strikers your Skirmishers, shooters your Marksmen, control your Trappers, healers your Medics") and settles "which classes each limb covers", left open in the sections above.
+
+Still open: who draws the new classes' battle sheets after 8 Dec; every number. Not built: PalKit.cs still names the limbs with Healers.
+
+## Every pop word at pixel size 2, owner decision, 16 Nov 2026
+
+Jacob: "k do it" to the table words and status words still being 1x, then "Go, both". The 19 status words (CampaignArt/UI/Words43) and the 4 attack table words (Table42Review/Words) are redrawn at pixel size 2 the same way as the cash words in the section above. Where that section says they are still 1x, this wins.
+
+- The files are in Art/Studies/Marks-CashIn-20261116: the cash words in the folder itself, words43/ and table42/, each with its old name and canvas height, made by make_cash_px2.py, which first rebuilds every 1x file pixel for pixel to prove its text and colours.
+- The font draws Q to Z a pixel lower and shorter than A to P. At pixel size 2 that put R, S, U, X and Z 2 px out of line, so every letter is now top aligned, and the seven cash words were remade with this fix. K and G are drawn by hand like the R.
+
+Not in Unity: none of these files are in Assets yet.
+
+## Tectonic Shift, the leader's gravity tool, owner decision, 16 Nov 2026
+
+Jacob's seed, 15 Nov: "shifts gravity to create more damage bro more heavy hits argon is encapsulated into crystals that are left behind on succesful parrys break these". On 16 Nov he answered Claude's paper with "animate it", and to the fifth cut: "Yes, lock it".
+
+Locked: Tectonic Shift as cut 5 plays it.
+- Every parry leaves an argon crystal on the floor under the man parried. It stays there when he moves on.
+- The press is the leader's relic punch (L1767) with the burst in argon violet, since gold is the parry's alone. Every crystal flashes white and breaks on that frame.
+- The floor under each crystal shudders, then tears loose in slabs and heaves up. Whoever stands there goes up, our own men too: his duel breaks, he can't swing or dodge, and hits on him land heavy. Then the slabs slam down and he lands on his back and gets up.
+- Two crystals close together break the floor as one bigger break, and the men on it go higher and hang longer.
+- No crystals, no shift.
+
+His calls on the way:
+- The crystal grows inside a ring of light: take 2 of 3, his pick after "crystal spawn like aids bro need more good animation".
+- The floor never breaks in a drawn shape ("how will grounf break in a perfect circle omg"). It splits into slabs cut from the court's own floor along cracks. He picked "2 Slabs" over a tent and a shatter.
+- No lines ("bro those lines are the problem omg"). The cracks are never drawn, they only set where the floor cuts. The gaps under and between the slabs are the floor's own colour in shadow, and the violet light comes up out of them onto what is above.
+
+Claude's calls, not his words:
+- The slabs shudder a pixel or two on the punch, snap up past their height and settle, and stay off the floor until the slam frame. After the slam the floor is whole.
+- A small argon core lights where each crystal burst, only as it bursts. The lifted men take the violet light from below in three steps, outlines dark, less the higher they go. Slab faces near a crystal take a little of it.
+- Grit of the court's floor sprays out as the slabs snap up.
+- A lifted man plays his own death clip, knocked back then tumbling, with violet motes rising under him, and gets up with his get up clip from the combat study. Our Trapper's launch is PixMiniMax from his hurt frame, mask turned away.
+- HEAVY shows on each man's first heavy hit.
+- In the cut, the normal blows before the press are parried with the relic punch too. That is the open question at L1782, not settled here.
+
+The files sit outside the repo in the side session notes folder, tectonic-20261116: tectonic-shift-5.mp4 with its timeline, build_ts.py and breaks.py (run build_ts.py --take slabs with that folder on the Python path), and dl/ with the PixelLab pieces: the crystal (object 995d972a), its grow, the motes pulled out of a parried man, the cracks that guide the cut, the lift motes and the grit. The workbench effects are in his My effects named "ts ...". The mock's screen shakes fire 9 to 19 frames before their hits, because they run on the screen's frame count; they belong on the hit frames.
+
+Still open: how it works at the champion and the chief, where a button never stops a boss move; its half string in the build up; its tiers; whether crystals fade; sound; every number. Not in the sim, not in Unity, not with Codex.
+
+## Tool 3, the relic's ground attack, owner decision, 18 Nov 2026
+
+This replaces the 17 Nov section "Tool 3, the relic turns the ground" (the grave Hex in cut 2). Jacob on that version, seen again: "i see some skulls and ground going black wtf how is that a unique game changing thing omfg". Then: "arent we using terrrain to create an attack by sending relic into the bnattle based on it it will launch an attack"; that it must work on bosses ("It wouldn't technically be a unique button in a kit for a leader if it is not usable against bosses"); and "okay bro scrap everything listen keep it an attack it interupts units and boss cleaves/aoe attacks from hitting ... changes terrain for 4-5 sec depenind on terrain units get buff/debuff but whatever attack does the terrain change should feel like a residue of it". He said "yes" to Claude's play back below, then "Yes, swap both".
+
+Locked, his words:
+- The leader sends his relic into the fight and that stage's ground launches an attack on their men there. The same on the road, at the champion and at the chief.
+- The hit interrupts their units: whatever they were winding up or swinging doesn't land.
+- At bosses it interrupts cleaves and AoE attacks, so they don't hit. This is his exception to the 12 Nov rule that only the parry cancels a boss attack. Tank busters, casts and the build up string stay the parry's alone.
+- The ground changes for 4 to 5 s, and the change is what the attack left behind: a buff for our men on it, a debuff for theirs.
+
+Claude's calls, in the play back he said yes to (every number a starting value):
+- Press and pick a spot. The relic flies there and stops; the floor under it takes his violet, about 4 fighters across, which is the zone. It comes back about 1.5 s after the press.
+- If the zone covers a boss winding up a cleave or AoE, it breaks even while he can't be hit (L1340); only the damage misses him. The champion can be hit from the start (L1348).
+- The five grounds (the attack / what it leaves / ours on it / theirs on it):
+  - Bloodridge, the root bound burial court: roots tear up in straight lines out from the relic / tangled roots, 5 s / they take less damage / they can't step out of their duel.
+  - Stoneveil, the cave: stone spikes drop from the roof, one on each of their men, shadows first / rubble, 4 s / they hit harder / they hit lighter.
+  - Skullpeak, the frozen ground: frost spreads, then the ice splits under all of them at once / an ice sheet, 5 s / they act faster / they can't dodge.
+  - Thundercoast, their flooded floor: coral grows round their biggest man and crushes him / the reef, 5 s / up out of the water, so the flood can't touch them, though the water still rises on its own clock / the coral cuts them.
+  - Clarth, the Broken Wastes: the sand blasts out from under the relic, hardest in the middle / dust in the air, 4 s / they dodge more / they miss more. Met in the sand shark's fight.
+- The hunters have no home ground; the relic uses whatever ground the ambush is on. The 57's ground is open. Each of the 19 unnamed tribes gets an attack, what it leaves and one buff and one debuff when its stage is drawn, in a shape the five don't use.
+- While the relic is out he can't parry, if every parry is his punch on the relic (open, L1782).
+- Dropped with the 17 Nov version: the grave Hex, ground hazards that fire on their own, live patches, and marks from the ground.
+
+The rules sit outside the repo in the side session notes folder: tool3-20261117/tool3-ground-rules.md (draft 5). The 17 Nov mock (tool3-relic-2.mp4, build_t3b.py) shows the old Hex version; only its relic flying in and stopping still matches.
+
+Still open: its name, tiers and sound; every number (the zone, 1.5 s, the 4 or 5 s, each buff and debuff, the hit); whether the attack can kill or leaves the kill to the units (GDD: "The units keep the credit"); its half string in the build up (L1437); whether the relic punch is every parry (L1782); the 57's and the unnamed tribes' grounds. Not in the sim, not in Unity, not with Codex.
+
+## The Pal and leader screens: FORGE, COMMANDS and WAR TABLE, owner decision, 18 Nov 2026
+
+Jacob, 17 Nov, on the clickable camp: "use this link up each pals and leader ui screen next". Claude gave three ideas for each missing screen; Jacob: "2 2 3" (FORGE idea 2, the pour; COMMANDS idea 2, the four hands; WAR TABLE idea 3, the table), then "Go" to the route: rebuild the UI kit from the two locked screens, paint each scene with GPT images through the Codex app, put the real sprites and words back on a 2x grid. Round 1 and its fixes, 18 Nov. Jacob: "Lock these bro ask codex to hook em up in unity and let's go".
+
+Locked: the look and layout of the three screens, as in Art/Studies/Pal-Screens-20261118 (forge-locked.png, commands-locked.png, wartable-locked.png, 1440x900). They make one set with the Glutton's TALENTS (round 22, line 1066) and the Whisperer's SQUAD (pod round 6, line 1120).
+- FORGE (the Butcher): his forge floats in the cult's astral camp. The Butcher stands on the left, a fighter on the right, and between them a bowl of molten metal with three moulds sunk in it, blue, purple and gold. A crucible on a chain pours into the picked mould. The picked mould's label sits under the bowl, the other two above it.
+- COMMANDS (the Shade): she floats over her pink basin. Four arms of shadow grow from her back and hold your four buttons (Hold, Fall Back, Focus Fire, Unleash) as gold rings, each with its two routes as cards beside it. The picked card gets corner brackets. A strip bottom right shows your four buttons and what each one holds.
+- WAR TABLE (the leader): a long table of astral light runs away from him, with the run's five banners on it (Bloodridge or Stoneveil, Skullpeak or Thundercoast, then the hunters, line 405) and roads of light between them. The picked road is gold, the others pale blue. Your squad sits in the tabs strip bottom right.
+- Every screen: the title in the logo font with the gold rule under it, a number box and a note top right, the other Pals' portraits down the right edge (each opens that Pal's screen), and the picked thing's panel bottom left with its cost plate and button. The kit and the words are at pixel size 2; the painted scene is cut to 48 colours on the same 2x grid.
+
+Not locked: the words and numbers on them. They are mock, and where they differ from these sections, these win:
+- Combos are road picks that last one run, and augments have no price (line 866). The camp forge makes the tabard, trophies and chief gear. So the FORGE's augment for "60 MATERIALS", a price Claude made up, sells nothing that exists.
+- Black Hole Round and Around the Corner were cut on 16 Nov (line 1898). Of the Marksman's three, only Stopped Bullets is left.
+- The Shade's forms come on the road; camp pays to unlock second and third forms for 150 and 250 (line 866). The COMMANDS "30 MATERIALS", "2 OF 2 BUTTONS ENHANCED" and "SECOND FORMS AT TIER 3" come from the 28 Oct sections before that (line 781).
+- Panel words were cut to fit four lines: the FORGE dropped "Gravity Well on the Marksman's shot", COMMANDS dropped "Price:" and "Forms:", and the WAR TABLE ends "Break him, take the Eclipse."
+
+Claude's calls, not his words: the mould colours (the augments' colours, lines 725 to 727); the HEXER tab in place of MEDIC (line 1558); the WAR TABLE's four portraits at a step of 126 px so the fourth clears the strip; the mould labels above and under the bowl.
+
+Known faults, left for the build: "YOUR SQUAD" touches the table's corner on the WAR TABLE; the tiny font's comma reads as a full stop; the FORGE panel's icon is a plain purple disc; the big numbers are smaller than on the two locked screens.
+
+Still open: what the FORGE's three moulds hold at camp; animation (the pour, the arms, the banners); sound; every number. Not in Unity yet; with Codex from 18 Nov (HANDOFF_LOG.md, 18 Nov entry).
