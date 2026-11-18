@@ -1,0 +1,106 @@
+fight 1: end tick 570 (28.5 s), winner Clarth, lesson in play: none
+  bleedtick                  12
+  block                      2
+  boost                      2
+  boostmove                  2
+  break:flee                 1
+  break:rage                 2
+  break:shield               2
+  burst                      23
+  contract                   17
+  defence:brace              3
+  defence:sidestep           1
+  defence:snap trap          2
+  dodge                      7
+  down                       4
+  end                        1
+  feint                      1
+  getup                      4
+  grant                      85
+  hit:blocked                8
+  hit:class                  24
+  hit:hexed                  2
+  hit:hit                    59
+  hit:opened                 1
+  hit:pierce                 1
+  hit:ripped                 1
+  hit:splash                 8
+  kill                       7
+  launch                     23
+  mark                       45
+  miss                       28
+  nerve:Breaking             7
+  nerve:Broken               5
+  nerve:Confident            3
+  nerve:Steady               3
+  nerve:Wavering             7
+  pin                        1
+  rally                      2
+  roar                       2
+  swing                      82
+  target                     34
+  whiff                      1
+  Clarth Warden          Steady    hp  184/860  nerve Steady    Guard
+  Clarth Skirmisher      Reckless  hp    0/720  nerve Broken    Dead
+  Clarth Trapper         Veteran   hp    0/720  nerve Steady    Dead
+  Clarth Marksman        Coward    hp  260/580  nerve Confident Wait
+  Clarth Hexer           Vengeful  hp  542/580  nerve Confident Wait
+  Bloodridge Warden      Loyal     hp    0/860  nerve Broken    Dead
+  Bloodridge Skirmisher  Vengeful  hp    0/720  nerve Broken    Dead
+  Bloodridge Trapper     Nervous   hp    0/720  nerve Breaking  Dead
+  Bloodridge Marksman    Recruit   hp    0/580  nerve Confident Dead
+  Bloodridge Hexer       Coward    hp    0/580  nerve Steady    Dead
+deterministic: True
+Bloodridge read the fight: dive kills 0, curse crowds 0, hex cashes 1, snare cashes 0, bash staggers 0 -> lesson: kill the Hexer first
+fight 2: end tick 486 (24.3 s), winner Bloodridge, lesson in play: kill the Hexer first
+  bitten                     3
+  bleedtick                  11
+  block                      2
+  boost                      1
+  boostmove                  2
+  break:flee                 2
+  break:rage                 1
+  break:shield               1
+  burst                      19
+  contract                   21
+  defence:brace              2
+  defence:sidestep           2
+  defence:snap trap          3
+  dodge                      6
+  down                       5
+  end                        1
+  feint                      4
+  getup                      5
+  grant                      94
+  hit:blocked                10
+  hit:class                  26
+  hit:hexed                  5
+  hit:hit                    61
+  hit:pierce                 1
+  hit:splash                 8
+  kill                       8
+  launch                     19
+  lesson                     1
+  mark                       45
+  miss                       23
+  nerve:Breaking             5
+  nerve:Broken               4
+  nerve:Confident            3
+  nerve:Steady               8
+  nerve:Wavering             12
+  pin                        2
+  rally                      3
+  roar                       2
+  swing                      88
+  target                     38
+  whiff                      1
+  Clarth Warden          Steady    hp    0/860  nerve Steady    Dead
+  Clarth Skirmisher      Reckless  hp    0/720  nerve Broken    Dead
+  Clarth Trapper         Veteran   hp    0/720  nerve Steady    Dead
+  Clarth Marksman        Coward    hp    0/580  nerve Wavering  Dead
+  Clarth Hexer           Vengeful  hp    0/580  nerve Confident Dead
+  Bloodridge Warden      Loyal     hp    0/860  nerve Wavering  Dead
+  Bloodridge Skirmisher  Vengeful  hp    0/720  nerve Wavering  Dead
+  Bloodridge Trapper     Nervous   hp    0/720  nerve Breaking  Dead
+  Bloodridge Marksman    Recruit   hp   20/580  nerve Steady    Wait
+  Bloodridge Hexer       Coward    hp  580/580  nerve Wavering  Wait

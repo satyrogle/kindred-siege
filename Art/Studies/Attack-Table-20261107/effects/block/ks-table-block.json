@@ -1,0 +1,209 @@
+{
+ "frames": [
+  {
+   "filename": "ks-table-block 0.png",
+   "frame": {
+    "x": 0,
+    "y": 0,
+    "w": 156,
+    "h": 132
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 156,
+    "h": 132
+   },
+   "sourceSize": {
+    "w": 156,
+    "h": 132
+   },
+   "pivot": {
+    "x": 0.36538461538461536,
+    "y": 0.9772727272727273
+   },
+   "duration": 63
+  },
+  {
+   "filename": "ks-table-block 1.png",
+   "frame": {
+    "x": 156,
+    "y": 0,
+    "w": 156,
+    "h": 132
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 156,
+    "h": 132
+   },
+   "sourceSize": {
+    "w": 156,
+    "h": 132
+   },
+   "pivot": {
+    "x": 0.36538461538461536,
+    "y": 0.9772727272727273
+   },
+   "duration": 63
+  },
+  {
+   "filename": "ks-table-block 2.png",
+   "frame": {
+    "x": 312,
+    "y": 0,
+    "w": 156,
+    "h": 132
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 156,
+    "h": 132
+   },
+   "sourceSize": {
+    "w": 156,
+    "h": 132
+   },
+   "pivot": {
+    "x": 0.36538461538461536,
+    "y": 0.9772727272727273
+   },
+   "duration": 63
+  },
+  {
+   "filename": "ks-table-block 3.png",
+   "frame": {
+    "x": 0,
+    "y": 132,
+    "w": 156,
+    "h": 132
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 156,
+    "h": 132
+   },
+   "sourceSize": {
+    "w": 156,
+    "h": 132
+   },
+   "pivot": {
+    "x": 0.36538461538461536,
+    "y": 0.9772727272727273
+   },
+   "duration": 63
+  },
+  {
+   "filename": "ks-table-block 4.png",
+   "frame": {
+    "x": 156,
+    "y": 132,
+    "w": 156,
+    "h": 132
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 156,
+    "h": 132
+   },
+   "sourceSize": {
+    "w": 156,
+    "h": 132
+   },
+   "pivot": {
+    "x": 0.36538461538461536,
+    "y": 0.9772727272727273
+   },
+   "duration": 63
+  },
+  {
+   "filename": "ks-table-block 5.png",
+   "frame": {
+    "x": 312,
+    "y": 132,
+    "w": 156,
+    "h": 132
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 156,
+    "h": 132
+   },
+   "sourceSize": {
+    "w": 156,
+    "h": 132
+   },
+   "pivot": {
+    "x": 0.36538461538461536,
+    "y": 0.9772727272727273
+   },
+   "duration": 63
+  },
+  {
+   "filename": "ks-table-block 6.png",
+   "frame": {
+    "x": 0,
+    "y": 264,
+    "w": 156,
+    "h": 132
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 156,
+    "h": 132
+   },
+   "sourceSize": {
+    "w": 156,
+    "h": 132
+   },
+   "pivot": {
+    "x": 0.36538461538461536,
+    "y": 0.9772727272727273
+   },
+   "duration": 63
+  }
+ ],
+ "meta": {
+  "app": "PixelLab VFX Creator",
+  "image": "ks-table-block.png",
+  "format": "RGBA8888",
+  "size": {
+   "w": 468,
+   "h": 396
+  },
+  "scale": "1",
+  "anchor": {
+   "kind": "feet",
+   "x": 57,
+   "y": 129
+  },
+  "frameTags": [
+   {
+    "name": "ks-table-block",
+    "from": 0,
+    "to": 6,
+    "direction": "forward"
+   }
+  ]
+ }
+}

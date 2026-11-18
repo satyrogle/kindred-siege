@@ -1,0 +1,70 @@
+clarth_warden_se_idle set_warden_idle_se_20261106, 17 frames 160x180, 1700 ms, anchor (79.0, 152)
+clarth_warden_se_attack set_warden_attack1_bash_se_20261106, 17 frames 208x180, 850 ms, anchor (103.0, 152), hitFrame 6
+clarth_warden_se_attack2 set_warden_attack2_slash_se_20261106, 17 frames 224x188, 850 ms, anchor (111.0, 156), hitFrame 6
+clarth_warden_se_block set_warden_block_se_20261106, 13 frames 168x180, 650 ms, anchor (83.0, 152)
+clarth_warden_se_hit set_warden_hit_se_20261106, 13 frames 196x180, 520 ms, anchor (97.0, 152)
+clarth_warden_se_power set_warden_power_guard_se_20261106, 17 frames 200x208, 1020 ms, anchor (99.0, 166), hitFrame 5
+clarth_warden_se_death set_warden_death_se_20261106, 17 frames 180x180, 1360 ms, anchor (89.0, 152)
+blood_rot_warden_sw_idle set_warden_idle_sw_20261106, 17 frames 168x180, 1700 ms, anchor (78.5, 152)
+blood_rot_warden_sw_attack set_warden_attack1_bash_sw_20261106, 17 frames 212x188, 850 ms, anchor (100.5, 156), hitFrame 8
+blood_rot_warden_sw_attack2 set_warden_attack2_slash_sw_20261106, 17 frames 188x188, 850 ms, anchor (88.5, 156), hitFrame 5
+blood_rot_warden_sw_block set_warden_block_sw_20261106, 13 frames 216x180, 650 ms, anchor (102.5, 152)
+blood_rot_warden_sw_hit set_warden_hit_sw_20261106, 13 frames 172x180, 520 ms, anchor (80.5, 152)
+blood_rot_warden_sw_power set_warden_power_guard_sw_20261106, 17 frames 196x192, 1020 ms, anchor (92.5, 158), hitFrame 5
+blood_rot_warden_sw_death set_warden_death_sw_20261106, 17 frames 180x180, 1360 ms, anchor (84.5, 152)
+clarth_skirmisher_se_idle set_skirmisher_idle_se_20261106, 17 frames 136x152, 1700 ms, anchor (70.0, 128)
+clarth_skirmisher_se_attack set_skirmisher_attack1_slash_se_20261106, 17 frames 188x160, 850 ms, anchor (96.0, 132), hitFrame 6
+clarth_skirmisher_se_attack2 set_skirmisher_attack2_stab_se_20261106, 17 frames 152x180, 850 ms, anchor (78.0, 142), hitFrame 5
+clarth_skirmisher_se_block set_skirmisher_block_se_20261106, 13 frames 160x148, 650 ms, anchor (82.0, 126)
+clarth_skirmisher_se_hit set_skirmisher_hit_se_20261106, 13 frames 156x156, 520 ms, anchor (80.0, 130)
+clarth_skirmisher_se_power set_skirmisher_power_strike_se_20261106, 17 frames 160x172, 1020 ms, anchor (82.0, 138), hitFrame 5
+clarth_skirmisher_se_death set_skirmisher_death_se_20261106, 17 frames 148x148, 1360 ms, anchor (76.0, 126)
+blood_rot_skirmisher_sw_idle set_skirmisher_idle_sw_20261106, 17 frames 160x160, 1700 ms, anchor (75.0, 136)
+blood_rot_skirmisher_sw_attack set_skirmisher_attack1_hook_sw_20261106, 17 frames 180x168, 850 ms, anchor (85.0, 140), hitFrame 6
+blood_rot_skirmisher_sw_attack2 set_skirmisher_attack2_chop_sw_20261106, 17 frames 192x188, 850 ms, anchor (91.0, 150), hitFrame 5
+blood_rot_skirmisher_sw_block set_skirmisher_block_sw_20261106, 13 frames 164x160, 650 ms, anchor (77.0, 136)
+blood_rot_skirmisher_sw_hit set_skirmisher_hit_sw_20261106, 13 frames 176x160, 520 ms, anchor (83.0, 136)
+blood_rot_skirmisher_sw_power set_skirmisher_power_strike_sw_20261106, 17 frames 188x168, 1020 ms, anchor (89.0, 140), hitFrame 5
+blood_rot_skirmisher_sw_death set_skirmisher_death_sw_20261106, 17 frames 160x160, 1360 ms, anchor (75.0, 136)
+clarth_trapper_se_idle set_trapper_idle_se_20261106, 17 frames 132x160, 1700 ms, anchor (65.0, 135)
+clarth_trapper_se_attack set_trapper_attack1_jab_se_20261106, 17 frames 164x160, 850 ms, anchor (81.0, 135), hitFrame 5
+clarth_trapper_se_attack2 set_trapper_attack2_sweep_se_20261106, 17 frames 160x160, 850 ms, anchor (79.0, 135), hitFrame 5
+clarth_trapper_se_block set_trapper_block2_se_20261106, 13 frames 132x164, 650 ms, anchor (65.0, 137)
+clarth_trapper_se_hit set_trapper_hit_se_20261106, 13 frames 164x168, 520 ms, anchor (81.0, 139)
+clarth_trapper_se_power set_trapper_power_snare_se_20261106, 17 frames 140x188, 1020 ms, anchor (69.0, 149), hitFrame 7
+clarth_trapper_se_death set_trapper_death_se_20261106, 17 frames 160x160, 1360 ms, anchor (79.0, 135)
+blood_rot_trapper_sw_idle set_trapper_idle_sw_20261106, 17 frames 144x160, 1700 ms, anchor (70.5, 136)
+blood_rot_trapper_sw_attack set_trapper_attack1_slash_sw_20261106, 17 frames 188x160, 850 ms, anchor (92.5, 136), hitFrame 4
+blood_rot_trapper_sw_attack2 set_trapper_attack2_stab_sw_20261106, 17 frames 156x180, 850 ms, anchor (76.5, 146), hitFrame 3
+blood_rot_trapper_sw_block set_trapper_block_sw_20261106, 13 frames 152x160, 650 ms, anchor (74.5, 136)
+blood_rot_trapper_sw_hit set_trapper_hit_sw_20261106, 13 frames 152x160, 520 ms, anchor (74.5, 136)
+blood_rot_trapper_sw_power set_trapper_power_snare_sw_20261106, 17 frames 152x168, 1020 ms, anchor (74.5, 140), hitFrame 4
+blood_rot_trapper_sw_death set_trapper_death_sw_20261106, 17 frames 160x160, 1360 ms, anchor (78.5, 136)
+clarth_marksman_se_idle set_marksman_idle_se_20261106, 17 frames 112x132, 1700 ms, anchor (55.5, 111)
+clarth_marksman_se_attack set_marksman_attack1_shot_se_20261106, 17 frames 148x180, 850 ms, anchor (73.5, 135), hitFrame 7
+clarth_marksman_se_attack2 set_marksman_attack2_hipshot_se_20261106, 17 frames 140x132, 850 ms, anchor (69.5, 111), hitFrame 5
+clarth_marksman_se_block set_marksman_block_se_20261106, 13 frames 112x152, 650 ms, anchor (55.5, 121)
+clarth_marksman_se_hit set_marksman_hit_se_20261106, 13 frames 120x136, 520 ms, anchor (59.5, 113)
+clarth_marksman_se_power set_marksman_power_aimed_se_20261106, 17 frames 148x132, 1020 ms, anchor (73.5, 111), hitFrame 11
+clarth_marksman_se_death set_marksman_death_se_20261106, 17 frames 132x132, 1360 ms, anchor (65.5, 111)
+blood_rot_marksman_sw_idle set_marksman_idle_sw_20261106, 17 frames 96x132, 1700 ms, anchor (44.0, 112)
+blood_rot_marksman_sw_attack set_marksman_attack1_shot_sw_20261106, 17 frames 136x148, 850 ms, anchor (64.0, 120), hitFrame 7
+blood_rot_marksman_sw_attack2 set_marksman_attack2_hipshot_sw_20261106, 17 frames 108x132, 850 ms, anchor (50.0, 112), hitFrame 9
+blood_rot_marksman_sw_block set_marksman_block_sw_20261106, 13 frames 136x132, 650 ms, anchor (64.0, 112)
+blood_rot_marksman_sw_hit set_marksman_hit_sw_20261106, 13 frames 112x132, 520 ms, anchor (52.0, 112)
+blood_rot_marksman_sw_power set_marksman_power_aimed_sw_20261106, 17 frames 136x180, 1020 ms, anchor (64.0, 136), hitFrame 11
+blood_rot_marksman_sw_death set_marksman_death_sw_20261106, 17 frames 132x132, 1360 ms, anchor (62.0, 112)
+clarth_medic_se_idle set_medic_idle_se_20261106, 17 frames 96x144, 1700 ms, anchor (45.5, 118)
+clarth_medic_se_attack set_medic_attack1_strike_se_20261106, 17 frames 96x188, 850 ms, anchor (45.5, 140), hitFrame 5
+clarth_medic_se_heal set_medic_attack2_heal_se_20261106, 17 frames 124x188, 850 ms, anchor (59.5, 140), hitFrame 6
+clarth_medic_se_block set_medic_block_se_20261106, 13 frames 112x140, 650 ms, anchor (53.5, 116)
+clarth_medic_se_hit set_medic_hit_se_20261106, 13 frames 136x148, 520 ms, anchor (65.5, 120)
+clarth_medic_se_power set_medic_power_treat_se_20261106, 17 frames 112x188, 1020 ms, anchor (53.5, 140), hitFrame 8
+clarth_medic_se_death set_medic_death_se_20261106, 17 frames 132x132, 1360 ms, anchor (63.5, 112)
+blood_rot_medic_sw_idle set_medic_idle_sw_20261106, 17 frames 96x132, 1700 ms, anchor (45.5, 113)
+blood_rot_medic_sw_attack set_medic_attack1_lash_sw_20261106, 17 frames 96x188, 850 ms, anchor (45.5, 141), hitFrame 8
+blood_rot_medic_sw_heal set_medic_attack2_heal_sw_20261106, 17 frames 104x188, 850 ms, anchor (49.5, 141), hitFrame 11
+blood_rot_medic_sw_block set_medic_block_sw_20261106, 13 frames 96x132, 650 ms, anchor (45.5, 113)
+blood_rot_medic_sw_hit set_medic_hit_sw_20261106, 13 frames 112x132, 520 ms, anchor (53.5, 113)
+blood_rot_medic_sw_power set_medic_power_treat_sw_20261106, 17 frames 124x160, 1020 ms, anchor (59.5, 127), hitFrame 8
+blood_rot_medic_sw_death set_medic_death_sw_20261106, 17 frames 132x132, 1360 ms, anchor (63.5, 113)

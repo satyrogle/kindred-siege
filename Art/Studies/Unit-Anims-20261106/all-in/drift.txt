@@ -1,0 +1,10 @@
+d917de88 warden     se  run old  1.1% (worst  1.8)  new  0.0% (worst  0.0)   fight old  0.0% (worst  0.0)  new  0.0% (worst  0.0)   frames old 17 new 10
+b3fef59f warden     sw  run old  1.7% (worst  1.9)  new  0.0% (worst  0.0)   fight old  0.9% (worst 10.4)  new  0.0% (worst  0.0)   frames old 17 new 10
+a3aa47e7 skirmisher se  run old  1.8% (worst  2.2)  new  0.0% (worst  0.0)   fight old  1.8% (worst 31.0)  new  0.0% (worst  0.0)   frames old 17 new 10
+a1195c8f skirmisher sw  run old  2.0% (worst  2.5)  new  0.0% (worst  0.0)   fight old  0.1% (worst  2.1)  new  0.0% (worst  0.0)   frames old 17 new 10
+44547cca trapper    se  run old  1.4% (worst  1.7)  new  0.0% (worst  0.0)   fight old  0.0% (worst  0.0)  new  0.0% (worst  0.0)   frames old 17 new 10
+720d540c trapper    sw  run old  1.9% (worst  2.4)  new  0.0% (worst  0.0)   fight old  0.0% (worst  0.0)  new  0.0% (worst  0.0)   frames old 17 new 10
+9e0233b1 marksman   se  run old 10.3% (worst 11.5)  new  0.0% (worst  0.0)   fight old  0.0% (worst  0.0)  new  0.0% (worst  0.0)   frames old 17 new 10
+19b7cc53 marksman   sw  run old  0.0% (worst  0.0)  new  0.0% (worst  0.0)   fight old  0.0% (worst  0.0)  new  0.3% (worst  1.4)   frames old 17 new 10
+20b62125 medic      se  run old  7.6% (worst  8.8)  new  0.0% (worst  0.0)   fight old  0.4% (worst  6.4)  new  0.0% (worst  0.0)   frames old 17 new 10
+e7aceef9 medic      sw  run old  2.6% (worst  2.8)  new  0.0% (worst  0.0)   fight old  3.3% (worst 18.4)  new  0.0% (worst  0.0)   frames old 17 new 10

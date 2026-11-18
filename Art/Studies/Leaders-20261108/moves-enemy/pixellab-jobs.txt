@@ -1,0 +1,21 @@
+PixelLab jobs, 8 Nov 2026 (Claude): the enemy band's own versions of the 6 Nov class moves (Jacob, 8 Nov: "every unit should get
+their own art and you have full permissions to use Pixel Lab"). Ours stay the 6 Nov red and bone set in Art/Studies/Class-Moves-20261106.
+The band in the rules 43 hunt fight wears brown wraps with molten orange cracks, so theirs are sooty black iron and stone with molten
+orange, colours sampled from their sprites (#100808 #281810 #402818 #604838 browns, #C83710 #B74C22 #AB2F10 #BD2A04 molten).
+Each still is an edit_image_pixen of the matching 6 Nov piece, each clip a pixminimax from that still. 13 generations.
+
+strike_ring.png  pixen 7fa73f5b-1ffd-456a-b8b4-e235efbe0b0a seed 4301 from moves/parts/strike_ring.png
+strike_anim/     pixminimax 22d41a3a-78a6-4744-96ae-eb41d00ff646 seed 4321, 8 frames (cage of blades shoots up, scatters into embers)
+aim_ring.png     pixen 900e03cb-97c3-4e6f-9dcd-3f5fc515d507 seed 4302 from moves/parts/aim_ring.png
+aim_anim/        pixminimax c0986b20-4e5f-475b-9d02-d015a6fc2665 seed 4322, 8 frames (tightens, flashes, bursts into embers)
+treat_ring.png   pixen a30be272-cd48-42b7-afa6-0d846f2ce32a seed 4303 from moves/parts/treat_ring2.png
+treat_anim/      pixminimax 7bcfb643-d340-4af2-9ad3-89a59a95c2b9 seed 4323, 8 frames (smoke and embers rise, break into specks)
+guard_ring.png   pixen d5b496c5-65de-44c3-91c4-a1399a20f1e4 seed 4314 from guard/parts/ring128.png; its grey inner fill cut out in code
+guard_wall.png   pixen ebd03268-1155-4ca3-9cde-57734bfa2ec4 seed 4305 from guard/parts/wall0.png
+rise_anim/       pixminimax 1d0ad229-b2f5-4c03-9125-4067e59ba5ff seed 4324, 8 frames, guard_ring.png to guard_wall.png
+jaws.png         pixen 4eb8cdd6-c08f-4a03-9811-7d0931c7a632 seed 4306 from snare/parts/jaws0.png (iron jaws: their Trapper carries
+                 chains and ember pots, so not our picked bone skull jaws)
+jaws_anim/       pixminimax d083c535-27f5-4d28-ba5b-ea6fab1dc53c seed 4325, 8 frames (snap shut in a spark burst, hold)
+rejected: guard ring b57636b5-103d-4331-86da-d89e58c709b3 (painted a stone floor square round it); jaws 260bbe17-33cb-4f50-ab75-3bcdd00d9e64
+from the picked v2 bone jaws (lost the jaws, came back a hunched blob).
+Not shown to Jacob on their own yet; they first appear in the rules 43 clip.

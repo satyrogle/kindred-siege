@@ -1,0 +1,1958 @@
+{
+ "note": "Strike frames for every attack sheet the fight loads, picked by eye by Claude on 4 Nov 2026 from the contact pages here (pages, zooms). A strike is the frame the blow connects: the slash smear, the muzzle flash, the impact burst, a whip or chain at full reach, a cast at its biggest. 0 based frame index. Each clip holds 1 to 5 strikes. A segment runs from halfway after the previous strike (frame 0 for the first) to halfway to the next (the last frame for the last). Not included: beast_sandshark_bite and _sweep already carry hitFrame in their own json; cult_* and sovereign_* sheets are not loaded by the fight.",
+ "clips": {
+  "clarth_warden_se_attack": {
+   "resource": "ClarthStudy/clarth_warden_se_attack",
+   "frames": 40,
+   "clipMs": 2000,
+   "strikes": [
+    9,
+    17,
+    25
+   ],
+   "segments": [
+    {
+     "start": 0,
+     "strike": 9,
+     "end": 13,
+     "leadInMs": 450,
+     "lengthMs": 700,
+     "strikeAtMsInClip": 450
+    },
+    {
+     "start": 13,
+     "strike": 17,
+     "end": 21,
+     "leadInMs": 200,
+     "lengthMs": 450,
+     "strikeAtMsInClip": 850
+    },
+    {
+     "start": 21,
+     "strike": 25,
+     "end": 39,
+     "leadInMs": 200,
+     "lengthMs": 950,
+     "strikeAtMsInClip": 1250
+    }
+   ]
+  },
+  "clarth_warden_sw_attack": {
+   "resource": "CampaignArt/clarth_warden_sw_attack",
+   "frames": 40,
+   "clipMs": 2000,
+   "strikes": [
+    4,
+    12,
+    18
+   ],
+   "segments": [
+    {
+     "start": 0,
+     "strike": 4,
+     "end": 8,
+     "leadInMs": 200,
+     "lengthMs": 450,
+     "strikeAtMsInClip": 200
+    },
+    {
+     "start": 8,
+     "strike": 12,
+     "end": 15,
+     "leadInMs": 200,
+     "lengthMs": 400,
+     "strikeAtMsInClip": 600
+    },
+    {
+     "start": 15,
+     "strike": 18,
+     "end": 39,
+     "leadInMs": 150,
+     "lengthMs": 1250,
+     "strikeAtMsInClip": 900
+    }
+   ]
+  },
+  "clarth_skirmisher_se_attack": {
+   "resource": "ClarthStudy/clarth_skirmisher_se_attack",
+   "frames": 40,
+   "clipMs": 2000,
+   "strikes": [
+    7,
+    15
+   ],
+   "segments": [
+    {
+     "start": 0,
+     "strike": 7,
+     "end": 11,
+     "leadInMs": 350,
+     "lengthMs": 600,
+     "strikeAtMsInClip": 350
+    },
+    {
+     "start": 11,
+     "strike": 15,
+     "end": 39,
+     "leadInMs": 200,
+     "lengthMs": 1450,
+     "strikeAtMsInClip": 750
+    }
+   ]
+  },
+  "clarth_skirmisher_sw_attack": {
+   "resource": "CampaignArt/clarth_skirmisher_sw_attack",
+   "frames": 40,
+   "clipMs": 2000,
+   "strikes": [
+    8,
+    12,
+    18,
+    26
+   ],
+   "segments": [
+    {
+     "start": 0,
+     "strike": 8,
+     "end": 10,
+     "leadInMs": 400,
+     "lengthMs": 550,
+     "strikeAtMsInClip": 400
+    },
+    {
+     "start": 10,
+     "strike": 12,
+     "end": 15,
+     "leadInMs": 100,
+     "lengthMs": 300,
+     "strikeAtMsInClip": 600
+    },
+    {
+     "start": 15,
+     "strike": 18,
+     "end": 22,
+     "leadInMs": 150,
+     "lengthMs": 400,
+     "strikeAtMsInClip": 900
+    },
+    {
+     "start": 22,
+     "strike": 26,
+     "end": 39,
+     "leadInMs": 200,
+     "lengthMs": 900,
+     "strikeAtMsInClip": 1300
+    }
+   ]
+  },
+  "clarth_trapper_se_attack": {
+   "resource": "ClarthStudy/clarth_trapper_se_attack",
+   "frames": 40,
+   "clipMs": 2000,
+   "strikes": [
+    8,
+    29
+   ],
+   "segments": [
+    {
+     "start": 0,
+     "strike": 8,
+     "end": 18,
+     "leadInMs": 400,
+     "lengthMs": 950,
+     "strikeAtMsInClip": 400
+    },
+    {
+     "start": 19,
+     "strike": 29,
+     "end": 39,
+     "leadInMs": 500,
+     "lengthMs": 1050,
+     "strikeAtMsInClip": 1450
+    }
+   ]
+  },
+  "clarth_trapper_sw_attack": {
+   "resource": "CampaignArt/clarth_trapper_sw_attack",
+   "frames": 40,
+   "clipMs": 2000,
+   "strikes": [
+    22,
+    25
+   ],
+   "segments": [
+    {
+     "start": 0,
+     "strike": 22,
+     "end": 23,
+     "leadInMs": 1100,
+     "lengthMs": 1200,
+     "strikeAtMsInClip": 1100
+    },
+    {
+     "start": 24,
+     "strike": 25,
+     "end": 39,
+     "leadInMs": 50,
+     "lengthMs": 800,
+     "strikeAtMsInClip": 1250
+    }
+   ]
+  },
+  "clarth_marksman_se_attack": {
+   "resource": "ClarthStudy/clarth_marksman_se_attack",
+   "frames": 40,
+   "clipMs": 2000,
+   "strikes": [
+    11,
+    20
+   ],
+   "segments": [
+    {
+     "start": 0,
+     "strike": 11,
+     "end": 15,
+     "leadInMs": 550,
+     "lengthMs": 800,
+     "strikeAtMsInClip": 550
+    },
+    {
+     "start": 16,
+     "strike": 20,
+     "end": 39,
+     "leadInMs": 200,
+     "lengthMs": 1200,
+     "strikeAtMsInClip": 1000
+    }
+   ]
+  },
+  "clarth_marksman_sw_attack": {
+   "resource": "CampaignArt/clarth_marksman_sw_attack",
+   "frames": 40,
+   "clipMs": 2000,
+   "strikes": [
+    2,
+    7,
+    12,
+    22
+   ],
+   "segments": [
+    {
+     "start": 0,
+     "strike": 2,
+     "end": 4,
+     "leadInMs": 100,
+     "lengthMs": 250,
+     "strikeAtMsInClip": 100
+    },
+    {
+     "start": 5,
+     "strike": 7,
+     "end": 9,
+     "leadInMs": 100,
+     "lengthMs": 250,
+     "strikeAtMsInClip": 350
+    },
+    {
+     "start": 10,
+     "strike": 12,
+     "end": 17,
+     "leadInMs": 100,
+     "lengthMs": 400,
+     "strikeAtMsInClip": 600
+    },
+    {
+     "start": 17,
+     "strike": 22,
+     "end": 39,
+     "leadInMs": 250,
+     "lengthMs": 1150,
+     "strikeAtMsInClip": 1100
+    }
+   ]
+  },
+  "clarth_medic_se_attack": {
+   "resource": "ClarthStudy/clarth_medic_se_attack",
+   "frames": 40,
+   "clipMs": 2000,
+   "strikes": [
+    8,
+    29
+   ],
+   "segments": [
+    {
+     "start": 0,
+     "strike": 8,
+     "end": 18,
+     "leadInMs": 400,
+     "lengthMs": 950,
+     "strikeAtMsInClip": 400
+    },
+    {
+     "start": 19,
+     "strike": 29,
+     "end": 39,
+     "leadInMs": 500,
+     "lengthMs": 1050,
+     "strikeAtMsInClip": 1450
+    }
+   ]
+  },
+  "clarth_medic_sw_attack": {
+   "resource": "CampaignArt/clarth_medic_sw_attack",
+   "frames": 40,
+   "clipMs": 2000,
+   "strikes": [
+    14
+   ],
+   "segments": [
+    {
+     "start": 0,
+     "strike": 14,
+     "end": 39,
+     "leadInMs": 700,
+     "lengthMs": 2000,
+     "strikeAtMsInClip": 700
+    }
+   ]
+  },
+  "clarth_chief_se_attack": {
+   "resource": "CampaignArt/clarth_chief_se_attack",
+   "frames": 40,
+   "clipMs": 2000,
+   "strikes": [
+    5,
+    10,
+    16
+   ],
+   "segments": [
+    {
+     "start": 0,
+     "strike": 5,
+     "end": 7,
+     "leadInMs": 250,
+     "lengthMs": 400,
+     "strikeAtMsInClip": 250
+    },
+    {
+     "start": 8,
+     "strike": 10,
+     "end": 13,
+     "leadInMs": 100,
+     "lengthMs": 300,
+     "strikeAtMsInClip": 500
+    },
+    {
+     "start": 13,
+     "strike": 16,
+     "end": 39,
+     "leadInMs": 150,
+     "lengthMs": 1350,
+     "strikeAtMsInClip": 800
+    }
+   ]
+  },
+  "clarth_chief_sw_attack": {
+   "resource": "CampaignArt/clarth_chief_sw_attack",
+   "frames": 40,
+   "clipMs": 2000,
+   "strikes": [
+    5,
+    9,
+    14
+   ],
+   "segments": [
+    {
+     "start": 0,
+     "strike": 5,
+     "end": 7,
+     "leadInMs": 250,
+     "lengthMs": 400,
+     "strikeAtMsInClip": 250
+    },
+    {
+     "start": 7,
+     "strike": 9,
+     "end": 11,
+     "leadInMs": 100,
+     "lengthMs": 250,
+     "strikeAtMsInClip": 450
+    },
+    {
+     "start": 12,
+     "strike": 14,
+     "end": 39,
+     "leadInMs": 100,
+     "lengthMs": 1400,
+     "strikeAtMsInClip": 700
+    }
+   ]
+  },
+  "blood_rot_warden_se_attack": {
+   "resource": "CampaignArt/blood_rot_warden_se_attack",
+   "frames": 40,
+   "clipMs": 2000,
+   "strikes": [
+    12,
+    18,
+    24
+   ],
+   "segments": [
+    {
+     "start": 0,
+     "strike": 12,
+     "end": 15,
+     "leadInMs": 600,
+     "lengthMs": 800,
+     "strikeAtMsInClip": 600
+    },
+    {
+     "start": 15,
+     "strike": 18,
+     "end": 21,
+     "leadInMs": 150,
+     "lengthMs": 350,
+     "strikeAtMsInClip": 900
+    },
+    {
+     "start": 21,
+     "strike": 24,
+     "end": 39,
+     "leadInMs": 150,
+     "lengthMs": 950,
+     "strikeAtMsInClip": 1200
+    }
+   ]
+  },
+  "blood_rot_warden_sw_attack": {
+   "resource": "ClarthStudy/blood_rot_warden_sw_attack",
+   "frames": 40,
+   "clipMs": 2000,
+   "strikes": [
+    7,
+    20
+   ],
+   "segments": [
+    {
+     "start": 0,
+     "strike": 7,
+     "end": 13,
+     "leadInMs": 350,
+     "lengthMs": 700,
+     "strikeAtMsInClip": 350
+    },
+    {
+     "start": 14,
+     "strike": 20,
+     "end": 39,
+     "leadInMs": 300,
+     "lengthMs": 1300,
+     "strikeAtMsInClip": 1000
+    }
+   ]
+  },
+  "blood_rot_skirmisher_se_attack": {
+   "resource": "CampaignArt/blood_rot_skirmisher_se_attack",
+   "frames": 40,
+   "clipMs": 2000,
+   "strikes": [
+    3,
+    10,
+    17,
+    25
+   ],
+   "segments": [
+    {
+     "start": 0,
+     "strike": 3,
+     "end": 6,
+     "leadInMs": 150,
+     "lengthMs": 350,
+     "strikeAtMsInClip": 150
+    },
+    {
+     "start": 7,
+     "strike": 10,
+     "end": 13,
+     "leadInMs": 150,
+     "lengthMs": 350,
+     "strikeAtMsInClip": 500
+    },
+    {
+     "start": 14,
+     "strike": 17,
+     "end": 21,
+     "leadInMs": 150,
+     "lengthMs": 400,
+     "strikeAtMsInClip": 850
+    },
+    {
+     "start": 21,
+     "strike": 25,
+     "end": 39,
+     "leadInMs": 200,
+     "lengthMs": 950,
+     "strikeAtMsInClip": 1250
+    }
+   ]
+  },
+  "blood_rot_skirmisher_sw_attack": {
+   "resource": "ClarthStudy/blood_rot_skirmisher_sw_attack",
+   "frames": 40,
+   "clipMs": 2000,
+   "strikes": [
+    3,
+    8,
+    16,
+    22,
+    28
+   ],
+   "segments": [
+    {
+     "start": 0,
+     "strike": 3,
+     "end": 5,
+     "leadInMs": 150,
+     "lengthMs": 300,
+     "strikeAtMsInClip": 150
+    },
+    {
+     "start": 6,
+     "strike": 8,
+     "end": 12,
+     "leadInMs": 100,
+     "lengthMs": 350,
+     "strikeAtMsInClip": 400
+    },
+    {
+     "start": 12,
+     "strike": 16,
+     "end": 19,
+     "leadInMs": 200,
+     "lengthMs": 400,
+     "strikeAtMsInClip": 800
+    },
+    {
+     "start": 19,
+     "strike": 22,
+     "end": 25,
+     "leadInMs": 150,
+     "lengthMs": 350,
+     "strikeAtMsInClip": 1100
+    },
+    {
+     "start": 25,
+     "strike": 28,
+     "end": 39,
+     "leadInMs": 150,
+     "lengthMs": 750,
+     "strikeAtMsInClip": 1400
+    }
+   ]
+  },
+  "blood_rot_trapper_se_attack": {
+   "resource": "CampaignArt/blood_rot_trapper_se_attack",
+   "frames": 40,
+   "clipMs": 2000,
+   "strikes": [
+    7,
+    13
+   ],
+   "segments": [
+    {
+     "start": 0,
+     "strike": 7,
+     "end": 10,
+     "leadInMs": 350,
+     "lengthMs": 550,
+     "strikeAtMsInClip": 350
+    },
+    {
+     "start": 10,
+     "strike": 13,
+     "end": 39,
+     "leadInMs": 150,
+     "lengthMs": 1500,
+     "strikeAtMsInClip": 650
+    }
+   ]
+  },
+  "blood_rot_trapper_sw_attack": {
+   "resource": "ClarthStudy/blood_rot_trapper_sw_attack",
+   "frames": 40,
+   "clipMs": 2000,
+   "strikes": [
+    14
+   ],
+   "segments": [
+    {
+     "start": 0,
+     "strike": 14,
+     "end": 39,
+     "leadInMs": 700,
+     "lengthMs": 2000,
+     "strikeAtMsInClip": 700
+    }
+   ]
+  },
+  "blood_rot_marksman_se_attack": {
+   "resource": "CampaignArt/blood_rot_marksman_se_attack",
+   "frames": 40,
+   "clipMs": 2000,
+   "strikes": [
+    9,
+    17,
+    26
+   ],
+   "segments": [
+    {
+     "start": 0,
+     "strike": 9,
+     "end": 13,
+     "leadInMs": 450,
+     "lengthMs": 700,
+     "strikeAtMsInClip": 450
+    },
+    {
+     "start": 13,
+     "strike": 17,
+     "end": 21,
+     "leadInMs": 200,
+     "lengthMs": 450,
+     "strikeAtMsInClip": 850
+    },
+    {
+     "start": 22,
+     "strike": 26,
+     "end": 39,
+     "leadInMs": 200,
+     "lengthMs": 900,
+     "strikeAtMsInClip": 1300
+    }
+   ]
+  },
+  "blood_rot_marksman_sw_attack": {
+   "resource": "ClarthStudy/blood_rot_marksman_sw_attack",
+   "frames": 40,
+   "clipMs": 2000,
+   "strikes": [
+    10,
+    13,
+    16,
+    30,
+    34
+   ],
+   "segments": [
+    {
+     "start": 0,
+     "strike": 10,
+     "end": 11,
+     "leadInMs": 500,
+     "lengthMs": 600,
+     "strikeAtMsInClip": 500
+    },
+    {
+     "start": 12,
+     "strike": 13,
+     "end": 14,
+     "leadInMs": 50,
+     "lengthMs": 150,
+     "strikeAtMsInClip": 650
+    },
+    {
+     "start": 15,
+     "strike": 16,
+     "end": 23,
+     "leadInMs": 50,
+     "lengthMs": 450,
+     "strikeAtMsInClip": 800
+    },
+    {
+     "start": 23,
+     "strike": 30,
+     "end": 32,
+     "leadInMs": 350,
+     "lengthMs": 500,
+     "strikeAtMsInClip": 1500
+    },
+    {
+     "start": 32,
+     "strike": 34,
+     "end": 39,
+     "leadInMs": 100,
+     "lengthMs": 400,
+     "strikeAtMsInClip": 1700
+    }
+   ]
+  },
+  "blood_rot_medic_se_attack": {
+   "resource": "CampaignArt/blood_rot_medic_se_attack",
+   "frames": 40,
+   "clipMs": 2000,
+   "strikes": [
+    14
+   ],
+   "segments": [
+    {
+     "start": 0,
+     "strike": 14,
+     "end": 39,
+     "leadInMs": 700,
+     "lengthMs": 2000,
+     "strikeAtMsInClip": 700
+    }
+   ]
+  },
+  "blood_rot_medic_sw_attack": {
+   "resource": "ClarthStudy/blood_rot_medic_sw_attack",
+   "frames": 40,
+   "clipMs": 2000,
+   "strikes": [
+    9,
+    16,
+    27
+   ],
+   "segments": [
+    {
+     "start": 0,
+     "strike": 9,
+     "end": 12,
+     "leadInMs": 450,
+     "lengthMs": 650,
+     "strikeAtMsInClip": 450
+    },
+    {
+     "start": 13,
+     "strike": 16,
+     "end": 21,
+     "leadInMs": 150,
+     "lengthMs": 450,
+     "strikeAtMsInClip": 800
+    },
+    {
+     "start": 22,
+     "strike": 27,
+     "end": 39,
+     "leadInMs": 250,
+     "lengthMs": 900,
+     "strikeAtMsInClip": 1350
+    }
+   ]
+  },
+  "bloodridge_chief_se_attack": {
+   "resource": "CampaignArt/bloodridge_chief_se_attack",
+   "frames": 40,
+   "clipMs": 2000,
+   "strikes": [
+    2,
+    9,
+    17
+   ],
+   "segments": [
+    {
+     "start": 0,
+     "strike": 2,
+     "end": 5,
+     "leadInMs": 100,
+     "lengthMs": 300,
+     "strikeAtMsInClip": 100
+    },
+    {
+     "start": 6,
+     "strike": 9,
+     "end": 13,
+     "leadInMs": 150,
+     "lengthMs": 400,
+     "strikeAtMsInClip": 450
+    },
+    {
+     "start": 13,
+     "strike": 17,
+     "end": 39,
+     "leadInMs": 200,
+     "lengthMs": 1350,
+     "strikeAtMsInClip": 850
+    }
+   ]
+  },
+  "bloodridge_chief_sw_attack": {
+   "resource": "CampaignArt/bloodridge_chief_sw_attack",
+   "frames": 40,
+   "clipMs": 2000,
+   "strikes": [
+    5,
+    11,
+    14
+   ],
+   "segments": [
+    {
+     "start": 0,
+     "strike": 5,
+     "end": 8,
+     "leadInMs": 250,
+     "lengthMs": 450,
+     "strikeAtMsInClip": 250
+    },
+    {
+     "start": 8,
+     "strike": 11,
+     "end": 12,
+     "leadInMs": 150,
+     "lengthMs": 250,
+     "strikeAtMsInClip": 550
+    },
+    {
+     "start": 13,
+     "strike": 14,
+     "end": 39,
+     "leadInMs": 50,
+     "lengthMs": 1350,
+     "strikeAtMsInClip": 700
+    }
+   ]
+  },
+  "bloodridge_champion_sw_attack": {
+   "resource": "CampaignArt/bloodridge_champion_sw_attack",
+   "frames": 40,
+   "clipMs": 2000,
+   "strikes": [
+    20
+   ],
+   "segments": [
+    {
+     "start": 0,
+     "strike": 20,
+     "end": 39,
+     "leadInMs": 1000,
+     "lengthMs": 2000,
+     "strikeAtMsInClip": 1000
+    }
+   ]
+  },
+  "bloodridge_shaman_sw_attack": {
+   "resource": "CampaignArt/bloodridge_shaman_sw_attack",
+   "frames": 40,
+   "clipMs": 2000,
+   "strikes": [
+    10
+   ],
+   "segments": [
+    {
+     "start": 0,
+     "strike": 10,
+     "end": 39,
+     "leadInMs": 500,
+     "lengthMs": 2000,
+     "strikeAtMsInClip": 500
+    }
+   ]
+  },
+  "skull_warden_se_attack": {
+   "resource": "CampaignArt/skull_warden_se_attack",
+   "frames": 40,
+   "clipMs": 2000,
+   "strikes": [
+    4,
+    12,
+    22
+   ],
+   "segments": [
+    {
+     "start": 0,
+     "strike": 4,
+     "end": 8,
+     "leadInMs": 200,
+     "lengthMs": 450,
+     "strikeAtMsInClip": 200
+    },
+    {
+     "start": 8,
+     "strike": 12,
+     "end": 17,
+     "leadInMs": 200,
+     "lengthMs": 500,
+     "strikeAtMsInClip": 600
+    },
+    {
+     "start": 17,
+     "strike": 22,
+     "end": 39,
+     "leadInMs": 250,
+     "lengthMs": 1150,
+     "strikeAtMsInClip": 1100
+    }
+   ]
+  },
+  "skull_warden_sw_attack": {
+   "resource": "CampaignArt/skull_warden_sw_attack",
+   "frames": 40,
+   "clipMs": 2000,
+   "strikes": [
+    3,
+    10,
+    18
+   ],
+   "segments": [
+    {
+     "start": 0,
+     "strike": 3,
+     "end": 6,
+     "leadInMs": 150,
+     "lengthMs": 350,
+     "strikeAtMsInClip": 150
+    },
+    {
+     "start": 7,
+     "strike": 10,
+     "end": 14,
+     "leadInMs": 150,
+     "lengthMs": 400,
+     "strikeAtMsInClip": 500
+    },
+    {
+     "start": 14,
+     "strike": 18,
+     "end": 39,
+     "leadInMs": 200,
+     "lengthMs": 1300,
+     "strikeAtMsInClip": 900
+    }
+   ]
+  },
+  "skull_skirmisher_se_attack": {
+   "resource": "CampaignArt/skull_skirmisher_se_attack",
+   "frames": 40,
+   "clipMs": 2000,
+   "strikes": [
+    5,
+    10,
+    15,
+    20
+   ],
+   "segments": [
+    {
+     "start": 0,
+     "strike": 5,
+     "end": 7,
+     "leadInMs": 250,
+     "lengthMs": 400,
+     "strikeAtMsInClip": 250
+    },
+    {
+     "start": 8,
+     "strike": 10,
+     "end": 12,
+     "leadInMs": 100,
+     "lengthMs": 250,
+     "strikeAtMsInClip": 500
+    },
+    {
+     "start": 13,
+     "strike": 15,
+     "end": 17,
+     "leadInMs": 100,
+     "lengthMs": 250,
+     "strikeAtMsInClip": 750
+    },
+    {
+     "start": 18,
+     "strike": 20,
+     "end": 39,
+     "leadInMs": 100,
+     "lengthMs": 1100,
+     "strikeAtMsInClip": 1000
+    }
+   ]
+  },
+  "skull_skirmisher_sw_attack": {
+   "resource": "CampaignArt/skull_skirmisher_sw_attack",
+   "frames": 40,
+   "clipMs": 2000,
+   "strikes": [
+    7,
+    16,
+    20,
+    23
+   ],
+   "segments": [
+    {
+     "start": 0,
+     "strike": 7,
+     "end": 11,
+     "leadInMs": 350,
+     "lengthMs": 600,
+     "strikeAtMsInClip": 350
+    },
+    {
+     "start": 12,
+     "strike": 16,
+     "end": 18,
+     "leadInMs": 200,
+     "lengthMs": 350,
+     "strikeAtMsInClip": 800
+    },
+    {
+     "start": 18,
+     "strike": 20,
+     "end": 21,
+     "leadInMs": 100,
+     "lengthMs": 200,
+     "strikeAtMsInClip": 1000
+    },
+    {
+     "start": 22,
+     "strike": 23,
+     "end": 39,
+     "leadInMs": 50,
+     "lengthMs": 900,
+     "strikeAtMsInClip": 1150
+    }
+   ]
+  },
+  "skull_trapper_se_attack": {
+   "resource": "CampaignArt/skull_trapper_se_attack",
+   "frames": 40,
+   "clipMs": 2000,
+   "strikes": [
+    11
+   ],
+   "segments": [
+    {
+     "start": 0,
+     "strike": 11,
+     "end": 39,
+     "leadInMs": 550,
+     "lengthMs": 2000,
+     "strikeAtMsInClip": 550
+    }
+   ]
+  },
+  "skull_trapper_sw_attack": {
+   "resource": "CampaignArt/skull_trapper_sw_attack",
+   "frames": 40,
+   "clipMs": 2000,
+   "strikes": [
+    14,
+    18
+   ],
+   "segments": [
+    {
+     "start": 0,
+     "strike": 14,
+     "end": 16,
+     "leadInMs": 700,
+     "lengthMs": 850,
+     "strikeAtMsInClip": 700
+    },
+    {
+     "start": 16,
+     "strike": 18,
+     "end": 39,
+     "leadInMs": 100,
+     "lengthMs": 1200,
+     "strikeAtMsInClip": 900
+    }
+   ]
+  },
+  "skull_marksman_se_attack": {
+   "resource": "CampaignArt/skull_marksman_se_attack",
+   "frames": 40,
+   "clipMs": 2000,
+   "strikes": [
+    2,
+    9,
+    16,
+    22
+   ],
+   "segments": [
+    {
+     "start": 0,
+     "strike": 2,
+     "end": 5,
+     "leadInMs": 100,
+     "lengthMs": 300,
+     "strikeAtMsInClip": 100
+    },
+    {
+     "start": 6,
+     "strike": 9,
+     "end": 12,
+     "leadInMs": 150,
+     "lengthMs": 350,
+     "strikeAtMsInClip": 450
+    },
+    {
+     "start": 13,
+     "strike": 16,
+     "end": 19,
+     "leadInMs": 150,
+     "lengthMs": 350,
+     "strikeAtMsInClip": 800
+    },
+    {
+     "start": 19,
+     "strike": 22,
+     "end": 39,
+     "leadInMs": 150,
+     "lengthMs": 1050,
+     "strikeAtMsInClip": 1100
+    }
+   ]
+  },
+  "skull_marksman_sw_attack": {
+   "resource": "CampaignArt/skull_marksman_sw_attack",
+   "frames": 40,
+   "clipMs": 2000,
+   "strikes": [
+    12,
+    18,
+    22,
+    26
+   ],
+   "segments": [
+    {
+     "start": 0,
+     "strike": 12,
+     "end": 15,
+     "leadInMs": 600,
+     "lengthMs": 800,
+     "strikeAtMsInClip": 600
+    },
+    {
+     "start": 15,
+     "strike": 18,
+     "end": 20,
+     "leadInMs": 150,
+     "lengthMs": 300,
+     "strikeAtMsInClip": 900
+    },
+    {
+     "start": 20,
+     "strike": 22,
+     "end": 24,
+     "leadInMs": 100,
+     "lengthMs": 250,
+     "strikeAtMsInClip": 1100
+    },
+    {
+     "start": 24,
+     "strike": 26,
+     "end": 39,
+     "leadInMs": 100,
+     "lengthMs": 800,
+     "strikeAtMsInClip": 1300
+    }
+   ]
+  },
+  "skull_medic_se_attack": {
+   "resource": "CampaignArt/skull_medic_se_attack",
+   "frames": 40,
+   "clipMs": 2000,
+   "strikes": [
+    6,
+    18,
+    23
+   ],
+   "segments": [
+    {
+     "start": 0,
+     "strike": 6,
+     "end": 12,
+     "leadInMs": 300,
+     "lengthMs": 650,
+     "strikeAtMsInClip": 300
+    },
+    {
+     "start": 12,
+     "strike": 18,
+     "end": 20,
+     "leadInMs": 300,
+     "lengthMs": 450,
+     "strikeAtMsInClip": 900
+    },
+    {
+     "start": 21,
+     "strike": 23,
+     "end": 39,
+     "leadInMs": 100,
+     "lengthMs": 950,
+     "strikeAtMsInClip": 1150
+    }
+   ]
+  },
+  "skull_medic_sw_attack": {
+   "resource": "CampaignArt/skull_medic_sw_attack",
+   "frames": 40,
+   "clipMs": 2000,
+   "strikes": [
+    10
+   ],
+   "segments": [
+    {
+     "start": 0,
+     "strike": 10,
+     "end": 39,
+     "leadInMs": 500,
+     "lengthMs": 2000,
+     "strikeAtMsInClip": 500
+    }
+   ]
+  },
+  "skullpeak_chief_se_attack": {
+   "resource": "CampaignArt/skullpeak_chief_se_attack",
+   "frames": 40,
+   "clipMs": 2000,
+   "strikes": [
+    6,
+    14,
+    19
+   ],
+   "segments": [
+    {
+     "start": 0,
+     "strike": 6,
+     "end": 10,
+     "leadInMs": 300,
+     "lengthMs": 550,
+     "strikeAtMsInClip": 300
+    },
+    {
+     "start": 10,
+     "strike": 14,
+     "end": 16,
+     "leadInMs": 200,
+     "lengthMs": 350,
+     "strikeAtMsInClip": 700
+    },
+    {
+     "start": 17,
+     "strike": 19,
+     "end": 39,
+     "leadInMs": 100,
+     "lengthMs": 1150,
+     "strikeAtMsInClip": 950
+    }
+   ]
+  },
+  "skullpeak_chief_sw_attack": {
+   "resource": "CampaignArt/skullpeak_chief_sw_attack",
+   "frames": 40,
+   "clipMs": 2000,
+   "strikes": [
+    7,
+    14,
+    24
+   ],
+   "segments": [
+    {
+     "start": 0,
+     "strike": 7,
+     "end": 10,
+     "leadInMs": 350,
+     "lengthMs": 550,
+     "strikeAtMsInClip": 350
+    },
+    {
+     "start": 11,
+     "strike": 14,
+     "end": 19,
+     "leadInMs": 150,
+     "lengthMs": 450,
+     "strikeAtMsInClip": 700
+    },
+    {
+     "start": 19,
+     "strike": 24,
+     "end": 39,
+     "leadInMs": 250,
+     "lengthMs": 1050,
+     "strikeAtMsInClip": 1200
+    }
+   ]
+  },
+  "skullpeak_champion_sw_attack": {
+   "resource": "CampaignArt/skullpeak_champion_sw_attack",
+   "frames": 40,
+   "clipMs": 2000,
+   "strikes": [
+    29
+   ],
+   "segments": [
+    {
+     "start": 0,
+     "strike": 29,
+     "end": 39,
+     "leadInMs": 1450,
+     "lengthMs": 2000,
+     "strikeAtMsInClip": 1450
+    }
+   ]
+  },
+  "stoneveil_warden_se_attack": {
+   "resource": "CampaignArt/stoneveil_warden_se_attack",
+   "frames": 40,
+   "clipMs": 2000,
+   "strikes": [
+    7
+   ],
+   "segments": [
+    {
+     "start": 0,
+     "strike": 7,
+     "end": 39,
+     "leadInMs": 350,
+     "lengthMs": 2000,
+     "strikeAtMsInClip": 350
+    }
+   ]
+  },
+  "stoneveil_warden_sw_attack": {
+   "resource": "CampaignArt/stoneveil_warden_sw_attack",
+   "frames": 40,
+   "clipMs": 2000,
+   "strikes": [
+    26,
+    32
+   ],
+   "segments": [
+    {
+     "start": 0,
+     "strike": 26,
+     "end": 29,
+     "leadInMs": 1300,
+     "lengthMs": 1500,
+     "strikeAtMsInClip": 1300
+    },
+    {
+     "start": 29,
+     "strike": 32,
+     "end": 39,
+     "leadInMs": 150,
+     "lengthMs": 550,
+     "strikeAtMsInClip": 1600
+    }
+   ]
+  },
+  "stoneveil_skirmisher_se_attack": {
+   "resource": "CampaignArt/stoneveil_skirmisher_se_attack",
+   "frames": 40,
+   "clipMs": 2000,
+   "strikes": [
+    23
+   ],
+   "segments": [
+    {
+     "start": 0,
+     "strike": 23,
+     "end": 39,
+     "leadInMs": 1150,
+     "lengthMs": 2000,
+     "strikeAtMsInClip": 1150
+    }
+   ]
+  },
+  "stoneveil_skirmisher_sw_attack": {
+   "resource": "CampaignArt/stoneveil_skirmisher_sw_attack",
+   "frames": 40,
+   "clipMs": 2000,
+   "strikes": [
+    17,
+    22
+   ],
+   "segments": [
+    {
+     "start": 0,
+     "strike": 17,
+     "end": 19,
+     "leadInMs": 850,
+     "lengthMs": 1000,
+     "strikeAtMsInClip": 850
+    },
+    {
+     "start": 20,
+     "strike": 22,
+     "end": 39,
+     "leadInMs": 100,
+     "lengthMs": 1000,
+     "strikeAtMsInClip": 1100
+    }
+   ]
+  },
+  "stoneveil_trapper_se_attack": {
+   "resource": "CampaignArt/stoneveil_trapper_se_attack",
+   "frames": 40,
+   "clipMs": 2000,
+   "strikes": [
+    20
+   ],
+   "segments": [
+    {
+     "start": 0,
+     "strike": 20,
+     "end": 39,
+     "leadInMs": 1000,
+     "lengthMs": 2000,
+     "strikeAtMsInClip": 1000
+    }
+   ]
+  },
+  "stoneveil_trapper_sw_attack": {
+   "resource": "CampaignArt/stoneveil_trapper_sw_attack",
+   "frames": 40,
+   "clipMs": 2000,
+   "strikes": [
+    25
+   ],
+   "segments": [
+    {
+     "start": 0,
+     "strike": 25,
+     "end": 39,
+     "leadInMs": 1250,
+     "lengthMs": 2000,
+     "strikeAtMsInClip": 1250
+    }
+   ]
+  },
+  "stoneveil_marksman_se_attack": {
+   "resource": "CampaignArt/stoneveil_marksman_se_attack",
+   "frames": 40,
+   "clipMs": 2000,
+   "strikes": [
+    21
+   ],
+   "segments": [
+    {
+     "start": 0,
+     "strike": 21,
+     "end": 39,
+     "leadInMs": 1050,
+     "lengthMs": 2000,
+     "strikeAtMsInClip": 1050
+    }
+   ]
+  },
+  "stoneveil_marksman_sw_attack": {
+   "resource": "CampaignArt/stoneveil_marksman_sw_attack",
+   "frames": 40,
+   "clipMs": 2000,
+   "strikes": [
+    26
+   ],
+   "segments": [
+    {
+     "start": 0,
+     "strike": 26,
+     "end": 39,
+     "leadInMs": 1300,
+     "lengthMs": 2000,
+     "strikeAtMsInClip": 1300
+    }
+   ]
+  },
+  "stoneveil_medic_se_attack": {
+   "resource": "CampaignArt/stoneveil_medic_se_attack",
+   "frames": 40,
+   "clipMs": 2000,
+   "strikes": [
+    17
+   ],
+   "segments": [
+    {
+     "start": 0,
+     "strike": 17,
+     "end": 39,
+     "leadInMs": 850,
+     "lengthMs": 2000,
+     "strikeAtMsInClip": 850
+    }
+   ]
+  },
+  "stoneveil_medic_sw_attack": {
+   "resource": "CampaignArt/stoneveil_medic_sw_attack",
+   "frames": 40,
+   "clipMs": 2000,
+   "strikes": [
+    12
+   ],
+   "segments": [
+    {
+     "start": 0,
+     "strike": 12,
+     "end": 39,
+     "leadInMs": 600,
+     "lengthMs": 2000,
+     "strikeAtMsInClip": 600
+    }
+   ]
+  },
+  "stoneveil_chief_sw_attack": {
+   "resource": "CampaignArt/stoneveil_chief_sw_attack",
+   "frames": 40,
+   "clipMs": 2000,
+   "strikes": [
+    15
+   ],
+   "segments": [
+    {
+     "start": 0,
+     "strike": 15,
+     "end": 39,
+     "leadInMs": 750,
+     "lengthMs": 2000,
+     "strikeAtMsInClip": 750
+    }
+   ]
+  },
+  "stoneveil_champion_sw_attack": {
+   "resource": "CampaignArt/stoneveil_champion_sw_attack",
+   "frames": 40,
+   "clipMs": 2000,
+   "strikes": [
+    8
+   ],
+   "segments": [
+    {
+     "start": 0,
+     "strike": 8,
+     "end": 39,
+     "leadInMs": 400,
+     "lengthMs": 2000,
+     "strikeAtMsInClip": 400
+    }
+   ]
+  },
+  "stoneveil_shaman_sw_attack": {
+   "resource": "CampaignArt/stoneveil_shaman_sw_attack",
+   "frames": 40,
+   "clipMs": 2000,
+   "strikes": [
+    16
+   ],
+   "segments": [
+    {
+     "start": 0,
+     "strike": 16,
+     "end": 39,
+     "leadInMs": 800,
+     "lengthMs": 2000,
+     "strikeAtMsInClip": 800
+    }
+   ]
+  },
+  "thundercoast_warden_se_attack": {
+   "resource": "CampaignArt/thundercoast_warden_se_attack",
+   "frames": 40,
+   "clipMs": 2000,
+   "strikes": [
+    27
+   ],
+   "segments": [
+    {
+     "start": 0,
+     "strike": 27,
+     "end": 39,
+     "leadInMs": 1350,
+     "lengthMs": 2000,
+     "strikeAtMsInClip": 1350
+    }
+   ]
+  },
+  "thundercoast_warden_sw_attack": {
+   "resource": "CampaignArt/thundercoast_warden_sw_attack",
+   "frames": 40,
+   "clipMs": 2000,
+   "strikes": [
+    16
+   ],
+   "segments": [
+    {
+     "start": 0,
+     "strike": 16,
+     "end": 39,
+     "leadInMs": 800,
+     "lengthMs": 2000,
+     "strikeAtMsInClip": 800
+    }
+   ]
+  },
+  "thundercoast_skirmisher_se_attack": {
+   "resource": "CampaignArt/thundercoast_skirmisher_se_attack",
+   "frames": 40,
+   "clipMs": 2000,
+   "strikes": [
+    26,
+    30,
+    33
+   ],
+   "segments": [
+    {
+     "start": 0,
+     "strike": 26,
+     "end": 28,
+     "leadInMs": 1300,
+     "lengthMs": 1450,
+     "strikeAtMsInClip": 1300
+    },
+    {
+     "start": 28,
+     "strike": 30,
+     "end": 31,
+     "leadInMs": 100,
+     "lengthMs": 200,
+     "strikeAtMsInClip": 1500
+    },
+    {
+     "start": 32,
+     "strike": 33,
+     "end": 39,
+     "leadInMs": 50,
+     "lengthMs": 400,
+     "strikeAtMsInClip": 1650
+    }
+   ]
+  },
+  "thundercoast_skirmisher_sw_attack": {
+   "resource": "CampaignArt/thundercoast_skirmisher_sw_attack",
+   "frames": 40,
+   "clipMs": 2000,
+   "strikes": [
+    6,
+    26
+   ],
+   "segments": [
+    {
+     "start": 0,
+     "strike": 6,
+     "end": 16,
+     "leadInMs": 300,
+     "lengthMs": 850,
+     "strikeAtMsInClip": 300
+    },
+    {
+     "start": 16,
+     "strike": 26,
+     "end": 39,
+     "leadInMs": 500,
+     "lengthMs": 1200,
+     "strikeAtMsInClip": 1300
+    }
+   ]
+  },
+  "thundercoast_trapper_se_attack": {
+   "resource": "CampaignArt/thundercoast_trapper_se_attack",
+   "frames": 40,
+   "clipMs": 2000,
+   "strikes": [
+    26
+   ],
+   "segments": [
+    {
+     "start": 0,
+     "strike": 26,
+     "end": 39,
+     "leadInMs": 1300,
+     "lengthMs": 2000,
+     "strikeAtMsInClip": 1300
+    }
+   ]
+  },
+  "thundercoast_trapper_sw_attack": {
+   "resource": "CampaignArt/thundercoast_trapper_sw_attack",
+   "frames": 40,
+   "clipMs": 2000,
+   "strikes": [
+    13,
+    26
+   ],
+   "segments": [
+    {
+     "start": 0,
+     "strike": 13,
+     "end": 19,
+     "leadInMs": 650,
+     "lengthMs": 1000,
+     "strikeAtMsInClip": 650
+    },
+    {
+     "start": 20,
+     "strike": 26,
+     "end": 39,
+     "leadInMs": 300,
+     "lengthMs": 1000,
+     "strikeAtMsInClip": 1300
+    }
+   ]
+  },
+  "thundercoast_marksman_se_attack": {
+   "resource": "CampaignArt/thundercoast_marksman_se_attack",
+   "frames": 40,
+   "clipMs": 2000,
+   "strikes": [
+    10
+   ],
+   "segments": [
+    {
+     "start": 0,
+     "strike": 10,
+     "end": 39,
+     "leadInMs": 500,
+     "lengthMs": 2000,
+     "strikeAtMsInClip": 500
+    }
+   ]
+  },
+  "thundercoast_marksman_sw_attack": {
+   "resource": "CampaignArt/thundercoast_marksman_sw_attack",
+   "frames": 40,
+   "clipMs": 2000,
+   "strikes": [
+    29
+   ],
+   "segments": [
+    {
+     "start": 0,
+     "strike": 29,
+     "end": 39,
+     "leadInMs": 1450,
+     "lengthMs": 2000,
+     "strikeAtMsInClip": 1450
+    }
+   ]
+  },
+  "thundercoast_medic_se_attack": {
+   "resource": "CampaignArt/thundercoast_medic_se_attack",
+   "frames": 40,
+   "clipMs": 2000,
+   "strikes": [
+    30
+   ],
+   "segments": [
+    {
+     "start": 0,
+     "strike": 30,
+     "end": 39,
+     "leadInMs": 1500,
+     "lengthMs": 2000,
+     "strikeAtMsInClip": 1500
+    }
+   ]
+  },
+  "thundercoast_medic_sw_attack": {
+   "resource": "CampaignArt/thundercoast_medic_sw_attack",
+   "frames": 40,
+   "clipMs": 2000,
+   "strikes": [
+    35
+   ],
+   "segments": [
+    {
+     "start": 0,
+     "strike": 35,
+     "end": 39,
+     "leadInMs": 1750,
+     "lengthMs": 2000,
+     "strikeAtMsInClip": 1750
+    }
+   ]
+  },
+  "thundercoast_chief_sw_attack": {
+   "resource": "CampaignArt/thundercoast_chief_sw_attack",
+   "frames": 40,
+   "clipMs": 2000,
+   "strikes": [
+    16
+   ],
+   "segments": [
+    {
+     "start": 0,
+     "strike": 16,
+     "end": 39,
+     "leadInMs": 800,
+     "lengthMs": 2000,
+     "strikeAtMsInClip": 800
+    }
+   ]
+  },
+  "thundercoast_champion_sw_attack": {
+   "resource": "CampaignArt/thundercoast_champion_sw_attack",
+   "frames": 40,
+   "clipMs": 2000,
+   "strikes": [
+    16,
+    30
+   ],
+   "segments": [
+    {
+     "start": 0,
+     "strike": 16,
+     "end": 23,
+     "leadInMs": 800,
+     "lengthMs": 1200,
+     "strikeAtMsInClip": 800
+    },
+    {
+     "start": 23,
+     "strike": 30,
+     "end": 39,
+     "leadInMs": 350,
+     "lengthMs": 850,
+     "strikeAtMsInClip": 1500
+    }
+   ]
+  },
+  "hunter_captain_sw_attack": {
+   "resource": "CampaignArt/hunter_captain_sw_attack",
+   "frames": 40,
+   "clipMs": 2000,
+   "strikes": [
+    8,
+    26
+   ],
+   "segments": [
+    {
+     "start": 0,
+     "strike": 8,
+     "end": 17,
+     "leadInMs": 400,
+     "lengthMs": 900,
+     "strikeAtMsInClip": 400
+    },
+    {
+     "start": 17,
+     "strike": 26,
+     "end": 39,
+     "leadInMs": 450,
+     "lengthMs": 1150,
+     "strikeAtMsInClip": 1300
+    }
+   ]
+  },
+  "hunter_warden_sw_attack": {
+   "resource": "CampaignArt/hunter_warden_sw_attack",
+   "frames": 40,
+   "clipMs": 2000,
+   "strikes": [
+    14
+   ],
+   "segments": [
+    {
+     "start": 0,
+     "strike": 14,
+     "end": 39,
+     "leadInMs": 700,
+     "lengthMs": 2000,
+     "strikeAtMsInClip": 700
+    }
+   ]
+  },
+  "hunter_skirmisher_sw_attack": {
+   "resource": "CampaignArt/hunter_skirmisher_sw_attack",
+   "frames": 40,
+   "clipMs": 2000,
+   "strikes": [
+    22,
+    32
+   ],
+   "segments": [
+    {
+     "start": 0,
+     "strike": 22,
+     "end": 27,
+     "leadInMs": 1100,
+     "lengthMs": 1400,
+     "strikeAtMsInClip": 1100
+    },
+    {
+     "start": 27,
+     "strike": 32,
+     "end": 39,
+     "leadInMs": 250,
+     "lengthMs": 650,
+     "strikeAtMsInClip": 1600
+    }
+   ]
+  },
+  "hunter_trapper_sw_attack": {
+   "resource": "CampaignArt/hunter_trapper_sw_attack",
+   "frames": 40,
+   "clipMs": 2000,
+   "strikes": [
+    12
+   ],
+   "segments": [
+    {
+     "start": 0,
+     "strike": 12,
+     "end": 39,
+     "leadInMs": 600,
+     "lengthMs": 2000,
+     "strikeAtMsInClip": 600
+    }
+   ]
+  },
+  "hunter_marksman_sw_attack": {
+   "resource": "CampaignArt/hunter_marksman_sw_attack",
+   "frames": 40,
+   "clipMs": 2000,
+   "strikes": [
+    21
+   ],
+   "segments": [
+    {
+     "start": 0,
+     "strike": 21,
+     "end": 39,
+     "leadInMs": 1050,
+     "lengthMs": 2000,
+     "strikeAtMsInClip": 1050
+    }
+   ]
+  },
+  "hunter_medic_sw_attack": {
+   "resource": "CampaignArt/hunter_medic_sw_attack",
+   "frames": 40,
+   "clipMs": 2000,
+   "strikes": [
+    20,
+    28
+   ],
+   "segments": [
+    {
+     "start": 0,
+     "strike": 20,
+     "end": 24,
+     "leadInMs": 1000,
+     "lengthMs": 1250,
+     "strikeAtMsInClip": 1000
+    },
+    {
+     "start": 24,
+     "strike": 28,
+     "end": 39,
+     "leadInMs": 200,
+     "lengthMs": 800,
+     "strikeAtMsInClip": 1400
+    }
+   ]
+  },
+  "leader_se_attack": {
+   "resource": "CampaignArt/Leader/leader_se_attack",
+   "frames": 40,
+   "clipMs": 2240,
+   "strikes": [
+    9
+   ],
+   "segments": [
+    {
+     "start": 0,
+     "strike": 9,
+     "end": 39,
+     "leadInMs": 540,
+     "lengthMs": 2240,
+     "strikeAtMsInClip": 540
+    }
+   ]
+  }
+ }
+}

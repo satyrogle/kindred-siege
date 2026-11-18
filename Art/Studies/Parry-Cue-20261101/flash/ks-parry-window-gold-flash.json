@@ -1,0 +1,183 @@
+{
+ "frames": [
+  {
+   "filename": "ks-parry-window-gold-flash 0.png",
+   "frame": {
+    "x": 0,
+    "y": 0,
+    "w": 122,
+    "h": 223
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 122,
+    "h": 223
+   },
+   "sourceSize": {
+    "w": 122,
+    "h": 223
+   },
+   "pivot": {
+    "x": 0.5,
+    "y": 0.9865470852017937
+   },
+   "duration": 33
+  },
+  {
+   "filename": "ks-parry-window-gold-flash 1.png",
+   "frame": {
+    "x": 122,
+    "y": 0,
+    "w": 122,
+    "h": 223
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 122,
+    "h": 223
+   },
+   "sourceSize": {
+    "w": 122,
+    "h": 223
+   },
+   "pivot": {
+    "x": 0.5,
+    "y": 0.9865470852017937
+   },
+   "duration": 33
+  },
+  {
+   "filename": "ks-parry-window-gold-flash 2.png",
+   "frame": {
+    "x": 244,
+    "y": 0,
+    "w": 122,
+    "h": 223
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 122,
+    "h": 223
+   },
+   "sourceSize": {
+    "w": 122,
+    "h": 223
+   },
+   "pivot": {
+    "x": 0.5,
+    "y": 0.9865470852017937
+   },
+   "duration": 33
+  },
+  {
+   "filename": "ks-parry-window-gold-flash 3.png",
+   "frame": {
+    "x": 0,
+    "y": 223,
+    "w": 122,
+    "h": 223
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 122,
+    "h": 223
+   },
+   "sourceSize": {
+    "w": 122,
+    "h": 223
+   },
+   "pivot": {
+    "x": 0.5,
+    "y": 0.9865470852017937
+   },
+   "duration": 33
+  },
+  {
+   "filename": "ks-parry-window-gold-flash 4.png",
+   "frame": {
+    "x": 122,
+    "y": 223,
+    "w": 122,
+    "h": 223
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 122,
+    "h": 223
+   },
+   "sourceSize": {
+    "w": 122,
+    "h": 223
+   },
+   "pivot": {
+    "x": 0.5,
+    "y": 0.9865470852017937
+   },
+   "duration": 33
+  },
+  {
+   "filename": "ks-parry-window-gold-flash 5.png",
+   "frame": {
+    "x": 244,
+    "y": 223,
+    "w": 122,
+    "h": 223
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 122,
+    "h": 223
+   },
+   "sourceSize": {
+    "w": 122,
+    "h": 223
+   },
+   "pivot": {
+    "x": 0.5,
+    "y": 0.9865470852017937
+   },
+   "duration": 33
+  }
+ ],
+ "meta": {
+  "app": "PixelLab VFX Creator",
+  "image": "ks-parry-window-gold-flash.png",
+  "format": "RGBA8888",
+  "size": {
+   "w": 366,
+   "h": 446
+  },
+  "scale": "1",
+  "anchor": {
+   "kind": "feet",
+   "x": 61,
+   "y": 220
+  },
+  "frameTags": [
+   {
+    "name": "ks-parry-window-gold-flash",
+    "from": 0,
+    "to": 5,
+    "direction": "forward"
+   }
+  ]
+ }
+}

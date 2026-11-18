@@ -1,0 +1,120 @@
+{
+ "app": "PixelLab VFX Creator",
+ "name": "KS mark focus floor",
+ "fps": 16,
+ "frame_ms": 63,
+ "frames": 32,
+ "loop": true,
+ "canvas": {
+  "w": 143,
+  "h": 153
+ },
+ "anchor": {
+  "kind": "feet",
+  "x": 71,
+  "y": 128
+ },
+ "clips": [
+  {
+   "name": "whole",
+   "title": "the whole effect, no sprite",
+   "depth": "both",
+   "loop": true,
+   "start_frame": 0,
+   "frames": 32,
+   "frame": {
+    "w": 137,
+    "h": 59
+   },
+   "sheets": [
+    {
+     "file": "whole.png",
+     "first_frame": 0,
+     "frames": 32,
+     "columns": 6,
+     "rows": 6
+    }
+   ],
+   "offset": {
+    "x": -68,
+    "y": -37
+   }
+  },
+  {
+   "name": "whole-with-sprite",
+   "title": "the whole effect with the sprite in it",
+   "depth": "both",
+   "loop": true,
+   "start_frame": 0,
+   "frames": 32,
+   "frame": {
+    "w": 137,
+    "h": 147
+   },
+   "sheets": [
+    {
+     "file": "whole-with-sprite.png",
+     "first_frame": 0,
+     "frames": 32,
+     "columns": 6,
+     "rows": 6
+    }
+   ],
+   "offset": {
+    "x": -68,
+    "y": -125
+   }
+  },
+  {
+   "name": "behind",
+   "title": "everything behind the sprite",
+   "depth": "behind",
+   "loop": true,
+   "start_frame": 0,
+   "frames": 32,
+   "frame": {
+    "w": 137,
+    "h": 59
+   },
+   "sheets": [
+    {
+     "file": "behind.png",
+     "first_frame": 0,
+     "frames": 32,
+     "columns": 6,
+     "rows": 6
+    }
+   ],
+   "offset": {
+    "x": -68,
+    "y": -37
+   }
+  },
+  {
+   "name": "part-lock_on",
+   "title": "the lock on part",
+   "part": "lock_on",
+   "depth": "behind",
+   "loop": true,
+   "start_frame": 0,
+   "frames": 32,
+   "frame": {
+    "w": 137,
+    "h": 59
+   },
+   "sheets": [
+    {
+     "file": "part-lock_on.png",
+     "first_frame": 0,
+     "frames": 32,
+     "columns": 6,
+     "rows": 6
+    }
+   ],
+   "offset": {
+    "x": -68,
+    "y": -37
+   }
+  }
+ ]
+}

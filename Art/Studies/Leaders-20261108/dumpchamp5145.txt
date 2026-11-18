@@ -1,0 +1,2446 @@
+seed 5145 fight 3 camp.5.raiders.warparty rules 43 ticks 419 tps 30 champion True table True
+U 0 leader Marksman Pal alive True hp 360
+U 0 clarth.warden.1 Warden Fighter alive True hp 704
+U 0 clarth.medic.5 Medic Fighter alive True hp 374
+U 0 clarth.skirmisher.3 Skirmisher Fighter alive True hp 504
+U 0 clarth.marksman.2 Marksman Fighter alive True hp 396
+U 0 clarth.trapper.4 Trapper Fighter alive True hp 418
+U 1 camp.5.raiders.warparty.raiders.0 Skirmisher Fighter alive True hp 192
+U 1 camp.5.raiders.warparty.raiders.1 Warden Fighter alive False hp 320
+U 1 camp.5.raiders.warparty.raiders.2 Marksman Fighter alive False hp 172
+U 1 camp.5.raiders.warparty.raiders.3 Skirmisher Fighter alive True hp 192
+U 1 camp.5.raiders.warparty.raiders.4 Medic Fighter alive False hp 163
+U 1 camp.5.raiders.warparty.raiders.champion Skirmisher Chief alive False hp 384
+E 0 Hit 0 leader > camp.5.raiders.warparty.raiders.2 15 
+E 3 Hit 1 camp.5.raiders.warparty.raiders.champion > clarth.trapper.4 7 
+E 3 Mark 1 camp.5.raiders.warparty.raiders.champion > clarth.trapper.4 150 burn
+E 3 Defence 0 clarth.trapper.4 > camp.5.raiders.warparty.raiders.champion 0 snaptrap
+E 3 Mark 0 clarth.trapper.4 > camp.5.raiders.warparty.raiders.champion 60 snare
+E 3 Mark 0 clarth.trapper.4 > camp.5.raiders.warparty.raiders.champion 150 bleed
+E 3 Chain 0 leader > camp.5.raiders.warparty.raiders.champion 2 snare.bonded
+E 3 Cash 0 leader > camp.5.raiders.warparty.raiders.champion 40 pin
+E 3 Hit 0 leader > camp.5.raiders.warparty.raiders.champion 78 aimed.pin
+E 3 ComboSetup 0 clarth.trapper.4 > camp.5.raiders.warparty.raiders.champion 2 snare
+E 3 ComboFinish 0 leader > camp.5.raiders.warparty.raiders.champion 2 snare
+E 3 Mark 0 leader > camp.5.raiders.warparty.raiders.champion 90 opening
+E 3 Chain 0 clarth.skirmisher.3 > camp.5.raiders.warparty.raiders.champion 3 bleed
+E 3 Defence 1 camp.5.raiders.warparty.raiders.1 > camp.5.raiders.warparty.raiders.champion 50 holds
+E 3 Guard 1 camp.5.raiders.warparty.raiders.1 > camp.5.raiders.warparty.raiders.champion 9 
+E 3 Hit 0 clarth.skirmisher.3 > camp.5.raiders.warparty.raiders.1 8 guarded
+E 3 Chain 0  > camp.5.raiders.warparty.raiders.champion 2 opening.unready
+E 4 TrapArmed 0 clarth.trapper.4 >  0 
+E 8 Hit 1 camp.5.raiders.warparty.raiders.2 > clarth.warden.1 6 
+E 11 TrapSprung 0 clarth.trapper.4 > camp.5.raiders.warparty.raiders.1 16 
+E 11 Hit 0 clarth.trapper.4 > camp.5.raiders.warparty.raiders.1 16 trap
+E 11 Mark 0 clarth.trapper.4 > camp.5.raiders.warparty.raiders.1 60 snare
+E 11 Mark 0 clarth.trapper.4 > camp.5.raiders.warparty.raiders.1 150 bleed
+E 11 Chain 0 clarth.marksman.2 > camp.5.raiders.warparty.raiders.1 4 snare
+E 11 Aim 0 clarth.marksman.2 > camp.5.raiders.warparty.raiders.1 22 pin
+E 11 Chain 0  > camp.5.raiders.warparty.raiders.1 5 bleed.unready
+E 15 Defence 0 clarth.marksman.2 > camp.5.raiders.warparty.raiders.3 0 stepback
+D 20 0 side0 >  2 Unleash
+D 20 1 auto1 >  1 Hold
+D 20 1 auto1 >  100 blocked
+E 20 Whisper 0 clarth.medic.5 >  0 inhand
+E 25 Hit 1 camp.5.raiders.warparty.raiders.0 > clarth.medic.5 4 
+E 28 Hit 0 clarth.skirmisher.3 > camp.5.raiders.warparty.raiders.4 14 
+E 30 Miss 0 clarth.warden.1 > camp.5.raiders.warparty.raiders.0 42 dodge
+E 32 Hit 0  > camp.5.raiders.warparty.raiders.champion 8 bleed
+E 32 Hit 1 camp.5.raiders.warparty.raiders.champion > clarth.trapper.4 4 burn
+E 33 Defence 0 clarth.warden.1 > clarth.trapper.4 50 holds
+E 33 Guard 0 clarth.warden.1 > clarth.trapper.4 2 
+E 33 Hit 1 camp.5.raiders.warparty.raiders.champion > clarth.warden.1 5 guarded
+E 33 Mark 1 camp.5.raiders.warparty.raiders.champion > clarth.warden.1 150 burn
+E 33 Cash 0 clarth.marksman.2 > camp.5.raiders.warparty.raiders.1 49 pin
+E 33 Hit 0 clarth.marksman.2 > camp.5.raiders.warparty.raiders.1 88 aimed.pin
+E 33 ComboSetup 0 clarth.trapper.4 > camp.5.raiders.warparty.raiders.1 4 snare
+E 33 ComboFinish 0 clarth.marksman.2 > camp.5.raiders.warparty.raiders.1 4 snare
+E 33 Mark 0 clarth.marksman.2 > camp.5.raiders.warparty.raiders.1 90 opening
+E 33 Chain 0  > camp.5.raiders.warparty.raiders.1 4 opening.unready
+E 38 Miss 1 camp.5.raiders.warparty.raiders.4 > clarth.trapper.4 70 dodge
+E 39 Hit 0 clarth.marksman.2 > camp.5.raiders.warparty.raiders.4 25 
+E 40 Hit 0  > camp.5.raiders.warparty.raiders.1 7 bleed
+E 43 Hit 0 clarth.trapper.4 > camp.5.raiders.warparty.raiders.4 11 
+E 45 Hit 1 camp.5.raiders.warparty.raiders.3 > clarth.marksman.2 3 
+E 45 Mark 1 camp.5.raiders.warparty.raiders.3 > clarth.marksman.2 150 burn
+E 45 Hit 0 leader > camp.5.raiders.warparty.raiders.2 30 
+E 53 Hit 1 camp.5.raiders.warparty.raiders.2 > clarth.warden.1 7 
+E 55 Miss 1 camp.5.raiders.warparty.raiders.0 > clarth.medic.5 78 dodge
+E 58 Defence 1 camp.5.raiders.warparty.raiders.1 > camp.5.raiders.warparty.raiders.4 50 holds
+E 58 Guard 1 camp.5.raiders.warparty.raiders.1 > camp.5.raiders.warparty.raiders.4 7 
+E 58 Hit 0 clarth.skirmisher.3 > camp.5.raiders.warparty.raiders.1 7 guarded
+E 62 Hit 0  > camp.5.raiders.warparty.raiders.champion 7 bleed
+E 62 Hit 1 camp.5.raiders.warparty.raiders.champion > clarth.warden.1 7 burn
+E 62 Hit 1 camp.5.raiders.warparty.raiders.champion > clarth.trapper.4 4 burn
+E 63 Defence 0 clarth.warden.1 > clarth.trapper.4 50 holds
+E 63 Guard 0 clarth.warden.1 > clarth.trapper.4 2 
+E 63 Hit 1 camp.5.raiders.warparty.raiders.champion > clarth.warden.1 4 guarded
+E 63 Mark 1 camp.5.raiders.warparty.raiders.champion > clarth.warden.1 150 burn
+E 66 Hit 0 clarth.warden.1 > camp.5.raiders.warparty.raiders.1 7 
+E 69 Miss 1 camp.5.raiders.warparty.raiders.1 > clarth.warden.1 60 dodge
+E 70 Hit 0  > camp.5.raiders.warparty.raiders.1 7 bleed
+E 74 Hit 1 camp.5.raiders.warparty.raiders.3 > clarth.marksman.2 4 burn
+E 75 Defence 0 clarth.warden.1 > clarth.marksman.2 50 holds
+E 75 Guard 0 clarth.warden.1 > clarth.marksman.2 1 
+E 75 Hit 1 camp.5.raiders.warparty.raiders.3 > clarth.warden.1 3 guarded
+E 75 Mark 1 camp.5.raiders.warparty.raiders.3 > clarth.warden.1 150 burn
+E 80 Hit 1 camp.5.raiders.warparty.raiders.4 > clarth.trapper.4 7 
+E 80 Mark 1 camp.5.raiders.warparty.raiders.4 > clarth.trapper.4 150 burn
+E 82 Hit 0 clarth.trapper.4 > camp.5.raiders.warparty.raiders.4 12 
+E 84 Hit 0 clarth.marksman.2 > camp.5.raiders.warparty.raiders.4 24 
+E 85 Guard 0 clarth.warden.1 > clarth.medic.5 1 
+E 85 Hit 1 camp.5.raiders.warparty.raiders.0 > clarth.warden.1 2 guarded
+E 88 Defence 1 camp.5.raiders.warparty.raiders.1 > camp.5.raiders.warparty.raiders.4 50 holds
+E 88 Guard 1 camp.5.raiders.warparty.raiders.1 > camp.5.raiders.warparty.raiders.4 8 
+E 88 Hit 0 clarth.skirmisher.3 > camp.5.raiders.warparty.raiders.1 8 guarded
+E 90 Miss 0 leader > camp.5.raiders.warparty.raiders.2 95 dodge
+E 92 Hit 0  > camp.5.raiders.warparty.raiders.champion 8 bleed
+E 93 Struck 1 camp.5.raiders.warparty.raiders.champion > clarth.trapper.4 4 crit
+E 93 Defence 0 clarth.warden.1 > clarth.trapper.4 50 holds
+E 93 Guard 0 clarth.warden.1 > clarth.trapper.4 3 
+E 93 Hit 1 camp.5.raiders.warparty.raiders.champion > clarth.warden.1 6 guarded
+E 93 Mark 1 camp.5.raiders.warparty.raiders.champion > clarth.warden.1 150 burn
+E 98 Struck 1 camp.5.raiders.warparty.raiders.2 > clarth.warden.1 5 block
+E 98 Hit 1 camp.5.raiders.warparty.raiders.2 > clarth.warden.1 4 
+E 100 Hit 0  > camp.5.raiders.warparty.raiders.1 6 bleed
+E 102 Struck 0 clarth.warden.1 > camp.5.raiders.warparty.raiders.1 6 block
+E 102 Hit 0 clarth.warden.1 > camp.5.raiders.warparty.raiders.1 2 
+E 104 Hit 1 camp.5.raiders.warparty.raiders.3 > clarth.marksman.2 4 burn
+E 105 Hit 1 camp.5.raiders.warparty.raiders.3 > clarth.marksman.2 4 
+E 105 Mark 1 camp.5.raiders.warparty.raiders.3 > clarth.marksman.2 150 burn
+E 105 Hit 1 camp.5.raiders.warparty.raiders.1 > clarth.warden.1 3 
+E 109 Hit 1 camp.5.raiders.warparty.raiders.4 > clarth.trapper.4 8 burn
+E 115 Guard 0 clarth.warden.1 > clarth.medic.5 2 
+E 115 Hit 1 camp.5.raiders.warparty.raiders.0 > clarth.warden.1 3 guarded
+E 118 Hit 0 clarth.skirmisher.3 > camp.5.raiders.warparty.raiders.4 22 
+E 121 Hit 0 clarth.trapper.4 > camp.5.raiders.warparty.raiders.4 14 
+E 122 Hit 1 camp.5.raiders.warparty.raiders.4 > clarth.trapper.4 7 
+E 122 Mark 1 camp.5.raiders.warparty.raiders.4 > clarth.trapper.4 150 burn
+E 122 Hit 0  > camp.5.raiders.warparty.raiders.champion 8 bleed
+E 122 Hit 1 camp.5.raiders.warparty.raiders.champion > clarth.warden.1 21 burn
+E 123 Hit 1 camp.5.raiders.warparty.raiders.champion > clarth.trapper.4 6 
+E 123 Mark 1 camp.5.raiders.warparty.raiders.champion > clarth.trapper.4 150 burn
+E 129 Struck 0 clarth.marksman.2 > camp.5.raiders.warparty.raiders.4 18 crit
+E 129 Hit 0 clarth.marksman.2 > camp.5.raiders.warparty.raiders.4 54 
+E 129 Kill 0 clarth.marksman.2 > camp.5.raiders.warparty.raiders.4 0 
+E 129 Reaction 1  > camp.5.raiders.warparty.raiders.4 90 rally
+E 130 Hit 0  > camp.5.raiders.warparty.raiders.1 7 bleed
+E 134 Hit 1 camp.5.raiders.warparty.raiders.3 > clarth.marksman.2 8 burn
+E 135 Hit 1 camp.5.raiders.warparty.raiders.3 > clarth.marksman.2 4 
+E 135 Mark 1 camp.5.raiders.warparty.raiders.3 > clarth.marksman.2 150 burn
+E 135 Hit 0 leader > camp.5.raiders.warparty.raiders.2 30 
+E 138 Hit 0 clarth.warden.1 > camp.5.raiders.warparty.raiders.1 8 
+D 140 0 side0 >  2 Unleash
+D 140 1 auto1 >  100 blocked
+E 141 Struck 1 camp.5.raiders.warparty.raiders.1 > clarth.warden.1 2 block
+E 141 Hit 1 camp.5.raiders.warparty.raiders.1 > clarth.warden.1 2 
+E 143 Hit 1 camp.5.raiders.warparty.raiders.2 > clarth.warden.1 9 
+E 145 Guard 0 clarth.warden.1 > clarth.medic.5 1 
+E 145 Hit 1 camp.5.raiders.warparty.raiders.0 > clarth.warden.1 3 guarded
+E 146 Cash 0 clarth.medic.5 > clarth.warden.1 8 covered
+E 146 Heal 0 clarth.medic.5 > clarth.warden.1 25 treat
+E 146 Cash 0 clarth.medic.5 > clarth.trapper.4 8 covered
+E 146 Heal 0 clarth.medic.5 > clarth.trapper.4 25 treat
+E 146 Heal 0 clarth.medic.5 > clarth.marksman.2 12 hierophant
+E 146 Whisper 0 clarth.medic.5 > clarth.trapper.4 1 hierophant
+E 148 Hit 0 clarth.skirmisher.3 > camp.5.raiders.warparty.raiders.1 29 strike
+E 148 Cash 0 clarth.skirmisher.3 > camp.5.raiders.warparty.raiders.1 6 rip
+E 148 Hit 0 clarth.skirmisher.3 > camp.5.raiders.warparty.raiders.1 7 rip
+E 148 ComboSetup 0 clarth.trapper.4 > camp.5.raiders.warparty.raiders.1 5 bleed
+E 148 ComboFinish 0 clarth.skirmisher.3 > camp.5.raiders.warparty.raiders.1 5 bleed
+E 148 Snap 1 camp.5.raiders.warparty.raiders.1 >  900 frenzy
+E 150 Windup 1 camp.5.raiders.warparty.raiders.0 > clarth.medic.5 30 Heavy
+E 152 Hit 0  > camp.5.raiders.warparty.raiders.champion 7 bleed
+E 152 Hit 1 camp.5.raiders.warparty.raiders.champion > clarth.warden.1 22 burn
+E 152 Hit 1 camp.5.raiders.warparty.raiders.champion > clarth.trapper.4 13 burn
+E 153 Hit 1 camp.5.raiders.warparty.raiders.champion > clarth.trapper.4 9 
+E 153 Mark 1 camp.5.raiders.warparty.raiders.champion > clarth.trapper.4 150 burn
+E 160 TrapArmed 0 clarth.trapper.4 >  0 
+E 164 Hit 1 camp.5.raiders.warparty.raiders.3 > clarth.marksman.2 12 burn
+E 165 TrapSprung 0 clarth.trapper.4 > camp.5.raiders.warparty.raiders.3 16 
+E 165 Hit 0 clarth.trapper.4 > camp.5.raiders.warparty.raiders.3 16 trap
+E 165 Mark 0 clarth.trapper.4 > camp.5.raiders.warparty.raiders.3 60 snare
+E 165 Mark 0 clarth.trapper.4 > camp.5.raiders.warparty.raiders.3 150 bleed
+E 165 Chain 0 leader > camp.5.raiders.warparty.raiders.3 17 snare.bonded
+E 165 Cash 0 leader > camp.5.raiders.warparty.raiders.3 41 pin
+E 165 Hit 0 leader > camp.5.raiders.warparty.raiders.3 80 aimed.pin
+E 165 ComboSetup 0 clarth.trapper.4 > camp.5.raiders.warparty.raiders.3 17 snare
+E 165 ComboFinish 0 leader > camp.5.raiders.warparty.raiders.3 17 snare
+E 165 Mark 0 leader > camp.5.raiders.warparty.raiders.3 90 opening
+E 165 Chain 0  > camp.5.raiders.warparty.raiders.3 18 bleed.unready
+E 165 Chain 0  > camp.5.raiders.warparty.raiders.3 17 opening.unready
+E 174 Struck 0 clarth.warden.1 > camp.5.raiders.warparty.raiders.1 8 block
+E 174 Hit 0 clarth.warden.1 > camp.5.raiders.warparty.raiders.1 6 
+E 174 Hit 0 clarth.marksman.2 > camp.5.raiders.warparty.raiders.2 26 
+E 177 Miss 1 camp.5.raiders.warparty.raiders.1 > clarth.warden.1 60 dodge
+E 178 Miss 0 clarth.skirmisher.3 > camp.5.raiders.warparty.raiders.2 98 dodge
+D 179 0 side0 >  0 Hold
+E 179 Release 1 camp.5.raiders.warparty.raiders.0 > clarth.medic.5 0 parried
+E 179 Parry 0  > camp.5.raiders.warparty.raiders.0 60 Heavy
+E 179 Mark 0  > camp.5.raiders.warparty.raiders.0 90 opening
+E 179 Hit 0  > camp.5.raiders.warparty.raiders.0 8 counter
+E 180 Hit 0 leader > camp.5.raiders.warparty.raiders.2 27 
+E 180 Chain 0  > camp.5.raiders.warparty.raiders.0 19 opening.unready
+E 182 Hit 1 camp.5.raiders.warparty.raiders.champion > clarth.warden.1 21 burn
+E 182 Hit 1 camp.5.raiders.warparty.raiders.champion > clarth.trapper.4 13 burn
+E 183 Hit 1 camp.5.raiders.warparty.raiders.champion > clarth.trapper.4 8 
+E 183 Mark 1 camp.5.raiders.warparty.raiders.champion > clarth.trapper.4 150 burn
+E 188 Cash 0 clarth.medic.5 > clarth.warden.1 8 covered
+E 188 Heal 0 clarth.medic.5 > clarth.warden.1 26 treat
+E 188 Hit 1 camp.5.raiders.warparty.raiders.2 > clarth.warden.1 9 
+E 194 Hit 0  > camp.5.raiders.warparty.raiders.3 4 bleed
+E 194 Hit 1 camp.5.raiders.warparty.raiders.3 > clarth.marksman.2 12 burn
+E 195 Hit 1 camp.5.raiders.warparty.raiders.3 > clarth.marksman.2 5 
+E 195 Mark 1 camp.5.raiders.warparty.raiders.3 > clarth.marksman.2 150 burn
+E 199 Hit 0 clarth.trapper.4 > camp.5.raiders.warparty.raiders.2 18 
+E 208 Hit 0 clarth.skirmisher.3 > camp.5.raiders.warparty.raiders.2 19 
+E 210 Struck 0 clarth.warden.1 > camp.5.raiders.warparty.raiders.1 8 block
+E 210 Hit 0 clarth.warden.1 > camp.5.raiders.warparty.raiders.1 8 
+E 212 Hit 1 camp.5.raiders.warparty.raiders.champion > clarth.warden.1 21 burn
+E 212 Hit 1 camp.5.raiders.warparty.raiders.champion > clarth.trapper.4 12 burn
+E 213 Hit 1 camp.5.raiders.warparty.raiders.champion > clarth.trapper.4 9 
+E 213 Mark 1 camp.5.raiders.warparty.raiders.champion > clarth.trapper.4 150 burn
+E 213 Hit 1 camp.5.raiders.warparty.raiders.1 > clarth.warden.1 5 
+E 219 Aim 0 clarth.marksman.2 > camp.5.raiders.warparty.raiders.2 45 aim
+E 224 Hit 0  > camp.5.raiders.warparty.raiders.3 4 bleed
+E 224 Hit 1 camp.5.raiders.warparty.raiders.3 > clarth.marksman.2 12 burn
+E 225 Hit 1 camp.5.raiders.warparty.raiders.3 > clarth.marksman.2 4 
+E 225 Broken 1 camp.5.raiders.warparty.raiders.3 > clarth.marksman.2 0 aim
+E 225 Mark 1 camp.5.raiders.warparty.raiders.3 > clarth.marksman.2 150 burn
+E 225 Hit 0 leader > camp.5.raiders.warparty.raiders.2 26 
+E 225 Kill 0 leader > camp.5.raiders.warparty.raiders.2 0 
+E 225 Reaction 1  > camp.5.raiders.warparty.raiders.2 90 rally
+E 230 Boost 0 clarth.medic.5 > leader 85 stim
+E 238 Boost 0 clarth.skirmisher.3 > camp.5.raiders.warparty.raiders.3 0 twincut
+E 238 Hit 0 clarth.skirmisher.3 > camp.5.raiders.warparty.raiders.3 6 twincut
+E 238 Snap 1 camp.5.raiders.warparty.raiders.3 >  900 frenzy
+E 238 Hit 0 clarth.skirmisher.3 > camp.5.raiders.warparty.raiders.3 6 twincut
+E 238 Mark 0 clarth.skirmisher.3 > camp.5.raiders.warparty.raiders.3 150 bleed
+E 238 Boost 0 clarth.trapper.4 >  0 rearm
+E 238 TrapArmed 0 clarth.trapper.4 >  0 
+E 238 Chain 0  > camp.5.raiders.warparty.raiders.3 24 bleed.unready
+E 242 Hit 1 camp.5.raiders.warparty.raiders.champion > clarth.warden.1 21 burn
+E 242 Hit 1 camp.5.raiders.warparty.raiders.champion > clarth.trapper.4 12 burn
+E 243 TrapSprung 0 clarth.trapper.4 > camp.5.raiders.warparty.raiders.champion 16 
+E 243 Hit 0 clarth.trapper.4 > camp.5.raiders.warparty.raiders.champion 16 trap
+E 243 Mark 0 clarth.trapper.4 > camp.5.raiders.warparty.raiders.champion 60 snare
+E 243 Mark 0 clarth.trapper.4 > camp.5.raiders.warparty.raiders.champion 150 bleed
+E 243 Chain 0 leader > camp.5.raiders.warparty.raiders.champion 25 snare.bonded
+E 243 Cash 0 leader > camp.5.raiders.warparty.raiders.champion 68 pin
+E 243 Hit 0 leader > camp.5.raiders.warparty.raiders.champion 147 aimed.pin
+E 243 ComboSetup 0 clarth.trapper.4 > camp.5.raiders.warparty.raiders.champion 25 snare
+E 243 ComboFinish 0 leader > camp.5.raiders.warparty.raiders.champion 25 snare
+E 243 Mark 0 leader > camp.5.raiders.warparty.raiders.champion 90 opening
+E 243 Chain 0 clarth.skirmisher.3 > camp.5.raiders.warparty.raiders.champion 26 bleed
+E 243 Defence 1 camp.5.raiders.warparty.raiders.1 > camp.5.raiders.warparty.raiders.champion 50 holds
+E 243 Guard 1 camp.5.raiders.warparty.raiders.1 > camp.5.raiders.warparty.raiders.champion 20 
+E 243 Hit 0 clarth.skirmisher.3 > camp.5.raiders.warparty.raiders.1 20 guarded
+E 243 Chain 0  > camp.5.raiders.warparty.raiders.champion 25 opening.unready
+E 246 Boost 0 clarth.warden.1 > camp.5.raiders.warparty.raiders.1 4 shieldbash
+E 246 Hit 0 clarth.warden.1 > camp.5.raiders.warparty.raiders.1 4 bash
+E 246 Mark 0 clarth.warden.1 > camp.5.raiders.warparty.raiders.1 90 opening
+E 246 Chain 0  > camp.5.raiders.warparty.raiders.1 27 opening.unready
+E 254 Hit 1 camp.5.raiders.warparty.raiders.3 > clarth.marksman.2 12 burn
+E 255 Defence 0 clarth.warden.1 > clarth.marksman.2 50 holds
+E 255 Guard 0 clarth.warden.1 > clarth.marksman.2 2 
+E 255 Hit 1 camp.5.raiders.warparty.raiders.3 > clarth.warden.1 4 guarded
+E 255 Mark 1 camp.5.raiders.warparty.raiders.3 > clarth.warden.1 150 burn
+D 260 0 side0 >  2 Unleash
+D 260 1 auto1 >  1 Hold
+D 260 1 auto1 >  100 blocked
+E 265 Miss 1 camp.5.raiders.warparty.raiders.0 > clarth.marksman.2 78 dodge
+E 267 Hit 0  > camp.5.raiders.warparty.raiders.3 4 bleed
+E 268 Hit 0 clarth.skirmisher.3 > camp.5.raiders.warparty.raiders.champion 14 
+E 269 Miss 0 clarth.marksman.2 > camp.5.raiders.warparty.raiders.1 83 dodge
+E 270 Hit 0 leader > camp.5.raiders.warparty.raiders.1 19 
+E 272 Cash 0 clarth.medic.5 > clarth.trapper.4 8 covered
+E 272 Heal 0 clarth.medic.5 > clarth.trapper.4 26 treat
+E 272 Heal 0 clarth.medic.5 > clarth.marksman.2 12 hierophant
+E 272 Whisper 0 clarth.medic.5 > clarth.trapper.4 1 hierophant
+E 272 Hit 0  > camp.5.raiders.warparty.raiders.champion 8 bleed
+E 272 Hit 1 camp.5.raiders.warparty.raiders.champion > clarth.trapper.4 13 burn
+E 273 Defence 0 clarth.warden.1 > clarth.trapper.4 50 holds
+E 273 Guard 0 clarth.warden.1 > clarth.trapper.4 3 
+E 273 Hit 1 camp.5.raiders.warparty.raiders.champion > clarth.warden.1 5 guarded
+E 273 Mark 1 camp.5.raiders.warparty.raiders.champion > clarth.warden.1 150 burn
+E 277 Hit 0 clarth.trapper.4 > camp.5.raiders.warparty.raiders.champion 10 
+E 282 Hit 0 clarth.warden.1 > camp.5.raiders.warparty.raiders.1 10 
+E 284 Hit 1 camp.5.raiders.warparty.raiders.3 > clarth.marksman.2 11 burn
+E 285 Hit 1 camp.5.raiders.warparty.raiders.3 > clarth.marksman.2 7 
+E 285 Mark 1 camp.5.raiders.warparty.raiders.3 > clarth.marksman.2 150 burn
+E 295 Miss 1 camp.5.raiders.warparty.raiders.0 > clarth.marksman.2 78 dodge
+E 297 Hit 0  > camp.5.raiders.warparty.raiders.3 3 bleed
+E 298 Hit 0 clarth.skirmisher.3 > camp.5.raiders.warparty.raiders.champion 13 
+D 300 1 auto1 >  3 Eclipse
+E 300 Windup 1 camp.5.raiders.warparty.raiders.champion >  90 Eclipse
+E 300 Reaction 1  > camp.5.raiders.warparty.raiders.champion 0 guardcaster
+E 302 Hit 0  > camp.5.raiders.warparty.raiders.champion 7 bleed
+E 302 Hit 1 camp.5.raiders.warparty.raiders.champion > clarth.warden.1 14 burn
+E 302 Hit 1 camp.5.raiders.warparty.raiders.champion > clarth.trapper.4 12 burn
+E 303 Miss 1 camp.5.raiders.warparty.raiders.champion > clarth.trapper.4 78 dodge
+E 309 Miss 1 camp.5.raiders.warparty.raiders.1 > clarth.warden.1 60 parry
+E 314 Cash 0 clarth.medic.5 > clarth.trapper.4 8 covered
+E 314 Heal 0 clarth.medic.5 > clarth.trapper.4 25 treat
+E 314 Heal 0 clarth.medic.5 > clarth.marksman.2 12 hierophant
+E 314 Whisper 0 clarth.medic.5 > clarth.trapper.4 1 hierophant
+E 314 Boost 0 clarth.marksman.2 > camp.5.raiders.warparty.raiders.champion 0 steady
+E 314 Aim 0 clarth.marksman.2 > camp.5.raiders.warparty.raiders.champion 45 aim
+E 314 Hit 1 camp.5.raiders.warparty.raiders.3 > clarth.marksman.2 12 burn
+E 315 Struck 1 camp.5.raiders.warparty.raiders.3 > clarth.marksman.2 3 crit
+E 315 Defence 0 clarth.marksman.2 > camp.5.raiders.warparty.raiders.3 0 stepback
+E 315 Hit 0 leader > camp.5.raiders.warparty.raiders.1 19 
+E 316 Guard 1 camp.5.raiders.warparty.raiders.1 > camp.5.raiders.warparty.raiders.champion 7 
+E 316 Hit 0 clarth.trapper.4 > camp.5.raiders.warparty.raiders.1 2 guarded
+E 318 Hit 0 clarth.warden.1 > camp.5.raiders.warparty.raiders.1 11 
+E 325 Hit 1 camp.5.raiders.warparty.raiders.0 > clarth.marksman.2 3 
+E 327 Hit 0  > camp.5.raiders.warparty.raiders.3 4 bleed
+E 328 Guard 1 camp.5.raiders.warparty.raiders.1 > camp.5.raiders.warparty.raiders.champion 10 
+E 328 Hit 0 clarth.skirmisher.3 > camp.5.raiders.warparty.raiders.1 4 guarded
+D 330 0 side0 >  1 FallBack
+E 332 Hit 0  > camp.5.raiders.warparty.raiders.champion 8 bleed
+E 332 Hit 1 camp.5.raiders.warparty.raiders.champion > clarth.warden.1 14 burn
+E 332 Hit 1 camp.5.raiders.warparty.raiders.champion > clarth.trapper.4 13 burn
+E 344 Hit 1 camp.5.raiders.warparty.raiders.3 > clarth.marksman.2 12 burn
+E 345 Defence 0 clarth.warden.1 > clarth.marksman.2 50 holds
+E 345 Guard 0 clarth.warden.1 > clarth.marksman.2 1 
+E 345 Hit 1 camp.5.raiders.warparty.raiders.3 > clarth.warden.1 4 guarded
+E 345 Mark 1 camp.5.raiders.warparty.raiders.3 > clarth.warden.1 150 burn
+E 345 Hit 1 camp.5.raiders.warparty.raiders.1 > clarth.warden.1 4 
+E 356 Cash 0 clarth.medic.5 > clarth.warden.1 8 covered
+E 356 Heal 0 clarth.medic.5 > clarth.warden.1 25 treat
+E 357 Hit 0  > camp.5.raiders.warparty.raiders.3 4 bleed
+E 362 Hit 0  > camp.5.raiders.warparty.raiders.champion 8 bleed
+E 362 Hit 1 camp.5.raiders.warparty.raiders.champion > clarth.trapper.4 12 burn
+E 374 Hit 1 camp.5.raiders.warparty.raiders.3 > clarth.warden.1 21 burn
+E 374 Hit 1 camp.5.raiders.warparty.raiders.3 > clarth.marksman.2 12 burn
+E 375 Struck 1 camp.5.raiders.warparty.raiders.3 > clarth.marksman.2 2 crit
+E 375 Hit 1 camp.5.raiders.warparty.raiders.3 > clarth.marksman.2 8 
+E 375 Mark 1 camp.5.raiders.warparty.raiders.3 > clarth.marksman.2 150 burn
+E 381 Miss 1 camp.5.raiders.warparty.raiders.1 > clarth.warden.1 60 parry
+E 387 Hit 0  > camp.5.raiders.warparty.raiders.3 4 bleed
+D 389 0 side0 >  0 Hold
+E 389 Release 1 camp.5.raiders.warparty.raiders.champion >  30 dodged
+D 390 0 side0 > camp.5.raiders.warparty.raiders.champion 1 FocusFire
+E 390 Windup 1 camp.5.raiders.warparty.raiders.1 > clarth.warden.1 30 Heavy
+E 392 Hit 0  > camp.5.raiders.warparty.raiders.champion 15 bleed
+E 394 TrapArmed 0 clarth.trapper.4 >  0 
+E 398 Cash 0 clarth.medic.5 > clarth.marksman.2 8 covered
+E 398 Heal 0 clarth.medic.5 > clarth.marksman.2 25 treat
+E 398 Heal 0 clarth.medic.5 > clarth.medic.5 4 hierophant
+E 398 Heal 0 clarth.medic.5 > clarth.trapper.4 12 hierophant
+E 398 Whisper 0 clarth.medic.5 > clarth.marksman.2 2 hierophant
+E 404 Hit 1 camp.5.raiders.warparty.raiders.3 > clarth.warden.1 21 burn
+E 404 Hit 1 camp.5.raiders.warparty.raiders.3 > clarth.marksman.2 12 burn
+E 405 TrapSprung 0 clarth.trapper.4 > camp.5.raiders.warparty.raiders.3 16 
+E 405 Hit 0 clarth.trapper.4 > camp.5.raiders.warparty.raiders.3 16 trap
+E 405 Mark 0 clarth.trapper.4 > camp.5.raiders.warparty.raiders.3 60 snare
+E 405 Mark 0 clarth.trapper.4 > camp.5.raiders.warparty.raiders.3 150 bleed
+E 405 Boost 0 leader > camp.5.raiders.warparty.raiders.champion 0 steady
+E 405 Aim 0 leader > camp.5.raiders.warparty.raiders.champion 45 aim
+E 405 Chain 0  > camp.5.raiders.warparty.raiders.3 33 snare.unready
+E 405 Chain 0  > camp.5.raiders.warparty.raiders.3 34 bleed.unready
+E 415 Miss 1 camp.5.raiders.warparty.raiders.0 > clarth.marksman.2 78 dodge
+E 418 Guard 1 camp.5.raiders.warparty.raiders.1 > camp.5.raiders.warparty.raiders.champion 11 
+E 418 Hit 0 clarth.skirmisher.3 > camp.5.raiders.warparty.raiders.1 11 guarded
+E 418 Kill 0 clarth.skirmisher.3 > camp.5.raiders.warparty.raiders.1 0 guarded
+E 418 Reaction 1  > camp.5.raiders.warparty.raiders.1 90 rally
+D 419 0 side0 >  2 Unleash
+E 419 Combo 0  >  10 Ambush
+E 419 Hit 0  > camp.5.raiders.warparty.raiders.0 19 ambush
+E 419 Hit 0  > camp.5.raiders.warparty.raiders.3 19 ambush
+E 419 Hit 0  > camp.5.raiders.warparty.raiders.champion 76 ambush
+E 419 Kill 0  > camp.5.raiders.warparty.raiders.champion 0 ambush
+E 419 Reaction 1  > camp.5.raiders.warparty.raiders.champion 90 rally
+E 419 Break 1  >  2 champion
+E 419 End 0  >  0 champion
+S 4 clarth.trapper.4 g:-/- a:- m:Burn=149
+S 4 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=149,Opening=89
+S 5 clarth.trapper.4 g:-/- a:- m:Burn=148
+S 5 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=148,Opening=88
+S 6 clarth.trapper.4 g:-/- a:- m:Burn=147
+S 6 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=147,Opening=87
+S 7 clarth.trapper.4 g:-/- a:- m:Burn=146
+S 7 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=146,Opening=86
+S 8 clarth.trapper.4 g:-/- a:- m:Burn=145
+S 8 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=145,Opening=85
+S 9 clarth.trapper.4 g:-/- a:- m:Burn=144
+S 9 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=144,Opening=84
+S 10 clarth.trapper.4 g:-/- a:- m:Burn=143
+S 10 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=143,Opening=83
+S 11 clarth.trapper.4 g:-/- a:- m:Burn=142
+S 11 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=142,Opening=82
+S 12 clarth.marksman.2 g:-/- a:camp.5.raiders.warparty.raiders.1:22 m:-
+S 12 clarth.trapper.4 g:-/- a:- m:Burn=141
+S 12 camp.5.raiders.warparty.raiders.1 g:-/- a:- m:Bleed=149,Snare=59
+S 12 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=141,Opening=81
+S 13 clarth.marksman.2 g:-/- a:camp.5.raiders.warparty.raiders.1:21 m:-
+S 13 clarth.trapper.4 g:-/- a:- m:Burn=140
+S 13 camp.5.raiders.warparty.raiders.1 g:-/- a:- m:Bleed=148,Snare=58
+S 13 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=140,Opening=80
+S 14 clarth.marksman.2 g:-/- a:camp.5.raiders.warparty.raiders.1:20 m:-
+S 14 clarth.trapper.4 g:-/- a:- m:Burn=139
+S 14 camp.5.raiders.warparty.raiders.1 g:-/- a:- m:Bleed=147,Snare=57
+S 14 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=139,Opening=79
+S 15 clarth.marksman.2 g:-/- a:camp.5.raiders.warparty.raiders.1:19 m:-
+S 15 clarth.trapper.4 g:-/- a:- m:Burn=138
+S 15 camp.5.raiders.warparty.raiders.1 g:-/- a:- m:Bleed=146,Snare=56
+S 15 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=138,Opening=78
+S 16 clarth.marksman.2 g:-/- a:camp.5.raiders.warparty.raiders.1:18 m:-
+S 16 clarth.trapper.4 g:-/- a:- m:Burn=137
+S 16 camp.5.raiders.warparty.raiders.1 g:-/- a:- m:Bleed=145,Snare=55
+S 16 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=137,Opening=77
+S 17 clarth.marksman.2 g:-/- a:camp.5.raiders.warparty.raiders.1:17 m:-
+S 17 clarth.trapper.4 g:-/- a:- m:Burn=136
+S 17 camp.5.raiders.warparty.raiders.1 g:-/- a:- m:Bleed=144,Snare=54
+S 17 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=136,Opening=76
+S 18 clarth.marksman.2 g:-/- a:camp.5.raiders.warparty.raiders.1:16 m:-
+S 18 clarth.trapper.4 g:-/- a:- m:Burn=135
+S 18 camp.5.raiders.warparty.raiders.1 g:-/- a:- m:Bleed=143,Snare=53
+S 18 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=135,Opening=75
+S 19 clarth.marksman.2 g:-/- a:camp.5.raiders.warparty.raiders.1:15 m:-
+S 19 clarth.trapper.4 g:-/- a:- m:Burn=134
+S 19 camp.5.raiders.warparty.raiders.1 g:-/- a:- m:Bleed=142,Snare=52
+S 19 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=134,Opening=74
+S 20 clarth.marksman.2 g:-/- a:camp.5.raiders.warparty.raiders.1:14 m:-
+S 20 clarth.trapper.4 g:-/- a:- m:Burn=133
+S 20 camp.5.raiders.warparty.raiders.1 g:-/- a:- m:Bleed=141,Snare=51
+S 20 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=133,Opening=73
+S 21 clarth.marksman.2 g:-/- a:camp.5.raiders.warparty.raiders.1:13 m:-
+S 21 clarth.trapper.4 g:-/- a:- m:Burn=132
+S 21 camp.5.raiders.warparty.raiders.1 g:-/- a:- m:Bleed=140,Snare=50
+S 21 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=132,Opening=72
+S 22 clarth.marksman.2 g:-/- a:camp.5.raiders.warparty.raiders.1:12 m:-
+S 22 clarth.trapper.4 g:-/- a:- m:Burn=131
+S 22 camp.5.raiders.warparty.raiders.1 g:-/- a:- m:Bleed=139,Snare=49
+S 22 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=131,Opening=71
+S 23 clarth.marksman.2 g:-/- a:camp.5.raiders.warparty.raiders.1:11 m:-
+S 23 clarth.trapper.4 g:-/- a:- m:Burn=130
+S 23 camp.5.raiders.warparty.raiders.1 g:-/- a:- m:Bleed=138,Snare=48
+S 23 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=130,Opening=70
+S 24 clarth.marksman.2 g:-/- a:camp.5.raiders.warparty.raiders.1:10 m:-
+S 24 clarth.trapper.4 g:-/- a:- m:Burn=129
+S 24 camp.5.raiders.warparty.raiders.1 g:-/- a:- m:Bleed=137,Snare=47
+S 24 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=129,Opening=69
+S 25 clarth.marksman.2 g:-/- a:camp.5.raiders.warparty.raiders.1:9 m:-
+S 25 clarth.trapper.4 g:-/- a:- m:Burn=128
+S 25 camp.5.raiders.warparty.raiders.1 g:-/- a:- m:Bleed=136,Snare=46
+S 25 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=128,Opening=68
+S 26 clarth.marksman.2 g:-/- a:camp.5.raiders.warparty.raiders.1:8 m:-
+S 26 clarth.trapper.4 g:-/- a:- m:Burn=127
+S 26 camp.5.raiders.warparty.raiders.1 g:-/- a:- m:Bleed=135,Snare=45
+S 26 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=127,Opening=67
+S 27 clarth.marksman.2 g:-/- a:camp.5.raiders.warparty.raiders.1:7 m:-
+S 27 clarth.trapper.4 g:-/- a:- m:Burn=126
+S 27 camp.5.raiders.warparty.raiders.1 g:-/- a:- m:Bleed=134,Snare=44
+S 27 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=126,Opening=66
+S 28 clarth.marksman.2 g:-/- a:camp.5.raiders.warparty.raiders.1:6 m:-
+S 28 clarth.trapper.4 g:-/- a:- m:Burn=125
+S 28 camp.5.raiders.warparty.raiders.1 g:-/- a:- m:Bleed=133,Snare=43
+S 28 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=125,Opening=65
+S 29 clarth.marksman.2 g:-/- a:camp.5.raiders.warparty.raiders.1:5 m:-
+S 29 clarth.trapper.4 g:-/- a:- m:Burn=124
+S 29 camp.5.raiders.warparty.raiders.1 g:-/- a:- m:Bleed=132,Snare=42
+S 29 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=124,Opening=64
+S 30 clarth.marksman.2 g:-/- a:camp.5.raiders.warparty.raiders.1:4 m:-
+S 30 clarth.trapper.4 g:-/- a:- m:Burn=123
+S 30 camp.5.raiders.warparty.raiders.1 g:-/- a:- m:Bleed=131,Snare=41
+S 30 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=123,Opening=63
+S 31 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 31 clarth.marksman.2 g:-/- a:camp.5.raiders.warparty.raiders.1:3 m:-
+S 31 clarth.trapper.4 g:-/- a:- m:Burn=122
+S 31 camp.5.raiders.warparty.raiders.1 g:-/- a:- m:Bleed=130,Snare=40
+S 31 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=122,Opening=62
+S 32 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 32 clarth.marksman.2 g:-/- a:camp.5.raiders.warparty.raiders.1:2 m:-
+S 32 clarth.trapper.4 g:-/- a:- m:Burn=121
+S 32 camp.5.raiders.warparty.raiders.1 g:-/- a:- m:Bleed=129,Snare=39
+S 32 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=121,Opening=61
+S 33 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 33 clarth.marksman.2 g:-/- a:camp.5.raiders.warparty.raiders.1:1 m:-
+S 33 clarth.trapper.4 g:-/- a:- m:Burn=120
+S 33 camp.5.raiders.warparty.raiders.1 g:-/- a:- m:Bleed=128,Snare=38
+S 33 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=120,Opening=60
+S 34 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=149
+S 34 clarth.trapper.4 g:-/- a:- m:Burn=119
+S 34 camp.5.raiders.warparty.raiders.1 g:-/- a:- m:Bleed=127,Opening=89
+S 34 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=119,Opening=59
+S 35 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=148
+S 35 clarth.trapper.4 g:-/- a:- m:Burn=118
+S 35 camp.5.raiders.warparty.raiders.1 g:-/- a:- m:Bleed=126,Opening=88
+S 35 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=118,Opening=58
+S 36 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=147
+S 36 clarth.trapper.4 g:-/- a:- m:Burn=117
+S 36 camp.5.raiders.warparty.raiders.1 g:-/- a:- m:Bleed=125,Opening=87
+S 36 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=117,Opening=57
+S 37 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=146
+S 37 clarth.trapper.4 g:-/- a:- m:Burn=116
+S 37 camp.5.raiders.warparty.raiders.1 g:-/- a:- m:Bleed=124,Opening=86
+S 37 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=116,Opening=56
+S 38 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=145
+S 38 clarth.trapper.4 g:-/- a:- m:Burn=115
+S 38 camp.5.raiders.warparty.raiders.1 g:-/- a:- m:Bleed=123,Opening=85
+S 38 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=115,Opening=55
+S 39 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=144
+S 39 clarth.trapper.4 g:-/- a:- m:Burn=114
+S 39 camp.5.raiders.warparty.raiders.1 g:-/- a:- m:Bleed=122,Opening=84
+S 39 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=114,Opening=54
+S 40 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=143
+S 40 clarth.trapper.4 g:-/- a:- m:Burn=113
+S 40 camp.5.raiders.warparty.raiders.1 g:-/- a:- m:Bleed=121,Opening=83
+S 40 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=113,Opening=53
+S 41 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=142
+S 41 clarth.trapper.4 g:-/- a:- m:Burn=112
+S 41 camp.5.raiders.warparty.raiders.1 g:-/- a:- m:Bleed=120,Opening=82
+S 41 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=112,Opening=52
+S 42 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=141
+S 42 clarth.trapper.4 g:-/- a:- m:Burn=111
+S 42 camp.5.raiders.warparty.raiders.1 g:-/- a:- m:Bleed=119,Opening=81
+S 42 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=111,Opening=51
+S 43 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=140
+S 43 clarth.trapper.4 g:-/- a:- m:Burn=110
+S 43 camp.5.raiders.warparty.raiders.1 g:-/- a:- m:Bleed=118,Opening=80
+S 43 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=110,Opening=50
+S 44 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=139
+S 44 clarth.trapper.4 g:-/- a:- m:Burn=109
+S 44 camp.5.raiders.warparty.raiders.1 g:-/- a:- m:Bleed=117,Opening=79
+S 44 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=109,Opening=49
+S 45 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=138
+S 45 clarth.trapper.4 g:-/- a:- m:Burn=108
+S 45 camp.5.raiders.warparty.raiders.1 g:-/- a:- m:Bleed=116,Opening=78
+S 45 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=108,Opening=48
+S 46 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=137
+S 46 clarth.marksman.2 g:-/- a:- m:Burn=149
+S 46 clarth.trapper.4 g:-/- a:- m:Burn=107
+S 46 camp.5.raiders.warparty.raiders.1 g:-/- a:- m:Bleed=115,Opening=77
+S 46 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=107,Opening=47
+S 47 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=136
+S 47 clarth.marksman.2 g:-/- a:- m:Burn=148
+S 47 clarth.trapper.4 g:-/- a:- m:Burn=106
+S 47 camp.5.raiders.warparty.raiders.1 g:-/- a:- m:Bleed=114,Opening=76
+S 47 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=106,Opening=46
+S 48 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=135
+S 48 clarth.marksman.2 g:-/- a:- m:Burn=147
+S 48 clarth.trapper.4 g:-/- a:- m:Burn=105
+S 48 camp.5.raiders.warparty.raiders.1 g:-/- a:- m:Bleed=113,Opening=75
+S 48 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=105,Opening=45
+S 49 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=134
+S 49 clarth.marksman.2 g:-/- a:- m:Burn=146
+S 49 clarth.trapper.4 g:-/- a:- m:Burn=104
+S 49 camp.5.raiders.warparty.raiders.1 g:-/- a:- m:Bleed=112,Opening=74
+S 49 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=104,Opening=44
+S 50 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=133
+S 50 clarth.marksman.2 g:-/- a:- m:Burn=145
+S 50 clarth.trapper.4 g:-/- a:- m:Burn=103
+S 50 camp.5.raiders.warparty.raiders.1 g:-/- a:- m:Bleed=111,Opening=73
+S 50 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=103,Opening=43
+S 51 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=132
+S 51 clarth.marksman.2 g:-/- a:- m:Burn=144
+S 51 clarth.trapper.4 g:-/- a:- m:Burn=102
+S 51 camp.5.raiders.warparty.raiders.1 g:-/- a:- m:Bleed=110,Opening=72
+S 51 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=102,Opening=42
+S 52 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=131
+S 52 clarth.marksman.2 g:-/- a:- m:Burn=143
+S 52 clarth.trapper.4 g:-/- a:- m:Burn=101
+S 52 camp.5.raiders.warparty.raiders.1 g:-/- a:- m:Bleed=109,Opening=71
+S 52 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=101,Opening=41
+S 53 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=130
+S 53 clarth.marksman.2 g:-/- a:- m:Burn=142
+S 53 clarth.trapper.4 g:-/- a:- m:Burn=100
+S 53 camp.5.raiders.warparty.raiders.1 g:-/- a:- m:Bleed=108,Opening=70
+S 53 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=100,Opening=40
+S 54 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=129
+S 54 clarth.marksman.2 g:-/- a:- m:Burn=141
+S 54 clarth.trapper.4 g:-/- a:- m:Burn=99
+S 54 camp.5.raiders.warparty.raiders.1 g:-/- a:- m:Bleed=107,Opening=69
+S 54 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=99,Opening=39
+S 55 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=128
+S 55 clarth.marksman.2 g:-/- a:- m:Burn=140
+S 55 clarth.trapper.4 g:-/- a:- m:Burn=98
+S 55 camp.5.raiders.warparty.raiders.1 g:-/- a:- m:Bleed=106,Opening=68
+S 55 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=98,Opening=38
+S 56 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=127
+S 56 clarth.marksman.2 g:-/- a:- m:Burn=139
+S 56 clarth.trapper.4 g:-/- a:- m:Burn=97
+S 56 camp.5.raiders.warparty.raiders.1 g:-/- a:- m:Bleed=105,Opening=67
+S 56 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=97,Opening=37
+S 57 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=126
+S 57 clarth.marksman.2 g:-/- a:- m:Burn=138
+S 57 clarth.trapper.4 g:-/- a:- m:Burn=96
+S 57 camp.5.raiders.warparty.raiders.1 g:-/- a:- m:Bleed=104,Opening=66
+S 57 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=96,Opening=36
+S 58 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=125
+S 58 clarth.marksman.2 g:-/- a:- m:Burn=137
+S 58 clarth.trapper.4 g:-/- a:- m:Burn=95
+S 58 camp.5.raiders.warparty.raiders.1 g:-/- a:- m:Bleed=103,Opening=65
+S 58 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=95,Opening=35
+S 59 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=124
+S 59 clarth.marksman.2 g:-/- a:- m:Burn=136
+S 59 clarth.trapper.4 g:-/- a:- m:Burn=94
+S 59 camp.5.raiders.warparty.raiders.1 g:-/- a:- m:Bleed=102,Opening=64
+S 59 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=94,Opening=34
+S 60 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=123
+S 60 clarth.marksman.2 g:-/- a:- m:Burn=135
+S 60 clarth.trapper.4 g:-/- a:- m:Burn=93
+S 60 camp.5.raiders.warparty.raiders.1 g:-/- a:- m:Bleed=101,Opening=63
+S 60 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=93,Opening=33
+S 61 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=122
+S 61 clarth.marksman.2 g:-/- a:- m:Burn=134
+S 61 clarth.trapper.4 g:-/- a:- m:Burn=92
+S 61 camp.5.raiders.warparty.raiders.1 g:-/- a:- m:Bleed=100,Opening=62
+S 61 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=92,Opening=32
+S 62 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=121
+S 62 clarth.marksman.2 g:-/- a:- m:Burn=133
+S 62 clarth.trapper.4 g:-/- a:- m:Burn=91
+S 62 camp.5.raiders.warparty.raiders.1 g:-/- a:- m:Bleed=99,Opening=61
+S 62 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=91,Opening=31
+S 63 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=120
+S 63 clarth.marksman.2 g:-/- a:- m:Burn=132
+S 63 clarth.trapper.4 g:-/- a:- m:Burn=90
+S 63 camp.5.raiders.warparty.raiders.1 g:-/- a:- m:Bleed=98,Opening=60
+S 63 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=90,Opening=30
+S 64 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=149
+S 64 clarth.marksman.2 g:-/- a:- m:Burn=131
+S 64 clarth.trapper.4 g:-/- a:- m:Burn=89
+S 64 camp.5.raiders.warparty.raiders.1 g:-/- a:- m:Bleed=97,Opening=59
+S 64 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=89,Opening=29
+S 65 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=148
+S 65 clarth.marksman.2 g:-/- a:- m:Burn=130
+S 65 clarth.trapper.4 g:-/- a:- m:Burn=88
+S 65 camp.5.raiders.warparty.raiders.1 g:-/- a:- m:Bleed=96,Opening=58
+S 65 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=88,Opening=28
+S 66 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=147
+S 66 clarth.marksman.2 g:-/- a:- m:Burn=129
+S 66 clarth.trapper.4 g:-/- a:- m:Burn=87
+S 66 camp.5.raiders.warparty.raiders.1 g:-/- a:- m:Bleed=95,Opening=57
+S 66 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=87,Opening=27
+S 67 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=146
+S 67 clarth.marksman.2 g:-/- a:- m:Burn=128
+S 67 clarth.trapper.4 g:-/- a:- m:Burn=86
+S 67 camp.5.raiders.warparty.raiders.1 g:-/- a:- m:Bleed=94,Opening=56
+S 67 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=86,Opening=26
+S 68 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=145
+S 68 clarth.marksman.2 g:-/- a:- m:Burn=127
+S 68 clarth.trapper.4 g:-/- a:- m:Burn=85
+S 68 camp.5.raiders.warparty.raiders.1 g:-/- a:- m:Bleed=93,Opening=55
+S 68 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=85,Opening=25
+S 69 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=144
+S 69 clarth.marksman.2 g:-/- a:- m:Burn=126
+S 69 clarth.trapper.4 g:-/- a:- m:Burn=84
+S 69 camp.5.raiders.warparty.raiders.1 g:-/- a:- m:Bleed=92,Opening=54
+S 69 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=84,Opening=24
+S 70 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=143
+S 70 clarth.marksman.2 g:-/- a:- m:Burn=125
+S 70 clarth.trapper.4 g:-/- a:- m:Burn=83
+S 70 camp.5.raiders.warparty.raiders.1 g:-/- a:- m:Bleed=91,Opening=53
+S 70 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=83,Opening=23
+S 71 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=142
+S 71 clarth.marksman.2 g:-/- a:- m:Burn=124
+S 71 clarth.trapper.4 g:-/- a:- m:Burn=82
+S 71 camp.5.raiders.warparty.raiders.1 g:-/- a:- m:Bleed=90,Opening=52
+S 71 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=82,Opening=22
+S 72 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=141
+S 72 clarth.marksman.2 g:-/- a:- m:Burn=123
+S 72 clarth.trapper.4 g:-/- a:- m:Burn=81
+S 72 camp.5.raiders.warparty.raiders.1 g:-/- a:- m:Bleed=89,Opening=51
+S 72 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=81,Opening=21
+S 73 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=140
+S 73 clarth.marksman.2 g:-/- a:- m:Burn=122
+S 73 clarth.trapper.4 g:-/- a:- m:Burn=80
+S 73 camp.5.raiders.warparty.raiders.1 g:-/- a:- m:Bleed=88,Opening=50
+S 73 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=80,Opening=20
+S 74 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=139
+S 74 clarth.marksman.2 g:-/- a:- m:Burn=121
+S 74 clarth.trapper.4 g:-/- a:- m:Burn=79
+S 74 camp.5.raiders.warparty.raiders.1 g:-/- a:- m:Bleed=87,Opening=49
+S 74 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=79,Opening=19
+S 75 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=138
+S 75 clarth.marksman.2 g:-/- a:- m:Burn=120
+S 75 clarth.trapper.4 g:-/- a:- m:Burn=78
+S 75 camp.5.raiders.warparty.raiders.1 g:-/- a:- m:Bleed=86,Opening=48
+S 75 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=78,Opening=18
+S 76 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=149
+S 76 clarth.marksman.2 g:-/- a:- m:Burn=119
+S 76 clarth.trapper.4 g:-/- a:- m:Burn=77
+S 76 camp.5.raiders.warparty.raiders.1 g:-/- a:- m:Bleed=85,Opening=47
+S 76 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=77,Opening=17
+S 77 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=148
+S 77 clarth.marksman.2 g:-/- a:- m:Burn=118
+S 77 clarth.trapper.4 g:-/- a:- m:Burn=76
+S 77 camp.5.raiders.warparty.raiders.1 g:-/- a:- m:Bleed=84,Opening=46
+S 77 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=76,Opening=16
+S 78 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=147
+S 78 clarth.marksman.2 g:-/- a:- m:Burn=117
+S 78 clarth.trapper.4 g:-/- a:- m:Burn=75
+S 78 camp.5.raiders.warparty.raiders.1 g:-/- a:- m:Bleed=83,Opening=45
+S 78 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=75,Opening=15
+S 79 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=146
+S 79 clarth.marksman.2 g:-/- a:- m:Burn=116
+S 79 clarth.trapper.4 g:-/- a:- m:Burn=74
+S 79 camp.5.raiders.warparty.raiders.1 g:-/- a:- m:Bleed=82,Opening=44
+S 79 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=74,Opening=14
+S 80 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=145
+S 80 clarth.marksman.2 g:-/- a:- m:Burn=115
+S 80 clarth.trapper.4 g:-/- a:- m:Burn=73
+S 80 camp.5.raiders.warparty.raiders.1 g:-/- a:- m:Bleed=81,Opening=43
+S 80 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=73,Opening=13
+S 81 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=144
+S 81 clarth.marksman.2 g:-/- a:- m:Burn=114
+S 81 clarth.trapper.4 g:-/- a:- m:Burn=149
+S 81 camp.5.raiders.warparty.raiders.1 g:-/- a:- m:Bleed=80,Opening=42
+S 81 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=72,Opening=12
+S 82 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=143
+S 82 clarth.marksman.2 g:-/- a:- m:Burn=113
+S 82 clarth.trapper.4 g:-/- a:- m:Burn=148
+S 82 camp.5.raiders.warparty.raiders.1 g:-/- a:- m:Bleed=79,Opening=41
+S 82 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=71,Opening=11
+S 83 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=142
+S 83 clarth.marksman.2 g:-/- a:- m:Burn=112
+S 83 clarth.trapper.4 g:-/- a:- m:Burn=147
+S 83 camp.5.raiders.warparty.raiders.1 g:-/- a:- m:Bleed=78,Opening=40
+S 83 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=70,Opening=10
+S 84 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=141
+S 84 clarth.marksman.2 g:-/- a:- m:Burn=111
+S 84 clarth.trapper.4 g:-/- a:- m:Burn=146
+S 84 camp.5.raiders.warparty.raiders.1 g:-/- a:- m:Bleed=77,Opening=39
+S 84 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=69,Opening=9
+S 85 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=140
+S 85 clarth.marksman.2 g:-/- a:- m:Burn=110
+S 85 clarth.trapper.4 g:-/- a:- m:Burn=145
+S 85 camp.5.raiders.warparty.raiders.1 g:-/- a:- m:Bleed=76,Opening=38
+S 85 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=68,Opening=8
+S 86 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=139
+S 86 clarth.marksman.2 g:-/- a:- m:Burn=109
+S 86 clarth.trapper.4 g:-/- a:- m:Burn=144
+S 86 camp.5.raiders.warparty.raiders.1 g:-/- a:- m:Bleed=75,Opening=37
+S 86 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=67,Opening=7
+S 87 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=138
+S 87 clarth.marksman.2 g:-/- a:- m:Burn=108
+S 87 clarth.trapper.4 g:-/- a:- m:Burn=143
+S 87 camp.5.raiders.warparty.raiders.1 g:-/- a:- m:Bleed=74,Opening=36
+S 87 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=66,Opening=6
+S 88 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=137
+S 88 clarth.marksman.2 g:-/- a:- m:Burn=107
+S 88 clarth.trapper.4 g:-/- a:- m:Burn=142
+S 88 camp.5.raiders.warparty.raiders.1 g:-/- a:- m:Bleed=73,Opening=35
+S 88 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=65,Opening=5
+S 89 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=136
+S 89 clarth.marksman.2 g:-/- a:- m:Burn=106
+S 89 clarth.trapper.4 g:-/- a:- m:Burn=141
+S 89 camp.5.raiders.warparty.raiders.1 g:-/- a:- m:Bleed=72,Opening=34
+S 89 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=64,Opening=4
+S 90 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=135
+S 90 clarth.marksman.2 g:-/- a:- m:Burn=105
+S 90 clarth.trapper.4 g:-/- a:- m:Burn=140
+S 90 camp.5.raiders.warparty.raiders.1 g:-/- a:- m:Bleed=71,Opening=33
+S 90 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=63,Opening=3
+S 91 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=134
+S 91 clarth.marksman.2 g:-/- a:- m:Burn=104
+S 91 clarth.trapper.4 g:-/- a:- m:Burn=139
+S 91 camp.5.raiders.warparty.raiders.1 g:-/- a:- m:Bleed=70,Opening=32
+S 91 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=62,Opening=2
+S 92 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=133
+S 92 clarth.marksman.2 g:-/- a:- m:Burn=103
+S 92 clarth.trapper.4 g:-/- a:- m:Burn=138
+S 92 camp.5.raiders.warparty.raiders.1 g:-/- a:- m:Bleed=69,Opening=31
+S 92 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=61,Opening=1
+S 93 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=132
+S 93 clarth.marksman.2 g:-/- a:- m:Burn=102
+S 93 clarth.trapper.4 g:-/- a:- m:Burn=137
+S 93 camp.5.raiders.warparty.raiders.1 g:-/- a:- m:Bleed=68,Opening=30
+S 93 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=60
+S 94 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=149
+S 94 clarth.marksman.2 g:-/- a:- m:Burn=101
+S 94 clarth.trapper.4 g:-/- a:- m:Burn=136
+S 94 camp.5.raiders.warparty.raiders.1 g:-/- a:- m:Bleed=67,Opening=29
+S 94 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=59
+S 95 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=148
+S 95 clarth.marksman.2 g:-/- a:- m:Burn=100
+S 95 clarth.trapper.4 g:-/- a:- m:Burn=135
+S 95 camp.5.raiders.warparty.raiders.1 g:-/- a:- m:Bleed=66,Opening=28
+S 95 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=58
+S 96 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=147
+S 96 clarth.marksman.2 g:-/- a:- m:Burn=99
+S 96 clarth.trapper.4 g:-/- a:- m:Burn=134
+S 96 camp.5.raiders.warparty.raiders.1 g:-/- a:- m:Bleed=65,Opening=27
+S 96 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=57
+S 97 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=146
+S 97 clarth.marksman.2 g:-/- a:- m:Burn=98
+S 97 clarth.trapper.4 g:-/- a:- m:Burn=133
+S 97 camp.5.raiders.warparty.raiders.1 g:-/- a:- m:Bleed=64,Opening=26
+S 97 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=56
+S 98 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=145
+S 98 clarth.marksman.2 g:-/- a:- m:Burn=97
+S 98 clarth.trapper.4 g:-/- a:- m:Burn=132
+S 98 camp.5.raiders.warparty.raiders.1 g:-/- a:- m:Bleed=63,Opening=25
+S 98 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=55
+S 99 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=144
+S 99 clarth.marksman.2 g:-/- a:- m:Burn=96
+S 99 clarth.trapper.4 g:-/- a:- m:Burn=131
+S 99 camp.5.raiders.warparty.raiders.1 g:-/- a:- m:Bleed=62,Opening=24
+S 99 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=54
+S 100 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=143
+S 100 clarth.marksman.2 g:-/- a:- m:Burn=95
+S 100 clarth.trapper.4 g:-/- a:- m:Burn=130
+S 100 camp.5.raiders.warparty.raiders.1 g:-/- a:- m:Bleed=61,Opening=23
+S 100 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=53
+S 101 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=142
+S 101 clarth.marksman.2 g:-/- a:- m:Burn=94
+S 101 clarth.trapper.4 g:-/- a:- m:Burn=129
+S 101 camp.5.raiders.warparty.raiders.1 g:-/- a:- m:Bleed=60,Opening=22
+S 101 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=52
+S 102 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=141
+S 102 clarth.marksman.2 g:-/- a:- m:Burn=93
+S 102 clarth.trapper.4 g:-/- a:- m:Burn=128
+S 102 camp.5.raiders.warparty.raiders.1 g:-/- a:- m:Bleed=59,Opening=21
+S 102 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=51
+S 103 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=140
+S 103 clarth.marksman.2 g:-/- a:- m:Burn=92
+S 103 clarth.trapper.4 g:-/- a:- m:Burn=127
+S 103 camp.5.raiders.warparty.raiders.1 g:-/- a:- m:Bleed=58,Opening=20
+S 103 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=50
+S 104 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=139
+S 104 clarth.marksman.2 g:-/- a:- m:Burn=91
+S 104 clarth.trapper.4 g:-/- a:- m:Burn=126
+S 104 camp.5.raiders.warparty.raiders.1 g:-/- a:- m:Bleed=57,Opening=19
+S 104 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=49
+S 105 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=138
+S 105 clarth.marksman.2 g:-/- a:- m:Burn=90
+S 105 clarth.trapper.4 g:-/- a:- m:Burn=125
+S 105 camp.5.raiders.warparty.raiders.1 g:-/- a:- m:Bleed=56,Opening=18
+S 105 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=48
+S 106 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=137
+S 106 clarth.marksman.2 g:-/- a:- m:Burn=149
+S 106 clarth.trapper.4 g:-/- a:- m:Burn=124
+S 106 camp.5.raiders.warparty.raiders.1 g:-/- a:- m:Bleed=55,Opening=17
+S 106 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=47
+S 107 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=136
+S 107 clarth.marksman.2 g:-/- a:- m:Burn=148
+S 107 clarth.trapper.4 g:-/- a:- m:Burn=123
+S 107 camp.5.raiders.warparty.raiders.1 g:-/- a:- m:Bleed=54,Opening=16
+S 107 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=46
+S 108 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=135
+S 108 clarth.marksman.2 g:-/- a:- m:Burn=147
+S 108 clarth.trapper.4 g:-/- a:- m:Burn=122
+S 108 camp.5.raiders.warparty.raiders.1 g:-/- a:- m:Bleed=53,Opening=15
+S 108 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=45
+S 109 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=134
+S 109 clarth.marksman.2 g:-/- a:- m:Burn=146
+S 109 clarth.trapper.4 g:-/- a:- m:Burn=121
+S 109 camp.5.raiders.warparty.raiders.1 g:-/- a:- m:Bleed=52,Opening=14
+S 109 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=44
+S 110 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=133
+S 110 clarth.marksman.2 g:-/- a:- m:Burn=145
+S 110 clarth.trapper.4 g:-/- a:- m:Burn=120
+S 110 camp.5.raiders.warparty.raiders.1 g:-/- a:- m:Bleed=51,Opening=13
+S 110 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=43
+S 111 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=132
+S 111 clarth.marksman.2 g:-/- a:- m:Burn=144
+S 111 clarth.trapper.4 g:-/- a:- m:Burn=119
+S 111 camp.5.raiders.warparty.raiders.1 g:-/- a:- m:Bleed=50,Opening=12
+S 111 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=42
+S 112 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=131
+S 112 clarth.marksman.2 g:-/- a:- m:Burn=143
+S 112 clarth.trapper.4 g:-/- a:- m:Burn=118
+S 112 camp.5.raiders.warparty.raiders.1 g:-/- a:- m:Bleed=49,Opening=11
+S 112 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=41
+S 113 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=130
+S 113 clarth.marksman.2 g:-/- a:- m:Burn=142
+S 113 clarth.trapper.4 g:-/- a:- m:Burn=117
+S 113 camp.5.raiders.warparty.raiders.1 g:-/- a:- m:Bleed=48,Opening=10
+S 113 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=40
+S 114 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=129
+S 114 clarth.marksman.2 g:-/- a:- m:Burn=141
+S 114 clarth.trapper.4 g:-/- a:- m:Burn=116
+S 114 camp.5.raiders.warparty.raiders.1 g:-/- a:- m:Bleed=47,Opening=9
+S 114 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=39
+S 115 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=128
+S 115 clarth.marksman.2 g:-/- a:- m:Burn=140
+S 115 clarth.trapper.4 g:-/- a:- m:Burn=115
+S 115 camp.5.raiders.warparty.raiders.1 g:-/- a:- m:Bleed=46,Opening=8
+S 115 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=38
+S 116 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=127
+S 116 clarth.marksman.2 g:-/- a:- m:Burn=139
+S 116 clarth.trapper.4 g:-/- a:- m:Burn=114
+S 116 camp.5.raiders.warparty.raiders.1 g:-/- a:- m:Bleed=45,Opening=7
+S 116 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=37
+S 117 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=126
+S 117 clarth.marksman.2 g:-/- a:- m:Burn=138
+S 117 clarth.trapper.4 g:-/- a:- m:Burn=113
+S 117 camp.5.raiders.warparty.raiders.1 g:-/- a:- m:Bleed=44,Opening=6
+S 117 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=36
+S 118 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=125
+S 118 clarth.marksman.2 g:-/- a:- m:Burn=137
+S 118 clarth.trapper.4 g:-/- a:- m:Burn=112
+S 118 camp.5.raiders.warparty.raiders.1 g:-/- a:- m:Bleed=43,Opening=5
+S 118 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=35
+S 119 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=124
+S 119 clarth.marksman.2 g:-/- a:- m:Burn=136
+S 119 clarth.trapper.4 g:-/- a:- m:Burn=111
+S 119 camp.5.raiders.warparty.raiders.1 g:-/- a:- m:Bleed=42,Opening=4
+S 119 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=34
+S 120 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=123
+S 120 clarth.marksman.2 g:-/- a:- m:Burn=135
+S 120 clarth.trapper.4 g:-/- a:- m:Burn=110
+S 120 camp.5.raiders.warparty.raiders.1 g:-/- a:- m:Bleed=41,Opening=3
+S 120 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=33
+S 121 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=122
+S 121 clarth.marksman.2 g:-/- a:- m:Burn=134
+S 121 clarth.trapper.4 g:-/- a:- m:Burn=109
+S 121 camp.5.raiders.warparty.raiders.1 g:-/- a:- m:Bleed=40,Opening=2
+S 121 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=32
+S 122 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=121
+S 122 clarth.marksman.2 g:-/- a:- m:Burn=133
+S 122 clarth.trapper.4 g:-/- a:- m:Burn=108
+S 122 camp.5.raiders.warparty.raiders.1 g:-/- a:- m:Bleed=39,Opening=1
+S 122 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=31
+S 123 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=120
+S 123 clarth.marksman.2 g:-/- a:- m:Burn=132
+S 123 clarth.trapper.4 g:-/- a:- m:Burn=149
+S 123 camp.5.raiders.warparty.raiders.1 g:-/- a:- m:Bleed=38
+S 123 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=30
+S 124 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=119
+S 124 clarth.marksman.2 g:-/- a:- m:Burn=131
+S 124 clarth.trapper.4 g:-/- a:- m:Burn=149
+S 124 camp.5.raiders.warparty.raiders.1 g:-/- a:- m:Bleed=37
+S 124 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=29
+S 125 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=118
+S 125 clarth.marksman.2 g:-/- a:- m:Burn=130
+S 125 clarth.trapper.4 g:-/- a:- m:Burn=148
+S 125 camp.5.raiders.warparty.raiders.1 g:-/- a:- m:Bleed=36
+S 125 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=28
+S 126 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=117
+S 126 clarth.marksman.2 g:-/- a:- m:Burn=129
+S 126 clarth.trapper.4 g:-/- a:- m:Burn=147
+S 126 camp.5.raiders.warparty.raiders.1 g:-/- a:- m:Bleed=35
+S 126 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=27
+S 127 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=116
+S 127 clarth.marksman.2 g:-/- a:- m:Burn=128
+S 127 clarth.trapper.4 g:-/- a:- m:Burn=146
+S 127 camp.5.raiders.warparty.raiders.1 g:-/- a:- m:Bleed=34
+S 127 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=26
+S 128 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=115
+S 128 clarth.marksman.2 g:-/- a:- m:Burn=127
+S 128 clarth.trapper.4 g:-/- a:- m:Burn=145
+S 128 camp.5.raiders.warparty.raiders.1 g:-/- a:- m:Bleed=33
+S 128 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=25
+S 129 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=114
+S 129 clarth.marksman.2 g:-/- a:- m:Burn=126
+S 129 clarth.trapper.4 g:-/- a:- m:Burn=144
+S 129 camp.5.raiders.warparty.raiders.1 g:-/- a:- m:Bleed=32
+S 129 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=24
+S 130 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=113
+S 130 clarth.marksman.2 g:-/- a:- m:Burn=125
+S 130 clarth.trapper.4 g:-/- a:- m:Burn=143
+S 130 camp.5.raiders.warparty.raiders.1 g:-/- a:- m:Bleed=31
+S 130 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=23
+S 131 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=112
+S 131 clarth.marksman.2 g:-/- a:- m:Burn=124
+S 131 clarth.trapper.4 g:-/- a:- m:Burn=142
+S 131 camp.5.raiders.warparty.raiders.1 g:-/- a:- m:Bleed=30
+S 131 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=22
+S 132 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=111
+S 132 clarth.marksman.2 g:-/- a:- m:Burn=123
+S 132 clarth.trapper.4 g:-/- a:- m:Burn=141
+S 132 camp.5.raiders.warparty.raiders.1 g:-/- a:- m:Bleed=29
+S 132 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=21
+S 133 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=110
+S 133 clarth.marksman.2 g:-/- a:- m:Burn=122
+S 133 clarth.trapper.4 g:-/- a:- m:Burn=140
+S 133 camp.5.raiders.warparty.raiders.1 g:-/- a:- m:Bleed=28
+S 133 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=20
+S 134 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=109
+S 134 clarth.marksman.2 g:-/- a:- m:Burn=121
+S 134 clarth.trapper.4 g:-/- a:- m:Burn=139
+S 134 camp.5.raiders.warparty.raiders.1 g:-/- a:- m:Bleed=27
+S 134 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=19
+S 135 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=108
+S 135 clarth.marksman.2 g:-/- a:- m:Burn=120
+S 135 clarth.trapper.4 g:-/- a:- m:Burn=138
+S 135 camp.5.raiders.warparty.raiders.1 g:-/- a:- m:Bleed=26
+S 135 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=18
+S 136 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=107
+S 136 clarth.marksman.2 g:-/- a:- m:Burn=149
+S 136 clarth.trapper.4 g:-/- a:- m:Burn=137
+S 136 camp.5.raiders.warparty.raiders.1 g:-/- a:- m:Bleed=25
+S 136 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=17
+S 137 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=106
+S 137 clarth.marksman.2 g:-/- a:- m:Burn=148
+S 137 clarth.trapper.4 g:-/- a:- m:Burn=136
+S 137 camp.5.raiders.warparty.raiders.1 g:-/- a:- m:Bleed=24
+S 137 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=16
+S 138 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=105
+S 138 clarth.marksman.2 g:-/- a:- m:Burn=147
+S 138 clarth.trapper.4 g:-/- a:- m:Burn=135
+S 138 camp.5.raiders.warparty.raiders.1 g:-/- a:- m:Bleed=23
+S 138 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=15
+S 139 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=104
+S 139 clarth.marksman.2 g:-/- a:- m:Burn=146
+S 139 clarth.trapper.4 g:-/- a:- m:Burn=134
+S 139 camp.5.raiders.warparty.raiders.1 g:-/- a:- m:Bleed=22
+S 139 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=14
+S 140 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=103
+S 140 clarth.marksman.2 g:-/- a:- m:Burn=145
+S 140 clarth.trapper.4 g:-/- a:- m:Burn=133
+S 140 camp.5.raiders.warparty.raiders.1 g:-/- a:- m:Bleed=21
+S 140 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=13
+S 141 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=102
+S 141 clarth.marksman.2 g:-/- a:- m:Burn=144
+S 141 clarth.trapper.4 g:-/- a:- m:Burn=132
+S 141 camp.5.raiders.warparty.raiders.1 g:-/- a:- m:Bleed=20
+S 141 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=12
+S 142 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=101
+S 142 clarth.marksman.2 g:-/- a:- m:Burn=143
+S 142 clarth.trapper.4 g:-/- a:- m:Burn=131
+S 142 camp.5.raiders.warparty.raiders.1 g:-/- a:- m:Bleed=19
+S 142 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=11
+S 143 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=100
+S 143 clarth.marksman.2 g:-/- a:- m:Burn=142
+S 143 clarth.trapper.4 g:-/- a:- m:Burn=130
+S 143 camp.5.raiders.warparty.raiders.1 g:-/- a:- m:Bleed=18
+S 143 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=10
+S 144 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=99
+S 144 clarth.marksman.2 g:-/- a:- m:Burn=141
+S 144 clarth.trapper.4 g:-/- a:- m:Burn=129
+S 144 camp.5.raiders.warparty.raiders.1 g:-/- a:- m:Bleed=17
+S 144 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=9
+S 145 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=98
+S 145 clarth.marksman.2 g:-/- a:- m:Burn=140
+S 145 clarth.trapper.4 g:-/- a:- m:Burn=128
+S 145 camp.5.raiders.warparty.raiders.1 g:-/- a:- m:Bleed=16
+S 145 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=8
+S 146 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=97
+S 146 clarth.marksman.2 g:-/- a:- m:Burn=139
+S 146 clarth.trapper.4 g:-/- a:- m:Burn=127
+S 146 camp.5.raiders.warparty.raiders.1 g:-/- a:- m:Bleed=15
+S 146 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=7
+S 147 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=96
+S 147 clarth.marksman.2 g:-/- a:- m:Burn=138
+S 147 clarth.trapper.4 g:-/- a:- m:Burn=126
+S 147 camp.5.raiders.warparty.raiders.1 g:-/- a:- m:Bleed=14
+S 147 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=6
+S 148 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=95
+S 148 clarth.marksman.2 g:-/- a:- m:Burn=137
+S 148 clarth.trapper.4 g:-/- a:- m:Burn=125
+S 148 camp.5.raiders.warparty.raiders.1 g:-/- a:- m:Bleed=13
+S 148 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=5
+S 149 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=94
+S 149 clarth.marksman.2 g:-/- a:- m:Burn=136
+S 149 clarth.trapper.4 g:-/- a:- m:Burn=124
+S 149 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=4
+S 150 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=93
+S 150 clarth.marksman.2 g:-/- a:- m:Burn=135
+S 150 clarth.trapper.4 g:-/- a:- m:Burn=123
+S 150 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=3
+S 151 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=92
+S 151 clarth.marksman.2 g:-/- a:- m:Burn=134
+S 151 clarth.trapper.4 g:-/- a:- m:Burn=122
+S 151 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=2
+S 152 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=91
+S 152 clarth.marksman.2 g:-/- a:- m:Burn=133
+S 152 clarth.trapper.4 g:-/- a:- m:Burn=121
+S 152 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=1
+S 153 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=90
+S 153 clarth.marksman.2 g:-/- a:- m:Burn=132
+S 153 clarth.trapper.4 g:-/- a:- m:Burn=120
+S 154 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=89
+S 154 clarth.marksman.2 g:-/- a:- m:Burn=131
+S 154 clarth.trapper.4 g:-/- a:- m:Burn=149
+S 155 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=88
+S 155 clarth.marksman.2 g:-/- a:- m:Burn=130
+S 155 clarth.trapper.4 g:-/- a:- m:Burn=148
+S 156 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=87
+S 156 clarth.marksman.2 g:-/- a:- m:Burn=129
+S 156 clarth.trapper.4 g:-/- a:- m:Burn=147
+S 157 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=86
+S 157 clarth.marksman.2 g:-/- a:- m:Burn=128
+S 157 clarth.trapper.4 g:-/- a:- m:Burn=146
+S 158 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=85
+S 158 clarth.marksman.2 g:-/- a:- m:Burn=127
+S 158 clarth.trapper.4 g:-/- a:- m:Burn=145
+S 159 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=84
+S 159 clarth.marksman.2 g:-/- a:- m:Burn=126
+S 159 clarth.trapper.4 g:-/- a:- m:Burn=144
+S 160 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=83
+S 160 clarth.marksman.2 g:-/- a:- m:Burn=125
+S 160 clarth.trapper.4 g:-/- a:- m:Burn=143
+S 161 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=82
+S 161 clarth.marksman.2 g:-/- a:- m:Burn=124
+S 161 clarth.trapper.4 g:-/- a:- m:Burn=142
+S 162 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=81
+S 162 clarth.marksman.2 g:-/- a:- m:Burn=123
+S 162 clarth.trapper.4 g:-/- a:- m:Burn=141
+S 163 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=80
+S 163 clarth.marksman.2 g:-/- a:- m:Burn=122
+S 163 clarth.trapper.4 g:-/- a:- m:Burn=140
+S 164 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=79
+S 164 clarth.marksman.2 g:-/- a:- m:Burn=121
+S 164 clarth.trapper.4 g:-/- a:- m:Burn=139
+S 165 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=78
+S 165 clarth.marksman.2 g:-/- a:- m:Burn=120
+S 165 clarth.trapper.4 g:-/- a:- m:Burn=138
+S 166 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=77
+S 166 clarth.marksman.2 g:-/- a:- m:Burn=119
+S 166 clarth.trapper.4 g:-/- a:- m:Burn=137
+S 166 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=149,Opening=89
+S 167 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=76
+S 167 clarth.marksman.2 g:-/- a:- m:Burn=118
+S 167 clarth.trapper.4 g:-/- a:- m:Burn=136
+S 167 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=148,Opening=88
+S 168 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=75
+S 168 clarth.marksman.2 g:-/- a:- m:Burn=117
+S 168 clarth.trapper.4 g:-/- a:- m:Burn=135
+S 168 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=147,Opening=87
+S 169 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=74
+S 169 clarth.marksman.2 g:-/- a:- m:Burn=116
+S 169 clarth.trapper.4 g:-/- a:- m:Burn=134
+S 169 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=146,Opening=86
+S 170 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=73
+S 170 clarth.marksman.2 g:-/- a:- m:Burn=115
+S 170 clarth.trapper.4 g:-/- a:- m:Burn=133
+S 170 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=145,Opening=85
+S 171 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=72
+S 171 clarth.marksman.2 g:-/- a:- m:Burn=114
+S 171 clarth.trapper.4 g:-/- a:- m:Burn=132
+S 171 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=144,Opening=84
+S 172 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=71
+S 172 clarth.marksman.2 g:-/- a:- m:Burn=113
+S 172 clarth.trapper.4 g:-/- a:- m:Burn=131
+S 172 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=143,Opening=83
+S 173 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=70
+S 173 clarth.marksman.2 g:-/- a:- m:Burn=112
+S 173 clarth.trapper.4 g:-/- a:- m:Burn=130
+S 173 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=142,Opening=82
+S 174 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=69
+S 174 clarth.marksman.2 g:-/- a:- m:Burn=111
+S 174 clarth.trapper.4 g:-/- a:- m:Burn=129
+S 174 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=141,Opening=81
+S 175 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=68
+S 175 clarth.marksman.2 g:-/- a:- m:Burn=110
+S 175 clarth.trapper.4 g:-/- a:- m:Burn=128
+S 175 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=140,Opening=80
+S 176 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=67
+S 176 clarth.marksman.2 g:-/- a:- m:Burn=109
+S 176 clarth.trapper.4 g:-/- a:- m:Burn=127
+S 176 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=139,Opening=79
+S 177 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=66
+S 177 clarth.marksman.2 g:-/- a:- m:Burn=108
+S 177 clarth.trapper.4 g:-/- a:- m:Burn=126
+S 177 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=138,Opening=78
+S 178 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=65
+S 178 clarth.marksman.2 g:-/- a:- m:Burn=107
+S 178 clarth.trapper.4 g:-/- a:- m:Burn=125
+S 178 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=137,Opening=77
+S 179 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=64
+S 179 clarth.marksman.2 g:-/- a:- m:Burn=106
+S 179 clarth.trapper.4 g:-/- a:- m:Burn=124
+S 179 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=136,Opening=76
+S 180 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=63
+S 180 clarth.marksman.2 g:-/- a:- m:Burn=105
+S 180 clarth.trapper.4 g:-/- a:- m:Burn=123
+S 180 camp.5.raiders.warparty.raiders.0 g:-/- a:- m:Opening=89
+S 180 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=135,Opening=75
+S 181 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=62
+S 181 clarth.marksman.2 g:-/- a:- m:Burn=104
+S 181 clarth.trapper.4 g:-/- a:- m:Burn=122
+S 181 camp.5.raiders.warparty.raiders.0 g:-/- a:- m:Opening=88
+S 181 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=134,Opening=74
+S 182 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=61
+S 182 clarth.marksman.2 g:-/- a:- m:Burn=103
+S 182 clarth.trapper.4 g:-/- a:- m:Burn=121
+S 182 camp.5.raiders.warparty.raiders.0 g:-/- a:- m:Opening=87
+S 182 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=133,Opening=73
+S 183 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=60
+S 183 clarth.marksman.2 g:-/- a:- m:Burn=102
+S 183 clarth.trapper.4 g:-/- a:- m:Burn=120
+S 183 camp.5.raiders.warparty.raiders.0 g:-/- a:- m:Opening=86
+S 183 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=132,Opening=72
+S 184 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=59
+S 184 clarth.marksman.2 g:-/- a:- m:Burn=101
+S 184 clarth.trapper.4 g:-/- a:- m:Burn=149
+S 184 camp.5.raiders.warparty.raiders.0 g:-/- a:- m:Opening=85
+S 184 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=131,Opening=71
+S 185 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=58
+S 185 clarth.marksman.2 g:-/- a:- m:Burn=100
+S 185 clarth.trapper.4 g:-/- a:- m:Burn=148
+S 185 camp.5.raiders.warparty.raiders.0 g:-/- a:- m:Opening=84
+S 185 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=130,Opening=70
+S 186 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=57
+S 186 clarth.marksman.2 g:-/- a:- m:Burn=99
+S 186 clarth.trapper.4 g:-/- a:- m:Burn=147
+S 186 camp.5.raiders.warparty.raiders.0 g:-/- a:- m:Opening=83
+S 186 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=129,Opening=69
+S 187 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=56
+S 187 clarth.marksman.2 g:-/- a:- m:Burn=98
+S 187 clarth.trapper.4 g:-/- a:- m:Burn=146
+S 187 camp.5.raiders.warparty.raiders.0 g:-/- a:- m:Opening=82
+S 187 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=128,Opening=68
+S 188 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=55
+S 188 clarth.marksman.2 g:-/- a:- m:Burn=97
+S 188 clarth.trapper.4 g:-/- a:- m:Burn=145
+S 188 camp.5.raiders.warparty.raiders.0 g:-/- a:- m:Opening=81
+S 188 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=127,Opening=67
+S 189 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=54
+S 189 clarth.marksman.2 g:-/- a:- m:Burn=96
+S 189 clarth.trapper.4 g:-/- a:- m:Burn=144
+S 189 camp.5.raiders.warparty.raiders.0 g:-/- a:- m:Opening=80
+S 189 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=126,Opening=66
+S 190 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=53
+S 190 clarth.marksman.2 g:-/- a:- m:Burn=95
+S 190 clarth.trapper.4 g:-/- a:- m:Burn=143
+S 190 camp.5.raiders.warparty.raiders.0 g:-/- a:- m:Opening=79
+S 190 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=125,Opening=65
+S 191 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=52
+S 191 clarth.marksman.2 g:-/- a:- m:Burn=94
+S 191 clarth.trapper.4 g:-/- a:- m:Burn=142
+S 191 camp.5.raiders.warparty.raiders.0 g:-/- a:- m:Opening=78
+S 191 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=124,Opening=64
+S 192 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=51
+S 192 clarth.marksman.2 g:-/- a:- m:Burn=93
+S 192 clarth.trapper.4 g:-/- a:- m:Burn=141
+S 192 camp.5.raiders.warparty.raiders.0 g:-/- a:- m:Opening=77
+S 192 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=123,Opening=63
+S 193 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=50
+S 193 clarth.marksman.2 g:-/- a:- m:Burn=92
+S 193 clarth.trapper.4 g:-/- a:- m:Burn=140
+S 193 camp.5.raiders.warparty.raiders.0 g:-/- a:- m:Opening=76
+S 193 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=122,Opening=62
+S 194 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=49
+S 194 clarth.marksman.2 g:-/- a:- m:Burn=91
+S 194 clarth.trapper.4 g:-/- a:- m:Burn=139
+S 194 camp.5.raiders.warparty.raiders.0 g:-/- a:- m:Opening=75
+S 194 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=121,Opening=61
+S 195 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=48
+S 195 clarth.marksman.2 g:-/- a:- m:Burn=90
+S 195 clarth.trapper.4 g:-/- a:- m:Burn=138
+S 195 camp.5.raiders.warparty.raiders.0 g:-/- a:- m:Opening=74
+S 195 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=120,Opening=60
+S 196 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=47
+S 196 clarth.marksman.2 g:-/- a:- m:Burn=149
+S 196 clarth.trapper.4 g:-/- a:- m:Burn=137
+S 196 camp.5.raiders.warparty.raiders.0 g:-/- a:- m:Opening=73
+S 196 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=119,Opening=59
+S 197 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=46
+S 197 clarth.marksman.2 g:-/- a:- m:Burn=148
+S 197 clarth.trapper.4 g:-/- a:- m:Burn=136
+S 197 camp.5.raiders.warparty.raiders.0 g:-/- a:- m:Opening=72
+S 197 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=118,Opening=58
+S 198 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=45
+S 198 clarth.marksman.2 g:-/- a:- m:Burn=147
+S 198 clarth.trapper.4 g:-/- a:- m:Burn=135
+S 198 camp.5.raiders.warparty.raiders.0 g:-/- a:- m:Opening=71
+S 198 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=117,Opening=57
+S 199 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=44
+S 199 clarth.marksman.2 g:-/- a:- m:Burn=146
+S 199 clarth.trapper.4 g:-/- a:- m:Burn=134
+S 199 camp.5.raiders.warparty.raiders.0 g:-/- a:- m:Opening=70
+S 199 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=116,Opening=56
+S 200 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=43
+S 200 clarth.marksman.2 g:-/- a:- m:Burn=145
+S 200 clarth.trapper.4 g:-/- a:- m:Burn=133
+S 200 camp.5.raiders.warparty.raiders.0 g:-/- a:- m:Opening=69
+S 200 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=115,Opening=55
+S 201 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=42
+S 201 clarth.marksman.2 g:-/- a:- m:Burn=144
+S 201 clarth.trapper.4 g:-/- a:- m:Burn=132
+S 201 camp.5.raiders.warparty.raiders.0 g:-/- a:- m:Opening=68
+S 201 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=114,Opening=54
+S 202 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=41
+S 202 clarth.marksman.2 g:-/- a:- m:Burn=143
+S 202 clarth.trapper.4 g:-/- a:- m:Burn=131
+S 202 camp.5.raiders.warparty.raiders.0 g:-/- a:- m:Opening=67
+S 202 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=113,Opening=53
+S 203 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=40
+S 203 clarth.marksman.2 g:-/- a:- m:Burn=142
+S 203 clarth.trapper.4 g:-/- a:- m:Burn=130
+S 203 camp.5.raiders.warparty.raiders.0 g:-/- a:- m:Opening=66
+S 203 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=112,Opening=52
+S 204 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=39
+S 204 clarth.marksman.2 g:-/- a:- m:Burn=141
+S 204 clarth.trapper.4 g:-/- a:- m:Burn=129
+S 204 camp.5.raiders.warparty.raiders.0 g:-/- a:- m:Opening=65
+S 204 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=111,Opening=51
+S 205 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=38
+S 205 clarth.marksman.2 g:-/- a:- m:Burn=140
+S 205 clarth.trapper.4 g:-/- a:- m:Burn=128
+S 205 camp.5.raiders.warparty.raiders.0 g:-/- a:- m:Opening=64
+S 205 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=110,Opening=50
+S 206 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=37
+S 206 clarth.marksman.2 g:-/- a:- m:Burn=139
+S 206 clarth.trapper.4 g:-/- a:- m:Burn=127
+S 206 camp.5.raiders.warparty.raiders.0 g:-/- a:- m:Opening=63
+S 206 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=109,Opening=49
+S 207 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=36
+S 207 clarth.marksman.2 g:-/- a:- m:Burn=138
+S 207 clarth.trapper.4 g:-/- a:- m:Burn=126
+S 207 camp.5.raiders.warparty.raiders.0 g:-/- a:- m:Opening=62
+S 207 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=108,Opening=48
+S 208 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=35
+S 208 clarth.marksman.2 g:-/- a:- m:Burn=137
+S 208 clarth.trapper.4 g:-/- a:- m:Burn=125
+S 208 camp.5.raiders.warparty.raiders.0 g:-/- a:- m:Opening=61
+S 208 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=107,Opening=47
+S 209 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=34
+S 209 clarth.marksman.2 g:-/- a:- m:Burn=136
+S 209 clarth.trapper.4 g:-/- a:- m:Burn=124
+S 209 camp.5.raiders.warparty.raiders.0 g:-/- a:- m:Opening=60
+S 209 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=106,Opening=46
+S 210 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=33
+S 210 clarth.marksman.2 g:-/- a:- m:Burn=135
+S 210 clarth.trapper.4 g:-/- a:- m:Burn=123
+S 210 camp.5.raiders.warparty.raiders.0 g:-/- a:- m:Opening=59
+S 210 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=105,Opening=45
+S 211 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=32
+S 211 clarth.marksman.2 g:-/- a:- m:Burn=134
+S 211 clarth.trapper.4 g:-/- a:- m:Burn=122
+S 211 camp.5.raiders.warparty.raiders.0 g:-/- a:- m:Opening=58
+S 211 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=104,Opening=44
+S 212 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=31
+S 212 clarth.marksman.2 g:-/- a:- m:Burn=133
+S 212 clarth.trapper.4 g:-/- a:- m:Burn=121
+S 212 camp.5.raiders.warparty.raiders.0 g:-/- a:- m:Opening=57
+S 212 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=103,Opening=43
+S 213 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=30
+S 213 clarth.marksman.2 g:-/- a:- m:Burn=132
+S 213 clarth.trapper.4 g:-/- a:- m:Burn=120
+S 213 camp.5.raiders.warparty.raiders.0 g:-/- a:- m:Opening=56
+S 213 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=102,Opening=42
+S 214 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=29
+S 214 clarth.marksman.2 g:-/- a:- m:Burn=131
+S 214 clarth.trapper.4 g:-/- a:- m:Burn=149
+S 214 camp.5.raiders.warparty.raiders.0 g:-/- a:- m:Opening=55
+S 214 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=101,Opening=41
+S 215 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=28
+S 215 clarth.marksman.2 g:-/- a:- m:Burn=130
+S 215 clarth.trapper.4 g:-/- a:- m:Burn=148
+S 215 camp.5.raiders.warparty.raiders.0 g:-/- a:- m:Opening=54
+S 215 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=100,Opening=40
+S 216 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=27
+S 216 clarth.marksman.2 g:-/- a:- m:Burn=129
+S 216 clarth.trapper.4 g:-/- a:- m:Burn=147
+S 216 camp.5.raiders.warparty.raiders.0 g:-/- a:- m:Opening=53
+S 216 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=99,Opening=39
+S 217 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=26
+S 217 clarth.marksman.2 g:-/- a:- m:Burn=128
+S 217 clarth.trapper.4 g:-/- a:- m:Burn=146
+S 217 camp.5.raiders.warparty.raiders.0 g:-/- a:- m:Opening=52
+S 217 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=98,Opening=38
+S 218 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=25
+S 218 clarth.marksman.2 g:-/- a:- m:Burn=127
+S 218 clarth.trapper.4 g:-/- a:- m:Burn=145
+S 218 camp.5.raiders.warparty.raiders.0 g:-/- a:- m:Opening=51
+S 218 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=97,Opening=37
+S 219 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=24
+S 219 clarth.marksman.2 g:-/- a:- m:Burn=126
+S 219 clarth.trapper.4 g:-/- a:- m:Burn=144
+S 219 camp.5.raiders.warparty.raiders.0 g:-/- a:- m:Opening=50
+S 219 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=96,Opening=36
+S 220 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=23
+S 220 clarth.marksman.2 g:-/- a:camp.5.raiders.warparty.raiders.2:44 m:Burn=125
+S 220 clarth.trapper.4 g:-/- a:- m:Burn=143
+S 220 camp.5.raiders.warparty.raiders.0 g:-/- a:- m:Opening=49
+S 220 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=95,Opening=35
+S 221 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=22
+S 221 clarth.marksman.2 g:-/- a:camp.5.raiders.warparty.raiders.2:43 m:Burn=124
+S 221 clarth.trapper.4 g:-/- a:- m:Burn=142
+S 221 camp.5.raiders.warparty.raiders.0 g:-/- a:- m:Opening=48
+S 221 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=94,Opening=34
+S 222 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=21
+S 222 clarth.marksman.2 g:-/- a:camp.5.raiders.warparty.raiders.2:42 m:Burn=123
+S 222 clarth.trapper.4 g:-/- a:- m:Burn=141
+S 222 camp.5.raiders.warparty.raiders.0 g:-/- a:- m:Opening=47
+S 222 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=93,Opening=33
+S 223 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=20
+S 223 clarth.marksman.2 g:-/- a:camp.5.raiders.warparty.raiders.2:41 m:Burn=122
+S 223 clarth.trapper.4 g:-/- a:- m:Burn=140
+S 223 camp.5.raiders.warparty.raiders.0 g:-/- a:- m:Opening=46
+S 223 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=92,Opening=32
+S 224 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=19
+S 224 clarth.marksman.2 g:-/- a:camp.5.raiders.warparty.raiders.2:40 m:Burn=121
+S 224 clarth.trapper.4 g:-/- a:- m:Burn=139
+S 224 camp.5.raiders.warparty.raiders.0 g:-/- a:- m:Opening=45
+S 224 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=91,Opening=31
+S 225 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=18
+S 225 clarth.marksman.2 g:-/- a:camp.5.raiders.warparty.raiders.2:39 m:Burn=120
+S 225 clarth.trapper.4 g:-/- a:- m:Burn=138
+S 225 camp.5.raiders.warparty.raiders.0 g:-/- a:- m:Opening=44
+S 225 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=90,Opening=30
+S 226 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=17
+S 226 clarth.marksman.2 g:-/- a:- m:Burn=149
+S 226 clarth.trapper.4 g:-/- a:- m:Burn=137
+S 226 camp.5.raiders.warparty.raiders.0 g:-/- a:- m:Opening=43
+S 226 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=89,Opening=29
+S 227 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=16
+S 227 clarth.marksman.2 g:-/- a:- m:Burn=148
+S 227 clarth.trapper.4 g:-/- a:- m:Burn=136
+S 227 camp.5.raiders.warparty.raiders.0 g:-/- a:- m:Opening=42
+S 227 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=88,Opening=28
+S 228 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=15
+S 228 clarth.marksman.2 g:-/- a:- m:Burn=147
+S 228 clarth.trapper.4 g:-/- a:- m:Burn=135
+S 228 camp.5.raiders.warparty.raiders.0 g:-/- a:- m:Opening=41
+S 228 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=87,Opening=27
+S 229 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=14
+S 229 clarth.marksman.2 g:-/- a:- m:Burn=146
+S 229 clarth.trapper.4 g:-/- a:- m:Burn=134
+S 229 camp.5.raiders.warparty.raiders.0 g:-/- a:- m:Opening=40
+S 229 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=86,Opening=26
+S 230 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=13
+S 230 clarth.marksman.2 g:-/- a:- m:Burn=145
+S 230 clarth.trapper.4 g:-/- a:- m:Burn=133
+S 230 camp.5.raiders.warparty.raiders.0 g:-/- a:- m:Opening=39
+S 230 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=85,Opening=25
+S 231 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=12
+S 231 clarth.marksman.2 g:-/- a:- m:Burn=144
+S 231 clarth.trapper.4 g:-/- a:- m:Burn=132
+S 231 camp.5.raiders.warparty.raiders.0 g:-/- a:- m:Opening=38
+S 231 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=84,Opening=24
+S 232 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=11
+S 232 clarth.marksman.2 g:-/- a:- m:Burn=143
+S 232 clarth.trapper.4 g:-/- a:- m:Burn=131
+S 232 camp.5.raiders.warparty.raiders.0 g:-/- a:- m:Opening=37
+S 232 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=83,Opening=23
+S 233 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=10
+S 233 clarth.marksman.2 g:-/- a:- m:Burn=142
+S 233 clarth.trapper.4 g:-/- a:- m:Burn=130
+S 233 camp.5.raiders.warparty.raiders.0 g:-/- a:- m:Opening=36
+S 233 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=82,Opening=22
+S 234 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=9
+S 234 clarth.marksman.2 g:-/- a:- m:Burn=141
+S 234 clarth.trapper.4 g:-/- a:- m:Burn=129
+S 234 camp.5.raiders.warparty.raiders.0 g:-/- a:- m:Opening=35
+S 234 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=81,Opening=21
+S 235 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=8
+S 235 clarth.marksman.2 g:-/- a:- m:Burn=140
+S 235 clarth.trapper.4 g:-/- a:- m:Burn=128
+S 235 camp.5.raiders.warparty.raiders.0 g:-/- a:- m:Opening=34
+S 235 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=80,Opening=20
+S 236 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=7
+S 236 clarth.marksman.2 g:-/- a:- m:Burn=139
+S 236 clarth.trapper.4 g:-/- a:- m:Burn=127
+S 236 camp.5.raiders.warparty.raiders.0 g:-/- a:- m:Opening=33
+S 236 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=79,Opening=19
+S 237 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=6
+S 237 clarth.marksman.2 g:-/- a:- m:Burn=138
+S 237 clarth.trapper.4 g:-/- a:- m:Burn=126
+S 237 camp.5.raiders.warparty.raiders.0 g:-/- a:- m:Opening=32
+S 237 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=78,Opening=18
+S 238 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=5
+S 238 clarth.marksman.2 g:-/- a:- m:Burn=137
+S 238 clarth.trapper.4 g:-/- a:- m:Burn=125
+S 238 camp.5.raiders.warparty.raiders.0 g:-/- a:- m:Opening=31
+S 238 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=77,Opening=17
+S 239 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=4
+S 239 clarth.marksman.2 g:-/- a:- m:Burn=136
+S 239 clarth.trapper.4 g:-/- a:- m:Burn=124
+S 239 camp.5.raiders.warparty.raiders.0 g:-/- a:- m:Opening=30
+S 239 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=149,Opening=16
+S 240 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=3
+S 240 clarth.marksman.2 g:-/- a:- m:Burn=135
+S 240 clarth.trapper.4 g:-/- a:- m:Burn=123
+S 240 camp.5.raiders.warparty.raiders.0 g:-/- a:- m:Opening=29
+S 240 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=148,Opening=15
+S 241 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=2
+S 241 clarth.marksman.2 g:-/- a:- m:Burn=134
+S 241 clarth.trapper.4 g:-/- a:- m:Burn=122
+S 241 camp.5.raiders.warparty.raiders.0 g:-/- a:- m:Opening=28
+S 241 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=147,Opening=14
+S 242 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=1
+S 242 clarth.marksman.2 g:-/- a:- m:Burn=133
+S 242 clarth.trapper.4 g:-/- a:- m:Burn=121
+S 242 camp.5.raiders.warparty.raiders.0 g:-/- a:- m:Opening=27
+S 242 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=146,Opening=13
+S 243 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 243 clarth.marksman.2 g:-/- a:- m:Burn=132
+S 243 clarth.trapper.4 g:-/- a:- m:Burn=120
+S 243 camp.5.raiders.warparty.raiders.0 g:-/- a:- m:Opening=26
+S 243 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=145,Opening=12
+S 244 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 244 clarth.marksman.2 g:-/- a:- m:Burn=131
+S 244 clarth.trapper.4 g:-/- a:- m:Burn=119
+S 244 camp.5.raiders.warparty.raiders.0 g:-/- a:- m:Opening=25
+S 244 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=144,Opening=11
+S 244 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=149,Opening=89
+S 245 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 245 clarth.marksman.2 g:-/- a:- m:Burn=130
+S 245 clarth.trapper.4 g:-/- a:- m:Burn=118
+S 245 camp.5.raiders.warparty.raiders.0 g:-/- a:- m:Opening=24
+S 245 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=143,Opening=10
+S 245 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=148,Opening=88
+S 246 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 246 clarth.marksman.2 g:-/- a:- m:Burn=129
+S 246 clarth.trapper.4 g:-/- a:- m:Burn=117
+S 246 camp.5.raiders.warparty.raiders.0 g:-/- a:- m:Opening=23
+S 246 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=142,Opening=9
+S 246 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=147,Opening=87
+S 247 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 247 clarth.marksman.2 g:-/- a:- m:Burn=128
+S 247 clarth.trapper.4 g:-/- a:- m:Burn=116
+S 247 camp.5.raiders.warparty.raiders.0 g:-/- a:- m:Opening=22
+S 247 camp.5.raiders.warparty.raiders.1 g:-/- a:- m:Opening=89
+S 247 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=141,Opening=8
+S 247 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=146,Opening=86
+S 248 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 248 clarth.marksman.2 g:-/- a:- m:Burn=127
+S 248 clarth.trapper.4 g:-/- a:- m:Burn=115
+S 248 camp.5.raiders.warparty.raiders.0 g:-/- a:- m:Opening=21
+S 248 camp.5.raiders.warparty.raiders.1 g:-/- a:- m:Opening=88
+S 248 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=140,Opening=7
+S 248 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=145,Opening=85
+S 249 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 249 clarth.marksman.2 g:-/- a:- m:Burn=126
+S 249 clarth.trapper.4 g:-/- a:- m:Burn=114
+S 249 camp.5.raiders.warparty.raiders.0 g:-/- a:- m:Opening=20
+S 249 camp.5.raiders.warparty.raiders.1 g:-/- a:- m:Opening=87
+S 249 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=139,Opening=6
+S 249 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=144,Opening=84
+S 250 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 250 clarth.marksman.2 g:-/- a:- m:Burn=125
+S 250 clarth.trapper.4 g:-/- a:- m:Burn=113
+S 250 camp.5.raiders.warparty.raiders.0 g:-/- a:- m:Opening=19
+S 250 camp.5.raiders.warparty.raiders.1 g:-/- a:- m:Opening=86
+S 250 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=138,Opening=5
+S 250 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=143,Opening=83
+S 251 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 251 clarth.marksman.2 g:-/- a:- m:Burn=124
+S 251 clarth.trapper.4 g:-/- a:- m:Burn=112
+S 251 camp.5.raiders.warparty.raiders.0 g:-/- a:- m:Opening=18
+S 251 camp.5.raiders.warparty.raiders.1 g:-/- a:- m:Opening=85
+S 251 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=137,Opening=4
+S 251 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=142,Opening=82
+S 252 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 252 clarth.marksman.2 g:-/- a:- m:Burn=123
+S 252 clarth.trapper.4 g:-/- a:- m:Burn=111
+S 252 camp.5.raiders.warparty.raiders.0 g:-/- a:- m:Opening=17
+S 252 camp.5.raiders.warparty.raiders.1 g:-/- a:- m:Opening=84
+S 252 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=136,Opening=3
+S 252 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=141,Opening=81
+S 253 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 253 clarth.marksman.2 g:-/- a:- m:Burn=122
+S 253 clarth.trapper.4 g:-/- a:- m:Burn=110
+S 253 camp.5.raiders.warparty.raiders.0 g:-/- a:- m:Opening=16
+S 253 camp.5.raiders.warparty.raiders.1 g:-/- a:- m:Opening=83
+S 253 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=135,Opening=2
+S 253 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=140,Opening=80
+S 254 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 254 clarth.marksman.2 g:-/- a:- m:Burn=121
+S 254 clarth.trapper.4 g:-/- a:- m:Burn=109
+S 254 camp.5.raiders.warparty.raiders.0 g:-/- a:- m:Opening=15
+S 254 camp.5.raiders.warparty.raiders.1 g:-/- a:- m:Opening=82
+S 254 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=134,Opening=1
+S 254 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=139,Opening=79
+S 255 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 255 clarth.marksman.2 g:-/- a:- m:Burn=120
+S 255 clarth.trapper.4 g:-/- a:- m:Burn=108
+S 255 camp.5.raiders.warparty.raiders.0 g:-/- a:- m:Opening=14
+S 255 camp.5.raiders.warparty.raiders.1 g:-/- a:- m:Opening=81
+S 255 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=133
+S 255 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=138,Opening=78
+S 256 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=149
+S 256 clarth.marksman.2 g:-/- a:- m:Burn=119
+S 256 clarth.trapper.4 g:-/- a:- m:Burn=107
+S 256 camp.5.raiders.warparty.raiders.0 g:-/- a:- m:Opening=13
+S 256 camp.5.raiders.warparty.raiders.1 g:-/- a:- m:Opening=80
+S 256 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=132
+S 256 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=137,Opening=77
+S 257 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=148
+S 257 clarth.marksman.2 g:-/- a:- m:Burn=118
+S 257 clarth.trapper.4 g:-/- a:- m:Burn=106
+S 257 camp.5.raiders.warparty.raiders.0 g:-/- a:- m:Opening=12
+S 257 camp.5.raiders.warparty.raiders.1 g:-/- a:- m:Opening=79
+S 257 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=131
+S 257 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=136,Opening=76
+S 258 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=147
+S 258 clarth.marksman.2 g:-/- a:- m:Burn=117
+S 258 clarth.trapper.4 g:-/- a:- m:Burn=105
+S 258 camp.5.raiders.warparty.raiders.0 g:-/- a:- m:Opening=11
+S 258 camp.5.raiders.warparty.raiders.1 g:-/- a:- m:Opening=78
+S 258 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=130
+S 258 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=135,Opening=75
+S 259 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=146
+S 259 clarth.marksman.2 g:-/- a:- m:Burn=116
+S 259 clarth.trapper.4 g:-/- a:- m:Burn=104
+S 259 camp.5.raiders.warparty.raiders.0 g:-/- a:- m:Opening=10
+S 259 camp.5.raiders.warparty.raiders.1 g:-/- a:- m:Opening=77
+S 259 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=129
+S 259 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=134,Opening=74
+S 260 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=145
+S 260 clarth.marksman.2 g:-/- a:- m:Burn=115
+S 260 clarth.trapper.4 g:-/- a:- m:Burn=103
+S 260 camp.5.raiders.warparty.raiders.0 g:-/- a:- m:Opening=9
+S 260 camp.5.raiders.warparty.raiders.1 g:-/- a:- m:Opening=76
+S 260 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=128
+S 260 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=133,Opening=73
+S 261 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=144
+S 261 clarth.marksman.2 g:-/- a:- m:Burn=114
+S 261 clarth.trapper.4 g:-/- a:- m:Burn=102
+S 261 camp.5.raiders.warparty.raiders.0 g:-/- a:- m:Opening=8
+S 261 camp.5.raiders.warparty.raiders.1 g:-/- a:- m:Opening=75
+S 261 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=127
+S 261 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=132,Opening=72
+S 262 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=143
+S 262 clarth.marksman.2 g:-/- a:- m:Burn=113
+S 262 clarth.trapper.4 g:-/- a:- m:Burn=101
+S 262 camp.5.raiders.warparty.raiders.0 g:-/- a:- m:Opening=7
+S 262 camp.5.raiders.warparty.raiders.1 g:-/- a:- m:Opening=74
+S 262 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=126
+S 262 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=131,Opening=71
+S 263 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=142
+S 263 clarth.marksman.2 g:-/- a:- m:Burn=112
+S 263 clarth.trapper.4 g:-/- a:- m:Burn=100
+S 263 camp.5.raiders.warparty.raiders.0 g:-/- a:- m:Opening=6
+S 263 camp.5.raiders.warparty.raiders.1 g:-/- a:- m:Opening=73
+S 263 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=125
+S 263 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=130,Opening=70
+S 264 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=141
+S 264 clarth.marksman.2 g:-/- a:- m:Burn=111
+S 264 clarth.trapper.4 g:-/- a:- m:Burn=99
+S 264 camp.5.raiders.warparty.raiders.0 g:-/- a:- m:Opening=5
+S 264 camp.5.raiders.warparty.raiders.1 g:-/- a:- m:Opening=72
+S 264 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=124
+S 264 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=129,Opening=69
+S 265 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=140
+S 265 clarth.marksman.2 g:-/- a:- m:Burn=110
+S 265 clarth.trapper.4 g:-/- a:- m:Burn=98
+S 265 camp.5.raiders.warparty.raiders.0 g:-/- a:- m:Opening=4
+S 265 camp.5.raiders.warparty.raiders.1 g:-/- a:- m:Opening=71
+S 265 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=123
+S 265 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=128,Opening=68
+S 266 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=139
+S 266 clarth.marksman.2 g:-/- a:- m:Burn=109
+S 266 clarth.trapper.4 g:-/- a:- m:Burn=97
+S 266 camp.5.raiders.warparty.raiders.0 g:-/- a:- m:Opening=3
+S 266 camp.5.raiders.warparty.raiders.1 g:-/- a:- m:Opening=70
+S 266 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=122
+S 266 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=127,Opening=67
+S 267 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=138
+S 267 clarth.marksman.2 g:-/- a:- m:Burn=108
+S 267 clarth.trapper.4 g:-/- a:- m:Burn=96
+S 267 camp.5.raiders.warparty.raiders.0 g:-/- a:- m:Opening=2
+S 267 camp.5.raiders.warparty.raiders.1 g:-/- a:- m:Opening=69
+S 267 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=121
+S 267 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=126,Opening=66
+S 268 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=137
+S 268 clarth.marksman.2 g:-/- a:- m:Burn=107
+S 268 clarth.trapper.4 g:-/- a:- m:Burn=95
+S 268 camp.5.raiders.warparty.raiders.0 g:-/- a:- m:Opening=1
+S 268 camp.5.raiders.warparty.raiders.1 g:-/- a:- m:Opening=68
+S 268 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=120
+S 268 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=125,Opening=65
+S 269 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=136
+S 269 clarth.marksman.2 g:-/- a:- m:Burn=106
+S 269 clarth.trapper.4 g:-/- a:- m:Burn=94
+S 269 camp.5.raiders.warparty.raiders.1 g:-/- a:- m:Opening=67
+S 269 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=119
+S 269 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=124,Opening=64
+S 270 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=135
+S 270 clarth.marksman.2 g:-/- a:- m:Burn=105
+S 270 clarth.trapper.4 g:-/- a:- m:Burn=93
+S 270 camp.5.raiders.warparty.raiders.1 g:-/- a:- m:Opening=66
+S 270 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=118
+S 270 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=123,Opening=63
+S 271 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=134
+S 271 clarth.marksman.2 g:-/- a:- m:Burn=104
+S 271 clarth.trapper.4 g:-/- a:- m:Burn=92
+S 271 camp.5.raiders.warparty.raiders.1 g:-/- a:- m:Opening=65
+S 271 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=117
+S 271 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=122,Opening=62
+S 272 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=133
+S 272 clarth.marksman.2 g:-/- a:- m:Burn=103
+S 272 clarth.trapper.4 g:-/- a:- m:Burn=91
+S 272 camp.5.raiders.warparty.raiders.1 g:-/- a:- m:Opening=64
+S 272 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=116
+S 272 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=121,Opening=61
+S 273 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=132
+S 273 clarth.marksman.2 g:-/- a:- m:Burn=102
+S 273 clarth.trapper.4 g:-/- a:- m:Burn=90
+S 273 camp.5.raiders.warparty.raiders.1 g:-/- a:- m:Opening=63
+S 273 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=115
+S 273 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=120,Opening=60
+S 274 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=149
+S 274 clarth.marksman.2 g:-/- a:- m:Burn=101
+S 274 clarth.trapper.4 g:-/- a:- m:Burn=89
+S 274 camp.5.raiders.warparty.raiders.1 g:-/- a:- m:Opening=62
+S 274 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=114
+S 274 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=119,Opening=59
+S 275 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=148
+S 275 clarth.marksman.2 g:-/- a:- m:Burn=100
+S 275 clarth.trapper.4 g:-/- a:- m:Burn=88
+S 275 camp.5.raiders.warparty.raiders.1 g:-/- a:- m:Opening=61
+S 275 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=113
+S 275 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=118,Opening=58
+S 276 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=147
+S 276 clarth.marksman.2 g:-/- a:- m:Burn=99
+S 276 clarth.trapper.4 g:-/- a:- m:Burn=87
+S 276 camp.5.raiders.warparty.raiders.1 g:-/- a:- m:Opening=60
+S 276 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=112
+S 276 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=117,Opening=57
+S 277 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=146
+S 277 clarth.marksman.2 g:-/- a:- m:Burn=98
+S 277 clarth.trapper.4 g:-/- a:- m:Burn=86
+S 277 camp.5.raiders.warparty.raiders.1 g:-/- a:- m:Opening=59
+S 277 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=111
+S 277 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=116,Opening=56
+S 278 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=145
+S 278 clarth.marksman.2 g:-/- a:- m:Burn=97
+S 278 clarth.trapper.4 g:-/- a:- m:Burn=85
+S 278 camp.5.raiders.warparty.raiders.1 g:-/- a:- m:Opening=58
+S 278 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=110
+S 278 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=115,Opening=55
+S 279 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=144
+S 279 clarth.marksman.2 g:-/- a:- m:Burn=96
+S 279 clarth.trapper.4 g:-/- a:- m:Burn=84
+S 279 camp.5.raiders.warparty.raiders.1 g:-/- a:- m:Opening=57
+S 279 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=109
+S 279 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=114,Opening=54
+S 280 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=143
+S 280 clarth.marksman.2 g:-/- a:- m:Burn=95
+S 280 clarth.trapper.4 g:-/- a:- m:Burn=83
+S 280 camp.5.raiders.warparty.raiders.1 g:-/- a:- m:Opening=56
+S 280 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=108
+S 280 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=113,Opening=53
+S 281 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=142
+S 281 clarth.marksman.2 g:-/- a:- m:Burn=94
+S 281 clarth.trapper.4 g:-/- a:- m:Burn=82
+S 281 camp.5.raiders.warparty.raiders.1 g:-/- a:- m:Opening=55
+S 281 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=107
+S 281 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=112,Opening=52
+S 282 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=141
+S 282 clarth.marksman.2 g:-/- a:- m:Burn=93
+S 282 clarth.trapper.4 g:-/- a:- m:Burn=81
+S 282 camp.5.raiders.warparty.raiders.1 g:-/- a:- m:Opening=54
+S 282 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=106
+S 282 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=111,Opening=51
+S 283 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=140
+S 283 clarth.marksman.2 g:-/- a:- m:Burn=92
+S 283 clarth.trapper.4 g:-/- a:- m:Burn=80
+S 283 camp.5.raiders.warparty.raiders.1 g:-/- a:- m:Opening=53
+S 283 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=105
+S 283 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=110,Opening=50
+S 284 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=139
+S 284 clarth.marksman.2 g:-/- a:- m:Burn=91
+S 284 clarth.trapper.4 g:-/- a:- m:Burn=79
+S 284 camp.5.raiders.warparty.raiders.1 g:-/- a:- m:Opening=52
+S 284 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=104
+S 284 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=109,Opening=49
+S 285 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=138
+S 285 clarth.marksman.2 g:-/- a:- m:Burn=90
+S 285 clarth.trapper.4 g:-/- a:- m:Burn=78
+S 285 camp.5.raiders.warparty.raiders.1 g:-/- a:- m:Opening=51
+S 285 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=103
+S 285 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=108,Opening=48
+S 286 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=137
+S 286 clarth.marksman.2 g:-/- a:- m:Burn=149
+S 286 clarth.trapper.4 g:-/- a:- m:Burn=77
+S 286 camp.5.raiders.warparty.raiders.1 g:-/- a:- m:Opening=50
+S 286 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=102
+S 286 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=107,Opening=47
+S 287 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=136
+S 287 clarth.marksman.2 g:-/- a:- m:Burn=148
+S 287 clarth.trapper.4 g:-/- a:- m:Burn=76
+S 287 camp.5.raiders.warparty.raiders.1 g:-/- a:- m:Opening=49
+S 287 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=101
+S 287 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=106,Opening=46
+S 288 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=135
+S 288 clarth.marksman.2 g:-/- a:- m:Burn=147
+S 288 clarth.trapper.4 g:-/- a:- m:Burn=75
+S 288 camp.5.raiders.warparty.raiders.1 g:-/- a:- m:Opening=48
+S 288 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=100
+S 288 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=105,Opening=45
+S 289 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=134
+S 289 clarth.marksman.2 g:-/- a:- m:Burn=146
+S 289 clarth.trapper.4 g:-/- a:- m:Burn=74
+S 289 camp.5.raiders.warparty.raiders.1 g:-/- a:- m:Opening=47
+S 289 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=99
+S 289 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=104,Opening=44
+S 290 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=133
+S 290 clarth.marksman.2 g:-/- a:- m:Burn=145
+S 290 clarth.trapper.4 g:-/- a:- m:Burn=73
+S 290 camp.5.raiders.warparty.raiders.1 g:-/- a:- m:Opening=46
+S 290 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=98
+S 290 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=103,Opening=43
+S 291 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=132
+S 291 clarth.marksman.2 g:-/- a:- m:Burn=144
+S 291 clarth.trapper.4 g:-/- a:- m:Burn=72
+S 291 camp.5.raiders.warparty.raiders.1 g:-/- a:- m:Opening=45
+S 291 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=97
+S 291 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=102,Opening=42
+S 292 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=131
+S 292 clarth.marksman.2 g:-/- a:- m:Burn=143
+S 292 clarth.trapper.4 g:-/- a:- m:Burn=71
+S 292 camp.5.raiders.warparty.raiders.1 g:-/- a:- m:Opening=44
+S 292 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=96
+S 292 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=101,Opening=41
+S 293 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=130
+S 293 clarth.marksman.2 g:-/- a:- m:Burn=142
+S 293 clarth.trapper.4 g:-/- a:- m:Burn=70
+S 293 camp.5.raiders.warparty.raiders.1 g:-/- a:- m:Opening=43
+S 293 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=95
+S 293 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=100,Opening=40
+S 294 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=129
+S 294 clarth.marksman.2 g:-/- a:- m:Burn=141
+S 294 clarth.trapper.4 g:-/- a:- m:Burn=69
+S 294 camp.5.raiders.warparty.raiders.1 g:-/- a:- m:Opening=42
+S 294 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=94
+S 294 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=99,Opening=39
+S 295 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=128
+S 295 clarth.marksman.2 g:-/- a:- m:Burn=140
+S 295 clarth.trapper.4 g:-/- a:- m:Burn=68
+S 295 camp.5.raiders.warparty.raiders.1 g:-/- a:- m:Opening=41
+S 295 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=93
+S 295 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=98,Opening=38
+S 296 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=127
+S 296 clarth.marksman.2 g:-/- a:- m:Burn=139
+S 296 clarth.trapper.4 g:-/- a:- m:Burn=67
+S 296 camp.5.raiders.warparty.raiders.1 g:-/- a:- m:Opening=40
+S 296 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=92
+S 296 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=97,Opening=37
+S 297 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=126
+S 297 clarth.marksman.2 g:-/- a:- m:Burn=138
+S 297 clarth.trapper.4 g:-/- a:- m:Burn=66
+S 297 camp.5.raiders.warparty.raiders.1 g:-/- a:- m:Opening=39
+S 297 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=91
+S 297 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=96,Opening=36
+S 298 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=125
+S 298 clarth.marksman.2 g:-/- a:- m:Burn=137
+S 298 clarth.trapper.4 g:-/- a:- m:Burn=65
+S 298 camp.5.raiders.warparty.raiders.1 g:-/- a:- m:Opening=38
+S 298 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=90
+S 298 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=95,Opening=35
+S 299 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=124
+S 299 clarth.marksman.2 g:-/- a:- m:Burn=136
+S 299 clarth.trapper.4 g:-/- a:- m:Burn=64
+S 299 camp.5.raiders.warparty.raiders.1 g:-/- a:- m:Opening=37
+S 299 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=89
+S 299 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=94,Opening=34
+S 300 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=123
+S 300 clarth.marksman.2 g:-/- a:- m:Burn=135
+S 300 clarth.trapper.4 g:-/- a:- m:Burn=63
+S 300 camp.5.raiders.warparty.raiders.1 g:-/- a:- m:Opening=36
+S 300 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=88
+S 300 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=93,Opening=33
+S 301 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=122
+S 301 clarth.marksman.2 g:-/- a:- m:Burn=134
+S 301 clarth.trapper.4 g:-/- a:- m:Burn=62
+S 301 camp.5.raiders.warparty.raiders.1 g:camp.5.raiders.warparty.raiders.champion/- a:- m:Opening=35
+S 301 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=87
+S 301 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=92,Opening=32
+S 302 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=121
+S 302 clarth.marksman.2 g:-/- a:- m:Burn=133
+S 302 clarth.trapper.4 g:-/- a:- m:Burn=61
+S 302 camp.5.raiders.warparty.raiders.1 g:camp.5.raiders.warparty.raiders.champion/- a:- m:Opening=34
+S 302 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=86
+S 302 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=91,Opening=31
+S 303 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=120
+S 303 clarth.marksman.2 g:-/- a:- m:Burn=132
+S 303 clarth.trapper.4 g:-/- a:- m:Burn=60
+S 303 camp.5.raiders.warparty.raiders.1 g:camp.5.raiders.warparty.raiders.champion/- a:- m:Opening=33
+S 303 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=85
+S 303 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=90,Opening=30
+S 304 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=119
+S 304 clarth.marksman.2 g:-/- a:- m:Burn=131
+S 304 clarth.trapper.4 g:-/- a:- m:Burn=59
+S 304 camp.5.raiders.warparty.raiders.1 g:camp.5.raiders.warparty.raiders.champion/- a:- m:Opening=32
+S 304 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=84
+S 304 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=89,Opening=29
+S 305 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=118
+S 305 clarth.marksman.2 g:-/- a:- m:Burn=130
+S 305 clarth.trapper.4 g:-/- a:- m:Burn=58
+S 305 camp.5.raiders.warparty.raiders.1 g:camp.5.raiders.warparty.raiders.champion/- a:- m:Opening=31
+S 305 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=83
+S 305 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=88,Opening=28
+S 306 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=117
+S 306 clarth.marksman.2 g:-/- a:- m:Burn=129
+S 306 clarth.trapper.4 g:-/- a:- m:Burn=57
+S 306 camp.5.raiders.warparty.raiders.1 g:camp.5.raiders.warparty.raiders.champion/- a:- m:Opening=30
+S 306 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=82
+S 306 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=87,Opening=27
+S 307 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=116
+S 307 clarth.marksman.2 g:-/- a:- m:Burn=128
+S 307 clarth.trapper.4 g:-/- a:- m:Burn=56
+S 307 camp.5.raiders.warparty.raiders.1 g:camp.5.raiders.warparty.raiders.champion/- a:- m:Opening=29
+S 307 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=81
+S 307 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=86,Opening=26
+S 308 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=115
+S 308 clarth.marksman.2 g:-/- a:- m:Burn=127
+S 308 clarth.trapper.4 g:-/- a:- m:Burn=55
+S 308 camp.5.raiders.warparty.raiders.1 g:camp.5.raiders.warparty.raiders.champion/- a:- m:Opening=28
+S 308 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=80
+S 308 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=85,Opening=25
+S 309 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=114
+S 309 clarth.marksman.2 g:-/- a:- m:Burn=126
+S 309 clarth.trapper.4 g:-/- a:- m:Burn=54
+S 309 camp.5.raiders.warparty.raiders.1 g:camp.5.raiders.warparty.raiders.champion/- a:- m:Opening=27
+S 309 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=79
+S 309 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=84,Opening=24
+S 310 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=113
+S 310 clarth.marksman.2 g:-/- a:- m:Burn=125
+S 310 clarth.trapper.4 g:-/- a:- m:Burn=53
+S 310 camp.5.raiders.warparty.raiders.1 g:camp.5.raiders.warparty.raiders.champion/- a:- m:Opening=26
+S 310 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=78
+S 310 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=83,Opening=23
+S 311 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=112
+S 311 clarth.marksman.2 g:-/- a:- m:Burn=124
+S 311 clarth.trapper.4 g:-/- a:- m:Burn=52
+S 311 camp.5.raiders.warparty.raiders.1 g:camp.5.raiders.warparty.raiders.champion/- a:- m:Opening=25
+S 311 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=77
+S 311 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=82,Opening=22
+S 312 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=111
+S 312 clarth.marksman.2 g:-/- a:- m:Burn=123
+S 312 clarth.trapper.4 g:-/- a:- m:Burn=51
+S 312 camp.5.raiders.warparty.raiders.1 g:camp.5.raiders.warparty.raiders.champion/- a:- m:Opening=24
+S 312 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=76
+S 312 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=81,Opening=21
+S 313 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=110
+S 313 clarth.marksman.2 g:-/- a:- m:Burn=122
+S 313 clarth.trapper.4 g:-/- a:- m:Burn=50
+S 313 camp.5.raiders.warparty.raiders.1 g:camp.5.raiders.warparty.raiders.champion/- a:- m:Opening=23
+S 313 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=75
+S 313 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=80,Opening=20
+S 314 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=109
+S 314 clarth.marksman.2 g:-/- a:- m:Burn=121
+S 314 clarth.trapper.4 g:-/- a:- m:Burn=49
+S 314 camp.5.raiders.warparty.raiders.1 g:camp.5.raiders.warparty.raiders.champion/- a:- m:Opening=22
+S 314 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=74
+S 314 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=79,Opening=19
+S 315 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=108
+S 315 clarth.marksman.2 g:-/- a:camp.5.raiders.warparty.raiders.champion:44 m:Burn=120
+S 315 clarth.trapper.4 g:-/- a:- m:Burn=48
+S 315 camp.5.raiders.warparty.raiders.1 g:camp.5.raiders.warparty.raiders.champion/- a:- m:Opening=21
+S 315 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=73
+S 315 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=78,Opening=18
+S 316 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=107
+S 316 clarth.marksman.2 g:-/- a:camp.5.raiders.warparty.raiders.champion:43 m:Burn=119
+S 316 clarth.trapper.4 g:-/- a:- m:Burn=47
+S 316 camp.5.raiders.warparty.raiders.1 g:camp.5.raiders.warparty.raiders.champion/- a:- m:Opening=20
+S 316 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=72
+S 316 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=77,Opening=17
+S 317 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=106
+S 317 clarth.marksman.2 g:-/- a:camp.5.raiders.warparty.raiders.champion:42 m:Burn=118
+S 317 clarth.trapper.4 g:-/- a:- m:Burn=46
+S 317 camp.5.raiders.warparty.raiders.1 g:camp.5.raiders.warparty.raiders.champion/- a:- m:Opening=19
+S 317 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=71
+S 317 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=76,Opening=16
+S 318 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=105
+S 318 clarth.marksman.2 g:-/- a:camp.5.raiders.warparty.raiders.champion:41 m:Burn=117
+S 318 clarth.trapper.4 g:-/- a:- m:Burn=45
+S 318 camp.5.raiders.warparty.raiders.1 g:camp.5.raiders.warparty.raiders.champion/- a:- m:Opening=18
+S 318 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=70
+S 318 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=75,Opening=15
+S 319 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=104
+S 319 clarth.marksman.2 g:-/- a:camp.5.raiders.warparty.raiders.champion:40 m:Burn=116
+S 319 clarth.trapper.4 g:-/- a:- m:Burn=44
+S 319 camp.5.raiders.warparty.raiders.1 g:camp.5.raiders.warparty.raiders.champion/- a:- m:Opening=17
+S 319 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=69
+S 319 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=74,Opening=14
+S 320 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=103
+S 320 clarth.marksman.2 g:-/- a:camp.5.raiders.warparty.raiders.champion:39 m:Burn=115
+S 320 clarth.trapper.4 g:-/- a:- m:Burn=43
+S 320 camp.5.raiders.warparty.raiders.1 g:camp.5.raiders.warparty.raiders.champion/- a:- m:Opening=16
+S 320 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=68
+S 320 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=73,Opening=13
+S 321 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=102
+S 321 clarth.marksman.2 g:-/- a:camp.5.raiders.warparty.raiders.champion:38 m:Burn=114
+S 321 clarth.trapper.4 g:-/- a:- m:Burn=42
+S 321 camp.5.raiders.warparty.raiders.1 g:camp.5.raiders.warparty.raiders.champion/- a:- m:Opening=15
+S 321 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=67
+S 321 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=72,Opening=12
+S 322 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=101
+S 322 clarth.marksman.2 g:-/- a:camp.5.raiders.warparty.raiders.champion:37 m:Burn=113
+S 322 clarth.trapper.4 g:-/- a:- m:Burn=41
+S 322 camp.5.raiders.warparty.raiders.1 g:camp.5.raiders.warparty.raiders.champion/- a:- m:Opening=14
+S 322 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=66
+S 322 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=71,Opening=11
+S 323 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=100
+S 323 clarth.marksman.2 g:-/- a:camp.5.raiders.warparty.raiders.champion:36 m:Burn=112
+S 323 clarth.trapper.4 g:-/- a:- m:Burn=40
+S 323 camp.5.raiders.warparty.raiders.1 g:camp.5.raiders.warparty.raiders.champion/- a:- m:Opening=13
+S 323 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=65
+S 323 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=70,Opening=10
+S 324 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=99
+S 324 clarth.marksman.2 g:-/- a:camp.5.raiders.warparty.raiders.champion:35 m:Burn=111
+S 324 clarth.trapper.4 g:-/- a:- m:Burn=39
+S 324 camp.5.raiders.warparty.raiders.1 g:camp.5.raiders.warparty.raiders.champion/- a:- m:Opening=12
+S 324 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=64
+S 324 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=69,Opening=9
+S 325 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=98
+S 325 clarth.marksman.2 g:-/- a:camp.5.raiders.warparty.raiders.champion:34 m:Burn=110
+S 325 clarth.trapper.4 g:-/- a:- m:Burn=38
+S 325 camp.5.raiders.warparty.raiders.1 g:camp.5.raiders.warparty.raiders.champion/- a:- m:Opening=11
+S 325 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=63
+S 325 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=68,Opening=8
+S 326 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=97
+S 326 clarth.marksman.2 g:-/- a:camp.5.raiders.warparty.raiders.champion:33 m:Burn=109
+S 326 clarth.trapper.4 g:-/- a:- m:Burn=37
+S 326 camp.5.raiders.warparty.raiders.1 g:camp.5.raiders.warparty.raiders.champion/- a:- m:Opening=10
+S 326 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=62
+S 326 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=67,Opening=7
+S 327 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=96
+S 327 clarth.marksman.2 g:-/- a:camp.5.raiders.warparty.raiders.champion:32 m:Burn=108
+S 327 clarth.trapper.4 g:-/- a:- m:Burn=36
+S 327 camp.5.raiders.warparty.raiders.1 g:camp.5.raiders.warparty.raiders.champion/- a:- m:Opening=9
+S 327 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=61
+S 327 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=66,Opening=6
+S 328 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=95
+S 328 clarth.marksman.2 g:-/- a:camp.5.raiders.warparty.raiders.champion:31 m:Burn=107
+S 328 clarth.trapper.4 g:-/- a:- m:Burn=35
+S 328 camp.5.raiders.warparty.raiders.1 g:camp.5.raiders.warparty.raiders.champion/- a:- m:Opening=8
+S 328 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=60
+S 328 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=65,Opening=5
+S 329 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=94
+S 329 clarth.marksman.2 g:-/- a:camp.5.raiders.warparty.raiders.champion:30 m:Burn=106
+S 329 clarth.trapper.4 g:-/- a:- m:Burn=34
+S 329 camp.5.raiders.warparty.raiders.1 g:camp.5.raiders.warparty.raiders.champion/- a:- m:Opening=7
+S 329 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=59
+S 329 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=64,Opening=4
+S 330 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=93
+S 330 clarth.marksman.2 g:-/- a:camp.5.raiders.warparty.raiders.champion:29 m:Burn=105
+S 330 clarth.trapper.4 g:-/- a:- m:Burn=33
+S 330 camp.5.raiders.warparty.raiders.1 g:camp.5.raiders.warparty.raiders.champion/- a:- m:Opening=6
+S 330 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=58
+S 330 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=63,Opening=3
+S 331 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=92
+S 331 clarth.marksman.2 g:-/- a:camp.5.raiders.warparty.raiders.champion:28 m:Burn=104
+S 331 clarth.trapper.4 g:-/- a:- m:Burn=32
+S 331 camp.5.raiders.warparty.raiders.1 g:camp.5.raiders.warparty.raiders.champion/- a:- m:Opening=5
+S 331 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=57
+S 331 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=62,Opening=2
+S 332 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=91
+S 332 clarth.marksman.2 g:-/- a:camp.5.raiders.warparty.raiders.champion:27 m:Burn=103
+S 332 clarth.trapper.4 g:-/- a:- m:Burn=31
+S 332 camp.5.raiders.warparty.raiders.1 g:camp.5.raiders.warparty.raiders.champion/- a:- m:Opening=4
+S 332 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=56
+S 332 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=61,Opening=1
+S 333 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=90
+S 333 clarth.marksman.2 g:-/- a:camp.5.raiders.warparty.raiders.champion:26 m:Burn=102
+S 333 clarth.trapper.4 g:-/- a:- m:Burn=30
+S 333 camp.5.raiders.warparty.raiders.1 g:camp.5.raiders.warparty.raiders.champion/- a:- m:Opening=3
+S 333 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=55
+S 333 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=60
+S 334 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=89
+S 334 clarth.marksman.2 g:-/- a:camp.5.raiders.warparty.raiders.champion:25 m:Burn=101
+S 334 clarth.trapper.4 g:-/- a:- m:Burn=29
+S 334 camp.5.raiders.warparty.raiders.1 g:camp.5.raiders.warparty.raiders.champion/- a:- m:Opening=2
+S 334 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=54
+S 334 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=59
+S 335 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=88
+S 335 clarth.marksman.2 g:-/- a:camp.5.raiders.warparty.raiders.champion:24 m:Burn=100
+S 335 clarth.trapper.4 g:-/- a:- m:Burn=28
+S 335 camp.5.raiders.warparty.raiders.1 g:camp.5.raiders.warparty.raiders.champion/- a:- m:Opening=1
+S 335 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=53
+S 335 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=58
+S 336 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=87
+S 336 clarth.marksman.2 g:-/- a:camp.5.raiders.warparty.raiders.champion:23 m:Burn=99
+S 336 clarth.trapper.4 g:-/- a:- m:Burn=27
+S 336 camp.5.raiders.warparty.raiders.1 g:camp.5.raiders.warparty.raiders.champion/- a:- m:-
+S 336 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=52
+S 336 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=57
+S 337 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=86
+S 337 clarth.marksman.2 g:-/- a:camp.5.raiders.warparty.raiders.champion:22 m:Burn=98
+S 337 clarth.trapper.4 g:-/- a:- m:Burn=26
+S 337 camp.5.raiders.warparty.raiders.1 g:camp.5.raiders.warparty.raiders.champion/- a:- m:-
+S 337 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=51
+S 337 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=56
+S 338 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=85
+S 338 clarth.marksman.2 g:-/- a:camp.5.raiders.warparty.raiders.champion:21 m:Burn=97
+S 338 clarth.trapper.4 g:-/- a:- m:Burn=25
+S 338 camp.5.raiders.warparty.raiders.1 g:camp.5.raiders.warparty.raiders.champion/- a:- m:-
+S 338 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=50
+S 338 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=55
+S 339 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=84
+S 339 clarth.marksman.2 g:-/- a:camp.5.raiders.warparty.raiders.champion:20 m:Burn=96
+S 339 clarth.trapper.4 g:-/- a:- m:Burn=24
+S 339 camp.5.raiders.warparty.raiders.1 g:camp.5.raiders.warparty.raiders.champion/- a:- m:-
+S 339 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=49
+S 339 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=54
+S 340 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=83
+S 340 clarth.marksman.2 g:-/- a:camp.5.raiders.warparty.raiders.champion:19 m:Burn=95
+S 340 clarth.trapper.4 g:-/- a:- m:Burn=23
+S 340 camp.5.raiders.warparty.raiders.1 g:camp.5.raiders.warparty.raiders.champion/- a:- m:-
+S 340 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=48
+S 340 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=53
+S 341 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=82
+S 341 clarth.marksman.2 g:-/- a:camp.5.raiders.warparty.raiders.champion:18 m:Burn=94
+S 341 clarth.trapper.4 g:-/- a:- m:Burn=22
+S 341 camp.5.raiders.warparty.raiders.1 g:camp.5.raiders.warparty.raiders.champion/- a:- m:-
+S 341 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=47
+S 341 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=52
+S 342 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=81
+S 342 clarth.marksman.2 g:-/- a:camp.5.raiders.warparty.raiders.champion:17 m:Burn=93
+S 342 clarth.trapper.4 g:-/- a:- m:Burn=21
+S 342 camp.5.raiders.warparty.raiders.1 g:camp.5.raiders.warparty.raiders.champion/- a:- m:-
+S 342 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=46
+S 342 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=51
+S 343 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=80
+S 343 clarth.marksman.2 g:-/- a:camp.5.raiders.warparty.raiders.champion:16 m:Burn=92
+S 343 clarth.trapper.4 g:-/- a:- m:Burn=20
+S 343 camp.5.raiders.warparty.raiders.1 g:camp.5.raiders.warparty.raiders.champion/- a:- m:-
+S 343 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=45
+S 343 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=50
+S 344 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=79
+S 344 clarth.marksman.2 g:-/- a:camp.5.raiders.warparty.raiders.champion:15 m:Burn=91
+S 344 clarth.trapper.4 g:-/- a:- m:Burn=19
+S 344 camp.5.raiders.warparty.raiders.1 g:camp.5.raiders.warparty.raiders.champion/- a:- m:-
+S 344 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=44
+S 344 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=49
+S 345 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=78
+S 345 clarth.marksman.2 g:-/- a:camp.5.raiders.warparty.raiders.champion:14 m:Burn=90
+S 345 clarth.trapper.4 g:-/- a:- m:Burn=18
+S 345 camp.5.raiders.warparty.raiders.1 g:camp.5.raiders.warparty.raiders.champion/- a:- m:-
+S 345 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=43
+S 345 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=48
+S 346 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=149
+S 346 clarth.marksman.2 g:-/- a:camp.5.raiders.warparty.raiders.champion:13 m:Burn=89
+S 346 clarth.trapper.4 g:-/- a:- m:Burn=17
+S 346 camp.5.raiders.warparty.raiders.1 g:camp.5.raiders.warparty.raiders.champion/- a:- m:-
+S 346 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=42
+S 346 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=47
+S 347 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=148
+S 347 clarth.marksman.2 g:-/- a:camp.5.raiders.warparty.raiders.champion:12 m:Burn=88
+S 347 clarth.trapper.4 g:-/- a:- m:Burn=16
+S 347 camp.5.raiders.warparty.raiders.1 g:camp.5.raiders.warparty.raiders.champion/- a:- m:-
+S 347 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=41
+S 347 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=46
+S 348 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=147
+S 348 clarth.marksman.2 g:-/- a:camp.5.raiders.warparty.raiders.champion:11 m:Burn=87
+S 348 clarth.trapper.4 g:-/- a:- m:Burn=15
+S 348 camp.5.raiders.warparty.raiders.1 g:camp.5.raiders.warparty.raiders.champion/- a:- m:-
+S 348 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=40
+S 348 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=45
+S 349 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=146
+S 349 clarth.marksman.2 g:-/- a:camp.5.raiders.warparty.raiders.champion:10 m:Burn=86
+S 349 clarth.trapper.4 g:-/- a:- m:Burn=14
+S 349 camp.5.raiders.warparty.raiders.1 g:camp.5.raiders.warparty.raiders.champion/- a:- m:-
+S 349 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=39
+S 349 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=44
+S 350 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=145
+S 350 clarth.marksman.2 g:-/- a:camp.5.raiders.warparty.raiders.champion:9 m:Burn=85
+S 350 clarth.trapper.4 g:-/- a:- m:Burn=13
+S 350 camp.5.raiders.warparty.raiders.1 g:camp.5.raiders.warparty.raiders.champion/- a:- m:-
+S 350 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=38
+S 350 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=43
+S 351 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=144
+S 351 clarth.marksman.2 g:-/- a:camp.5.raiders.warparty.raiders.champion:8 m:Burn=84
+S 351 clarth.trapper.4 g:-/- a:- m:Burn=12
+S 351 camp.5.raiders.warparty.raiders.1 g:camp.5.raiders.warparty.raiders.champion/- a:- m:-
+S 351 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=37
+S 351 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=42
+S 352 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=143
+S 352 clarth.marksman.2 g:-/- a:camp.5.raiders.warparty.raiders.champion:7 m:Burn=83
+S 352 clarth.trapper.4 g:-/- a:- m:Burn=11
+S 352 camp.5.raiders.warparty.raiders.1 g:camp.5.raiders.warparty.raiders.champion/- a:- m:-
+S 352 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=36
+S 352 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=41
+S 353 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=142
+S 353 clarth.marksman.2 g:-/- a:camp.5.raiders.warparty.raiders.champion:6 m:Burn=82
+S 353 clarth.trapper.4 g:-/- a:- m:Burn=10
+S 353 camp.5.raiders.warparty.raiders.1 g:camp.5.raiders.warparty.raiders.champion/- a:- m:-
+S 353 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=35
+S 353 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=40
+S 354 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=141
+S 354 clarth.marksman.2 g:-/- a:camp.5.raiders.warparty.raiders.champion:5 m:Burn=81
+S 354 clarth.trapper.4 g:-/- a:- m:Burn=9
+S 354 camp.5.raiders.warparty.raiders.1 g:camp.5.raiders.warparty.raiders.champion/- a:- m:-
+S 354 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=34
+S 354 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=39
+S 355 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=140
+S 355 clarth.marksman.2 g:-/- a:camp.5.raiders.warparty.raiders.champion:4 m:Burn=80
+S 355 clarth.trapper.4 g:-/- a:- m:Burn=8
+S 355 camp.5.raiders.warparty.raiders.1 g:camp.5.raiders.warparty.raiders.champion/- a:- m:-
+S 355 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=33
+S 355 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=38
+S 356 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=139
+S 356 clarth.marksman.2 g:-/- a:camp.5.raiders.warparty.raiders.champion:3 m:Burn=79
+S 356 clarth.trapper.4 g:-/- a:- m:Burn=7
+S 356 camp.5.raiders.warparty.raiders.1 g:camp.5.raiders.warparty.raiders.champion/- a:- m:-
+S 356 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=32
+S 356 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=37
+S 357 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=138
+S 357 clarth.marksman.2 g:-/- a:camp.5.raiders.warparty.raiders.champion:2 m:Burn=78
+S 357 clarth.trapper.4 g:-/- a:- m:Burn=6
+S 357 camp.5.raiders.warparty.raiders.1 g:camp.5.raiders.warparty.raiders.champion/- a:- m:-
+S 357 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=31
+S 357 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=36
+S 358 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=137
+S 358 clarth.marksman.2 g:-/- a:camp.5.raiders.warparty.raiders.champion:1 m:Burn=77
+S 358 clarth.trapper.4 g:-/- a:- m:Burn=5
+S 358 camp.5.raiders.warparty.raiders.1 g:camp.5.raiders.warparty.raiders.champion/- a:- m:-
+S 358 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=30
+S 358 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=35
+S 359 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=136
+S 359 clarth.marksman.2 g:-/- a:- m:Burn=76
+S 359 clarth.trapper.4 g:-/- a:- m:Burn=4
+S 359 camp.5.raiders.warparty.raiders.1 g:camp.5.raiders.warparty.raiders.champion/- a:- m:-
+S 359 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=29
+S 359 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=34
+S 360 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=135
+S 360 clarth.marksman.2 g:-/- a:- m:Burn=75
+S 360 clarth.trapper.4 g:-/- a:- m:Burn=3
+S 360 camp.5.raiders.warparty.raiders.1 g:camp.5.raiders.warparty.raiders.champion/- a:- m:-
+S 360 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=28
+S 360 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=33
+S 361 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=134
+S 361 clarth.marksman.2 g:-/- a:- m:Burn=74
+S 361 clarth.trapper.4 g:-/- a:- m:Burn=2
+S 361 camp.5.raiders.warparty.raiders.1 g:camp.5.raiders.warparty.raiders.champion/- a:- m:-
+S 361 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=27
+S 361 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=32
+S 362 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=133
+S 362 clarth.marksman.2 g:-/- a:- m:Burn=73
+S 362 clarth.trapper.4 g:-/- a:- m:Burn=1
+S 362 camp.5.raiders.warparty.raiders.1 g:camp.5.raiders.warparty.raiders.champion/- a:- m:-
+S 362 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=26
+S 362 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=31
+S 363 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=132
+S 363 clarth.marksman.2 g:-/- a:- m:Burn=72
+S 363 camp.5.raiders.warparty.raiders.1 g:camp.5.raiders.warparty.raiders.champion/- a:- m:-
+S 363 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=25
+S 363 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=30
+S 364 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=131
+S 364 clarth.marksman.2 g:-/- a:- m:Burn=71
+S 364 camp.5.raiders.warparty.raiders.1 g:camp.5.raiders.warparty.raiders.champion/- a:- m:-
+S 364 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=24
+S 364 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=29
+S 365 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=130
+S 365 clarth.marksman.2 g:-/- a:- m:Burn=70
+S 365 camp.5.raiders.warparty.raiders.1 g:camp.5.raiders.warparty.raiders.champion/- a:- m:-
+S 365 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=23
+S 365 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=28
+S 366 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=129
+S 366 clarth.marksman.2 g:-/- a:- m:Burn=69
+S 366 camp.5.raiders.warparty.raiders.1 g:camp.5.raiders.warparty.raiders.champion/- a:- m:-
+S 366 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=22
+S 366 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=27
+S 367 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=128
+S 367 clarth.marksman.2 g:-/- a:- m:Burn=68
+S 367 camp.5.raiders.warparty.raiders.1 g:camp.5.raiders.warparty.raiders.champion/- a:- m:-
+S 367 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=21
+S 367 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=26
+S 368 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=127
+S 368 clarth.marksman.2 g:-/- a:- m:Burn=67
+S 368 camp.5.raiders.warparty.raiders.1 g:camp.5.raiders.warparty.raiders.champion/- a:- m:-
+S 368 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=20
+S 368 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=25
+S 369 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=126
+S 369 clarth.marksman.2 g:-/- a:- m:Burn=66
+S 369 camp.5.raiders.warparty.raiders.1 g:camp.5.raiders.warparty.raiders.champion/- a:- m:-
+S 369 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=19
+S 369 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=24
+S 370 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=125
+S 370 clarth.marksman.2 g:-/- a:- m:Burn=65
+S 370 camp.5.raiders.warparty.raiders.1 g:camp.5.raiders.warparty.raiders.champion/- a:- m:-
+S 370 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=18
+S 370 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=23
+S 371 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=124
+S 371 clarth.marksman.2 g:-/- a:- m:Burn=64
+S 371 camp.5.raiders.warparty.raiders.1 g:camp.5.raiders.warparty.raiders.champion/- a:- m:-
+S 371 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=17
+S 371 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=22
+S 372 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=123
+S 372 clarth.marksman.2 g:-/- a:- m:Burn=63
+S 372 camp.5.raiders.warparty.raiders.1 g:camp.5.raiders.warparty.raiders.champion/- a:- m:-
+S 372 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=16
+S 372 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=21
+S 373 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=122
+S 373 clarth.marksman.2 g:-/- a:- m:Burn=62
+S 373 camp.5.raiders.warparty.raiders.1 g:camp.5.raiders.warparty.raiders.champion/- a:- m:-
+S 373 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=15
+S 373 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=20
+S 374 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=121
+S 374 clarth.marksman.2 g:-/- a:- m:Burn=61
+S 374 camp.5.raiders.warparty.raiders.1 g:camp.5.raiders.warparty.raiders.champion/- a:- m:-
+S 374 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=14
+S 374 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=19
+S 375 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=120
+S 375 clarth.marksman.2 g:-/- a:- m:Burn=60
+S 375 camp.5.raiders.warparty.raiders.1 g:camp.5.raiders.warparty.raiders.champion/- a:- m:-
+S 375 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=13
+S 375 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=18
+S 376 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=119
+S 376 clarth.marksman.2 g:-/- a:- m:Burn=149
+S 376 camp.5.raiders.warparty.raiders.1 g:camp.5.raiders.warparty.raiders.champion/- a:- m:-
+S 376 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=12
+S 376 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=17
+S 377 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=118
+S 377 clarth.marksman.2 g:-/- a:- m:Burn=148
+S 377 camp.5.raiders.warparty.raiders.1 g:camp.5.raiders.warparty.raiders.champion/- a:- m:-
+S 377 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=11
+S 377 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=16
+S 378 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=117
+S 378 clarth.marksman.2 g:-/- a:- m:Burn=147
+S 378 camp.5.raiders.warparty.raiders.1 g:camp.5.raiders.warparty.raiders.champion/- a:- m:-
+S 378 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=10
+S 378 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=15
+S 379 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=116
+S 379 clarth.marksman.2 g:-/- a:- m:Burn=146
+S 379 camp.5.raiders.warparty.raiders.1 g:camp.5.raiders.warparty.raiders.champion/- a:- m:-
+S 379 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=9
+S 379 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=14
+S 380 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=115
+S 380 clarth.marksman.2 g:-/- a:- m:Burn=145
+S 380 camp.5.raiders.warparty.raiders.1 g:camp.5.raiders.warparty.raiders.champion/- a:- m:-
+S 380 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=8
+S 380 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=13
+S 381 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=114
+S 381 clarth.marksman.2 g:-/- a:- m:Burn=144
+S 381 camp.5.raiders.warparty.raiders.1 g:camp.5.raiders.warparty.raiders.champion/- a:- m:-
+S 381 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=7
+S 381 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=12
+S 382 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=113
+S 382 clarth.marksman.2 g:-/- a:- m:Burn=143
+S 382 camp.5.raiders.warparty.raiders.1 g:camp.5.raiders.warparty.raiders.champion/- a:- m:-
+S 382 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=6
+S 382 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=11
+S 383 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=112
+S 383 clarth.marksman.2 g:-/- a:- m:Burn=142
+S 383 camp.5.raiders.warparty.raiders.1 g:camp.5.raiders.warparty.raiders.champion/- a:- m:-
+S 383 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=5
+S 383 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=10
+S 384 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=111
+S 384 clarth.marksman.2 g:-/- a:- m:Burn=141
+S 384 camp.5.raiders.warparty.raiders.1 g:camp.5.raiders.warparty.raiders.champion/- a:- m:-
+S 384 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=4
+S 384 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=9
+S 385 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=110
+S 385 clarth.marksman.2 g:-/- a:- m:Burn=140
+S 385 camp.5.raiders.warparty.raiders.1 g:camp.5.raiders.warparty.raiders.champion/- a:- m:-
+S 385 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=3
+S 385 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=8
+S 386 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=109
+S 386 clarth.marksman.2 g:-/- a:- m:Burn=139
+S 386 camp.5.raiders.warparty.raiders.1 g:camp.5.raiders.warparty.raiders.champion/- a:- m:-
+S 386 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=2
+S 386 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=7
+S 387 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=108
+S 387 clarth.marksman.2 g:-/- a:- m:Burn=138
+S 387 camp.5.raiders.warparty.raiders.1 g:camp.5.raiders.warparty.raiders.champion/- a:- m:-
+S 387 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=1
+S 387 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=6
+S 388 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=107
+S 388 clarth.marksman.2 g:-/- a:- m:Burn=137
+S 388 camp.5.raiders.warparty.raiders.1 g:camp.5.raiders.warparty.raiders.champion/- a:- m:-
+S 388 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=5
+S 389 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=106
+S 389 clarth.marksman.2 g:-/- a:- m:Burn=136
+S 389 camp.5.raiders.warparty.raiders.1 g:camp.5.raiders.warparty.raiders.champion/- a:- m:-
+S 389 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=4
+S 390 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=105
+S 390 clarth.marksman.2 g:-/- a:- m:Burn=135
+S 390 camp.5.raiders.warparty.raiders.1 g:camp.5.raiders.warparty.raiders.champion/- a:- m:-
+S 390 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=3
+S 391 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=104
+S 391 clarth.marksman.2 g:-/- a:- m:Burn=134
+S 391 camp.5.raiders.warparty.raiders.1 g:camp.5.raiders.warparty.raiders.champion/- a:- m:-
+S 391 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=2
+S 392 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=103
+S 392 clarth.marksman.2 g:-/- a:- m:Burn=133
+S 392 camp.5.raiders.warparty.raiders.1 g:camp.5.raiders.warparty.raiders.champion/- a:- m:-
+S 392 camp.5.raiders.warparty.raiders.champion g:-/- a:- m:Bleed=1
+S 393 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=102
+S 393 clarth.marksman.2 g:-/- a:- m:Burn=132
+S 393 camp.5.raiders.warparty.raiders.1 g:camp.5.raiders.warparty.raiders.champion/- a:- m:-
+S 394 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=101
+S 394 clarth.marksman.2 g:-/- a:- m:Burn=131
+S 394 camp.5.raiders.warparty.raiders.1 g:camp.5.raiders.warparty.raiders.champion/- a:- m:-
+S 395 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=100
+S 395 clarth.marksman.2 g:-/- a:- m:Burn=130
+S 395 camp.5.raiders.warparty.raiders.1 g:camp.5.raiders.warparty.raiders.champion/- a:- m:-
+S 396 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=99
+S 396 clarth.marksman.2 g:-/- a:- m:Burn=129
+S 396 camp.5.raiders.warparty.raiders.1 g:camp.5.raiders.warparty.raiders.champion/- a:- m:-
+S 397 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=98
+S 397 clarth.marksman.2 g:-/- a:- m:Burn=128
+S 397 camp.5.raiders.warparty.raiders.1 g:camp.5.raiders.warparty.raiders.champion/- a:- m:-
+S 398 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=97
+S 398 clarth.marksman.2 g:-/- a:- m:Burn=127
+S 398 camp.5.raiders.warparty.raiders.1 g:camp.5.raiders.warparty.raiders.champion/- a:- m:-
+S 399 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=96
+S 399 clarth.marksman.2 g:-/- a:- m:Burn=126
+S 399 camp.5.raiders.warparty.raiders.1 g:camp.5.raiders.warparty.raiders.champion/- a:- m:-
+S 400 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=95
+S 400 clarth.marksman.2 g:-/- a:- m:Burn=125
+S 400 camp.5.raiders.warparty.raiders.1 g:camp.5.raiders.warparty.raiders.champion/- a:- m:-
+S 401 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=94
+S 401 clarth.marksman.2 g:-/- a:- m:Burn=124
+S 401 camp.5.raiders.warparty.raiders.1 g:camp.5.raiders.warparty.raiders.champion/- a:- m:-
+S 402 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=93
+S 402 clarth.marksman.2 g:-/- a:- m:Burn=123
+S 402 camp.5.raiders.warparty.raiders.1 g:camp.5.raiders.warparty.raiders.champion/- a:- m:-
+S 403 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=92
+S 403 clarth.marksman.2 g:-/- a:- m:Burn=122
+S 403 camp.5.raiders.warparty.raiders.1 g:camp.5.raiders.warparty.raiders.champion/- a:- m:-
+S 404 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=91
+S 404 clarth.marksman.2 g:-/- a:- m:Burn=121
+S 404 camp.5.raiders.warparty.raiders.1 g:camp.5.raiders.warparty.raiders.champion/- a:- m:-
+S 405 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=90
+S 405 clarth.marksman.2 g:-/- a:- m:Burn=120
+S 405 camp.5.raiders.warparty.raiders.1 g:camp.5.raiders.warparty.raiders.champion/- a:- m:-
+S 406 leader g:-/- a:camp.5.raiders.warparty.raiders.champion:44 m:-
+S 406 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=89
+S 406 clarth.marksman.2 g:-/- a:- m:Burn=119
+S 406 camp.5.raiders.warparty.raiders.1 g:camp.5.raiders.warparty.raiders.champion/- a:- m:-
+S 406 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=149,Snare=59
+S 407 leader g:-/- a:camp.5.raiders.warparty.raiders.champion:43 m:-
+S 407 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=88
+S 407 clarth.marksman.2 g:-/- a:- m:Burn=118
+S 407 camp.5.raiders.warparty.raiders.1 g:camp.5.raiders.warparty.raiders.champion/- a:- m:-
+S 407 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=148,Snare=58
+S 408 leader g:-/- a:camp.5.raiders.warparty.raiders.champion:42 m:-
+S 408 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=87
+S 408 clarth.marksman.2 g:-/- a:- m:Burn=117
+S 408 camp.5.raiders.warparty.raiders.1 g:camp.5.raiders.warparty.raiders.champion/- a:- m:-
+S 408 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=147,Snare=57
+S 409 leader g:-/- a:camp.5.raiders.warparty.raiders.champion:41 m:-
+S 409 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=86
+S 409 clarth.marksman.2 g:-/- a:- m:Burn=116
+S 409 camp.5.raiders.warparty.raiders.1 g:camp.5.raiders.warparty.raiders.champion/- a:- m:-
+S 409 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=146,Snare=56
+S 410 leader g:-/- a:camp.5.raiders.warparty.raiders.champion:40 m:-
+S 410 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=85
+S 410 clarth.marksman.2 g:-/- a:- m:Burn=115
+S 410 camp.5.raiders.warparty.raiders.1 g:camp.5.raiders.warparty.raiders.champion/- a:- m:-
+S 410 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=145,Snare=55
+S 411 leader g:-/- a:camp.5.raiders.warparty.raiders.champion:39 m:-
+S 411 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=84
+S 411 clarth.marksman.2 g:-/- a:- m:Burn=114
+S 411 camp.5.raiders.warparty.raiders.1 g:camp.5.raiders.warparty.raiders.champion/- a:- m:-
+S 411 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=144,Snare=54
+S 412 leader g:-/- a:camp.5.raiders.warparty.raiders.champion:38 m:-
+S 412 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=83
+S 412 clarth.marksman.2 g:-/- a:- m:Burn=113
+S 412 camp.5.raiders.warparty.raiders.1 g:camp.5.raiders.warparty.raiders.champion/- a:- m:-
+S 412 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=143,Snare=53
+S 413 leader g:-/- a:camp.5.raiders.warparty.raiders.champion:37 m:-
+S 413 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=82
+S 413 clarth.marksman.2 g:-/- a:- m:Burn=112
+S 413 camp.5.raiders.warparty.raiders.1 g:camp.5.raiders.warparty.raiders.champion/- a:- m:-
+S 413 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=142,Snare=52
+S 414 leader g:-/- a:camp.5.raiders.warparty.raiders.champion:36 m:-
+S 414 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=81
+S 414 clarth.marksman.2 g:-/- a:- m:Burn=111
+S 414 camp.5.raiders.warparty.raiders.1 g:camp.5.raiders.warparty.raiders.champion/- a:- m:-
+S 414 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=141,Snare=51
+S 415 leader g:-/- a:camp.5.raiders.warparty.raiders.champion:35 m:-
+S 415 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=80
+S 415 clarth.marksman.2 g:-/- a:- m:Burn=110
+S 415 camp.5.raiders.warparty.raiders.1 g:camp.5.raiders.warparty.raiders.champion/- a:- m:-
+S 415 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=140,Snare=50
+S 416 leader g:-/- a:camp.5.raiders.warparty.raiders.champion:34 m:-
+S 416 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=79
+S 416 clarth.marksman.2 g:-/- a:- m:Burn=109
+S 416 camp.5.raiders.warparty.raiders.1 g:camp.5.raiders.warparty.raiders.champion/- a:- m:-
+S 416 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=139,Snare=49
+S 417 leader g:-/- a:camp.5.raiders.warparty.raiders.champion:33 m:-
+S 417 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=78
+S 417 clarth.marksman.2 g:-/- a:- m:Burn=108
+S 417 camp.5.raiders.warparty.raiders.1 g:camp.5.raiders.warparty.raiders.champion/- a:- m:-
+S 417 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=138,Snare=48
+S 418 leader g:-/- a:camp.5.raiders.warparty.raiders.champion:32 m:-
+S 418 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=77
+S 418 clarth.marksman.2 g:-/- a:- m:Burn=107
+S 418 camp.5.raiders.warparty.raiders.1 g:camp.5.raiders.warparty.raiders.champion/- a:- m:-
+S 418 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=137,Snare=47
+S 419 leader g:-/- a:camp.5.raiders.warparty.raiders.champion:31 m:-
+S 419 clarth.warden.1 g:clarth.medic.5/- a:- m:Burn=76
+S 419 clarth.marksman.2 g:-/- a:- m:Burn=106
+S 419 camp.5.raiders.warparty.raiders.3 g:-/- a:- m:Bleed=136,Snare=46
+playback 419 matched True

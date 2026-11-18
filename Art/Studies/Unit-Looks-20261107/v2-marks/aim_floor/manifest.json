@@ -1,0 +1,120 @@
+{
+ "app": "PixelLab VFX Creator",
+ "name": "KS mark aim floor",
+ "fps": 24,
+ "frame_ms": 42,
+ "frames": 40,
+ "loop": false,
+ "canvas": {
+  "w": 117,
+  "h": 152
+ },
+ "anchor": {
+  "kind": "feet",
+  "x": 58,
+  "y": 128
+ },
+ "clips": [
+  {
+   "name": "whole",
+   "title": "the whole effect, no sprite",
+   "depth": "both",
+   "loop": false,
+   "start_frame": 0,
+   "frames": 27,
+   "frame": {
+    "w": 85,
+    "h": 42
+   },
+   "sheets": [
+    {
+     "file": "whole.png",
+     "first_frame": 0,
+     "frames": 27,
+     "columns": 6,
+     "rows": 5
+    }
+   ],
+   "offset": {
+    "x": -42,
+    "y": -21
+   }
+  },
+  {
+   "name": "whole-with-sprite",
+   "title": "the whole effect with the sprite in it",
+   "depth": "both",
+   "loop": false,
+   "start_frame": 0,
+   "frames": 40,
+   "frame": {
+    "w": 111,
+    "h": 146
+   },
+   "sheets": [
+    {
+     "file": "whole-with-sprite.png",
+     "first_frame": 0,
+     "frames": 40,
+     "columns": 7,
+     "rows": 6
+    }
+   ],
+   "offset": {
+    "x": -55,
+    "y": -125
+   }
+  },
+  {
+   "name": "behind",
+   "title": "everything behind the sprite",
+   "depth": "behind",
+   "loop": false,
+   "start_frame": 0,
+   "frames": 27,
+   "frame": {
+    "w": 85,
+    "h": 42
+   },
+   "sheets": [
+    {
+     "file": "behind.png",
+     "first_frame": 0,
+     "frames": 27,
+     "columns": 6,
+     "rows": 5
+    }
+   ],
+   "offset": {
+    "x": -42,
+    "y": -21
+   }
+  },
+  {
+   "name": "part-warn_strike",
+   "title": "the warn strike part",
+   "part": "warn_strike",
+   "depth": "behind",
+   "loop": false,
+   "start_frame": 0,
+   "frames": 27,
+   "frame": {
+    "w": 85,
+    "h": 42
+   },
+   "sheets": [
+    {
+     "file": "part-warn_strike.png",
+     "first_frame": 0,
+     "frames": 27,
+     "columns": 6,
+     "rows": 5
+    }
+   ],
+   "offset": {
+    "x": -42,
+    "y": -21
+   }
+  }
+ ]
+}

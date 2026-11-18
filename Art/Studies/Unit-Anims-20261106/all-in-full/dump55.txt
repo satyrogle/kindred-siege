@@ -1,0 +1,238 @@
+seed 5100 fight 9 camp.11.alpha.alphahunt rules 41 ticks 343 tps 30
+U 0 leader Marksman Pal alive True hp 360
+U 0 clarth.warden.1 Warden Fighter alive True hp 896
+U 0 clarth.medic.5 Medic Fighter alive True hp 476
+U 0 clarth.skirmisher.3 Skirmisher Fighter alive True hp 525
+U 0 clarth.marksman.2 Marksman Fighter alive True hp 504
+U 0 clarth.trapper.4 Trapper Fighter alive True hp 532
+U 1 camp.11.alpha.alphahunt.alpha.0 Medic Fighter alive True hp 397
+U 1 camp.11.alpha.alphahunt.alpha.1 Warden Fighter alive False hp 748
+U 1 camp.11.alpha.alphahunt.alpha.2 Skirmisher Fighter alive True hp 468
+U 1 camp.11.alpha.alphahunt.alpha.3 Marksman Fighter alive True hp 421
+U 1 camp.11.alpha.alphahunt.alpha.4 Trapper Fighter alive True hp 444
+U 1 camp.11.alpha.alphahunt.alpha.captain Warden Chief alive False hp 2425
+E 11 Hit 0 clarth.warden.1 > camp.11.alpha.alphahunt.alpha.1 10 
+E 18 Hit 0 leader > camp.11.alpha.alphahunt.alpha.0 16 
+E 18 Hit 1 camp.11.alpha.alphahunt.alpha.captain > clarth.skirmisher.3 13 
+E 20 Reaction 1  >  100 unshakable
+E 20 TrapArmed 1 camp.11.alpha.alphahunt.alpha.4 >  0 
+E 25 Hit 1 camp.11.alpha.alphahunt.alpha.1 > clarth.warden.1 7 
+E 25 TrapSprung 1 camp.11.alpha.alphahunt.alpha.4 > clarth.skirmisher.3 16 
+E 25 Hit 1 camp.11.alpha.alphahunt.alpha.4 > clarth.skirmisher.3 14 trap
+E 25 Mark 1 camp.11.alpha.alphahunt.alpha.4 > clarth.skirmisher.3 60 snare
+E 25 Mark 1 camp.11.alpha.alphahunt.alpha.4 > clarth.skirmisher.3 150 bleed
+E 25 Chain 1 camp.11.alpha.alphahunt.alpha.3 > clarth.skirmisher.3 1 snare
+E 25 Aim 1 camp.11.alpha.alphahunt.alpha.3 > clarth.skirmisher.3 22 pin
+E 25 Chain 1 camp.11.alpha.alphahunt.alpha.2 > clarth.skirmisher.3 2 bleed
+E 25 Hit 1 camp.11.alpha.alphahunt.alpha.2 > clarth.skirmisher.3 18 strike
+E 25 Cash 1 camp.11.alpha.alphahunt.alpha.2 > clarth.skirmisher.3 52 rip
+E 25 Hit 1 camp.11.alpha.alphahunt.alpha.2 > clarth.skirmisher.3 47 rip
+E 25 ComboSetup 1 camp.11.alpha.alphahunt.alpha.4 > clarth.skirmisher.3 2 bleed
+E 25 ComboFinish 1 camp.11.alpha.alphahunt.alpha.2 > clarth.skirmisher.3 2 bleed
+E 29 Hit 1 camp.11.alpha.alphahunt.alpha.2 > clarth.trapper.4 11 
+E 29 Defence 0 clarth.trapper.4 > camp.11.alpha.alphahunt.alpha.2 0 snaptrap
+E 29 Mark 0 clarth.trapper.4 > camp.11.alpha.alphahunt.alpha.2 60 snare
+E 29 Mark 0 clarth.trapper.4 > camp.11.alpha.alphahunt.alpha.2 150 bleed
+E 29 Chain 0 leader > camp.11.alpha.alphahunt.alpha.2 3 snare.bonded
+E 29 Cash 0 leader > camp.11.alpha.alphahunt.alpha.2 61 pin
+E 29 Hit 0 leader > camp.11.alpha.alphahunt.alpha.2 121 aimed.pin
+E 29 ComboSetup 0 clarth.trapper.4 > camp.11.alpha.alphahunt.alpha.2 3 snare
+E 29 ComboFinish 0 leader > camp.11.alpha.alphahunt.alpha.2 3 snare
+E 29 Mark 0 leader > camp.11.alpha.alphahunt.alpha.2 90 opening
+E 29 Chain 0  > camp.11.alpha.alphahunt.alpha.2 4 bleed.unready
+E 29 Chain 0  > camp.11.alpha.alphahunt.alpha.2 3 opening.unready
+E 31 Hit 0 clarth.marksman.2 > camp.11.alpha.alphahunt.alpha.1 35 
+E 31 Mark 0 clarth.marksman.2 > camp.11.alpha.alphahunt.alpha.1 180 exposed
+E 37 Cash 1 camp.11.alpha.alphahunt.alpha.0 > camp.11.alpha.alphahunt.alpha.2 9 covered
+E 37 Heal 1 camp.11.alpha.alphahunt.alpha.0 > camp.11.alpha.alphahunt.alpha.2 27 treat
+E 38 TrapArmed 0 clarth.trapper.4 >  0 
+E 47 Hit 0 clarth.warden.1 > camp.11.alpha.alphahunt.alpha.1 19 
+E 47 Cash 1 camp.11.alpha.alphahunt.alpha.3 > clarth.skirmisher.3 48 pin
+E 47 Hit 1 camp.11.alpha.alphahunt.alpha.3 > clarth.skirmisher.3 86 aimed.pin
+E 47 ComboSetup 1 camp.11.alpha.alphahunt.alpha.4 > clarth.skirmisher.3 1 snare
+E 47 ComboFinish 1 camp.11.alpha.alphahunt.alpha.3 > clarth.skirmisher.3 1 snare
+E 47 Mark 1 camp.11.alpha.alphahunt.alpha.3 > clarth.skirmisher.3 90 opening
+E 47 Chain 1  > clarth.skirmisher.3 1 opening.unready
+E 54 TrapSprung 0 clarth.trapper.4 > camp.11.alpha.alphahunt.alpha.captain 16 
+E 54 Hit 0 clarth.trapper.4 > camp.11.alpha.alphahunt.alpha.captain 16 trap
+E 54 Mark 0 clarth.trapper.4 > camp.11.alpha.alphahunt.alpha.captain 150 bleed
+E 54 Chain 0  > camp.11.alpha.alphahunt.alpha.captain 5 bleed.unready
+E 58 Hit 0  > camp.11.alpha.alphahunt.alpha.2 9 bleed
+E 59 Miss 1 camp.11.alpha.alphahunt.alpha.4 > clarth.skirmisher.3 62 miss
+E 59 Miss 1 camp.11.alpha.alphahunt.alpha.2 > clarth.trapper.4 58 miss
+E 59 Cash 0 clarth.medic.5 > clarth.skirmisher.3 11 covered
+E 59 Heal 0 clarth.medic.5 > clarth.skirmisher.3 33 treat
+E 61 Miss 1 camp.11.alpha.alphahunt.alpha.1 > clarth.warden.1 60 miss
+E 62 Hit 1 camp.11.alpha.alphahunt.alpha.3 > clarth.skirmisher.3 17 
+E 63 Hit 0 leader > camp.11.alpha.alphahunt.alpha.1 26 
+E 76 Aim 0 clarth.marksman.2 > camp.11.alpha.alphahunt.alpha.1 45 aim
+E 76 Portal 0 clarth.marksman.2 > camp.11.alpha.alphahunt.alpha.1 45 Around the Corner
+E 77 Hit 0 clarth.trapper.4 > camp.11.alpha.alphahunt.alpha.1 19 
+E 77 Hit 0 clarth.skirmisher.3 > camp.11.alpha.alphahunt.alpha.1 162 
+E 77 Mark 0 clarth.skirmisher.3 > camp.11.alpha.alphahunt.alpha.1 180 stasis
+E 79 Cash 1 camp.11.alpha.alphahunt.alpha.0 > camp.11.alpha.alphahunt.alpha.1 9 covered
+E 79 Heal 1 camp.11.alpha.alphahunt.alpha.0 > camp.11.alpha.alphahunt.alpha.1 27 treat
+E 83 Hit 0 clarth.warden.1 > camp.11.alpha.alphahunt.alpha.1 15 
+E 83 Hit 0  > camp.11.alpha.alphahunt.alpha.captain 16 bleed
+E 88 Hit 0  > camp.11.alpha.alphahunt.alpha.2 10 bleed
+E 89 Miss 1 camp.11.alpha.alphahunt.alpha.2 > clarth.trapper.4 58 miss
+E 90 Hit 1 camp.11.alpha.alphahunt.alpha.captain > clarth.skirmisher.3 13 
+E 97 Miss 1 camp.11.alpha.alphahunt.alpha.1 > clarth.warden.1 60 miss
+E 98 Hit 1 camp.11.alpha.alphahunt.alpha.4 > clarth.skirmisher.3 9 
+E 101 Cash 0 clarth.medic.5 > clarth.skirmisher.3 11 covered
+E 101 Heal 0 clarth.medic.5 > clarth.skirmisher.3 33 treat
+E 107 Miss 1 camp.11.alpha.alphahunt.alpha.3 > clarth.skirmisher.3 67 miss
+E 107 Hit 0 clarth.skirmisher.3 > camp.11.alpha.alphahunt.alpha.1 294 strike
+E 107 Freeze 0 clarth.skirmisher.3 > camp.11.alpha.alphahunt.alpha.1 45 Frozen Flurry
+E 107 Mark 0 clarth.skirmisher.3 > camp.11.alpha.alphahunt.alpha.1 180 stasis
+E 107 Mark 0 clarth.skirmisher.3 > camp.11.alpha.alphahunt.alpha.1 180 stasis
+E 107 Burst 0 clarth.skirmisher.3 > camp.11.alpha.alphahunt.alpha.1 45 stasis
+E 107 Mark 0 clarth.skirmisher.3 > camp.11.alpha.alphahunt.alpha.1 180 stasis
+E 113 Hit 0  > camp.11.alpha.alphahunt.alpha.captain 16 bleed
+E 118 Hit 0  > camp.11.alpha.alphahunt.alpha.2 9 bleed
+E 119 Miss 1 camp.11.alpha.alphahunt.alpha.2 > clarth.trapper.4 58 miss
+E 120 Mark 0 clarth.marksman.2 > camp.11.alpha.alphahunt.alpha.1 180 exposed
+E 120 Mark 0 clarth.marksman.2 > camp.11.alpha.alphahunt.alpha.1 90 opening
+E 120 Mark 0 clarth.marksman.2 > camp.11.alpha.alphahunt.alpha.1 180 exposed
+E 120 Burst 0 clarth.marksman.2 > camp.11.alpha.alphahunt.alpha.1 180 exposed
+E 120 Chain 0  > camp.11.alpha.alphahunt.alpha.1 6 opening.unready
+E 121 Cash 1 camp.11.alpha.alphahunt.alpha.0 > camp.11.alpha.alphahunt.alpha.1 9 covered
+E 121 Heal 1 camp.11.alpha.alphahunt.alpha.0 > camp.11.alpha.alphahunt.alpha.1 27 treat
+E 126 Hit 1 camp.11.alpha.alphahunt.alpha.captain > clarth.skirmisher.3 12 
+E 137 Miss 1 camp.11.alpha.alphahunt.alpha.4 > clarth.skirmisher.3 62 miss
+E 137 Cash 0 clarth.skirmisher.3 > camp.11.alpha.alphahunt.alpha.1 29 wide open
+E 137 Mark 0 clarth.skirmisher.3 > camp.11.alpha.alphahunt.alpha.1 180 stasis
+E 140 Reaction 1  >  100 unshakable
+E 143 Cash 0 clarth.medic.5 > clarth.skirmisher.3 11 covered
+E 143 Heal 0 clarth.medic.5 > clarth.skirmisher.3 33 treat
+E 143 Hit 0  > camp.11.alpha.alphahunt.alpha.captain 16 bleed
+E 148 Hit 0  > camp.11.alpha.alphahunt.alpha.2 9 bleed
+E 149 Miss 1 camp.11.alpha.alphahunt.alpha.2 > clarth.trapper.4 58 miss
+E 150 Windup 1 camp.11.alpha.alphahunt.alpha.2 > clarth.trapper.4 30 Heavy
+E 150 Tell 1 camp.11.alpha.alphahunt.alpha.captain > clarth.skirmisher.3 150 Track
+E 151 Cash 0 clarth.skirmisher.3 > camp.11.alpha.alphahunt.alpha.1 925 opening
+E 151 Hit 0 clarth.skirmisher.3 > camp.11.alpha.alphahunt.alpha.1 1850 flurry
+E 151 Kill 0 clarth.skirmisher.3 > camp.11.alpha.alphahunt.alpha.1 0 flurry
+E 151 Snap 1 camp.11.alpha.alphahunt.alpha.2 >  90 panic
+E 152 Guard 0 clarth.warden.1 > clarth.medic.5 6 
+E 152 Hit 1 camp.11.alpha.alphahunt.alpha.3 > clarth.warden.1 12 guarded
+E 153 Guard 1 camp.11.alpha.alphahunt.alpha.captain > camp.11.alpha.alphahunt.alpha.0 7 
+E 153 Hit 0 leader > camp.11.alpha.alphahunt.alpha.captain 16 guarded
+E 155 Hit 0 clarth.trapper.4 > camp.11.alpha.alphahunt.alpha.captain 19 
+E 155 Hit 0 clarth.warden.1 > camp.11.alpha.alphahunt.alpha.2 18 
+E 162 Miss 1 camp.11.alpha.alphahunt.alpha.captain > clarth.skirmisher.3 60 miss
+E 163 Cash 1 camp.11.alpha.alphahunt.alpha.0 > camp.11.alpha.alphahunt.alpha.2 9 covered
+E 163 Heal 1 camp.11.alpha.alphahunt.alpha.0 > camp.11.alpha.alphahunt.alpha.2 27 treat
+E 165 Hit 0 clarth.marksman.2 > camp.11.alpha.alphahunt.alpha.4 32 
+E 165 Mark 0 clarth.marksman.2 > camp.11.alpha.alphahunt.alpha.4 180 exposed
+E 167 Hit 0 clarth.skirmisher.3 > camp.11.alpha.alphahunt.alpha.captain 151 
+E 173 Hit 0  > camp.11.alpha.alphahunt.alpha.captain 16 bleed
+E 176 TrapArmed 1 camp.11.alpha.alphahunt.alpha.4 >  0 
+E 178 Hit 0  > camp.11.alpha.alphahunt.alpha.2 10 bleed
+E 185 Cash 0 clarth.medic.5 > clarth.skirmisher.3 11 covered
+E 185 Heal 0 clarth.medic.5 > clarth.skirmisher.3 33 treat
+E 191 TrapSprung 1 camp.11.alpha.alphahunt.alpha.4 > clarth.warden.1 16 
+E 191 Hit 1 camp.11.alpha.alphahunt.alpha.4 > clarth.warden.1 14 trap
+E 191 Mark 1 camp.11.alpha.alphahunt.alpha.4 > clarth.warden.1 60 snare
+E 191 Mark 1 camp.11.alpha.alphahunt.alpha.4 > clarth.warden.1 150 bleed
+E 191 Chain 1 camp.11.alpha.alphahunt.alpha.3 > clarth.warden.1 7 snare
+E 191 Aim 1 camp.11.alpha.alphahunt.alpha.3 > clarth.warden.1 22 pin
+E 191 Chain 1  > clarth.warden.1 8 bleed.unready
+E 194 TrapArmed 0 clarth.trapper.4 >  0 
+E 197 Hit 0 clarth.skirmisher.3 > camp.11.alpha.alphahunt.alpha.captain 130 
+E 198 Aim 0 leader > camp.11.alpha.alphahunt.alpha.0 45 aim
+E 198 TrapSprung 0 clarth.trapper.4 > camp.11.alpha.alphahunt.alpha.captain 16 
+E 198 Hit 0 clarth.trapper.4 > camp.11.alpha.alphahunt.alpha.captain 16 trap
+E 198 Mark 0 clarth.trapper.4 > camp.11.alpha.alphahunt.alpha.captain 150 bleed
+E 198 Chain 0 clarth.skirmisher.3 > camp.11.alpha.alphahunt.alpha.captain 9 bleed
+E 198 Hit 0 clarth.skirmisher.3 > camp.11.alpha.alphahunt.alpha.captain 314 strike
+E 198 Snap 1 camp.11.alpha.alphahunt.alpha.4 >  90 rise
+E 198 Cash 0 clarth.skirmisher.3 > camp.11.alpha.alphahunt.alpha.captain 80 rip
+E 198 Hit 0 clarth.skirmisher.3 > camp.11.alpha.alphahunt.alpha.captain 560 rip
+E 198 ComboSetup 0 clarth.trapper.4 > camp.11.alpha.alphahunt.alpha.captain 9 bleed
+E 198 ComboFinish 0 clarth.skirmisher.3 > camp.11.alpha.alphahunt.alpha.captain 9 bleed
+E 198 Phase 1 camp.11.alpha.alphahunt.alpha.captain >  0 Pack
+E 198 Line 1 camp.11.alpha.alphahunt.alpha.captain >  0 pack
+E 198 Windup 1 camp.11.alpha.alphahunt.alpha.captain >  90 Eclipse
+E 198 Hit 0 clarth.skirmisher.3 > camp.11.alpha.alphahunt.alpha.captain 419 strike
+E 198 Tell 1 camp.11.alpha.alphahunt.alpha.captain > clarth.warden.1 150 Track
+E 205 Cash 1 camp.11.alpha.alphahunt.alpha.0 > camp.11.alpha.alphahunt.alpha.captain 9 covered
+E 205 Heal 1 camp.11.alpha.alphahunt.alpha.0 > camp.11.alpha.alphahunt.alpha.captain 27 treat
+E 210 Hit 0 clarth.marksman.2 > camp.11.alpha.alphahunt.alpha.captain 52 
+E 213 Cash 1 camp.11.alpha.alphahunt.alpha.3 > clarth.warden.1 60 pin
+E 213 Hit 1 camp.11.alpha.alphahunt.alpha.3 > clarth.warden.1 108 aimed.pin
+E 213 ComboSetup 1 camp.11.alpha.alphahunt.alpha.4 > clarth.warden.1 7 snare
+E 213 ComboFinish 1 camp.11.alpha.alphahunt.alpha.3 > clarth.warden.1 7 snare
+E 213 Mark 1 camp.11.alpha.alphahunt.alpha.3 > clarth.warden.1 90 opening
+E 213 Chain 1  > clarth.warden.1 7 opening.unready
+E 215 Miss 1 camp.11.alpha.alphahunt.alpha.4 > clarth.skirmisher.3 62 miss
+E 219 Miss 1 camp.11.alpha.alphahunt.alpha.3 > clarth.warden.1 67 miss
+E 220 Hit 1  > clarth.warden.1 14 bleed
+E 227 Boost 0 clarth.skirmisher.3 > camp.11.alpha.alphahunt.alpha.captain 0 twincut
+E 227 Hit 0 clarth.skirmisher.3 > camp.11.alpha.alphahunt.alpha.captain 56 twincut
+E 227 Hit 0 clarth.skirmisher.3 > camp.11.alpha.alphahunt.alpha.captain 56 twincut
+E 227 Mark 0 clarth.skirmisher.3 > camp.11.alpha.alphahunt.alpha.captain 150 bleed
+E 227 Boost 0 clarth.medic.5 > clarth.skirmisher.3 91 stim
+E 227 Chain 0  > camp.11.alpha.alphahunt.alpha.captain 10 bleed.unready
+E 228 Snap 0 clarth.skirmisher.3 >  90 rise
+E 247 Cash 1 camp.11.alpha.alphahunt.alpha.0 > camp.11.alpha.alphahunt.alpha.captain 9 covered
+E 247 Heal 1 camp.11.alpha.alphahunt.alpha.0 > camp.11.alpha.alphahunt.alpha.captain 27 treat
+E 250 Hit 1  > clarth.warden.1 15 bleed
+E 254 Boost 1 camp.11.alpha.alphahunt.alpha.4 >  0 rearm
+E 254 TrapArmed 1 camp.11.alpha.alphahunt.alpha.4 >  0 
+E 256 Hit 0  > camp.11.alpha.alphahunt.alpha.captain 16 bleed
+E 264 Hit 1 camp.11.alpha.alphahunt.alpha.3 > clarth.warden.1 21 
+E 269 Cash 0 clarth.medic.5 > clarth.warden.1 11 covered
+E 269 Heal 0 clarth.medic.5 > clarth.warden.1 33 treat
+E 280 Hit 1  > clarth.warden.1 14 bleed
+E 286 Hit 0  > camp.11.alpha.alphahunt.alpha.captain 16 bleed
+E 287 Reaction 0  >  30 whiff
+E 287 Release 1 camp.11.alpha.alphahunt.alpha.captain >  40 dodged
+E 287 Glory 0  > camp.11.alpha.alphahunt.alpha.captain 80 dodge
+E 287 Snap 1 camp.11.alpha.alphahunt.alpha.2 >  90 rise
+E 289 Combo 0  >  10 Ambush
+E 289 Hit 0  > camp.11.alpha.alphahunt.alpha.0 39 ambush
+E 289 Hit 0  > camp.11.alpha.alphahunt.alpha.3 42 ambush
+E 289 Hit 0  > camp.11.alpha.alphahunt.alpha.4 44 ambush
+E 289 Hit 0  > camp.11.alpha.alphahunt.alpha.captain 484 ambush
+E 289 Reaction 1  >  100 unshakable
+E 289 Cash 1 camp.11.alpha.alphahunt.alpha.0 > camp.11.alpha.alphahunt.alpha.captain 9 covered
+E 289 Heal 1 camp.11.alpha.alphahunt.alpha.0 > camp.11.alpha.alphahunt.alpha.captain 27 treat
+E 293 Hit 1 camp.11.alpha.alphahunt.alpha.4 > clarth.skirmisher.3 13 
+E 300 Aim 0 clarth.marksman.2 > camp.11.alpha.alphahunt.alpha.captain 45 aim
+E 300 Portal 0 clarth.marksman.2 > camp.11.alpha.alphahunt.alpha.captain 45 Around the Corner
+E 300 Reaction 0  >  30 whiff
+E 300 Tell 1 camp.11.alpha.alphahunt.alpha.captain > clarth.skirmisher.3 120 Drive
+E 306 Boost 1 camp.11.alpha.alphahunt.alpha.captain > clarth.skirmisher.3 7 shieldbash
+E 306 Hit 1 camp.11.alpha.alphahunt.alpha.captain > clarth.skirmisher.3 9 bash
+E 306 Mark 1 camp.11.alpha.alphahunt.alpha.captain > clarth.skirmisher.3 90 opening
+E 306 Chain 1 camp.11.alpha.alphahunt.alpha.2 > clarth.skirmisher.3 11 opening
+E 306 Miss 1 camp.11.alpha.alphahunt.alpha.2 > clarth.skirmisher.3 49 miss
+E 309 Miss 1 camp.11.alpha.alphahunt.alpha.3 > clarth.warden.1 52 miss
+E 310 Hit 1  > clarth.warden.1 22 bleed
+E 311 Boost 0 clarth.trapper.4 >  0 rearm
+E 311 TrapArmed 0 clarth.trapper.4 >  0 
+E 311 Cash 0 clarth.medic.5 > clarth.skirmisher.3 11 covered
+E 311 Heal 0 clarth.medic.5 > clarth.skirmisher.3 33 treat
+E 316 Hit 0  > camp.11.alpha.alphahunt.alpha.captain 32 bleed
+E 321 Boost 0 clarth.warden.1 > camp.11.alpha.alphahunt.alpha.2 5 shieldbash
+E 321 Hit 0 clarth.warden.1 > camp.11.alpha.alphahunt.alpha.2 5 bash
+E 321 Mark 0 clarth.warden.1 > camp.11.alpha.alphahunt.alpha.2 90 opening
+E 321 Chain 0  > camp.11.alpha.alphahunt.alpha.2 12 opening.unready
+E 331 Cash 1 camp.11.alpha.alphahunt.alpha.0 > camp.11.alpha.alphahunt.alpha.captain 9 covered
+E 331 Heal 1 camp.11.alpha.alphahunt.alpha.0 > camp.11.alpha.alphahunt.alpha.captain 27 treat
+E 332 Hit 0 leader > camp.11.alpha.alphahunt.alpha.captain 53 
+E 332 Miss 1 camp.11.alpha.alphahunt.alpha.4 > clarth.skirmisher.3 47 miss
+E 340 Hit 1  > clarth.warden.1 14 bleed
+E 342 TrapSprung 0 clarth.trapper.4 > camp.11.alpha.alphahunt.alpha.captain 16 
+E 342 Hit 0 clarth.trapper.4 > camp.11.alpha.alphahunt.alpha.captain 32 trap
+E 342 Mark 0 clarth.trapper.4 > camp.11.alpha.alphahunt.alpha.captain 150 bleed
+E 342 Chain 0 clarth.skirmisher.3 > camp.11.alpha.alphahunt.alpha.captain 13 bleed
+E 342 TrapSprung 1 camp.11.alpha.alphahunt.alpha.4 > clarth.skirmisher.3 16 
+E 342 Hit 1 camp.11.alpha.alphahunt.alpha.4 > clarth.skirmisher.3 14 trap
+E 342 Mark 1 camp.11.alpha.alphahunt.alpha.4 > clarth.skirmisher.3 60 snare
+E 342 Mark 1 camp.11.alpha.alphahunt.alpha.4 > clarth.skirmisher.3 150 bleed
+E 342 Hit 0 clarth.skirmisher.3 > camp.11.alpha.alphahunt.alpha.captain 809 strike
+E 342 Kill 0 clarth.skirmisher.3 > camp.11.alpha.alphahunt.alpha.captain 0 strike
+E 342 Break 1  >  4 break
+E 342 End 0  >  0 break

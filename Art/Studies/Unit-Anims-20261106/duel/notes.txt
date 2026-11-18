@@ -1,0 +1,7 @@
+6 Nov 2026, Warden against their Skirmisher, staged from a real rules 41 fight (tutorial, seed 5, FightDump.cs, events in dump5.txt).
+Clips: pixminimax, start on the still pose and aimed back at it (end_frame_url = the rotation), 7 per unit, 1 gen each, 14 gens.
+  Warden d917de88 se: set_warden_{idle,attack1_bash,attack2_slash,block,hit,death,power_guard}_se_20261106
+  Skirmisher a1195c8f sw: set_skirmisher_{idle,attack1_hook,attack2_chop,block,hit,death,power_strike}_sw_20261106
+duel-plain.gif: every frame 100 ms, nothing else. duel-full.gif: same beats with snap and hold timing (wind up 240 ms, contact 170 ms),
+hit stop 80 or 120 ms, white frame and red tint on the victim, 1 px jitter, 8 px knockback, rising numbers, power move freeze 500 ms
+with the screen dimmed and camera pushed in, a 450 ms freeze, shake and camera push on the kill. Screen only; the sim is untouched.

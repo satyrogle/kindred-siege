@@ -1,0 +1,145 @@
+{
+ "app": "PixelLab VFX Creator",
+ "name": "KS mark bleed body",
+ "fps": 12,
+ "frame_ms": 83,
+ "frames": 24,
+ "loop": true,
+ "canvas": {
+  "w": 117,
+  "h": 142
+ },
+ "anchor": {
+  "kind": "feet",
+  "x": 58,
+  "y": 128
+ },
+ "clips": [
+  {
+   "name": "whole",
+   "title": "the whole effect, no sprite",
+   "depth": "both",
+   "loop": true,
+   "start_frame": 0,
+   "frames": 24,
+   "frame": {
+    "w": 47,
+    "h": 76
+   },
+   "sheets": [
+    {
+     "file": "whole.png",
+     "first_frame": 0,
+     "frames": 24,
+     "columns": 5,
+     "rows": 5
+    }
+   ],
+   "offset": {
+    "x": -22,
+    "y": -65
+   }
+  },
+  {
+   "name": "whole-with-sprite",
+   "title": "the whole effect with the sprite in it",
+   "depth": "both",
+   "loop": true,
+   "start_frame": 0,
+   "frames": 24,
+   "frame": {
+    "w": 111,
+    "h": 136
+   },
+   "sheets": [
+    {
+     "file": "whole-with-sprite.png",
+     "first_frame": 0,
+     "frames": 24,
+     "columns": 5,
+     "rows": 5
+    }
+   ],
+   "offset": {
+    "x": -55,
+    "y": -125
+   }
+  },
+  {
+   "name": "behind",
+   "title": "everything behind the sprite",
+   "depth": "behind",
+   "loop": true,
+   "start_frame": 0,
+   "frames": 24,
+   "frame": {
+    "w": 36,
+    "h": 11
+   },
+   "sheets": [
+    {
+     "file": "behind.png",
+     "first_frame": 0,
+     "frames": 24,
+     "columns": 5,
+     "rows": 5
+    }
+   ],
+   "offset": {
+    "x": -17,
+    "y": 0
+   }
+  },
+  {
+   "name": "front",
+   "title": "everything in front of the sprite",
+   "depth": "front",
+   "loop": true,
+   "start_frame": 0,
+   "frames": 24,
+   "frame": {
+    "w": 47,
+    "h": 73
+   },
+   "sheets": [
+    {
+     "file": "front.png",
+     "first_frame": 0,
+     "frames": 24,
+     "columns": 5,
+     "rows": 5
+    }
+   ],
+   "offset": {
+    "x": -22,
+    "y": -65
+   }
+  },
+  {
+   "name": "part-bleed_status",
+   "title": "the bleed status part",
+   "part": "bleed_status",
+   "depth": "both",
+   "loop": true,
+   "start_frame": 0,
+   "frames": 24,
+   "frame": {
+    "w": 47,
+    "h": 76
+   },
+   "sheets": [
+    {
+     "file": "part-bleed_status.png",
+     "first_frame": 0,
+     "frames": 24,
+     "columns": 5,
+     "rows": 5
+    }
+   ],
+   "offset": {
+    "x": -22,
+    "y": -65
+   }
+  }
+ ]
+}

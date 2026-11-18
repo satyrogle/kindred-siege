@@ -1,0 +1,121 @@
+{
+ "app": "PixelLab VFX Creator",
+ "name": "KS Table Dodge",
+ "fps": 14,
+ "frame_ms": 71,
+ "frames": 8,
+ "loop": false,
+ "canvas": {
+  "w": 112,
+  "h": 142
+ },
+ "anchor": {
+  "kind": "feet",
+  "x": 56,
+  "y": 114
+ },
+ "clips": [
+  {
+   "name": "whole",
+   "title": "the whole effect, no sprite",
+   "depth": "both",
+   "loop": false,
+   "start_frame": 0,
+   "frames": 7,
+   "frame": {
+    "w": 89,
+    "h": 43
+   },
+   "sheets": [
+    {
+     "file": "whole.png",
+     "first_frame": 0,
+     "frames": 7,
+     "columns": 3,
+     "rows": 3
+    }
+   ],
+   "offset": {
+    "x": -44,
+    "y": -18
+   }
+  },
+  {
+   "name": "whole-with-sprite",
+   "title": "the whole effect with the sprite in it",
+   "depth": "both",
+   "loop": false,
+   "start_frame": 0,
+   "frames": 8,
+   "frame": {
+    "w": 106,
+    "h": 136
+   },
+   "sheets": [
+    {
+     "file": "whole-with-sprite.png",
+     "first_frame": 0,
+     "frames": 8,
+     "columns": 3,
+     "rows": 3
+    }
+   ],
+   "offset": {
+    "x": -53,
+    "y": -111
+   }
+  },
+  {
+   "name": "front",
+   "title": "everything in front of the sprite",
+   "depth": "front",
+   "loop": false,
+   "start_frame": 0,
+   "frames": 7,
+   "frame": {
+    "w": 89,
+    "h": 43
+   },
+   "sheets": [
+    {
+     "file": "front.png",
+     "first_frame": 0,
+     "frames": 7,
+     "columns": 3,
+     "rows": 3
+    }
+   ],
+   "offset": {
+    "x": -44,
+    "y": -18
+   }
+  },
+  {
+   "name": "part-dust_kick",
+   "title": "the dust kick part",
+   "role": "impact",
+   "part": "dust_kick",
+   "depth": "front",
+   "loop": false,
+   "start_frame": 0,
+   "frames": 7,
+   "frame": {
+    "w": 89,
+    "h": 43
+   },
+   "sheets": [
+    {
+     "file": "part-dust_kick.png",
+     "first_frame": 0,
+     "frames": 7,
+     "columns": 3,
+     "rows": 3
+    }
+   ],
+   "offset": {
+    "x": -44,
+    "y": -18
+   }
+  }
+ ]
+}

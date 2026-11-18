@@ -1,0 +1,64 @@
+fight1 t25   dodge      clart Skirmisher   > blood Skirmisher   dodge:sidestep
+fight1 t62   down       clart Skirmisher   > blood Trapper      knocked down
+fight1 t63   dodge      blood Skirmisher   > clart Hexer        dodge:steps out of the curse
+fight1 t66   feint      blood Warden       > clart Skirmisher   feint:he is quick: bait his dodge
+fight1 t75   getup      blood Trapper      > -                  getup:gets up
+fight1 t76   dodge      clart Skirmisher   > blood Warden       dodge:read his bash
+fight1 t76   bitten     blood Warden       > clart Skirmisher   feint
+fight1 t76   feint      clart Trapper      > blood Trapper      feint:he is quick: bait his dodge
+fight1 t85   dodge      blood Trapper      > clart Trapper      dodge:read his heavy
+fight1 t85   bitten     clart Trapper      > blood Trapper      feint
+fight1 t88   break      blood Trapper      > -                  freeze
+fight1 t120  kill       clart Marksman     > blood Trapper      Trapper
+fight1 t132  down       clart Skirmisher   > blood Warden       knocked down
+fight1 t139  roar       blood Skirmisher   > clart Marksman     roar:a friend fell: going for his killer
+fight1 t145  getup      blood Warden       > -                  getup:gets up
+fight1 t149  dodge      blood Skirmisher   > clart Hexer        dodge:steps out of the curse
+fight1 t151  feint      clart Trapper      > blood Skirmisher   feint:he is quick: bait his dodge
+fight1 t155  dodge      clart Skirmisher   > blood Hexer        dodge:steps out of the curse
+fight1 t160  break      blood Skirmisher   > -                  rage
+fight1 t160  kill       clart Marksman     > blood Skirmisher   Skirmisher
+fight1 t160  break      blood Warden       > -                  shield
+fight1 t166  kill       blood Marksman     > clart Trapper      Trapper
+fight1 t166  rally      blood Warden       > -                  their man fell
+fight1 t167  roar       clart Skirmisher   > blood Marksman     roar:a friend fell: going for his killer
+fight1 t211  dodge      clart Skirmisher   > blood Hexer        dodge:steps out of the curse
+fight1 t218  break      blood Warden       > -                  shield
+fight1 t218  down       clart Warden       > blood Warden       knocked down
+fight1 t231  getup      blood Warden       > -                  getup:gets up
+fight1 t260  kill       blood Marksman     > clart Skirmisher   Skirmisher
+fight1 t260  rally      blood Warden       > -                  their man fell
+fight1 t261  roar       clart Hexer        > blood Marksman     roar:a friend fell: going for his killer
+fight1 t300  kill       clart Marksman     > blood Hexer        Hexer
+fight1 t358  kill       blood Marksman     > clart Marksman     Marksman
+fight1 t374  kill       clart Hexer        > blood Warden       Warden
+fight1 t459  dodge      blood Marksman     > clart Hexer        dodge:steps out of the curse
+fight1 t470  kill       blood Marksman     > clart Hexer        Hexer
+fight1 t678  kill       clart Warden       > blood Marksman     Marksman
+fight2 t14   feint      clart Trapper      > blood Skirmisher   feint:he is quick: bait his dodge
+fight2 t21   feint      blood Warden       > clart Skirmisher   feint:he is quick: bait his dodge
+fight2 t35   dodge      blood Skirmisher   > clart Trapper      dodge:read his heavy
+fight2 t48   dodge      clart Skirmisher   > blood Trapper      dodge:read his heavy
+fight2 t69   break      blood Skirmisher   > -                  rage
+fight2 t75   block      clart Skirmisher   > blood Trapper      block:expects his quick cut
+fight2 t82   kill       clart Marksman     > blood Skirmisher   Skirmisher
+fight2 t84   dodge      clart Skirmisher   > blood Hexer        dodge:steps out of the curse
+fight2 t112  dodge      clart Skirmisher   > blood Trapper      dodge:sidestep
+fight2 t130  break      blood Trapper      > -                  freeze
+fight2 t130  down       clart Skirmisher   > blood Trapper      knocked down
+fight2 t143  getup      blood Trapper      > -                  getup:gets up
+fight2 t158  kill       clart Hexer        > blood Trapper      Trapper
+fight2 t158  break      blood Hexer        > -                  flee
+fight2 t171  kill       blood Marksman     > clart Skirmisher   Skirmisher
+fight2 t172  roar       clart Hexer        > blood Marksman     roar:a friend fell: going for his killer
+fight2 t199  rally      blood Hexer        > -                  caught his breath
+fight2 t205  kill       blood Warden       > clart Trapper      Trapper
+fight2 t325  kill       blood Marksman     > clart Marksman     Marksman
+fight2 t388  kill       clart Hexer        > blood Warden       Warden
+fight2 t388  break      blood Hexer        > -                  flee
+fight2 t429  rally      blood Hexer        > -                  caught his breath
+fight2 t434  dodge      blood Marksman     > clart Hexer        dodge:steps out of the curse
+fight2 t458  kill       blood Marksman     > clart Hexer        Hexer
+fight2 t600  break      clart Warden       > -                  flee
+fight2 t680  rally      clart Warden       > -                  caught his breath
+fight2 t713  kill       blood Marksman     > clart Warden       Warden

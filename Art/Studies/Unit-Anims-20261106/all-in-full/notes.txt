@@ -1,0 +1,15 @@
+6 Nov 2026, all in fight staged from a real rules 41 fight: seed 5100, road fight 9 (alpha hunt), FightDump2.cs, events in dump55.txt.
+Ten units, 7 clips each, all pixminimax pinned to the unit's still (end_frame_url = rotation), named set_<class>_<move>_<se|sw>_20261106,
+70 gens plus 1 redo (our Trapper's block invented a shield: set_trapper_block2_se_20261106, not in this render). Runs are the older allin_run clips.
+Everyone fights at once on the sim's ticks (30 a second). Melee units walk to a seam at x 722 and lean toward their target's lane, allies push apart,
+hits shove the victim. Every Hit or Miss plays an attack on the actor and a hit or block on the target. Numbers, heals, MISS and mark words pop.
+Guard raises the twin rings (Art/Studies/Class-Moves-20261106/guard/parts/rise_anim), a sprung trap shows the bone jaws (snare/v2-props/parts/jaws_anim).
+Chief Eclipse windup and release, kills freeze and push the camera in, the last kill slows down with BREAK. Screen only, the sim is untouched.
+Stand ins: the chief is their Warden's clips at 1.3x; marksman and leader shots are drawn lines; our leader is not drawn.
+
+Take 3 (all-in-v3.webp, allin_v3.py), after Jacob's "audit it": lanes lock the sim's real pairs (our Skirmisher and their chief, the Wardens,
+our Trapper and their Skirmisher, their Trapper flanking), white flash only on big hits, red tint 90 ms, one number stack per unit,
+the real Bloodridge chief sprite (Resources/CampaignArt/bloodridge_chief_sw_*, at 0.72x, death clip from its last two thirds),
+our leader (Resources/CampaignArt/Leader) with a gold ring on each chief tell and the Eclipse windup (ring drawn in code, like Codex's),
+the approved Eclipse sheets (log 10634) with the sim's dodge, Guard's wall only on a guarded blow, their side running after BREAK.
+Audit sheets every 200 ms in audit-v3/.

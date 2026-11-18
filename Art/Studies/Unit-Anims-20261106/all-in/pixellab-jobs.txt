@@ -1,0 +1,9 @@
+PixelLab pixminimax, 6 Nov 2026, 16 frames each, 1 gen each (9 gens), staged by allin_make.py on the Bloodridge burial court, all at once, phases staggered.
+Ours (south-east): Warden d917de88 tank_take3_block_bash (cc8c2c10); Skirmisher a3aa47e7 allin_skirmisher_combo_se (404e3cd9); Trapper 44547cca allin_trapper_jab_se (722f58de); Marksman 9e0233b1 allin_marksman_shot_se (f0c1b22c); Medic 20b62125 allin_medic_heal_se (28a08df5).
+Bloodridge rot (south-west): Warden b3fef59f allin_warden_brace_strike_sw (c1b7d0c1); Skirmisher a1195c8f allin_skirmisher_hack_sw (ad5c7871); Trapper 720d540c allin_trapper_slash_sw (5806be36); Marksman 19b7cc53 allin_marksman_shot_sw (6b49580d); Medic e7aceef9 allin_medic_heal_sw (e9f372c1).
+Run clips, 6 Nov: PixelLab template running-6-frames on all ten (allin_run_se / allin_run_sw_20261106), about 12 gens. all-in-charge.gif = run in, plant, then the fight clips (allin_charge.py).
+
+6 Nov evening, locked clips test (Jacob "Yes, test it"): animate_character mode skeleton-v3, 3 gens each, 60 gens total.
+Fight clips are named lock_<unit>_fight_<se|sw>_20261106 (10 frames, built from moves: guard+bash, guard+chop, slash+stab, slash+slash, stab, slash, shoot, cast).
+Runs are named lock_run_<se|sw>_20261106 (running-6-frames template posed onto the sprite).
+Results: compare.png (old vs new), drift.txt (off colour percent), all-in-locked.gif.

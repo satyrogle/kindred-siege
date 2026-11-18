@@ -1,0 +1,50 @@
+seed 5: ticks 1045, end 984 (49.2 s), winner Bloodridge, deterministic True
+hits 177, misses 19, cashes 13
+  bleedtick                38
+  boost:rearm              2
+  boost:steady             4
+  boostmove                7
+  broken                   6
+  burst                    27
+  defence:brace            4
+  defence:evil eye         1
+  defence:sidestep         2
+  defence:snap trap        3
+  defence:step back        1
+  dodge                    10
+  end                      1
+  hit:blocked              14
+  hit:class                45
+  hit:hexed                6
+  hit:hit                  96
+  hit:opened               5
+  hit:pierce               1
+  hit:pinned               2
+  hit:splash               8
+  kill                     9
+  launch                   27
+  mark:bleed               6
+  mark:hex                 26
+  mark:opening             37
+  mark:snare               7
+  miss:dodged              6
+  miss:missed              1
+  miss:out of reach        9
+  miss:sidestep            2
+  miss:step back           1
+  pin                      3
+  retarget                 3
+  spread                   2
+  swing                    84
+  target                   43
+  whiff                    10
+  Clarth Warden          hp    0/860  dealt   226  Dead
+  Clarth Skirmisher      hp    0/720  dealt   377  Dead
+  Clarth Trapper         hp    0/720  dealt   265  Dead
+  Clarth Marksman        hp    0/580  dealt  1088  Dead
+  Clarth Hexer           hp    0/580  dealt  1440  Dead
+  Bloodridge Warden      hp    0/860  dealt    82  Dead
+  Bloodridge Skirmisher  hp    0/720  dealt   480  Dead
+  Bloodridge Trapper     hp    0/720  dealt   216  Dead
+  Bloodridge Marksman    hp   52/580  dealt  1707  Idle
+  Bloodridge Hexer       hp    0/580  dealt   940  Dead

@@ -1,0 +1,9 @@
+PixelLab jobs, 6 Nov 2026 (Claude), Warden's Guard options. 9 generations.
+ghost_shield0.png  edit_image_pixen 98739970-5c13-4c9f-805f-41d04f8b130c  seed 4061  from shield_cut128.png (the Warden's own shield, attack frame 8)
+ring0 -> ring128   create_image_pixen 219f978f-2343-4270-a631-faf81d556257  seed 4062  (floor cracks stripped, padded to 128)
+wall0.png          edit_image_pixen 7c81d301-9d99-438b-af7e-e74a72ae61e5  seed 4081  from ring128.png
+shield_anim/       animate_image_pixminimax 79a51f4b-9a5b-4460-ac9d-0b29d3071266  12 frames  seed 4071
+rise_anim/         animate_image_pixminimax 45399be8-9b10-4d41-9962-b1b6f7a53b67  8 frames  ring -> wall  seed 4082
+hitwall_anim/      animate_image_pixminimax e355db82-3caf-41ce-8052-0a5fc648a550  8 frames  wall -> ring  seed 4083
+rejected: ring anim 7a78015b-2acf-4edf-aa28-0235dcd7ee5e (flat orange slab, grey smudges), not kept.
+Scene: Bloodridge burial court rear layers (StreamingAssets/CampaignArt/Bloodridge), Clarth warden/medic SE sheets, blood rot skirmisher SW sheets, 50 ms frames.

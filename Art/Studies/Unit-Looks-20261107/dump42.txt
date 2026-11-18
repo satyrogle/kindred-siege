@@ -1,0 +1,1653 @@
+seed 5100 fight 9 camp.11.alpha.alphahunt rules 42 ticks 289 tps 30 table True
+U 0 leader Marksman Pal alive True hp 360
+U 0 clarth.warden.1 Warden Fighter alive True hp 896
+U 0 clarth.medic.5 Medic Fighter alive True hp 476
+U 0 clarth.skirmisher.3 Skirmisher Fighter alive True hp 525
+U 0 clarth.marksman.2 Marksman Fighter alive True hp 504
+U 0 clarth.trapper.4 Trapper Fighter alive True hp 532
+U 1 camp.11.alpha.alphahunt.alpha.0 Medic Fighter alive True hp 397
+U 1 camp.11.alpha.alphahunt.alpha.1 Warden Fighter alive False hp 748
+U 1 camp.11.alpha.alphahunt.alpha.2 Skirmisher Fighter alive True hp 468
+U 1 camp.11.alpha.alphahunt.alpha.3 Marksman Fighter alive True hp 421
+U 1 camp.11.alpha.alphahunt.alpha.4 Trapper Fighter alive True hp 444
+U 1 camp.11.alpha.alphahunt.alpha.captain Warden Chief alive False hp 2425
+E 11 Miss 0 clarth.warden.1 > camp.11.alpha.alphahunt.alpha.1 65 dodge
+E 18 Hit 0 leader > camp.11.alpha.alphahunt.alpha.0 15 
+E 18 Miss 1 camp.11.alpha.alphahunt.alpha.captain > clarth.skirmisher.3 48 dodge
+D 20 0 side0 >  2 Unleash
+E 20 Reaction 1  >  100 unshakable
+E 20 TrapArmed 1 camp.11.alpha.alphahunt.alpha.4 >  0 
+E 25 Struck 1 camp.11.alpha.alphahunt.alpha.1 > clarth.warden.1 4 block
+E 25 Hit 1 camp.11.alpha.alphahunt.alpha.1 > clarth.warden.1 3 
+E 25 TrapSprung 1 camp.11.alpha.alphahunt.alpha.4 > clarth.skirmisher.3 16 
+E 25 Hit 1 camp.11.alpha.alphahunt.alpha.4 > clarth.skirmisher.3 14 trap
+E 25 Mark 1 camp.11.alpha.alphahunt.alpha.4 > clarth.skirmisher.3 60 snare
+E 25 Mark 1 camp.11.alpha.alphahunt.alpha.4 > clarth.skirmisher.3 150 bleed
+E 25 Chain 1 camp.11.alpha.alphahunt.alpha.3 > clarth.skirmisher.3 1 snare
+E 25 Aim 1 camp.11.alpha.alphahunt.alpha.3 > clarth.skirmisher.3 22 pin
+E 25 Chain 1 camp.11.alpha.alphahunt.alpha.2 > clarth.skirmisher.3 2 bleed
+E 25 Hit 1 camp.11.alpha.alphahunt.alpha.2 > clarth.skirmisher.3 17 strike
+E 25 Cash 1 camp.11.alpha.alphahunt.alpha.2 > clarth.skirmisher.3 52 rip
+E 25 Hit 1 camp.11.alpha.alphahunt.alpha.2 > clarth.skirmisher.3 47 rip
+E 25 ComboSetup 1 camp.11.alpha.alphahunt.alpha.4 > clarth.skirmisher.3 2 bleed
+E 25 ComboFinish 1 camp.11.alpha.alphahunt.alpha.2 > clarth.skirmisher.3 2 bleed
+E 29 Miss 1 camp.11.alpha.alphahunt.alpha.2 > clarth.trapper.4 74 dodge
+E 31 Hit 0 clarth.marksman.2 > camp.11.alpha.alphahunt.alpha.4 32 
+E 31 Mark 0 clarth.marksman.2 > camp.11.alpha.alphahunt.alpha.4 180 exposed
+E 38 TrapArmed 0 clarth.trapper.4 >  0 
+E 47 Hit 0 clarth.warden.1 > camp.11.alpha.alphahunt.alpha.1 16 
+E 47 Cash 1 camp.11.alpha.alphahunt.alpha.3 > clarth.skirmisher.3 55 pin
+E 47 Hit 1 camp.11.alpha.alphahunt.alpha.3 > clarth.skirmisher.3 97 aimed.pin
+E 47 ComboSetup 1 camp.11.alpha.alphahunt.alpha.4 > clarth.skirmisher.3 1 snare
+E 47 ComboFinish 1 camp.11.alpha.alphahunt.alpha.3 > clarth.skirmisher.3 1 snare
+E 47 Mark 1 camp.11.alpha.alphahunt.alpha.3 > clarth.skirmisher.3 90 opening
+E 47 Chain 1  > clarth.skirmisher.3 1 opening.unready
+E 54 TrapSprung 0 clarth.trapper.4 > camp.11.alpha.alphahunt.alpha.captain 16 
+E 54 Hit 0 clarth.trapper.4 > camp.11.alpha.alphahunt.alpha.captain 16 trap
+E 54 Mark 0 clarth.trapper.4 > camp.11.alpha.alphahunt.alpha.captain 150 bleed
+E 54 Chain 0 clarth.skirmisher.3 > camp.11.alpha.alphahunt.alpha.captain 3 bleed
+E 54 Guard 1 camp.11.alpha.alphahunt.alpha.1 > camp.11.alpha.alphahunt.alpha.captain 11 
+E 54 Hit 0 clarth.skirmisher.3 > camp.11.alpha.alphahunt.alpha.1 179 guarded
+E 54 Struck 0 clarth.skirmisher.3 > camp.11.alpha.alphahunt.alpha.captain 20 crit
+E 54 Guard 1 camp.11.alpha.alphahunt.alpha.1 > camp.11.alpha.alphahunt.alpha.captain 17 
+E 54 Hit 0 clarth.skirmisher.3 > camp.11.alpha.alphahunt.alpha.1 273 guarded
+E 59 Hit 1 camp.11.alpha.alphahunt.alpha.4 > clarth.skirmisher.3 9 
+E 59 Hit 1 camp.11.alpha.alphahunt.alpha.2 > clarth.trapper.4 9 
+E 59 Defence 0 clarth.trapper.4 > camp.11.alpha.alphahunt.alpha.2 0 snaptrap
+E 59 Mark 0 clarth.trapper.4 > camp.11.alpha.alphahunt.alpha.2 60 snare
+E 59 Mark 0 clarth.trapper.4 > camp.11.alpha.alphahunt.alpha.2 150 bleed
+E 59 Cash 0 clarth.medic.5 > clarth.skirmisher.3 11 covered
+E 59 Heal 0 clarth.medic.5 > clarth.skirmisher.3 33 treat
+E 59 Chain 0 leader > camp.11.alpha.alphahunt.alpha.2 4 snare.bonded
+E 59 Cash 0 leader > camp.11.alpha.alphahunt.alpha.2 63 pin
+E 59 Hit 0 leader > camp.11.alpha.alphahunt.alpha.2 123 aimed.pin
+E 59 ComboSetup 0 clarth.trapper.4 > camp.11.alpha.alphahunt.alpha.2 4 snare
+E 59 ComboFinish 0 leader > camp.11.alpha.alphahunt.alpha.2 4 snare
+E 59 Mark 0 leader > camp.11.alpha.alphahunt.alpha.2 90 opening
+E 59 Chain 0  > camp.11.alpha.alphahunt.alpha.2 5 bleed.unready
+E 59 Chain 0  > camp.11.alpha.alphahunt.alpha.2 4 opening.unready
+D 60 0 side0 > camp.11.alpha.alphahunt.alpha.1 1 FocusFire
+E 61 Hit 1 camp.11.alpha.alphahunt.alpha.1 > clarth.warden.1 7 
+E 62 Hit 1 camp.11.alpha.alphahunt.alpha.3 > clarth.skirmisher.3 20 
+E 63 Struck 0 leader > camp.11.alpha.alphahunt.alpha.1 15 crit
+E 63 Hit 0 leader > camp.11.alpha.alphahunt.alpha.1 40 
+E 76 Aim 0 clarth.marksman.2 > camp.11.alpha.alphahunt.alpha.1 45 aim
+E 76 Portal 0 clarth.marksman.2 > camp.11.alpha.alphahunt.alpha.1 45 Around the Corner
+E 77 Hit 0 clarth.trapper.4 > camp.11.alpha.alphahunt.alpha.1 19 
+E 77 Hit 0 clarth.skirmisher.3 > camp.11.alpha.alphahunt.alpha.1 187 
+E 77 Mark 0 clarth.skirmisher.3 > camp.11.alpha.alphahunt.alpha.1 180 stasis
+E 79 Cash 1 camp.11.alpha.alphahunt.alpha.0 > camp.11.alpha.alphahunt.alpha.1 9 covered
+E 79 Heal 1 camp.11.alpha.alphahunt.alpha.0 > camp.11.alpha.alphahunt.alpha.1 27 treat
+E 83 Hit 0 clarth.warden.1 > camp.11.alpha.alphahunt.alpha.1 17 
+E 83 Hit 0  > camp.11.alpha.alphahunt.alpha.captain 16 bleed
+E 88 Hit 0  > camp.11.alpha.alphahunt.alpha.2 9 bleed
+E 89 Hit 1 camp.11.alpha.alphahunt.alpha.2 > clarth.trapper.4 12 
+E 90 Miss 1 camp.11.alpha.alphahunt.alpha.captain > clarth.skirmisher.3 48 dodge
+E 97 Hit 1 camp.11.alpha.alphahunt.alpha.1 > clarth.warden.1 8 
+E 98 Hit 1 camp.11.alpha.alphahunt.alpha.4 > clarth.skirmisher.3 9 
+E 101 Cash 0 clarth.medic.5 > clarth.skirmisher.3 11 covered
+E 101 Heal 0 clarth.medic.5 > clarth.skirmisher.3 33 treat
+E 107 Hit 1 camp.11.alpha.alphahunt.alpha.3 > clarth.skirmisher.3 16 
+E 107 Hit 0 clarth.skirmisher.3 > camp.11.alpha.alphahunt.alpha.1 180 
+E 107 Kill 0 clarth.skirmisher.3 > camp.11.alpha.alphahunt.alpha.1 0 
+E 107 Snap 1 camp.11.alpha.alphahunt.alpha.2 >  90 panic
+E 108 Guard 1 camp.11.alpha.alphahunt.alpha.captain > camp.11.alpha.alphahunt.alpha.0 7 
+E 108 Hit 0 leader > camp.11.alpha.alphahunt.alpha.captain 17 guarded
+E 113 Hit 0  > camp.11.alpha.alphahunt.alpha.captain 16 bleed
+E 116 Hit 0 clarth.trapper.4 > camp.11.alpha.alphahunt.alpha.captain 14 
+E 118 Hit 0  > camp.11.alpha.alphahunt.alpha.2 9 bleed
+E 119 Hit 0 clarth.warden.1 > camp.11.alpha.alphahunt.alpha.2 17 
+E 120 Hit 0 clarth.marksman.2 > camp.11.alpha.alphahunt.alpha.0 198 aimed
+E 120 Defence 1 camp.11.alpha.alphahunt.alpha.0 >  99 selfpatch
+E 120 Mark 0 clarth.marksman.2 > camp.11.alpha.alphahunt.alpha.0 180 exposed
+E 120 Mark 0 clarth.marksman.2 > camp.11.alpha.alphahunt.alpha.0 90 opening
+E 120 Mark 0 clarth.marksman.2 > camp.11.alpha.alphahunt.alpha.0 180 exposed
+E 120 Chain 0 clarth.skirmisher.3 > camp.11.alpha.alphahunt.alpha.0 6 opening
+E 120 Guard 1 camp.11.alpha.alphahunt.alpha.captain > camp.11.alpha.alphahunt.alpha.0 10 
+E 120 Hit 0 clarth.skirmisher.3 > camp.11.alpha.alphahunt.alpha.captain 176 guarded
+E 120 Guard 1 camp.11.alpha.alphahunt.alpha.captain > camp.11.alpha.alphahunt.alpha.0 10 
+E 120 Hit 0 clarth.skirmisher.3 > camp.11.alpha.alphahunt.alpha.captain 169 guarded
+E 121 Cash 1 camp.11.alpha.alphahunt.alpha.0 > camp.11.alpha.alphahunt.alpha.captain 9 covered
+E 121 Heal 1 camp.11.alpha.alphahunt.alpha.0 > camp.11.alpha.alphahunt.alpha.captain 27 treat
+E 126 Miss 1 camp.11.alpha.alphahunt.alpha.captain > clarth.skirmisher.3 48 parry
+E 137 Hit 1 camp.11.alpha.alphahunt.alpha.4 > clarth.skirmisher.3 10 
+E 137 Hit 0 clarth.skirmisher.3 > camp.11.alpha.alphahunt.alpha.captain 144 
+D 140 0 side0 >  2 Unleash
+E 140 Reaction 1  >  100 unshakable
+E 143 Cash 0 clarth.medic.5 > clarth.skirmisher.3 11 covered
+E 143 Heal 0 clarth.medic.5 > clarth.skirmisher.3 33 treat
+E 143 Hit 0  > camp.11.alpha.alphahunt.alpha.captain 16 bleed
+E 148 Hit 0  > camp.11.alpha.alphahunt.alpha.2 10 bleed
+E 150 Windup 1 camp.11.alpha.alphahunt.alpha.3 > clarth.skirmisher.3 30 Heavy
+E 150 Tell 1 camp.11.alpha.alphahunt.alpha.captain > clarth.skirmisher.3 150 Track
+E 153 Guard 1 camp.11.alpha.alphahunt.alpha.captain > camp.11.alpha.alphahunt.alpha.0 8 
+E 153 Hit 0 leader > camp.11.alpha.alphahunt.alpha.captain 17 guarded
+E 155 Struck 0 clarth.trapper.4 > camp.11.alpha.alphahunt.alpha.captain 8 block
+E 155 Hit 0 clarth.trapper.4 > camp.11.alpha.alphahunt.alpha.captain 8 
+E 155 Hit 0 clarth.warden.1 > camp.11.alpha.alphahunt.alpha.2 16 
+E 162 Hit 1 camp.11.alpha.alphahunt.alpha.captain > clarth.skirmisher.3 14 
+E 163 Cash 1 camp.11.alpha.alphahunt.alpha.0 > camp.11.alpha.alphahunt.alpha.captain 9 covered
+E 163 Heal 1 camp.11.alpha.alphahunt.alpha.0 > camp.11.alpha.alphahunt.alpha.captain 27 treat
+E 165 Hit 0 clarth.marksman.2 > camp.11.alpha.alphahunt.alpha.captain 33 
+E 165 Snap 1 camp.11.alpha.alphahunt.alpha.0 >  90 panic
+E 167 Struck 0 clarth.skirmisher.3 > camp.11.alpha.alphahunt.alpha.captain 10 block
+E 167 Hit 0 clarth.skirmisher.3 > camp.11.alpha.alphahunt.alpha.captain 66 
+E 173 Hit 0  > camp.11.alpha.alphahunt.alpha.captain 16 bleed
+E 176 TrapArmed 1 camp.11.alpha.alphahunt.alpha.4 >  0 
+E 178 Hit 0  > camp.11.alpha.alphahunt.alpha.2 10 bleed
+E 179 Release 1 camp.11.alpha.alphahunt.alpha.3 > clarth.skirmisher.3 46 full
+E 179 Defence 0 clarth.skirmisher.3 > camp.11.alpha.alphahunt.alpha.3 46 sidestep
+E 182 Miss 1 camp.11.alpha.alphahunt.alpha.3 > clarth.skirmisher.3 71 dodge
+E 185 Cash 0 clarth.medic.5 > clarth.skirmisher.3 11 covered
+E 185 Heal 0 clarth.medic.5 > clarth.skirmisher.3 33 treat
+E 191 TrapSprung 1 camp.11.alpha.alphahunt.alpha.4 > clarth.warden.1 16 
+E 191 Hit 1 camp.11.alpha.alphahunt.alpha.4 > clarth.warden.1 14 trap
+E 191 Mark 1 camp.11.alpha.alphahunt.alpha.4 > clarth.warden.1 60 snare
+E 191 Mark 1 camp.11.alpha.alphahunt.alpha.4 > clarth.warden.1 150 bleed
+E 191 Chain 1 camp.11.alpha.alphahunt.alpha.3 > clarth.warden.1 7 snare
+E 191 Aim 1 camp.11.alpha.alphahunt.alpha.3 > clarth.warden.1 22 pin
+E 191 Chain 1  > clarth.warden.1 8 bleed.unready
+E 194 TrapArmed 0 clarth.trapper.4 >  0 
+E 197 Struck 0 clarth.skirmisher.3 > camp.11.alpha.alphahunt.alpha.captain 12 block
+E 197 Hit 0 clarth.skirmisher.3 > camp.11.alpha.alphahunt.alpha.captain 75 
+E 198 Guard 1 camp.11.alpha.alphahunt.alpha.captain > camp.11.alpha.alphahunt.alpha.0 8 
+E 198 Hit 0 leader > camp.11.alpha.alphahunt.alpha.captain 18 guarded
+E 198 TrapSprung 0 clarth.trapper.4 > camp.11.alpha.alphahunt.alpha.captain 16 
+E 198 Hit 0 clarth.trapper.4 > camp.11.alpha.alphahunt.alpha.captain 16 trap
+E 198 Mark 0 clarth.trapper.4 > camp.11.alpha.alphahunt.alpha.captain 150 bleed
+E 198 Chain 0 clarth.skirmisher.3 > camp.11.alpha.alphahunt.alpha.captain 9 bleed
+E 198 Hit 0 clarth.skirmisher.3 > camp.11.alpha.alphahunt.alpha.captain 288 strike
+E 198 Cash 0 clarth.skirmisher.3 > camp.11.alpha.alphahunt.alpha.captain 80 rip
+E 198 Hit 0 clarth.skirmisher.3 > camp.11.alpha.alphahunt.alpha.captain 560 rip
+E 198 ComboSetup 0 clarth.trapper.4 > camp.11.alpha.alphahunt.alpha.captain 9 bleed
+E 198 ComboFinish 0 clarth.skirmisher.3 > camp.11.alpha.alphahunt.alpha.captain 9 bleed
+E 198 Phase 1 camp.11.alpha.alphahunt.alpha.captain >  0 Pack
+E 198 Line 1 camp.11.alpha.alphahunt.alpha.captain >  0 pack
+E 198 Windup 1 camp.11.alpha.alphahunt.alpha.captain >  90 Eclipse
+E 198 Hit 0 clarth.skirmisher.3 > camp.11.alpha.alphahunt.alpha.captain 288 strike
+E 198 Tell 1 camp.11.alpha.alphahunt.alpha.captain > clarth.trapper.4 150 Track
+E 208 Miss 1 camp.11.alpha.alphahunt.alpha.2 > clarth.trapper.4 74 dodge
+E 208 Hit 0  > camp.11.alpha.alphahunt.alpha.2 9 bleed
+E 210 Hit 0 clarth.marksman.2 > camp.11.alpha.alphahunt.alpha.captain 37 
+E 213 Cash 1 camp.11.alpha.alphahunt.alpha.3 > clarth.warden.1 47 pin
+E 213 Hit 1 camp.11.alpha.alphahunt.alpha.3 > clarth.warden.1 76 aimed.pin
+E 213 ComboSetup 1 camp.11.alpha.alphahunt.alpha.4 > clarth.warden.1 7 snare
+E 213 ComboFinish 1 camp.11.alpha.alphahunt.alpha.3 > clarth.warden.1 7 snare
+E 213 Mark 1 camp.11.alpha.alphahunt.alpha.3 > clarth.warden.1 90 opening
+E 213 Chain 1 camp.11.alpha.alphahunt.alpha.2 > clarth.warden.1 7 opening
+E 213 Cash 1 camp.11.alpha.alphahunt.alpha.2 > clarth.warden.1 22 opening
+E 213 Hit 1 camp.11.alpha.alphahunt.alpha.2 > clarth.warden.1 36 strike.open
+E 213 ComboSetup 1 camp.11.alpha.alphahunt.alpha.3 > clarth.warden.1 7 opening
+E 213 ComboFinish 1 camp.11.alpha.alphahunt.alpha.2 > clarth.warden.1 7 opening
+E 213 Snap 0 clarth.skirmisher.3 >  90 rise
+E 213 Cash 1 camp.11.alpha.alphahunt.alpha.2 > clarth.warden.1 80 rip
+E 213 Hit 1 camp.11.alpha.alphahunt.alpha.2 > clarth.warden.1 72 rip
+E 213 ComboSetup 1 camp.11.alpha.alphahunt.alpha.4 > clarth.warden.1 8 bleed
+E 213 ComboFinish 1 camp.11.alpha.alphahunt.alpha.2 > clarth.warden.1 8 bleed
+E 215 Hit 1 camp.11.alpha.alphahunt.alpha.4 > clarth.skirmisher.3 11 
+E 227 Boost 0 clarth.skirmisher.3 > camp.11.alpha.alphahunt.alpha.captain 0 twincut
+E 227 Hit 0 clarth.skirmisher.3 > camp.11.alpha.alphahunt.alpha.captain 56 twincut
+E 227 Hit 0 clarth.skirmisher.3 > camp.11.alpha.alphahunt.alpha.captain 56 twincut
+E 227 Snap 1 camp.11.alpha.alphahunt.alpha.2 >  90 panic
+E 227 Mark 0 clarth.skirmisher.3 > camp.11.alpha.alphahunt.alpha.captain 150 bleed
+E 227 Boost 0 clarth.medic.5 > clarth.skirmisher.3 91 stim
+E 227 Chain 0  > camp.11.alpha.alphahunt.alpha.captain 10 bleed.unready
+D 228 0 side0 >  1 FallBack
+D 228 1 auto1 >  2 Unleash
+D 228 0 auto0 >  0 Hold
+D 228 0 auto0 >  100 blocked
+E 243 Aim 0 leader > camp.11.alpha.alphahunt.alpha.captain 45 aim
+E 249 Miss 1 camp.11.alpha.alphahunt.alpha.3 > clarth.warden.1 59 dodge
+E 254 Boost 1 camp.11.alpha.alphahunt.alpha.4 >  0 rearm
+E 254 TrapArmed 1 camp.11.alpha.alphahunt.alpha.4 >  0 
+E 256 Hit 0  > camp.11.alpha.alphahunt.alpha.captain 16 bleed
+E 269 Cash 0 clarth.medic.5 > clarth.skirmisher.3 11 covered
+E 269 Heal 0 clarth.medic.5 > clarth.skirmisher.3 33 treat
+E 286 Hit 0  > camp.11.alpha.alphahunt.alpha.captain 16 bleed
+E 287 Reaction 0  >  30 whiff
+E 287 Release 1 camp.11.alpha.alphahunt.alpha.captain >  40 dodged
+E 287 Glory 0  > camp.11.alpha.alphahunt.alpha.captain 80 dodge
+D 288 0 side0 > camp.11.alpha.alphahunt.alpha.captain 1 FocusFire
+D 289 0 side0 >  0 Hold
+D 289 0 side0 >  2 Unleash
+E 289 Combo 0  >  10 Ambush
+E 289 Hit 0  > camp.11.alpha.alphahunt.alpha.0 39 ambush
+E 289 Hit 0  > camp.11.alpha.alphahunt.alpha.3 42 ambush
+E 289 Hit 0  > camp.11.alpha.alphahunt.alpha.4 44 ambush
+E 289 Hit 0  > camp.11.alpha.alphahunt.alpha.captain 484 ambush
+E 289 Kill 0  > camp.11.alpha.alphahunt.alpha.captain 0 ambush
+E 289 Break 1  >  4 break
+E 289 End 0  >  0 break
+S 12 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 13 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 14 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 15 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 16 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 17 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 18 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 19 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 19 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:-
+S 20 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 20 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:-
+S 21 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 21 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:-
+S 22 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 22 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:-
+S 23 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 23 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:-
+S 24 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 24 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:-
+S 25 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 25 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:-
+S 26 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 26 clarth.skirmisher.3 g:-/- a:- m:Snare=59
+S 26 camp.11.alpha.alphahunt.alpha.1 g:camp.11.alpha.alphahunt.alpha.captain/- a:- m:-
+S 26 camp.11.alpha.alphahunt.alpha.3 g:-/- a:clarth.skirmisher.3:22 m:-
+S 26 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:-
+S 27 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 27 clarth.skirmisher.3 g:-/- a:- m:Snare=58
+S 27 camp.11.alpha.alphahunt.alpha.1 g:camp.11.alpha.alphahunt.alpha.captain/- a:- m:-
+S 27 camp.11.alpha.alphahunt.alpha.3 g:-/- a:clarth.skirmisher.3:21 m:-
+S 27 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:-
+S 28 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 28 clarth.skirmisher.3 g:-/- a:- m:Snare=57
+S 28 camp.11.alpha.alphahunt.alpha.1 g:camp.11.alpha.alphahunt.alpha.captain/- a:- m:-
+S 28 camp.11.alpha.alphahunt.alpha.3 g:-/- a:clarth.skirmisher.3:20 m:-
+S 28 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:-
+S 29 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 29 clarth.skirmisher.3 g:-/- a:- m:Snare=56
+S 29 camp.11.alpha.alphahunt.alpha.1 g:camp.11.alpha.alphahunt.alpha.captain/- a:- m:-
+S 29 camp.11.alpha.alphahunt.alpha.3 g:-/- a:clarth.skirmisher.3:19 m:-
+S 29 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:-
+S 30 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 30 clarth.skirmisher.3 g:-/- a:- m:Snare=55
+S 30 camp.11.alpha.alphahunt.alpha.1 g:camp.11.alpha.alphahunt.alpha.captain/- a:- m:-
+S 30 camp.11.alpha.alphahunt.alpha.3 g:-/- a:clarth.skirmisher.3:18 m:-
+S 30 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:-
+S 31 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 31 clarth.skirmisher.3 g:-/- a:- m:Snare=54
+S 31 camp.11.alpha.alphahunt.alpha.1 g:camp.11.alpha.alphahunt.alpha.captain/- a:- m:-
+S 31 camp.11.alpha.alphahunt.alpha.3 g:-/- a:clarth.skirmisher.3:17 m:-
+S 31 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:-
+S 32 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 32 clarth.skirmisher.3 g:-/- a:- m:Snare=53
+S 32 camp.11.alpha.alphahunt.alpha.1 g:camp.11.alpha.alphahunt.alpha.captain/- a:- m:-
+S 32 camp.11.alpha.alphahunt.alpha.3 g:-/- a:clarth.skirmisher.3:16 m:-
+S 32 camp.11.alpha.alphahunt.alpha.4 g:-/- a:- m:Exposed=179
+S 32 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:-
+S 33 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 33 clarth.skirmisher.3 g:-/- a:- m:Snare=52
+S 33 camp.11.alpha.alphahunt.alpha.1 g:camp.11.alpha.alphahunt.alpha.captain/- a:- m:-
+S 33 camp.11.alpha.alphahunt.alpha.3 g:-/- a:clarth.skirmisher.3:15 m:-
+S 33 camp.11.alpha.alphahunt.alpha.4 g:-/- a:- m:Exposed=178
+S 33 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:-
+S 34 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 34 clarth.skirmisher.3 g:-/- a:- m:Snare=51
+S 34 camp.11.alpha.alphahunt.alpha.1 g:camp.11.alpha.alphahunt.alpha.captain/- a:- m:-
+S 34 camp.11.alpha.alphahunt.alpha.3 g:-/- a:clarth.skirmisher.3:14 m:-
+S 34 camp.11.alpha.alphahunt.alpha.4 g:-/- a:- m:Exposed=177
+S 34 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:-
+S 35 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 35 clarth.skirmisher.3 g:-/- a:- m:Snare=50
+S 35 camp.11.alpha.alphahunt.alpha.1 g:camp.11.alpha.alphahunt.alpha.captain/- a:- m:-
+S 35 camp.11.alpha.alphahunt.alpha.3 g:-/- a:clarth.skirmisher.3:13 m:-
+S 35 camp.11.alpha.alphahunt.alpha.4 g:-/- a:- m:Exposed=176
+S 35 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:-
+S 36 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 36 clarth.skirmisher.3 g:-/- a:- m:Snare=49
+S 36 camp.11.alpha.alphahunt.alpha.1 g:camp.11.alpha.alphahunt.alpha.captain/- a:- m:-
+S 36 camp.11.alpha.alphahunt.alpha.3 g:-/- a:clarth.skirmisher.3:12 m:-
+S 36 camp.11.alpha.alphahunt.alpha.4 g:-/- a:- m:Exposed=175
+S 36 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:-
+S 37 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 37 clarth.skirmisher.3 g:-/- a:- m:Snare=48
+S 37 camp.11.alpha.alphahunt.alpha.1 g:camp.11.alpha.alphahunt.alpha.captain/- a:- m:-
+S 37 camp.11.alpha.alphahunt.alpha.3 g:-/- a:clarth.skirmisher.3:11 m:-
+S 37 camp.11.alpha.alphahunt.alpha.4 g:-/- a:- m:Exposed=174
+S 37 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:-
+S 38 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 38 clarth.skirmisher.3 g:-/- a:- m:Snare=47
+S 38 camp.11.alpha.alphahunt.alpha.1 g:camp.11.alpha.alphahunt.alpha.captain/- a:- m:-
+S 38 camp.11.alpha.alphahunt.alpha.3 g:-/- a:clarth.skirmisher.3:10 m:-
+S 38 camp.11.alpha.alphahunt.alpha.4 g:-/- a:- m:Exposed=173
+S 38 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:-
+S 39 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 39 clarth.skirmisher.3 g:-/- a:- m:Snare=46
+S 39 camp.11.alpha.alphahunt.alpha.1 g:camp.11.alpha.alphahunt.alpha.captain/- a:- m:-
+S 39 camp.11.alpha.alphahunt.alpha.3 g:-/- a:clarth.skirmisher.3:9 m:-
+S 39 camp.11.alpha.alphahunt.alpha.4 g:-/- a:- m:Exposed=172
+S 39 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:-
+S 40 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 40 clarth.skirmisher.3 g:-/- a:- m:Snare=45
+S 40 camp.11.alpha.alphahunt.alpha.1 g:camp.11.alpha.alphahunt.alpha.captain/- a:- m:-
+S 40 camp.11.alpha.alphahunt.alpha.3 g:-/- a:clarth.skirmisher.3:8 m:-
+S 40 camp.11.alpha.alphahunt.alpha.4 g:-/- a:- m:Exposed=171
+S 40 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:-
+S 41 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 41 clarth.skirmisher.3 g:-/- a:- m:Snare=44
+S 41 camp.11.alpha.alphahunt.alpha.1 g:camp.11.alpha.alphahunt.alpha.captain/- a:- m:-
+S 41 camp.11.alpha.alphahunt.alpha.3 g:-/- a:clarth.skirmisher.3:7 m:-
+S 41 camp.11.alpha.alphahunt.alpha.4 g:-/- a:- m:Exposed=170
+S 41 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:-
+S 42 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 42 clarth.skirmisher.3 g:-/- a:- m:Snare=43
+S 42 camp.11.alpha.alphahunt.alpha.1 g:camp.11.alpha.alphahunt.alpha.captain/- a:- m:-
+S 42 camp.11.alpha.alphahunt.alpha.3 g:-/- a:clarth.skirmisher.3:6 m:-
+S 42 camp.11.alpha.alphahunt.alpha.4 g:-/- a:- m:Exposed=169
+S 42 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:-
+S 43 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 43 clarth.skirmisher.3 g:-/- a:- m:Snare=42
+S 43 camp.11.alpha.alphahunt.alpha.1 g:camp.11.alpha.alphahunt.alpha.captain/- a:- m:-
+S 43 camp.11.alpha.alphahunt.alpha.3 g:-/- a:clarth.skirmisher.3:5 m:-
+S 43 camp.11.alpha.alphahunt.alpha.4 g:-/- a:- m:Exposed=168
+S 43 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:-
+S 44 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 44 clarth.skirmisher.3 g:-/- a:- m:Snare=41
+S 44 camp.11.alpha.alphahunt.alpha.1 g:camp.11.alpha.alphahunt.alpha.captain/- a:- m:-
+S 44 camp.11.alpha.alphahunt.alpha.3 g:-/- a:clarth.skirmisher.3:4 m:-
+S 44 camp.11.alpha.alphahunt.alpha.4 g:-/- a:- m:Exposed=167
+S 44 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:-
+S 45 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 45 clarth.skirmisher.3 g:-/- a:- m:Snare=40
+S 45 camp.11.alpha.alphahunt.alpha.1 g:camp.11.alpha.alphahunt.alpha.captain/- a:- m:-
+S 45 camp.11.alpha.alphahunt.alpha.3 g:-/- a:clarth.skirmisher.3:3 m:-
+S 45 camp.11.alpha.alphahunt.alpha.4 g:-/- a:- m:Exposed=166
+S 45 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:-
+S 46 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 46 clarth.skirmisher.3 g:-/- a:- m:Snare=39
+S 46 camp.11.alpha.alphahunt.alpha.1 g:camp.11.alpha.alphahunt.alpha.captain/- a:- m:-
+S 46 camp.11.alpha.alphahunt.alpha.3 g:-/- a:clarth.skirmisher.3:2 m:-
+S 46 camp.11.alpha.alphahunt.alpha.4 g:-/- a:- m:Exposed=165
+S 46 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:-
+S 47 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 47 clarth.skirmisher.3 g:-/- a:- m:Snare=38
+S 47 camp.11.alpha.alphahunt.alpha.1 g:camp.11.alpha.alphahunt.alpha.captain/- a:- m:-
+S 47 camp.11.alpha.alphahunt.alpha.3 g:-/- a:clarth.skirmisher.3:1 m:-
+S 47 camp.11.alpha.alphahunt.alpha.4 g:-/- a:- m:Exposed=164
+S 47 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:-
+S 48 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 48 clarth.skirmisher.3 g:-/- a:- m:Opening=89
+S 48 camp.11.alpha.alphahunt.alpha.1 g:camp.11.alpha.alphahunt.alpha.captain/- a:- m:-
+S 48 camp.11.alpha.alphahunt.alpha.4 g:-/- a:- m:Exposed=163
+S 48 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:-
+S 49 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 49 clarth.skirmisher.3 g:-/- a:- m:Opening=88
+S 49 camp.11.alpha.alphahunt.alpha.1 g:camp.11.alpha.alphahunt.alpha.captain/- a:- m:-
+S 49 camp.11.alpha.alphahunt.alpha.4 g:-/- a:- m:Exposed=162
+S 49 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:-
+S 50 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 50 clarth.skirmisher.3 g:-/- a:- m:Opening=87
+S 50 camp.11.alpha.alphahunt.alpha.1 g:camp.11.alpha.alphahunt.alpha.captain/- a:- m:-
+S 50 camp.11.alpha.alphahunt.alpha.4 g:-/- a:- m:Exposed=161
+S 50 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:-
+S 51 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 51 clarth.skirmisher.3 g:-/- a:- m:Opening=86
+S 51 camp.11.alpha.alphahunt.alpha.1 g:camp.11.alpha.alphahunt.alpha.captain/- a:- m:-
+S 51 camp.11.alpha.alphahunt.alpha.4 g:-/- a:- m:Exposed=160
+S 51 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:-
+S 52 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 52 clarth.skirmisher.3 g:-/- a:- m:Opening=85
+S 52 camp.11.alpha.alphahunt.alpha.1 g:camp.11.alpha.alphahunt.alpha.captain/- a:- m:-
+S 52 camp.11.alpha.alphahunt.alpha.4 g:-/- a:- m:Exposed=159
+S 52 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:-
+S 53 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 53 clarth.skirmisher.3 g:-/- a:- m:Opening=84
+S 53 camp.11.alpha.alphahunt.alpha.1 g:camp.11.alpha.alphahunt.alpha.captain/- a:- m:-
+S 53 camp.11.alpha.alphahunt.alpha.4 g:-/- a:- m:Exposed=158
+S 53 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:-
+S 54 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 54 clarth.skirmisher.3 g:-/- a:- m:Opening=83
+S 54 camp.11.alpha.alphahunt.alpha.1 g:camp.11.alpha.alphahunt.alpha.captain/- a:- m:-
+S 54 camp.11.alpha.alphahunt.alpha.4 g:-/- a:- m:Exposed=157
+S 54 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:-
+S 55 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 55 clarth.skirmisher.3 g:-/- a:- m:Opening=82
+S 55 camp.11.alpha.alphahunt.alpha.1 g:camp.11.alpha.alphahunt.alpha.captain/- a:- m:-
+S 55 camp.11.alpha.alphahunt.alpha.4 g:-/- a:- m:Exposed=156
+S 55 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:Bleed=149
+S 56 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 56 clarth.skirmisher.3 g:-/- a:- m:Opening=81
+S 56 camp.11.alpha.alphahunt.alpha.1 g:camp.11.alpha.alphahunt.alpha.captain/- a:- m:-
+S 56 camp.11.alpha.alphahunt.alpha.4 g:-/- a:- m:Exposed=155
+S 56 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:Bleed=148
+S 57 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 57 clarth.skirmisher.3 g:-/- a:- m:Opening=80
+S 57 camp.11.alpha.alphahunt.alpha.1 g:camp.11.alpha.alphahunt.alpha.captain/- a:- m:-
+S 57 camp.11.alpha.alphahunt.alpha.4 g:-/- a:- m:Exposed=154
+S 57 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:Bleed=147
+S 58 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 58 clarth.skirmisher.3 g:-/- a:- m:Opening=79
+S 58 camp.11.alpha.alphahunt.alpha.1 g:camp.11.alpha.alphahunt.alpha.captain/- a:- m:-
+S 58 camp.11.alpha.alphahunt.alpha.4 g:-/- a:- m:Exposed=153
+S 58 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:Bleed=146
+S 59 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 59 clarth.skirmisher.3 g:-/- a:- m:Opening=78
+S 59 camp.11.alpha.alphahunt.alpha.1 g:camp.11.alpha.alphahunt.alpha.captain/- a:- m:-
+S 59 camp.11.alpha.alphahunt.alpha.4 g:-/- a:- m:Exposed=152
+S 59 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:Bleed=145
+S 60 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 60 clarth.skirmisher.3 g:-/- a:- m:Opening=77
+S 60 camp.11.alpha.alphahunt.alpha.1 g:camp.11.alpha.alphahunt.alpha.captain/- a:- m:-
+S 60 camp.11.alpha.alphahunt.alpha.2 g:-/- a:- m:Bleed=149,Opening=89
+S 60 camp.11.alpha.alphahunt.alpha.4 g:-/- a:- m:Exposed=151
+S 60 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:Bleed=144
+S 61 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 61 clarth.skirmisher.3 g:-/- a:- m:Opening=76
+S 61 camp.11.alpha.alphahunt.alpha.1 g:camp.11.alpha.alphahunt.alpha.captain/- a:- m:-
+S 61 camp.11.alpha.alphahunt.alpha.2 g:-/- a:- m:Bleed=148,Opening=88
+S 61 camp.11.alpha.alphahunt.alpha.4 g:-/- a:- m:Exposed=150
+S 61 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:Bleed=143
+S 62 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 62 clarth.skirmisher.3 g:-/- a:- m:Opening=75
+S 62 camp.11.alpha.alphahunt.alpha.1 g:camp.11.alpha.alphahunt.alpha.captain/- a:- m:-
+S 62 camp.11.alpha.alphahunt.alpha.2 g:-/- a:- m:Bleed=147,Opening=87
+S 62 camp.11.alpha.alphahunt.alpha.4 g:-/- a:- m:Exposed=149
+S 62 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:Bleed=142
+S 63 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 63 clarth.skirmisher.3 g:-/- a:- m:Opening=74
+S 63 camp.11.alpha.alphahunt.alpha.1 g:camp.11.alpha.alphahunt.alpha.captain/- a:- m:-
+S 63 camp.11.alpha.alphahunt.alpha.2 g:-/- a:- m:Bleed=146,Opening=86
+S 63 camp.11.alpha.alphahunt.alpha.4 g:-/- a:- m:Exposed=148
+S 63 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:Bleed=141
+S 64 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 64 clarth.skirmisher.3 g:-/- a:- m:Opening=73
+S 64 camp.11.alpha.alphahunt.alpha.1 g:camp.11.alpha.alphahunt.alpha.captain/- a:- m:-
+S 64 camp.11.alpha.alphahunt.alpha.2 g:-/- a:- m:Bleed=145,Opening=85
+S 64 camp.11.alpha.alphahunt.alpha.4 g:-/- a:- m:Exposed=147
+S 64 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:Bleed=140
+S 65 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 65 clarth.skirmisher.3 g:-/- a:- m:Opening=72
+S 65 camp.11.alpha.alphahunt.alpha.1 g:camp.11.alpha.alphahunt.alpha.captain/- a:- m:-
+S 65 camp.11.alpha.alphahunt.alpha.2 g:-/- a:- m:Bleed=144,Opening=84
+S 65 camp.11.alpha.alphahunt.alpha.4 g:-/- a:- m:Exposed=146
+S 65 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:Bleed=139
+S 66 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 66 clarth.skirmisher.3 g:-/- a:- m:Opening=71
+S 66 camp.11.alpha.alphahunt.alpha.1 g:camp.11.alpha.alphahunt.alpha.captain/- a:- m:-
+S 66 camp.11.alpha.alphahunt.alpha.2 g:-/- a:- m:Bleed=143,Opening=83
+S 66 camp.11.alpha.alphahunt.alpha.4 g:-/- a:- m:Exposed=145
+S 66 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:Bleed=138
+S 67 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 67 clarth.skirmisher.3 g:-/- a:- m:Opening=70
+S 67 camp.11.alpha.alphahunt.alpha.1 g:camp.11.alpha.alphahunt.alpha.captain/- a:- m:-
+S 67 camp.11.alpha.alphahunt.alpha.2 g:-/- a:- m:Bleed=142,Opening=82
+S 67 camp.11.alpha.alphahunt.alpha.4 g:-/- a:- m:Exposed=144
+S 67 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:Bleed=137
+S 68 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 68 clarth.skirmisher.3 g:-/- a:- m:Opening=69
+S 68 camp.11.alpha.alphahunt.alpha.1 g:camp.11.alpha.alphahunt.alpha.captain/- a:- m:-
+S 68 camp.11.alpha.alphahunt.alpha.2 g:-/- a:- m:Bleed=141,Opening=81
+S 68 camp.11.alpha.alphahunt.alpha.4 g:-/- a:- m:Exposed=143
+S 68 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:Bleed=136
+S 69 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 69 clarth.skirmisher.3 g:-/- a:- m:Opening=68
+S 69 camp.11.alpha.alphahunt.alpha.1 g:camp.11.alpha.alphahunt.alpha.captain/- a:- m:-
+S 69 camp.11.alpha.alphahunt.alpha.2 g:-/- a:- m:Bleed=140,Opening=80
+S 69 camp.11.alpha.alphahunt.alpha.4 g:-/- a:- m:Exposed=142
+S 69 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:Bleed=135
+S 70 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 70 clarth.skirmisher.3 g:-/- a:- m:Opening=67
+S 70 camp.11.alpha.alphahunt.alpha.1 g:camp.11.alpha.alphahunt.alpha.captain/- a:- m:-
+S 70 camp.11.alpha.alphahunt.alpha.2 g:-/- a:- m:Bleed=139,Opening=79
+S 70 camp.11.alpha.alphahunt.alpha.4 g:-/- a:- m:Exposed=141
+S 70 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:Bleed=134
+S 71 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 71 clarth.skirmisher.3 g:-/- a:- m:Opening=66
+S 71 camp.11.alpha.alphahunt.alpha.1 g:camp.11.alpha.alphahunt.alpha.captain/- a:- m:-
+S 71 camp.11.alpha.alphahunt.alpha.2 g:-/- a:- m:Bleed=138,Opening=78
+S 71 camp.11.alpha.alphahunt.alpha.4 g:-/- a:- m:Exposed=140
+S 71 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:Bleed=133
+S 72 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 72 clarth.skirmisher.3 g:-/- a:- m:Opening=65
+S 72 camp.11.alpha.alphahunt.alpha.1 g:camp.11.alpha.alphahunt.alpha.captain/- a:- m:-
+S 72 camp.11.alpha.alphahunt.alpha.2 g:-/- a:- m:Bleed=137,Opening=77
+S 72 camp.11.alpha.alphahunt.alpha.4 g:-/- a:- m:Exposed=139
+S 72 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:Bleed=132
+S 73 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 73 clarth.skirmisher.3 g:-/- a:- m:Opening=64
+S 73 camp.11.alpha.alphahunt.alpha.1 g:camp.11.alpha.alphahunt.alpha.captain/- a:- m:-
+S 73 camp.11.alpha.alphahunt.alpha.2 g:-/- a:- m:Bleed=136,Opening=76
+S 73 camp.11.alpha.alphahunt.alpha.4 g:-/- a:- m:Exposed=138
+S 73 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:Bleed=131
+S 74 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 74 clarth.skirmisher.3 g:-/- a:- m:Opening=63
+S 74 camp.11.alpha.alphahunt.alpha.1 g:camp.11.alpha.alphahunt.alpha.captain/- a:- m:-
+S 74 camp.11.alpha.alphahunt.alpha.2 g:-/- a:- m:Bleed=135,Opening=75
+S 74 camp.11.alpha.alphahunt.alpha.4 g:-/- a:- m:Exposed=137
+S 74 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:Bleed=130
+S 75 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 75 clarth.skirmisher.3 g:-/- a:- m:Opening=62
+S 75 camp.11.alpha.alphahunt.alpha.1 g:camp.11.alpha.alphahunt.alpha.captain/- a:- m:-
+S 75 camp.11.alpha.alphahunt.alpha.2 g:-/- a:- m:Bleed=134,Opening=74
+S 75 camp.11.alpha.alphahunt.alpha.4 g:-/- a:- m:Exposed=136
+S 75 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:Bleed=129
+S 76 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 76 clarth.skirmisher.3 g:-/- a:- m:Opening=61
+S 76 camp.11.alpha.alphahunt.alpha.1 g:camp.11.alpha.alphahunt.alpha.captain/- a:- m:-
+S 76 camp.11.alpha.alphahunt.alpha.2 g:-/- a:- m:Bleed=133,Opening=73
+S 76 camp.11.alpha.alphahunt.alpha.4 g:-/- a:- m:Exposed=135
+S 76 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:Bleed=128
+S 77 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 77 clarth.skirmisher.3 g:-/- a:- m:Opening=60
+S 77 clarth.marksman.2 g:-/- a:camp.11.alpha.alphahunt.alpha.1:44 m:-
+S 77 camp.11.alpha.alphahunt.alpha.1 g:camp.11.alpha.alphahunt.alpha.captain/- a:- m:-
+S 77 camp.11.alpha.alphahunt.alpha.2 g:-/- a:- m:Bleed=132,Opening=72
+S 77 camp.11.alpha.alphahunt.alpha.4 g:-/- a:- m:Exposed=134
+S 77 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:Bleed=127
+S 78 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 78 clarth.skirmisher.3 g:-/- a:- m:Opening=59
+S 78 clarth.marksman.2 g:-/- a:camp.11.alpha.alphahunt.alpha.1:43 m:-
+S 78 camp.11.alpha.alphahunt.alpha.1 g:camp.11.alpha.alphahunt.alpha.captain/- a:- m:Stasis=179
+S 78 camp.11.alpha.alphahunt.alpha.2 g:-/- a:- m:Bleed=131,Opening=71
+S 78 camp.11.alpha.alphahunt.alpha.4 g:-/- a:- m:Exposed=133
+S 78 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:Bleed=126
+S 79 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 79 clarth.skirmisher.3 g:-/- a:- m:Opening=58
+S 79 clarth.marksman.2 g:-/- a:camp.11.alpha.alphahunt.alpha.1:42 m:-
+S 79 camp.11.alpha.alphahunt.alpha.1 g:camp.11.alpha.alphahunt.alpha.captain/- a:- m:Stasis=178
+S 79 camp.11.alpha.alphahunt.alpha.2 g:-/- a:- m:Bleed=130,Opening=70
+S 79 camp.11.alpha.alphahunt.alpha.4 g:-/- a:- m:Exposed=132
+S 79 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:Bleed=125
+S 80 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 80 clarth.skirmisher.3 g:-/- a:- m:Opening=57
+S 80 clarth.marksman.2 g:-/- a:camp.11.alpha.alphahunt.alpha.1:41 m:-
+S 80 camp.11.alpha.alphahunt.alpha.1 g:camp.11.alpha.alphahunt.alpha.captain/- a:- m:Stasis=177
+S 80 camp.11.alpha.alphahunt.alpha.2 g:-/- a:- m:Bleed=129,Opening=69
+S 80 camp.11.alpha.alphahunt.alpha.4 g:-/- a:- m:Exposed=131
+S 80 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:Bleed=124
+S 81 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 81 clarth.skirmisher.3 g:-/- a:- m:Opening=56
+S 81 clarth.marksman.2 g:-/- a:camp.11.alpha.alphahunt.alpha.1:40 m:-
+S 81 camp.11.alpha.alphahunt.alpha.1 g:camp.11.alpha.alphahunt.alpha.captain/- a:- m:Stasis=176
+S 81 camp.11.alpha.alphahunt.alpha.2 g:-/- a:- m:Bleed=128,Opening=68
+S 81 camp.11.alpha.alphahunt.alpha.4 g:-/- a:- m:Exposed=130
+S 81 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:Bleed=123
+S 82 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 82 clarth.skirmisher.3 g:-/- a:- m:Opening=55
+S 82 clarth.marksman.2 g:-/- a:camp.11.alpha.alphahunt.alpha.1:39 m:-
+S 82 camp.11.alpha.alphahunt.alpha.1 g:camp.11.alpha.alphahunt.alpha.captain/- a:- m:Stasis=175
+S 82 camp.11.alpha.alphahunt.alpha.2 g:-/- a:- m:Bleed=127,Opening=67
+S 82 camp.11.alpha.alphahunt.alpha.4 g:-/- a:- m:Exposed=129
+S 82 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:Bleed=122
+S 83 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 83 clarth.skirmisher.3 g:-/- a:- m:Opening=54
+S 83 clarth.marksman.2 g:-/- a:camp.11.alpha.alphahunt.alpha.1:38 m:-
+S 83 camp.11.alpha.alphahunt.alpha.1 g:camp.11.alpha.alphahunt.alpha.captain/- a:- m:Stasis=174
+S 83 camp.11.alpha.alphahunt.alpha.2 g:-/- a:- m:Bleed=126,Opening=66
+S 83 camp.11.alpha.alphahunt.alpha.4 g:-/- a:- m:Exposed=128
+S 83 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:Bleed=121
+S 84 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 84 clarth.skirmisher.3 g:-/- a:- m:Opening=53
+S 84 clarth.marksman.2 g:-/- a:camp.11.alpha.alphahunt.alpha.1:37 m:-
+S 84 camp.11.alpha.alphahunt.alpha.1 g:camp.11.alpha.alphahunt.alpha.captain/- a:- m:Stasis=173
+S 84 camp.11.alpha.alphahunt.alpha.2 g:-/- a:- m:Bleed=125,Opening=65
+S 84 camp.11.alpha.alphahunt.alpha.4 g:-/- a:- m:Exposed=127
+S 84 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:Bleed=120
+S 85 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 85 clarth.skirmisher.3 g:-/- a:- m:Opening=52
+S 85 clarth.marksman.2 g:-/- a:camp.11.alpha.alphahunt.alpha.1:36 m:-
+S 85 camp.11.alpha.alphahunt.alpha.1 g:camp.11.alpha.alphahunt.alpha.captain/- a:- m:Stasis=172
+S 85 camp.11.alpha.alphahunt.alpha.2 g:-/- a:- m:Bleed=124,Opening=64
+S 85 camp.11.alpha.alphahunt.alpha.4 g:-/- a:- m:Exposed=126
+S 85 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:Bleed=119
+S 86 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 86 clarth.skirmisher.3 g:-/- a:- m:Opening=51
+S 86 clarth.marksman.2 g:-/- a:camp.11.alpha.alphahunt.alpha.1:35 m:-
+S 86 camp.11.alpha.alphahunt.alpha.1 g:camp.11.alpha.alphahunt.alpha.captain/- a:- m:Stasis=171
+S 86 camp.11.alpha.alphahunt.alpha.2 g:-/- a:- m:Bleed=123,Opening=63
+S 86 camp.11.alpha.alphahunt.alpha.4 g:-/- a:- m:Exposed=125
+S 86 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:Bleed=118
+S 87 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 87 clarth.skirmisher.3 g:-/- a:- m:Opening=50
+S 87 clarth.marksman.2 g:-/- a:camp.11.alpha.alphahunt.alpha.1:34 m:-
+S 87 camp.11.alpha.alphahunt.alpha.1 g:camp.11.alpha.alphahunt.alpha.captain/- a:- m:Stasis=170
+S 87 camp.11.alpha.alphahunt.alpha.2 g:-/- a:- m:Bleed=122,Opening=62
+S 87 camp.11.alpha.alphahunt.alpha.4 g:-/- a:- m:Exposed=124
+S 87 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:Bleed=117
+S 88 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 88 clarth.skirmisher.3 g:-/- a:- m:Opening=49
+S 88 clarth.marksman.2 g:-/- a:camp.11.alpha.alphahunt.alpha.1:33 m:-
+S 88 camp.11.alpha.alphahunt.alpha.1 g:camp.11.alpha.alphahunt.alpha.captain/- a:- m:Stasis=169
+S 88 camp.11.alpha.alphahunt.alpha.2 g:-/- a:- m:Bleed=121,Opening=61
+S 88 camp.11.alpha.alphahunt.alpha.4 g:-/- a:- m:Exposed=123
+S 88 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:Bleed=116
+S 89 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 89 clarth.skirmisher.3 g:-/- a:- m:Opening=48
+S 89 clarth.marksman.2 g:-/- a:camp.11.alpha.alphahunt.alpha.1:32 m:-
+S 89 camp.11.alpha.alphahunt.alpha.1 g:camp.11.alpha.alphahunt.alpha.captain/- a:- m:Stasis=168
+S 89 camp.11.alpha.alphahunt.alpha.2 g:-/- a:- m:Bleed=120,Opening=60
+S 89 camp.11.alpha.alphahunt.alpha.4 g:-/- a:- m:Exposed=122
+S 89 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:Bleed=115
+S 90 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 90 clarth.skirmisher.3 g:-/- a:- m:Opening=47
+S 90 clarth.marksman.2 g:-/- a:camp.11.alpha.alphahunt.alpha.1:31 m:-
+S 90 camp.11.alpha.alphahunt.alpha.1 g:camp.11.alpha.alphahunt.alpha.captain/- a:- m:Stasis=167
+S 90 camp.11.alpha.alphahunt.alpha.2 g:-/- a:- m:Bleed=119,Opening=59
+S 90 camp.11.alpha.alphahunt.alpha.4 g:-/- a:- m:Exposed=121
+S 90 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:Bleed=114
+S 91 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 91 clarth.skirmisher.3 g:-/- a:- m:Opening=46
+S 91 clarth.marksman.2 g:-/- a:camp.11.alpha.alphahunt.alpha.1:30 m:-
+S 91 camp.11.alpha.alphahunt.alpha.1 g:camp.11.alpha.alphahunt.alpha.captain/- a:- m:Stasis=166
+S 91 camp.11.alpha.alphahunt.alpha.2 g:-/- a:- m:Bleed=118,Opening=58
+S 91 camp.11.alpha.alphahunt.alpha.4 g:-/- a:- m:Exposed=120
+S 91 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:Bleed=113
+S 92 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 92 clarth.skirmisher.3 g:-/- a:- m:Opening=45
+S 92 clarth.marksman.2 g:-/- a:camp.11.alpha.alphahunt.alpha.1:29 m:-
+S 92 camp.11.alpha.alphahunt.alpha.1 g:camp.11.alpha.alphahunt.alpha.captain/- a:- m:Stasis=165
+S 92 camp.11.alpha.alphahunt.alpha.2 g:-/- a:- m:Bleed=117,Opening=57
+S 92 camp.11.alpha.alphahunt.alpha.4 g:-/- a:- m:Exposed=119
+S 92 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:Bleed=112
+S 93 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 93 clarth.skirmisher.3 g:-/- a:- m:Opening=44
+S 93 clarth.marksman.2 g:-/- a:camp.11.alpha.alphahunt.alpha.1:28 m:-
+S 93 camp.11.alpha.alphahunt.alpha.1 g:camp.11.alpha.alphahunt.alpha.captain/- a:- m:Stasis=164
+S 93 camp.11.alpha.alphahunt.alpha.2 g:-/- a:- m:Bleed=116,Opening=56
+S 93 camp.11.alpha.alphahunt.alpha.4 g:-/- a:- m:Exposed=118
+S 93 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:Bleed=111
+S 94 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 94 clarth.skirmisher.3 g:-/- a:- m:Opening=43
+S 94 clarth.marksman.2 g:-/- a:camp.11.alpha.alphahunt.alpha.1:27 m:-
+S 94 camp.11.alpha.alphahunt.alpha.1 g:camp.11.alpha.alphahunt.alpha.captain/- a:- m:Stasis=163
+S 94 camp.11.alpha.alphahunt.alpha.2 g:-/- a:- m:Bleed=115,Opening=55
+S 94 camp.11.alpha.alphahunt.alpha.4 g:-/- a:- m:Exposed=117
+S 94 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:Bleed=110
+S 95 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 95 clarth.skirmisher.3 g:-/- a:- m:Opening=42
+S 95 clarth.marksman.2 g:-/- a:camp.11.alpha.alphahunt.alpha.1:26 m:-
+S 95 camp.11.alpha.alphahunt.alpha.1 g:camp.11.alpha.alphahunt.alpha.captain/- a:- m:Stasis=162
+S 95 camp.11.alpha.alphahunt.alpha.2 g:-/- a:- m:Bleed=114,Opening=54
+S 95 camp.11.alpha.alphahunt.alpha.4 g:-/- a:- m:Exposed=116
+S 95 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:Bleed=109
+S 96 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 96 clarth.skirmisher.3 g:-/- a:- m:Opening=41
+S 96 clarth.marksman.2 g:-/- a:camp.11.alpha.alphahunt.alpha.1:25 m:-
+S 96 camp.11.alpha.alphahunt.alpha.1 g:camp.11.alpha.alphahunt.alpha.captain/- a:- m:Stasis=161
+S 96 camp.11.alpha.alphahunt.alpha.2 g:-/- a:- m:Bleed=113,Opening=53
+S 96 camp.11.alpha.alphahunt.alpha.4 g:-/- a:- m:Exposed=115
+S 96 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:Bleed=108
+S 97 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 97 clarth.skirmisher.3 g:-/- a:- m:Opening=40
+S 97 clarth.marksman.2 g:-/- a:camp.11.alpha.alphahunt.alpha.1:24 m:-
+S 97 camp.11.alpha.alphahunt.alpha.1 g:camp.11.alpha.alphahunt.alpha.captain/- a:- m:Stasis=160
+S 97 camp.11.alpha.alphahunt.alpha.2 g:-/- a:- m:Bleed=112,Opening=52
+S 97 camp.11.alpha.alphahunt.alpha.4 g:-/- a:- m:Exposed=114
+S 97 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:Bleed=107
+S 98 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 98 clarth.skirmisher.3 g:-/- a:- m:Opening=39
+S 98 clarth.marksman.2 g:-/- a:camp.11.alpha.alphahunt.alpha.1:23 m:-
+S 98 camp.11.alpha.alphahunt.alpha.1 g:camp.11.alpha.alphahunt.alpha.captain/- a:- m:Stasis=159
+S 98 camp.11.alpha.alphahunt.alpha.2 g:-/- a:- m:Bleed=111,Opening=51
+S 98 camp.11.alpha.alphahunt.alpha.4 g:-/- a:- m:Exposed=113
+S 98 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:Bleed=106
+S 99 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 99 clarth.skirmisher.3 g:-/- a:- m:Opening=38
+S 99 clarth.marksman.2 g:-/- a:camp.11.alpha.alphahunt.alpha.1:22 m:-
+S 99 camp.11.alpha.alphahunt.alpha.1 g:camp.11.alpha.alphahunt.alpha.captain/- a:- m:Stasis=158
+S 99 camp.11.alpha.alphahunt.alpha.2 g:-/- a:- m:Bleed=110,Opening=50
+S 99 camp.11.alpha.alphahunt.alpha.4 g:-/- a:- m:Exposed=112
+S 99 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:Bleed=105
+S 100 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 100 clarth.skirmisher.3 g:-/- a:- m:Opening=37
+S 100 clarth.marksman.2 g:-/- a:camp.11.alpha.alphahunt.alpha.1:21 m:-
+S 100 camp.11.alpha.alphahunt.alpha.1 g:camp.11.alpha.alphahunt.alpha.captain/- a:- m:Stasis=157
+S 100 camp.11.alpha.alphahunt.alpha.2 g:-/- a:- m:Bleed=109,Opening=49
+S 100 camp.11.alpha.alphahunt.alpha.4 g:-/- a:- m:Exposed=111
+S 100 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:Bleed=104
+S 101 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 101 clarth.skirmisher.3 g:-/- a:- m:Opening=36
+S 101 clarth.marksman.2 g:-/- a:camp.11.alpha.alphahunt.alpha.1:20 m:-
+S 101 camp.11.alpha.alphahunt.alpha.1 g:camp.11.alpha.alphahunt.alpha.captain/- a:- m:Stasis=156
+S 101 camp.11.alpha.alphahunt.alpha.2 g:-/- a:- m:Bleed=108,Opening=48
+S 101 camp.11.alpha.alphahunt.alpha.4 g:-/- a:- m:Exposed=110
+S 101 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:Bleed=103
+S 102 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 102 clarth.skirmisher.3 g:-/- a:- m:Opening=35
+S 102 clarth.marksman.2 g:-/- a:camp.11.alpha.alphahunt.alpha.1:19 m:-
+S 102 camp.11.alpha.alphahunt.alpha.1 g:camp.11.alpha.alphahunt.alpha.captain/- a:- m:Stasis=155
+S 102 camp.11.alpha.alphahunt.alpha.2 g:-/- a:- m:Bleed=107,Opening=47
+S 102 camp.11.alpha.alphahunt.alpha.4 g:-/- a:- m:Exposed=109
+S 102 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:Bleed=102
+S 103 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 103 clarth.skirmisher.3 g:-/- a:- m:Opening=34
+S 103 clarth.marksman.2 g:-/- a:camp.11.alpha.alphahunt.alpha.1:18 m:-
+S 103 camp.11.alpha.alphahunt.alpha.1 g:camp.11.alpha.alphahunt.alpha.captain/- a:- m:Stasis=154
+S 103 camp.11.alpha.alphahunt.alpha.2 g:-/- a:- m:Bleed=106,Opening=46
+S 103 camp.11.alpha.alphahunt.alpha.4 g:-/- a:- m:Exposed=108
+S 103 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:Bleed=101
+S 104 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 104 clarth.skirmisher.3 g:-/- a:- m:Opening=33
+S 104 clarth.marksman.2 g:-/- a:camp.11.alpha.alphahunt.alpha.1:17 m:-
+S 104 camp.11.alpha.alphahunt.alpha.1 g:camp.11.alpha.alphahunt.alpha.captain/- a:- m:Stasis=153
+S 104 camp.11.alpha.alphahunt.alpha.2 g:-/- a:- m:Bleed=105,Opening=45
+S 104 camp.11.alpha.alphahunt.alpha.4 g:-/- a:- m:Exposed=107
+S 104 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:Bleed=100
+S 105 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 105 clarth.skirmisher.3 g:-/- a:- m:Opening=32
+S 105 clarth.marksman.2 g:-/- a:camp.11.alpha.alphahunt.alpha.1:16 m:-
+S 105 camp.11.alpha.alphahunt.alpha.1 g:camp.11.alpha.alphahunt.alpha.captain/- a:- m:Stasis=152
+S 105 camp.11.alpha.alphahunt.alpha.2 g:-/- a:- m:Bleed=104,Opening=44
+S 105 camp.11.alpha.alphahunt.alpha.4 g:-/- a:- m:Exposed=106
+S 105 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:Bleed=99
+S 106 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 106 clarth.skirmisher.3 g:-/- a:- m:Opening=31
+S 106 clarth.marksman.2 g:-/- a:camp.11.alpha.alphahunt.alpha.1:15 m:-
+S 106 camp.11.alpha.alphahunt.alpha.1 g:camp.11.alpha.alphahunt.alpha.captain/- a:- m:Stasis=151
+S 106 camp.11.alpha.alphahunt.alpha.2 g:-/- a:- m:Bleed=103,Opening=43
+S 106 camp.11.alpha.alphahunt.alpha.4 g:-/- a:- m:Exposed=105
+S 106 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:Bleed=98
+S 107 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 107 clarth.skirmisher.3 g:-/- a:- m:Opening=30
+S 107 clarth.marksman.2 g:-/- a:camp.11.alpha.alphahunt.alpha.1:14 m:-
+S 107 camp.11.alpha.alphahunt.alpha.1 g:camp.11.alpha.alphahunt.alpha.captain/- a:- m:Stasis=150
+S 107 camp.11.alpha.alphahunt.alpha.2 g:-/- a:- m:Bleed=102,Opening=42
+S 107 camp.11.alpha.alphahunt.alpha.4 g:-/- a:- m:Exposed=104
+S 107 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:Bleed=97
+S 108 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 108 clarth.skirmisher.3 g:-/- a:- m:Opening=29
+S 108 clarth.marksman.2 g:-/- a:camp.11.alpha.alphahunt.alpha.1:13 m:-
+S 108 camp.11.alpha.alphahunt.alpha.2 g:-/- a:- m:Panic=89,Bleed=101,Opening=41
+S 108 camp.11.alpha.alphahunt.alpha.4 g:-/- a:- m:Exposed=103
+S 108 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:Bleed=96
+S 109 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 109 clarth.skirmisher.3 g:-/- a:- m:Opening=28
+S 109 clarth.marksman.2 g:-/- a:camp.11.alpha.alphahunt.alpha.1:12 m:-
+S 109 camp.11.alpha.alphahunt.alpha.2 g:-/- a:- m:Panic=88,Bleed=100,Opening=40
+S 109 camp.11.alpha.alphahunt.alpha.4 g:-/- a:- m:Exposed=102
+S 109 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:Bleed=95
+S 110 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 110 clarth.skirmisher.3 g:-/- a:- m:Opening=27
+S 110 clarth.marksman.2 g:-/- a:camp.11.alpha.alphahunt.alpha.1:11 m:-
+S 110 camp.11.alpha.alphahunt.alpha.2 g:-/- a:- m:Panic=87,Bleed=99,Opening=39
+S 110 camp.11.alpha.alphahunt.alpha.4 g:-/- a:- m:Exposed=101
+S 110 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:Bleed=94
+S 111 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 111 clarth.skirmisher.3 g:-/- a:- m:Opening=26
+S 111 clarth.marksman.2 g:-/- a:camp.11.alpha.alphahunt.alpha.1:10 m:-
+S 111 camp.11.alpha.alphahunt.alpha.2 g:-/- a:- m:Panic=86,Bleed=98,Opening=38
+S 111 camp.11.alpha.alphahunt.alpha.4 g:-/- a:- m:Exposed=100
+S 111 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:Bleed=93
+S 112 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 112 clarth.skirmisher.3 g:-/- a:- m:Opening=25
+S 112 clarth.marksman.2 g:-/- a:camp.11.alpha.alphahunt.alpha.1:9 m:-
+S 112 camp.11.alpha.alphahunt.alpha.2 g:-/- a:- m:Panic=85,Bleed=97,Opening=37
+S 112 camp.11.alpha.alphahunt.alpha.4 g:-/- a:- m:Exposed=99
+S 112 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:Bleed=92
+S 113 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 113 clarth.skirmisher.3 g:-/- a:- m:Opening=24
+S 113 clarth.marksman.2 g:-/- a:camp.11.alpha.alphahunt.alpha.1:8 m:-
+S 113 camp.11.alpha.alphahunt.alpha.2 g:-/- a:- m:Panic=84,Bleed=96,Opening=36
+S 113 camp.11.alpha.alphahunt.alpha.4 g:-/- a:- m:Exposed=98
+S 113 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:Bleed=91
+S 114 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 114 clarth.skirmisher.3 g:-/- a:- m:Opening=23
+S 114 clarth.marksman.2 g:-/- a:camp.11.alpha.alphahunt.alpha.1:7 m:-
+S 114 camp.11.alpha.alphahunt.alpha.2 g:-/- a:- m:Panic=83,Bleed=95,Opening=35
+S 114 camp.11.alpha.alphahunt.alpha.4 g:-/- a:- m:Exposed=97
+S 114 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:Bleed=90
+S 115 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 115 clarth.skirmisher.3 g:-/- a:- m:Opening=22
+S 115 clarth.marksman.2 g:-/- a:camp.11.alpha.alphahunt.alpha.1:6 m:-
+S 115 camp.11.alpha.alphahunt.alpha.2 g:-/- a:- m:Panic=82,Bleed=94,Opening=34
+S 115 camp.11.alpha.alphahunt.alpha.4 g:-/- a:- m:Exposed=96
+S 115 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:Bleed=89
+S 116 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 116 clarth.skirmisher.3 g:-/- a:- m:Opening=21
+S 116 clarth.marksman.2 g:-/- a:camp.11.alpha.alphahunt.alpha.1:5 m:-
+S 116 camp.11.alpha.alphahunt.alpha.2 g:-/- a:- m:Panic=81,Bleed=93,Opening=33
+S 116 camp.11.alpha.alphahunt.alpha.4 g:-/- a:- m:Exposed=95
+S 116 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:Bleed=88
+S 117 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 117 clarth.skirmisher.3 g:-/- a:- m:Opening=20
+S 117 clarth.marksman.2 g:-/- a:camp.11.alpha.alphahunt.alpha.1:4 m:-
+S 117 camp.11.alpha.alphahunt.alpha.2 g:-/- a:- m:Panic=80,Bleed=92,Opening=32
+S 117 camp.11.alpha.alphahunt.alpha.4 g:-/- a:- m:Exposed=94
+S 117 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:Bleed=87
+S 118 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 118 clarth.skirmisher.3 g:-/- a:- m:Opening=19
+S 118 clarth.marksman.2 g:-/- a:camp.11.alpha.alphahunt.alpha.1:3 m:-
+S 118 camp.11.alpha.alphahunt.alpha.2 g:-/- a:- m:Panic=79,Bleed=91,Opening=31
+S 118 camp.11.alpha.alphahunt.alpha.4 g:-/- a:- m:Exposed=93
+S 118 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:Bleed=86
+S 119 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 119 clarth.skirmisher.3 g:-/- a:- m:Opening=18
+S 119 clarth.marksman.2 g:-/- a:camp.11.alpha.alphahunt.alpha.1:2 m:-
+S 119 camp.11.alpha.alphahunt.alpha.2 g:-/- a:- m:Panic=78,Bleed=90,Opening=30
+S 119 camp.11.alpha.alphahunt.alpha.4 g:-/- a:- m:Exposed=92
+S 119 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:Bleed=85
+S 120 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 120 clarth.skirmisher.3 g:-/- a:- m:Opening=17
+S 120 clarth.marksman.2 g:-/- a:camp.11.alpha.alphahunt.alpha.1:1 m:-
+S 120 camp.11.alpha.alphahunt.alpha.2 g:-/- a:- m:Panic=77,Bleed=89,Opening=29
+S 120 camp.11.alpha.alphahunt.alpha.4 g:-/- a:- m:Exposed=91
+S 120 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:Bleed=84
+S 121 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 121 clarth.skirmisher.3 g:-/- a:- m:Opening=16
+S 121 camp.11.alpha.alphahunt.alpha.0 g:-/- a:- m:Opening=89,Exposed=179
+S 121 camp.11.alpha.alphahunt.alpha.2 g:-/- a:- m:Panic=76,Bleed=88,Opening=28
+S 121 camp.11.alpha.alphahunt.alpha.4 g:-/- a:- m:Exposed=90
+S 121 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:Bleed=83
+S 122 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 122 clarth.skirmisher.3 g:-/- a:- m:Opening=15
+S 122 camp.11.alpha.alphahunt.alpha.0 g:-/- a:- m:Opening=88,Exposed=178
+S 122 camp.11.alpha.alphahunt.alpha.2 g:-/- a:- m:Panic=75,Bleed=87,Opening=27
+S 122 camp.11.alpha.alphahunt.alpha.4 g:-/- a:- m:Exposed=89
+S 122 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:Bleed=82
+S 123 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 123 clarth.skirmisher.3 g:-/- a:- m:Opening=14
+S 123 camp.11.alpha.alphahunt.alpha.0 g:-/- a:- m:Opening=87,Exposed=177
+S 123 camp.11.alpha.alphahunt.alpha.2 g:-/- a:- m:Panic=74,Bleed=86,Opening=26
+S 123 camp.11.alpha.alphahunt.alpha.4 g:-/- a:- m:Exposed=88
+S 123 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:Bleed=81
+S 124 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 124 clarth.skirmisher.3 g:-/- a:- m:Opening=13
+S 124 camp.11.alpha.alphahunt.alpha.0 g:-/- a:- m:Opening=86,Exposed=176
+S 124 camp.11.alpha.alphahunt.alpha.2 g:-/- a:- m:Panic=73,Bleed=85,Opening=25
+S 124 camp.11.alpha.alphahunt.alpha.4 g:-/- a:- m:Exposed=87
+S 124 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:Bleed=80
+S 125 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 125 clarth.skirmisher.3 g:-/- a:- m:Opening=12
+S 125 camp.11.alpha.alphahunt.alpha.0 g:-/- a:- m:Opening=85,Exposed=175
+S 125 camp.11.alpha.alphahunt.alpha.2 g:-/- a:- m:Panic=72,Bleed=84,Opening=24
+S 125 camp.11.alpha.alphahunt.alpha.4 g:-/- a:- m:Exposed=86
+S 125 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:Bleed=79
+S 126 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 126 clarth.skirmisher.3 g:-/- a:- m:Opening=11
+S 126 camp.11.alpha.alphahunt.alpha.0 g:-/- a:- m:Opening=84,Exposed=174
+S 126 camp.11.alpha.alphahunt.alpha.2 g:-/- a:- m:Panic=71,Bleed=83,Opening=23
+S 126 camp.11.alpha.alphahunt.alpha.4 g:-/- a:- m:Exposed=85
+S 126 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:Bleed=78
+S 127 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 127 clarth.skirmisher.3 g:-/- a:- m:Opening=10
+S 127 camp.11.alpha.alphahunt.alpha.0 g:-/- a:- m:Opening=83,Exposed=173
+S 127 camp.11.alpha.alphahunt.alpha.2 g:-/- a:- m:Panic=70,Bleed=82,Opening=22
+S 127 camp.11.alpha.alphahunt.alpha.4 g:-/- a:- m:Exposed=84
+S 127 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:Bleed=77
+S 128 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 128 clarth.skirmisher.3 g:-/- a:- m:Opening=9
+S 128 camp.11.alpha.alphahunt.alpha.0 g:-/- a:- m:Opening=82,Exposed=172
+S 128 camp.11.alpha.alphahunt.alpha.2 g:-/- a:- m:Panic=69,Bleed=81,Opening=21
+S 128 camp.11.alpha.alphahunt.alpha.4 g:-/- a:- m:Exposed=83
+S 128 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:Bleed=76
+S 129 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 129 clarth.skirmisher.3 g:-/- a:- m:Opening=8
+S 129 camp.11.alpha.alphahunt.alpha.0 g:-/- a:- m:Opening=81,Exposed=171
+S 129 camp.11.alpha.alphahunt.alpha.2 g:-/- a:- m:Panic=68,Bleed=80,Opening=20
+S 129 camp.11.alpha.alphahunt.alpha.4 g:-/- a:- m:Exposed=82
+S 129 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:Bleed=75
+S 130 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 130 clarth.skirmisher.3 g:-/- a:- m:Opening=7
+S 130 camp.11.alpha.alphahunt.alpha.0 g:-/- a:- m:Opening=80,Exposed=170
+S 130 camp.11.alpha.alphahunt.alpha.2 g:-/- a:- m:Panic=67,Bleed=79,Opening=19
+S 130 camp.11.alpha.alphahunt.alpha.4 g:-/- a:- m:Exposed=81
+S 130 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:Bleed=74
+S 131 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 131 clarth.skirmisher.3 g:-/- a:- m:Opening=6
+S 131 camp.11.alpha.alphahunt.alpha.0 g:-/- a:- m:Opening=79,Exposed=169
+S 131 camp.11.alpha.alphahunt.alpha.2 g:-/- a:- m:Panic=66,Bleed=78,Opening=18
+S 131 camp.11.alpha.alphahunt.alpha.4 g:-/- a:- m:Exposed=80
+S 131 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:Bleed=73
+S 132 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 132 clarth.skirmisher.3 g:-/- a:- m:Opening=5
+S 132 camp.11.alpha.alphahunt.alpha.0 g:-/- a:- m:Opening=78,Exposed=168
+S 132 camp.11.alpha.alphahunt.alpha.2 g:-/- a:- m:Panic=65,Bleed=77,Opening=17
+S 132 camp.11.alpha.alphahunt.alpha.4 g:-/- a:- m:Exposed=79
+S 132 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:Bleed=72
+S 133 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 133 clarth.skirmisher.3 g:-/- a:- m:Opening=4
+S 133 camp.11.alpha.alphahunt.alpha.0 g:-/- a:- m:Opening=77,Exposed=167
+S 133 camp.11.alpha.alphahunt.alpha.2 g:-/- a:- m:Panic=64,Bleed=76,Opening=16
+S 133 camp.11.alpha.alphahunt.alpha.4 g:-/- a:- m:Exposed=78
+S 133 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:Bleed=71
+S 134 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 134 clarth.skirmisher.3 g:-/- a:- m:Opening=3
+S 134 camp.11.alpha.alphahunt.alpha.0 g:-/- a:- m:Opening=76,Exposed=166
+S 134 camp.11.alpha.alphahunt.alpha.2 g:-/- a:- m:Panic=63,Bleed=75,Opening=15
+S 134 camp.11.alpha.alphahunt.alpha.4 g:-/- a:- m:Exposed=77
+S 134 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:Bleed=70
+S 135 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 135 clarth.skirmisher.3 g:-/- a:- m:Opening=2
+S 135 camp.11.alpha.alphahunt.alpha.0 g:-/- a:- m:Opening=75,Exposed=165
+S 135 camp.11.alpha.alphahunt.alpha.2 g:-/- a:- m:Panic=62,Bleed=74,Opening=14
+S 135 camp.11.alpha.alphahunt.alpha.4 g:-/- a:- m:Exposed=76
+S 135 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:Bleed=69
+S 136 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 136 clarth.skirmisher.3 g:-/- a:- m:Opening=1
+S 136 camp.11.alpha.alphahunt.alpha.0 g:-/- a:- m:Opening=74,Exposed=164
+S 136 camp.11.alpha.alphahunt.alpha.2 g:-/- a:- m:Panic=61,Bleed=73,Opening=13
+S 136 camp.11.alpha.alphahunt.alpha.4 g:-/- a:- m:Exposed=75
+S 136 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:Bleed=68
+S 137 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 137 camp.11.alpha.alphahunt.alpha.0 g:-/- a:- m:Opening=73,Exposed=163
+S 137 camp.11.alpha.alphahunt.alpha.2 g:-/- a:- m:Panic=60,Bleed=72,Opening=12
+S 137 camp.11.alpha.alphahunt.alpha.4 g:-/- a:- m:Exposed=74
+S 137 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:Bleed=67
+S 138 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 138 camp.11.alpha.alphahunt.alpha.0 g:-/- a:- m:Opening=72,Exposed=162
+S 138 camp.11.alpha.alphahunt.alpha.2 g:-/- a:- m:Panic=59,Bleed=71,Opening=11
+S 138 camp.11.alpha.alphahunt.alpha.4 g:-/- a:- m:Exposed=73
+S 138 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:Bleed=66
+S 139 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 139 camp.11.alpha.alphahunt.alpha.0 g:-/- a:- m:Opening=71,Exposed=161
+S 139 camp.11.alpha.alphahunt.alpha.2 g:-/- a:- m:Panic=58,Bleed=70,Opening=10
+S 139 camp.11.alpha.alphahunt.alpha.4 g:-/- a:- m:Exposed=72
+S 139 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:Bleed=65
+S 140 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 140 camp.11.alpha.alphahunt.alpha.0 g:-/- a:- m:Opening=70,Exposed=160
+S 140 camp.11.alpha.alphahunt.alpha.2 g:-/- a:- m:Panic=57,Bleed=69,Opening=9
+S 140 camp.11.alpha.alphahunt.alpha.4 g:-/- a:- m:Exposed=71
+S 140 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:Bleed=64
+S 141 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 141 camp.11.alpha.alphahunt.alpha.0 g:-/- a:- m:Opening=69,Exposed=159
+S 141 camp.11.alpha.alphahunt.alpha.2 g:-/- a:- m:Panic=56,Bleed=68,Opening=8
+S 141 camp.11.alpha.alphahunt.alpha.4 g:-/- a:- m:Exposed=70
+S 141 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:Bleed=63
+S 142 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 142 camp.11.alpha.alphahunt.alpha.0 g:-/- a:- m:Opening=68,Exposed=158
+S 142 camp.11.alpha.alphahunt.alpha.2 g:-/- a:- m:Panic=55,Bleed=67,Opening=7
+S 142 camp.11.alpha.alphahunt.alpha.4 g:-/- a:- m:Exposed=69
+S 142 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:Bleed=62
+S 143 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 143 camp.11.alpha.alphahunt.alpha.0 g:-/- a:- m:Opening=67,Exposed=157
+S 143 camp.11.alpha.alphahunt.alpha.2 g:-/- a:- m:Panic=54,Bleed=66,Opening=6
+S 143 camp.11.alpha.alphahunt.alpha.4 g:-/- a:- m:Exposed=68
+S 143 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:Bleed=61
+S 144 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 144 camp.11.alpha.alphahunt.alpha.0 g:-/- a:- m:Opening=66,Exposed=156
+S 144 camp.11.alpha.alphahunt.alpha.2 g:-/- a:- m:Panic=53,Bleed=65,Opening=5
+S 144 camp.11.alpha.alphahunt.alpha.4 g:-/- a:- m:Exposed=67
+S 144 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:Bleed=60
+S 145 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 145 camp.11.alpha.alphahunt.alpha.0 g:-/- a:- m:Opening=65,Exposed=155
+S 145 camp.11.alpha.alphahunt.alpha.2 g:-/- a:- m:Panic=52,Bleed=64,Opening=4
+S 145 camp.11.alpha.alphahunt.alpha.4 g:-/- a:- m:Exposed=66
+S 145 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:Bleed=59
+S 146 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 146 camp.11.alpha.alphahunt.alpha.0 g:-/- a:- m:Opening=64,Exposed=154
+S 146 camp.11.alpha.alphahunt.alpha.2 g:-/- a:- m:Panic=51,Bleed=63,Opening=3
+S 146 camp.11.alpha.alphahunt.alpha.4 g:-/- a:- m:Exposed=65
+S 146 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:Bleed=58
+S 147 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 147 camp.11.alpha.alphahunt.alpha.0 g:-/- a:- m:Opening=63,Exposed=153
+S 147 camp.11.alpha.alphahunt.alpha.2 g:-/- a:- m:Panic=50,Bleed=62,Opening=2
+S 147 camp.11.alpha.alphahunt.alpha.4 g:-/- a:- m:Exposed=64
+S 147 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:Bleed=57
+S 148 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 148 camp.11.alpha.alphahunt.alpha.0 g:-/- a:- m:Opening=62,Exposed=152
+S 148 camp.11.alpha.alphahunt.alpha.2 g:-/- a:- m:Panic=49,Bleed=61,Opening=1
+S 148 camp.11.alpha.alphahunt.alpha.4 g:-/- a:- m:Exposed=63
+S 148 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:Bleed=56
+S 149 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 149 camp.11.alpha.alphahunt.alpha.0 g:-/- a:- m:Opening=61,Exposed=151
+S 149 camp.11.alpha.alphahunt.alpha.2 g:-/- a:- m:Panic=48,Bleed=60
+S 149 camp.11.alpha.alphahunt.alpha.4 g:-/- a:- m:Exposed=62
+S 149 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:Bleed=55
+S 150 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 150 camp.11.alpha.alphahunt.alpha.0 g:-/- a:- m:Opening=60,Exposed=150
+S 150 camp.11.alpha.alphahunt.alpha.2 g:-/- a:- m:Panic=47,Bleed=59
+S 150 camp.11.alpha.alphahunt.alpha.4 g:-/- a:- m:Exposed=61
+S 150 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:Bleed=54
+S 151 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 151 camp.11.alpha.alphahunt.alpha.0 g:-/- a:- m:Opening=59,Exposed=149
+S 151 camp.11.alpha.alphahunt.alpha.2 g:-/- a:- m:Panic=46,Bleed=58
+S 151 camp.11.alpha.alphahunt.alpha.4 g:-/- a:- m:Exposed=60
+S 151 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:Bleed=53
+S 152 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 152 camp.11.alpha.alphahunt.alpha.0 g:-/- a:- m:Opening=58,Exposed=148
+S 152 camp.11.alpha.alphahunt.alpha.2 g:-/- a:- m:Panic=45,Bleed=57
+S 152 camp.11.alpha.alphahunt.alpha.4 g:-/- a:- m:Exposed=59
+S 152 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:Bleed=52
+S 153 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 153 camp.11.alpha.alphahunt.alpha.0 g:-/- a:- m:Opening=57,Exposed=147
+S 153 camp.11.alpha.alphahunt.alpha.2 g:-/- a:- m:Panic=44,Bleed=56
+S 153 camp.11.alpha.alphahunt.alpha.4 g:-/- a:- m:Exposed=58
+S 153 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:Bleed=51
+S 154 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 154 camp.11.alpha.alphahunt.alpha.0 g:-/- a:- m:Opening=56,Exposed=146
+S 154 camp.11.alpha.alphahunt.alpha.2 g:-/- a:- m:Panic=43,Bleed=55
+S 154 camp.11.alpha.alphahunt.alpha.4 g:-/- a:- m:Exposed=57
+S 154 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:Bleed=50
+S 155 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 155 camp.11.alpha.alphahunt.alpha.0 g:-/- a:- m:Opening=55,Exposed=145
+S 155 camp.11.alpha.alphahunt.alpha.2 g:-/- a:- m:Panic=42,Bleed=54
+S 155 camp.11.alpha.alphahunt.alpha.4 g:-/- a:- m:Exposed=56
+S 155 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:Bleed=49
+S 156 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 156 camp.11.alpha.alphahunt.alpha.0 g:-/- a:- m:Opening=54,Exposed=144
+S 156 camp.11.alpha.alphahunt.alpha.2 g:-/- a:- m:Panic=41,Bleed=53
+S 156 camp.11.alpha.alphahunt.alpha.4 g:-/- a:- m:Exposed=55
+S 156 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:Bleed=48
+S 157 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 157 camp.11.alpha.alphahunt.alpha.0 g:-/- a:- m:Opening=53,Exposed=143
+S 157 camp.11.alpha.alphahunt.alpha.2 g:-/- a:- m:Panic=40,Bleed=52
+S 157 camp.11.alpha.alphahunt.alpha.4 g:-/- a:- m:Exposed=54
+S 157 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:Bleed=47
+S 158 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 158 camp.11.alpha.alphahunt.alpha.0 g:-/- a:- m:Opening=52,Exposed=142
+S 158 camp.11.alpha.alphahunt.alpha.2 g:-/- a:- m:Panic=39,Bleed=51
+S 158 camp.11.alpha.alphahunt.alpha.4 g:-/- a:- m:Exposed=53
+S 158 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:Bleed=46
+S 159 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 159 camp.11.alpha.alphahunt.alpha.0 g:-/- a:- m:Opening=51,Exposed=141
+S 159 camp.11.alpha.alphahunt.alpha.2 g:-/- a:- m:Panic=38,Bleed=50
+S 159 camp.11.alpha.alphahunt.alpha.4 g:-/- a:- m:Exposed=52
+S 159 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:Bleed=45
+S 160 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 160 camp.11.alpha.alphahunt.alpha.0 g:-/- a:- m:Opening=50,Exposed=140
+S 160 camp.11.alpha.alphahunt.alpha.2 g:-/- a:- m:Panic=37,Bleed=49
+S 160 camp.11.alpha.alphahunt.alpha.4 g:-/- a:- m:Exposed=51
+S 160 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:Bleed=44
+S 161 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 161 camp.11.alpha.alphahunt.alpha.0 g:-/- a:- m:Opening=49,Exposed=139
+S 161 camp.11.alpha.alphahunt.alpha.2 g:-/- a:- m:Panic=36,Bleed=48
+S 161 camp.11.alpha.alphahunt.alpha.4 g:-/- a:- m:Exposed=50
+S 161 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:Bleed=43
+S 162 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 162 camp.11.alpha.alphahunt.alpha.0 g:-/- a:- m:Opening=48,Exposed=138
+S 162 camp.11.alpha.alphahunt.alpha.2 g:-/- a:- m:Panic=35,Bleed=47
+S 162 camp.11.alpha.alphahunt.alpha.4 g:-/- a:- m:Exposed=49
+S 162 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:Bleed=42
+S 163 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 163 camp.11.alpha.alphahunt.alpha.0 g:-/- a:- m:Opening=47,Exposed=137
+S 163 camp.11.alpha.alphahunt.alpha.2 g:-/- a:- m:Panic=34,Bleed=46
+S 163 camp.11.alpha.alphahunt.alpha.4 g:-/- a:- m:Exposed=48
+S 163 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:Bleed=41
+S 164 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 164 camp.11.alpha.alphahunt.alpha.0 g:-/- a:- m:Opening=46,Exposed=136
+S 164 camp.11.alpha.alphahunt.alpha.2 g:-/- a:- m:Panic=33,Bleed=45
+S 164 camp.11.alpha.alphahunt.alpha.4 g:-/- a:- m:Exposed=47
+S 164 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:Bleed=40
+S 165 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 165 camp.11.alpha.alphahunt.alpha.0 g:-/- a:- m:Opening=45,Exposed=135
+S 165 camp.11.alpha.alphahunt.alpha.2 g:-/- a:- m:Panic=32,Bleed=44
+S 165 camp.11.alpha.alphahunt.alpha.4 g:-/- a:- m:Exposed=46
+S 165 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:Bleed=39
+S 166 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 166 camp.11.alpha.alphahunt.alpha.0 g:-/- a:- m:Panic=89,Opening=44,Exposed=134
+S 166 camp.11.alpha.alphahunt.alpha.2 g:-/- a:- m:Panic=31,Bleed=43
+S 166 camp.11.alpha.alphahunt.alpha.4 g:-/- a:- m:Exposed=45
+S 166 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:Bleed=38
+S 167 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 167 camp.11.alpha.alphahunt.alpha.0 g:-/- a:- m:Panic=88,Opening=43,Exposed=133
+S 167 camp.11.alpha.alphahunt.alpha.2 g:-/- a:- m:Panic=30,Bleed=42
+S 167 camp.11.alpha.alphahunt.alpha.4 g:-/- a:- m:Exposed=44
+S 167 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:Bleed=37
+S 168 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 168 camp.11.alpha.alphahunt.alpha.0 g:-/- a:- m:Panic=87,Opening=42,Exposed=132
+S 168 camp.11.alpha.alphahunt.alpha.2 g:-/- a:- m:Panic=29,Bleed=41
+S 168 camp.11.alpha.alphahunt.alpha.4 g:-/- a:- m:Exposed=43
+S 168 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:Bleed=36
+S 169 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 169 camp.11.alpha.alphahunt.alpha.0 g:-/- a:- m:Panic=86,Opening=41,Exposed=131
+S 169 camp.11.alpha.alphahunt.alpha.2 g:-/- a:- m:Panic=28,Bleed=40
+S 169 camp.11.alpha.alphahunt.alpha.4 g:-/- a:- m:Exposed=42
+S 169 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:Bleed=35
+S 170 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 170 camp.11.alpha.alphahunt.alpha.0 g:-/- a:- m:Panic=85,Opening=40,Exposed=130
+S 170 camp.11.alpha.alphahunt.alpha.2 g:-/- a:- m:Panic=27,Bleed=39
+S 170 camp.11.alpha.alphahunt.alpha.4 g:-/- a:- m:Exposed=41
+S 170 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:Bleed=34
+S 171 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 171 camp.11.alpha.alphahunt.alpha.0 g:-/- a:- m:Panic=84,Opening=39,Exposed=129
+S 171 camp.11.alpha.alphahunt.alpha.2 g:-/- a:- m:Panic=26,Bleed=38
+S 171 camp.11.alpha.alphahunt.alpha.4 g:-/- a:- m:Exposed=40
+S 171 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:Bleed=33
+S 172 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 172 camp.11.alpha.alphahunt.alpha.0 g:-/- a:- m:Panic=83,Opening=38,Exposed=128
+S 172 camp.11.alpha.alphahunt.alpha.2 g:-/- a:- m:Panic=25,Bleed=37
+S 172 camp.11.alpha.alphahunt.alpha.4 g:-/- a:- m:Exposed=39
+S 172 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:Bleed=32
+S 173 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 173 camp.11.alpha.alphahunt.alpha.0 g:-/- a:- m:Panic=82,Opening=37,Exposed=127
+S 173 camp.11.alpha.alphahunt.alpha.2 g:-/- a:- m:Panic=24,Bleed=36
+S 173 camp.11.alpha.alphahunt.alpha.4 g:-/- a:- m:Exposed=38
+S 173 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:Bleed=31
+S 174 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 174 camp.11.alpha.alphahunt.alpha.0 g:-/- a:- m:Panic=81,Opening=36,Exposed=126
+S 174 camp.11.alpha.alphahunt.alpha.2 g:-/- a:- m:Panic=23,Bleed=35
+S 174 camp.11.alpha.alphahunt.alpha.4 g:-/- a:- m:Exposed=37
+S 174 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:Bleed=30
+S 175 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 175 camp.11.alpha.alphahunt.alpha.0 g:-/- a:- m:Panic=80,Opening=35,Exposed=125
+S 175 camp.11.alpha.alphahunt.alpha.2 g:-/- a:- m:Panic=22,Bleed=34
+S 175 camp.11.alpha.alphahunt.alpha.4 g:-/- a:- m:Exposed=36
+S 175 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:Bleed=29
+S 176 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 176 camp.11.alpha.alphahunt.alpha.0 g:-/- a:- m:Panic=79,Opening=34,Exposed=124
+S 176 camp.11.alpha.alphahunt.alpha.2 g:-/- a:- m:Panic=21,Bleed=33
+S 176 camp.11.alpha.alphahunt.alpha.4 g:-/- a:- m:Exposed=35
+S 176 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:Bleed=28
+S 177 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 177 camp.11.alpha.alphahunt.alpha.0 g:-/- a:- m:Panic=78,Opening=33,Exposed=123
+S 177 camp.11.alpha.alphahunt.alpha.2 g:-/- a:- m:Panic=20,Bleed=32
+S 177 camp.11.alpha.alphahunt.alpha.4 g:-/- a:- m:Exposed=34
+S 177 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:Bleed=27
+S 178 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 178 camp.11.alpha.alphahunt.alpha.0 g:-/- a:- m:Panic=77,Opening=32,Exposed=122
+S 178 camp.11.alpha.alphahunt.alpha.2 g:-/- a:- m:Panic=19,Bleed=31
+S 178 camp.11.alpha.alphahunt.alpha.4 g:-/- a:- m:Exposed=33
+S 178 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:Bleed=26
+S 179 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 179 camp.11.alpha.alphahunt.alpha.0 g:-/- a:- m:Panic=76,Opening=31,Exposed=121
+S 179 camp.11.alpha.alphahunt.alpha.2 g:-/- a:- m:Panic=18,Bleed=30
+S 179 camp.11.alpha.alphahunt.alpha.4 g:-/- a:- m:Exposed=32
+S 179 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:Bleed=25
+S 180 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 180 camp.11.alpha.alphahunt.alpha.0 g:-/- a:- m:Panic=75,Opening=30,Exposed=120
+S 180 camp.11.alpha.alphahunt.alpha.2 g:-/- a:- m:Panic=17,Bleed=29
+S 180 camp.11.alpha.alphahunt.alpha.4 g:-/- a:- m:Exposed=31
+S 180 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:Bleed=24
+S 181 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 181 camp.11.alpha.alphahunt.alpha.0 g:-/- a:- m:Panic=74,Opening=29,Exposed=119
+S 181 camp.11.alpha.alphahunt.alpha.2 g:-/- a:- m:Panic=16,Bleed=28
+S 181 camp.11.alpha.alphahunt.alpha.4 g:-/- a:- m:Exposed=30
+S 181 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:Bleed=23
+S 182 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 182 camp.11.alpha.alphahunt.alpha.0 g:-/- a:- m:Panic=73,Opening=28,Exposed=118
+S 182 camp.11.alpha.alphahunt.alpha.2 g:-/- a:- m:Panic=15,Bleed=27
+S 182 camp.11.alpha.alphahunt.alpha.4 g:-/- a:- m:Exposed=29
+S 182 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:Bleed=22
+S 183 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 183 camp.11.alpha.alphahunt.alpha.0 g:-/- a:- m:Panic=72,Opening=27,Exposed=117
+S 183 camp.11.alpha.alphahunt.alpha.2 g:-/- a:- m:Panic=14,Bleed=26
+S 183 camp.11.alpha.alphahunt.alpha.4 g:-/- a:- m:Exposed=28
+S 183 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:Bleed=21
+S 184 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 184 camp.11.alpha.alphahunt.alpha.0 g:-/- a:- m:Panic=71,Opening=26,Exposed=116
+S 184 camp.11.alpha.alphahunt.alpha.2 g:-/- a:- m:Panic=13,Bleed=25
+S 184 camp.11.alpha.alphahunt.alpha.4 g:-/- a:- m:Exposed=27
+S 184 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:Bleed=20
+S 185 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 185 camp.11.alpha.alphahunt.alpha.0 g:-/- a:- m:Panic=70,Opening=25,Exposed=115
+S 185 camp.11.alpha.alphahunt.alpha.2 g:-/- a:- m:Panic=12,Bleed=24
+S 185 camp.11.alpha.alphahunt.alpha.4 g:-/- a:- m:Exposed=26
+S 185 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:Bleed=19
+S 186 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 186 camp.11.alpha.alphahunt.alpha.0 g:-/- a:- m:Panic=69,Opening=24,Exposed=114
+S 186 camp.11.alpha.alphahunt.alpha.2 g:-/- a:- m:Panic=11,Bleed=23
+S 186 camp.11.alpha.alphahunt.alpha.4 g:-/- a:- m:Exposed=25
+S 186 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:Bleed=18
+S 187 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 187 camp.11.alpha.alphahunt.alpha.0 g:-/- a:- m:Panic=68,Opening=23,Exposed=113
+S 187 camp.11.alpha.alphahunt.alpha.2 g:-/- a:- m:Panic=10,Bleed=22
+S 187 camp.11.alpha.alphahunt.alpha.4 g:-/- a:- m:Exposed=24
+S 187 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:Bleed=17
+S 188 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 188 camp.11.alpha.alphahunt.alpha.0 g:-/- a:- m:Panic=67,Opening=22,Exposed=112
+S 188 camp.11.alpha.alphahunt.alpha.2 g:-/- a:- m:Panic=9,Bleed=21
+S 188 camp.11.alpha.alphahunt.alpha.4 g:-/- a:- m:Exposed=23
+S 188 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:Bleed=16
+S 189 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 189 camp.11.alpha.alphahunt.alpha.0 g:-/- a:- m:Panic=66,Opening=21,Exposed=111
+S 189 camp.11.alpha.alphahunt.alpha.2 g:-/- a:- m:Panic=8,Bleed=20
+S 189 camp.11.alpha.alphahunt.alpha.4 g:-/- a:- m:Exposed=22
+S 189 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:Bleed=15
+S 190 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 190 camp.11.alpha.alphahunt.alpha.0 g:-/- a:- m:Panic=65,Opening=20,Exposed=110
+S 190 camp.11.alpha.alphahunt.alpha.2 g:-/- a:- m:Panic=7,Bleed=19
+S 190 camp.11.alpha.alphahunt.alpha.4 g:-/- a:- m:Exposed=21
+S 190 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:Bleed=14
+S 191 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 191 camp.11.alpha.alphahunt.alpha.0 g:-/- a:- m:Panic=64,Opening=19,Exposed=109
+S 191 camp.11.alpha.alphahunt.alpha.2 g:-/- a:- m:Panic=6,Bleed=18
+S 191 camp.11.alpha.alphahunt.alpha.4 g:-/- a:- m:Exposed=20
+S 191 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:Bleed=13
+S 192 clarth.warden.1 g:clarth.medic.5/- a:- m:Bleed=149,Snare=59
+S 192 camp.11.alpha.alphahunt.alpha.0 g:-/- a:- m:Panic=63,Opening=18,Exposed=108
+S 192 camp.11.alpha.alphahunt.alpha.2 g:-/- a:- m:Panic=5,Bleed=17
+S 192 camp.11.alpha.alphahunt.alpha.3 g:-/- a:clarth.warden.1:22 m:-
+S 192 camp.11.alpha.alphahunt.alpha.4 g:-/- a:- m:Exposed=19
+S 192 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:Bleed=12
+S 193 clarth.warden.1 g:clarth.medic.5/- a:- m:Bleed=148,Snare=58
+S 193 camp.11.alpha.alphahunt.alpha.0 g:-/- a:- m:Panic=62,Opening=17,Exposed=107
+S 193 camp.11.alpha.alphahunt.alpha.2 g:-/- a:- m:Panic=4,Bleed=16
+S 193 camp.11.alpha.alphahunt.alpha.3 g:-/- a:clarth.warden.1:21 m:-
+S 193 camp.11.alpha.alphahunt.alpha.4 g:-/- a:- m:Exposed=18
+S 193 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:Bleed=11
+S 194 clarth.warden.1 g:clarth.medic.5/- a:- m:Bleed=147,Snare=57
+S 194 camp.11.alpha.alphahunt.alpha.0 g:-/- a:- m:Panic=61,Opening=16,Exposed=106
+S 194 camp.11.alpha.alphahunt.alpha.2 g:-/- a:- m:Panic=3,Bleed=15
+S 194 camp.11.alpha.alphahunt.alpha.3 g:-/- a:clarth.warden.1:20 m:-
+S 194 camp.11.alpha.alphahunt.alpha.4 g:-/- a:- m:Exposed=17
+S 194 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:Bleed=10
+S 195 clarth.warden.1 g:clarth.medic.5/- a:- m:Bleed=146,Snare=56
+S 195 camp.11.alpha.alphahunt.alpha.0 g:-/- a:- m:Panic=60,Opening=15,Exposed=105
+S 195 camp.11.alpha.alphahunt.alpha.2 g:-/- a:- m:Panic=2,Bleed=14
+S 195 camp.11.alpha.alphahunt.alpha.3 g:-/- a:clarth.warden.1:19 m:-
+S 195 camp.11.alpha.alphahunt.alpha.4 g:-/- a:- m:Exposed=16
+S 195 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:Bleed=9
+S 196 clarth.warden.1 g:clarth.medic.5/- a:- m:Bleed=145,Snare=55
+S 196 camp.11.alpha.alphahunt.alpha.0 g:-/- a:- m:Panic=59,Opening=14,Exposed=104
+S 196 camp.11.alpha.alphahunt.alpha.2 g:-/- a:- m:Panic=1,Bleed=13
+S 196 camp.11.alpha.alphahunt.alpha.3 g:-/- a:clarth.warden.1:18 m:-
+S 196 camp.11.alpha.alphahunt.alpha.4 g:-/- a:- m:Exposed=15
+S 196 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:Bleed=8
+S 197 clarth.warden.1 g:clarth.medic.5/- a:- m:Bleed=144,Snare=54
+S 197 camp.11.alpha.alphahunt.alpha.0 g:-/- a:- m:Panic=58,Opening=13,Exposed=103
+S 197 camp.11.alpha.alphahunt.alpha.2 g:-/- a:- m:Bleed=12
+S 197 camp.11.alpha.alphahunt.alpha.3 g:-/- a:clarth.warden.1:17 m:-
+S 197 camp.11.alpha.alphahunt.alpha.4 g:-/- a:- m:Exposed=14
+S 197 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:Bleed=7
+S 198 clarth.warden.1 g:clarth.medic.5/- a:- m:Bleed=143,Snare=53
+S 198 camp.11.alpha.alphahunt.alpha.0 g:-/- a:- m:Panic=57,Opening=12,Exposed=102
+S 198 camp.11.alpha.alphahunt.alpha.2 g:-/- a:- m:Bleed=11
+S 198 camp.11.alpha.alphahunt.alpha.3 g:-/- a:clarth.warden.1:16 m:-
+S 198 camp.11.alpha.alphahunt.alpha.4 g:-/- a:- m:Exposed=13
+S 198 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:Bleed=6
+S 199 clarth.warden.1 g:clarth.medic.5/- a:- m:Bleed=142,Snare=52
+S 199 camp.11.alpha.alphahunt.alpha.0 g:-/- a:- m:Panic=56,Opening=11,Exposed=101
+S 199 camp.11.alpha.alphahunt.alpha.2 g:-/- a:- m:Bleed=10
+S 199 camp.11.alpha.alphahunt.alpha.3 g:-/- a:clarth.warden.1:15 m:-
+S 199 camp.11.alpha.alphahunt.alpha.4 g:-/- a:- m:Exposed=12
+S 199 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:-
+S 200 clarth.warden.1 g:clarth.medic.5/- a:- m:Bleed=141,Snare=51
+S 200 camp.11.alpha.alphahunt.alpha.0 g:-/- a:- m:Panic=55,Opening=10,Exposed=100
+S 200 camp.11.alpha.alphahunt.alpha.2 g:-/- a:- m:Bleed=9
+S 200 camp.11.alpha.alphahunt.alpha.3 g:-/- a:clarth.warden.1:14 m:-
+S 200 camp.11.alpha.alphahunt.alpha.4 g:-/- a:- m:Exposed=11
+S 200 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:-
+S 201 clarth.warden.1 g:clarth.medic.5/- a:- m:Bleed=140,Snare=50
+S 201 camp.11.alpha.alphahunt.alpha.0 g:-/- a:- m:Panic=54,Opening=9,Exposed=99
+S 201 camp.11.alpha.alphahunt.alpha.2 g:-/- a:- m:Bleed=8
+S 201 camp.11.alpha.alphahunt.alpha.3 g:-/- a:clarth.warden.1:13 m:-
+S 201 camp.11.alpha.alphahunt.alpha.4 g:-/- a:- m:Exposed=10
+S 201 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:-
+S 202 clarth.warden.1 g:clarth.medic.5/- a:- m:Bleed=139,Snare=49
+S 202 camp.11.alpha.alphahunt.alpha.0 g:-/- a:- m:Panic=53,Opening=8,Exposed=98
+S 202 camp.11.alpha.alphahunt.alpha.2 g:-/- a:- m:Bleed=7
+S 202 camp.11.alpha.alphahunt.alpha.3 g:-/- a:clarth.warden.1:12 m:-
+S 202 camp.11.alpha.alphahunt.alpha.4 g:-/- a:- m:Exposed=9
+S 202 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:-
+S 203 clarth.warden.1 g:clarth.medic.5/- a:- m:Bleed=138,Snare=48
+S 203 camp.11.alpha.alphahunt.alpha.0 g:-/- a:- m:Panic=52,Opening=7,Exposed=97
+S 203 camp.11.alpha.alphahunt.alpha.2 g:-/- a:- m:Bleed=6
+S 203 camp.11.alpha.alphahunt.alpha.3 g:-/- a:clarth.warden.1:11 m:-
+S 203 camp.11.alpha.alphahunt.alpha.4 g:-/- a:- m:Exposed=8
+S 203 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:-
+S 204 clarth.warden.1 g:clarth.medic.5/- a:- m:Bleed=137,Snare=47
+S 204 camp.11.alpha.alphahunt.alpha.0 g:-/- a:- m:Panic=51,Opening=6,Exposed=96
+S 204 camp.11.alpha.alphahunt.alpha.2 g:-/- a:- m:Bleed=5
+S 204 camp.11.alpha.alphahunt.alpha.3 g:-/- a:clarth.warden.1:10 m:-
+S 204 camp.11.alpha.alphahunt.alpha.4 g:-/- a:- m:Exposed=7
+S 204 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:-
+S 205 clarth.warden.1 g:clarth.medic.5/- a:- m:Bleed=136,Snare=46
+S 205 camp.11.alpha.alphahunt.alpha.0 g:-/- a:- m:Panic=50,Opening=5,Exposed=95
+S 205 camp.11.alpha.alphahunt.alpha.2 g:-/- a:- m:Bleed=4
+S 205 camp.11.alpha.alphahunt.alpha.3 g:-/- a:clarth.warden.1:9 m:-
+S 205 camp.11.alpha.alphahunt.alpha.4 g:-/- a:- m:Exposed=6
+S 205 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:-
+S 206 clarth.warden.1 g:clarth.medic.5/- a:- m:Bleed=135,Snare=45
+S 206 camp.11.alpha.alphahunt.alpha.0 g:-/- a:- m:Panic=49,Opening=4,Exposed=94
+S 206 camp.11.alpha.alphahunt.alpha.2 g:-/- a:- m:Bleed=3
+S 206 camp.11.alpha.alphahunt.alpha.3 g:-/- a:clarth.warden.1:8 m:-
+S 206 camp.11.alpha.alphahunt.alpha.4 g:-/- a:- m:Exposed=5
+S 206 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:-
+S 207 clarth.warden.1 g:clarth.medic.5/- a:- m:Bleed=134,Snare=44
+S 207 camp.11.alpha.alphahunt.alpha.0 g:-/- a:- m:Panic=48,Opening=3,Exposed=93
+S 207 camp.11.alpha.alphahunt.alpha.2 g:-/- a:- m:Bleed=2
+S 207 camp.11.alpha.alphahunt.alpha.3 g:-/- a:clarth.warden.1:7 m:-
+S 207 camp.11.alpha.alphahunt.alpha.4 g:-/- a:- m:Exposed=4
+S 207 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:-
+S 208 clarth.warden.1 g:clarth.medic.5/- a:- m:Bleed=133,Snare=43
+S 208 camp.11.alpha.alphahunt.alpha.0 g:-/- a:- m:Panic=47,Opening=2,Exposed=92
+S 208 camp.11.alpha.alphahunt.alpha.2 g:-/- a:- m:Bleed=1
+S 208 camp.11.alpha.alphahunt.alpha.3 g:-/- a:clarth.warden.1:6 m:-
+S 208 camp.11.alpha.alphahunt.alpha.4 g:-/- a:- m:Exposed=3
+S 208 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:-
+S 209 clarth.warden.1 g:clarth.medic.5/- a:- m:Bleed=132,Snare=42
+S 209 camp.11.alpha.alphahunt.alpha.0 g:-/- a:- m:Panic=46,Opening=1,Exposed=91
+S 209 camp.11.alpha.alphahunt.alpha.3 g:-/- a:clarth.warden.1:5 m:-
+S 209 camp.11.alpha.alphahunt.alpha.4 g:-/- a:- m:Exposed=2
+S 209 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:-
+S 210 clarth.warden.1 g:clarth.medic.5/- a:- m:Bleed=131,Snare=41
+S 210 camp.11.alpha.alphahunt.alpha.0 g:-/- a:- m:Panic=45,Exposed=90
+S 210 camp.11.alpha.alphahunt.alpha.3 g:-/- a:clarth.warden.1:4 m:-
+S 210 camp.11.alpha.alphahunt.alpha.4 g:-/- a:- m:Exposed=1
+S 210 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:-
+S 211 clarth.warden.1 g:clarth.medic.5/- a:- m:Bleed=130,Snare=40
+S 211 camp.11.alpha.alphahunt.alpha.0 g:-/- a:- m:Panic=44,Exposed=89
+S 211 camp.11.alpha.alphahunt.alpha.3 g:-/- a:clarth.warden.1:3 m:-
+S 211 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:-
+S 212 clarth.warden.1 g:clarth.medic.5/- a:- m:Bleed=129,Snare=39
+S 212 camp.11.alpha.alphahunt.alpha.0 g:-/- a:- m:Panic=43,Exposed=88
+S 212 camp.11.alpha.alphahunt.alpha.3 g:-/- a:clarth.warden.1:2 m:-
+S 212 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:-
+S 213 clarth.warden.1 g:clarth.medic.5/- a:- m:Bleed=128,Snare=38
+S 213 camp.11.alpha.alphahunt.alpha.0 g:-/- a:- m:Panic=42,Exposed=87
+S 213 camp.11.alpha.alphahunt.alpha.3 g:-/- a:clarth.warden.1:1 m:-
+S 213 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:-
+S 214 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 214 camp.11.alpha.alphahunt.alpha.0 g:-/- a:- m:Panic=41,Exposed=86
+S 214 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:-
+S 215 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 215 camp.11.alpha.alphahunt.alpha.0 g:-/- a:- m:Panic=40,Exposed=85
+S 215 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:-
+S 216 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 216 camp.11.alpha.alphahunt.alpha.0 g:-/- a:- m:Panic=39,Exposed=84
+S 216 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:-
+S 217 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 217 camp.11.alpha.alphahunt.alpha.0 g:-/- a:- m:Panic=38,Exposed=83
+S 217 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:-
+S 218 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 218 camp.11.alpha.alphahunt.alpha.0 g:-/- a:- m:Panic=37,Exposed=82
+S 218 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:-
+S 219 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 219 camp.11.alpha.alphahunt.alpha.0 g:-/- a:- m:Panic=36,Exposed=81
+S 219 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:-
+S 220 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 220 camp.11.alpha.alphahunt.alpha.0 g:-/- a:- m:Panic=35,Exposed=80
+S 220 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:-
+S 221 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 221 camp.11.alpha.alphahunt.alpha.0 g:-/- a:- m:Panic=34,Exposed=79
+S 221 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:-
+S 222 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 222 camp.11.alpha.alphahunt.alpha.0 g:-/- a:- m:Panic=33,Exposed=78
+S 222 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:-
+S 223 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 223 camp.11.alpha.alphahunt.alpha.0 g:-/- a:- m:Panic=32,Exposed=77
+S 223 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:-
+S 224 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 224 camp.11.alpha.alphahunt.alpha.0 g:-/- a:- m:Panic=31,Exposed=76
+S 224 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:-
+S 225 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 225 camp.11.alpha.alphahunt.alpha.0 g:-/- a:- m:Panic=30,Exposed=75
+S 225 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:-
+S 226 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 226 camp.11.alpha.alphahunt.alpha.0 g:-/- a:- m:Panic=29,Exposed=74
+S 226 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:-
+S 227 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 227 camp.11.alpha.alphahunt.alpha.0 g:-/- a:- m:Panic=28,Exposed=73
+S 227 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:-
+S 228 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 228 camp.11.alpha.alphahunt.alpha.0 g:-/- a:- m:Panic=27,Exposed=72
+S 228 camp.11.alpha.alphahunt.alpha.2 g:-/- a:- m:Panic=89
+S 228 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:Bleed=149
+S 229 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 229 camp.11.alpha.alphahunt.alpha.0 g:-/- a:- m:Panic=26,Exposed=71
+S 229 camp.11.alpha.alphahunt.alpha.2 g:-/- a:- m:Panic=88
+S 229 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:Bleed=148
+S 230 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 230 camp.11.alpha.alphahunt.alpha.0 g:-/- a:- m:Panic=25,Exposed=70
+S 230 camp.11.alpha.alphahunt.alpha.2 g:-/- a:- m:Panic=87
+S 230 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:Bleed=147
+S 231 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 231 camp.11.alpha.alphahunt.alpha.0 g:-/- a:- m:Panic=24,Exposed=69
+S 231 camp.11.alpha.alphahunt.alpha.2 g:-/- a:- m:Panic=86
+S 231 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:Bleed=146
+S 232 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 232 camp.11.alpha.alphahunt.alpha.0 g:-/- a:- m:Panic=23,Exposed=68
+S 232 camp.11.alpha.alphahunt.alpha.2 g:-/- a:- m:Panic=85
+S 232 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:Bleed=145
+S 233 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 233 camp.11.alpha.alphahunt.alpha.0 g:-/- a:- m:Panic=22,Exposed=67
+S 233 camp.11.alpha.alphahunt.alpha.2 g:-/- a:- m:Panic=84
+S 233 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:Bleed=144
+S 234 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 234 camp.11.alpha.alphahunt.alpha.0 g:-/- a:- m:Panic=21,Exposed=66
+S 234 camp.11.alpha.alphahunt.alpha.2 g:-/- a:- m:Panic=83
+S 234 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:Bleed=143
+S 235 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 235 camp.11.alpha.alphahunt.alpha.0 g:-/- a:- m:Panic=20,Exposed=65
+S 235 camp.11.alpha.alphahunt.alpha.2 g:-/- a:- m:Panic=82
+S 235 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:Bleed=142
+S 236 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 236 camp.11.alpha.alphahunt.alpha.0 g:-/- a:- m:Panic=19,Exposed=64
+S 236 camp.11.alpha.alphahunt.alpha.2 g:-/- a:- m:Panic=81
+S 236 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:Bleed=141
+S 237 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 237 camp.11.alpha.alphahunt.alpha.0 g:-/- a:- m:Panic=18,Exposed=63
+S 237 camp.11.alpha.alphahunt.alpha.2 g:-/- a:- m:Panic=80
+S 237 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:Bleed=140
+S 238 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 238 camp.11.alpha.alphahunt.alpha.0 g:-/- a:- m:Panic=17,Exposed=62
+S 238 camp.11.alpha.alphahunt.alpha.2 g:-/- a:- m:Panic=79
+S 238 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:Bleed=139
+S 239 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 239 camp.11.alpha.alphahunt.alpha.0 g:-/- a:- m:Panic=16,Exposed=61
+S 239 camp.11.alpha.alphahunt.alpha.2 g:-/- a:- m:Panic=78
+S 239 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:Bleed=138
+S 240 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 240 camp.11.alpha.alphahunt.alpha.0 g:-/- a:- m:Panic=15,Exposed=60
+S 240 camp.11.alpha.alphahunt.alpha.2 g:-/- a:- m:Panic=77
+S 240 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:Bleed=137
+S 241 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 241 camp.11.alpha.alphahunt.alpha.0 g:-/- a:- m:Panic=14,Exposed=59
+S 241 camp.11.alpha.alphahunt.alpha.2 g:-/- a:- m:Panic=76
+S 241 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:Bleed=136
+S 242 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 242 camp.11.alpha.alphahunt.alpha.0 g:-/- a:- m:Panic=13,Exposed=58
+S 242 camp.11.alpha.alphahunt.alpha.2 g:-/- a:- m:Panic=75
+S 242 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:Bleed=135
+S 243 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 243 camp.11.alpha.alphahunt.alpha.0 g:-/- a:- m:Panic=12,Exposed=57
+S 243 camp.11.alpha.alphahunt.alpha.2 g:-/- a:- m:Panic=74
+S 243 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:Bleed=134
+S 244 leader g:-/- a:camp.11.alpha.alphahunt.alpha.captain:44 m:-
+S 244 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 244 camp.11.alpha.alphahunt.alpha.0 g:-/- a:- m:Panic=11,Exposed=56
+S 244 camp.11.alpha.alphahunt.alpha.2 g:-/- a:- m:Panic=73
+S 244 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:Bleed=133
+S 245 leader g:-/- a:camp.11.alpha.alphahunt.alpha.captain:43 m:-
+S 245 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 245 camp.11.alpha.alphahunt.alpha.0 g:-/- a:- m:Panic=10,Exposed=55
+S 245 camp.11.alpha.alphahunt.alpha.2 g:-/- a:- m:Panic=72
+S 245 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:Bleed=132
+S 246 leader g:-/- a:camp.11.alpha.alphahunt.alpha.captain:42 m:-
+S 246 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 246 camp.11.alpha.alphahunt.alpha.0 g:-/- a:- m:Panic=9,Exposed=54
+S 246 camp.11.alpha.alphahunt.alpha.2 g:-/- a:- m:Panic=71
+S 246 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:Bleed=131
+S 247 leader g:-/- a:camp.11.alpha.alphahunt.alpha.captain:41 m:-
+S 247 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 247 camp.11.alpha.alphahunt.alpha.0 g:-/- a:- m:Panic=8,Exposed=53
+S 247 camp.11.alpha.alphahunt.alpha.2 g:-/- a:- m:Panic=70
+S 247 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:Bleed=130
+S 248 leader g:-/- a:camp.11.alpha.alphahunt.alpha.captain:40 m:-
+S 248 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 248 camp.11.alpha.alphahunt.alpha.0 g:-/- a:- m:Panic=7,Exposed=52
+S 248 camp.11.alpha.alphahunt.alpha.2 g:-/- a:- m:Panic=69
+S 248 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:Bleed=129
+S 249 leader g:-/- a:camp.11.alpha.alphahunt.alpha.captain:39 m:-
+S 249 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 249 camp.11.alpha.alphahunt.alpha.0 g:-/- a:- m:Panic=6,Exposed=51
+S 249 camp.11.alpha.alphahunt.alpha.2 g:-/- a:- m:Panic=68
+S 249 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:Bleed=128
+S 250 leader g:-/- a:camp.11.alpha.alphahunt.alpha.captain:38 m:-
+S 250 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 250 camp.11.alpha.alphahunt.alpha.0 g:-/- a:- m:Panic=5,Exposed=50
+S 250 camp.11.alpha.alphahunt.alpha.2 g:-/- a:- m:Panic=67
+S 250 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:Bleed=127
+S 251 leader g:-/- a:camp.11.alpha.alphahunt.alpha.captain:37 m:-
+S 251 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 251 camp.11.alpha.alphahunt.alpha.0 g:-/- a:- m:Panic=4,Exposed=49
+S 251 camp.11.alpha.alphahunt.alpha.2 g:-/- a:- m:Panic=66
+S 251 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:Bleed=126
+S 252 leader g:-/- a:camp.11.alpha.alphahunt.alpha.captain:36 m:-
+S 252 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 252 camp.11.alpha.alphahunt.alpha.0 g:-/- a:- m:Panic=3,Exposed=48
+S 252 camp.11.alpha.alphahunt.alpha.2 g:-/- a:- m:Panic=65
+S 252 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:Bleed=125
+S 253 leader g:-/- a:camp.11.alpha.alphahunt.alpha.captain:35 m:-
+S 253 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 253 camp.11.alpha.alphahunt.alpha.0 g:-/- a:- m:Panic=2,Exposed=47
+S 253 camp.11.alpha.alphahunt.alpha.2 g:-/- a:- m:Panic=64
+S 253 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:Bleed=124
+S 254 leader g:-/- a:camp.11.alpha.alphahunt.alpha.captain:34 m:-
+S 254 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 254 camp.11.alpha.alphahunt.alpha.0 g:-/- a:- m:Panic=1,Exposed=46
+S 254 camp.11.alpha.alphahunt.alpha.2 g:-/- a:- m:Panic=63
+S 254 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:Bleed=123
+S 255 leader g:-/- a:camp.11.alpha.alphahunt.alpha.captain:33 m:-
+S 255 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 255 camp.11.alpha.alphahunt.alpha.0 g:-/- a:- m:Exposed=45
+S 255 camp.11.alpha.alphahunt.alpha.2 g:-/- a:- m:Panic=62
+S 255 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:Bleed=122
+S 256 leader g:-/- a:camp.11.alpha.alphahunt.alpha.captain:32 m:-
+S 256 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 256 camp.11.alpha.alphahunt.alpha.0 g:-/- a:- m:Exposed=44
+S 256 camp.11.alpha.alphahunt.alpha.2 g:-/- a:- m:Panic=61
+S 256 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:Bleed=121
+S 257 leader g:-/- a:camp.11.alpha.alphahunt.alpha.captain:31 m:-
+S 257 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 257 camp.11.alpha.alphahunt.alpha.0 g:-/- a:- m:Exposed=43
+S 257 camp.11.alpha.alphahunt.alpha.2 g:-/- a:- m:Panic=60
+S 257 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:Bleed=120
+S 258 leader g:-/- a:camp.11.alpha.alphahunt.alpha.captain:30 m:-
+S 258 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 258 camp.11.alpha.alphahunt.alpha.0 g:-/- a:- m:Exposed=42
+S 258 camp.11.alpha.alphahunt.alpha.2 g:-/- a:- m:Panic=59
+S 258 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:Bleed=119
+S 259 leader g:-/- a:camp.11.alpha.alphahunt.alpha.captain:29 m:-
+S 259 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 259 camp.11.alpha.alphahunt.alpha.0 g:-/- a:- m:Exposed=41
+S 259 camp.11.alpha.alphahunt.alpha.2 g:-/- a:- m:Panic=58
+S 259 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:Bleed=118
+S 260 leader g:-/- a:camp.11.alpha.alphahunt.alpha.captain:28 m:-
+S 260 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 260 camp.11.alpha.alphahunt.alpha.0 g:-/- a:- m:Exposed=40
+S 260 camp.11.alpha.alphahunt.alpha.2 g:-/- a:- m:Panic=57
+S 260 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:Bleed=117
+S 261 leader g:-/- a:camp.11.alpha.alphahunt.alpha.captain:27 m:-
+S 261 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 261 camp.11.alpha.alphahunt.alpha.0 g:-/- a:- m:Exposed=39
+S 261 camp.11.alpha.alphahunt.alpha.2 g:-/- a:- m:Panic=56
+S 261 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:Bleed=116
+S 262 leader g:-/- a:camp.11.alpha.alphahunt.alpha.captain:26 m:-
+S 262 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 262 camp.11.alpha.alphahunt.alpha.0 g:-/- a:- m:Exposed=38
+S 262 camp.11.alpha.alphahunt.alpha.2 g:-/- a:- m:Panic=55
+S 262 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:Bleed=115
+S 263 leader g:-/- a:camp.11.alpha.alphahunt.alpha.captain:25 m:-
+S 263 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 263 camp.11.alpha.alphahunt.alpha.0 g:-/- a:- m:Exposed=37
+S 263 camp.11.alpha.alphahunt.alpha.2 g:-/- a:- m:Panic=54
+S 263 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:Bleed=114
+S 264 leader g:-/- a:camp.11.alpha.alphahunt.alpha.captain:24 m:-
+S 264 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 264 camp.11.alpha.alphahunt.alpha.0 g:-/- a:- m:Exposed=36
+S 264 camp.11.alpha.alphahunt.alpha.2 g:-/- a:- m:Panic=53
+S 264 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:Bleed=113
+S 265 leader g:-/- a:camp.11.alpha.alphahunt.alpha.captain:23 m:-
+S 265 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 265 camp.11.alpha.alphahunt.alpha.0 g:-/- a:- m:Exposed=35
+S 265 camp.11.alpha.alphahunt.alpha.2 g:-/- a:- m:Panic=52
+S 265 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:Bleed=112
+S 266 leader g:-/- a:camp.11.alpha.alphahunt.alpha.captain:22 m:-
+S 266 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 266 camp.11.alpha.alphahunt.alpha.0 g:-/- a:- m:Exposed=34
+S 266 camp.11.alpha.alphahunt.alpha.2 g:-/- a:- m:Panic=51
+S 266 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:Bleed=111
+S 267 leader g:-/- a:camp.11.alpha.alphahunt.alpha.captain:21 m:-
+S 267 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 267 camp.11.alpha.alphahunt.alpha.0 g:-/- a:- m:Exposed=33
+S 267 camp.11.alpha.alphahunt.alpha.2 g:-/- a:- m:Panic=50
+S 267 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:Bleed=110
+S 268 leader g:-/- a:camp.11.alpha.alphahunt.alpha.captain:20 m:-
+S 268 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 268 camp.11.alpha.alphahunt.alpha.0 g:-/- a:- m:Exposed=32
+S 268 camp.11.alpha.alphahunt.alpha.2 g:-/- a:- m:Panic=49
+S 268 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:Bleed=109
+S 269 leader g:-/- a:camp.11.alpha.alphahunt.alpha.captain:19 m:-
+S 269 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 269 camp.11.alpha.alphahunt.alpha.0 g:-/- a:- m:Exposed=31
+S 269 camp.11.alpha.alphahunt.alpha.2 g:-/- a:- m:Panic=48
+S 269 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:Bleed=108
+S 270 leader g:-/- a:camp.11.alpha.alphahunt.alpha.captain:18 m:-
+S 270 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 270 camp.11.alpha.alphahunt.alpha.0 g:-/- a:- m:Exposed=30
+S 270 camp.11.alpha.alphahunt.alpha.2 g:-/- a:- m:Panic=47
+S 270 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:Bleed=107
+S 271 leader g:-/- a:camp.11.alpha.alphahunt.alpha.captain:17 m:-
+S 271 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 271 camp.11.alpha.alphahunt.alpha.0 g:-/- a:- m:Exposed=29
+S 271 camp.11.alpha.alphahunt.alpha.2 g:-/- a:- m:Panic=46
+S 271 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:Bleed=106
+S 272 leader g:-/- a:camp.11.alpha.alphahunt.alpha.captain:16 m:-
+S 272 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 272 camp.11.alpha.alphahunt.alpha.0 g:-/- a:- m:Exposed=28
+S 272 camp.11.alpha.alphahunt.alpha.2 g:-/- a:- m:Panic=45
+S 272 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:Bleed=105
+S 273 leader g:-/- a:camp.11.alpha.alphahunt.alpha.captain:15 m:-
+S 273 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 273 camp.11.alpha.alphahunt.alpha.0 g:-/- a:- m:Exposed=27
+S 273 camp.11.alpha.alphahunt.alpha.2 g:-/- a:- m:Panic=44
+S 273 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:Bleed=104
+S 274 leader g:-/- a:camp.11.alpha.alphahunt.alpha.captain:14 m:-
+S 274 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 274 camp.11.alpha.alphahunt.alpha.0 g:-/- a:- m:Exposed=26
+S 274 camp.11.alpha.alphahunt.alpha.2 g:-/- a:- m:Panic=43
+S 274 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:Bleed=103
+S 275 leader g:-/- a:camp.11.alpha.alphahunt.alpha.captain:13 m:-
+S 275 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 275 camp.11.alpha.alphahunt.alpha.0 g:-/- a:- m:Exposed=25
+S 275 camp.11.alpha.alphahunt.alpha.2 g:-/- a:- m:Panic=42
+S 275 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:Bleed=102
+S 276 leader g:-/- a:camp.11.alpha.alphahunt.alpha.captain:12 m:-
+S 276 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 276 camp.11.alpha.alphahunt.alpha.0 g:-/- a:- m:Exposed=24
+S 276 camp.11.alpha.alphahunt.alpha.2 g:-/- a:- m:Panic=41
+S 276 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:Bleed=101
+S 277 leader g:-/- a:camp.11.alpha.alphahunt.alpha.captain:11 m:-
+S 277 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 277 camp.11.alpha.alphahunt.alpha.0 g:-/- a:- m:Exposed=23
+S 277 camp.11.alpha.alphahunt.alpha.2 g:-/- a:- m:Panic=40
+S 277 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:Bleed=100
+S 278 leader g:-/- a:camp.11.alpha.alphahunt.alpha.captain:10 m:-
+S 278 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 278 camp.11.alpha.alphahunt.alpha.0 g:-/- a:- m:Exposed=22
+S 278 camp.11.alpha.alphahunt.alpha.2 g:-/- a:- m:Panic=39
+S 278 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:Bleed=99
+S 279 leader g:-/- a:camp.11.alpha.alphahunt.alpha.captain:9 m:-
+S 279 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 279 camp.11.alpha.alphahunt.alpha.0 g:-/- a:- m:Exposed=21
+S 279 camp.11.alpha.alphahunt.alpha.2 g:-/- a:- m:Panic=38
+S 279 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:Bleed=98
+S 280 leader g:-/- a:camp.11.alpha.alphahunt.alpha.captain:8 m:-
+S 280 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 280 camp.11.alpha.alphahunt.alpha.0 g:-/- a:- m:Exposed=20
+S 280 camp.11.alpha.alphahunt.alpha.2 g:-/- a:- m:Panic=37
+S 280 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:Bleed=97
+S 281 leader g:-/- a:camp.11.alpha.alphahunt.alpha.captain:7 m:-
+S 281 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 281 camp.11.alpha.alphahunt.alpha.0 g:-/- a:- m:Exposed=19
+S 281 camp.11.alpha.alphahunt.alpha.2 g:-/- a:- m:Panic=36
+S 281 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:Bleed=96
+S 282 leader g:-/- a:camp.11.alpha.alphahunt.alpha.captain:6 m:-
+S 282 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 282 camp.11.alpha.alphahunt.alpha.0 g:-/- a:- m:Exposed=18
+S 282 camp.11.alpha.alphahunt.alpha.2 g:-/- a:- m:Panic=35
+S 282 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:Bleed=95
+S 283 leader g:-/- a:camp.11.alpha.alphahunt.alpha.captain:5 m:-
+S 283 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 283 camp.11.alpha.alphahunt.alpha.0 g:-/- a:- m:Exposed=17
+S 283 camp.11.alpha.alphahunt.alpha.2 g:-/- a:- m:Panic=34
+S 283 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:Bleed=94
+S 284 leader g:-/- a:camp.11.alpha.alphahunt.alpha.captain:4 m:-
+S 284 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 284 camp.11.alpha.alphahunt.alpha.0 g:-/- a:- m:Exposed=16
+S 284 camp.11.alpha.alphahunt.alpha.2 g:-/- a:- m:Panic=33
+S 284 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:Bleed=93
+S 285 leader g:-/- a:camp.11.alpha.alphahunt.alpha.captain:3 m:-
+S 285 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 285 camp.11.alpha.alphahunt.alpha.0 g:-/- a:- m:Exposed=15
+S 285 camp.11.alpha.alphahunt.alpha.2 g:-/- a:- m:Panic=32
+S 285 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:Bleed=92
+S 286 leader g:-/- a:camp.11.alpha.alphahunt.alpha.captain:2 m:-
+S 286 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 286 camp.11.alpha.alphahunt.alpha.0 g:-/- a:- m:Exposed=14
+S 286 camp.11.alpha.alphahunt.alpha.2 g:-/- a:- m:Panic=31
+S 286 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:Bleed=91
+S 287 leader g:-/- a:camp.11.alpha.alphahunt.alpha.captain:1 m:-
+S 287 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 287 camp.11.alpha.alphahunt.alpha.0 g:-/- a:- m:Exposed=13
+S 287 camp.11.alpha.alphahunt.alpha.2 g:-/- a:- m:Panic=30
+S 287 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:Bleed=90
+S 288 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 288 camp.11.alpha.alphahunt.alpha.0 g:-/- a:- m:Exposed=12
+S 288 camp.11.alpha.alphahunt.alpha.2 g:-/- a:- m:Panic=29
+S 288 camp.11.alpha.alphahunt.alpha.captain g:camp.11.alpha.alphahunt.alpha.0/- a:- m:Bleed=89
+S 289 clarth.warden.1 g:clarth.medic.5/- a:- m:-
+S 289 camp.11.alpha.alphahunt.alpha.0 g:-/- a:- m:Exposed=11
+S 289 camp.11.alpha.alphahunt.alpha.2 g:-/- a:- m:Panic=28
+playback 289 matched True

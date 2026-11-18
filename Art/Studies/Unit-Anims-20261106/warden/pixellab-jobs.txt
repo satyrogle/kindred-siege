@@ -1,0 +1,4 @@
+PixelLab pixminimax, 6 Nov 2026, Clarth Warden tank d917de88, south-east, 16 frames, 1 gen each.
+t1 tank_take1_brace_skid group 3d36fd25 (brace, take the blow, skid, shove back)
+t2 tank_take2_taunt_wall group 56a7ae6f (bang shield, slam it into the ground; hair drifts to long dreads, last frames show a doubled shield)
+t3 tank_take3_block_bash group cc8c2c10 (block high, shield bash with a white smear, back to guard)

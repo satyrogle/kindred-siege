@@ -1,0 +1,136 @@
+rules 41 ticks 333 tps 30
+U 0 leader Marksman Pal alive True hp 360
+U 0 tutorial.0 Warden Fighter alive True hp 704
+U 0 tutorial.1 Marksman Fighter alive True hp 396
+U 0 tutorial.2 Skirmisher Fighter alive True hp 440
+U 0 tutorial.3 Trapper Fighter alive True hp 418
+U 0 tutorial.4 Medic Fighter alive True hp 374
+U 1 camp.1.raiders.tutorial.raiders.0 Warden Fighter alive False hp 531
+U 1 camp.1.raiders.tutorial.raiders.1 Marksman Fighter alive False hp 298
+U 1 camp.1.raiders.tutorial.raiders.2 Skirmisher Fighter alive False hp 332
+E 2 Miss 1 camp.1.raiders.tutorial.raiders.2 > tutorial.4 64 miss
+E 6 Miss 1 camp.1.raiders.tutorial.raiders.1 > tutorial.1 69 miss
+E 12 TrapArmed 0 tutorial.3 >  0 
+E 12 TrapSprung 0 tutorial.3 > camp.1.raiders.tutorial.raiders.0 16 
+E 12 Hit 0 tutorial.3 > camp.1.raiders.tutorial.raiders.0 16 trap
+E 12 Mark 0 tutorial.3 > camp.1.raiders.tutorial.raiders.0 60 snare
+E 12 Mark 0 tutorial.3 > camp.1.raiders.tutorial.raiders.0 150 bleed
+E 12 Chain 0 leader > camp.1.raiders.tutorial.raiders.0 1 snare
+E 12 Aim 0 leader > camp.1.raiders.tutorial.raiders.0 22 pin
+E 12 Chain 0 tutorial.2 > camp.1.raiders.tutorial.raiders.0 2 bleed
+E 12 Hit 0 tutorial.2 > camp.1.raiders.tutorial.raiders.0 20 strike
+E 12 Cash 0 tutorial.2 > camp.1.raiders.tutorial.raiders.0 53 rip
+E 12 Hit 0 tutorial.2 > camp.1.raiders.tutorial.raiders.0 53 rip
+E 12 ComboSetup 0 tutorial.3 > camp.1.raiders.tutorial.raiders.0 2 bleed
+E 12 ComboFinish 0 tutorial.2 > camp.1.raiders.tutorial.raiders.0 2 bleed
+E 20 Hit 0 tutorial.1 > camp.1.raiders.tutorial.raiders.1 31 
+E 23 Hit 0 tutorial.0 > camp.1.raiders.tutorial.raiders.0 14 
+E 26 Hit 0 tutorial.2 > camp.1.raiders.tutorial.raiders.1 17 
+E 32 Miss 1 camp.1.raiders.tutorial.raiders.2 > tutorial.4 64 miss
+E 34 Cash 0 leader > camp.1.raiders.tutorial.raiders.0 77 pin
+E 34 Hit 0 leader > camp.1.raiders.tutorial.raiders.0 154 aimed.pin
+E 34 ComboSetup 0 tutorial.3 > camp.1.raiders.tutorial.raiders.0 1 snare
+E 34 ComboFinish 0 leader > camp.1.raiders.tutorial.raiders.0 1 snare
+E 34 Mark 0 leader > camp.1.raiders.tutorial.raiders.0 90 opening
+E 34 Chain 0  > camp.1.raiders.tutorial.raiders.0 1 opening.unready
+E 51 Miss 1 camp.1.raiders.tutorial.raiders.1 > tutorial.1 69 miss
+E 51 Hit 0 tutorial.3 > camp.1.raiders.tutorial.raiders.1 13 
+E 56 Hit 0 tutorial.2 > camp.1.raiders.tutorial.raiders.1 16 
+E 59 Miss 0 tutorial.0 > camp.1.raiders.tutorial.raiders.0 84 miss
+E 62 Miss 1 camp.1.raiders.tutorial.raiders.2 > tutorial.4 64 miss
+E 64 Hit 0 leader > camp.1.raiders.tutorial.raiders.1 23 
+E 65 Hit 0 tutorial.1 > camp.1.raiders.tutorial.raiders.1 26 
+E 70 Hit 1 camp.1.raiders.tutorial.raiders.0 > tutorial.0 5 
+E 86 Hit 0 tutorial.2 > camp.1.raiders.tutorial.raiders.1 19 
+E 90 Hit 0 tutorial.3 > camp.1.raiders.tutorial.raiders.1 15 
+E 92 Guard 0 tutorial.0 > tutorial.4 3 
+E 92 Hit 1 camp.1.raiders.tutorial.raiders.2 > tutorial.0 6 guarded
+E 95 Miss 0 tutorial.0 > camp.1.raiders.tutorial.raiders.0 84 miss
+E 96 Miss 1 camp.1.raiders.tutorial.raiders.1 > tutorial.1 69 miss
+E 106 Miss 1 camp.1.raiders.tutorial.raiders.0 > tutorial.0 64 miss
+E 109 Hit 0 leader > camp.1.raiders.tutorial.raiders.1 27 
+E 110 Aim 0 tutorial.1 > camp.1.raiders.tutorial.raiders.1 45 aim
+E 116 Hit 0 tutorial.2 > camp.1.raiders.tutorial.raiders.1 20 
+E 122 Guard 0 tutorial.0 > tutorial.4 2 
+E 122 Hit 1 camp.1.raiders.tutorial.raiders.2 > tutorial.0 5 guarded
+E 129 Hit 0 tutorial.3 > camp.1.raiders.tutorial.raiders.1 19 
+E 131 Hit 0 tutorial.0 > camp.1.raiders.tutorial.raiders.0 10 
+E 131 Snap 1 camp.1.raiders.tutorial.raiders.0 >  900 frenzy
+E 141 Hit 1 camp.1.raiders.tutorial.raiders.1 > tutorial.1 14 
+E 141 Broken 1 camp.1.raiders.tutorial.raiders.1 > tutorial.1 0 aim
+E 142 Miss 1 camp.1.raiders.tutorial.raiders.0 > tutorial.0 64 miss
+E 146 Hit 0 tutorial.2 > camp.1.raiders.tutorial.raiders.1 41 strike
+E 152 Guard 0 tutorial.0 > tutorial.4 3 
+E 152 Hit 1 camp.1.raiders.tutorial.raiders.2 > tutorial.0 6 guarded
+E 154 Hit 0 leader > camp.1.raiders.tutorial.raiders.1 23 
+E 167 Hit 0 tutorial.0 > camp.1.raiders.tutorial.raiders.0 16 
+E 168 TrapArmed 0 tutorial.3 >  0 
+E 176 Hit 0 tutorial.2 > camp.1.raiders.tutorial.raiders.1 21 
+E 176 Kill 0 tutorial.2 > camp.1.raiders.tutorial.raiders.1 0 
+E 176 Reaction 1  > camp.1.raiders.tutorial.raiders.1 90 rally
+E 178 TrapSprung 0 tutorial.3 > camp.1.raiders.tutorial.raiders.0 16 
+E 178 Hit 0 tutorial.3 > camp.1.raiders.tutorial.raiders.0 16 trap
+E 178 Mark 0 tutorial.3 > camp.1.raiders.tutorial.raiders.0 60 snare
+E 178 Mark 0 tutorial.3 > camp.1.raiders.tutorial.raiders.0 150 bleed
+E 178 Chain 0 leader > camp.1.raiders.tutorial.raiders.0 3 snare
+E 178 Aim 0 leader > camp.1.raiders.tutorial.raiders.0 22 pin
+E 178 Chain 0  > camp.1.raiders.tutorial.raiders.0 4 bleed.unready
+E 182 Guard 0 tutorial.0 > tutorial.4 4 
+E 182 Hit 1 camp.1.raiders.tutorial.raiders.2 > tutorial.0 8 guarded
+E 185 Hit 0 tutorial.1 > camp.1.raiders.tutorial.raiders.0 31 
+E 200 Cash 0 leader > camp.1.raiders.tutorial.raiders.0 66 pin
+E 200 Hit 0 leader > camp.1.raiders.tutorial.raiders.0 132 aimed.pin
+E 200 ComboSetup 0 tutorial.3 > camp.1.raiders.tutorial.raiders.0 3 snare
+E 200 ComboFinish 0 leader > camp.1.raiders.tutorial.raiders.0 3 snare
+E 200 Mark 0 leader > camp.1.raiders.tutorial.raiders.0 90 opening
+E 200 Chain 0  > camp.1.raiders.tutorial.raiders.0 3 opening.unready
+E 203 Hit 0 tutorial.0 > camp.1.raiders.tutorial.raiders.0 14 
+E 206 Hit 0 tutorial.2 > camp.1.raiders.tutorial.raiders.0 23 
+E 207 Hit 0 tutorial.3 > camp.1.raiders.tutorial.raiders.0 18 
+E 207 Hit 0  > camp.1.raiders.tutorial.raiders.0 11 bleed
+E 212 Guard 0 tutorial.0 > tutorial.4 2 
+E 212 Hit 1 camp.1.raiders.tutorial.raiders.2 > tutorial.0 6 guarded
+E 221 Miss 0 leader > camp.1.raiders.tutorial.raiders.0 91 miss
+E 230 Aim 0 tutorial.1 > camp.1.raiders.tutorial.raiders.0 45 aim
+E 236 Hit 0 tutorial.2 > camp.1.raiders.tutorial.raiders.0 18 
+E 236 Kill 0 tutorial.2 > camp.1.raiders.tutorial.raiders.0 0 
+E 236 Reaction 1  > camp.1.raiders.tutorial.raiders.0 90 rally
+E 239 Miss 0 tutorial.0 > camp.1.raiders.tutorial.raiders.2 74 miss
+E 242 Guard 0 tutorial.0 > tutorial.4 3 
+E 242 Hit 1 camp.1.raiders.tutorial.raiders.2 > tutorial.0 7 guarded
+E 246 Hit 0 tutorial.3 > camp.1.raiders.tutorial.raiders.2 14 
+E 266 Miss 0 leader > camp.1.raiders.tutorial.raiders.2 81 miss
+E 266 Hit 0 tutorial.2 > camp.1.raiders.tutorial.raiders.2 38 strike
+E 272 Guard 0 tutorial.0 > tutorial.4 3 
+E 272 Hit 1 camp.1.raiders.tutorial.raiders.2 > tutorial.0 6 guarded
+E 274 Hit 0 tutorial.1 > camp.1.raiders.tutorial.raiders.2 77 aimed
+E 274 Mark 0 tutorial.1 > camp.1.raiders.tutorial.raiders.2 90 opening
+E 274 Chain 0  > camp.1.raiders.tutorial.raiders.2 5 opening.unready
+E 275 Hit 0 tutorial.0 > camp.1.raiders.tutorial.raiders.2 14 
+E 285 Hit 0 tutorial.3 > camp.1.raiders.tutorial.raiders.2 13 
+E 296 Miss 0 tutorial.2 > camp.1.raiders.tutorial.raiders.2 78 miss
+E 302 Guard 0 tutorial.0 > tutorial.4 3 
+E 302 Hit 1 camp.1.raiders.tutorial.raiders.2 > tutorial.0 7 guarded
+E 311 Hit 0 tutorial.0 > camp.1.raiders.tutorial.raiders.2 10 
+E 311 Hit 0 leader > camp.1.raiders.tutorial.raiders.2 26 
+E 311 Snap 1 camp.1.raiders.tutorial.raiders.2 >  900 frenzy
+E 319 Hit 0 tutorial.1 > camp.1.raiders.tutorial.raiders.2 33 
+E 324 TrapArmed 0 tutorial.3 >  0 
+E 326 Miss 0 tutorial.2 > camp.1.raiders.tutorial.raiders.2 78 miss
+E 332 TrapSprung 0 tutorial.3 > camp.1.raiders.tutorial.raiders.2 16 
+E 332 Hit 0 tutorial.3 > camp.1.raiders.tutorial.raiders.2 16 trap
+E 332 Mark 0 tutorial.3 > camp.1.raiders.tutorial.raiders.2 60 snare
+E 332 Mark 0 tutorial.3 > camp.1.raiders.tutorial.raiders.2 150 bleed
+E 332 Chain 0 leader > camp.1.raiders.tutorial.raiders.2 6 snare
+E 332 Aim 0 leader > camp.1.raiders.tutorial.raiders.2 22 pin
+E 332 Chain 0 tutorial.2 > camp.1.raiders.tutorial.raiders.2 7 bleed
+E 332 Cash 0 tutorial.2 > camp.1.raiders.tutorial.raiders.2 38 opening
+E 332 Hit 0 tutorial.2 > camp.1.raiders.tutorial.raiders.2 75 strike.open
+E 332 ComboSetup 0 tutorial.1 > camp.1.raiders.tutorial.raiders.2 5 opening
+E 332 ComboFinish 0 tutorial.2 > camp.1.raiders.tutorial.raiders.2 5 opening
+E 332 Cash 0 tutorial.2 > camp.1.raiders.tutorial.raiders.2 33 rip
+E 332 Hit 0 tutorial.2 > camp.1.raiders.tutorial.raiders.2 33 rip
+E 332 ComboSetup 0 tutorial.3 > camp.1.raiders.tutorial.raiders.2 7 bleed
+E 332 ComboFinish 0 tutorial.2 > camp.1.raiders.tutorial.raiders.2 7 bleed
+E 332 Kill 0 tutorial.2 > camp.1.raiders.tutorial.raiders.2 0 rip
+E 332 End 0  >  0 wipe

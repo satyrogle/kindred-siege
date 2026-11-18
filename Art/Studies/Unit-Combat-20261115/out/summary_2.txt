@@ -1,0 +1,48 @@
+seed 2: ticks 697, end 636 (31.8 s), winner Clarth, deterministic True
+hits 150, misses 28, cashes 17
+  bleedtick                34
+  boost:rearm              2
+  boost:steady             4
+  boostmove                6
+  broken                   6
+  burst                    20
+  defence:brace            5
+  defence:sidestep         2
+  defence:snap trap        4
+  defence:step back        2
+  dodge                    13
+  end                      1
+  hit:blocked              5
+  hit:class                31
+  hit:hexed                8
+  hit:hit                  85
+  hit:opened               6
+  hit:pierce               1
+  hit:pinned               3
+  hit:splash               11
+  kill                     7
+  launch                   20
+  mark:bleed               6
+  mark:hex                 16
+  mark:opening             33
+  mark:snare               8
+  miss:dodged              8
+  miss:missed              5
+  miss:out of reach        11
+  miss:sidestep            2
+  miss:step back           2
+  pin                      3
+  retarget                 2
+  swing                    79
+  target                   46
+  whiff                    5
+  Clarth Warden          hp  320/860  dealt   294  Idle
+  Clarth Skirmisher      hp    0/720  dealt   562  Dead
+  Clarth Trapper         hp    0/720  dealt   265  Dead
+  Clarth Marksman        hp  100/580  dealt  1446  Idle
+  Clarth Hexer           hp  562/580  dealt   880  Idle
+  Bloodridge Warden      hp    0/860  dealt   128  Dead
+  Bloodridge Skirmisher  hp    0/720  dealt   324  Dead
+  Bloodridge Trapper     hp    0/720  dealt   216  Dead
+  Bloodridge Marksman    hp    0/580  dealt  1292  Dead
+  Bloodridge Hexer       hp    0/580  dealt   480  Dead

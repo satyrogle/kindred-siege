@@ -1,0 +1,183 @@
+{
+ "frames": [
+  {
+   "filename": "ks-parry-counter-hit 0.png",
+   "frame": {
+    "x": 0,
+    "y": 0,
+    "w": 163,
+    "h": 196
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 163,
+    "h": 196
+   },
+   "sourceSize": {
+    "w": 163,
+    "h": 196
+   },
+   "pivot": {
+    "x": 0.5460122699386503,
+    "y": 0.9846938775510204
+   },
+   "duration": 63
+  },
+  {
+   "filename": "ks-parry-counter-hit 1.png",
+   "frame": {
+    "x": 163,
+    "y": 0,
+    "w": 163,
+    "h": 196
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 163,
+    "h": 196
+   },
+   "sourceSize": {
+    "w": 163,
+    "h": 196
+   },
+   "pivot": {
+    "x": 0.5460122699386503,
+    "y": 0.9846938775510204
+   },
+   "duration": 63
+  },
+  {
+   "filename": "ks-parry-counter-hit 2.png",
+   "frame": {
+    "x": 326,
+    "y": 0,
+    "w": 163,
+    "h": 196
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 163,
+    "h": 196
+   },
+   "sourceSize": {
+    "w": 163,
+    "h": 196
+   },
+   "pivot": {
+    "x": 0.5460122699386503,
+    "y": 0.9846938775510204
+   },
+   "duration": 63
+  },
+  {
+   "filename": "ks-parry-counter-hit 3.png",
+   "frame": {
+    "x": 0,
+    "y": 196,
+    "w": 163,
+    "h": 196
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 163,
+    "h": 196
+   },
+   "sourceSize": {
+    "w": 163,
+    "h": 196
+   },
+   "pivot": {
+    "x": 0.5460122699386503,
+    "y": 0.9846938775510204
+   },
+   "duration": 63
+  },
+  {
+   "filename": "ks-parry-counter-hit 4.png",
+   "frame": {
+    "x": 163,
+    "y": 196,
+    "w": 163,
+    "h": 196
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 163,
+    "h": 196
+   },
+   "sourceSize": {
+    "w": 163,
+    "h": 196
+   },
+   "pivot": {
+    "x": 0.5460122699386503,
+    "y": 0.9846938775510204
+   },
+   "duration": 63
+  },
+  {
+   "filename": "ks-parry-counter-hit 5.png",
+   "frame": {
+    "x": 326,
+    "y": 196,
+    "w": 163,
+    "h": 196
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 163,
+    "h": 196
+   },
+   "sourceSize": {
+    "w": 163,
+    "h": 196
+   },
+   "pivot": {
+    "x": 0.5460122699386503,
+    "y": 0.9846938775510204
+   },
+   "duration": 63
+  }
+ ],
+ "meta": {
+  "app": "PixelLab VFX Creator",
+  "image": "ks-parry-counter-hit.png",
+  "format": "RGBA8888",
+  "size": {
+   "w": 489,
+   "h": 392
+  },
+  "scale": "1",
+  "anchor": {
+   "kind": "feet",
+   "x": 89,
+   "y": 193
+  },
+  "frameTags": [
+   {
+    "name": "ks-parry-counter-hit",
+    "from": 0,
+    "to": 5,
+    "direction": "forward"
+   }
+  ]
+ }
+}

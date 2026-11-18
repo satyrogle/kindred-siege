@@ -1,0 +1,10 @@
+clarth_warden_se_idle upload:e64c264c-217c-43f1-9ac1-ceeee632ea39
+clarth_warden_sw_idle upload:78a92c76-6373-44a0-93bc-8d71d9251573
+clarth_skirmisher_se_idle upload:696dba34-93e9-49d9-9f84-22a859de8fd2
+clarth_skirmisher_sw_idle upload:bc72ce90-c2b3-4848-9deb-2095dcef10c1
+clarth_trapper_se_idle upload:49772022-e227-4e17-bf27-4442b92a9032
+clarth_trapper_sw_idle upload:558c4edb-0516-47d7-8749-d0783d7c3215
+clarth_marksman_se_idle upload:9223b14b-13b4-42ce-b5cb-9d70f940b604
+clarth_marksman_sw_idle upload:6c1ccd19-5569-41ad-81be-589f0f6ebfeb
+clarth_medic_se_idle upload:f20a5787-3cc6-47bb-a22b-b669f9344525
+clarth_medic_sw_idle upload:ce93bfdb-8f2f-4fcd-91fd-76f0f73a5b94

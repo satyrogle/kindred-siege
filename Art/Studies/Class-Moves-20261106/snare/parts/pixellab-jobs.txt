@@ -1,0 +1,5 @@
+PixelLab jobs, 6 Nov 2026 (Claude): Snare redo after Jacob: "they are okay snare is shit tho". 6 generations.
+jaws0.png   edit of ../guard/parts/ring128.png  e2d6bd07-69ce-4980-be5f-20282193802e  seed 4121   jaws_anim/  pixminimax 14abe4f5-7cbd-4419-a85d-e9b7d1d5593d  seed 4131 (snap shut, blood, hold)
+hooks0.png  edit of ../guard/parts/ring128.png  78ac133a-e85b-4338-a323-762234ffcac0  seed 4122   hooks_anim/ pixminimax b8efece3-dff9-4906-b238-da80c71bbebf  seed 4132 (hooks rise on chains, cage, pull taut)
+net0.png    create_image_pixen  ba6e9450-8e1f-4ba8-bd90-7efe1415be3d  seed 4123                 net_anim/   pixminimax b8584895-f3af-4457-a580-6307dfb60ae7  seed 4133 (opens, drops, ends as a weighted pile)
+The rejected first take is ../moves/parts/snare_anim (spiky crown).

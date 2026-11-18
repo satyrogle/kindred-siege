@@ -1,0 +1,71 @@
+{
+ "dodge": [
+  "blood_rot_marksman_sw",
+  "blood_rot_skirmisher_sw",
+  "blood_rot_trapper_sw",
+  "clarth_marksman_se",
+  "clarth_medic_se",
+  "clarth_skirmisher_se",
+  "clarth_trapper_se"
+ ],
+ "block": [
+  "blood_rot_warden_sw",
+  "blood_rot_skirmisher_sw",
+  "blood_rot_marksman_sw",
+  "clarth_warden_se",
+  "clarth_skirmisher_se",
+  "clarth_trapper_se",
+  "clarth_marksman_se"
+ ],
+ "roar": [
+  "blood_rot_warden_sw",
+  "blood_rot_skirmisher_sw",
+  "blood_rot_trapper_sw",
+  "blood_rot_medic_sw",
+  "clarth_warden_se",
+  "clarth_skirmisher_se",
+  "clarth_trapper_se",
+  "clarth_marksman_se",
+  "clarth_medic_se"
+ ],
+ "getup": [
+  "blood_rot_warden_sw",
+  "blood_rot_skirmisher_sw",
+  "blood_rot_trapper_sw",
+  "blood_rot_marksman_sw",
+  "blood_rot_medic_sw",
+  "clarth_warden_se",
+  "clarth_skirmisher_se",
+  "clarth_trapper_se",
+  "clarth_marksman_se",
+  "clarth_medic_se"
+ ],
+ "frame_fix": {
+  "block/blood_rot_skirmisher_sw": {
+   "3": 4
+  },
+  "roar/blood_rot_skirmisher_sw": {
+   "3": 4
+  },
+  "roar/blood_rot_trapper_sw": {
+   "2": 3
+  },
+  "roar/clarth_medic_se": {
+   "3": 4
+  },
+  "dodge/clarth_marksman_se": {
+   "1": 3,
+   "2": 3
+  },
+  "dodge/blood_rot_marksman_sw": {
+   "1": 2
+  }
+ },
+ "rejected": {
+  "block/blood_rot_medic_sw": "a whip swing, reads as an attack",
+  "block/clarth_medic_se": "a staff swipe, reads as an attack",
+  "block/blood_rot_trapper_sw": "the chain lashes out first, reads as an attack",
+  "dodge/blood_rot_medic_sw": "both takes swing a fire whip instead of hopping"
+ },
+ "note": "dodge clips load from art/dodge_v2 when that folder has the clip (16 Nov redo, idle pinned as the last frame), else art/dodge"
+}

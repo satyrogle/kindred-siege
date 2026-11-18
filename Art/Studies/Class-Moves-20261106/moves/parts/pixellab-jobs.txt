@@ -1,0 +1,8 @@
+PixelLab jobs, 6 Nov 2026 (Claude): the other four class moves in the Guard's twin rings language (Jacob picked "twin rings" for the Guard). 9 generations.
+Each ring is an edit_image_pixen of the Guard's ring (../guard/parts/ring128.png), so they match.
+aim_ring.png      edit 412a1054-b690-487a-bc42-98076591d3cb  seed 4101   aim_anim/    pixminimax e5b05871-4de9-4809-9e65-bbbd509425e3  8 frames  seed 4111 (tightens, flashes, bursts)
+strike_ring.png   edit fa15c4ff-f116-4512-b67f-f866ed1e4f90  seed 4102   strike_anim/ pixminimax 37ad11f8-d8e2-402f-af6a-82e4d5932ee3  8 frames  seed 4112 (blade cage shoots up, scatters)
+snare_ring.png    edit 39af57f0-f50b-402a-ad1e-cd37719fc439  seed 4103   snare_anim/  pixminimax bb026ddf-a5c5-4e7a-9ca9-7e80d387ef18  8 frames  seed 4113 (barbs clamp shut, hold)
+treat_ring2.png   edit 1cab7049-63f8-4a1a-bd5a-ec60a65eb05f  seed 4114   treat_anim/  pixminimax c4ce8387-8e59-4f0d-92c8-1e813aa24657  8 frames  seed 4115 (threads rise, specks; frames 1-2 have a grey smudge, unused)
+rejected: treat ring c7514da7-acdd-42f8-a787-5884b66ee6ae (grey pad inside), not kept.
+Staged on the Bloodridge burial court rear layers with the Clarth SE sheets and blood rot skirmisher SW sheets, 50 ms frames.

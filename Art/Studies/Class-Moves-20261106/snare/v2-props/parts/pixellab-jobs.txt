@@ -1,0 +1,13 @@
+PixelLab, 6 Nov 2026 (Claude). Jacob on the snare options: "Props are bad execution is okay". Props remade with
+create_1_direction_object, style image = the Clarth Trapper's own idle sprite (style_trapper.png), palette = 16 colours
+sampled from the Trapper and the Warden: #F8EACF #E9CEA6 #CFAE8A #C4906A #B2774F #925839 #933A29 #6A3824 #523023 #33241D
+#731A15 #3B2116 #2E140E #271715 #161514 #150B07. 34 generations.
+jaws_c0.png   object review 5da142a3-8fcc-4d28-b9d0-9d5961d61b32 candidate 0 -> object adf77dd2-3b25-4003-a487-bc77c7138086 (tag ks-trapper-snare)
+hooks_c3.png  object review af46c611-4b1b-4067-acc9-9fe35fca3833 candidate 3 -> object 606b9e27-2404-47dd-85a2-1353669d828d
+net_c1.png    object review a486e560-0a97-4ae2-b580-e59df50edd2a candidate 1 -> object 39726428-13b7-4c9b-a2bf-c78a6fe57672 (the tied bundle)
+net_c2.png    same review, candidate 2 -> object d0169434-8205-431c-b71d-d95a38f9eb24 (the draped net)
+jaws_anim/    pixminimax 97cbf5bb-7638-460a-a30a-327b069e9ce7  seed 4141 (snap shut, blood spray, hold)
+hooks2_anim/  pixminimax 205872f7-5523-4ad0-87cc-a0fcaa53751e  seed 4152 (flat star snaps up into a cage of hooks; frame 8 returns flat, unused)
+net_anim/     pixminimax 871d7fcd-63c9-45b6-9e69-9c9831ac0ba6  seed 4143, net_c1 -> net_c2 (bursts, drapes, weights land)
+rejected: hooks pixminimax a8085b33-0745-40ba-9cef-cc3d2d13c795 (stayed flat, only tightened).
+In the mock the flat hook star is squashed to 55% height to lie on the low camera's floor.

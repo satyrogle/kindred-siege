@@ -1,0 +1,235 @@
+{
+ "frames": [
+  {
+   "filename": "ks-parry-landed-clash 0.png",
+   "frame": {
+    "x": 0,
+    "y": 0,
+    "w": 274,
+    "h": 347
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 274,
+    "h": 347
+   },
+   "sourceSize": {
+    "w": 274,
+    "h": 347
+   },
+   "pivot": {
+    "x": 0.4854014598540146,
+    "y": 0.6685878962536023
+   },
+   "duration": 83
+  },
+  {
+   "filename": "ks-parry-landed-clash 1.png",
+   "frame": {
+    "x": 274,
+    "y": 0,
+    "w": 274,
+    "h": 347
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 274,
+    "h": 347
+   },
+   "sourceSize": {
+    "w": 274,
+    "h": 347
+   },
+   "pivot": {
+    "x": 0.4854014598540146,
+    "y": 0.6685878962536023
+   },
+   "duration": 83
+  },
+  {
+   "filename": "ks-parry-landed-clash 2.png",
+   "frame": {
+    "x": 548,
+    "y": 0,
+    "w": 274,
+    "h": 347
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 274,
+    "h": 347
+   },
+   "sourceSize": {
+    "w": 274,
+    "h": 347
+   },
+   "pivot": {
+    "x": 0.4854014598540146,
+    "y": 0.6685878962536023
+   },
+   "duration": 83
+  },
+  {
+   "filename": "ks-parry-landed-clash 3.png",
+   "frame": {
+    "x": 0,
+    "y": 347,
+    "w": 274,
+    "h": 347
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 274,
+    "h": 347
+   },
+   "sourceSize": {
+    "w": 274,
+    "h": 347
+   },
+   "pivot": {
+    "x": 0.4854014598540146,
+    "y": 0.6685878962536023
+   },
+   "duration": 83
+  },
+  {
+   "filename": "ks-parry-landed-clash 4.png",
+   "frame": {
+    "x": 274,
+    "y": 347,
+    "w": 274,
+    "h": 347
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 274,
+    "h": 347
+   },
+   "sourceSize": {
+    "w": 274,
+    "h": 347
+   },
+   "pivot": {
+    "x": 0.4854014598540146,
+    "y": 0.6685878962536023
+   },
+   "duration": 83
+  },
+  {
+   "filename": "ks-parry-landed-clash 5.png",
+   "frame": {
+    "x": 548,
+    "y": 347,
+    "w": 274,
+    "h": 347
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 274,
+    "h": 347
+   },
+   "sourceSize": {
+    "w": 274,
+    "h": 347
+   },
+   "pivot": {
+    "x": 0.4854014598540146,
+    "y": 0.6685878962536023
+   },
+   "duration": 83
+  },
+  {
+   "filename": "ks-parry-landed-clash 6.png",
+   "frame": {
+    "x": 0,
+    "y": 694,
+    "w": 274,
+    "h": 347
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 274,
+    "h": 347
+   },
+   "sourceSize": {
+    "w": 274,
+    "h": 347
+   },
+   "pivot": {
+    "x": 0.4854014598540146,
+    "y": 0.6685878962536023
+   },
+   "duration": 83
+  },
+  {
+   "filename": "ks-parry-landed-clash 7.png",
+   "frame": {
+    "x": 274,
+    "y": 694,
+    "w": 274,
+    "h": 347
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 274,
+    "h": 347
+   },
+   "sourceSize": {
+    "w": 274,
+    "h": 347
+   },
+   "pivot": {
+    "x": 0.4854014598540146,
+    "y": 0.6685878962536023
+   },
+   "duration": 83
+  }
+ ],
+ "meta": {
+  "app": "PixelLab VFX Creator",
+  "image": "ks-parry-landed-clash.png",
+  "format": "RGBA8888",
+  "size": {
+   "w": 822,
+   "h": 1041
+  },
+  "scale": "1",
+  "anchor": {
+   "kind": "feet",
+   "x": 133,
+   "y": 232
+  },
+  "frameTags": [
+   {
+    "name": "ks-parry-landed-clash",
+    "from": 0,
+    "to": 7,
+    "direction": "forward"
+   }
+  ]
+ }
+}
