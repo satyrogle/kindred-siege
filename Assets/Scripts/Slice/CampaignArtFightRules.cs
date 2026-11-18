@@ -43,7 +43,7 @@ namespace KindredSiege.Slice
                 case BattleEventKind.Miss:
                     // The swing still plays; the word floats over the fighter it missed.
                     if(actor!=null&&actor.attack!=null){actor.poseHold=0;actor.attackAt=_visualTime-actor.attackLength*.4f;actor.anticipated=false;}
-                    if(target!=null&&!_seeking)FloatMiss(target);
+                    if(target!=null&&!_seeking&&!TablePresentation)FloatMiss(target);
                     break;
                 case BattleEventKind.Parry:
                     // The target is the caster who was parried; it loses e.Amount ticks.

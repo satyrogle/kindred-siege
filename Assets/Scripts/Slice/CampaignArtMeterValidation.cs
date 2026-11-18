@@ -15,7 +15,7 @@ namespace KindredSiege.Slice
         {
             var sim=ViewSim;
             Check(sim.MeterOn&&sim.ParryBars(0)==expected&&_meterPanel.gameObject.activeInHierarchy,moment+": authoritative meter visible");
-            Check(_meterBars.Count(bar=>bar.enabled)==expected,moment+": filled segments match the sim");
+            Check(_meterSuns.texture==_meterStates[expected],moment+": delivered sun state matches the sim");
             Check(_meterLabel.key.Contains("PARRY "+expected+"/"+MeterRules.Bars),moment+": readable bar count");
             Check(_meterBonus.key.Contains("COMBO +"+(expected*MeterRules.PercentPerBar)+"%"),moment+": held combo bonus is labelled");
         }

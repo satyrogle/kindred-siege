@@ -355,7 +355,30 @@ namespace KindredSiege.Slice
                 return lines;
             }
 
+            sealed class Raster { public int width,height; public Color32[] pixels; }
+            readonly Dictionary<string,Raster> _rasterCache=new Dictionary<string,Raster>();
+            readonly Queue<string> _rasterKeys=new Queue<string>();
+            int _rasterPixels;
+            public bool RasterCacheEnabled=true;
+            public int CachedPixels=>_rasterPixels;
+            const int RasterBudget=512000;
             public Texture2D Render(string text, Color32 fill, Color32 lower, int spacing, bool caps)
+            {
+                string key=text+"|"+fill.r+","+fill.g+","+fill.b+","+fill.a+"|"+lower.r+","+lower.g+","+lower.b+","+lower.a+"|"+spacing+"|"+caps;
+                if(!RasterCacheEnabled||!_rasterCache.TryGetValue(key,out Raster raster))
+                {
+                    raster=Rasterize(text,fill,lower,spacing,caps);
+                    if(RasterCacheEnabled&&raster.pixels.Length<=RasterBudget)
+                    {
+                        while(_rasterPixels+raster.pixels.Length>RasterBudget&&_rasterKeys.Count>0)
+                        {string oldest=_rasterKeys.Dequeue();_rasterPixels-=_rasterCache[oldest].pixels.Length;_rasterCache.Remove(oldest);}
+                        _rasterCache[key]=raster;_rasterKeys.Enqueue(key);_rasterPixels+=raster.pixels.Length;
+                    }
+                }
+                var texture=new Texture2D(raster.width,raster.height,TextureFormat.RGBA32,false){filterMode=FilterMode.Point,wrapMode=TextureWrapMode.Clamp};
+                texture.SetPixels32(raster.pixels);texture.Apply();return texture;
+            }
+            Raster Rasterize(string text, Color32 fill, Color32 lower, int spacing, bool caps)
             {
                 int top = caps ? _capTop : _allTop, rows = caps ? _capRows : _allRows, split = rows * 11 / 20;
                 int w = Measure(text, spacing) + 2, h = rows + 3;
@@ -383,10 +406,7 @@ namespace KindredSiege.Slice
                         else if (Near(ink, w, h, x, y) || Near(ink, w, h, x, y - 1)) c = TitleNight;
                         pixels[(h - 1 - y) * w + x] = c;
                     }
-                var texture = new Texture2D(w, h, TextureFormat.RGBA32, false) { filterMode = FilterMode.Point, wrapMode = TextureWrapMode.Clamp };
-                texture.SetPixels32(pixels);
-                texture.Apply();
-                return texture;
+                return new Raster{width=w,height=h,pixels=pixels};
             }
 
             static bool Near(bool[] ink, int w, int h, int x, int y)

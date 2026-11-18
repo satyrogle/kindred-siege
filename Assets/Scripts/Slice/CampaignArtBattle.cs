@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using KindredSiege.Sim;
 using KindredSiege.Sim.Battle;
@@ -24,7 +25,7 @@ namespace KindredSiege.Slice
         static readonly string[] OrderIcons={"hold","fallback","focus","unleash","eclipse"};
         [Serializable] sealed class FrameRect { public int x,y,w,h; }
         [Serializable] sealed class Frame { public FrameRect frame;public int duration; }
-        [Serializable] sealed class Sheet { public Frame[] frames;public float anchorX,anchorY;public int hitFrame;public float scale; }
+        [Serializable] sealed class Sheet { public Frame[] frames;public float anchorX,anchorY;public int hitFrame;public float scale;public string layer;public FxCue[] cues; }
         sealed class Clip
         {
             public Texture2D texture;public Sheet sheet;public float seconds;
@@ -56,8 +57,17 @@ namespace KindredSiege.Slice
             public float hitPoseAt,staggerUntil=-100;
             public Clip drawnClip;public int drawnFrame;
             public bool majorFreeze;public float majorWhiteUntil=-100;
+            public float counterAt=-100;public RawImage counterImage;
+            public PitPose pit;public TablePose table;public PairPose pair;
         }
-        sealed class Number { public RawImage image;public Vector2 origin;public float at,life=.95f,rise=20;public int sum;public bool payoff; }
+        sealed class Number { public RawImage image;public Vector2 origin;public float at,life=.95f,rise=20;public int sum,bars;public Image[] suns;public bool payoff,focus,heal;public string fighterId,word=""; }
+        bool _keepBattleClips=true;
+        bool _buildingBattle,_asyncBattleQa;
+        Coroutine _battleBuilder;
+        RectTransform _battleLoading;
+        double _buildSliceMaxMs;
+        int _buildSlices;
+        readonly HashSet<string> _battleClipKeys=new HashSet<string>();
         readonly Dictionary<string,Clip> _clips=new Dictionary<string,Clip>();
         readonly List<Figure> _figures=new List<Figure>();
         readonly List<Number> _numbers=new List<Number>();
@@ -70,13 +80,29 @@ namespace KindredSiege.Slice
         RectTransform _stage,_effects;
         Texture2D _stageArt;
         string _selected="";
-        void ClearBattle()
+        void ClearBattle(bool replaySeek=false)
         {
-            ClearBloodridgeReview();
-            ClearRegionalStage();
+            ClearStageBeats();ClearBeats();ClearTablePresentation();ClearClassMoves();ClearPairPresentation();
+            if(_battleBuilder!=null){StopCoroutine(_battleBuilder);_battleBuilder=null;}
+            _buildingBattle=false;
+            if(_battleLoading!=null){_battleLoading.gameObject.SetActive(false);Destroy(_battleLoading.gameObject);_battleLoading=null;}
+            if(replaySeek&&_replayScenery!=null)
+                ParkReplayScenery();
+            else
+            {
+                if(_replayScenery?.parking!=null)Destroy(_replayScenery.parking.gameObject);
+                _replayScenery=null;
+                ClearBloodridgeReview();
+                ClearRegionalStage();
+            }
             if(_sharkMaterial!=null){Destroy(_sharkMaterial);_sharkMaterial=null;}
             foreach(var f in _figures)if(f.hitMaterial!=null)Destroy(f.hitMaterial);
             _figures.Clear();_numbers.Clear();
+            _pitSparks.Clear();
+            ClearFocusFeedback();
+            _cashScreen=null;_cashWords.Clear();_markShots.Clear();
+            _parryCall=_comboCall=_squadNames=_leaderCover=null;
+            _clearStamp=null;_castLabel=null;
             _shakeAt=_lastShakeAt=-100;
             _lastWhiteAt=-100;
             _flashAt[0]=_flashAt[1]=-100;
@@ -84,15 +110,27 @@ namespace KindredSiege.Slice
             _coverCalloutAt=-100;
             ClearFightRules();
             _windupName.Clear();
-            // These textures are owned only by this presenter; unloading between fights bounds memory.
-            foreach(var c in _clips.Values)if(c.texture!=null)Resources.UnloadAsset(c.texture);
-            _clips.Clear();
+            // Retain only the previous battle's clips until the next battle's exact set is known.
+            if(!_keepBattleClips)ReleaseBattleClips();
             if(_stageArt!=null){Resources.UnloadAsset(_stageArt);_stageArt=null;}
+        }
+        void ReleaseBattleClips()
+        {
+            foreach(var c in _clips.Values)if(c.texture!=null)Resources.UnloadAsset(c.texture);
+            _clips.Clear();_battleClipKeys.Clear();
+        }
+        void PruneBattleClips()
+        {
+            var stale=new List<string>();foreach(var key in _clips.Keys)if(!_battleClipKeys.Contains(key))stale.Add(key);
+            foreach(var key in stale){if(_clips[key].texture!=null)Resources.UnloadAsset(_clips[key].texture);_clips.Remove(key);}
         }
         Clip LoadClip(string key)
         {
+            if(key.StartsWith("Table42Review/")){}
+            else if(TablePresentation&&HasTableUnit(key))key="Table42Review/Units/"+key;
+            _battleClipKeys.Add(key);
             if(_clips.TryGetValue(key,out Clip c))return c;
-            string path="CampaignArt/"+key;
+            string path=key.StartsWith("Table42Review/")?key:"CampaignArt/"+key;
             var json=Resources.Load<TextAsset>(path);
             if(json==null){path="ClarthStudy/"+key;json=Resources.Load<TextAsset>(path);}
             var tex=Resources.Load<Texture2D>(path);
@@ -103,7 +141,7 @@ namespace KindredSiege.Slice
         }
         string ArtKey(BattleUnit u)
         {
-            if(ViewSim.TryPartOf(u,out _))return null;
+            if(ViewSim.TryPartOf(u,out _)||IsSharkAdd(u))return null;
             string tribe=FigureTribe(u);
             if(u.Id==Campaign.LeaderId)return null;
             // The two new tribes' PixelLab sheets (Jacob, 19 Oct 2026: "bind both tribes in ArtKey", then "do both and fix em"):
@@ -143,19 +181,67 @@ namespace KindredSiege.Slice
         }
         void BuildBattle()
         {
+            if(!_auto||_asyncBattleQa)
+            {
+                LoadPixelKit();_buildingBattle=true;_buildSliceMaxMs=0;_buildSlices=0;
+                _battleLoading=Rect(_screen,"Forming squad",0,0,W,H);
+                Panel(_battleLoading,0,0,W,H,Ink).raycastTarget=true;
+                SetPx(PxLabel(_battleLoading,360,210,1),"FORMING SQUAD",PxBone);
+                _battleBuilder=StartCoroutine(BuildBattleOverFrames());
+            }
+            else {var steps=BuildBattleSteps();while(steps.MoveNext()){} }
+        }
+        IEnumerator BuildBattleOverFrames()
+        {
+            // First present the loading screen. Unity object/texture work remains on its main thread.
+            yield return null;
+            var steps=BuildBattleSteps();
+            while(true)
+            {
+                var watch=System.Diagnostics.Stopwatch.StartNew();bool more=steps.MoveNext();watch.Stop();
+                _buildSliceMaxMs=Math.Max(_buildSliceMaxMs,watch.Elapsed.TotalMilliseconds);_buildSlices++;
+                if(!more)break;
+                if(_battleLoading!=null)_battleLoading.SetAsLastSibling();
+                yield return null;
+            }
+            // Render the newly constructed HUD under the cover before doing historical ticks.
+            if(_pendingPlaybackSeek>0)
+            {
+                _battleLoading.SetAsLastSibling();
+                yield return null;
+            }
+            if(_battleLoading!=null){_battleLoading.gameObject.SetActive(false);Destroy(_battleLoading.gameObject);_battleLoading=null;}
+            _buildingBattle=false;_battleBuilder=null;ApplyPendingPlaybackSeek();SelectPageControl();
+        }
+        IEnumerator BuildBattleSteps()
+        {
+            _battleClipKeys.Clear();
             LoadPixelKit();
             _visualTime=_endAge=0;_selected="";_hover="";
             _majorUntil=_majorLast=-100;
             _stage=Rect(_screen,"Battlefield",0,0,W,H);
-            var bg=Raw(_stage,"Stage",StageX*Px,StageY*Px,StageW*Px,StageH*Px);
-            bool shark=ViewSim.Beast(1)==BeastKit.SandShark;
-            if(shark||!UseBloodridgeCourt&&!UseRegionalStage)bg.texture=ReviewStage()??StageArt();
-            if(!shark){BuildBloodridgeReviewRear(bg);BuildRegionalStageRear(bg);}
+            bool restoring=_replayScenery?.parking!=null;
+            if(restoring)
+                foreach(var layer in _replayScenery.rear)layer.SetParent(_stage,false);
+            else
+            {
+                var bg=Raw(_stage,"Stage",StageX*Px,StageY*Px,StageW*Px,StageH*Px);
+                bool shark=ViewSim.Beast(1)==BeastKit.SandShark;
+                if(shark||!UseBloodridgeCourt&&!UseRegionalStage)bg.texture=ReviewStage()??StageArt();
+                if(!shark){BuildBloodridgeReviewRear(bg);BuildRegionalStageRear(bg);}
+                if(_playback!=null&&(_bloodridgeActive||_regionalActive))
+                    _replayScenery=new ReplayScenery{rear=StageChildrenFrom(0)};
+            }
+            yield return null;
             var total=new int[2,2];var placed=new int[2,2];
             bool chiefPresent=false;foreach(var u in ViewSim.Units)if(u.Side==1&&u.Id.EndsWith(".chief"))chiefPresent=true;
             foreach(var u in ViewSim.Units)if(!u.IsLeader)total[u.Side,(int)u.Row]++;
             // The 1x formation: the armies meet in the lower middle of the stage, and the top row's heads stay
             // under the landmark at the foot of the cliff. Screen pixels, starting values.
+            // Cached figure binding takes a fraction of a frame. A seek can fit several
+            // figures into one 3 ms slice while cold fight construction keeps its cadence.
+            var seekSlice=_pendingPlaybackSeek>=0?System.Diagnostics.Stopwatch.StartNew():null;
+            var formation=new HashSet<string>();
             foreach(var u in ViewSim.Units)
             {
                 int row=(int)u.Row;int slot=u.IsLeader?0:placed[u.Side,row]++;int count=total[u.Side,row];
@@ -171,8 +257,15 @@ namespace KindredSiege.Slice
                     y=u.IsLeader?630:430+slot%3*135;
                 }
                 if(ViewSim.BeastOn&&!u.IsLeader)y=count<=1?580:480+slot*(220f/Mathf.Max(1,count-1));
+                if(PitPresentation&&!ViewSim.BeastOn&&!u.IsLeader&&ViewKind!=EncounterKind.Duel)
+                {x=u.Side==0?(u.Row==Row.Front?650:470):(u.Row==Row.Front?790:970);y=count<=1?560:420+slot*(280f/Mathf.Max(1,count-1));}
+                // A solo raid chief has no front rank to stand behind. Bring him to the same weapon line.
+                if(PitPresentation&&RaidHud&&u.Side==1&&u.IsLeader&&total[1,0]+total[1,1]==0){x=850;y=620;}
+                LeadersFormation(u,formation,ref x,ref y);
+                if(PairsPresentation){var grid=PairFeet(u);x=grid.x;y=grid.y;}
                 var feet=new Vector2(Mathf.Round(x),Mathf.Round(y));
                 if(IsSharkPart(u))feet=SharkPartFeet(u);
+                if(IsSharkAdd(u))feet=new Vector2(u.Id.EndsWith(".pup1")?1030:1220,720);
                 var f=new Figure{unit=u,feet=feet,artKey=ArtKey(u),shownHp=u.Hp};
                 f.root=Rect(_stage,u.Id,feet.x,feet.y,1,1);
                 if(u.Id==Campaign.LeaderId)
@@ -200,7 +293,7 @@ namespace KindredSiege.Slice
                 {
                     f.head=55*Px;
                     PxImage(f.root,"Token",Plate(_kitButton,12,46,52),-23,-52);
-                    string title=ViewSim.TryPartOf(u,out var markerPart)?BeastKits.Name(markerPart).ToUpperInvariant():HunterFight(ViewKind)&&u.Side==1?(u.IsLeader?"THE HUNTER":"HUNTER"):
+                    string title=IsSharkAdd(u)?(u.Id.EndsWith(".pup1")?"PUP 1":"PUP 2"):ViewSim.TryPartOf(u,out var markerPart)?BeastKits.Name(markerPart).ToUpperInvariant():HunterFight(ViewKind)&&u.Side==1?(u.IsLeader?"THE HUNTER":"HUNTER"):
                         u.Id.EndsWith(".champion")?"CHAMPION":"SHAMAN";
                     SetPx(PxLabel(f.root,0,-40,1),title,PxBone);
                     SetPx(PxLabel(f.root,0,-26,1),"ART",PxMuted);
@@ -209,14 +302,32 @@ namespace KindredSiege.Slice
                 // Point at a fighter to see who it is; click an enemy while Focus Fire is armed to target it.
                 // The area covers the fighter's body at 1x.
                 float reach=Mathf.Clamp(f.head*.8f,60,140);
+                PrepareTableFigure(f);PreparePitFigure(f);PreparePairFigure(f);
                 var hitbox=ActionButton(f.root,-28,-reach,56,reach+6,"",()=>SelectFigure(u));
                 hitbox.image.color=Color.clear;hitbox.name="target-"+u.Id;_buttons["target-"+u.Id]=hitbox;f.target=hitbox;
                 OnHover(hitbox.gameObject,()=>ClassFighterHint(u));
                 PrepareCombatFeedback(f);
                 _figures.Add(f);
+                if(seekSlice==null||seekSlice.Elapsed.TotalMilliseconds>=3)
+                {
+                    yield return null;
+                    seekSlice?.Restart();
+                }
             }
+            // This iterator is stepped manually by both construction paths. Yielding
+            // another IEnumerator does not execute it; flatten preloads explicitly.
+            if(TablePresentation){var effects=PreloadReviewFx();while(effects.MoveNext())yield return null;}
+            var moves=PreloadClassMoves();while(moves.MoveNext())yield return null;
+            // Playback binds the shark's clips in its first DrawBattle below.
+            if(_playback==null)PruneBattleClips();
             _figures.Sort((a,b)=>a.feet.y.CompareTo(b.feet.y));foreach(var f in _figures)f.root.SetAsLastSibling();
-            BuildBloodridgeReviewFront();
+            if(restoring)RestoreReplayForeground();
+            else
+            {
+                int first=_stage.childCount;
+                BuildBloodridgeReviewFront();
+                if(_replayScenery!=null)_replayScenery.front=StageChildrenFrom(first);
+            }
             // Bars and tags sit on a layer above every fighter, so one standing lower never hides them.
             // They go under the feet: the columns are stacked, so above the head they would sit on the
             // feet of the fighter above.
@@ -231,6 +342,7 @@ namespace KindredSiege.Slice
                 f.barFill=Panel(f.readoutRoot,left,2*Px,f.barWidth*Px,3*Px,f.unit.Side==0?PxMint:PxRed);
                 f.tag=PxLabel(f.readoutRoot,0,7,1);
             }
+            yield return null;
             _effects=Rect(_stage,"Numbers above sprites",0,0,W,H);
             _pxLane[0]=PxLabel(_screen,StageX+6,TopBarH+4,0);
             _pxLane[1]=PxLabel(_screen,StageX+StageW-6,TopBarH+4,2);
@@ -246,7 +358,7 @@ namespace KindredSiege.Slice
             PxImage(_screen,"Top bar",Plate(_kitButton,12,720,TopBarH),0,0);
             _pxTitle=PxLabel(_screen,14,8);
             _pxStats=PxLabel(_screen,14,21);
-            if(_playback!=null){BuildPlaybackControls();return;}
+            if(_playback!=null){BuildPlaybackControls();PruneBattleClips();yield break;}
             string heading=ViewKind==EncounterKind.Tutorial?"Tutorial: "+_fight.Encounter.Title:_fight.Encounter.Title+" / "+PathPlace(_campaign);
             SetPx(_pxTitle,ViewSim.MeterOn?Fit(heading,300):heading,PxBone);
             PxButton("pause","PAUSE",490,6,64,28,()=>_paused=!_paused);
@@ -273,18 +385,25 @@ namespace KindredSiege.Slice
             _resultButton=PxButton("see-result","SEE RESULT",260,StageY+StageH/2-14,200,28,ShowResult);
             _resultButton.gameObject.SetActive(false);
             CoachBegin();
-            DrawBattle();RefreshFight();
+            yield return null;
+            DrawBattle();
+            yield return null;
+            RefreshFight();
         }
         void SelectFigure(BattleUnit u)
         {
+            if(_buildingBattle)return;
             if(_playback!=null){_selected=u.Id;_notice=UnitName(u)+"   "+u.Hp+" / "+u.MaxHp+" HP";return;}
             if(!u.Alive||ViewOver)return;
+            if(_targeting&&u.Side==1&&ViewSim.LeaderProtected(u))return;
             _selected=u.Id;
             if(_targeting&&u.Side==1)Focus(u);
             else _notice=UnitName(u)+"   "+u.Hp+" / "+u.MaxHp+" HP, "+(u.Row==Row.Front?"front":"back")+" row.";
         }
         void Anticipate()
         {
+            if(ViewSim.StageOn)return;
+            if(PitPresentation){AnticipatePit();return;}
             foreach(var f in _figures)
             {
                 if(f.attack==null||!f.unit.Alive)continue;
@@ -298,6 +417,7 @@ namespace KindredSiege.Slice
         Figure FindFigure(string id){foreach(var f in _figures)if(f.unit.Id==id)return f;return null;}
         void AnimateEvent(BattleEvent e)
         {
+            if(DeferChiefReceipt(e))return;
             var actor=FindFigure(e.ActorId);var target=FindFigure(e.TargetId);
             if(e.Kind==BattleEventKind.Hit||e.Kind==BattleEventKind.Heal||e.Kind==BattleEventKind.TrapArmed)
             {
@@ -305,7 +425,7 @@ namespace KindredSiege.Slice
                 if(target!=null&&e.Amount>0)
                 {
                     bool heal=e.Kind==BattleEventKind.Heal;
-                    if(!_seeking)FloatNumber(target,e.Amount,heal,e.Tick,e.ActorId);
+                    if(!_seeking)FloatNumber(target,e.Amount,heal,e.Tick,e.ActorId,e.ActorSide==0&&e.TargetId==ViewSim.FocusedId(0),e.Detail);
                     target.flashAt=_visualTime;target.flash=heal?new Color(.72f,1f,.78f):new Color(1f,.58f,.52f);
                     if(e.Kind==BattleEventKind.Hit){target.hitAt=_visualTime;target.hitPoseAt=target.poseTime;target.lagUntil=_visualTime+.35f;}
                 }
@@ -354,6 +474,9 @@ namespace KindredSiege.Slice
             FightRulesEvent(e,actor,target);
             // Why an order did not land as hoped (CampaignArtWhy.cs), and the tutorial's next step.
             WhyEvent(e);if(_playback==null)CoachHeard(e);
+            PitEvent(e,actor,target);TableEvent(e,actor,target);ChiefFxEvent(e);
+            BeatEvent(e,actor,target);
+            ClassMoveEvent(e,actor,target);
         }
         static Color32 OrderColour(Directive d)
         {
@@ -415,15 +538,16 @@ namespace KindredSiege.Slice
         }
         void DrawBar(Figure f,BattleSimulation sim)
         {
-            var u=f.unit;bool alive=u.Alive;
+            // One blow at a time (CampaignArtBeats.cs): the bar shows health as the blows already played left it.
+            var u=f.unit;bool alive=u.Alive||BeatAlive(f);int hp=BeatHp(f);
             f.marker.enabled=f.barLag.enabled=f.barFill.enabled=alive;
             // The chip drains on the fight's own clock (Codex re-audit, 10 Oct 2026): it holds while paused
             // and does not move when a frame is drawn again or captured.
             float dt=Mathf.Max(0f,_visualTime-f.chipAt);f.chipAt=_visualTime;
             if(!alive){DrawTags(f,null,null);return;}
-            if(f.shownHp<u.Hp)f.shownHp=u.Hp;
-            else if(_visualTime>=f.lagUntil)f.shownHp=Mathf.MoveTowards(f.shownHp,u.Hp,u.MaxHp*1.2f*dt);
-            f.barFill.rectTransform.sizeDelta=new Vector2(Mathf.Round(f.barWidth*u.Hp/u.MaxHp)*Px,3*Px);
+            if(f.shownHp<hp)f.shownHp=hp;
+            else if(_visualTime>=f.lagUntil)f.shownHp=Mathf.MoveTowards(f.shownHp,hp,u.MaxHp*1.2f*dt);
+            f.barFill.rectTransform.sizeDelta=new Vector2(Mathf.Round(f.barWidth*hp/u.MaxHp)*Px,3*Px);
             f.barLag.rectTransform.sizeDelta=new Vector2(Mathf.Round(f.barWidth*Mathf.Clamp01(f.shownHp/u.MaxHp))*Px,3*Px);
             // The frame takes the colour of the order running on this fighter's side, while the fight runs.
             int s=u.Side;bool live=!ViewOver;
@@ -438,6 +562,7 @@ namespace KindredSiege.Slice
         }
         void DrawBattle()
         {
+            if(!_paused)DeliverChiefReceipts();
             var sim=ViewSim;
             // New fight/replay screens must replace readout references before chief overlays inspect them.
             EnsureReadouts(sim);
@@ -450,7 +575,7 @@ namespace KindredSiege.Slice
             DrawClarity(sim);
             DrawFocusTarget(sim);
             if(CleanCombatHud)CleanThreatMarkers(sim);
-            DrawCombatShake();
+            ResolveTableImpacts();DrawCombatShake();PrepareClassMoves();DrawPairPositions();
             foreach(var f in _figures)
             {
                 var u=f.unit;
@@ -459,15 +584,22 @@ namespace KindredSiege.Slice
                 f.readoutRoot.gameObject.SetActive(visible);
                 if(_bloodridgeContacts.TryGetValue(f,out RawImage reserveContact))reserveContact.enabled=visible;
                 if(!visible)continue;
-                f.target.interactable=u.Alive;
-                DrawBar(f,sim);
-                DrawRoadUnit(f);
-                DrawCombatFeedback(f);
-                DrawBloodridgeContact(f);
+                f.target.interactable=u.Alive&&(!_targeting||u.Side!=1||!sim.LeaderProtected(u));
+                bool waiting=StageBystander(f);
+                if(!waiting)
+                {
+                    if(!PendingChiefImpact(f)&&(!StageHolding||_stageLanded||f!=_stageTarget))DrawBar(f,sim);
+                    DrawRoadUnit(f);
+                    DrawCombatFeedback(f);
+                    DrawClassMovePosition(f);
+                    DrawBloodridgeContact(f);
+                }
                 if(f.body==null)continue;
-                Color tint=!_paused&&u.Alive&&_visualTime-f.flashAt<.1f?f.flash:Color.white;
-                tint=MomentTint(f,tint);
+                Color tint=!TablePresentation&&!_paused&&u.Alive&&_visualTime-f.flashAt<.1f?f.flash:Color.white;
+                tint=PitPresentation?PitFocusTint(f,tint):MomentTint(f,tint);
+                tint=PitHitTint(f,tint);
                 if(RoadHud&&u.Alive&&u.Frenzied)tint=Color.Lerp(tint,new Color(1f,.30f,.20f),.55f);
+                if(waiting)tint=new Color(.7f,.7f,.7f,1);
                 if(f.staticFront)
                 {
                     // Front-only asset pass: show the actual sprite; do not fake unmade animation clips.
@@ -476,25 +608,33 @@ namespace KindredSiege.Slice
                 }
                 f.body.color=tint;
                 // The guard goes up when Hold starts, stays up while it runs, and comes down after.
-                bool holding=f.block!=null&&sim.HoldTicksLeft(u.Side)>0;
+                bool holding=f.block!=null&&f.table==null&&sim.HoldTicksLeft(u.Side)>0;
                 if(holding&&!f.blocking){f.blocking=true;f.blockAt=f.poseTime;}
                 else if(!holding&&f.blocking){f.blocking=false;f.blockEndAt=f.poseTime;}
                 Clip c=f.idle;float time=f.poseTime+u.Index*.41f;bool loop=true;
-                if(!u.Alive)
+                if(StageAttackPose(f,out float stageTime)){c=f.attack;time=stageTime;loop=false;}
+                else if(BeatAttackPose(f,out Clip beatClip,out float beatTime)){c=beatClip;time=beatTime;loop=false;}
+                else if(!u.Alive&&!PendingChiefImpact(f)&&!(StageHolding&&f==_stageTarget&&!_stageLanded)&&!BeatAlive(f))
                 {if(f.deathAt<0)f.deathAt=f.poseTime;c=f.death;time=f.poseTime-f.deathAt;loop=false;}
                 // Until a surrender clip is handed over, the yielded chief rests in his idle.
                 // Do not keep showing the interrupted attack or cast as if it were still active.
-                else if(u.Yielded){c=f.idle;}
-                else if(HeavyAttackPose(f,sim,out float heavyTime)){c=f.attack;time=heavyTime;loop=false;}
+                else if(waiting||u.Yielded){c=f.idle;}
+                else if(PitPresentation&&u.StunTicks>0){c=f.hit;time=Mathf.Min(.1f,c.seconds*.5f);loop=false;}
+                else if(ChiefCasterPose(f,out Clip casterClip,out float casterTime)){c=casterClip;time=casterTime;loop=false;}
+                else if(PairCombatPose(f,out Clip pairClip,out float pairTime)){c=pairClip;time=pairTime;loop=false;}
+                else if(TableAttackPose(f,out Clip tableClip,out float tableTime)){c=tableClip;time=tableTime;loop=false;}
+                else if(f.table==null&&PitAttackPose(f,out float pitTime)){c=f.attack;time=pitTime;loop=false;}
+                else if(!PitPresentation&&HeavyAttackPose(f,sim,out float heavyTime)){c=f.attack;time=heavyTime;loop=false;}
                 // Hit-reaction poses may hold locally, but their selection window and every attack
                 // use the unheld action clock. A hit pause can never cover extra attack frames.
                 else if(_visualTime-f.hitAt<f.hitLength&&!(_combatFeedback&&f.poseTime-f.strikeAt>=0&&f.poseTime-f.strikeAt<StrikeHoldSeconds))
                 {c=f.hit;time=(f.poseTime-f.hitPoseAt)/f.hitLength*c.seconds;loop=false;}
-                else if(_visualTime-f.attackAt<f.attackLength){c=f.attack;time=(_visualTime-f.attackAt)/f.attackLength*c.seconds;loop=false;}
+                else if(!PitPresentation&&_visualTime-f.attackAt<f.attackLength){c=f.attack;time=(_visualTime-f.attackAt)/f.attackLength*c.seconds;loop=false;}
                 else if(f.victory!=null&&ViewOver&&sim.Winner==u.Side){c=f.victory;time=_endAge;loop=false;}
                 else if(f.blocking){c=f.block;time=Mathf.Min(f.poseTime-f.blockAt,c.seconds/2);loop=false;}
                 else if(f.block!=null&&f.poseTime-f.blockEndAt<f.block.seconds/2){c=f.block;time=f.block.seconds/2+f.poseTime-f.blockEndAt;loop=false;}
-                if(f.majorFreeze&&f.poseHold>0&&f.drawnClip!=null&&!u.Yielded&&!(sim.RoadKitOn&&sim.FallBackTicksLeft(u.Side)>0))c=f.drawnClip;
+                if(!PairsPresentation&&!waiting&&f.table!=null&&_tableClock<f.table.holdUntil&&f.drawnClip!=null){c=f.drawnClip;}
+                else if(!PairsPresentation&&!waiting&&!(StageHolding&&f==_stageActor)&&f.majorFreeze&&f.poseHold>0&&f.drawnClip!=null&&!u.Yielded&&!(sim.RoadKitOn&&sim.FallBackTicksLeft(u.Side)>0))c=f.drawnClip;
                 else {f.drawnClip=c;f.drawnFrame=c.FrameAt(time,loop);}
                 FrameRect frame=c.sheet.frames[f.drawnFrame].frame;
                 f.body.texture=c.texture;
@@ -504,15 +644,16 @@ namespace KindredSiege.Slice
                 SetFlashMask(f,c,frame);
                 DrawTightBody(sim,f);
             }
+            BeatFadeClock();
             DrawTightParry(sim);
+            DrawPit();
             // Confirmed effects share the existing feedback area; compact state marks sit by HP.
             DrawButcherEffects(sim);
             DrawPalFloor(sim);
-            DrawShark(sim);
-            DrawCashWords();
+            if(!StageHolding||IsSharkStageBeat())DrawShark(sim);
+            DrawCashWords();DrawTableWords();DrawReviewFx();OrderClassMoves();DrawBeatWords();DrawPairBlood();
             DrawLane(sim,0);DrawLane(sim,1);
-            DrawBloodridgeWind();
-            DrawRegionalWind();
+            if(!StageHolding){DrawBloodridgeWind();DrawRegionalWind();}
             for(int i=_numbers.Count-1;i>=0;i--)
             {
                 var n=_numbers[i];float age=_visualTime-n.at;
@@ -521,7 +662,16 @@ namespace KindredSiege.Slice
                     if(n.image.texture!=null){_screenTextures.Remove((Texture2D)n.image.texture);Destroy(n.image.texture);}
                     Destroy(n.image.gameObject);_numbers.RemoveAt(i);continue;
                 }
+                n.image.enabled=!StageHolding||(_stageLanded&&n.at>=_visualTime-_stageAge-.0001f&&
+                    (_stageTarget==null||n.fighterId==_stageTarget.unit.Id));
                 var size=n.image.rectTransform.sizeDelta;
+                if(PitPresentation)
+                {
+                    var victim=FindFigure(n.fighterId);float stack=0;
+                    foreach(var other in _numbers)if(other!=n&&other.fighterId==n.fighterId&&_visualTime-other.at<=other.life&&
+                        (other.at>n.at||other.at==n.at&&_numbers.IndexOf(other)>i))stack+=other.image.rectTransform.sizeDelta.y+6;
+                    if(victim!=null)n.origin=new Vector2(victim.root.anchoredPosition.x,Mathf.Max(150,victim.feet.y-victim.head*.55f-stack));
+                }
                 float rise=Mathf.Floor(age/n.life*n.rise)*ArtScale;
                 n.image.rectTransform.anchoredPosition=new Vector2(Mathf.Round(n.origin.x-size.x/2),-(Mathf.Round(n.origin.y-size.y/2)-rise));
                 n.image.color=new Color(1,1,1,Mathf.Clamp01((n.life-age)*3));
@@ -531,14 +681,15 @@ namespace KindredSiege.Slice
         /// one unreadable number. It starts at chest height and stays inside the stage. Wounds on your
         /// fighters are red, healing green, wounds on theirs bone. Drawn in the game's display font at the
         /// world's 1x, so a number never dwarfs the fighter it is on.
-        void FloatNumber(Figure f,int amount,bool heal,long eventTick=-1,string actorId=null)
+        void FloatNumber(Figure f,int amount,bool heal,long eventTick=-1,string actorId=null,bool focusHit=false,string detail="")
         {
+            if(PitPresentation){PitFloatNumber(f,amount,heal,eventTick,actorId,focusHit,detail);return;}
             bool payoff=!heal&&eventTick>=0&&CashHitAt(f,eventTick,actorId);
-            if(!payoff&&!heal&&_selected!=f.unit.Id&&!f.unit.IsLeader&&amount<Mathf.Max(1,f.unit.MaxHp/10))return;
+            if(!payoff&&!focusHit&&!heal&&_selected!=f.unit.Id&&!f.unit.IsLeader&&amount<Mathf.Max(1,f.unit.MaxHp/10))return;
             Number last=heal?f.lastHeal:f.lastHit;
-            if(!payoff&&last!=null&&!last.payoff&&_numbers.Contains(last)&&_visualTime-last.at<.6f){last.sum+=amount;DrawNumber(last,heal,f);return;}
+            if(!payoff&&last!=null&&!last.payoff&&last.focus==focusHit&&_numbers.Contains(last)&&_visualTime-last.at<.6f){last.sum+=amount;DrawNumber(last,heal,f);return;}
             float offset=(f.lane++%3-1)*22*ArtScale;
-            var n=new Number{sum=amount,payoff=payoff,at=_visualTime,origin=new Vector2(f.feet.x+offset,Mathf.Max(payoff?380:(StageY+40)*Px,f.feet.y-f.head*.45f))};
+            var n=new Number{sum=amount,payoff=payoff,focus=focusHit,at=_visualTime,origin=new Vector2(f.feet.x+offset,Mathf.Max(payoff?380:(StageY+40)*Px,f.feet.y-f.head*.45f))};
             n.image=Raw(_effects,"Number",0,0,1,1);
             DrawNumber(n,heal,f);
             _numbers.Add(n);
@@ -547,11 +698,18 @@ namespace KindredSiege.Slice
         void DrawNumber(Number n,bool heal,Figure f)
         {
             if(n.image.texture!=null){_screenTextures.Remove((Texture2D)n.image.texture);Destroy(n.image.texture);}
-            Color32 fill=heal?PxMint:f.unit.Side==0?PxRed:PxBone;
-            Color32 lower=heal?new Color32(104,150,128,255):f.unit.Side==0?new Color32(160,64,48,255):PxMuted;
-            var t=_logoFont.Render((heal?"+":"")+n.sum,fill,lower,1,true);_screenTextures.Add(t);
-            float scale=ArtScale*(n.payoff?1.5f:1);
+            Color32 fill=heal?PxMint:f.unit.Side==0||n.focus?PxRed:PxBone;
+            Color32 lower=heal?new Color32(104,150,128,255):f.unit.Side==0||n.focus?new Color32(160,64,48,255):PxMuted;
+            if(PitPresentation&&f.unit.Side==0&&!heal){fill=new Color32(245,113,94,255);lower=fill;}
+            bool small=PitPresentation&&(!n.payoff||n.word=="TOTAL");
+            var t=(small?_tinyFont:_logoFont).Render((n.word.Length>0?n.word+" ":"")+(heal?"+":"")+n.sum,fill,lower,1,true);_screenTextures.Add(t);
+            float scale=small?2:ArtScale*(PitPresentation?1:n.payoff||n.focus?1.5f:1);
             n.image.texture=t;n.image.rectTransform.sizeDelta=new Vector2(t.width*scale,t.height*scale);
+            if(PitPresentation&&n.bars>0)
+            {
+                if(n.suns==null)
+                {n.suns=new Image[n.bars];for(int i=0;i<n.bars;i++){n.suns[i]=Panel(n.image.transform,i*9,-8,6,6,PxGold);n.suns[i].name="Held parry sun / ART PENDING";n.suns[i].raycastTarget=false;}}
+            }
         }
         void Callout(int side,string value,Color32 colour)
         {
@@ -673,7 +831,8 @@ namespace KindredSiege.Slice
                 var d=Orders[i];var b=_buttons["order-"+i];
                 int pointCost=DisplayOrderCost(sim,d);
                 string title=(i+1)+" "+OrderName(d),effect=sim.RoadKitOn&&d==Directive.FallBack?"Dodge; no attacks":ShortEffect(d),cost=pointCost==0?"FREE":pointCost.ToString();
-                bool allowed=sim.CanUse(0,d,out string unavailable);
+                string unavailable;
+                bool allowed=d==Directive.FocusFire&&string.IsNullOrEmpty(ShadeFollowUp(sim,d))?sim.CanUse(0,d,out unavailable):sim.CanUseOrder(0,d,d==Directive.FocusFire?sim.FocusedId(0):"",out unavailable);
                 bool ok=!ViewOver&&allowed&&!_pilotOn;
                 if(d==Directive.FallBack&&_fight.Encounter.NoFallBack){effect="Not here";ok=false;}
                 if(d==Directive.Eclipse)
@@ -720,7 +879,7 @@ namespace KindredSiege.Slice
                         lit=window&&ok;
                     }
                     if(d==Directive.Hold&&sim.TightParryOn&&!verdict)
-                    {effect=sim.WhiffTicksLeft(0)>0?"WHIFF / +50%":_paused?"Paused: no parry":"Watch attacker";lit=false;}
+                    {effect=sim.WhiffTicksLeft(0)>0?"WHIFF / +50%":_paused?"Paused: no parry":LeaderParryPresentation?"Watch leader":"Watch attacker";lit=false;}
                     if(!allowed)effect=sim.DirectivePoints(0)<pointCost?"Need "+pointCost+" pts":unavailable;
                     if(d==Directive.FallBack&&_fight.Encounter.NoFallBack)effect="Not in this fight";
                     if(d==Directive.Eclipse)
@@ -734,6 +893,7 @@ namespace KindredSiege.Slice
                     title=Fit(title,90);
                     effect=blocked.Length>0?"+"+(BattleSimulation.UnleashDamagePercent-100)+"% DMG":Fit(effect,90);
                 }
+                PalOrderPlate(sim,d,verdict,ref title,ref effect,ref cost,ref ok,ref lit);
                 if(d==Directive.Eclipse)MeterSpellPlate(sim,ok,ref effect,ref cost,ref lit);
                 if(verdict)
                 {
@@ -752,7 +912,7 @@ namespace KindredSiege.Slice
             }
             SetPx(_pxButtonLabels["pause"],_paused?"RESUME":"PAUSE",PxBone);
             SetPx(_pxButtonLabels["speed"],LearningSpeedLabel,_speed<1?PxMint:PxBone);
-            bool resultReady=ViewOver&&_endAge>2.3f;
+            bool resultReady=!StageHolding&&_chiefReceipts.Count==0&&ViewOver&&_endAge>2.3f;
             bool newlyReady=resultReady&&!_resultButton.gameObject.activeSelf;
             _resultButton.gameObject.SetActive(resultReady);
             if(newlyReady&&_modal==null)SelectControl("see-result");

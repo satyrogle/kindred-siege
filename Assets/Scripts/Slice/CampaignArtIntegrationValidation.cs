@@ -15,6 +15,7 @@ namespace KindredSiege.Slice
         // Fixed integration scenarios, real UI controls and authoritative state. No tuning or seed sweep.
         void IntegrationCap(int cap)
         {
+            _palsReviewCap=cap>26?cap:0;
             _sprintReview=cap>=26;
             _floorReview=cap>=23;
             _meterReview=cap>=22;

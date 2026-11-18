@@ -84,6 +84,14 @@ namespace KindredSiege.Slice
 
         // ------------------------------------------------------------ the squad page
 
+        void ToggleSquadPick(CampaignFighter f, Encounter encounter)
+        {
+            if(_squad.Contains(f.Id))_squad.Remove(f.Id);
+            else if(encounter.Kind==EncounterKind.Duel){_squad.Clear();_squad.Add(f.Id);}
+            else if(_squad.Count<encounter.SquadSize)_squad.Add(f.Id);
+            SetPage(Page.Squad);
+        }
+
         /// One fighter on the squad page: the plate that picks them, then FRONT or BACK and GEAR. A wide row (ten
         /// fighters or fewer) shows name, class, quirk and gear; a narrow one, in two columns, name and quirk with
         /// one letter buttons. Pointing at any of it says the whole of it at the foot of the page.
@@ -94,13 +102,7 @@ namespace KindredSiege.Slice
             var piece=_campaign.GearOf(f.Id);
             var second=PalFloorRun?_campaign.FindGear(f.GearId2):null;
             int small=wide?54:30,pickW=width-2*small-8;
-            var pick=PxButton("fighter-"+f.Id,"",x,y,pickW,28,()=>
-            {
-                if(_squad.Contains(f.Id))_squad.Remove(f.Id);
-                else if(encounter.Kind==EncounterKind.Duel){_squad.Clear();_squad.Add(f.Id);}
-                else if(_squad.Count<encounter.SquadSize)_squad.Add(f.Id);
-                SetPage(Page.Squad);
-            });
+            var pick=PxButton("fighter-"+f.Id,"",x,y,pickW,28,()=>ToggleSquadPick(f,encounter));
             if(!selected)pick.targetGraphic.color=new Color(.62f,.6f,.66f);
             var mark=selected?PxGlyph(PxCheck,PxMint):_tinyFont.Render("+",PxMuted,PxMuted,1,true);
             _screenTextures.Add(mark);

@@ -12,6 +12,7 @@ namespace KindredSiege.Slice
     {
         IEnumerator ValidateSprint26()
         {
+            yield return ValidateParryWarning();
             _savePath=Path.Combine(_capture,"sprint26-save.txt");
             IntegrationCap(26);
             _campaign=CampaignSave.Read(File.ReadAllText(Path.Combine(Application.streamingAssetsPath,"ReviewRoute","camp.txt")),ReviewTuning);
@@ -118,6 +119,48 @@ namespace KindredSiege.Slice
             for(int tick=0;tick<400&&!ViewOver;tick++)HudTicks(1);
             Capture("26-shark-moving");
             Log("Sprint26 integration checks complete. Native input and subjective feel remain owner review.");
+        }
+
+        IEnumerator ValidateParryWarning()
+        {
+            IntegrationCap(30);_savePath=Path.Combine(_capture,"warning-save.txt");
+            _campaign=FreshRoadPreview();_fight=_campaign.StartEncounter(0);_playback=null;
+            BeginFight();_pilotOn=false;_paused=false;_speed=0;yield return null;
+            HudTicks(10);
+            Check(_figures.Where(f=>f.hitMaterial!=null).All(f=>f.hitMaterial.GetFloat(ParryGold)==0&&f.hitMaterial.GetFloat(ParryRim)==0),
+                "ordinary road attacks have no parry warning or fill");
+            int guard=0;
+            while(!ViewOver&&!ViewSim.Threats(0).Any(t=>t.Name==HeavyRules.Heavy&&t.BeatTicks>t.WindowTicks+1)&&guard++<600)HudTicks(1);
+            var sim=ViewSim;var threat=sim.Threats(0).First(t=>t.Name==HeavyRules.Heavy&&t.BeatTicks>t.WindowTicks+1);
+            var attacker=FindFigure(threat.ActorId);
+            Check(attacker!=null&&attacker.unit.Side==1&&attacker.unit.Role==UnitRole.Fighter,"actual road raider starts the parry warning");
+            string state=sim.OrderedStateSnapshot;ReadClarity(sim);DrawBattle();
+            Check(attacker.hitMaterial.GetFloat(ParryRim)==1&&attacker.hitMaterial.GetFloat(ParryGold)==0,
+                "coming attack has a steady rim with no premature press-now fill");
+            Check(_figures.Where(f=>f!=attacker&&f.hitMaterial!=null).All(f=>f.hitMaterial.GetFloat(ParryRim)==0&&f.hitMaterial.GetFloat(ParryGold)==0),
+                "warning identifies only the real heavy attacker among the squad");
+            Capture("warning-road-rim");
+            Check(sim.OrderedStateSnapshot==state,"drawing the warning leaves authoritative state unchanged");
+            _paused=true;DrawBattle();
+            Check(attacker.hitMaterial.GetFloat(ParryRim)==0&&attacker.hitMaterial.GetFloat(ParryGold)==0,"pause clears warning and fill");
+            _paused=false;DrawBattle();Check(attacker.hitMaterial.GetFloat(ParryRim)==1,"resume restores the current warning");
+            guard=0;
+            while(!ViewOver&&!sim.Threats(0).Any(t=>t.ActorId==attacker.unit.Id&&t.ParryWindow)&&guard++<90)
+            {
+                Check(attacker.hitMaterial.GetFloat(ParryGold)==0&&attacker.hitMaterial.GetFloat(ParryRim)==1,"rim stays steady until the real window");
+                HudTicks(1);
+            }
+            Check(sim.Threats(0).Any(t=>t.ActorId==attacker.unit.Id&&t.ParryWindow),"road raider reaches the unchanged real parry window");
+            Check(attacker.hitMaterial.GetFloat(ParryGold)==1,"road raider body flashes gold when Hold can parry");
+            Capture("warning-road-fill");
+            _paused=true;DrawBattle();Check(attacker.hitMaterial.GetFloat(ParryGold)==0&&attacker.hitMaterial.GetFloat(ParryRim)==0,"pause also clears the press-now flash");
+            _paused=false;DrawBattle();
+            Check(Click("order-0"),"live Hold through actual button after rim-to-fill transition");
+            HudTicks(8);yield return null;
+            Check(sim.ParryBars(0)==1&&sim.Events.Any(e=>e.Kind==BattleEventKind.Parry&&e.TargetId==attacker.unit.Id),
+                "warning leads to a real parry of that raider and one meter bar");
+            Check(attacker.hitMaterial.GetFloat(ParryGold)==0&&attacker.hitMaterial.GetFloat(ParryRim)==0,"resolved attack leaves no stale warning");
+            Log("Road parry warning validated. Native recognition and reaction remain owner review.");
         }
     }
 }

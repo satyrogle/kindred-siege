@@ -10,6 +10,7 @@ namespace KindredSiege.Slice
         sealed class CashWord
         {
             public RawImage image;public float at;public Vector2 position;
+            public string word="";   // what it says, so one blow at a time can keep only its most important word
         }
         sealed class MarkShot
         {
@@ -40,7 +41,7 @@ namespace KindredSiege.Slice
             {
                 if(!_cashWords.TryGetValue(target.unit.Id,out var pop))
                 {_cashWords[target.unit.Id]=pop=new CashWord{image=Raw(_readoutLayer,"Mark payoff",0,0,1,1)};pop.image.raycastTarget=false;}
-                pop.at=_visualTime;pop.position=new Vector2(target.feet.x,Mathf.Max(380,target.feet.y-target.head*.45f)-80);
+                pop.at=_visualTime;pop.word=word;pop.position=new Vector2(target.feet.x,Mathf.Max(380,target.feet.y-target.head*.45f)-80);
                 var old=pop.image.texture as Texture2D;
                 if(old!=null&&_screenTextures.Remove(old))Destroy(old);
                 Texture2D texture;

@@ -97,6 +97,8 @@ namespace KindredSiege.Slice
 
         void SetPx(PxText t,string[] texts,Color32[] colours)
         {
+            // Transitional presenters may still flush a receipt after their screen was destroyed.
+            if(t==null||t.root==null)return;
             var key=new StringBuilder();
             for(int i=0;i<texts.Length;i++)key.Append(texts[i]).Append('|').Append(colours[i].r).Append(colours[i].g).Append(colours[i].b).Append('/');
             string k=key.ToString();

@@ -45,9 +45,10 @@ namespace KindredSiege.Slice
             _combatFeedback=Argument("-ksNoCombatFeedback")==null;
             _font=Resources.GetBuiltinResource<Font>("Arial.ttf");
             _capture=Argument("-ksArtValidate")??Argument("-ksInnerCircleValidate"); _auto=_capture!=null;
+            if(_auto)_capture=ReviewProfileRoot(_capture);
             // Manual review keeps the real intro, coach and window scaling, but never uses the owner's save.
             string review=Argument("-ksArtReview");
-            _manualReviewDir=!_auto&&review!=null?Path.GetFullPath(review):null;
+            _manualReviewDir=!_auto&&review!=null?ReviewProfileRoot(review):null;
             if(_manualReviewDir!=null)Directory.CreateDirectory(_manualReviewDir);
             _savePath=Path.Combine(_auto?_capture:_manualReviewDir??Application.persistentDataPath,"campaign_art_loop.txt");
             if (_auto) Directory.CreateDirectory(_capture);
@@ -85,36 +86,45 @@ namespace KindredSiege.Slice
             _canvas.scaleFactor=_auto?1:fit>=1?Mathf.Floor(fit):fit;
             if(_noticeText!=null)_noticeText.text=_notice;
             if(_pxNotice!=null)SetPx(_pxNotice,_notice,PxRed);
+            if(_buildingBattle)return;
             InnerCircleInput();
             KeyboardInput();
+            // Submit can start a fight or a replay seek inside this Update.
+            if(_buildingBattle)return;
+            if(!_paused&&(_page==Page.Fight||_page==Page.Playback)){_tableClock+=_auto?1f/30:Mathf.Min(Time.unscaledDeltaTime,.1f);}
             if(_page==Page.Playback){UpdatePlayback();return;}
             if (_page!=Page.Fight || _fight==null) return;
             float dt=_auto?1f/30:Mathf.Min(Time.unscaledDeltaTime,.1f);
-            if(!_paused)
+            if(!_paused&&StageHolding)AdvanceStage(ref dt);
+            if(!_paused&&dt>0&&!StageHolding)
             {
-                _visualTime+=dt*(_fight.Over?1:_speed);
-                AdvanceCombatPoses(dt*(_fight.Over?1:_speed));
+                // One blow at a time (CampaignArtBeats.cs): while a blow plays the sim waits, and no ticks pile up meanwhile.
+                float step=dt*(ViewOver?1:_speed);
+                _visualTime+=step;
+                AdvanceCombatPoses(step);
+                AdvanceBeats(step);
                 if(!_fight.Over&&!_fight.Sim.AwaitingVerdict)
                 {
-                    _accum+=dt*_speed*SimClock.TicksPerSecond;
-                    while(_accum>=1&&!_fight.Over&&!_fight.Sim.AwaitingVerdict)
+                    if(!BeatsWait)_accum+=dt*_speed*SimClock.TicksPerSecond;
+                    while(_accum>=1&&!StageHolding&&!BeatsWait&&!_fight.Over&&!_fight.Sim.AwaitingVerdict)
                     {
                         Anticipate(); if(_pilotOn) _pilot.Step(_fight); _fight.Tick(); DrainEvents(); _accum--;
                     }
+                    if(BeatsWait)_accum=Mathf.Min(_accum,.99f);
                 }
-                else if(_fight.Over) _endAge+=dt;
+                else if(ViewOver) _endAge+=dt;
             }
             if(_fight.Sim.AwaitingVerdict)_accum=0;
             // Coach can pause this frame. Resolve it before drawing, so no paused frame retains a flash.
             RefreshFight(); DrawBattle();
         }
-        void SetPage(Page page)
+        void SetPage(Page page,bool replaySeek=false)
         {
             StopSound();
             _hover=string.Empty;
             _keyboardHint=string.Empty;
             _campOpen=false;
-            ClearBattle();
+            ClearBattle(replaySeek);
             if(_screen!=null){_screen.gameObject.SetActive(false);Destroy(_screen.gameObject);}
             if(_modal!=null){Destroy(_modal.gameObject);_modal=null;}
             FreeScreenTextures();
@@ -138,6 +148,7 @@ namespace KindredSiege.Slice
             _saveWriter.Dispose();
             ClearSound();
             ClearBattle();
+            ReleaseBattleClips();
             ClearInnerCircle();
             if(_canvas!=null) Destroy(_canvas.gameObject);
             if(_capturePixels!=null) Destroy(_capturePixels);
@@ -372,6 +383,7 @@ namespace KindredSiege.Slice
 
         void Order(Directive directive)
         {
+            if(_buildingBattle)return;
             if(_playback!=null)return;
             if (_fight == null || _fight.Over) return;
             if(_fight.Sim.AwaitingVerdict)
@@ -388,6 +400,8 @@ namespace KindredSiege.Slice
             }
             if (directive == Directive.FocusFire)
             {
+                if(ShadeFollowUp(_fight.Sim,directive).Length>0&&!Input.GetKey(KeyCode.LeftShift)&&!Input.GetKey(KeyCode.RightShift))
+                {var current=_fight.Sim.FindById(_fight.Sim.FocusedId(0));if(current!=null){Focus(current);return;}}
                 _targeting = !_targeting;
                 if(_targeting){var targets=KeyboardButtons();if(targets.Count>0)EventSystem.current.SetSelectedGameObject(targets[0].gameObject);}
                 else SelectControl("order-2");
@@ -459,10 +473,14 @@ namespace KindredSiege.Slice
         {
             BattleSimulation sim = _fight.Sim;
             IReadOnlyList<BattleEvent> ev = sim.Events;
+            bool staged=sim.StageOn;
+            bool beats=!staged&&_eventCursor<ev.Count&&BeatsOn;
+            if(staged)PresentBattleEvents(ev,_eventCursor);
+            else if(beats)PresentBeats(ev,_eventCursor);
             for (; _eventCursor < ev.Count; _eventCursor++)
             {
                 BattleEvent e = ev[_eventCursor];
-                AnimateEvent(e);
+                if(!staged&&!beats)AnimateEvent(e);
                 string time = Seconds(e.Tick) + "  ";
                 switch (e.Kind)
                 {

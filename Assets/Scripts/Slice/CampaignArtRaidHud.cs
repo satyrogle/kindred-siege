@@ -20,7 +20,7 @@ namespace KindredSiege.Slice
 
         // Cost presentation only. Eligibility and spending remain authoritative in CanUse/TryOrder.
         static int DisplayOrderCost(BattleSimulation sim, Directive order) =>
-            sim.OrderCost(0, order);
+            ShadeFollowUp(sim,order).Length>0?0:sim.OrderCost(0, order);
 
         void EnsureRaidHud()
         {
@@ -37,6 +37,7 @@ namespace KindredSiege.Slice
             tex.SetPixels32(pixels);tex.Apply();_screenTextures.Add(tex);
             _raidBeatRing=PxImage(_readoutLayer,"Raid parry beat ring",tex,0,0);
             _raidBeatRing.raycastTarget=false;
+            _raidBeatRing.enabled=false;
             _raidFlash=Panel(_readoutLayer,0,0,W,H,new Color(1,.83f,.45f,0));
             _raidFlash.raycastTarget=false;
         }

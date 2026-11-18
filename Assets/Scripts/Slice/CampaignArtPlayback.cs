@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using UnityEngine.UI;
 using KindredSiege.Sim;
 using KindredSiege.Sim.Battle;
 using KindredSiege.Sim.Learning;
@@ -8,16 +10,64 @@ namespace KindredSiege.Slice
 {
     public sealed partial class CampaignArtLoop
     {
+        // Only the current layered replay owns these nodes. On a seek they keep their
+        // already-decoded textures. All simulation-bound figures and HUDs get rebuilt.
+        sealed class ReplayScenery
+        {
+            public Transform[] rear,front;
+            public RectTransform parking;
+            public readonly Dictionary<string,RawImage> contacts=new Dictionary<string,RawImage>();
+        }
+        ReplayScenery _replayScenery;
+
+        Transform[] StageChildrenFrom(int first)
+        {
+            var result=new Transform[_stage.childCount-first];
+            for(int i=0;i<result.Length;i++)result[i]=_stage.GetChild(first+i);
+            return result;
+        }
+        void ParkReplayScenery()
+        {
+            var scenery=_replayScenery;
+            scenery.parking=Rect(_root,"Scenery during replay seek",0,0,W,H);
+            scenery.parking.gameObject.SetActive(false);
+            foreach(var layer in scenery.rear)layer.SetParent(scenery.parking,false);
+            foreach(var layer in scenery.front)layer.SetParent(scenery.parking,false);
+            foreach(var pair in _bloodridgeContacts)
+            {
+                pair.Value.transform.SetParent(scenery.parking,false);
+                scenery.contacts.Add(pair.Key.unit.Id,pair.Value);
+            }
+            _bloodridgeContacts.Clear();
+        }
+        void RestoreReplayForeground()
+        {
+            var scenery=_replayScenery;
+            foreach(var layer in scenery.front)layer.SetParent(_stage,false);
+            foreach(var f in _figures)
+            {
+                var contact=scenery.contacts[f.unit.Id];
+                contact.transform.SetParent(f.root,false);
+                contact.transform.SetAsFirstSibling();
+                _bloodridgeContacts.Add(f,contact);
+            }
+            scenery.contacts.Clear();
+            Destroy(scenery.parking.gameObject);
+            scenery.parking=null;
+        }
+
         FightPlayback _playback;
         Page _playbackReturn;
         bool _returnPaused;
         float _returnSpeed;
         long _lessonFrom=-1,_lessonTo=-1;
         int _playbackCursor;
+        long _pendingPlaybackSeek=-1;
         bool _seeking;
         bool _lessonStop;
         BattleSimulation ViewSim=>_playback!=null?_playback.Sim:_fight.Sim;
-        bool ViewOver=>_playback!=null?_playback.AtEnd:_fight.Over;
+        // Over once the sim is over and its last blow has played on screen (CampaignArtBeats.cs).
+        bool ViewOver=>(_playback!=null?_playback.AtEnd:_fight.Over)&&!BeatsPending;
         // Campaign.BuildSetup writes camp.counter.tribe.kind. Only recognised authored IDs
         // choose art; an old or unknown archive never borrows the current run's tribe.
         string[] PlaybackParts=>_playback.FightId.Split('.');
@@ -39,6 +89,7 @@ namespace KindredSiege.Slice
         }
         void WatchFight(ArchivedFight fight,long from=-1,long to=-1)
         {
+            _pendingPlaybackSeek=-1;
             if(!FightPlayback.TryOpen(_campaign.Archive,fight.FightId,out var playback,out string why))
             {ShowArchivedFight(fight,why);return;}
             _playbackReturn=_page;_returnPaused=_paused;_returnSpeed=_speed;
@@ -51,6 +102,7 @@ namespace KindredSiege.Slice
         void LeavePlayback()
         {
             if(_playback==null)return;
+            _pendingPlaybackSeek=-1;
             var fight=_playback.Fight;
             _playback=null;_paused=_returnPaused;_speed=_returnSpeed;
             SetPage(_playbackReturn);
@@ -74,18 +126,22 @@ namespace KindredSiege.Slice
         void UpdatePlayback()
         {
             float dt=_auto?1f/30:Mathf.Min(Time.unscaledDeltaTime,.1f);
-            if(!_paused)
+            if(!_paused&&StageHolding)AdvanceStage(ref dt);
+            if(!_paused&&dt>0&&!StageHolding)
             {
-                _visualTime+=dt*(_playback.AtEnd?1:_speed);
-                AdvanceCombatPoses(dt*(_playback.AtEnd?1:_speed));
-                _accum+=dt*_speed*SimClock.TicksPerSecond;
-                while(_accum>=1&&!_playback.AtEnd&&_playback.Failure.Length==0)
+                float step=dt*(ViewOver?1:_speed);
+                _visualTime+=step;
+                AdvanceCombatPoses(step);
+                AdvanceBeats(step);
+                if(!BeatsWait)_accum+=dt*_speed*SimClock.TicksPerSecond;
+                while(_accum>=1&&!StageHolding&&!BeatsWait&&!_playback.AtEnd&&_playback.Failure.Length==0)
                 {
                     Anticipate();if(!_playback.Step())break;
                     DrainPlayback();_accum--;
                     if(_lessonStop&&_lessonTo>=0&&_playback.Tick>=_lessonTo){_paused=true;_lessonStop=false;break;}
                 }
-                if(_playback.AtEnd)_endAge+=dt;
+                if(BeatsWait)_accum=Mathf.Min(_accum,.99f);
+                if(ViewOver)_endAge+=dt;
                 if(_playback.Failure.Length>0)_paused=true;
             }
             RefreshPlayback();DrawBattle();
@@ -93,9 +149,13 @@ namespace KindredSiege.Slice
         void DrainPlayback()
         {
             var events=_playback.Sim.Events;
+            bool staged=ViewSim.StageOn;
+            bool beats=!staged&&_playbackCursor<events.Count&&BeatsOn;
+            if(staged)PresentBattleEvents(events,_playbackCursor);
+            else if(beats)PresentBeats(events,_playbackCursor);
             for(;_playbackCursor<events.Count;_playbackCursor++)
             {
-                var e=events[_playbackCursor];AnimateEvent(e);
+                var e=events[_playbackCursor];if(!staged&&!beats)AnimateEvent(e);
                 if(e.Kind==BattleEventKind.Kill)Feed(Seconds(e.Tick)+"  "+NameOf(e.TargetId)+" fell.");
                 else if(e.Kind==BattleEventKind.Windup)Feed(Seconds(e.Tick)+"  "+NameOf(e.ActorId)+
                     (e.Detail==HeavyRules.Heavy?" winds up a heavy swing at "+NameOf(e.TargetId)+".":" begins "+e.Detail+"."));
@@ -108,7 +168,19 @@ namespace KindredSiege.Slice
             tick=Math.Max(0,Math.Min(_playback.Length,tick));_paused=true;StopSound();
             _lessonStop=_lessonFrom>=0&&tick<=_lessonFrom;
             // Restart and rebuild the figures: Restart replaces the units, so old references are invalid.
-            _playback.Restart();SetPage(Page.Playback);_feed.Clear();_seeking=true;
+            _pendingPlaybackSeek=tick;
+            _feed.Clear();
+            // The builder already has this replay at tick zero. Queue the newest target
+            // without invalidating the units it is currently binding.
+            if(_buildingBattle)return;
+            _playback.Restart();SetPage(Page.Playback,true);
+            if(!_buildingBattle)ApplyPendingPlaybackSeek();
+        }
+        void ApplyPendingPlaybackSeek()
+        {
+            if(_pendingPlaybackSeek<0||_page!=Page.Playback||_playback==null)return;
+            long tick=_pendingPlaybackSeek;_pendingPlaybackSeek=-1;
+            _seeking=true;
             try
             {
                 while(_playback.Tick<tick&&_playback.Failure.Length==0)
@@ -118,6 +190,7 @@ namespace KindredSiege.Slice
                 }
             }
             finally{_seeking=false;}
+            SnapPairPositions();RestoreChiefEffectsAfterSeek();
             RefreshPlayback();DrawBattle();
         }
         void RefreshPlayback()
@@ -137,7 +210,7 @@ namespace KindredSiege.Slice
             SetPx(_pxBanner,Fit(status,660),_playback.Failure.Length>0?PxRed:PxGold);
             SetPx(_pxBanner2,_hover.Length>0?_hover:_notice.Length>0?_notice:_feed.Count>0?_feed[_feed.Count-1]:"Point at a fighter to see their name and health.",PxBone);
             SetPx(_pxButtonLabels["pause"],_paused?"PLAY":"PAUSE",PxBone);
-            _buttons["pause"].interactable=!_playback.AtEnd&&_playback.Failure.Length==0;
+            _buttons["pause"].interactable=(!_playback.AtEnd||StageHolding||BeatsPending)&&_playback.Failure.Length==0;
             SetPx(_pxButtonLabels["speed"],_speed+"X",PxBone);
         }
         void MoveModalCloseToTop()

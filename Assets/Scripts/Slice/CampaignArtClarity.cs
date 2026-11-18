@@ -277,7 +277,7 @@ namespace KindredSiege.Slice
                 int count=0;foreach(var id in _squad)if(FindReserve(id)?.Class==c)count++;
                 if(count>0)lines.Add(count+" "+SliceClasses.Name(c)+": "+(c==UnitClass.Warden?"cover":c==UnitClass.Medic?"healing":c==UnitClass.Trapper?"snares":c==UnitClass.Marksman?"ranged focus":"frontline pressure"),PxMint);
             }
-            return lines.Gap().Add(e.Kind==EncounterKind.Beast?(LivesRun?"Lose: no trophies, no life lost. Squad returns.":"Lose: no trophies. Fallen stay down; nobody captured."):LossWarning(e),PxRed);
+            return lines.Gap().Add(e.Kind==EncounterKind.Beast?BeastLossText(e):LossWarning(e),PxRed);
         }
     }
 }

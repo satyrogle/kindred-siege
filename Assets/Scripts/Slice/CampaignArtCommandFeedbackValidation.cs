@@ -50,7 +50,7 @@ namespace KindredSiege.Slice
                 if(i%60==0)yield return null;
             }
             Check(hit,"real focused target receives a visible confirmed hit pulse");
-            Check(_focusCorners.All(c=>!c.enabled),"Focus brackets clear when the target falls or its order expires");
+            Check(!_focusRing.enabled&&!_focusRunning,"active Focus marker ends when its target falls or its order expires");
             if(!ViewOver)
             {
                 var restored=CampaignSave.Read(CampaignSave.Write(_campaign));

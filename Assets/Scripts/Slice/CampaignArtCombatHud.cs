@@ -29,7 +29,7 @@ namespace KindredSiege.Slice
                 return (_fight!=null&&(_fight.Assist==null||_fight.AssistUsed)?ChiefOrderHint()+" / ":"")+MeterHint()+
                     (ViewSim.CanUse(0,order,out string meterWhy)?"":" / "+meterWhy);
             if(order==Directive.Hold&&(_fight!=null||_playback!=null)&&ViewSim.TightParryOn)
-                return "Watch the attacker flash gold: live Hold in 0.2s parries, counters and fills a bar. Mistime: full hit and +50% incoming damage for1s. Paused Hold cannot parry.";
+                return "Gold rim: attack coming. Gold body flash: press Hold now. Live Hold in "+Seconds(ViewSim.ParryWindowTicksFor(0))+" parries, counters and fills a bar. Mistime: full hit and +50% incoming damage for1s. Paused Hold cannot parry.";
             if(order==Directive.Hold&&(_fight!=null||_playback!=null)&&ViewSim.DangerOn)
                 return "SWINGS: Hold guards the front. BLASTS: time a live parry"+(_fight!=null&&_fight.Encounter.NoFallBack?"":" or dodge")+"; an early or paused Hold stops nothing.";
             if(RoadHud&&order==Directive.Unleash)return "Unleash boosts damage and scares enemies. No own nerve drain in road combat.";
@@ -49,6 +49,7 @@ namespace KindredSiege.Slice
         {
             var u=ViewSim.FindById(id);
             if(u==null)return "AREA";
+            if(IsSharkAdd(u))return "SAND PUP";
             if(ViewKind==EncounterKind.Duel&&u.Side==1)return "ENEMY CHAMPION";
             return (u.Side==0?"YOUR ":"ENEMY ")+(u.IsLeader?u.Id.EndsWith(".chief")?"CHIEF":"LEADER":RoleName(u,ViewKind));
         }
@@ -122,8 +123,8 @@ namespace KindredSiege.Slice
             {
                 var chief=sim.Leader(1);
                 string phase=chief!=null&&chief.HpPermille<=RaidRules.DesperationPermille?" / DESPERATE":"";
-                SetPx(_nerveLabel[side],"CHIEF POSTURE "+Percent(value)+(sim.AwaitingVerdict?" / KNEELING":phase),PxGold);
-                _nerveFill[side].color=PxGold;
+                SetPx(_nerveLabel[side],"CHIEF POSTURE "+Percent(value)+(sim.AwaitingVerdict?" / KNEELING":phase),sim.PitOn?PxRed:PxGold);
+                _nerveFill[side].color=sim.PitOn?PxRed:PxGold;
                 SetPx(_nerveChange[side],chief==null?"":"HP "+Percent(chief.HpPermille),PxBone);
                 return;
             }

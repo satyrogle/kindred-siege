@@ -348,7 +348,7 @@ namespace KindredSiege.Slice
         void MusicTick()
         {
             bool inFight=_page==Page.Fight||_page==Page.Playback;
-            int want=!inFight?0:_page==Page.Fight&&_fight!=null&&_fight.Encounter.Kind==EncounterKind.Chief?2:1;
+            int want=!inFight?0:ViewKind==EncounterKind.Chief?2:1;
             if(_musicVoices[want]==null||_musicVoices[want].clip==null)want=inFight?1:0;
             float level=_soundSettings.muted?0:_soundSettings.volume*MusicLevel;
             for(int i=0;i<_musicVoices.Length;i++)

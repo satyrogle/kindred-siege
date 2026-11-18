@@ -37,6 +37,11 @@ namespace KindredSiege.Slice
             ResultScore(248,76,"RECRUITED",r.JoinedFighters.Count.ToString(),PxMint);
             ResultScore(480,76,FavourExchanged(r)||TakenSpoils(r)!=null?"EXCHANGED":"MATERIALS",r.MaterialsEarned.ToString(),PxGold);
             var lines=new PxLines().Add("LIVES "+_resultLives+"/"+Campaign.RunLives+" / STREAK "+_campaign.Streak,PxBone);
+            if(r.Encounter.Kind==EncounterKind.Beast&&r.Encounter.BeastTier>0)
+            {
+                lines.Add("FOUGHT TIER "+r.Encounter.BeastTier+" / CAMP TIER "+r.BeastTierAfter+" / TROPHIES "+r.Trophies.Count,PxMint);
+                lines.Add(r.Won?"ROAD NODE TAKEN":r.RunOver?"RUN ENDED / NO LIVES LEFT":"LIFE LOST / BEAST WAITS ON ITS NODE",r.Won?PxMint:PxRed);
+            }
             if(r.AssistUnlocked!=null)lines.Add("UNLOCKED: "+r.AssistUnlocked.Name,PxGold);
             if(r.Captured!=null)lines.Add("CAPTURED: "+FighterName(r.Captured),PxRed);
             if(r.Slain!=null)lines.Add("SLAIN: "+FighterName(r.Slain),PxRed);

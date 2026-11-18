@@ -17,7 +17,7 @@ namespace KindredSiege.Slice
         WhisperPick WhisperChoice(int choice)
         {
             var offer=_campaign.FavourOffer;
-            return offer!=null&&choice>=0&&choice<offer.Picks.Count?offer.Picks[choice]:null;
+            return offer!=null&&choice>=0&&choice<offer.Picks.Count&&FavourRules.IsWhisper(offer.Choices[choice])?offer.Picks[choice]:null;
         }
 
         string WhisperTitle(WhisperPick pick)
@@ -25,7 +25,7 @@ namespace KindredSiege.Slice
             if(pick.Kind==Favour.WhisperPair)return FavourRules.PairName(pick.Pair);
             if(pick.Kind==Favour.WhisperHabitUp)return FavourRules.HabitName(pick.Habit);
             var fighter=WhisperFighter(pick.FighterId);
-            return fighter==null?pick.FighterId:fighter.Name;
+            return (fighter==null?pick.FighterId:fighter.Name)+(pick.Vow!=StarVow.None?" / "+VowRules.Name(pick.Vow):"");
         }
 
         string WhisperEffect(WhisperPick pick)
@@ -37,7 +37,8 @@ namespace KindredSiege.Slice
             string rankTwo=fighter.Class==UnitClass.Warden?"Guard two allies.":fighter.Class==UnitClass.Skirmisher?"Two strikes per spell.":
                 fighter.Class==UnitClass.Marksman?"Two shots per aim.":fighter.Class==UnitClass.Trapper?"Two springs per trap.":"Can keep one treatment in hand.";
             return SliceClasses.Name(fighter.Class)+" / R"+fighter.Rank+" TO R"+(fighter.Rank+1)+". "+
-                (fighter.Rank>=2?"Second full gear slot.":rankTwo);
+                (fighter.Rank>=2?"Second full gear slot.":rankTwo)+
+                (pick.Vow!=StarVow.None?" "+VowRules.Describe(pick.Vow,1):fighter.Vow!=StarVow.None?" "+VowRules.Name(fighter.Vow)+": "+VowRules.Describe(fighter.Vow,2):"");
         }
 
         PxLines WhisperLines(int choice,bool compact=false)
@@ -49,7 +50,7 @@ namespace KindredSiege.Slice
             if(compact&&pick.Kind==Favour.WhisperRankUp)
             {
                 var fighter=WhisperFighter(pick.FighterId);
-                if(fighter!=null)lines.Add("R"+fighter.Rank+" TO R"+(fighter.Rank+1)+" / "+SliceClasses.Name(fighter.Class),PxBone);
+                if(fighter!=null)lines.Add("R"+fighter.Rank+" TO R"+(fighter.Rank+1)+" / "+(pick.Vow!=StarVow.None?VowRules.Name(pick.Vow):SliceClasses.Name(fighter.Class)),PxBone);
             }
             if(!compact)lines.Gap().Add(WhisperEffect(pick),PxBone)
                 .Add("For this run. Fallen in a lost fight: top rank lost. Capture: rank 1.",PxMuted);

@@ -1,3 +1,5 @@
+using System;
+using System.Linq;
 using System.Collections.Generic;
 using KindredSiege.Sim;
 using KindredSiege.Sim.Battle;
@@ -14,6 +16,8 @@ namespace KindredSiege.Slice
         int _favourReceiptCost;
         string _favourReceiptPlacement;
         string _whisperReceiptTitle, _whisperReceiptEffect;
+
+        bool FreeDuo(Favour f)=>_campaign.DuoMovesRun&&FavourRules.IsDuo(f)&&DuoRules.IsMove(FavourRules.DuoOf(f));
 
         bool FavourExchanged(EncounterResult r)=>r!=null&&r==_favourReceiptResult;
 
@@ -80,6 +84,7 @@ namespace KindredSiege.Slice
 
         PxLines FavourChoiceLines(Favour favour,int choice=-1)
         {
+            if(AdvancedPick(favour))return AdvancedPickLines(favour);
             if(FavourRules.IsWhisper(favour))return WhisperLines(choice);
             int rank=_campaign.FavourRank(favour),next=rank+1;
             if(FavourRules.IsCombo(favour))
@@ -92,6 +97,7 @@ namespace KindredSiege.Slice
                     .Add("One gear slot / this run",PxGold).Gap()
                     .Add(ClassSpells.Describe(bend),PxBone);
                 if(ThemePresentation)comboLines.Add(ComboThemeText(bend,next),ComboColour(bend));
+                if(_campaign.VowsRun)comboLines.Add("Each blow also lays one mark. Matching flavour ranks scale the burst; three unlock its final form.",PxMuted);
                 return comboLines;
             }
             var lines=new PxLines().Add(FavourRules.Name(favour),OrderColour(FavourRules.Button(FavourRules.PalOf(favour))))
@@ -142,23 +148,25 @@ namespace KindredSiege.Slice
             SelectControl("modal-close");
             int price=_campaign.SpoilsMaterials;
             var brief=new PxLines()
-                .Add("Choose ONE for "+price+" materials, or keep the materials already at camp.",PxGold)
+                .Add(offer.Choices.Any(FreeDuo)?"FREE DUO IS EXTRA / then choose your normal reward.":"Choose ONE for "+price+" materials, or keep the materials already at camp.",PxGold)
                 .Add("Offer lasts until the next fight or event. Picks last for this run.",PxMuted);
             if(combos)brief.Add("Auto-equips the first class fighter without a combo; their old gear stays.",PxOrange)
                 .Add("If every class fighter wears a combo, this stays unworn. Change it through GEAR.",PxBone);
             PxWrite(_modal,36,55,648,brief);
-            for(int i=0;i<offer.Choices.Count;i++)
+            int start=RewardPageStart(offer);
+            for(int i=start;i<Math.Min(offer.Choices.Count,start+3);i++)
             {
-                int choice=i,x=26+i*226;var favour=offer.Choices[i];
+                int choice=i,x=26+(i-start)*226;var favour=offer.Choices[i];
                 int rank=_campaign.FavourRank(favour);
                 var lines=FavourChoiceLines(favour,choice);
                 bool can=_campaign.CanTakeFavour(choice,out string why);
                 if(!can)lines.Gap().Add(why,PxRed);
                 int top=combos?112:94;
                 PxPanel(x,top,216,326-top,lines,_modal);
-                PxButton("favour-"+choice,(rank>0?"UPGRADE":"TAKE")+" (-"+price+" MAT)",x,334,216,28,()=>TakeFavour(choice),_modal).interactable=can;
+                PxButton("favour-"+choice,FreeDuo(favour)?"TAKE FREE DUO":(rank>0?"UPGRADE":"TAKE")+" (-"+price+" MAT)",x,334,216,28,()=>TakeFavour(choice),_modal).interactable=can;
             }
-            SetPx(PxLabel(_modal,36,375),"At camp: "+_campaign.Materials+" materials. Held: "+HeldComboCount()+" combos / "+_campaign.Favours.Count+" favours.",PxMuted);
+            RewardPager(offer.Choices.Count,false,367);
+            if(offer.Choices.Count<=3)SetPx(PxLabel(_modal,36,375),"At camp: "+_campaign.Materials+" materials. Held: "+HeldComboCount()+" combos / "+_campaign.Favours.Count+" favours.",PxMuted);
             PxButton("held-favours","HELD FAVOURS",16,398,216,28,()=>
             {
                 CloseModal();Modal("HELD FAVOURS",HeldFavourText());
@@ -173,8 +181,14 @@ namespace KindredSiege.Slice
             var favour=offer.Choices[choice];
             var whisper=WhisperChoice(choice);
             string whisperTitle=whisper==null?null:WhisperTitle(whisper), whisperEffect=whisper==null?null:WhisperEffect(whisper);
+            if(AdvancedPick(favour)){whisperTitle=FavourRules.Name(favour);whisperEffect=FavourRules.Describe(favour,Math.Min(FavourRules.MaxRank,_campaign.FavourRank(favour)+1));}
             int cost=_campaign.SpoilsMaterials;
             if(!_campaign.TryTakeFavour(choice,out string why)){_notice=why;ShowFavours();return;}
+            if(FreeDuo(favour))
+            {
+                _notice=FavourRules.Name(favour)+" joined. FREE / choose your normal reward too.";
+                PlaySound("favour"); Save(); SetPage(_page); ShowFavours(); return;
+            }
             _favourReceiptResult=_page==Page.Result?_result:null;
             _favourReceipt=favour;_favourReceiptRank=_campaign.FavourRank(favour);
             _favourReceiptCost=cost;
@@ -182,7 +196,7 @@ namespace KindredSiege.Slice
             _favourReceiptPlacement=FavourRules.IsCombo(favour)?ComboPlacement(FavourRules.ComboBend(favour)):"";
             _notice=FavourRules.IsCombo(favour)?FavourRules.Name(favour)+(ThemePresentation?" - rank "+_favourReceiptRank:"")+". "+_favourReceiptPlacement:
                 FavourRules.Name(favour)+" - rank "+_favourReceiptRank+". For this run.";
-            if(whisper!=null)_notice=whisperTitle+". "+whisperEffect+" For this run.";
+            if(!string.IsNullOrEmpty(whisperTitle))_notice=whisperTitle+". "+whisperEffect+" For this run.";
             PlaySound("favour");
             Save();SetPage(_page);
         }

@@ -114,7 +114,7 @@ namespace KindredSiege.Slice
             var key=new PxLines().Add("Nodes in gold corners are the ones you can take now. Point at any node to read it.",PxBone)
                 .Add(_campaign.PalRoadRun?"Pal victory: choose one Pal pick OR gear OR keep materials. A goal improves gear by one tier.":"A Pal offers a favour instead of gear. A goal improves a gear drop by one tier.",PxGold)
                 .Add("? is an event: a short scene with a choice. Some choices cost materials.",PxMuted)
-                .Add(LivesRun?"LIVES "+_campaign.Lives+"/3. Squad returns after fights. A defeat costs a life; beast hunts are exempt.":"Lose a fight and they capture one of yours; you try that step again.",PxRed);
+                .Add(LivesRun?"LIVES "+_campaign.Lives+"/3. Squad returns after fights. "+(_campaign.BeastRollRun?"Every defeat costs a life, including beasts.":"A defeat costs a life; beast hunts are exempt."):"Lose a fight and they capture one of yours; you try that step again.",PxRed);
             if(_campaign.StagedBloodridgeRoad)key.Add("NEXT: "+RoadLesson(Math.Min(4,_campaign.Step+1)),PxMint);
             else if(_roadReview)key.Add(KitRun?KitStatus:RoadIssue,PxOrange);
             bool hunted=false;
@@ -151,25 +151,27 @@ namespace KindredSiege.Slice
             bool dim=state==NodeShut;
             // A node the hunters hold (Campaign.IsAmbush, 18 Oct 2026) shows a red ! and the hunter waiting there.
             bool ambush=_campaign.IsAmbush(node);
+            bool beast=node.Beast!=BeastKit.None;
+            bool champion=_campaign.ChampionOn(node);
             bool pal=HasPalReward(node);
             var hunter=ambush?_campaign.HunterOnRoad:null;
-            if(node.Kind==RoadNodeKind.Event||ambush)
+            if(node.Kind==RoadNodeKind.Event||ambush||beast)
             {
-                var mark=_logoFont.Render(ambush?"!":"?",dim?PxMuted:ambush?PxRed:PxBone,dim?PxMuted:ambush?PxDeepRed:PxGold,1,true);_screenTextures.Add(mark);
-                PxImage(parent,ambush?"Ambush":"Event",mark,(w-mark.width)/2,5+(48-mark.height)/2);
+                var mark=_logoFont.Render(beast?"B":ambush?"!":"?",dim?PxMuted:ambush?PxRed:PxBone,dim?PxMuted:ambush?PxDeepRed:PxGold,1,true);_screenTextures.Add(mark);
+                PxImage(parent,beast?"Beast symbol / ART PENDING":ambush?"Ambush":"Event",mark,(w-mark.width)/2,5+(48-mark.height)/2);
             }
             else
             {
-                var icon=PxImage(parent,"Icon",EncounterArt(node.Fight),(w-48)/2,1);
+                var icon=PxImage(parent,"Icon",EncounterArt(beast?EncounterKind.Beast:node.Fight),(w-48)/2,1);
                 if(dim)icon.color=new Color(.5f,.5f,.5f);
                 else if(state==NodeAhead)icon.color=new Color(.8f,.8f,.8f);
             }
             string lesson=node.Row==0?"COMBOS":node.Row==1?"DEFENCE":node.Row==2?"BOOSTS":"CARRIERS";
-            SetPx(PxLabel(parent,w/2,49,1),Fit(ambush?"Ambush":_campaign.StagedBloodridgeRoad?lesson:NodeTitle(node),w-16),ambush&&!dim?PxRed:state==NodeLit?PxGold:state==NodeHere?PxMint:dim?PxMuted:PxBone);
+            SetPx(PxLabel(parent,w/2,49,1),Fit(beast?BeastKits.Name(node.Beast):ambush?"Ambush":_campaign.StagedBloodridgeRoad?lesson:NodeTitle(node),w-16),ambush&&!dim?PxRed:state==NodeLit?PxGold:state==NodeHere?PxMint:dim?PxMuted:PxBone);
             bool fight=node.Kind==RoadNodeKind.Fight;
-            SetPx(PxLabel(parent,w/2,59,1),Fit(ambush?(hunter==null?"Hunters":hunter.Name):pal?FavourRules.PalName(node.Pal):fight?_campaign.DropOf(node)+" gear":"Event",w-16),
+            SetPx(PxLabel(parent,w/2,59,1),Fit(beast?"TIER "+_campaign.BeastTier(node.Beast):ambush?(hunter==null?"Hunters":hunter.Name):pal?FavourRules.PalName(node.Pal):fight?_campaign.DropOf(node)+" gear":"Event",w-16),
                 dim||state==NodeHere?PxMuted:ambush?PxBone:fight?PxMint:PxLilac);
-            string third=state==NodeHere?"You are here":ambush?(hunter==null?"":"Rank "+_campaign.Company.Rank(hunter)):pal?"Pal favour":GoalShort(node.Objective);
+            string third=state==NodeHere?"You are here":beast?"TROPHIES":ambush?(hunter==null?"":"Rank "+_campaign.Company.Rank(hunter)):champion?"CHAMPION":pal?(_campaign.NodeFlavour(node)==Augment.None?"Pal favour":PalPickName(_campaign.NodeFlavour(node))):GoalShort(node.Objective);
             if(third.Length>0)SetPx(PxLabel(parent,w/2,69,1),Fit(third,w-16),state==NodeHere?PxMint:dim?PxMuted:ambush?PxRed:PxGold);
             var detail=ambush?AmbushDetail(state,e):NodeDetail(node,state,e);
             if(ambush){detail.texts.Insert(1,NodeEnemyPreview(node,e));detail.colours.Insert(1,PxBone);}
@@ -233,6 +235,7 @@ namespace KindredSiege.Slice
 
         string NodeTitle(RoadNode node)
         {
+            if(node.Beast!=BeastKit.None)return BeastKits.Name(node.Beast);
             if(node.Kind==RoadNodeKind.Event)return node.Event.Title;
             switch(node.Fight)
             {
@@ -255,6 +258,11 @@ namespace KindredSiege.Slice
         {
             var lines=new PxLines();
             string where=state==NodeLit?"":state==NodeHere?" You stand here.":state==NodeAhead?" Ahead on the road.":" Out of your reach now.";
+            if(node.Beast!=BeastKit.None)
+                return RoadDecision(lines.Add(BeastKits.Name(node.Beast)+" / TIER "+_campaign.BeastTier(node.Beast)+where,PxBone)
+                    .Add("Win: take this node, bank trophies and materials, raise this beast's camp tier (maximum 50).",PxMint)
+                    .Add("Lose: one life. Fallen fighters lose their top rank; beast tier stays. No capture.",PxRed),
+                    "ROAD BEAST / TIER "+_campaign.BeastTier(node.Beast),"TROPHIES + MATERIALS / DEFEAT = -1 LIFE");
             if(node.Kind==RoadNodeKind.Event)
             {
                 var choices=new List<string>();
@@ -267,9 +275,11 @@ namespace KindredSiege.Slice
             string head=NodeTitle(node)+".";
             if(e!=null)head+=" Squad "+e.SquadSize+", enemies "+e.EnemyUnits+"."+(e.EnemyCasts?" They cast.":"")+(e.NoFallBack?" No Fall Back.":"");
             lines.Add(head+where,PxGold);
+            if(_campaign.ChampionOn(node))lines.Add(e!=null?e.Text:"CHAMPION",PxGold);
             lines.Add(NodeEnemyPreview(node,e),PxBone);
             lines.Add(HasPalReward(node)?"Win: a favour from "+FavourRules.PalName(node.Pal)+", or +"+RoadMaterials(false)+" materials.":
                 "Win: a "+tier+" piece of their gear, or +"+RoadMaterials(false)+" materials.",PxMint);
+            if(_campaign.NodeFlavour(node)!=Augment.None)lines.Add("BUTCHER: "+PalPickName(_campaign.NodeFlavour(node))+" combos on this road.",PxLilac);
             AddSpellBrief(lines,e);
             if(node.Objective!=FightObjective.None)
                 lines.Add("Bonus goal: "+FightObjectives.Text(node.Objective)+". Meet it and their piece is "+TierUp(tier)+".",PxGold);

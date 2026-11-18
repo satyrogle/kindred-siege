@@ -65,7 +65,7 @@ namespace KindredSiege.Slice
                     {
                         if(!target)continue;
                         var unit=_fight.Sim.FindById(b.name.Substring(7));
-                        if(unit==null||!unit.Alive||unit.Side!=1)continue;
+                        if(unit==null||!unit.Alive||unit.Side!=1||_fight.Sim.LeaderProtected(unit))continue;
                     }
                     else if(target)continue;
                 }

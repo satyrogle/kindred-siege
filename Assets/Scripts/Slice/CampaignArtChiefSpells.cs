@@ -18,6 +18,9 @@ namespace KindredSiege.Slice
         readonly int[] _spellTotal = new int[2];
         RawImage _chiefOrderIcon;
         RawImage _wallBreakWord;
+        // Sequential fights and deterministic captures share the presentation clock.
+        // Legacy simultaneous/stage fights retain their original wall-clock band.
+        float ChiefCutClock => BeatsOn ? _visualTime : Time.unscaledTime;
 
         bool ChiefCutInVisible => (_chiefPanels[0] != null && _chiefPanels[0].gameObject.activeSelf) ||
             (_chiefPanels[1] != null && _chiefPanels[1].gameObject.activeSelf);
@@ -114,7 +117,7 @@ namespace KindredSiege.Slice
             return texture;
         }
 
-        RectTransform BuildChiefPanel(int side, ChiefSpell spell)
+        RectTransform BuildChiefPanel(int side, ChiefSpell spell, Figure caster = null)
         {
             var panel = Rect(_stage, "Chief spell cut-in " + side, 0, 0, W, H);
             Color32 dark = spell == ChiefSpell.SteelStorm ? new Color32(43, 39, 35, 255) : new Color32(87, 22, 21, 255);
@@ -129,10 +132,24 @@ namespace KindredSiege.Slice
             PxImage(panel, "Chief band", band, 0, 135);
             Panel(panel, 0, 135 * Px, W, 2 * Px, PxBone);
             Panel(panel, 0, 323 * Px, W, 2 * Px, PxBone);
-            var portrait = ChiefPortrait(side, spell);
+            bool champion = side == 1 && ViewSim.ChampionFightOn && caster != null && caster.unit.IsLeader;
+            var portrait = champion ? null : ChiefPortrait(side, spell);
             if (portrait != null) PxImage(panel, "Chief portrait", portrait, 24, 325 - portrait.height);
-            int textX = portrait == null ? 70 : 380;
-            SetPx(PxLabel(panel, textX, 151), side == 0 ? "YOUR CHIEF" : "THEIR CHIEF", side == 0 ? PxMint : PxRed);
+            bool championArt = champion && caster.idle != null;
+            if (championArt)
+            {
+                // Use the actual bound champion sheet at native pixels. A spell's
+                // chief portrait is a different character, not this spell's caster.
+                var clip = caster.idle; var frame = clip.sheet.frames[0].frame;
+                var body = Raw(panel, "Champion cut-in identity", 320 - frame.w / 2, 646 - frame.h, frame.w, frame.h);
+                body.texture = clip.texture;
+                body.uvRect = new UnityEngine.Rect(frame.x / (float)clip.texture.width,
+                    1 - (frame.y + frame.h) / (float)clip.texture.height,
+                    frame.w / (float)clip.texture.width, frame.h / (float)clip.texture.height);
+                body.raycastTarget = false;
+            }
+            int textX = portrait == null && !championArt ? 70 : 380;
+            SetPx(PxLabel(panel, textX, 151), side == 0 ? "YOUR CHIEF" : champion ? "THEIR CHAMPION" : "THEIR CHIEF", side == 0 ? PxMint : PxRed);
             var title = _logoFont.Render(ChiefSpells.Name(spell).ToUpperInvariant(), PxBone, PxMuted, 1, true);
             _screenTextures.Add(title); PxImage(panel, "Spell name", title, textX, 169);
             var answer = ChiefSpells.Answer(spell);
@@ -159,8 +176,8 @@ namespace KindredSiege.Slice
             EnsureChiefPresentation(sim);
             if (e.Kind == BattleEventKind.Windup && e.Detail == ChiefSpells.Name(sim.Spell(side)))
             {
-                if (_chiefPanels[side] == null) _chiefPanels[side] = BuildChiefPanel(side, sim.Spell(side));
-                _cutUntil[side] = Time.unscaledTime + .9f;
+                if (_chiefPanels[side] == null) _chiefPanels[side] = BuildChiefPanel(side, sim.Spell(side), FindFigure(e.ActorId));
+                _cutUntil[side] = ChiefCutClock + .9f;
                 _cutUntil[1 - side] = -100;
             }
             if (e.Kind == BattleEventKind.Wall && e.Detail == ChiefSpells.WallSmashed)
@@ -176,7 +193,7 @@ namespace KindredSiege.Slice
                 if (ticks > _spellTotal[side]) _spellTotal[side] = ticks;
                 if (ticks == 0) _spellTotal[side] = 0;
                 bool urgentHeavy = sim.HeavyTicks(1) > 0 && sim.HeavyTicks(1) <= FightRules.PerfectHoldTicks;
-                bool show = ticks > FightRules.PerfectHoldTicks && !urgentHeavy && !_targeting && Time.unscaledTime < _cutUntil[side] && _modal == null;
+                bool show = ticks > FightRules.PerfectHoldTicks && !urgentHeavy && !_targeting && ChiefCutClock < _cutUntil[side] && _modal == null;
                 if(RaidHud&&side==1)show=show&&!_paused&&!ViewOver&&ticks>FightRules.PerfectHoldTicks+1;
                 if (_chiefPanels[side] != null) _chiefPanels[side].gameObject.SetActive(show);
                 string spell = ChiefSpells.Name(sim.Spell(side));

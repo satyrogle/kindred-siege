@@ -93,7 +93,7 @@ namespace KindredSiege.Slice
                     var to = new Vector2(target.feet.x, target.feet.y - 45);
                     var point = Vector2.Lerp(from, to, (i + 1f) / (r.aim.Length + 1));
                     dot.rectTransform.anchoredPosition = new Vector2(Mathf.Round(point.x / Px) * Px, -Mathf.Round(point.y / Px) * Px);
-                    dot.color = u.Side == 0 ? PxMint : PxRed;
+                    dot.color = PitPresentation?PxRed:u.Side == 0 ? PxMint : PxRed;
                 }
             }
         }

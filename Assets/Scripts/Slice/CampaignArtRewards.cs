@@ -15,11 +15,13 @@ namespace KindredSiege.Slice
             CloseModal();Modal(FavourRules.PalName(_campaign.FavourOffer.Pal).ToUpperInvariant()+" / PICK ONE","");
             _buttons["modal-close"].gameObject.SetActive(false);
             int price=_campaign.SpoilsMaterials;
-            PxWrite(_modal,36,66,648,new PxLines().Add("PAL PICK OR GEAR OR "+price+" MAT",PxGold));
+            PxWrite(_modal,36,66,648,new PxLines().Add("PAL PICK OR GEAR OR "+price+" MAT / DUOS ARE EXTRA AND FREE",PxGold));
             var offer=_campaign.FavourOffer;
-            for(int i=0;i<offer.Choices.Count;i++)
+            int start=RewardPageStart(offer);
+            RewardPager(offer.Choices.Count,true,78);
+            for(int i=start;i<System.Math.Min(offer.Choices.Count,start+3);i++)
             {
-                int choice=i,x=26+i*226;var favour=offer.Choices[i];int rank=_campaign.FavourRank(favour);
+                int choice=i,x=26+(i-start)*226;var favour=offer.Choices[i];int rank=_campaign.FavourRank(favour);
                 var lines=new PxLines().Add(Fit(FavourRules.Name(favour),164),PxGold)
                     .Add(rank>0?"UPGRADE "+rank+" > "+(rank+1):"NEW / RANK 1",PxBone);
                 if(FavourRules.IsCombo(favour))
@@ -28,7 +30,8 @@ namespace KindredSiege.Slice
                     lines.Add(SliceClasses.Name(ClassSpells.ClassOf(bend))+" / "+MarkRules.Name(MarkRules.Of(bend)),ComboColour(bend));
                 }
                 else lines.Add(FavourRules.PalName(offer.Pal),PxMuted);
-                if(FavourRules.IsWhisper(favour))lines=WhisperLines(choice,true);
+                if(AdvancedPick(favour))lines=AdvancedPickLines(favour,true);
+                else if(FavourRules.IsWhisper(favour))lines=WhisperLines(choice,true);
                 PxPanel(x,108,216,88,lines,_modal);
                 PxButton("reward-pal-"+i,"VIEW PAL PICK",x,200,216,26,()=>ShowRewardDetail(true,choice),_modal);
             }
@@ -40,7 +43,7 @@ namespace KindredSiege.Slice
                 PxButton("reward-gear-"+i,"VIEW TRIBE GEAR",x,332,216,26,()=>ShowRewardDetail(false,choice),_modal);
             }
             PxButton("bank-reward","KEEP MATERIALS",264,398,192,28,()=>{CloseModal();if(_page==Page.Result)AfterResult();},_modal);
-            SelectControl("reward-pal-0");
+            SelectControl("reward-pal-"+start);
         }
 
         void ShowRewardDetail(bool pal,int choice)
@@ -51,7 +54,7 @@ namespace KindredSiege.Slice
             int price=_campaign.SpoilsMaterials;bool allowed;string why;PxLines lines,full;string title,action;
             if(pal)
             {
-                var favour=offer.Choices[choice];title="PAL PICK";full=FavourChoiceLines(favour,choice);lines=FavourRules.IsWhisper(favour)?WhisperLines(choice):CompactFavourLines(favour);
+                var favour=offer.Choices[choice];title="PAL PICK";full=FavourChoiceLines(favour,choice);lines=AdvancedPick(favour)?AdvancedPickLines(favour):FavourRules.IsWhisper(favour)?WhisperLines(choice):CompactFavourLines(favour);
                 if(FavourRules.IsCombo(favour))full.Gap().Add(_campaign.FavourRank(favour)>0?
                     "Ranks up this piece. Its current wearer stays the same.":
                     "Auto-equips the first class fighter without a combo; otherwise stays in run gear.",PxMuted);
@@ -70,9 +73,10 @@ namespace KindredSiege.Slice
                 action="STRIP GEAR";allowed=_campaign.CanTakeSpoils(choice,out why);
             }
             if(!allowed)lines.Gap().Add(why,PxRed);
-            lines.Gap().Add("-"+price+" MAT = THIS PICK / OTHERS LOST",PxGold);
+            bool free=pal&&FreeDuo(offer.Choices[choice]);
+            lines.Gap().Add(free?"FREE DUO / NORMAL REWARD STAYS":"-"+price+" MAT = THIS PICK / OTHERS LOST",PxGold);
             CloseModal();Modal(title,"");_buttons["modal-close"].gameObject.SetActive(false);PxWrite(_modal,36,66,648,lines);
-            PxButton(pal?"favour-"+choice:"strip-"+choice,action+" (-"+price+" MAT)",360,398,328,28,
+            PxButton(pal?"favour-"+choice:"strip-"+choice,free?"TAKE FREE DUO":action+" (-"+price+" MAT)",360,398,328,28,
                 ()=>{if(pal)TakeFavour(choice);else TakeClassSpoils(choice);},_modal).interactable=allowed;
             PxButton("reward-back","BACK TO ALL REWARDS",16,398,328,28,ShowRewardChoices,_modal);
             PxButton("reward-details","DETAILS",548,310,140,26,()=>

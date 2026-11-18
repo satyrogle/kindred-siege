@@ -54,16 +54,17 @@ namespace KindredSiege.Slice
             if (_readoutScreen == _screen) return;
             _readoutScreen = _screen;
             _readoutLayer = Rect(_stage, "Readouts", 0, 0, W, H);
-            Panel(_readoutLayer, StageX * Px, TopBarH * Px, StageW * Px, (CleanCombatHud?38:19) * Px, new Color(.06f, .05f, .07f, CleanCombatHud?.92f:.72f));
+            var hud=sim.PitOn?_screen:_readoutLayer;
+            Panel(hud, StageX * Px, TopBarH * Px, StageW * Px, (CleanCombatHud?38:19) * Px, new Color(.06f, .05f, .07f, CleanCombatHud?.92f:.72f));
             for (int s = 0; s < 2; s++)
             {
                 int x = s == 0 ? StageX + 6 : StageX + StageW - 6 - NerveBarW;
                 _nerveBarX[s] = x;
-                _nerveBack[s] = Panel(_readoutLayer, x * Px, NerveY * Px, NerveBarW * Px, NerveHeight * Px, BarBack);
-                _nerveLag[s] = Panel(_readoutLayer, x * Px, NerveY * Px, NerveBarW * Px, NerveHeight * Px, PxBone);
-                _nerveFill[s] = Panel(_readoutLayer, x * Px, NerveY * Px, NerveBarW * Px, NerveHeight * Px, s == 0 ? PxMint : PxRed);
-                _nerveLabel[s] = PxLabel(_readoutLayer, s == 0 ? x : x + NerveBarW, CleanCombatHud?43:NerveBarY + NerveBarH + 2, s == 0 ? 0 : 2);
-                if(CleanCombatHud)_nerveChange[s]=PxLabel(_readoutLayer,s==0?x:x+NerveBarW,69,s==0?0:2);
+                _nerveBack[s] = Panel(hud, x * Px, NerveY * Px, NerveBarW * Px, NerveHeight * Px, BarBack);
+                _nerveLag[s] = Panel(hud, x * Px, NerveY * Px, NerveBarW * Px, NerveHeight * Px, PxBone);
+                _nerveFill[s] = Panel(hud, x * Px, NerveY * Px, NerveBarW * Px, NerveHeight * Px, s == 0 ? PxMint : PxRed);
+                _nerveLabel[s] = PxLabel(hud, s == 0 ? x : x + NerveBarW, CleanCombatHud?43:NerveBarY + NerveBarH + 2, s == 0 ? 0 : 2);
+                if(CleanCombatHud)_nerveChange[s]=PxLabel(hud,s==0?x:x+NerveBarW,69,s==0?0:2);
                 _nerveSeen[s] = sim.Nerve(s);
                 _nerveLagValue[s] = sim.Nerve(s);
                 _nerveLagUntil[s] = _swingAt[s] = _causeAt[s] = -100;
@@ -74,11 +75,11 @@ namespace KindredSiege.Slice
                 if (_pxLane[s] != null) { _pxLane[s].y = CleanCombatHud?159:TopBarH + 22; _pxLane[s].key = ""; }
             }
             _nerveDrawnAt = _visualTime;
-            if(RoadHud){_roadWarning=PxLabel(_readoutLayer,30,56);SetPx(_roadWarning,sim.ClearRoadOn?"":sim.RoadKitOn?KitStatus:RoadIssue,PxOrange);}
-            _castBack = Panel(_readoutLayer, 0, 0, CastBarW * Px, CastBarH * Px, BarBack);
-            _castFill = Panel(_readoutLayer, 0, 0, CastBarW * Px, CastBarH * Px, PxYellow);
-            _castMark = Panel(_readoutLayer, 0, 0, Px, (CastBarH + 4) * Px, PxGold);
-            _castLabel = PxLabel(_readoutLayer, 0, 0, 1);
+            if(RoadHud){_roadWarning=PxLabel(hud,30,56);SetPx(_roadWarning,sim.ClearRoadOn?"":sim.RoadKitOn?KitStatus:RoadIssue,PxOrange);}
+            _castBack = Panel(hud, 0, 0, CastBarW * Px, CastBarH * Px, BarBack);
+            _castFill = Panel(hud, 0, 0, CastBarW * Px, CastBarH * Px, PxYellow);
+            _castMark = Panel(hud, 0, 0, Px, (CastBarH + 4) * Px, PxGold);
+            _castLabel = PxLabel(hud, 0, 0, 1);
             _castBack.enabled = _castFill.enabled = _castMark.enabled = false;
             _castTotal = 0;
             _castCaster = "";
@@ -235,7 +236,8 @@ namespace KindredSiege.Slice
                     _leaderMarks[f.unit.Id] = mark;
                 }
                 bool mine = f.unit.Side == 0;
-                SetPx(mark, f.unit.Alive ? (mine ? "YOUR LEADER" : ViewKind==EncounterKind.Duel?"CHAMPION":"LEADER") : "", mine ? PxMint : PxGold);
+                // One blow at a time hides the tag while the fight plays; a pause shows it (CampaignArtBeats.cs, fix 3).
+                SetPx(mark, f.unit.Alive && !BeatsQuiet ? (mine ? "YOUR LEADER" : ViewKind==EncounterKind.Duel?"CHAMPION":"LEADER") : "", mine ? PxMint : PxGold);
             }
             var leader = sim.Leader(0);
             if (!sim.UnitNerveOn && !_warnedLeaderHurt && leader != null && leader.Hp * 100 < leader.MaxHp * 40)

@@ -89,7 +89,7 @@ namespace KindredSiege.Slice
                     .Append(" steps on the road, then ").Append(route[i].ChiefName).Append("\n    His order: ").Append(route[i].AssistName).Append("\n");
             s.Append("Then the hunters: one final fight for the bounty on your head. Break them to win the run.\n\n")
                 .Append("Break a chief while he stands and his band joins, with his order. Kill him and you take his Princess gear.\n")
-                .Append(LivesRun?"Three lives per run. A defeat costs one life; your squad and gear return. Beast hunts cost no life. Each run starts with fresh Clarth.":"Lose a fight and they capture one of yours. Under "+Campaign.MinSquad+" fighters the run ends. Each run starts with fresh Clarth.");
+                .Append(LivesRun?"Three lives per run. A defeat costs one life; your squad and gear return. "+(_campaign.BeastRollRun?"Rolled beasts cost a life on defeat too. ":"Beast hunts cost no life. ")+"Each run starts with fresh Clarth.":"Lose a fight and they capture one of yours. Under "+Campaign.MinSquad+" fighters the run ends. Each run starts with fresh Clarth.");
             return s.ToString();
         }
         string TheyLearned()
@@ -148,6 +148,9 @@ namespace KindredSiege.Slice
         }
         string ResultLine(EncounterResult r)
         {
+            if(r.Encounter.Kind==EncounterKind.Beast&&r.Encounter.BeastTier>0)
+                return (r.Won?"Node taken. Trophies and materials banked.":r.RunOver?"Run over. Earlier trophies stay at camp.":"Life lost. The beast still waits on its node.")+
+                    " Tier "+r.BeastTierAfter+" / lives "+r.LivesLeft+"/3. Nobody captured.";
             if(r.Encounter.Kind==EncounterKind.Beast)return (r.BeastEscaped?"Last stand escape. ":r.BeastFled?"Time ran out; it fled. ":"")+(r.RunOver?"Run over. Earlier trophies stay at camp.":r.Won?"Trophies banked. Your road step is unchanged.":"No trophies. Nobody captured. Your road step is unchanged.");
             if(r.TutorialWon)return "The Clarth join you. Camp is open: every run starts and ends there.";
             if(r.Encounter.Kind==EncounterKind.Tutorial)return "The tutorial starts again.";

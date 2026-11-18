@@ -143,6 +143,8 @@ namespace KindredSiege.Slice
         /// 13 Oct 2026), and what waits for them, the fight's bonus goal included.
         void BuildPixelSquad()
         {
+            if (WarRollReview && !_warBriefing) { BuildWarRoll(); return; }
+            if (WarRollReview) PxButton("war-return", "WAR ROLL", 340, 6, 108, 26, () => { _warBriefing = false; SetPage(Page.Squad); });
             var encounter=SelectedEncounter;
             PxHeader(encounter.Kind==EncounterKind.Duel?"Choose your duelist":"Choose your squad",PxBone,PxGold,new PxLines());
             SetPx(PxLabel(_screen,16,38),Fit(encounter.Title+" / "+_squad.Count+"/"+encounter.SquadSize+" / "+LivesText(),688),PxBone);
@@ -289,7 +291,7 @@ namespace KindredSiege.Slice
             }
             BeastResultLines(lines,r);
             if(r.RecipeLearned)lines.Gap().Add("Recipe unlocked",PxGold).Add(CampaignForge.TabardName,PxBone)
-                .Add("Not gear yet. The Butcher can forge it at camp for "+CampaignForge.TabardPrice+" materials.",PxMuted);
+                .Add("Not gear yet. The Butcher can forge it at camp for "+_campaign.TabardPrice+" materials.",PxMuted);
             if(r.RunOver)lines.Gap().Add("KEPT AT CAMP",PxGold).Add("Materials, trophies, forged pieces, recipes, codex and learned habits.",PxBone)
                 .Add("Run fighters, orders, gear and favours reset.",PxMuted);
             return lines;

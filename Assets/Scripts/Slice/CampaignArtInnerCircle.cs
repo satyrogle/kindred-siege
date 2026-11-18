@@ -77,12 +77,18 @@ namespace KindredSiege.Slice
                 int x = Mathf.RoundToInt(feet.x / Px), y = Mathf.RoundToInt(feet.y / Px);
                 SetPx(PxLabel(_modal, x, y + 3, 1), PalNames[i], PxBone);
                 // The pixel font has no "&".
-                SetPx(PxLabel(_modal, x, y + 14, 1), PalRoles[i].Replace("&", "and"), PxGold);
+                SetPx(PxLabel(_modal, x, y + 14, 1), (_campaign!=null&&_campaign.ShadeFormsRun?new[]{"Gear and combos","Talents and Feed","Order routes","Habits and ranks"}[i]:PalRoles[i]).Replace("&", "and"), PxGold);
             }
             PxImage(_modal, "Top bar", Plate(_kitButton, 12, 720, TopBarH), 0, 0);
             SetPx(PxLabel(_modal, 14, 8), "CAMP", PxBone);
             SetPx(PxLabel(_modal, 14, 21), "The four who stayed with you. Point at one to watch them work.", PxMuted);
             if(_campaign!=null)PxButton("pal-forge","BUTCHER'S FORGE",16,420,216,28,()=>ShowForge(),_modal);
+            if(_campaign!=null&&_campaign.ShadeFormsRun)PxButton("pal-routes","SHADE ROUTES",264,386,192,28,ShowShadeRoutes,_modal);
+            if(GluttonUi)
+            {
+                PxButton("pal-tree","GLUTTON TREE",16,386,216,28,ShowTalentTree,_modal);
+                PxButton("pal-feed","FEED",488,386,216,28,ShowFeed,_modal);
+            }
             if(WhispererRun)PxButton("pal-habits","SQUAD HABITS",488,420,216,28,ShowHabits,_modal);
             var close = PxButton("camp-close", "RETURN", 264, 420, 192, 28, CloseCamp, _modal);
             if (EventSystem.current != null) EventSystem.current.SetSelectedGameObject(close.gameObject);

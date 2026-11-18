@@ -17,7 +17,7 @@ namespace KindredSiege.Slice
 
         string ForgeSummary()=>!_campaign.TabardRecipeKnown?"Break the Bloodridge chief to learn the recipe.":
             _campaign.TabardForged?"Forged for good. Wearer: "+TabardWearerName()+".":
-            "Recipe learned. Forge at camp for "+CampaignForge.TabardPrice+" materials.";
+            "Recipe learned. Forge at camp for "+_campaign.TabardPrice+" materials.";
 
         void ShowForge(string receipt="")
         {
@@ -26,7 +26,7 @@ namespace KindredSiege.Slice
             bool canForge=_campaign.CanForgeTabard(out string why);
             var text=new StringBuilder("THE BUTCHER\n\n").Append(CampaignForge.TabardName).Append("\n\n")
                 .Append("The wearer's hits drain enemy nerve ").Append(CampaignForge.TabardFear).Append("% harder.\n\n")
-                .Append("Price: ").Append(CampaignForge.TabardPrice).Append(" materials, paid once.\n")
+                .Append("Price: ").Append(_campaign.TabardPrice).Append(" materials, paid once.\n")
                 .Append("Materials at camp: ").Append(_campaign.Materials).Append("\n\n")
                 .Append("KEEPS: the forge unlock, even after a loss.\n")
                 .Append("RESETS: the tabard comes off at the end of each run. Choose a wearer again, or let the first Warden take it.\n\n")
@@ -35,11 +35,12 @@ namespace KindredSiege.Slice
             if(receipt.Length>0)text.Append(receipt);
             Modal("BUTCHER'S FORGE",text.ToString());
             PxButton("beast-trophies","TROPHIES: "+_campaign.Trophies.Count,480,8,224,26,()=>ShowTrophies(),_modal);
-            var forge=PxButton("forge-buy",_campaign.TabardForged?"FORGED":"FORGE: "+CampaignForge.TabardPrice,16,398,200,28,()=>
+            var forge=PxButton("forge-buy",_campaign.TabardForged?"FORGED":"FORGE: "+_campaign.TabardPrice,16,398,200,28,()=>
             {
+                int paid=_campaign.TabardPrice;
                 if(!_campaign.TryForgeTabard(out string failure)){ShowForge(failure);return;}
                 PlaySound("forge");
-                _notice="Forged "+CampaignForge.TabardName+". Paid "+CampaignForge.TabardPrice+" materials. The unlock stays after a loss.";
+                _notice="Forged "+CampaignForge.TabardName+". Paid "+paid+" materials. The unlock stays after a loss.";
                 Save();string note=_notice;SetPage(_page);ShowForge(note);
             },_modal);
             forge.interactable=canForge;

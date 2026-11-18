@@ -19,6 +19,7 @@ namespace KindredSiege.Slice
         void MajorMoment(BattleEvent e, Figure actor, Figure target)
         {
             if (!_combatFeedback || _seeking) return;
+            if(TablePresentation&&e.Kind!=BattleEventKind.Parry)return;
             if(e.Kind==BattleEventKind.Release&&e.Detail==FightRules.Parried)_parriedGuard=e.TargetId;
             bool kill=e.Kind==BattleEventKind.Kill;
             bool parry=e.Kind==BattleEventKind.Parry;

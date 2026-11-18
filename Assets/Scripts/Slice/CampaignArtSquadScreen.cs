@@ -155,7 +155,8 @@ namespace KindredSiege.Slice
                 SetPx(_threatAnswers, _paused && _playback==null ? "PAUSED / SPACE TO RESUME" : "NO PARRY BEAT / 3 FOCUS AN ENEMY", PxMuted);
             }
             var leader = sim.Leader(0);
-            var leaderFigure = live && sim.LeaderProtected(leader) ? FindFigure(leader.Id) : null;
+            // One blow at a time hides the ring and PROTECTED while the fight plays; a pause shows them (CampaignArtBeats.cs).
+            var leaderFigure = live && !BeatsQuiet && sim.LeaderProtected(leader) ? FindFigure(leader.Id) : null;
             Circle(_leaderShield, leaderFigure, 64, new Color(.3f, .8f, 1f, .55f));
             AtBody(_leaderCover, leaderFigure, "PROTECTED", PxBlue, 36);
 

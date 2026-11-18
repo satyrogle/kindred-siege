@@ -76,13 +76,21 @@ namespace KindredSiege.Slice
             var uv=_sharkImage.uvRect;_sharkMaterial.SetVector(SpriteRect,new Vector4(uv.x,uv.y,uv.width,uv.height));
             _sharkShadow.enabled=sim.BeastUnder;
             if(_sharkShadow.enabled)SharkFrame(_sharkShadow,_sharkShadowClip,_visualTime,true,feet);
-            int gold=-1;
-            if(sim.TightParryOn&&!_paused&&!ViewOver)foreach(var t in _threatReads)
-                if(t.ParryWindow&&(t.Answers&ThreatAnswer.Parry)!=0&&IsSharkPart(sim.FindById(t.ActorId)))
-                {gold=Mathf.Clamp(t.WindowTicks+1-t.BeatTicks,0,5);break;}
+            int gold=-1;bool warning=false;
+            if(sim.TightParryOn&&!_paused&&!ViewOver&&!ChiefCutInVisible)foreach(var t in _threatReads)
+            {
+                if((t.Answers&ThreatAnswer.Parry)==0||!IsSharkPart(sim.FindById(t.ActorId)))continue;
+                if(t.ParryWindow){gold=Mathf.Clamp(Mathf.FloorToInt((t.WindowTicks+1-t.BeatTicks)*6f/t.WindowTicks),0,5);break;}
+                warning|=t.BeatTicks>=t.WindowTicks+2&&t.BeatTicks<=t.WindowTicks+1+KindredSiege.Sim.SimClock.TicksPerSecond;
+            }
             _sharkMaterial.SetFloat(ParryGold,gold==0||gold==1||gold==3||gold==4?1:0);
-            _sharkMaterial.SetFloat(ParryRim,gold==0||gold==1||gold==3?1:0);
-            _sharkMaterial.SetFloat(FlatWhite,!_paused&&_visualTime-_tightLandedAt<1f/12?1:0);
+            _sharkMaterial.SetFloat(ParryRim,(gold<0?warning:gold==0||gold==1||gold==3)?1:0);
+            _sharkMaterial.SetFloat(FlatWhite,!_paused&&IsSharkPart(sim.FindById(_tightLandedTarget))&&_visualTime-_tightLandedAt<1f/12?1:0);
+            float counterAge=-1;
+            foreach(var f in _figures)if(IsSharkPart(f.unit)&&_visualTime>=f.counterAt&&_visualTime-f.counterAt<6f/16)
+            {counterAge=_visualTime-f.counterAt;break;}
+            _sharkMaterial.SetFloat(CounterRim,!_paused&&counterAge>=0?1:0);
+            if(counterAge>=0)_sharkMaterial.SetColor(CounterColor,CounterColours[Mathf.FloorToInt(counterAge*16)%3]);
         }
     }
 }

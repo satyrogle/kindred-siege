@@ -35,14 +35,23 @@ namespace KindredSiege.Slice
 
         PxLines RoadSummary(BattleSimulation sim)
         {
-            int fled=0,defences=0,cashes=0;
+            int fled=0,defences=0,cashes=0;string broke="";
             foreach(var e in sim.Events)
             {
                 if(e.Kind==BattleEventKind.Snap&&e.Detail==RoadRules.Fled&&e.ActorSide==1)fled++;
                 if(e.Kind==BattleEventKind.Defence&&e.ActorSide==0)defences++;
                 if(e.Kind==BattleEventKind.Cash&&e.ActorSide==0)cashes++;
+                if(e.Kind==BattleEventKind.Break)broke=e.Detail;
             }
-            return new PxLines().Add(sim.Ending.How==FightEnd.Wipe?"Fight ended: one side has nobody left fighting.":"Time limit reached; result uses the recorded health comparison.",PxBone)
+            // Every way a road fight ends, not only a wipe (rules 43: their champion falls, their leader retreats).
+            var end=sim.Ending;
+            string how=end.How==FightEnd.Wipe?"Fight ended: one side has nobody left fighting.":
+                end.How==FightEnd.NerveBreak?(end.Side==1?(broke==LeaderRules.ChampionDetail?"Their champion fell: his band breaks.":
+                    broke==LeaderRules.RetreatDetail?"Their band is done: their leader retreats.":"Their nerve broke.")
+                    :"Your nerve broke."):
+                end.How==FightEnd.LeaderFell?(end.Side==0?"Your leader fell.":"Their leader fell."):
+                end.How==FightEnd.Escaped?"The beast dug away.":"Time limit reached; result uses the recorded health comparison.";
+            return new PxLines().Add(how,PxBone)
                 .Add("Still standing: your squad "+sim.StillFighting(0)+", enemy "+sim.StillFighting(1)+".",PxBone)
                 .Add("Enemies fled: "+fled+" / Your automatic defences: "+defences,PxMint)
                 .Add("Your mark cashes: "+cashes+". Fallen allies return next fight.",PxGold)
@@ -153,6 +162,7 @@ namespace KindredSiege.Slice
         void RoadDetails(StringBuilder text,BattleSimulation sim)
         {
             if(!sim.RoadKitOn)text.Append(RoadIssue).Append("\nKnown road regression: repeated Fall Back won 23/40 in the handback test (ceiling 20%). Not tuned.\n\n");
+            else if(sim.PitOn)text.Append(TightGuide).Append("\n\n");
             else if(sim.DangerOn)text.Append("SQUAD COMBAT\n")
                 .Append("Gold closing ring: a fresh live parry is available. The line identifies the threatened ally. Repeated Hold presses restart its recovery.\n")
                 .Append("Swings can be guarded. Blasts need their displayed parry or dodge answer; an early Hold does not soften a blast.\n")

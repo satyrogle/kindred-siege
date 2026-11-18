@@ -11,10 +11,15 @@ namespace KindredSiege.Slice
     {
         // Presentation only. Availability, targets, receipts and purchases belong to Campaign/Sim.
         Encounter SelectedEncounter => _offer == -2 ? _campaign.BeastOffer : _campaign.Offers[_offer];
+        string BeastLossText(Encounter e)=>e.BeastTier>0?"Lose: -1 life; fallen fighters lose their top rank. Beast tier stays. No capture.":
+            LivesRun?"Lose: no trophies or life lost; your whole squad returns.":"Lose: no trophies; fallen stay down, nobody captured.";
         RectTransform _beastScreen, _beastPanel;
         PxText _beastState;
         readonly Dictionary<BeastPart, PxText> _beastParts = new Dictionary<BeastPart, PxText>();
         readonly Dictionary<string, PxText> _beastMarks = new Dictionary<string, PxText>();
+        readonly PxText[] _beastPupText=new PxText[BeastKits.PupCount];
+        readonly int[] _beastPupSlot=new int[BeastKits.PupCount];
+        bool IsSharkAdd(BattleUnit u)=>u!=null&&u.Side==1&&ViewSim.BeastRaidOn&&ViewSim.Beast(1)==BeastKit.SandShark&&!ViewSim.TryPartOf(u,out _);
 
         void TakeBeast()
         {
@@ -40,8 +45,14 @@ namespace KindredSiege.Slice
                 (lives?"Win: broken parts become trophies at camp. Lose: no trophies or life lost; your whole squad returns.\n":
                 "Win: broken parts become trophies at camp, safe even if the run is lost. Lose: no trophies; fallen stay down; nobody captured.\n") +
                 "Each breaker earns a road scar for this run, strengthening their spell against beasts.\n\n";
+            var encounter=_page==Page.Squad?SelectedEncounter:_playback==null?_fight?.Encounter:null;
+            if(encounter!=null&&encounter.BeastTier>0)
+                shared="Road beast / tier "+encounter.BeastTier+" of 50. Win: take its node, bank trophies and materials, and raise its camp tier by one (maximum 50).\n"+
+                    BeastLossText(encounter)+"\nNo enemy nerve: break parts. Your nerve and leader still matter.\n\n";
             if((_fight!=null||_playback!=null)&&ViewSim.TightParryOn) shared += TightGuide+"\n\n";
             else if(parryCenter) shared += "EVERY TOLD BEAT: time a fresh live Hold in its last half second to parry. Paused Hold never parries. Early Hold costs nerve. The following are safe alternatives.\n";
+            if(((_fight!=null||_playback!=null)?ViewSim.BeastRaidOn:ReviewRulesCap>=Campaign.BeastRaidRules))
+                shared+=kit==BeastKit.SandShark?"FEEDING FRENZY: second part breaks, it dives and becomes untouchable. Churning sand warns of the all-row burst: Fall Back or an armed trap. Then two pups attack your back row; Focus a pup to kill it. A trap exposes the shark.\n\n":"OVERLOAD: breaking the ribcage starts frost on both rows. Fall Back dodges it; otherwise fighters freeze. Last-stand Pulse climbs with each beat.\n\n";
             if (kit == BeastKit.CageBear) return shared +
                 "RIBCAGE: halves hits on the bear and seals the heart. Unleash doubles hits on the cage while active.\n" +
                 (scenes?"CLAW / SLAM + GRAB: wave hits both rows before the grab. Fall Back dodges both; Warden halves the wave and blocks the grab.":"CLAW / GRAB: Fall Back or Warden cover.")+" Held fighters cannot act or be healed. Break the claw to free them.\n" +
@@ -55,19 +66,19 @@ namespace KindredSiege.Slice
                 "FIN / DIVE: mostly avoids your hits while submerged. Fall Back dodges; a Trapper snare holds it up.\n" +
                 "SPINE / VOLLEY: back row hit. Fall Back or Warden cover.\n" +
                 "TAIL / SWEEP: "+(((_fight!=null||_playback!=null)?ViewSim.BeastScenesOn:ReviewRulesCap>=Campaign.BeastSceneRules)?"both rows hit.":"front row hit.")+" Fall Back, Warden cover or Medic." + (parryCenter ? " Time Hold to parry.\n" : " Hold does not soak it.\n") +
-                "BLOOD FRENZY: after two parts break, faster moves and bleeding hits.\n" +
+                "BLOOD FRENZY: after two parts break and any Feeding frenzy finishes, faster moves and bleeding hits.\n" +
                 "LAST STAND: after three break, 15s to break the last; otherwise it flees with three trophies left behind.\n" +
                 "Break all four to kill it. At the fight time limit it flees; keep what you broke.";
         }
 
         void BeastBrief(PxLines lines, Encounter encounter)
         {
-            lines.Add("OPTIONAL / NO ROAD STEP", PxGold)
+            lines.Add(encounter.BeastTier>0?"ROAD BEAST / TIER "+encounter.BeastTier+" OF 50":"OPTIONAL / NO ROAD STEP", PxGold)
                 .Add("No enemy nerve. Break parts to win. Your nerve and leader still matter.", PxBone)
                 .Add(encounter.Beast == BeastKit.CageBear ?
                     "Crack the ribcage to reach the heart. Break the heart to kill it; only broken parts give trophies. Timeout: you lose." :
                     "Break all four, or hold out until it flees. Last stand: 15s to break the last part.", PxBone)
-                .Add(LivesRun?"Win: trophies safe at camp. Lose: no trophies or life lost; your whole squad returns.":"Win: trophies safe at camp. Lose: none; fallen stay down, nobody captured.", PxMuted)
+                .Add((encounter.BeastTier>0?"Win: take the node; trophies and materials banked. ":"Win: trophies safe at camp. ")+BeastLossText(encounter), PxMuted)
                 .Add(encounter.Beast==BeastKit.SandShark?"Named parts share one shark. Select a part to Focus it.":"Bear art pending. Named part markers show the targets.", PxMuted);
             PxButton("beast-guide", "BEAST MOVES", 464, 362, 232, 26, () => { CloseModal(); Modal("BEAST MOVES", BeastGuide(encounter.Beast, true)); });
         }
@@ -88,8 +99,9 @@ namespace KindredSiege.Slice
             var unit = sim.Part(part);
             string name = BeastKits.Name(part).ToUpperInvariant();
             if (unit == null) return name + " --";
-            if (!unit.Alive) return name + (BeastSevered(sim,part) ? " BROKEN" : "\nDOWN / NO TROPHY");
-            string hp = name + " " + unit.Hp + "/" + unit.MaxHp;
+            var figure=FindFigure(unit.Id);
+            if (!unit.Alive&&(figure==null||!BeatAlive(figure))) return name + (BeastSevered(sim,part) ? " BROKEN" : "\nDOWN / NO TROPHY");
+            string hp = name + " " + (figure==null?unit.Hp:BeatHp(figure)) + "/" + unit.MaxHp;
             if (part == BeastPart.Ribcage) return hp + "\nFRONT / ARMOUR\nUNLEASH CRACKS CAGE";
             if(ViewOver)return hp+"\nSURVIVED";
             if(part==BeastPart.Claw&&sim.BeastHeldId.Length>0)return hp+"\nHOLDING / BREAK TO FREE";
@@ -114,10 +126,15 @@ namespace KindredSiege.Slice
             {
                 _beastScreen = _screen; _beastPanel = null; _beastParts.Clear(); _beastMarks.Clear();
                 if (!sim.BeastOn) return;
-                _beastPanel = Rect(_readoutLayer, "Beast parts", 0, 0, W, H);
+                _beastPanel = Rect(sim.PitOn?_screen:_readoutLayer, "Beast parts", 0, 0, W, H);
                 Panel(_beastPanel, 22*Px, 70*Px, 676*Px, 88*Px, new Color(.06f,.05f,.07f,.92f));
                 _beastState = PxLabel(_beastPanel, 28, 75);
                 PxButton("beast-moves", "MOVES", 616, 73, 76, 18, ShowBeastMoves, _beastPanel);
+                if(sim.BeastRaidOn&&sim.Beast(1)==BeastKit.SandShark)
+                    for(int pup=0;pup<BeastKits.PupCount;pup++)
+                    {int n=pup;_beastPupSlot[n]=-1;var pupButton=PxButton("beast-pup-"+n,"",28,104,160,46,()=>
+                        {foreach(var u in ViewSim.Units)if(IsSharkAdd(u)&&u.Id.EndsWith(".pup"+(n+1))&&u.Alive){Focus(u);break;}},_beastPanel);
+                        _beastPupText[n]=PxLabel(pupButton.transform,5,7);pupButton.gameObject.SetActive(false);}
                 int i=0;
                 foreach (var part in BeastKits.Parts(sim.Beast(1)))
                 {
@@ -134,20 +151,47 @@ namespace KindredSiege.Slice
             string state=BeastKits.Name(kit)+" / "+(sim.BeastPhase>=2?BeastKits.PhaseName(kit,sim.BeastPhase):"BREAK PARTS");
             if(ViewOver) state="FIGHT OVER / "+BeastKits.Name(kit);
             else if(sim.BeastEscapeTicks>0) state+=" / ESCAPES IN "+Seconds(sim.BeastEscapeTicks);
+            if(_playback==null&&_fight.Encounter.BeastTier>0)state+=" / TIER "+_fight.Encounter.BeastTier;
             state+="\n3 FOCUS -> PART / "+(kit==BeastKit.CageBear?(sim.BeastCaged?"CAGE UP / HEART SEALED":"HEART EXPOSED / TIMEOUT LOSES"):
                 sim.BeastUnder?"SUBMERGED / BLOWS MOSTLY MISS":"NO NERVE / BREAK ALL FOUR OR SURVIVE");
+            if(!ViewOver&&sim.BeastRaidOn)
+            {
+                if(sim.BeastIntermission.Length>0)state=sim.BeastIntermission.ToUpperInvariant()+" / "+Seconds(sim.BeastIntermissionTicks)+"\n"+(sim.BeastWarning.Length>0?sim.BeastWarning:"MOVES PAUSED");
+                else if(sim.BeastExposedTicks>0)state+=" / EXPOSED "+Seconds(sim.BeastExposedTicks);
+                if(kit==BeastKit.SandShark)for(int n=0;n<BeastKits.PupCount;n++)
+                {
+                    BattleUnit pup=null;foreach(var u in sim.Units)if(u.Side==1&&u.Id.EndsWith(".shark.pup"+(n+1))){pup=u;break;}
+                    var b=_buttons["beast-pup-"+n];bool live=!ViewOver&&pup!=null&&pup.Alive;
+                    b.interactable=live&&_playback==null;b.gameObject.SetActive(live);
+                    if(live)
+                    {
+                        var parts=BeastKits.Parts(kit);
+                        if(_beastPupSlot[n]<0)for(int slot=0;slot<parts.Count;slot++)
+                        {bool used=false;for(int other=0;other<BeastKits.PupCount;other++)used|=other!=n&&_beastPupSlot[other]==slot;
+                         if(!used&&!sim.Part(parts[slot]).Alive){_beastPupSlot[n]=slot;break;}}
+                        int occupied=Mathf.Max(0,_beastPupSlot[n]);b.GetComponent<RectTransform>().anchoredPosition=new Vector2((28+occupied*166)*Px,-104*Px);
+                        SetTacticsLines(_beastPupText[n],"PUP "+(n+1)+" "+pup.Hp+"/"+pup.MaxHp+"\nFOCUS TO CLEAR\n"+BeastKits.Name(parts[occupied]).ToUpperInvariant()+" BROKEN",PxGold);
+                    }
+                }
+            }
             SetTacticsLines(_beastState,state,PxGold);
             foreach(var part in BeastKits.Parts(kit))
             {
                 var u=sim.Part(part); bool live=!ViewOver&&u!=null&&u.Alive;
+                _buttons["beast-part-"+part].gameObject.SetActive(true);
                 SetTacticsLines(_beastParts[part],BeastPartLine(sim,part),sim.BeastTellTicks(part)>0&&live?PxYellow:live?PxBone:PxMuted);
                 _buttons["beast-part-"+part].interactable=live&&_playback==null;
             }
+            if(sim.BeastRaidOn&&kit==BeastKit.SandShark)
+                for(int n=0;n<BeastKits.PupCount;n++)if(_buttons["beast-pup-"+n].gameObject.activeSelf&&_beastPupSlot[n]>=0)
+                    _buttons["beast-part-"+BeastKits.Parts(kit)[_beastPupSlot[n]]].gameObject.SetActive(false);
             foreach(var f in _figures)
             {
                 var marks=new List<string>();
                 if(!ViewOver&&f.unit.Alive)
                 {
+                    if(sim.BeastRaidOn)foreach(var pup in sim.BeastAddIds)if(sim.BeastAddTargetId(pup)==f.unit.Id)marks.Add("PUP BITING / FOCUS PUP");
+                    if(sim.BeastRaidOn&&sim.FrozenTicks(f.unit)>0)marks.Add("FROZEN "+Seconds(sim.FrozenTicks(f.unit)));
                     if(sim.BeastHeldId==f.unit.Id) marks.Add("HELD / BREAK CLAW");
                     foreach(var part in BeastKits.Parts(kit))
                         if(sim.BeastTellTicks(part)>0)
@@ -174,6 +218,11 @@ namespace KindredSiege.Slice
         void BeastResultLines(PxLines lines, EncounterResult r)
         {
             if(r.Encounter.Kind!=EncounterKind.Beast)return;
+            if(r.Encounter.BeastTier>0)
+            {
+                lines.Gap().Add("FOUGHT TIER "+r.Encounter.BeastTier+" / CAMP TIER "+r.BeastTierAfter,PxBone)
+                    .Add("MATERIALS +"+r.MaterialsEarned+" / LIVES "+r.LivesLeft+"/3",PxMint);
+            }
             lines.Gap().Add("TROPHIES BANKED: "+r.Trophies.Count,PxGold);
             foreach(var part in r.Trophies)lines.Add(BeastKits.Name(part),PxBone);
             if(!r.Won)lines.Add("No trophies from this defeat.",PxMuted);
