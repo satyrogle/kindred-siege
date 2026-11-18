@@ -1,0 +1,68 @@
+{
+ "high_level_description": "The Clarth war hunters' camp on a floating snowy island: red hide tents on arched frames of sand shark bone around a giant shark skeleton, hunters in red cloaks and crested bone masks at cooking fires, a bone watchtower.",
+ "style_description": {
+  "aesthetics": "a lived in war camp seen from a little above, busy with small figures, warm against cold snow",
+  "lighting": "warm sunlight from the upper right, short blue shadows falling to the lower left",
+  "medium": "pixel art",
+  "art_style": "crisp pixel art with clean dark outlines, flat shading in few colours, figures a few pixels tall",
+  "color_palette": [
+   "#A7C4EA",
+   "#A4BFE3",
+   "#A3BFE4",
+   "#A2BFE5",
+   "#9CB0D2",
+   "#7384A4",
+   "#415D8B",
+   "#464A66",
+   "#1D3869",
+   "#411623",
+   "#15213D",
+   "#080411"
+  ]
+ },
+ "compositional_deconstruction": {
+  "background": "a floating island with a flat snowy top and blue ice cliffs, over a white sea of clouds, under a clear blue sky",
+  "elements": [
+   {
+    "type": "obj",
+    "bbox": [
+     300,
+     60,
+     700,
+     420
+    ],
+    "desc": "a giant sand shark skeleton lying on the snow, its ribs hung with red hides"
+   },
+   {
+    "type": "obj",
+    "bbox": [
+     380,
+     400,
+     640,
+     820
+    ],
+    "desc": "red hide tents stretched over arched frames of shark bone, smoke rising between them"
+   },
+   {
+    "type": "obj",
+    "bbox": [
+     480,
+     300,
+     700,
+     720
+    ],
+    "desc": "hunters in red cloaks and crested bone war masks at small fires, jaw shields beside them"
+   },
+   {
+    "type": "obj",
+    "bbox": [
+     140,
+     800,
+     660,
+     900
+    ],
+    "desc": "a tall watchtower of bone and red cloth with a lookout at the top"
+   }
+  ]
+ }
+}

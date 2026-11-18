@@ -1,0 +1,68 @@
+{
+ "high_level_description": "The Clarth hunters' camp on a floating snowy island, ringed by a wall of sand shark spines with a gate made of a shark jaw, hunters with spine rifles on the wall, hooded Bloodridge raiders climbing the ice cliff on the right.",
+ "style_description": {
+  "aesthetics": "a lived in war camp seen from a little above, busy with small figures, warm against cold snow",
+  "lighting": "warm sunlight from the upper right, short blue shadows falling to the lower left",
+  "medium": "pixel art",
+  "art_style": "crisp pixel art with clean dark outlines, flat shading in few colours, figures a few pixels tall",
+  "color_palette": [
+   "#A7C4EA",
+   "#A4BFE3",
+   "#A3BFE4",
+   "#A2BFE5",
+   "#9CB0D2",
+   "#7384A4",
+   "#415D8B",
+   "#464A66",
+   "#1D3869",
+   "#411623",
+   "#15213D",
+   "#080411"
+  ]
+ },
+ "compositional_deconstruction": {
+  "background": "a floating island with a flat snowy top and blue ice cliffs, over a white sea of clouds, under a clear blue sky",
+  "elements": [
+   {
+    "type": "obj",
+    "bbox": [
+     360,
+     80,
+     720,
+     900
+    ],
+    "desc": "a wall of tall sand shark spines around the camp, a gate made of a huge shark jaw"
+   },
+   {
+    "type": "obj",
+    "bbox": [
+     300,
+     200,
+     520,
+     640
+    ],
+    "desc": "Clarth hunters in red cloaks on the wall aiming spine rifles toward the right"
+   },
+   {
+    "type": "obj",
+    "bbox": [
+     420,
+     300,
+     640,
+     700
+    ],
+    "desc": "red hide tents inside the wall"
+   },
+   {
+    "type": "obj",
+    "bbox": [
+     450,
+     820,
+     900,
+     990
+    ],
+    "desc": "hooded raiders in rotted sepia rags climbing the ice cliff with hooked flails"
+   }
+  ]
+ }
+}

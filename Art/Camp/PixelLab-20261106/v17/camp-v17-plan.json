@@ -1,0 +1,369 @@
+{
+ "fps": 12,
+ "frames": 360,
+ "size": [
+  1376,
+  768
+ ],
+ "order": [
+  "layer-1-far-v17",
+  "gap banks",
+  "dart",
+  "skiff",
+  "layer-1b-war-*-v17",
+  "smoke",
+  "raid",
+  "fires",
+  "near wisps",
+  "barge",
+  "dome hits",
+  "pterodactyl",
+  "talent hologram (code)",
+  "layer-3-camp-v17 with its moving parts",
+  "spores",
+  "ash"
+ ],
+ "isles": {
+  "clarth": [
+   0,
+   95
+  ],
+  "bloodridge": [
+   770,
+   120
+  ]
+ },
+ "v14": {
+  "clouds": [
+   [
+    "cloud-0",
+    150,
+    18
+   ],
+   [
+    "cloud-1",
+    600,
+    8
+   ],
+   [
+    "cloud-3",
+    1060,
+    28
+   ]
+  ],
+  "gap_banks": [
+   [
+    "bank-1",
+    "bank-2",
+    "bank-3"
+   ],
+   245,
+   7.56
+  ],
+  "wisps": [
+   [
+    "bank-0",
+    "bank-3",
+    "bank-2",
+    "bank-1",
+    "bank-0",
+    "bank-2"
+   ],
+   340,
+   268,
+   11.33
+  ],
+  "raid": [
+   [
+    "clarth_skirmisher_sw",
+    58,
+    228,
+    1
+   ],
+   [
+    "blood_rot_trapper_se",
+    84,
+    229,
+    -1
+   ],
+   [
+    "clarth_trapper_sw",
+    506,
+    214,
+    1
+   ],
+   [
+    "blood_rot_warden_se",
+    534,
+    215,
+    -1
+   ],
+   [
+    "clarth_skirmisher_sw",
+    586,
+    211,
+    1
+   ],
+   [
+    "blood_rot_skirmisher_se",
+    612,
+    210,
+    -1
+   ]
+  ],
+  "fires": [
+   [
+    140,
+    240
+   ],
+   [
+    546,
+    126
+   ],
+   [
+    1000,
+    200
+   ]
+  ],
+  "hits": [
+   [
+    40,
+    330
+   ],
+   [
+    100,
+    900
+   ],
+   [
+    150,
+    1180
+   ],
+   [
+    215,
+    480
+   ],
+   [
+    275,
+    1050
+   ],
+   [
+    330,
+    760
+   ]
+  ],
+  "ptero": [
+   [
+    20,
+    58
+   ],
+   [
+    200,
+    78
+   ]
+  ],
+  "dome": [
+   688,
+   700,
+   760,
+   600
+  ]
+ },
+ "camp": {
+  "glow": {
+   "rule": "R>=232 G>=90 B<=125 R-B>=120",
+   "pulse": "1+0.2 sin(2pi 8t/N + phase of its 20 px block)",
+   "orb": {
+    "centre": [
+     383,
+     570
+    ],
+    "radius": 62,
+    "spin": "1+0.45 cos(angle - 2pi 12t/N)"
+   },
+   "beam": {
+    "box": [
+     990,
+     492,
+     1068,
+     562
+    ],
+    "run": "(x-2t) mod 24 < 5: x1.6"
+   },
+   "hearth": {
+    "box": [
+     664,
+     326,
+     726,
+     372
+    ],
+    "pulse": "1+0.35 sin(2pi 6t/N)"
+   },
+   "wisps": {
+    "box": [
+     280,
+     455,
+     470,
+     548
+    ],
+    "run": "(x-3t) mod 30 < 7: x1.5"
+   }
+  },
+  "water": {
+   "glints": "35 in 100 stream px, (y+0.4x-t) mod 40 < 3: +55",
+   "falls": "(y-3t+column offset) mod 18 < 4: 45 in 100 toward white"
+  },
+  "butcher": {
+   "rows_cols": [
+    199,
+    263,
+    315,
+    470
+   ],
+   "up_one_px": "t mod 45 < 20"
+  },
+  "glutton": {
+   "ellipse": [
+    1103,
+    320,
+    48,
+    24
+   ],
+   "up_one_px": "t mod 60 < 26"
+  },
+  "shade": {
+   "offset": "-round(1+sin(2pi t/40))",
+   "plate": "layer-3-camp-plate-v17"
+  },
+  "whisperer": {
+   "offset": "-round(1+sin(2pi t/60+1.3))",
+   "plate": "layer-3-camp-plate-v17"
+  },
+  "hologram": {
+   "quad": [
+    [
+     870.0,
+     213.0
+    ],
+    [
+     1012.0,
+     243.0
+    ],
+    [
+     997.0,
+     321.0
+    ],
+    [
+     857.0,
+     315.0
+    ]
+   ],
+   "nodes": [
+    [
+     0.1,
+     0.55
+    ],
+    [
+     0.24,
+     0.3
+    ],
+    [
+     0.24,
+     0.78
+    ],
+    [
+     0.4,
+     0.52
+    ],
+    [
+     0.55,
+     0.28
+    ],
+    [
+     0.55,
+     0.76
+    ],
+    [
+     0.7,
+     0.5
+    ],
+    [
+     0.84,
+     0.26
+    ],
+    [
+     0.84,
+     0.72
+    ],
+    [
+     0.93,
+     0.48
+    ]
+   ],
+   "edges": [
+    [
+     0,
+     1
+    ],
+    [
+     0,
+     2
+    ],
+    [
+     1,
+     3
+    ],
+    [
+     2,
+     3
+    ],
+    [
+     3,
+     4
+    ],
+    [
+     3,
+     5
+    ],
+    [
+     4,
+     6
+    ],
+    [
+     5,
+     6
+    ],
+    [
+     6,
+     7
+    ],
+    [
+     6,
+     8
+    ],
+    [
+     7,
+     9
+    ],
+    [
+     8,
+     9
+    ]
+   ],
+   "path": [
+    0,
+    1,
+    3,
+    4,
+    6,
+    7,
+    9
+   ],
+   "step_frames": 30
+  },
+  "spores": {
+   "count": 40,
+   "seed": 1107,
+   "rise": 140
+  }
+ }
+}

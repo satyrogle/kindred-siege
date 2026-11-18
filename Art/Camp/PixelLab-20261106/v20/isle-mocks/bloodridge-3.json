@@ -1,0 +1,68 @@
+{
+ "high_level_description": "Bloodridge raiders massing at the edge of their floating snowy island: hooded ranks with tall Egyptian shields and khopesh, their chief in an antlered ember hood holding a staff with a burning ring, ember lanterns, smoke.",
+ "style_description": {
+  "aesthetics": "a lived in war camp seen from a little above, busy with small figures, warm against cold snow",
+  "lighting": "warm sunlight from the upper right, short blue shadows falling to the lower left",
+  "medium": "pixel art",
+  "art_style": "crisp pixel art with clean dark outlines, flat shading in few colours, figures a few pixels tall",
+  "color_palette": [
+   "#9AACD8",
+   "#7A91BE",
+   "#696474",
+   "#394C78",
+   "#342C3B",
+   "#131F45",
+   "#201625",
+   "#100F20",
+   "#0D0D25",
+   "#0B0715",
+   "#000528",
+   "#000013"
+  ]
+ },
+ "compositional_deconstruction": {
+  "background": "a floating island with a flat snowy top and blue ice cliffs, over a white sea of clouds, under a clear blue sky",
+  "elements": [
+   {
+    "type": "obj",
+    "bbox": [
+     380,
+     100,
+     720,
+     640
+    ],
+    "desc": "ranks of hooded raiders in sepia rags with tall Egyptian shields and khopesh"
+   },
+   {
+    "type": "obj",
+    "bbox": [
+     260,
+     640,
+     640,
+     780
+    ],
+    "desc": "the chief, a faceless ember hood with antlers and ram skulls, holding a staff with a burning ring"
+   },
+   {
+    "type": "obj",
+    "bbox": [
+     300,
+     780,
+     640,
+     960
+    ],
+    "desc": "ember lanterns on poles and a black obelisk"
+   },
+   {
+    "type": "obj",
+    "bbox": [
+     60,
+     200,
+     340,
+     900
+    ],
+    "desc": "dark smoke rising into the blue sky"
+   }
+  ]
+ }
+}

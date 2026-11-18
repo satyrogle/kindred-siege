@@ -1,0 +1,1326 @@
+{
+ "fps": 12,
+ "frames": 360,
+ "size": [
+  1376,
+  768
+ ],
+ "order": [
+  "far",
+  "sky clouds (3 heights)",
+  "gap banks",
+  "dart",
+  "skiff",
+  "war isles",
+  "smoke",
+  "raid",
+  "fires",
+  "near wisps",
+  "barge",
+  "dome hits",
+  "pterodactyl",
+  "talent hologram",
+  "camp layer with its moving parts",
+  "Butcher",
+  "Glutton",
+  "critters with shadows",
+  "Shade's wisps",
+  "Whisperer's beam",
+  "Shade",
+  "Whisperer",
+  "cloud shadows on the floor",
+  "spores",
+  "ash"
+ ],
+ "isles": {
+  "clarth": [
+   0,
+   95
+  ],
+  "bloodridge": [
+   770,
+   120
+  ]
+ },
+ "pals": {
+  "butcher": {
+   "sheet": "butcher-v21-40f.png",
+   "at": [
+    300,
+    176
+   ],
+   "loops_per_30s": 8,
+   "note": "over the camp layer; already cut at the bench's back edge except his hands",
+   "lean": "rows above row 111 sink round(1 + sin(2 pi t / 45 - pi / 2)) px"
+  },
+  "glutton": {
+   "sheet": "C:\\Users\\jacob\\KindredSiege-Clean\\Assets\\Resources\\CampaignArt\\CampLoops\\glutton_camp.png",
+   "at": [
+    1022,
+    201
+   ],
+   "loops_per_30s": 5,
+   "hidden_from_row_by_column": [
+    172,
+    174,
+    173,
+    174,
+    176,
+    178,
+    179,
+    178,
+    176,
+    178,
+    180,
+    180,
+    180,
+    180,
+    181,
+    181,
+    181,
+    181,
+    181,
+    181,
+    181,
+    181,
+    181,
+    181,
+    181,
+    181,
+    181,
+    181,
+    180,
+    180,
+    180,
+    180,
+    180,
+    179,
+    179,
+    178,
+    178,
+    178,
+    178,
+    178,
+    177,
+    177,
+    176,
+    176,
+    175,
+    175,
+    175,
+    175,
+    176,
+    176,
+    176,
+    176,
+    176,
+    176,
+    176,
+    176,
+    176,
+    176,
+    176,
+    175,
+    175,
+    175,
+    175,
+    176,
+    176,
+    176,
+    176,
+    176,
+    176,
+    178,
+    178,
+    178,
+    178,
+    178,
+    178,
+    178,
+    178,
+    178,
+    178,
+    178,
+    178,
+    178,
+    179,
+    179,
+    178,
+    178,
+    178,
+    179,
+    179,
+    179,
+    181,
+    181,
+    181,
+    181,
+    181,
+    181,
+    181,
+    181,
+    181,
+    181,
+    181,
+    181,
+    181,
+    181,
+    181,
+    181,
+    181,
+    181,
+    181,
+    181,
+    181,
+    181,
+    181,
+    181,
+    181,
+    181,
+    181,
+    183,
+    183,
+    183,
+    183,
+    183,
+    183,
+    183,
+    182,
+    182,
+    182,
+    181,
+    181,
+    181,
+    181,
+    181,
+    181,
+    181,
+    182,
+    182,
+    182,
+    182,
+    182,
+    182,
+    182,
+    181,
+    179,
+    178,
+    178,
+    178,
+    178,
+    178,
+    178,
+    178,
+    178,
+    178,
+    178,
+    178,
+    178,
+    178,
+    178,
+    178,
+    178,
+    178,
+    178,
+    178,
+    178,
+    178,
+    178,
+    178,
+    178,
+    178,
+    178,
+    178,
+    178,
+    178,
+    178,
+    177,
+    177,
+    177,
+    177,
+    177,
+    177,
+    176,
+    175,
+    175,
+    175,
+    175,
+    175,
+    178,
+    178,
+    178,
+    178,
+    178,
+    178,
+    178
+   ],
+   "note": "over the camp layer, hidden below the lounger's front rim",
+   "sheet_v21": "glutton-v21-40f.png (the approved loop in the redraw's colours)"
+  },
+  "shade": {
+   "sheet": "C:\\Users\\jacob\\KindredSiege-Clean\\Assets\\Resources\\CampaignArt\\CampLoops\\shade_camp.png",
+   "at": [
+    145,
+    440
+   ],
+   "loops_per_30s": 6,
+   "sheet_v21": "shade-v21-40f.png (the approved loop in the redraw's colours)"
+  },
+  "whisperer": {
+   "sheet": "C:\\Users\\jacob\\KindredSiege-Clean\\Assets\\Resources\\CampaignArt\\CampLoops\\whisperer_camp.png",
+   "at": [
+    840,
+    420
+   ],
+   "loops_per_30s": 7,
+   "sheet_v21": "whisperer-v21-40f.png (the approved loop in the redraw's colours)"
+  },
+  "frames": "40 a loop, frame = floor(40 * frac(loops * t / 360)); in the game each loop keeps its own frame time"
+ },
+ "camp": {
+  "glow": {
+   "rule": "R>=232 G>=90 B<=125 R-B>=120",
+   "pieces": 2424,
+   "pulse": "each piece: k = 1+0.2 sin(2pi 8t/N + its own phase); k<1 mixes toward ember (150,46,18) by (1-k)*2.2, k>1 toward core (255,240,190) by (k-1)*1.6",
+   "orb": {
+    "centre": [
+     383,
+     570
+    ],
+    "radius": 62,
+    "spin": "k = 1+0.45 cos(angle - 2pi 12t/N), gains 1.2 and 0.9"
+   },
+   "hearth": {
+    "box": [
+     664,
+     326,
+     726,
+     372
+    ],
+    "pulse": "k = 1+0.35 sin(2pi 6t/N), gains 1.4 and 1.0"
+   },
+   "wisps": {
+    "box": [
+     280,
+     455,
+     470,
+     548
+    ],
+    "run": "(x-3t) mod 30 < 7: half way to (255,232,255)"
+   }
+  },
+  "water": {
+   "glints": "35 in 100 stream px, (y+0.4x-t) mod 40 < 3: +55",
+   "falls": "(y-3t+column offset) mod 18 < 4: 45 in 100 toward white"
+  },
+  "hologram": {
+   "quad": [
+    [
+     870.0,
+     213.0
+    ],
+    [
+     1012.0,
+     243.0
+    ],
+    [
+     997.0,
+     321.0
+    ],
+    [
+     857.0,
+     315.0
+    ]
+   ],
+   "nodes": [
+    [
+     0.1,
+     0.55
+    ],
+    [
+     0.24,
+     0.3
+    ],
+    [
+     0.24,
+     0.78
+    ],
+    [
+     0.4,
+     0.52
+    ],
+    [
+     0.55,
+     0.28
+    ],
+    [
+     0.55,
+     0.76
+    ],
+    [
+     0.7,
+     0.5
+    ],
+    [
+     0.84,
+     0.26
+    ],
+    [
+     0.84,
+     0.72
+    ],
+    [
+     0.93,
+     0.48
+    ]
+   ],
+   "edges": [
+    [
+     0,
+     1
+    ],
+    [
+     0,
+     2
+    ],
+    [
+     1,
+     3
+    ],
+    [
+     2,
+     3
+    ],
+    [
+     3,
+     4
+    ],
+    [
+     3,
+     5
+    ],
+    [
+     4,
+     6
+    ],
+    [
+     5,
+     6
+    ],
+    [
+     6,
+     7
+    ],
+    [
+     6,
+     8
+    ],
+    [
+     7,
+     9
+    ],
+    [
+     8,
+     9
+    ]
+   ],
+   "path": [
+    0,
+    1,
+    3,
+    4,
+    6,
+    7,
+    9
+   ],
+   "step_frames": 30
+  },
+  "spores": {
+   "count": 40,
+   "seed": 1107,
+   "rise": 140
+  },
+  "loop_join": {
+   "cloud_crossfade_frames": 24,
+   "ash": "drift resets with the fall wrap",
+   "fires": "a whole number of passes through the fire clip in 30 s"
+  }
+ },
+ "effects": {
+  "shade_wisps": {
+   "trails": [
+    {
+     "from": [
+      [
+       280,
+       488
+      ],
+      [
+       280,
+       488
+      ],
+      [
+       280,
+       488
+      ],
+      [
+       280,
+       488
+      ],
+      [
+       280,
+       488
+      ],
+      [
+       280,
+       488
+      ],
+      [
+       280,
+       488
+      ],
+      [
+       280,
+       488
+      ],
+      [
+       278,
+       488
+      ],
+      [
+       277,
+       488
+      ],
+      [
+       276,
+       488
+      ],
+      [
+       274,
+       488
+      ],
+      [
+       273,
+       488
+      ],
+      [
+       274,
+       479
+      ],
+      [
+       275,
+       479
+      ],
+      [
+       275,
+       479
+      ],
+      [
+       275,
+       479
+      ],
+      [
+       275,
+       479
+      ],
+      [
+       275,
+       479
+      ],
+      [
+       275,
+       479
+      ],
+      [
+       275,
+       479
+      ],
+      [
+       275,
+       479
+      ],
+      [
+       275,
+       479
+      ],
+      [
+       275,
+       479
+      ],
+      [
+       275,
+       479
+      ],
+      [
+       275,
+       479
+      ],
+      [
+       275,
+       479
+      ],
+      [
+       275,
+       479
+      ],
+      [
+       275,
+       479
+      ],
+      [
+       275,
+       479
+      ],
+      [
+       275,
+       479
+      ],
+      [
+       274,
+       479
+      ],
+      [
+       273,
+       488
+      ],
+      [
+       274,
+       488
+      ],
+      [
+       275,
+       488
+      ],
+      [
+       276,
+       488
+      ],
+      [
+       278,
+       488
+      ],
+      [
+       279,
+       488
+      ],
+      [
+       280,
+       488
+      ],
+      [
+       280,
+       488
+      ]
+     ],
+     "to": [
+      306,
+      479
+     ]
+    },
+    {
+     "from": [
+      [
+       265,
+       511
+      ],
+      [
+       265,
+       511
+      ],
+      [
+       265,
+       511
+      ],
+      [
+       265,
+       511
+      ],
+      [
+       265,
+       511
+      ],
+      [
+       265,
+       511
+      ],
+      [
+       264,
+       513
+      ],
+      [
+       264,
+       513
+      ],
+      [
+       264,
+       513
+      ],
+      [
+       264,
+       513
+      ],
+      [
+       264,
+       513
+      ],
+      [
+       264,
+       513
+      ],
+      [
+       264,
+       513
+      ],
+      [
+       264,
+       513
+      ],
+      [
+       264,
+       513
+      ],
+      [
+       264,
+       513
+      ],
+      [
+       264,
+       513
+      ],
+      [
+       264,
+       513
+      ],
+      [
+       264,
+       513
+      ],
+      [
+       264,
+       513
+      ],
+      [
+       264,
+       513
+      ],
+      [
+       264,
+       513
+      ],
+      [
+       264,
+       513
+      ],
+      [
+       264,
+       513
+      ],
+      [
+       264,
+       513
+      ],
+      [
+       264,
+       513
+      ],
+      [
+       265,
+       511
+      ],
+      [
+       264,
+       513
+      ],
+      [
+       265,
+       512
+      ],
+      [
+       264,
+       513
+      ],
+      [
+       264,
+       513
+      ],
+      [
+       264,
+       513
+      ],
+      [
+       264,
+       513
+      ],
+      [
+       264,
+       513
+      ],
+      [
+       264,
+       513
+      ],
+      [
+       264,
+       513
+      ],
+      [
+       264,
+       513
+      ],
+      [
+       265,
+       511
+      ],
+      [
+       265,
+       511
+      ],
+      [
+       265,
+       511
+      ]
+     ],
+     "to": [
+      283,
+      503
+     ]
+    }
+   ],
+   "colours_dark_to_light": [
+    [
+     198,
+     126,
+     192
+    ],
+    [
+     221,
+     129,
+     210
+    ],
+    [
+     246,
+     184,
+     247
+    ]
+   ],
+   "draw": "under the Shade, over the camp layer: a line from 2 px left of trails[k].from[her frame] to trails[k].to, swaying 1.6 px * sin(pi s) * sin(2 pi (1.5 s - t/10 + 0.4 k)) across it; mid colour, light past 60 in 100 of its length, a dark pixel beside it past 40 in 100; pixels where (x - 3t) mod 30 < 7 half way to (255, 232, 255)"
+  },
+  "whisperer_beam": {
+   "palm": [
+    [
+     975,
+     523
+    ],
+    [
+     976,
+     523
+    ],
+    [
+     976,
+     522
+    ],
+    [
+     975,
+     521
+    ],
+    [
+     974,
+     521
+    ],
+    [
+     976,
+     521
+    ],
+    [
+     976,
+     521
+    ],
+    [
+     970,
+     517
+    ],
+    [
+     971,
+     515
+    ],
+    [
+     967,
+     511
+    ],
+    [
+     967,
+     511
+    ],
+    [
+     967,
+     511
+    ],
+    [
+     967,
+     511
+    ],
+    [
+     967,
+     511
+    ],
+    [
+     967,
+     511
+    ],
+    [
+     967,
+     511
+    ],
+    [
+     967,
+     511
+    ],
+    [
+     967,
+     511
+    ],
+    [
+     967,
+     511
+    ],
+    [
+     967,
+     511
+    ],
+    [
+     967,
+     511
+    ],
+    [
+     967,
+     511
+    ],
+    [
+     967,
+     511
+    ],
+    [
+     967,
+     511
+    ],
+    [
+     967,
+     511
+    ],
+    [
+     967,
+     511
+    ],
+    [
+     967,
+     511
+    ],
+    [
+     975,
+     509
+    ],
+    [
+     979,
+     514
+    ],
+    [
+     976,
+     518
+    ],
+    [
+     974,
+     521
+    ],
+    [
+     974,
+     521
+    ],
+    [
+     974,
+     522
+    ],
+    [
+     975,
+     522
+    ],
+    [
+     974,
+     522
+    ],
+    [
+     975,
+     523
+    ],
+    [
+     975,
+     523
+    ],
+    [
+     975,
+     523
+    ],
+    [
+     975,
+     523
+    ],
+    [
+     975,
+     523
+    ]
+   ],
+   "palm_out": [
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true
+   ],
+   "opens_at": 27,
+   "closes_at": 10,
+   "grow_frames": 3.0,
+   "land": [
+    1077,
+    551
+   ],
+   "bend": [
+    1072,
+    512
+   ],
+   "colours_edge_mid_core": [
+    [
+     233,
+     121,
+     53
+    ],
+    [
+     244,
+     200,
+     116
+    ],
+    [
+     251,
+     235,
+     192
+    ]
+   ],
+   "draw": "under the Whisperer, over the camp layer: a quadratic curve from 3 px left of her palm through the bend's pull to land; core line core colour (mid past 70 in 100), sides mid (edge past 35 in 100) up to 80 in 100, outer edge up to 20 in 100; pulses where (distance along it - 2t) mod 24 < 5, 55 in 100 toward (255, 240, 190); shown from opens_at to closes_at, its head running out over grow_frames of her frames, and after closes_at its tail running to the figure over grow_frames from her last palm out"
+  },
+  "whisperer_shadow": {
+   "moved_by": [
+    50,
+    -50
+   ],
+   "top_row": 616
+  }
+ },
+ "critters": [
+  {
+   "name": "d1",
+   "sheet": "critter-d1-v20.png",
+   "frames": 12,
+   "frame_hold": 2,
+   "phase": 0,
+   "kind": "drink",
+   "at": [
+    441,
+    349
+   ],
+   "path": null,
+   "flipped": false,
+   "waterline_row": null
+  },
+  {
+   "name": "d3",
+   "sheet": "critter-d3-v20.png",
+   "frames": 12,
+   "frame_hold": 2,
+   "phase": 5,
+   "kind": "drink",
+   "at": [
+    721,
+    552
+   ],
+   "path": null,
+   "flipped": false,
+   "waterline_row": null
+  },
+  {
+   "name": "sw",
+   "sheet": "critter-sw-v20.png",
+   "frames": 12,
+   "frame_hold": 2,
+   "phase": 3,
+   "kind": "swim",
+   "at": [
+    507,
+    450
+   ],
+   "path": null,
+   "flipped": true,
+   "waterline_row": 72
+  }
+ ],
+ "sky": {
+  "sun": [
+   985,
+   40
+  ],
+  "clouds": [
+   {
+    "sprite": "A",
+    "x0": 80,
+    "y": 12,
+    "px_per_frame": 0.55
+   },
+   {
+    "sprite": "C flipped",
+    "x0": 560,
+    "y": 20,
+    "px_per_frame": 0.55
+   },
+   {
+    "sprite": "B flipped",
+    "x0": 1010,
+    "y": 6,
+    "px_per_frame": 0.55
+   },
+   {
+    "sprite": "B",
+    "x0": 300,
+    "y": 38,
+    "px_per_frame": 0.38
+   },
+   {
+    "sprite": "A flipped",
+    "x0": 820,
+    "y": 44,
+    "px_per_frame": 0.38
+   },
+   {
+    "sprite": "C",
+    "x0": 1240,
+    "y": 36,
+    "px_per_frame": 0.38
+   },
+   {
+    "sprite": "bank-1 at 0.4",
+    "x0": 120,
+    "y": 64,
+    "px_per_frame": 0.22
+   },
+   {
+    "sprite": "bank-3 at 0.4",
+    "x0": 700,
+    "y": 70,
+    "px_per_frame": 0.22
+   }
+  ],
+  "wrap": "x = (x0 - v t) mod (W + 300) - 150"
+ },
+ "cloud_shadows": {
+  "ellipses": [
+   [
+    [
+     330,
+     520,
+     230,
+     70
+    ],
+    [
+     460,
+     545,
+     150,
+     50
+    ],
+    [
+     210,
+     500,
+     120,
+     44
+    ]
+   ],
+   [
+    [
+     1040,
+     650,
+     200,
+     60
+    ],
+    [
+     1150,
+     630,
+     130,
+     46
+    ],
+    [
+     950,
+     672,
+     110,
+     40
+    ]
+   ]
+  ],
+  "period_px": 1440,
+  "px_per_frame": 4,
+  "floor_from_row": 262,
+  "darken": 0.78,
+  "edge": "checker dither where the ellipse value is 0 to 0.1"
+ },
+ "props": {
+  "moss": "strands sway: dx = round(A ((y - y0) / h)^1.3 sin(phase + 2 pi t / 72)), A 1 or 2 px",
+  "pods": "free hanging pods swing 1 px, period 72 frames",
+  "mirror": "a bright arm sweeps the glass, 45 frames",
+  "domes": "three steps, period 60 frames, the two out of step",
+  "figure": "lit while the beam is on"
+ },
+ "loop_join": "the last 24 frames fade the clouds into where they start (v18's cross fade)",
+ "v22": {
+  "forge_at": [
+   305,
+   292
+  ],
+  "butcher_at": [
+   309,
+   211
+  ],
+  "butcher_hidden_below": 376,
+  "glutton_at": [
+   1007,
+   254
+  ],
+  "halo": [
+   1060,
+   258,
+   78,
+   13
+  ],
+  "braid_from": [
+   1043,
+   309
+  ],
+  "leader_at": [
+   584,
+   127
+  ],
+  "pod_at": [
+   1199,
+   404
+  ],
+  "ghost_dx": -52,
+  "ghost_lag_frames": 6,
+  "meteors": [
+   [
+    30,
+    1070,
+    4
+   ],
+   [
+    165,
+    905,
+    2
+   ],
+   [
+    292,
+    1130,
+    8
+   ]
+  ],
+  "smoke": [
+   [
+    548,
+    112,
+    52,
+    14
+   ],
+   [
+    624,
+    222,
+    46,
+    16
+   ],
+   [
+    994,
+    168,
+    56,
+    18
+   ],
+   [
+    1062,
+    176,
+    50,
+    16
+   ]
+  ],
+  "raid": [
+   [
+    "clarth_skirmisher_sw",
+    588,
+    231,
+    1
+   ],
+   [
+    "blood_rot_skirmisher_se",
+    603,
+    232,
+    -1
+   ],
+   [
+    "clarth_trapper_sw",
+    618,
+    227,
+    1
+   ],
+   [
+    "blood_rot_warden_se",
+    634,
+    230,
+    -1
+   ]
+  ],
+  "raid_h": 12,
+  "loops_per_30s": {
+   "butcher": 4,
+   "leader": 3,
+   "glutton": 5,
+   "shade": 6,
+   "whisperer": 7
+  },
+  "critter_d1": "walk 72 frames (stride frames held 2), drink 108 (held 3), back, drink",
+  "loop_join": "exact: every motion is periodic in 360 frames, no fade"
+ }
+}

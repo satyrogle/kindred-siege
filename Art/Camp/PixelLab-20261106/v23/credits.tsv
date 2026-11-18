@@ -1,0 +1,36 @@
+time	call	job	quoted_gen	note
+--	get_balance	-	0	start of v23: 7826.90 left (v22 end)
+gate 1	image_to_pixelart	84469404	1	nosmoke-b (faithful 200, seed 717, v22 back-b box)
+gate 1	image_to_pixelart	a6b3f9db	1	nosmoke-c (faithful 200, seed 717, v22 back-c box)
+16:41	get_balance	-	0	gate 2 start: 7824.90 left
+16:42	image_to_pixelart	6c9efe0e-0cab-4782-92c2-819c4d162834	1	butcher pick (faithful 200, seed 717, 430x260)
+16:42	image_to_pixelart	ab11f5a7-0f39-4fba-bf90-43cef5e4b454	1	butcher empty (faithful 200, seed 717, 430x260)
+16:42	image_to_pixelart	82fd012d-1a44-437b-9ef7-423b47a0e215	1	glutton empty (faithful 200, seed 717, 440x280)
+16:42	image_to_pixelart	8b2c0199-3401-4349-a7e4-2b32d8aac104	1	shade pick (faithful 200, seed 717, 512x310)
+16:42	image_to_pixelart	970d426e-953f-466f-bb67-2fd4bc7b6792	1	shade empty (faithful 200, seed 717, 512x310)
+16:42	image_to_pixelart	c3a5287f-b35e-4b74-b38a-1169b699443d	1	whisperer pick (faithful 200, seed 717, 512x340)
+16:42	image_to_pixelart	60531e04-52b3-4e5c-9f78-2d610e512de7	1	whisperer empty (faithful 200, seed 717, 512x340)
+16:42	animate_image_pixminimax	4284a619-600c-434a-bfa3-262c72c765d8	1	stream critter walk, 12 frames, 132 px
+16:42	animate_image_pixminimax	927e0419-3bb4-401d-ad89-53de4ea8cd98	1	stream critter drink, 12 frames, pinned
+16:49	animate_image_pixminimax	72a695a5-1fc5-44b5-980c-3bdc26a2de6d	5	Butcher 40 frame loop, 240 px, pinned
+16:49	animate_image_pixminimax	45147998-0bf7-462e-b543-9786fadf90b1	4	Shade body 40 frame loop, 208 px, pinned
+16:49	animate_image_pixminimax	20bc9493-fc51-4243-b99e-94b25cdf29a4	6	Whisperer body 40 frame loop, 248 px, pinned
+17:05	get_balance	-	0	end: 7800.90 left; 26 used since v22's 7826.90, all 26 traced above (2 gate 1, 24 gate 2; the charges match the quotes)
+17:40	animate_image_pixminimax	ed9726af-5f64-4939-bd2e-3db8ff48b30a	1	v23b: critter lifts its head, 4 frames
+17:46	animate_image_pixminimax	62a5f5d8-16f4-4b8e-a4d7-44f00c5345db	1	v23b: critter walk from the head up frame, 12 frames
+17:46	animate_image_pixminimax	c6f3c354-a41b-4cef-a81e-51b65a0b902c	1	v23b: critter drink from the head up frame, 12 frames, pinned
+2026-11-09	pltest shade station 80%	image_to_pixelart free (init 0) + keep (init 150) 1 each, image_to_pixelart_pro_flash units palette 6	8	balance 7743.90
+2026-11-09	depth pass stations at 80%	image_to_pixelart init 150 seed 717: butcher, glutton, whisperer, leader, 1 each	4	balance 7739.90
+2026-11-09	Pal concepts round 1	create_object_pro_flash x12 (6 each, leader style anchor, 16 colours) + image_to_pixelart glutton v3 (1)	73	balance 7666.90
+2026-11-09	Pal picks to pixel art (GPT butcher3 glutton3 shade2 whisperer2)	image_to_pixelart init 150 seed 717, 1 each	4	balance about 7662.90 (not rechecked)
+2026-11-09	Pal picks simplified by GPT then pixel art	image_to_pixelart init 150 seed 717, 1 each	4	balance about 7658.90 (not rechecked)
+2026-11-09 15:20	image_to_pixelart	cf185211-64a5-4120-9cf5-7a752c769734	1	Shade 3 way test: PixelLab from GPT in-camp edit, 92x128, take 2 settings
+2026-11-09 15:40	image_to_pixelart	77a07d99-36fe-4a27-83b5-a1f9d3de113a	1	Shade locked redo: route 5, design locked in the GPT step, 82x128, take 2 settings
+2026-11-09 16:00	create_image_pro_flash	9dbf0259-b77a-4211-bb25-1994d600689d	6	Pals native like the tribes: butcher 128x160, his pick's palette, leader style
+2026-11-09 16:00	create_image_pro_flash	fcdcf451-91b3-47ba-988c-2eaa3472f45e	6	Pals native like the tribes: glutton 208x144, his pick's palette, leader style
+2026-11-09 16:00	create_image_pro_flash	a0571e5d-f82a-4fc3-94a3-fc8e48024175	6	Pals native like the tribes: shade 128x160, his pick's palette, leader style
+2026-11-09 16:00	create_image_pro_flash	4a8ca66a-edb3-43f0-aa7d-64793e367713	6	Pals native like the tribes: whisperer 128x160, his pick's palette, leader style
+2026-11-09 16:10	create_image_pro_flash	e4180e46-9046-4a31-b22d-7662c30270ab	6	Pals native at 192 px (Jacob: redo them 192 px): butcher 152x192
+2026-11-09 16:10	create_image_pro_flash	4997461f-35c4-405c-8678-28682d9baa69	9	Pals native at 192 px (Jacob: redo them 192 px): glutton 252x172
+2026-11-09 16:10	create_image_pro_flash	ad30da0b-3ef7-448f-bb4b-0cbe8ef8ab9c	6	Pals native at 192 px (Jacob: redo them 192 px): shade 152x192
+2026-11-09 16:10	create_image_pro_flash	eadf307f-7771-4cc4-8a14-3a7631f11917	6	Pals native at 192 px (Jacob: redo them 192 px): whisperer 152x192

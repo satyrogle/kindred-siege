@@ -1,0 +1,176 @@
+{
+ "1": {
+  "class_type": "UNETLoader",
+  "inputs": {
+   "unet_name": "ideogram4_int8_convrot.safetensors",
+   "weight_dtype": "default"
+  }
+ },
+ "2": {
+  "class_type": "CLIPLoader",
+  "inputs": {
+   "clip_name": "qwen3vl_8b_fp8_scaled.safetensors",
+   "type": "ideogram4",
+   "device": "default"
+  }
+ },
+ "3": {
+  "class_type": "VAELoader",
+  "inputs": {
+   "vae_name": "flux2-vae.safetensors"
+  }
+ },
+ "4": {
+  "class_type": "CLIPTextEncode",
+  "inputs": {
+   "clip": [
+    "2",
+    0
+   ],
+   "text": "{\"high_level_description\": \"Two dark metal supply cases with glowing orange glyph seams standing on the ground, on the bare tan stone floor of a camp on a high plateau.\", \"style_description\": {\"aesthetics\": \"the gear of a star faring people's camp, made of rose gold, pearly opalescent shell, plum starlight and dark metal with orange glyph seams, one coherent pixel art scene\", \"lighting\": \"cold morning sun from the upper left with cool blue shadows\", \"medium\": \"pixel art\", \"art_style\": \"crisp clustered pixel art at one pixel size, flat colour planes with hard pixel edges, a few hue shifted shades per material, the same pixel art as the floor around it\", \"color_palette\": [\"#7A5D55\", \"#957C66\", \"#A08067\", \"#C98545\", \"#A78668\", \"#AF8F6E\", \"#8F8F8F\", \"#BB9677\", \"#B89B79\", \"#8089C5\", \"#C4A17D\", \"#D0A771\", \"#C5A881\", \"#CDB084\", \"#CEB68C\", \"#E1D1B3\"]}, \"compositional_deconstruction\": {\"background\": \"the flat tan stone floor of a bare high plateau in bright cold morning light\", \"elements\": [{\"type\": \"obj\", \"bbox\": [390, 187, 670, 525], \"desc\": \"two dark metal supply cases with thin glowing orange glyph seams\", \"color_palette\": [\"#2A1836\", \"#462E44\", \"#C0933F\", \"#B9C6D7\"]}]}}"
+  }
+ },
+ "5": {
+  "class_type": "CLIPTextEncode",
+  "inputs": {
+   "clip": [
+    "2",
+    0
+   ],
+   "text": "blurry, smooth airbrushed gradients, photo, 3d render, text, letters, user interface, frame, border, people, faces, wooden campfire, logs, tent, cloth on the ground"
+  }
+ },
+ "6": {
+  "class_type": "CFGOverride",
+  "inputs": {
+   "model": [
+    "1",
+    0
+   ],
+   "cfg": 3.0,
+   "start_percent": 0.7,
+   "end_percent": 1.0
+  }
+ },
+ "7": {
+  "class_type": "DualModelGuider",
+  "inputs": {
+   "model": [
+    "6",
+    0
+   ],
+   "positive": [
+    "4",
+    0
+   ],
+   "cfg": 7.0,
+   "model_negative": [
+    "6",
+    0
+   ],
+   "negative": [
+    "5",
+    0
+   ]
+  }
+ },
+ "9": {
+  "class_type": "KSamplerSelect",
+  "inputs": {
+   "sampler_name": "euler"
+  }
+ },
+ "10": {
+  "class_type": "Ideogram4Scheduler",
+  "inputs": {
+   "steps": 20,
+   "width": 1280,
+   "height": 800,
+   "mu": 0.0,
+   "std": 1.75
+  }
+ },
+ "11": {
+  "class_type": "RandomNoise",
+  "inputs": {
+   "noise_seed": 2026110607
+  }
+ },
+ "12": {
+  "class_type": "SamplerCustomAdvanced",
+  "inputs": {
+   "noise": [
+    "11",
+    0
+   ],
+   "guider": [
+    "7",
+    0
+   ],
+   "sampler": [
+    "9",
+    0
+   ],
+   "sigmas": [
+    "18",
+    1
+   ],
+   "latent_image": [
+    "16",
+    0
+   ]
+  }
+ },
+ "13": {
+  "class_type": "VAEDecode",
+  "inputs": {
+   "samples": [
+    "12",
+    0
+   ],
+   "vae": [
+    "3",
+    0
+   ]
+  }
+ },
+ "14": {
+  "class_type": "SaveImage",
+  "inputs": {
+   "images": [
+    "13",
+    0
+   ],
+   "filename_prefix": "KS-Bloodridge-Stages-20261030/props-K6"
+  }
+ },
+ "15": {
+  "class_type": "LoadImage",
+  "inputs": {
+   "image": "ks-bloodridge-stages/props-K6-init.png"
+  }
+ },
+ "16": {
+  "class_type": "VAEEncode",
+  "inputs": {
+   "pixels": [
+    "15",
+    0
+   ],
+   "vae": [
+    "3",
+    0
+   ]
+  }
+ },
+ "18": {
+  "class_type": "SplitSigmas",
+  "inputs": {
+   "sigmas": [
+    "10",
+    0
+   ],
+   "step": 3
+  }
+ }
+}

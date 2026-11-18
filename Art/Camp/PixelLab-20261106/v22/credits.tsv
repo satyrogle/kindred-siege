@@ -1,0 +1,19 @@
+time	call	job	quoted_gen	note
+08:47	get_balance	-	0	start: 7865.90 left (353 below the 8218.90 after v21, spent by other sessions)
+08:48	image_to_pixelart	2d142a02-2f42-4b4b-904d-8638127fc142	1	back-a (faithful 200, seed 717)
+08:48	image_to_pixelart	da459e64-81a7-49d2-a1ed-a1c56f2790f7	1	back-b (faithful 200, seed 717)
+08:48	image_to_pixelart	d322da5f-9f67-4b56-9e5d-ac68f5358e2c	1	back-c (faithful 200, seed 717)
+08:48	image_to_pixelart	315deebf-47a0-4978-9c6d-2eabe1e5cc17	1	bed (faithful 200, seed 717)
+08:52	edit_image_pro_flash	dc4cc5b9-3ef2-4174-8d8a-9533afd55f90	6	Butcher posed from his locked front, forge1 pose reference
+08:52	edit_image_pro_flash	76a9b522-d507-4e5e-856d-b4af2fe96c67	6	leader from behind from his locked front, front A pose reference
+08:53	image_to_pixelart	1dd340cc-2c82-4bf8-b15f-d55224a0954b	1	forge sprite at the Butcher's 192 scale
+08:53	image_to_pixelart	657137c4-a404-49a9-9e3f-4fe888a09cee	1	Whisperer's pod at 1x
+08:57	image_to_pixelart	5734faf7-3f28-4562-86bb-048d67f50730	1	ground under the old bench
+08:57	animate_image_pixminimax	a444a4a7-967a-420b-bcef-95f5355639b8	4	Butcher 40 frame loop, pinned last frame
+08:57	animate_image_pixminimax	c6d55c80-729d-4997-baa3-ef5b61961158	4	leader 40 frame loop, pinned last frame
+08:57	animate_image_pixminimax	b0530d76-8c40-49ce-8131-d79d02c6a9df	1	critter d1 walk, 12 frames
+08:57	animate_image_pixminimax	e4453775-d5ad-4cb3-981e-2b1706151e48	1	critter d1 drink, 12 frames, pinned
+09:12	image_to_pixelart	e5e23850-074b-4047-9c52-97a51e824c42	1	bed2: wider bed region (the first bed box missed the lounger's arm, so job 315deebf was wasted)
+09:12	image_to_pixelart	dba2f650-cff2-4b09-a07c-63c9929b79c5	1	ground2: wider ground region (the first box missed the bench's right end, so job 5734faf7 was wasted)
+09:24	inpaint_image_pro_flash	f631cfe3-b0f1-4d01-bf97-2e57483cd235	6	ground and stream bank where GPT painted a critter (my quilt smeared it)
+09:32	get_balance	-	0	end: 7826.90 left; 39 used since the start balance, 37 traced above (the charges match the quotes); 2 not from this pass (another session shares the account)

@@ -1,0 +1,68 @@
+{
+ "high_level_description": "Bloodridge raiders have broken into the Clarth hunters' camp on a floating snowy island: red hide tents burning, hunters with fin blades and tooth nets fighting hooded raiders with khopesh and tall shields, smoke rising.",
+ "style_description": {
+  "aesthetics": "a lived in war camp seen from a little above, busy with small figures, warm against cold snow",
+  "lighting": "warm sunlight from the upper right, short blue shadows falling to the lower left",
+  "medium": "pixel art",
+  "art_style": "crisp pixel art with clean dark outlines, flat shading in few colours, figures a few pixels tall",
+  "color_palette": [
+   "#A7C4EA",
+   "#A4BFE3",
+   "#A3BFE4",
+   "#A2BFE5",
+   "#9CB0D2",
+   "#7384A4",
+   "#415D8B",
+   "#464A66",
+   "#1D3869",
+   "#411623",
+   "#15213D",
+   "#080411"
+  ]
+ },
+ "compositional_deconstruction": {
+  "background": "a floating island with a flat snowy top and blue ice cliffs, over a white sea of clouds, under a clear blue sky",
+  "elements": [
+   {
+    "type": "obj",
+    "bbox": [
+     380,
+     120,
+     660,
+     880
+    ],
+    "desc": "red hide tents on shark bone frames, several burning with orange flames"
+   },
+   {
+    "type": "obj",
+    "bbox": [
+     480,
+     200,
+     760,
+     520
+    ],
+    "desc": "Clarth hunters in red cloaks with fin blades and tooth nets, fighting"
+   },
+   {
+    "type": "obj",
+    "bbox": [
+     480,
+     520,
+     760,
+     860
+    ],
+    "desc": "hooded Bloodridge raiders in sepia rags with khopesh and tall Egyptian shields"
+   },
+   {
+    "type": "obj",
+    "bbox": [
+     60,
+     200,
+     400,
+     860
+    ],
+    "desc": "dark smoke rising from the burning tents into the sky"
+   }
+  ]
+ }
+}
