@@ -133,8 +133,10 @@ STAGE_FX = {
                   dict(base="blood_rot_warden_se", at=(1278, 169), h=16, face=-1),
                   dict(base="blood_rot_skirmisher_se", at=(1296, 170), h=15, face=-1),
                   dict(base="blood_rot_trapper_se", at=(1314, 172), h=15, face=-1)],
-        fires=[(450, 284, 0.55), (700, 266, 0.55), (918, 284, 0.55)],
-        glow=[(540, 60, 625, 290), (775, 45, 860, 290), (400, 90, 445, 290), (930, 170, 985, 290),
+        # Jacob, 6 Nov ("take 3 and do stage 1"): the near props are PixelLab sprites now; the flames sit on the new
+        # brazier rims and only the new obelisks' cracks glow (their full boxes caught the orange dunes behind)
+        fires=[(448, 300, 0.4), (700, 266, 0.55), (919, 298, 0.4)],
+        glow=[(560, 98, 607, 245), (793, 98, 840, 245), (400, 90, 445, 290), (930, 170, 985, 290),
               (1115, 190, 1165, 290)]),
     "2": dict(
         tint=(1.0, 1.0, 1.0),
@@ -227,15 +229,69 @@ def pbb(b, rect):
     return [int((y0 - py) / h * 1000), int((x0 - px) / w * 1000), int((y1 - py) / h * 1000), int((x1 - px) / w * 1000)]
 
 
+def pose(desc):
+    """-1 wings raised, 0 level, 1 pushed down, read off the element's description."""
+    return -1 if "raised" in desc else 1 if "down" in desc else 0
+
+
+def pose_blob(d, kind, box, desc, ox, oy):
+    """A flying thing's start for the painter: its silhouette in the pose its box asks for, lit along the top, so
+    the three wing beats really differ and a dark bird is not painted as one flat stamp (4 Nov: the flat ellipses gave
+    a black vulture with three near identical beats and a bone bird that read as a spiky blob). False for the rest."""
+    x0, y0, x1, y1 = box[0] - ox, box[1] - oy, box[2] - ox, box[3] - oy
+    w, h = x1 - x0, y1 - y0
+    cx, cy = x0 + w * 0.5, y0 + h * 0.5
+    tip = cy + pose(desc) * h * 0.42
+    if kind == "vulture":
+        dark, lit, head = (46, 40, 44), (118, 102, 98), (206, 182, 160)
+        for side in (-1, 1):  # broad wings, fingered tips
+            sx, ex = cx + side * w * 0.08, cx + side * w * 0.5
+            d.polygon([(sx, cy - h * 0.12), (ex, tip - h * 0.08), (ex - side * w * 0.06, tip + h * 0.12),
+                       (sx, cy + h * 0.14)], fill=dark)
+            d.line([(sx, cy - h * 0.12), (ex, tip - h * 0.08)], fill=lit, width=2)
+            for f in range(4):
+                fx = ex - side * w * 0.04 * f
+                d.line([(fx, tip - h * 0.02 + f), (fx + side * 3, tip + h * 0.1 + f)], fill=dark, width=1)
+        d.ellipse((cx - w * 0.12, cy - h * 0.12, cx + w * 0.14, cy + h * 0.2), fill=dark)
+        d.line([(cx - w * 0.1, cy - h * 0.1), (cx + w * 0.1, cy - h * 0.12)], fill=lit, width=1)
+        d.line([(cx - w * 0.1, cy), (cx - w * 0.2, cy - h * 0.06)], fill=(176, 156, 128), width=2)  # bandaged neck
+        d.ellipse((cx - w * 0.26, cy - h * 0.14, cx - w * 0.17, cy - h * 0.0), fill=head)
+        d.polygon([(cx + w * 0.12, cy + h * 0.08), (cx + w * 0.24, cy + h * 0.02), (cx + w * 0.24, cy + h * 0.2)],
+                  fill=dark)  # tail
+    elif kind == "bonebird":
+        bone, shade, rag = (222, 210, 188), (150, 138, 120), (122, 92, 62)
+        d.line([(cx - w * 0.3, cy), (cx + w * 0.28, cy + h * 0.04)], fill=bone, width=2)  # spine
+        for r in range(5):  # ribs
+            rx = cx - w * 0.14 + r * w * 0.05
+            d.line([(rx, cy), (rx + 1, cy + h * 0.18)], fill=shade, width=1)
+        d.ellipse((cx - w * 0.42, cy - h * 0.16, cx - w * 0.28, cy + h * 0.14), fill=bone)  # skull
+        d.point((cx - w * 0.37, cy - h * 0.02), fill=(30, 26, 30))
+        d.polygon([(cx - w * 0.42, cy), (cx - w * 0.5, cy + h * 0.06), (cx - w * 0.42, cy + h * 0.08)], fill=shade)
+        for side in (-1, 1):  # wing bones with rag strips hanging off them
+            sx, ex = cx - w * 0.04 + side * w * 0.04, cx + side * w * 0.36
+            d.line([(sx, cy - h * 0.04), (ex, tip)], fill=bone, width=2)
+            for s in range(3):
+                t = 0.35 + s * 0.22
+                px, py = sx + (ex - sx) * t, cy - h * 0.04 + (tip - cy + h * 0.04) * t
+                d.polygon([(px - 1, py + 1), (px + 2, py + 1), (px + 1, py + h * 0.3), (px - 1, py + h * 0.26)],
+                          fill=rag)
+        for s in range(3):  # trailing tail rags
+            d.line([(cx + w * 0.28, cy + h * 0.04), (cx + w * 0.48, cy + h * (0.0 + 0.14 * s))], fill=rag, width=1)
+    else:
+        return False
+    return True
+
+
 def paint_patch(k):
-    """The stage's own 1x patch, soft blobs where each new thing goes, painted from step 3 like camp_v4_paint's
-    patches, with the stage's light and palette."""
+    """The stage's own 1x patch, soft blobs where each new thing goes (shaped poses for the vultures and bone birds),
+    painted from step 3 like camp_v4_paint's patches, with the stage's light and palette."""
     P, o = PATCHES[k], SR.STAGES[k]
     px, py, qx, qy = P["rect"]
     init = Image.open(OUT / ("stage-%s.png" % k)).convert("RGB").crop(P["rect"])
     d = ImageDraw.Draw(init)
-    for kind, (x0, y0, x1, y1), _ in P["els"]:
-        d.ellipse((x0 - px + 2, y0 - py + 2, x1 - px - 2, y1 - py - 2), fill=BLOB[kind])
+    for kind, (x0, y0, x1, y1), desc in P["els"]:
+        if not pose_blob(d, kind, (x0, y0, x1, y1), desc, px, py):
+            d.ellipse((x0 - px + 2, y0 - py + 2, x1 - px - 2, y1 - py - 2), fill=BLOB[kind])
     pos = json.dumps({
         "high_level_description": "A piece of a pixel art battle stage background at its own pixel size: " +
                                   P["scene"] + ". In it: " + P["adds"] + ", small, in the same pixel art, colours and "
@@ -289,10 +345,11 @@ def components(m):
     return lab, n
 
 
-def cut_patch(k):
+def cut_patch(k, fresh=False):
     """Each new thing cut out of the painted patch at the size it was painted: BiRefNet's mask of its box (grown 6 px,
     shown to BiRefNet 4x big), the group nearest the box centre; if BiRefNet finds nothing there, the pixels that
-    differ from the box's border. Saved as kind-i.png with where it was painted in cuts.json."""
+    differ from the box's border. Saved as kind-i.png with where it was painted in cuts.json. A cut already on disk is
+    kept unless fresh (a repaint), so fixes Jacob makes by hand in Krita survive a run (4 Nov)."""
     P = PATCHES[k]
     px, py, qx, qy = P["rect"]
     raw = Image.open(LIFE / ("patch-%s-raw.png" % k)).convert("RGB")
@@ -302,6 +359,8 @@ def cut_patch(k):
     for j, (kind, (x0, y0, x1, y1), _) in enumerate(P["els"]):
         i = count.get(kind, 0)
         count[kind] = i + 1
+        if not fresh and (LIFE / ("%s-%d.png" % (kind, i))).exists() and "%s-%d" % (kind, i) in cuts:
+            continue
         bx0, by0 = max(0, x0 - px - 6), max(0, y0 - py - 6)
         bx1, by1 = min(qx - px, x1 - px + 6), min(qy - py, y1 - py + 6)
         reg = a[by0:by1, bx0:bx1]
@@ -335,7 +394,7 @@ def creatures(ks, repaint=False):
     for k in ks:
         if repaint or not (LIFE / ("patch-%s-raw.png" % k)).exists():
             paint_patch(k)
-        cut_patch(k)
+        cut_patch(k, repaint)
     look_creatures()
 
 
@@ -711,6 +770,7 @@ def render(k):
     flies = [(cx, cy, r, float(rng.uniform(0, 6.3)), int(rng.integers(3, 7))) for cx, cy, r, n in o.get("flies", ())
              for _ in range(n)]
     sparks = [(float(rng.uniform(0, 6.3)), int(rng.integers(0, N))) for _ in range(14)] if "ring" in o else []
+    import stage_beasts as SB  # here, not at the top: stage_beasts imports this file
     frames = []
     for t in range(N):
         cv = base.copy()
@@ -730,16 +790,9 @@ def render(k):
                     rr = rad + 6 + u * 1.5
                     dot(cv, cx + rr * math.cos(ang), cy + rr * math.sin(ang) + u * 0.4,
                         (255, 220, 120) if u < 6 else (230, 90, 40))
-        for b in o.get("boats", ()):
-            sp = boat(b["sprite"])
-            if sp is None:
-                continue
-            rgb, al = sp
-            x, y, d = boat_at(b, t, al.shape[1])
-            blit(cv, rgb, al, x - al.shape[1] / 2, y - al.shape[0] / 2, d > 0, tint)
-            if b.get("lanterns") and (t // 3) % 4:
-                dot(cv, x - al.shape[1] * 0.3, y, (255, 214, 120))
-                dot(cv, x + al.shape[1] * 0.3, y - 1, (255, 190, 90))
+        # Jacob, 4 Nov: the sun boats read as "ships on mountains"; one living beast far off in their place, rising
+        # out of its sand, sea or ridge (stage_beasts.py). The boats entries in STAGE_FX are no longer drawn.
+        SB.draw(cv, k, t)
         for f in o.get("flyers", ()):
             fr = species(f["kind"])
             if fr is None:
@@ -749,7 +802,8 @@ def render(k):
             i = seq[(t // (2 if fr[0][1].shape[1] < 30 else 3) + int(f.get("phase", 0) * 5)) % len(seq)]
             rgb, al = fr[i]
             native = FACE.get(f["kind"], -1)
-            blit(cv, rgb, al, x - al.shape[1] / 2, y - al.shape[0] / 2, native != 0 and face != native)
+            # Jacob, 6 Nov: the flyers are PixelLab sprites now, so they take the stage's light like the fighters
+            blit(cv, rgb, al, x - al.shape[1] / 2, y - al.shape[0] / 2, native != 0 and face != native, tint)
         for s in o.get("shots", ()):
             u = (t - s["at"]) % N
             (x0, y0), (x1, y1) = s["src"], s["dst"]
@@ -812,7 +866,13 @@ def render(k):
                     continue
                 x, y, d = keys_at(f["walk"], u)
                 native = FACE.get(f["name"].split("-")[0], -1)
-                blit(cv, rgb, al, x - al.shape[1] / 2, y - al.shape[0] - (u // 3) % 2, native != 0 and d != native)
+                # Jacob, 6 Nov: walkers are PixelLab sprites now; a contact shadow on the ground and the stage's tint
+                rx, ry = max(4.0, al.shape[1] * 0.4), max(2.0, al.shape[1] * 0.12)
+                sy, sx = np.mgrid[int(y - ry):int(y + ry) + 1, int(x - rx):int(x + rx) + 1]
+                ok = (((sx - x) / rx) ** 2 + ((sy - y) / ry) ** 2 <= 1) & (sy >= 0) & (sy < TOP) & (sx >= 0) & (sx < W)
+                cv[sy[ok], sx[ok]] *= 0.62 * np.array(tint or (1.0, 1.0, 1.0))
+                blit(cv, rgb, al, x - al.shape[1] / 2, y - al.shape[0] - (u // 3) % 2, native != 0 and d != native,
+                     tint)
             else:  # where it was painted; kneeling ones bow a pixel now and then
                 bow = f.get("bow") is not None and (t + f["bow"]) % 45 < 8
                 blit(cv, rgb, al, px, py + (1 if bow else 0))

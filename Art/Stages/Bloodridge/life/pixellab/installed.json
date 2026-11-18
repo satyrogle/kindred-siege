@@ -1,0 +1,77 @@
+{
+ "vulture": {
+  "source": "PixelLab 077a3304-295b-465e-bc06-c345a3c9fe30",
+  "flap_frames": [
+   0,
+   2,
+   4
+  ],
+  "size": [
+   60,
+   54
+  ]
+ },
+ "bonebird": {
+  "source": "PixelLab 36f98a7f-be6e-400c-bcf6-a4557fdcf07c",
+  "flap_frames": [
+   0,
+   1,
+   2
+  ],
+  "size": [
+   60,
+   62
+  ]
+ },
+ "bat": {
+  "source": "PixelLab 31917676-723b-4ab0-9122-8f4fc99809c7",
+  "flap_frames": [
+   0,
+   4,
+   2
+  ],
+  "size": [
+   30,
+   26
+  ]
+ },
+ "moth": {
+  "source": "PixelLab 2e312c58-9306-4cb6-aa4e-95f430e02d67",
+  "flap_frames": [
+   0,
+   2,
+   4
+  ],
+  "size": [
+   32,
+   23
+  ]
+ },
+ "scarab": {
+  "source": "PixelLab 3f534d01-a112-4f84-b05f-9f98e6875303",
+  "flap_frames": [
+   0,
+   2,
+   4
+  ],
+  "size": [
+   45,
+   43
+  ]
+ },
+ "sailor": {
+  "source": "PixelLab b77a189e review pack",
+  "candidates": [
+   0,
+   13,
+   33
+  ]
+ },
+ "whale": {
+  "source": "PixelLab map object 1046e8da",
+  "size": [
+   274,
+   62
+  ]
+ }
+}
