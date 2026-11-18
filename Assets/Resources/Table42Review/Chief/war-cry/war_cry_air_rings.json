@@ -1,0 +1,275 @@
+{
+ "frames": [
+  {
+   "filename": "war_cry_air_rings_00",
+   "frame": {
+    "x": 0,
+    "y": 0,
+    "w": 366,
+    "h": 209
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 366,
+    "h": 209
+   },
+   "sourceSize": {
+    "w": 366,
+    "h": 209
+   },
+   "duration": 80
+  },
+  {
+   "filename": "war_cry_air_rings_01",
+   "frame": {
+    "x": 366,
+    "y": 0,
+    "w": 366,
+    "h": 209
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 366,
+    "h": 209
+   },
+   "sourceSize": {
+    "w": 366,
+    "h": 209
+   },
+   "duration": 80
+  },
+  {
+   "filename": "war_cry_air_rings_02",
+   "frame": {
+    "x": 732,
+    "y": 0,
+    "w": 366,
+    "h": 209
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 366,
+    "h": 209
+   },
+   "sourceSize": {
+    "w": 366,
+    "h": 209
+   },
+   "duration": 80
+  },
+  {
+   "filename": "war_cry_air_rings_03",
+   "frame": {
+    "x": 1098,
+    "y": 0,
+    "w": 366,
+    "h": 209
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 366,
+    "h": 209
+   },
+   "sourceSize": {
+    "w": 366,
+    "h": 209
+   },
+   "duration": 80
+  },
+  {
+   "filename": "war_cry_air_rings_04",
+   "frame": {
+    "x": 1464,
+    "y": 0,
+    "w": 366,
+    "h": 209
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 366,
+    "h": 209
+   },
+   "sourceSize": {
+    "w": 366,
+    "h": 209
+   },
+   "duration": 80
+  },
+  {
+   "filename": "war_cry_air_rings_05",
+   "frame": {
+    "x": 0,
+    "y": 209,
+    "w": 366,
+    "h": 209
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 366,
+    "h": 209
+   },
+   "sourceSize": {
+    "w": 366,
+    "h": 209
+   },
+   "duration": 80
+  },
+  {
+   "filename": "war_cry_air_rings_06",
+   "frame": {
+    "x": 366,
+    "y": 209,
+    "w": 366,
+    "h": 209
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 366,
+    "h": 209
+   },
+   "sourceSize": {
+    "w": 366,
+    "h": 209
+   },
+   "duration": 80
+  },
+  {
+   "filename": "war_cry_air_rings_07",
+   "frame": {
+    "x": 732,
+    "y": 209,
+    "w": 366,
+    "h": 209
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 366,
+    "h": 209
+   },
+   "sourceSize": {
+    "w": 366,
+    "h": 209
+   },
+   "duration": 80
+  },
+  {
+   "filename": "war_cry_air_rings_08",
+   "frame": {
+    "x": 1098,
+    "y": 209,
+    "w": 366,
+    "h": 209
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 366,
+    "h": 209
+   },
+   "sourceSize": {
+    "w": 366,
+    "h": 209
+   },
+   "duration": 80
+  },
+  {
+   "filename": "war_cry_air_rings_09",
+   "frame": {
+    "x": 1464,
+    "y": 209,
+    "w": 366,
+    "h": 209
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 366,
+    "h": 209
+   },
+   "sourceSize": {
+    "w": 366,
+    "h": 209
+   },
+   "duration": 80
+  },
+  {
+   "filename": "war_cry_air_rings_10",
+   "frame": {
+    "x": 0,
+    "y": 418,
+    "w": 366,
+    "h": 209
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 366,
+    "h": 209
+   },
+   "sourceSize": {
+    "w": 366,
+    "h": 209
+   },
+   "duration": 80
+  },
+  {
+   "filename": "war_cry_air_rings_11",
+   "frame": {
+    "x": 366,
+    "y": 418,
+    "w": 366,
+    "h": 209
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 366,
+    "h": 209
+   },
+   "sourceSize": {
+    "w": 366,
+    "h": 209
+   },
+   "duration": 80
+  }
+ ],
+ "anchorX": 448.0,
+ "anchorY": 339.0,
+ "layer": "over",
+ "frameMs": 80,
+ "clip": "hit",
+ "startsAt": "the Release tick",
+ "note": "three rings of sound fly from the hound's jaws toward your side"
+}

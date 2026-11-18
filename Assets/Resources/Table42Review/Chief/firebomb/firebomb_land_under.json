@@ -1,0 +1,630 @@
+{
+ "frames": [
+  {
+   "filename": "firebomb_land_under_00",
+   "frame": {
+    "x": 0,
+    "y": 0,
+    "w": 233,
+    "h": 204
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 233,
+    "h": 204
+   },
+   "sourceSize": {
+    "w": 233,
+    "h": 204
+   },
+   "duration": 80
+  },
+  {
+   "filename": "firebomb_land_under_01",
+   "frame": {
+    "x": 233,
+    "y": 0,
+    "w": 233,
+    "h": 204
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 233,
+    "h": 204
+   },
+   "sourceSize": {
+    "w": 233,
+    "h": 204
+   },
+   "duration": 80
+  },
+  {
+   "filename": "firebomb_land_under_02",
+   "frame": {
+    "x": 466,
+    "y": 0,
+    "w": 233,
+    "h": 204
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 233,
+    "h": 204
+   },
+   "sourceSize": {
+    "w": 233,
+    "h": 204
+   },
+   "duration": 80
+  },
+  {
+   "filename": "firebomb_land_under_03",
+   "frame": {
+    "x": 699,
+    "y": 0,
+    "w": 233,
+    "h": 204
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 233,
+    "h": 204
+   },
+   "sourceSize": {
+    "w": 233,
+    "h": 204
+   },
+   "duration": 80
+  },
+  {
+   "filename": "firebomb_land_under_04",
+   "frame": {
+    "x": 932,
+    "y": 0,
+    "w": 233,
+    "h": 204
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 233,
+    "h": 204
+   },
+   "sourceSize": {
+    "w": 233,
+    "h": 204
+   },
+   "duration": 80
+  },
+  {
+   "filename": "firebomb_land_under_05",
+   "frame": {
+    "x": 1165,
+    "y": 0,
+    "w": 233,
+    "h": 204
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 233,
+    "h": 204
+   },
+   "sourceSize": {
+    "w": 233,
+    "h": 204
+   },
+   "duration": 80
+  },
+  {
+   "filename": "firebomb_land_under_06",
+   "frame": {
+    "x": 1398,
+    "y": 0,
+    "w": 233,
+    "h": 204
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 233,
+    "h": 204
+   },
+   "sourceSize": {
+    "w": 233,
+    "h": 204
+   },
+   "duration": 80
+  },
+  {
+   "filename": "firebomb_land_under_07",
+   "frame": {
+    "x": 1631,
+    "y": 0,
+    "w": 233,
+    "h": 204
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 233,
+    "h": 204
+   },
+   "sourceSize": {
+    "w": 233,
+    "h": 204
+   },
+   "duration": 80
+  },
+  {
+   "filename": "firebomb_land_under_08",
+   "frame": {
+    "x": 0,
+    "y": 204,
+    "w": 233,
+    "h": 204
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 233,
+    "h": 204
+   },
+   "sourceSize": {
+    "w": 233,
+    "h": 204
+   },
+   "duration": 80
+  },
+  {
+   "filename": "firebomb_land_under_09",
+   "frame": {
+    "x": 233,
+    "y": 204,
+    "w": 233,
+    "h": 204
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 233,
+    "h": 204
+   },
+   "sourceSize": {
+    "w": 233,
+    "h": 204
+   },
+   "duration": 80
+  },
+  {
+   "filename": "firebomb_land_under_10",
+   "frame": {
+    "x": 466,
+    "y": 204,
+    "w": 233,
+    "h": 204
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 233,
+    "h": 204
+   },
+   "sourceSize": {
+    "w": 233,
+    "h": 204
+   },
+   "duration": 80
+  },
+  {
+   "filename": "firebomb_land_under_11",
+   "frame": {
+    "x": 699,
+    "y": 204,
+    "w": 233,
+    "h": 204
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 233,
+    "h": 204
+   },
+   "sourceSize": {
+    "w": 233,
+    "h": 204
+   },
+   "duration": 80
+  },
+  {
+   "filename": "firebomb_land_under_12",
+   "frame": {
+    "x": 932,
+    "y": 204,
+    "w": 233,
+    "h": 204
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 233,
+    "h": 204
+   },
+   "sourceSize": {
+    "w": 233,
+    "h": 204
+   },
+   "duration": 80
+  },
+  {
+   "filename": "firebomb_land_under_13",
+   "frame": {
+    "x": 1165,
+    "y": 204,
+    "w": 233,
+    "h": 204
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 233,
+    "h": 204
+   },
+   "sourceSize": {
+    "w": 233,
+    "h": 204
+   },
+   "duration": 80
+  },
+  {
+   "filename": "firebomb_land_under_14",
+   "frame": {
+    "x": 1398,
+    "y": 204,
+    "w": 233,
+    "h": 204
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 233,
+    "h": 204
+   },
+   "sourceSize": {
+    "w": 233,
+    "h": 204
+   },
+   "duration": 80
+  },
+  {
+   "filename": "firebomb_land_under_15",
+   "frame": {
+    "x": 1631,
+    "y": 204,
+    "w": 233,
+    "h": 204
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 233,
+    "h": 204
+   },
+   "sourceSize": {
+    "w": 233,
+    "h": 204
+   },
+   "duration": 80
+  },
+  {
+   "filename": "firebomb_land_under_16",
+   "frame": {
+    "x": 0,
+    "y": 408,
+    "w": 233,
+    "h": 204
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 233,
+    "h": 204
+   },
+   "sourceSize": {
+    "w": 233,
+    "h": 204
+   },
+   "duration": 80
+  },
+  {
+   "filename": "firebomb_land_under_17",
+   "frame": {
+    "x": 233,
+    "y": 408,
+    "w": 233,
+    "h": 204
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 233,
+    "h": 204
+   },
+   "sourceSize": {
+    "w": 233,
+    "h": 204
+   },
+   "duration": 80
+  },
+  {
+   "filename": "firebomb_land_under_18",
+   "frame": {
+    "x": 466,
+    "y": 408,
+    "w": 233,
+    "h": 204
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 233,
+    "h": 204
+   },
+   "sourceSize": {
+    "w": 233,
+    "h": 204
+   },
+   "duration": 80
+  },
+  {
+   "filename": "firebomb_land_under_19",
+   "frame": {
+    "x": 699,
+    "y": 408,
+    "w": 233,
+    "h": 204
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 233,
+    "h": 204
+   },
+   "sourceSize": {
+    "w": 233,
+    "h": 204
+   },
+   "duration": 80
+  },
+  {
+   "filename": "firebomb_land_under_20",
+   "frame": {
+    "x": 932,
+    "y": 408,
+    "w": 233,
+    "h": 204
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 233,
+    "h": 204
+   },
+   "sourceSize": {
+    "w": 233,
+    "h": 204
+   },
+   "duration": 80
+  },
+  {
+   "filename": "firebomb_land_under_21",
+   "frame": {
+    "x": 1165,
+    "y": 408,
+    "w": 233,
+    "h": 204
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 233,
+    "h": 204
+   },
+   "sourceSize": {
+    "w": 233,
+    "h": 204
+   },
+   "duration": 80
+  },
+  {
+   "filename": "firebomb_land_under_22",
+   "frame": {
+    "x": 1398,
+    "y": 408,
+    "w": 233,
+    "h": 204
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 233,
+    "h": 204
+   },
+   "sourceSize": {
+    "w": 233,
+    "h": 204
+   },
+   "duration": 80
+  },
+  {
+   "filename": "firebomb_land_under_23",
+   "frame": {
+    "x": 1631,
+    "y": 408,
+    "w": 233,
+    "h": 204
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 233,
+    "h": 204
+   },
+   "sourceSize": {
+    "w": 233,
+    "h": 204
+   },
+   "duration": 80
+  },
+  {
+   "filename": "firebomb_land_under_24",
+   "frame": {
+    "x": 0,
+    "y": 612,
+    "w": 233,
+    "h": 204
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 233,
+    "h": 204
+   },
+   "sourceSize": {
+    "w": 233,
+    "h": 204
+   },
+   "duration": 80
+  },
+  {
+   "filename": "firebomb_land_under_25",
+   "frame": {
+    "x": 233,
+    "y": 612,
+    "w": 233,
+    "h": 204
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 233,
+    "h": 204
+   },
+   "sourceSize": {
+    "w": 233,
+    "h": 204
+   },
+   "duration": 80
+  },
+  {
+   "filename": "firebomb_land_under_26",
+   "frame": {
+    "x": 466,
+    "y": 612,
+    "w": 233,
+    "h": 204
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 233,
+    "h": 204
+   },
+   "sourceSize": {
+    "w": 233,
+    "h": 204
+   },
+   "duration": 80
+  }
+ ],
+ "anchorX": 115.0,
+ "anchorY": 164.0,
+ "layer": "under",
+ "frameMs": 80,
+ "clip": "land",
+ "startsAt": "the Release tick",
+ "anchorIs": "the landing point: the middle of your front row (between your top and bottom front fighters' feet, 2 px right)",
+ "impactFrame": 4,
+ "cues": [
+  {
+   "frame": 4,
+   "shake": [
+    5,
+    -2
+   ]
+  },
+  {
+   "frame": 5,
+   "shake": [
+    -5,
+    2
+   ]
+  },
+  {
+   "frame": 6,
+   "shake": [
+    2,
+    -1
+   ]
+  }
+ ],
+ "note": "the meteor's shadow growing, then the crater: a dome of violet fire, a ring of fire, smoke, the smoke breaking up, the scorch"
+}

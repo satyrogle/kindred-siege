@@ -1,0 +1,100 @@
+{
+ "frames": [
+  {
+   "filename": "firebomb_sky_hit_00",
+   "frame": {
+    "x": 0,
+    "y": 0,
+    "w": 304,
+    "h": 433
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 304,
+    "h": 433
+   },
+   "sourceSize": {
+    "w": 304,
+    "h": 433
+   },
+   "duration": 80
+  },
+  {
+   "filename": "firebomb_sky_hit_01",
+   "frame": {
+    "x": 304,
+    "y": 0,
+    "w": 304,
+    "h": 433
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 304,
+    "h": 433
+   },
+   "sourceSize": {
+    "w": 304,
+    "h": 433
+   },
+   "duration": 80
+  },
+  {
+   "filename": "firebomb_sky_hit_02",
+   "frame": {
+    "x": 608,
+    "y": 0,
+    "w": 304,
+    "h": 433
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 304,
+    "h": 433
+   },
+   "sourceSize": {
+    "w": 304,
+    "h": 433
+   },
+   "duration": 80
+  },
+  {
+   "filename": "firebomb_sky_hit_03",
+   "frame": {
+    "x": 912,
+    "y": 0,
+    "w": 304,
+    "h": 433
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 304,
+    "h": 433
+   },
+   "sourceSize": {
+    "w": 304,
+    "h": 433
+   },
+   "duration": 80
+  }
+ ],
+ "anchorX": 7.0,
+ "anchorY": 492.0,
+ "layer": "over",
+ "frameMs": 80,
+ "clip": "hit",
+ "startsAt": "the Release tick",
+ "anchorIs": "the landing point",
+ "note": "dark frame, then the meteor drops out of the rift onto the landing point in 3 frames and the rift snaps shut"
+}

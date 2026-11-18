@@ -1,0 +1,56 @@
+{
+ "frames": [
+  {
+   "filename": "eclipse_wait_under_00",
+   "frame": {
+    "x": 0,
+    "y": 0,
+    "w": 133,
+    "h": 57
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 133,
+    "h": 57
+   },
+   "sourceSize": {
+    "w": 133,
+    "h": 57
+   },
+   "duration": 80
+  },
+  {
+   "filename": "eclipse_wait_under_01",
+   "frame": {
+    "x": 133,
+    "y": 0,
+    "w": 133,
+    "h": 57
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 133,
+    "h": 57
+   },
+   "sourceSize": {
+    "w": 133,
+    "h": 57
+   },
+   "duration": 80
+  }
+ ],
+ "anchorX": 66.0,
+ "anchorY": 30.0,
+ "layer": "under",
+ "frameMs": 80,
+ "clip": "wait",
+ "startsAt": "the frame after Release, held until his comet hits",
+ "anchorIs": "each target's feet point",
+ "note": "a 2 frame loop: frame 0 on even frames, frame 1 on odd frames, counted from the windup start (Release is frame 38, even)"
+}

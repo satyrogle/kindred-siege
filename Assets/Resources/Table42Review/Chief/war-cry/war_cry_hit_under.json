@@ -1,0 +1,472 @@
+{
+ "frames": [
+  {
+   "filename": "war_cry_hit_under_00",
+   "frame": {
+    "x": 0,
+    "y": 0,
+    "w": 184,
+    "h": 92
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 184,
+    "h": 92
+   },
+   "sourceSize": {
+    "w": 184,
+    "h": 92
+   },
+   "duration": 80
+  },
+  {
+   "filename": "war_cry_hit_under_01",
+   "frame": {
+    "x": 184,
+    "y": 0,
+    "w": 184,
+    "h": 92
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 184,
+    "h": 92
+   },
+   "sourceSize": {
+    "w": 184,
+    "h": 92
+   },
+   "duration": 80
+  },
+  {
+   "filename": "war_cry_hit_under_02",
+   "frame": {
+    "x": 368,
+    "y": 0,
+    "w": 184,
+    "h": 92
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 184,
+    "h": 92
+   },
+   "sourceSize": {
+    "w": 184,
+    "h": 92
+   },
+   "duration": 80
+  },
+  {
+   "filename": "war_cry_hit_under_03",
+   "frame": {
+    "x": 552,
+    "y": 0,
+    "w": 184,
+    "h": 92
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 184,
+    "h": 92
+   },
+   "sourceSize": {
+    "w": 184,
+    "h": 92
+   },
+   "duration": 80
+  },
+  {
+   "filename": "war_cry_hit_under_04",
+   "frame": {
+    "x": 736,
+    "y": 0,
+    "w": 184,
+    "h": 92
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 184,
+    "h": 92
+   },
+   "sourceSize": {
+    "w": 184,
+    "h": 92
+   },
+   "duration": 80
+  },
+  {
+   "filename": "war_cry_hit_under_05",
+   "frame": {
+    "x": 920,
+    "y": 0,
+    "w": 184,
+    "h": 92
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 184,
+    "h": 92
+   },
+   "sourceSize": {
+    "w": 184,
+    "h": 92
+   },
+   "duration": 80
+  },
+  {
+   "filename": "war_cry_hit_under_06",
+   "frame": {
+    "x": 1104,
+    "y": 0,
+    "w": 184,
+    "h": 92
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 184,
+    "h": 92
+   },
+   "sourceSize": {
+    "w": 184,
+    "h": 92
+   },
+   "duration": 80
+  },
+  {
+   "filename": "war_cry_hit_under_07",
+   "frame": {
+    "x": 1288,
+    "y": 0,
+    "w": 184,
+    "h": 92
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 184,
+    "h": 92
+   },
+   "sourceSize": {
+    "w": 184,
+    "h": 92
+   },
+   "duration": 80
+  },
+  {
+   "filename": "war_cry_hit_under_08",
+   "frame": {
+    "x": 1472,
+    "y": 0,
+    "w": 184,
+    "h": 92
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 184,
+    "h": 92
+   },
+   "sourceSize": {
+    "w": 184,
+    "h": 92
+   },
+   "duration": 80
+  },
+  {
+   "filename": "war_cry_hit_under_09",
+   "frame": {
+    "x": 1656,
+    "y": 0,
+    "w": 184,
+    "h": 92
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 184,
+    "h": 92
+   },
+   "sourceSize": {
+    "w": 184,
+    "h": 92
+   },
+   "duration": 80
+  },
+  {
+   "filename": "war_cry_hit_under_10",
+   "frame": {
+    "x": 1840,
+    "y": 0,
+    "w": 184,
+    "h": 92
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 184,
+    "h": 92
+   },
+   "sourceSize": {
+    "w": 184,
+    "h": 92
+   },
+   "duration": 80
+  },
+  {
+   "filename": "war_cry_hit_under_11",
+   "frame": {
+    "x": 0,
+    "y": 92,
+    "w": 184,
+    "h": 92
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 184,
+    "h": 92
+   },
+   "sourceSize": {
+    "w": 184,
+    "h": 92
+   },
+   "duration": 80
+  },
+  {
+   "filename": "war_cry_hit_under_12",
+   "frame": {
+    "x": 184,
+    "y": 92,
+    "w": 184,
+    "h": 92
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 184,
+    "h": 92
+   },
+   "sourceSize": {
+    "w": 184,
+    "h": 92
+   },
+   "duration": 80
+  },
+  {
+   "filename": "war_cry_hit_under_13",
+   "frame": {
+    "x": 368,
+    "y": 92,
+    "w": 184,
+    "h": 92
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 184,
+    "h": 92
+   },
+   "sourceSize": {
+    "w": 184,
+    "h": 92
+   },
+   "duration": 80
+  },
+  {
+   "filename": "war_cry_hit_under_14",
+   "frame": {
+    "x": 552,
+    "y": 92,
+    "w": 184,
+    "h": 92
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 184,
+    "h": 92
+   },
+   "sourceSize": {
+    "w": 184,
+    "h": 92
+   },
+   "duration": 80
+  },
+  {
+   "filename": "war_cry_hit_under_15",
+   "frame": {
+    "x": 736,
+    "y": 92,
+    "w": 184,
+    "h": 92
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 184,
+    "h": 92
+   },
+   "sourceSize": {
+    "w": 184,
+    "h": 92
+   },
+   "duration": 80
+  },
+  {
+   "filename": "war_cry_hit_under_16",
+   "frame": {
+    "x": 920,
+    "y": 92,
+    "w": 184,
+    "h": 92
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 184,
+    "h": 92
+   },
+   "sourceSize": {
+    "w": 184,
+    "h": 92
+   },
+   "duration": 80
+  },
+  {
+   "filename": "war_cry_hit_under_17",
+   "frame": {
+    "x": 1104,
+    "y": 92,
+    "w": 184,
+    "h": 92
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 184,
+    "h": 92
+   },
+   "sourceSize": {
+    "w": 184,
+    "h": 92
+   },
+   "duration": 80
+  },
+  {
+   "filename": "war_cry_hit_under_18",
+   "frame": {
+    "x": 1288,
+    "y": 92,
+    "w": 184,
+    "h": 92
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 184,
+    "h": 92
+   },
+   "sourceSize": {
+    "w": 184,
+    "h": 92
+   },
+   "duration": 80
+  },
+  {
+   "filename": "war_cry_hit_under_19",
+   "frame": {
+    "x": 1472,
+    "y": 92,
+    "w": 184,
+    "h": 92
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 184,
+    "h": 92
+   },
+   "sourceSize": {
+    "w": 184,
+    "h": 92
+   },
+   "duration": 80
+  },
+  {
+   "filename": "war_cry_hit_under_20",
+   "frame": {
+    "x": 1656,
+    "y": 92,
+    "w": 184,
+    "h": 92
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 184,
+    "h": 92
+   },
+   "sourceSize": {
+    "w": 184,
+    "h": 92
+   },
+   "duration": 80
+  }
+ ],
+ "anchorX": 92.0,
+ "anchorY": 42.0,
+ "layer": "under",
+ "frameMs": 80,
+ "clip": "hit",
+ "startsAt": "the Release tick"
+}

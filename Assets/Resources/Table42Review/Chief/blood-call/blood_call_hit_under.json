@@ -1,0 +1,423 @@
+{
+ "frames": [
+  {
+   "filename": "blood_call_hit_under_00",
+   "frame": {
+    "x": 0,
+    "y": 0,
+    "w": 158,
+    "h": 188
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 158,
+    "h": 188
+   },
+   "sourceSize": {
+    "w": 158,
+    "h": 188
+   },
+   "duration": 80
+  },
+  {
+   "filename": "blood_call_hit_under_01",
+   "frame": {
+    "x": 158,
+    "y": 0,
+    "w": 158,
+    "h": 188
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 158,
+    "h": 188
+   },
+   "sourceSize": {
+    "w": 158,
+    "h": 188
+   },
+   "duration": 80
+  },
+  {
+   "filename": "blood_call_hit_under_02",
+   "frame": {
+    "x": 316,
+    "y": 0,
+    "w": 158,
+    "h": 188
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 158,
+    "h": 188
+   },
+   "sourceSize": {
+    "w": 158,
+    "h": 188
+   },
+   "duration": 80
+  },
+  {
+   "filename": "blood_call_hit_under_03",
+   "frame": {
+    "x": 474,
+    "y": 0,
+    "w": 158,
+    "h": 188
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 158,
+    "h": 188
+   },
+   "sourceSize": {
+    "w": 158,
+    "h": 188
+   },
+   "duration": 80
+  },
+  {
+   "filename": "blood_call_hit_under_04",
+   "frame": {
+    "x": 632,
+    "y": 0,
+    "w": 158,
+    "h": 188
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 158,
+    "h": 188
+   },
+   "sourceSize": {
+    "w": 158,
+    "h": 188
+   },
+   "duration": 80
+  },
+  {
+   "filename": "blood_call_hit_under_05",
+   "frame": {
+    "x": 790,
+    "y": 0,
+    "w": 158,
+    "h": 188
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 158,
+    "h": 188
+   },
+   "sourceSize": {
+    "w": 158,
+    "h": 188
+   },
+   "duration": 80
+  },
+  {
+   "filename": "blood_call_hit_under_06",
+   "frame": {
+    "x": 948,
+    "y": 0,
+    "w": 158,
+    "h": 188
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 158,
+    "h": 188
+   },
+   "sourceSize": {
+    "w": 158,
+    "h": 188
+   },
+   "duration": 80
+  },
+  {
+   "filename": "blood_call_hit_under_07",
+   "frame": {
+    "x": 1106,
+    "y": 0,
+    "w": 158,
+    "h": 188
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 158,
+    "h": 188
+   },
+   "sourceSize": {
+    "w": 158,
+    "h": 188
+   },
+   "duration": 80
+  },
+  {
+   "filename": "blood_call_hit_under_08",
+   "frame": {
+    "x": 1264,
+    "y": 0,
+    "w": 158,
+    "h": 188
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 158,
+    "h": 188
+   },
+   "sourceSize": {
+    "w": 158,
+    "h": 188
+   },
+   "duration": 80
+  },
+  {
+   "filename": "blood_call_hit_under_09",
+   "frame": {
+    "x": 1422,
+    "y": 0,
+    "w": 158,
+    "h": 188
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 158,
+    "h": 188
+   },
+   "sourceSize": {
+    "w": 158,
+    "h": 188
+   },
+   "duration": 80
+  },
+  {
+   "filename": "blood_call_hit_under_10",
+   "frame": {
+    "x": 1580,
+    "y": 0,
+    "w": 158,
+    "h": 188
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 158,
+    "h": 188
+   },
+   "sourceSize": {
+    "w": 158,
+    "h": 188
+   },
+   "duration": 80
+  },
+  {
+   "filename": "blood_call_hit_under_11",
+   "frame": {
+    "x": 1738,
+    "y": 0,
+    "w": 158,
+    "h": 188
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 158,
+    "h": 188
+   },
+   "sourceSize": {
+    "w": 158,
+    "h": 188
+   },
+   "duration": 80
+  },
+  {
+   "filename": "blood_call_hit_under_12",
+   "frame": {
+    "x": 0,
+    "y": 188,
+    "w": 158,
+    "h": 188
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 158,
+    "h": 188
+   },
+   "sourceSize": {
+    "w": 158,
+    "h": 188
+   },
+   "duration": 80
+  },
+  {
+   "filename": "blood_call_hit_under_13",
+   "frame": {
+    "x": 158,
+    "y": 188,
+    "w": 158,
+    "h": 188
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 158,
+    "h": 188
+   },
+   "sourceSize": {
+    "w": 158,
+    "h": 188
+   },
+   "duration": 80
+  },
+  {
+   "filename": "blood_call_hit_under_14",
+   "frame": {
+    "x": 316,
+    "y": 188,
+    "w": 158,
+    "h": 188
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 158,
+    "h": 188
+   },
+   "sourceSize": {
+    "w": 158,
+    "h": 188
+   },
+   "duration": 80
+  },
+  {
+   "filename": "blood_call_hit_under_15",
+   "frame": {
+    "x": 474,
+    "y": 188,
+    "w": 158,
+    "h": 188
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 158,
+    "h": 188
+   },
+   "sourceSize": {
+    "w": 158,
+    "h": 188
+   },
+   "duration": 80
+  }
+ ],
+ "anchorX": 79.0,
+ "anchorY": 160.0,
+ "layer": "under",
+ "frameMs": 80,
+ "clip": "hit",
+ "startsAt": "the Release tick, 1 frame later for each bleeder further down (see cues)",
+ "impactFrame": 8,
+ "cues": [
+  {
+   "frame": 1,
+   "victimDx": 1
+  },
+  {
+   "frame": 2,
+   "victimDx": -1
+  },
+  {
+   "frame": 3,
+   "victimDx": 1
+  },
+  {
+   "frame": 4,
+   "victimDx": -1
+  },
+  {
+   "frame": 5,
+   "victimDx": 1
+  },
+  {
+   "frame": 6,
+   "victimDx": -1
+  },
+  {
+   "frame": 7,
+   "victimDx": 1
+  },
+  {
+   "frame": 8,
+   "victim": "white",
+   "victimDy": 2,
+   "shake": [
+    4,
+    -2
+   ]
+  },
+  {
+   "frame": 9,
+   "victim": "red",
+   "victimDy": 2,
+   "shake": [
+    -4,
+    2
+   ]
+  },
+  {
+   "frame": 10,
+   "shake": [
+    2,
+    -1
+   ]
+  },
+  {
+   "frame": 11,
+   "victim": "red"
+  }
+ ],
+ "note": "dark mark, then the hand of blood rising out of it, opening, clenching and bursting; draw every bleeder's under clip before any fighter, back to front"
+}

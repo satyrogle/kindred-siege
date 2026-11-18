@@ -1,0 +1,144 @@
+{
+ "frames": [
+  {
+   "filename": "steel_storm_smash_ring_00",
+   "frame": {
+    "x": 0,
+    "y": 0,
+    "w": 643,
+    "h": 291
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 643,
+    "h": 291
+   },
+   "sourceSize": {
+    "w": 643,
+    "h": 291
+   },
+   "duration": 80
+  },
+  {
+   "filename": "steel_storm_smash_ring_01",
+   "frame": {
+    "x": 643,
+    "y": 0,
+    "w": 643,
+    "h": 291
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 643,
+    "h": 291
+   },
+   "sourceSize": {
+    "w": 643,
+    "h": 291
+   },
+   "duration": 80
+  },
+  {
+   "filename": "steel_storm_smash_ring_02",
+   "frame": {
+    "x": 1286,
+    "y": 0,
+    "w": 643,
+    "h": 291
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 643,
+    "h": 291
+   },
+   "sourceSize": {
+    "w": 643,
+    "h": 291
+   },
+   "duration": 80
+  },
+  {
+   "filename": "steel_storm_smash_ring_03",
+   "frame": {
+    "x": 0,
+    "y": 291,
+    "w": 643,
+    "h": 291
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 643,
+    "h": 291
+   },
+   "sourceSize": {
+    "w": 643,
+    "h": 291
+   },
+   "duration": 80
+  },
+  {
+   "filename": "steel_storm_smash_ring_04",
+   "frame": {
+    "x": 643,
+    "y": 291,
+    "w": 643,
+    "h": 291
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 643,
+    "h": 291
+   },
+   "sourceSize": {
+    "w": 643,
+    "h": 291
+   },
+   "duration": 80
+  },
+  {
+   "filename": "steel_storm_smash_ring_05",
+   "frame": {
+    "x": 1286,
+    "y": 291,
+    "w": 643,
+    "h": 291
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 643,
+    "h": 291
+   },
+   "sourceSize": {
+    "w": 643,
+    "h": 291
+   },
+   "duration": 80
+  }
+ ],
+ "anchorX": 321.0,
+ "anchorY": 145.0,
+ "layer": "under",
+ "frameMs": 80,
+ "clip": "smash",
+ "startsAt": "the Unleash that smashes the wall",
+ "anchorIs": "the centre of the box round her fighters' feet",
+ "note": "frame 0 empty; a ring blasts out over the ground for 5 frames"
+}

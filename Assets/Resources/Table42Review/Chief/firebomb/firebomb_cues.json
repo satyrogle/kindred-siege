@@ -1,0 +1,178 @@
+{
+ "spell": "Firebomb (the meteor)",
+ "frameMs": 80,
+ "tellFrames": 38,
+ "targets": "your two front fighters",
+ "stagger": "the hit clips start 1 frame later for the lower front fighter; while waiting he holds firebomb_tell_under's last frame",
+ "pillarStartsAtHitFrame": 6,
+ "landingPoint": "the middle of your front row, 2 px right",
+ "riftFromLandingPoint": [
+  168,
+  -427
+ ],
+ "captain": {
+  "note": "hunter_captain_sw_attack frame to show, counted from the windup start; idle otherwise. He raises his spear from tell frame 8 and holds it up until the meteor lands",
+  "frames": [
+   {
+    "frame": 8,
+    "attackFrame": 4
+   },
+   {
+    "frame": 9,
+    "attackFrame": 5
+   },
+   {
+    "frame": 10,
+    "attackFrame": 6
+   },
+   {
+    "frame": 11,
+    "attackFrame": 6
+   },
+   {
+    "frame": 12,
+    "attackFrame": 6
+   },
+   {
+    "frame": 13,
+    "attackFrame": 6
+   },
+   {
+    "frame": 14,
+    "attackFrame": 6
+   },
+   {
+    "frame": 15,
+    "attackFrame": 6
+   },
+   {
+    "frame": 16,
+    "attackFrame": 6
+   },
+   {
+    "frame": 17,
+    "attackFrame": 6
+   },
+   {
+    "frame": 18,
+    "attackFrame": 6
+   },
+   {
+    "frame": 19,
+    "attackFrame": 6
+   },
+   {
+    "frame": 20,
+    "attackFrame": 6
+   },
+   {
+    "frame": 21,
+    "attackFrame": 6
+   },
+   {
+    "frame": 22,
+    "attackFrame": 6
+   },
+   {
+    "frame": 23,
+    "attackFrame": 6
+   },
+   {
+    "frame": 24,
+    "attackFrame": 6
+   },
+   {
+    "frame": 25,
+    "attackFrame": 6
+   },
+   {
+    "frame": 26,
+    "attackFrame": 6
+   },
+   {
+    "frame": 27,
+    "attackFrame": 6
+   },
+   {
+    "frame": 28,
+    "attackFrame": 6
+   },
+   {
+    "frame": 29,
+    "attackFrame": 6
+   },
+   {
+    "frame": 30,
+    "attackFrame": 6
+   },
+   {
+    "frame": 31,
+    "attackFrame": 6
+   },
+   {
+    "frame": 32,
+    "attackFrame": 6
+   },
+   {
+    "frame": 33,
+    "attackFrame": 6
+   },
+   {
+    "frame": 34,
+    "attackFrame": 6
+   },
+   {
+    "frame": 35,
+    "attackFrame": 6
+   },
+   {
+    "frame": 36,
+    "attackFrame": 6
+   },
+   {
+    "frame": 37,
+    "attackFrame": 6
+   },
+   {
+    "frame": 38,
+    "attackFrame": 6
+   },
+   {
+    "frame": 39,
+    "attackFrame": 6
+   },
+   {
+    "frame": 40,
+    "attackFrame": 6
+   },
+   {
+    "frame": 41,
+    "attackFrame": 6
+   },
+   {
+    "frame": 42,
+    "attackFrame": 6
+   },
+   {
+    "frame": 43,
+    "attackFrame": 6
+   },
+   {
+    "frame": 44,
+    "attackFrame": 36
+   },
+   {
+    "frame": 45,
+    "attackFrame": 36
+   },
+   {
+    "frame": 46,
+    "attackFrame": 38
+   },
+   {
+    "frame": 47,
+    "attackFrame": 38
+   }
+  ]
+ }
+}

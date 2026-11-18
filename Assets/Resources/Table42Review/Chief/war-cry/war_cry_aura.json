@@ -1,0 +1,364 @@
+{
+ "frames": [
+  {
+   "filename": "war_cry_aura_00",
+   "frame": {
+    "x": 0,
+    "y": 0,
+    "w": 147,
+    "h": 186
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 147,
+    "h": 186
+   },
+   "sourceSize": {
+    "w": 147,
+    "h": 186
+   },
+   "duration": 80
+  },
+  {
+   "filename": "war_cry_aura_01",
+   "frame": {
+    "x": 147,
+    "y": 0,
+    "w": 147,
+    "h": 186
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 147,
+    "h": 186
+   },
+   "sourceSize": {
+    "w": 147,
+    "h": 186
+   },
+   "duration": 80
+  },
+  {
+   "filename": "war_cry_aura_02",
+   "frame": {
+    "x": 294,
+    "y": 0,
+    "w": 147,
+    "h": 186
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 147,
+    "h": 186
+   },
+   "sourceSize": {
+    "w": 147,
+    "h": 186
+   },
+   "duration": 80
+  },
+  {
+   "filename": "war_cry_aura_03",
+   "frame": {
+    "x": 441,
+    "y": 0,
+    "w": 147,
+    "h": 186
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 147,
+    "h": 186
+   },
+   "sourceSize": {
+    "w": 147,
+    "h": 186
+   },
+   "duration": 80
+  },
+  {
+   "filename": "war_cry_aura_04",
+   "frame": {
+    "x": 588,
+    "y": 0,
+    "w": 147,
+    "h": 186
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 147,
+    "h": 186
+   },
+   "sourceSize": {
+    "w": 147,
+    "h": 186
+   },
+   "duration": 80
+  },
+  {
+   "filename": "war_cry_aura_05",
+   "frame": {
+    "x": 735,
+    "y": 0,
+    "w": 147,
+    "h": 186
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 147,
+    "h": 186
+   },
+   "sourceSize": {
+    "w": 147,
+    "h": 186
+   },
+   "duration": 80
+  },
+  {
+   "filename": "war_cry_aura_06",
+   "frame": {
+    "x": 882,
+    "y": 0,
+    "w": 147,
+    "h": 186
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 147,
+    "h": 186
+   },
+   "sourceSize": {
+    "w": 147,
+    "h": 186
+   },
+   "duration": 80
+  },
+  {
+   "filename": "war_cry_aura_07",
+   "frame": {
+    "x": 1029,
+    "y": 0,
+    "w": 147,
+    "h": 186
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 147,
+    "h": 186
+   },
+   "sourceSize": {
+    "w": 147,
+    "h": 186
+   },
+   "duration": 80
+  },
+  {
+   "filename": "war_cry_aura_08",
+   "frame": {
+    "x": 1176,
+    "y": 0,
+    "w": 147,
+    "h": 186
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 147,
+    "h": 186
+   },
+   "sourceSize": {
+    "w": 147,
+    "h": 186
+   },
+   "duration": 80
+  },
+  {
+   "filename": "war_cry_aura_09",
+   "frame": {
+    "x": 1323,
+    "y": 0,
+    "w": 147,
+    "h": 186
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 147,
+    "h": 186
+   },
+   "sourceSize": {
+    "w": 147,
+    "h": 186
+   },
+   "duration": 80
+  },
+  {
+   "filename": "war_cry_aura_10",
+   "frame": {
+    "x": 1470,
+    "y": 0,
+    "w": 147,
+    "h": 186
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 147,
+    "h": 186
+   },
+   "sourceSize": {
+    "w": 147,
+    "h": 186
+   },
+   "duration": 80
+  },
+  {
+   "filename": "war_cry_aura_11",
+   "frame": {
+    "x": 1617,
+    "y": 0,
+    "w": 147,
+    "h": 186
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 147,
+    "h": 186
+   },
+   "sourceSize": {
+    "w": 147,
+    "h": 186
+   },
+   "duration": 80
+  },
+  {
+   "filename": "war_cry_aura_12",
+   "frame": {
+    "x": 1764,
+    "y": 0,
+    "w": 147,
+    "h": 186
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 147,
+    "h": 186
+   },
+   "sourceSize": {
+    "w": 147,
+    "h": 186
+   },
+   "duration": 80
+  },
+  {
+   "filename": "war_cry_aura_13",
+   "frame": {
+    "x": 0,
+    "y": 186,
+    "w": 147,
+    "h": 186
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 147,
+    "h": 186
+   },
+   "sourceSize": {
+    "w": 147,
+    "h": 186
+   },
+   "duration": 80
+  },
+  {
+   "filename": "war_cry_aura_14",
+   "frame": {
+    "x": 147,
+    "y": 186,
+    "w": 147,
+    "h": 186
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 147,
+    "h": 186
+   },
+   "sourceSize": {
+    "w": 147,
+    "h": 186
+   },
+   "duration": 80
+  },
+  {
+   "filename": "war_cry_aura_15",
+   "frame": {
+    "x": 294,
+    "y": 186,
+    "w": 147,
+    "h": 186
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 147,
+    "h": 186
+   },
+   "sourceSize": {
+    "w": 147,
+    "h": 186
+   },
+   "duration": 80
+  }
+ ],
+ "anchorX": 71.0,
+ "anchorY": 160.0,
+ "layer": "behind",
+ "frameMs": 80,
+ "clip": "aura",
+ "startsAt": "the frame the shockwave reaches that hunter (see cues)",
+ "anchorIs": "each hunter's feet",
+ "note": "violet flames burst up out of a ring under him, roar and sink back, drawn behind him"
+}

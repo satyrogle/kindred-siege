@@ -1,0 +1,52 @@
+{
+ "spell": "Blood Call",
+ "frameMs": 80,
+ "tellFrames": 38,
+ "targets": "every bleeding fighter of yours",
+ "stagger": "hit clips start 1 frame later for each bleeder further down; a bleeder waiting his turn holds the last frame of blood_call_tell_under and blood_call_wound",
+ "impactFrame": 8,
+ "shake": "only on the first bleeder's hit",
+ "rim": {
+  "what": "a 2 px outline round the fighter's own sprite, in front of him, moving with his victimDx",
+  "red": [
+   209,
+   27,
+   27
+  ],
+  "dark": [
+   68,
+   15,
+   21
+  ],
+  "redOnTellFrames": [
+   0,
+   1,
+   2,
+   3,
+   8,
+   9,
+   10,
+   11,
+   16,
+   17,
+   18,
+   19,
+   24,
+   25,
+   26,
+   28,
+   30,
+   32,
+   34,
+   36
+  ],
+  "redOnHitFrames": [
+   4,
+   6,
+   8
+  ],
+  "darkOnHitFrame": 0,
+  "waiting": "no rim while waiting"
+ },
+ "wound": "4 px right of the feet point, half the fighter's height up"
+}

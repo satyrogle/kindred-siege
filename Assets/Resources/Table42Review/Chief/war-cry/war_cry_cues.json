@@ -1,0 +1,106 @@
+{
+ "spell": "War Cry",
+ "frameMs": 80,
+ "tellFrames": 38,
+ "casterAnchor": "the hunter captain's feet",
+ "captain": [
+  {
+   "tellFrame": 36,
+   "dy": -1
+  },
+  {
+   "tellFrame": 37,
+   "dy": -1
+  },
+  {
+   "hitFrame": 1,
+   "victim": "white",
+   "dx": 3,
+   "shake": [
+    4,
+    -2
+   ]
+  },
+  {
+   "hitFrame": 2,
+   "dx": 1,
+   "shake": [
+    -4,
+    2
+   ]
+  },
+  {
+   "hitFrame": 3,
+   "shake": [
+    2,
+    -1
+   ]
+  }
+ ],
+ "eachHunter": {
+  "auraStartsAtHitFrame": "1 + the shockwave ring that first reaches his feet (ring radii per hit frame 1 to 8: [24, 70, 140, 220, 305, 390, 470, 545] px, the ring's height 0.7 of its width)",
+  "frames": [
+   {
+    "auraFrame": 0,
+    "victim": "white"
+   },
+   {
+    "auraFrame": 1,
+    "victimTint": [
+     230,
+     179,
+     255
+    ],
+    "dy": -3
+   },
+   {
+    "auraFrame": 2,
+    "dy": -1
+   }
+  ],
+  "inTheTake": {
+   "100": 7,
+   "101": 6,
+   "102": 5,
+   "103": 4,
+   "104": 3,
+   "105": 3
+  }
+ },
+ "broken": [
+  {
+   "frame": 0,
+   "victim": "white",
+   "dx": 2,
+   "shake": [
+    3,
+    -1
+   ]
+  },
+  {
+   "frame": 1,
+   "victim": "red",
+   "dx": 3
+  },
+  {
+   "frame": 2,
+   "dx": -1
+  },
+  {
+   "frame": 3,
+   "victim": "red"
+  },
+  {
+   "frame": 4,
+   "dx": -1
+  },
+  {
+   "frame": 5,
+   "dx": 1
+  },
+  {
+   "frame": 6,
+   "dx": -1
+  }
+ ]
+}

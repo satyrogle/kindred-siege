@@ -1,0 +1,33 @@
+{
+ "frames": [
+  {
+   "filename": "steel_storm_dark_under_m_00",
+   "frame": {
+    "x": 0,
+    "y": 0,
+    "w": 151,
+    "h": 55
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 151,
+    "h": 55
+   },
+   "sourceSize": {
+    "w": 151,
+    "h": 55
+   },
+   "duration": 80
+  }
+ ],
+ "anchorX": 75.0,
+ "anchorY": 25.0,
+ "layer": "under",
+ "frameMs": 80,
+ "clip": "dark",
+ "startsAt": "the Release tick plus that fighter's delay (see cues)",
+ "note": "1 frame: the ring goes dark"
+}

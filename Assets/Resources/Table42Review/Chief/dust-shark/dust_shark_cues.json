@@ -1,0 +1,10 @@
+{
+ "spell": "Dust Shark",
+ "frameMs": 80,
+ "tellFrames": 38,
+ "targets": "their back row (healers and shooters)",
+ "stagger": "hit clips start 2 frames later for each target further down; a target waiting his turn holds the last frame of dust_shark_tell_under and dust_shark_tell_front, and the fins stop at Release",
+ "impactFrame": 9,
+ "shake": "every target's bite shakes the screen, but a shake already running is not replaced",
+ "anchor": "the target's feet point; the art is drawn 8 px to the right of it"
+}

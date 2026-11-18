@@ -1,0 +1,175 @@
+{
+ "spell": "Eclipse (Bloodridge), redone the meteor way",
+ "frameMs": 80,
+ "tellFrames": 38,
+ "targets": "your front row, top to bottom; the back row if the front row is empty (the sim's ReleaseEclipse)",
+ "blackSun": {
+  "screen": [
+   780,
+   182
+  ],
+  "rule": "180 px right of and 380 px above the feet point of your front row's middle slot (600, 562) in the 1440x900 fight"
+ },
+ "comets": {
+  "launch": "the first target's comet leaves on Release + 1; each next target's comet leaves on the frame the one before it hits",
+  "flight": "its orb goes in a straight line from the black sun's centre to 2 px above his feet point: on launch + k - 1 it is at t = k / fallFrames for k = 1 to fallFrames - 1, each position rounded half up to a whole pixel, floor(v + 0.5), and it hits on launch + fallFrames - 1",
+  "fallFrames": "max(4, round(path length / 110))",
+  "draw": "over every fighter, before the black sun, so it leaves from behind the disc",
+  "slots": [
+   {
+    "slotFrame": 0,
+    "slot": "front top",
+    "feet": [
+     600,
+     422
+    ],
+    "pathDeg": 37.1,
+    "pathPx": 298.4,
+    "fallFrames": 4
+   },
+   {
+    "slotFrame": 1,
+    "slot": "front middle",
+    "feet": [
+     600,
+     562
+    ],
+    "pathDeg": 25.46,
+    "pathPx": 418.7,
+    "fallFrames": 4
+   },
+   {
+    "slotFrame": 2,
+    "slot": "front bottom",
+    "feet": [
+     600,
+     702
+    ],
+    "pathDeg": 19.16,
+    "pathPx": 548.4,
+    "fallFrames": 5
+   },
+   {
+    "slotFrame": 3,
+    "slot": "back top",
+    "feet": [
+     420,
+     422
+    ],
+    "pathDeg": 56.53,
+    "pathPx": 431.6,
+    "fallFrames": 4
+   },
+   {
+    "slotFrame": 4,
+    "slot": "back middle",
+    "feet": [
+     420,
+     562
+    ],
+    "pathDeg": 43.6,
+    "pathPx": 522.0,
+    "fallFrames": 5
+   },
+   {
+    "slotFrame": 5,
+    "slot": "back bottom",
+    "feet": [
+     420,
+     702
+    ],
+    "pathDeg": 34.8,
+    "pathPx": 630.8,
+    "fallFrames": 6
+   }
+  ]
+ },
+ "eachTarget": [
+  "eclipse_tell_under from the windup start",
+  "eclipse_dark_under on Release",
+  "eclipse_wait_under from Release + 1 until his comet hits",
+  "eclipse_shadowN_under (N = his fall frames) over the wait, from his comet's launch",
+  "eclipse_hit_behind and eclipse_hit_front from the hit, 14 frames",
+  "eclipse_break_under 14 frames after the hit"
+ ],
+ "rim": {
+  "frames": "even tell frames 26 to 36",
+  "colour": [
+   229,
+   95,
+   35
+  ],
+  "widthPx": 2,
+  "note": "on each target's own outline, behind him"
+ },
+ "hit": [
+  {
+   "frame": 0,
+   "victim": "white",
+   "victimDy": 2,
+   "shake": [
+    5,
+    -2
+   ]
+  },
+  {
+   "frame": 1,
+   "victim": "red",
+   "victimDy": 1,
+   "shake": [
+    -5,
+    2
+   ]
+  },
+  {
+   "frame": 2,
+   "shake": [
+    2,
+    -1
+   ]
+  },
+  {
+   "frame": 3,
+   "victim": "red"
+  }
+ ],
+ "laterTargetsShake": [
+  [
+   4,
+   -2
+  ],
+  [
+   -4,
+   2
+  ],
+  [
+   2,
+   -1
+  ]
+ ],
+ "blackSunTimeline": [
+  "eclipse_sun_tell_over from the windup start",
+  "eclipse_sun_dark_over on Release",
+  "eclipse_sun_flash_over on Release + 1",
+  "eclipse_sun_launch_over on each later comet's launch",
+  "eclipse_sun_loop_over on the other frames until the last comet hits",
+  "eclipse_sun_out_over from the frame after the last hit"
+ ],
+ "caster": [
+  "eclipse_staff_tell_front from the windup start",
+  "eclipse_staff_hit_front from Release"
+ ],
+ "hud": "HP bars stay on top of every layer",
+ "inTheTake": {
+  "targets": "front top and front bottom",
+  "launch": [
+   39,
+   42
+  ],
+  "hits": [
+   42,
+   46
+  ],
+  "frames": 71
+ }
+}

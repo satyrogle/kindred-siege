@@ -1,0 +1,704 @@
+{
+ "frames": [
+  {
+   "filename": "tide_hit_front_00",
+   "frame": {
+    "x": 0,
+    "y": 0,
+    "w": 158,
+    "h": 150
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 158,
+    "h": 150
+   },
+   "sourceSize": {
+    "w": 158,
+    "h": 150
+   },
+   "duration": 80
+  },
+  {
+   "filename": "tide_hit_front_01",
+   "frame": {
+    "x": 158,
+    "y": 0,
+    "w": 158,
+    "h": 150
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 158,
+    "h": 150
+   },
+   "sourceSize": {
+    "w": 158,
+    "h": 150
+   },
+   "duration": 80
+  },
+  {
+   "filename": "tide_hit_front_02",
+   "frame": {
+    "x": 316,
+    "y": 0,
+    "w": 158,
+    "h": 150
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 158,
+    "h": 150
+   },
+   "sourceSize": {
+    "w": 158,
+    "h": 150
+   },
+   "duration": 80
+  },
+  {
+   "filename": "tide_hit_front_03",
+   "frame": {
+    "x": 474,
+    "y": 0,
+    "w": 158,
+    "h": 150
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 158,
+    "h": 150
+   },
+   "sourceSize": {
+    "w": 158,
+    "h": 150
+   },
+   "duration": 80
+  },
+  {
+   "filename": "tide_hit_front_04",
+   "frame": {
+    "x": 632,
+    "y": 0,
+    "w": 158,
+    "h": 150
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 158,
+    "h": 150
+   },
+   "sourceSize": {
+    "w": 158,
+    "h": 150
+   },
+   "duration": 80
+  },
+  {
+   "filename": "tide_hit_front_05",
+   "frame": {
+    "x": 790,
+    "y": 0,
+    "w": 158,
+    "h": 150
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 158,
+    "h": 150
+   },
+   "sourceSize": {
+    "w": 158,
+    "h": 150
+   },
+   "duration": 80
+  },
+  {
+   "filename": "tide_hit_front_06",
+   "frame": {
+    "x": 948,
+    "y": 0,
+    "w": 158,
+    "h": 150
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 158,
+    "h": 150
+   },
+   "sourceSize": {
+    "w": 158,
+    "h": 150
+   },
+   "duration": 80
+  },
+  {
+   "filename": "tide_hit_front_07",
+   "frame": {
+    "x": 1106,
+    "y": 0,
+    "w": 158,
+    "h": 150
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 158,
+    "h": 150
+   },
+   "sourceSize": {
+    "w": 158,
+    "h": 150
+   },
+   "duration": 80
+  },
+  {
+   "filename": "tide_hit_front_08",
+   "frame": {
+    "x": 1264,
+    "y": 0,
+    "w": 158,
+    "h": 150
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 158,
+    "h": 150
+   },
+   "sourceSize": {
+    "w": 158,
+    "h": 150
+   },
+   "duration": 80
+  },
+  {
+   "filename": "tide_hit_front_09",
+   "frame": {
+    "x": 1422,
+    "y": 0,
+    "w": 158,
+    "h": 150
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 158,
+    "h": 150
+   },
+   "sourceSize": {
+    "w": 158,
+    "h": 150
+   },
+   "duration": 80
+  },
+  {
+   "filename": "tide_hit_front_10",
+   "frame": {
+    "x": 1580,
+    "y": 0,
+    "w": 158,
+    "h": 150
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 158,
+    "h": 150
+   },
+   "sourceSize": {
+    "w": 158,
+    "h": 150
+   },
+   "duration": 80
+  },
+  {
+   "filename": "tide_hit_front_11",
+   "frame": {
+    "x": 1738,
+    "y": 0,
+    "w": 158,
+    "h": 150
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 158,
+    "h": 150
+   },
+   "sourceSize": {
+    "w": 158,
+    "h": 150
+   },
+   "duration": 80
+  },
+  {
+   "filename": "tide_hit_front_12",
+   "frame": {
+    "x": 0,
+    "y": 150,
+    "w": 158,
+    "h": 150
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 158,
+    "h": 150
+   },
+   "sourceSize": {
+    "w": 158,
+    "h": 150
+   },
+   "duration": 80
+  },
+  {
+   "filename": "tide_hit_front_13",
+   "frame": {
+    "x": 158,
+    "y": 150,
+    "w": 158,
+    "h": 150
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 158,
+    "h": 150
+   },
+   "sourceSize": {
+    "w": 158,
+    "h": 150
+   },
+   "duration": 80
+  },
+  {
+   "filename": "tide_hit_front_14",
+   "frame": {
+    "x": 316,
+    "y": 150,
+    "w": 158,
+    "h": 150
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 158,
+    "h": 150
+   },
+   "sourceSize": {
+    "w": 158,
+    "h": 150
+   },
+   "duration": 80
+  },
+  {
+   "filename": "tide_hit_front_15",
+   "frame": {
+    "x": 474,
+    "y": 150,
+    "w": 158,
+    "h": 150
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 158,
+    "h": 150
+   },
+   "sourceSize": {
+    "w": 158,
+    "h": 150
+   },
+   "duration": 80
+  },
+  {
+   "filename": "tide_hit_front_16",
+   "frame": {
+    "x": 632,
+    "y": 150,
+    "w": 158,
+    "h": 150
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 158,
+    "h": 150
+   },
+   "sourceSize": {
+    "w": 158,
+    "h": 150
+   },
+   "duration": 80
+  },
+  {
+   "filename": "tide_hit_front_17",
+   "frame": {
+    "x": 790,
+    "y": 150,
+    "w": 158,
+    "h": 150
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 158,
+    "h": 150
+   },
+   "sourceSize": {
+    "w": 158,
+    "h": 150
+   },
+   "duration": 80
+  },
+  {
+   "filename": "tide_hit_front_18",
+   "frame": {
+    "x": 948,
+    "y": 150,
+    "w": 158,
+    "h": 150
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 158,
+    "h": 150
+   },
+   "sourceSize": {
+    "w": 158,
+    "h": 150
+   },
+   "duration": 80
+  },
+  {
+   "filename": "tide_hit_front_19",
+   "frame": {
+    "x": 1106,
+    "y": 150,
+    "w": 158,
+    "h": 150
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 158,
+    "h": 150
+   },
+   "sourceSize": {
+    "w": 158,
+    "h": 150
+   },
+   "duration": 80
+  },
+  {
+   "filename": "tide_hit_front_20",
+   "frame": {
+    "x": 1264,
+    "y": 150,
+    "w": 158,
+    "h": 150
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 158,
+    "h": 150
+   },
+   "sourceSize": {
+    "w": 158,
+    "h": 150
+   },
+   "duration": 80
+  },
+  {
+   "filename": "tide_hit_front_21",
+   "frame": {
+    "x": 1422,
+    "y": 150,
+    "w": 158,
+    "h": 150
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 158,
+    "h": 150
+   },
+   "sourceSize": {
+    "w": 158,
+    "h": 150
+   },
+   "duration": 80
+  },
+  {
+   "filename": "tide_hit_front_22",
+   "frame": {
+    "x": 1580,
+    "y": 150,
+    "w": 158,
+    "h": 150
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 158,
+    "h": 150
+   },
+   "sourceSize": {
+    "w": 158,
+    "h": 150
+   },
+   "duration": 80
+  },
+  {
+   "filename": "tide_hit_front_23",
+   "frame": {
+    "x": 1738,
+    "y": 150,
+    "w": 158,
+    "h": 150
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 158,
+    "h": 150
+   },
+   "sourceSize": {
+    "w": 158,
+    "h": 150
+   },
+   "duration": 80
+  },
+  {
+   "filename": "tide_hit_front_24",
+   "frame": {
+    "x": 0,
+    "y": 300,
+    "w": 158,
+    "h": 150
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 158,
+    "h": 150
+   },
+   "sourceSize": {
+    "w": 158,
+    "h": 150
+   },
+   "duration": 80
+  },
+  {
+   "filename": "tide_hit_front_25",
+   "frame": {
+    "x": 158,
+    "y": 300,
+    "w": 158,
+    "h": 150
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 158,
+    "h": 150
+   },
+   "sourceSize": {
+    "w": 158,
+    "h": 150
+   },
+   "duration": 80
+  },
+  {
+   "filename": "tide_hit_front_26",
+   "frame": {
+    "x": 316,
+    "y": 300,
+    "w": 158,
+    "h": 150
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 158,
+    "h": 150
+   },
+   "sourceSize": {
+    "w": 158,
+    "h": 150
+   },
+   "duration": 80
+  },
+  {
+   "filename": "tide_hit_front_27",
+   "frame": {
+    "x": 474,
+    "y": 300,
+    "w": 158,
+    "h": 150
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 158,
+    "h": 150
+   },
+   "sourceSize": {
+    "w": 158,
+    "h": 150
+   },
+   "duration": 80
+  },
+  {
+   "filename": "tide_hit_front_28",
+   "frame": {
+    "x": 632,
+    "y": 300,
+    "w": 158,
+    "h": 150
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 158,
+    "h": 150
+   },
+   "sourceSize": {
+    "w": 158,
+    "h": 150
+   },
+   "duration": 80
+  },
+  {
+   "filename": "tide_hit_front_29",
+   "frame": {
+    "x": 790,
+    "y": 300,
+    "w": 158,
+    "h": 150
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 158,
+    "h": 150
+   },
+   "sourceSize": {
+    "w": 158,
+    "h": 150
+   },
+   "duration": 80
+  }
+ ],
+ "anchorX": 79.0,
+ "anchorY": 124.0,
+ "layer": "front",
+ "frameMs": 80,
+ "clip": "hit",
+ "startsAt": "the Release tick, 1 frame later for each fighter further down your back row (see cues)",
+ "impactFrame": 10,
+ "cues": [
+  {
+   "frame": 10,
+   "victim": "white",
+   "victimDy": 2,
+   "shake": [
+    4,
+    -2
+   ]
+  },
+  {
+   "frame": 11,
+   "victim": "red",
+   "victimDy": 2,
+   "shake": [
+    -4,
+    2
+   ]
+  },
+  {
+   "frame": 12,
+   "victimDy": 2,
+   "shake": [
+    2,
+    -1
+   ]
+  },
+  {
+   "frame": 13,
+   "victim": "red"
+  }
+ ],
+ "note": "the lower 125 px of the crash, drawn over the fighter; the rest of the crash is in tide_hit_under so it never covers a fighter standing above"
+}

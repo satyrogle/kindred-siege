@@ -1,0 +1,424 @@
+{
+ "frames": [
+  {
+   "filename": "blood_call_stream_00",
+   "frame": {
+    "x": 0,
+    "y": 0,
+    "w": 21,
+    "h": 45
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 21,
+    "h": 45
+   },
+   "sourceSize": {
+    "w": 21,
+    "h": 45
+   },
+   "duration": 80
+  },
+  {
+   "filename": "blood_call_stream_01",
+   "frame": {
+    "x": 21,
+    "y": 0,
+    "w": 21,
+    "h": 45
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 21,
+    "h": 45
+   },
+   "sourceSize": {
+    "w": 21,
+    "h": 45
+   },
+   "duration": 80
+  },
+  {
+   "filename": "blood_call_stream_02",
+   "frame": {
+    "x": 42,
+    "y": 0,
+    "w": 21,
+    "h": 45
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 21,
+    "h": 45
+   },
+   "sourceSize": {
+    "w": 21,
+    "h": 45
+   },
+   "duration": 80
+  },
+  {
+   "filename": "blood_call_stream_03",
+   "frame": {
+    "x": 63,
+    "y": 0,
+    "w": 21,
+    "h": 45
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 21,
+    "h": 45
+   },
+   "sourceSize": {
+    "w": 21,
+    "h": 45
+   },
+   "duration": 80
+  },
+  {
+   "filename": "blood_call_stream_04",
+   "frame": {
+    "x": 84,
+    "y": 0,
+    "w": 21,
+    "h": 45
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 21,
+    "h": 45
+   },
+   "sourceSize": {
+    "w": 21,
+    "h": 45
+   },
+   "duration": 80
+  },
+  {
+   "filename": "blood_call_stream_05",
+   "frame": {
+    "x": 105,
+    "y": 0,
+    "w": 21,
+    "h": 45
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 21,
+    "h": 45
+   },
+   "sourceSize": {
+    "w": 21,
+    "h": 45
+   },
+   "duration": 80
+  },
+  {
+   "filename": "blood_call_stream_06",
+   "frame": {
+    "x": 126,
+    "y": 0,
+    "w": 21,
+    "h": 45
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 21,
+    "h": 45
+   },
+   "sourceSize": {
+    "w": 21,
+    "h": 45
+   },
+   "duration": 80
+  },
+  {
+   "filename": "blood_call_stream_07",
+   "frame": {
+    "x": 147,
+    "y": 0,
+    "w": 21,
+    "h": 45
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 21,
+    "h": 45
+   },
+   "sourceSize": {
+    "w": 21,
+    "h": 45
+   },
+   "duration": 80
+  },
+  {
+   "filename": "blood_call_stream_08",
+   "frame": {
+    "x": 168,
+    "y": 0,
+    "w": 21,
+    "h": 45
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 21,
+    "h": 45
+   },
+   "sourceSize": {
+    "w": 21,
+    "h": 45
+   },
+   "duration": 80
+  },
+  {
+   "filename": "blood_call_stream_09",
+   "frame": {
+    "x": 189,
+    "y": 0,
+    "w": 21,
+    "h": 45
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 21,
+    "h": 45
+   },
+   "sourceSize": {
+    "w": 21,
+    "h": 45
+   },
+   "duration": 80
+  },
+  {
+   "filename": "blood_call_stream_10",
+   "frame": {
+    "x": 210,
+    "y": 0,
+    "w": 21,
+    "h": 45
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 21,
+    "h": 45
+   },
+   "sourceSize": {
+    "w": 21,
+    "h": 45
+   },
+   "duration": 80
+  },
+  {
+   "filename": "blood_call_stream_11",
+   "frame": {
+    "x": 231,
+    "y": 0,
+    "w": 21,
+    "h": 45
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 21,
+    "h": 45
+   },
+   "sourceSize": {
+    "w": 21,
+    "h": 45
+   },
+   "duration": 80
+  },
+  {
+   "filename": "blood_call_stream_12",
+   "frame": {
+    "x": 252,
+    "y": 0,
+    "w": 21,
+    "h": 45
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 21,
+    "h": 45
+   },
+   "sourceSize": {
+    "w": 21,
+    "h": 45
+   },
+   "duration": 80
+  },
+  {
+   "filename": "blood_call_stream_13",
+   "frame": {
+    "x": 273,
+    "y": 0,
+    "w": 21,
+    "h": 45
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 21,
+    "h": 45
+   },
+   "sourceSize": {
+    "w": 21,
+    "h": 45
+   },
+   "duration": 80
+  },
+  {
+   "filename": "blood_call_stream_14",
+   "frame": {
+    "x": 294,
+    "y": 0,
+    "w": 21,
+    "h": 45
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 21,
+    "h": 45
+   },
+   "sourceSize": {
+    "w": 21,
+    "h": 45
+   },
+   "duration": 80
+  },
+  {
+   "filename": "blood_call_stream_15",
+   "frame": {
+    "x": 315,
+    "y": 0,
+    "w": 21,
+    "h": 45
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 21,
+    "h": 45
+   },
+   "sourceSize": {
+    "w": 21,
+    "h": 45
+   },
+   "duration": 80
+  }
+ ],
+ "anchorX": 12.0,
+ "anchorY": 38.5,
+ "layer": "front",
+ "frameMs": 80,
+ "clip": "hit",
+ "startsAt": "the Release tick, 1 frame later for each bleeder further down (see cues)",
+ "impactFrame": 8,
+ "cues": [
+  {
+   "frame": 1,
+   "victimDx": 1
+  },
+  {
+   "frame": 2,
+   "victimDx": -1
+  },
+  {
+   "frame": 3,
+   "victimDx": 1
+  },
+  {
+   "frame": 4,
+   "victimDx": -1
+  },
+  {
+   "frame": 5,
+   "victimDx": 1
+  },
+  {
+   "frame": 6,
+   "victimDx": -1
+  },
+  {
+   "frame": 7,
+   "victimDx": 1
+  },
+  {
+   "frame": 8,
+   "victim": "white",
+   "victimDy": 2,
+   "shake": [
+    4,
+    -2
+   ]
+  },
+  {
+   "frame": 9,
+   "victim": "red",
+   "victimDy": 2,
+   "shake": [
+    -4,
+    2
+   ]
+  },
+  {
+   "frame": 10,
+   "shake": [
+    2,
+    -1
+   ]
+  },
+  {
+   "frame": 11,
+   "victim": "red"
+  }
+ ],
+ "anchorIs": "the wound, as blood_call_wound",
+ "note": "blood torn out of the wound into the hand's palm, hit frames 3 to 8"
+}

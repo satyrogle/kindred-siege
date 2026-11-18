@@ -1,0 +1,232 @@
+{
+ "frames": [
+  {
+   "filename": "eclipse_break_under_00",
+   "frame": {
+    "x": 0,
+    "y": 0,
+    "w": 146,
+    "h": 250
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 146,
+    "h": 250
+   },
+   "sourceSize": {
+    "w": 146,
+    "h": 250
+   },
+   "duration": 80
+  },
+  {
+   "filename": "eclipse_break_under_01",
+   "frame": {
+    "x": 146,
+    "y": 0,
+    "w": 146,
+    "h": 250
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 146,
+    "h": 250
+   },
+   "sourceSize": {
+    "w": 146,
+    "h": 250
+   },
+   "duration": 80
+  },
+  {
+   "filename": "eclipse_break_under_02",
+   "frame": {
+    "x": 292,
+    "y": 0,
+    "w": 146,
+    "h": 250
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 146,
+    "h": 250
+   },
+   "sourceSize": {
+    "w": 146,
+    "h": 250
+   },
+   "duration": 80
+  },
+  {
+   "filename": "eclipse_break_under_03",
+   "frame": {
+    "x": 438,
+    "y": 0,
+    "w": 146,
+    "h": 250
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 146,
+    "h": 250
+   },
+   "sourceSize": {
+    "w": 146,
+    "h": 250
+   },
+   "duration": 80
+  },
+  {
+   "filename": "eclipse_break_under_04",
+   "frame": {
+    "x": 584,
+    "y": 0,
+    "w": 146,
+    "h": 250
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 146,
+    "h": 250
+   },
+   "sourceSize": {
+    "w": 146,
+    "h": 250
+   },
+   "duration": 80
+  },
+  {
+   "filename": "eclipse_break_under_05",
+   "frame": {
+    "x": 730,
+    "y": 0,
+    "w": 146,
+    "h": 250
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 146,
+    "h": 250
+   },
+   "sourceSize": {
+    "w": 146,
+    "h": 250
+   },
+   "duration": 80
+  },
+  {
+   "filename": "eclipse_break_under_06",
+   "frame": {
+    "x": 876,
+    "y": 0,
+    "w": 146,
+    "h": 250
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 146,
+    "h": 250
+   },
+   "sourceSize": {
+    "w": 146,
+    "h": 250
+   },
+   "duration": 80
+  },
+  {
+   "filename": "eclipse_break_under_07",
+   "frame": {
+    "x": 1022,
+    "y": 0,
+    "w": 146,
+    "h": 250
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 146,
+    "h": 250
+   },
+   "sourceSize": {
+    "w": 146,
+    "h": 250
+   },
+   "duration": 80
+  },
+  {
+   "filename": "eclipse_break_under_08",
+   "frame": {
+    "x": 1168,
+    "y": 0,
+    "w": 146,
+    "h": 250
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 146,
+    "h": 250
+   },
+   "sourceSize": {
+    "w": 146,
+    "h": 250
+   },
+   "duration": 80
+  },
+  {
+   "filename": "eclipse_break_under_09",
+   "frame": {
+    "x": 1314,
+    "y": 0,
+    "w": 146,
+    "h": 250
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 146,
+    "h": 250
+   },
+   "sourceSize": {
+    "w": 146,
+    "h": 250
+   },
+   "duration": 80
+  }
+ ],
+ "anchorX": 76.0,
+ "anchorY": 205.0,
+ "layer": "under",
+ "frameMs": 80,
+ "clip": "break",
+ "startsAt": "14 frames after his comet hits",
+ "anchorIs": "each target's feet point",
+ "note": "the sigil breaking into specks"
+}

@@ -1,0 +1,848 @@
+{
+ "frames": [
+  {
+   "filename": "eclipse_staff_tell_front_00",
+   "frame": {
+    "x": 0,
+    "y": 0,
+    "w": 66,
+    "h": 68
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 66,
+    "h": 68
+   },
+   "sourceSize": {
+    "w": 66,
+    "h": 68
+   },
+   "duration": 80
+  },
+  {
+   "filename": "eclipse_staff_tell_front_01",
+   "frame": {
+    "x": 66,
+    "y": 0,
+    "w": 66,
+    "h": 68
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 66,
+    "h": 68
+   },
+   "sourceSize": {
+    "w": 66,
+    "h": 68
+   },
+   "duration": 80
+  },
+  {
+   "filename": "eclipse_staff_tell_front_02",
+   "frame": {
+    "x": 132,
+    "y": 0,
+    "w": 66,
+    "h": 68
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 66,
+    "h": 68
+   },
+   "sourceSize": {
+    "w": 66,
+    "h": 68
+   },
+   "duration": 80
+  },
+  {
+   "filename": "eclipse_staff_tell_front_03",
+   "frame": {
+    "x": 198,
+    "y": 0,
+    "w": 66,
+    "h": 68
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 66,
+    "h": 68
+   },
+   "sourceSize": {
+    "w": 66,
+    "h": 68
+   },
+   "duration": 80
+  },
+  {
+   "filename": "eclipse_staff_tell_front_04",
+   "frame": {
+    "x": 264,
+    "y": 0,
+    "w": 66,
+    "h": 68
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 66,
+    "h": 68
+   },
+   "sourceSize": {
+    "w": 66,
+    "h": 68
+   },
+   "duration": 80
+  },
+  {
+   "filename": "eclipse_staff_tell_front_05",
+   "frame": {
+    "x": 330,
+    "y": 0,
+    "w": 66,
+    "h": 68
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 66,
+    "h": 68
+   },
+   "sourceSize": {
+    "w": 66,
+    "h": 68
+   },
+   "duration": 80
+  },
+  {
+   "filename": "eclipse_staff_tell_front_06",
+   "frame": {
+    "x": 396,
+    "y": 0,
+    "w": 66,
+    "h": 68
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 66,
+    "h": 68
+   },
+   "sourceSize": {
+    "w": 66,
+    "h": 68
+   },
+   "duration": 80
+  },
+  {
+   "filename": "eclipse_staff_tell_front_07",
+   "frame": {
+    "x": 462,
+    "y": 0,
+    "w": 66,
+    "h": 68
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 66,
+    "h": 68
+   },
+   "sourceSize": {
+    "w": 66,
+    "h": 68
+   },
+   "duration": 80
+  },
+  {
+   "filename": "eclipse_staff_tell_front_08",
+   "frame": {
+    "x": 528,
+    "y": 0,
+    "w": 66,
+    "h": 68
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 66,
+    "h": 68
+   },
+   "sourceSize": {
+    "w": 66,
+    "h": 68
+   },
+   "duration": 80
+  },
+  {
+   "filename": "eclipse_staff_tell_front_09",
+   "frame": {
+    "x": 594,
+    "y": 0,
+    "w": 66,
+    "h": 68
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 66,
+    "h": 68
+   },
+   "sourceSize": {
+    "w": 66,
+    "h": 68
+   },
+   "duration": 80
+  },
+  {
+   "filename": "eclipse_staff_tell_front_10",
+   "frame": {
+    "x": 660,
+    "y": 0,
+    "w": 66,
+    "h": 68
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 66,
+    "h": 68
+   },
+   "sourceSize": {
+    "w": 66,
+    "h": 68
+   },
+   "duration": 80
+  },
+  {
+   "filename": "eclipse_staff_tell_front_11",
+   "frame": {
+    "x": 726,
+    "y": 0,
+    "w": 66,
+    "h": 68
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 66,
+    "h": 68
+   },
+   "sourceSize": {
+    "w": 66,
+    "h": 68
+   },
+   "duration": 80
+  },
+  {
+   "filename": "eclipse_staff_tell_front_12",
+   "frame": {
+    "x": 792,
+    "y": 0,
+    "w": 66,
+    "h": 68
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 66,
+    "h": 68
+   },
+   "sourceSize": {
+    "w": 66,
+    "h": 68
+   },
+   "duration": 80
+  },
+  {
+   "filename": "eclipse_staff_tell_front_13",
+   "frame": {
+    "x": 858,
+    "y": 0,
+    "w": 66,
+    "h": 68
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 66,
+    "h": 68
+   },
+   "sourceSize": {
+    "w": 66,
+    "h": 68
+   },
+   "duration": 80
+  },
+  {
+   "filename": "eclipse_staff_tell_front_14",
+   "frame": {
+    "x": 924,
+    "y": 0,
+    "w": 66,
+    "h": 68
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 66,
+    "h": 68
+   },
+   "sourceSize": {
+    "w": 66,
+    "h": 68
+   },
+   "duration": 80
+  },
+  {
+   "filename": "eclipse_staff_tell_front_15",
+   "frame": {
+    "x": 990,
+    "y": 0,
+    "w": 66,
+    "h": 68
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 66,
+    "h": 68
+   },
+   "sourceSize": {
+    "w": 66,
+    "h": 68
+   },
+   "duration": 80
+  },
+  {
+   "filename": "eclipse_staff_tell_front_16",
+   "frame": {
+    "x": 1056,
+    "y": 0,
+    "w": 66,
+    "h": 68
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 66,
+    "h": 68
+   },
+   "sourceSize": {
+    "w": 66,
+    "h": 68
+   },
+   "duration": 80
+  },
+  {
+   "filename": "eclipse_staff_tell_front_17",
+   "frame": {
+    "x": 1122,
+    "y": 0,
+    "w": 66,
+    "h": 68
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 66,
+    "h": 68
+   },
+   "sourceSize": {
+    "w": 66,
+    "h": 68
+   },
+   "duration": 80
+  },
+  {
+   "filename": "eclipse_staff_tell_front_18",
+   "frame": {
+    "x": 1188,
+    "y": 0,
+    "w": 66,
+    "h": 68
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 66,
+    "h": 68
+   },
+   "sourceSize": {
+    "w": 66,
+    "h": 68
+   },
+   "duration": 80
+  },
+  {
+   "filename": "eclipse_staff_tell_front_19",
+   "frame": {
+    "x": 1254,
+    "y": 0,
+    "w": 66,
+    "h": 68
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 66,
+    "h": 68
+   },
+   "sourceSize": {
+    "w": 66,
+    "h": 68
+   },
+   "duration": 80
+  },
+  {
+   "filename": "eclipse_staff_tell_front_20",
+   "frame": {
+    "x": 1320,
+    "y": 0,
+    "w": 66,
+    "h": 68
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 66,
+    "h": 68
+   },
+   "sourceSize": {
+    "w": 66,
+    "h": 68
+   },
+   "duration": 80
+  },
+  {
+   "filename": "eclipse_staff_tell_front_21",
+   "frame": {
+    "x": 1386,
+    "y": 0,
+    "w": 66,
+    "h": 68
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 66,
+    "h": 68
+   },
+   "sourceSize": {
+    "w": 66,
+    "h": 68
+   },
+   "duration": 80
+  },
+  {
+   "filename": "eclipse_staff_tell_front_22",
+   "frame": {
+    "x": 1452,
+    "y": 0,
+    "w": 66,
+    "h": 68
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 66,
+    "h": 68
+   },
+   "sourceSize": {
+    "w": 66,
+    "h": 68
+   },
+   "duration": 80
+  },
+  {
+   "filename": "eclipse_staff_tell_front_23",
+   "frame": {
+    "x": 1518,
+    "y": 0,
+    "w": 66,
+    "h": 68
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 66,
+    "h": 68
+   },
+   "sourceSize": {
+    "w": 66,
+    "h": 68
+   },
+   "duration": 80
+  },
+  {
+   "filename": "eclipse_staff_tell_front_24",
+   "frame": {
+    "x": 1584,
+    "y": 0,
+    "w": 66,
+    "h": 68
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 66,
+    "h": 68
+   },
+   "sourceSize": {
+    "w": 66,
+    "h": 68
+   },
+   "duration": 80
+  },
+  {
+   "filename": "eclipse_staff_tell_front_25",
+   "frame": {
+    "x": 1650,
+    "y": 0,
+    "w": 66,
+    "h": 68
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 66,
+    "h": 68
+   },
+   "sourceSize": {
+    "w": 66,
+    "h": 68
+   },
+   "duration": 80
+  },
+  {
+   "filename": "eclipse_staff_tell_front_26",
+   "frame": {
+    "x": 1716,
+    "y": 0,
+    "w": 66,
+    "h": 68
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 66,
+    "h": 68
+   },
+   "sourceSize": {
+    "w": 66,
+    "h": 68
+   },
+   "duration": 80
+  },
+  {
+   "filename": "eclipse_staff_tell_front_27",
+   "frame": {
+    "x": 1782,
+    "y": 0,
+    "w": 66,
+    "h": 68
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 66,
+    "h": 68
+   },
+   "sourceSize": {
+    "w": 66,
+    "h": 68
+   },
+   "duration": 80
+  },
+  {
+   "filename": "eclipse_staff_tell_front_28",
+   "frame": {
+    "x": 1848,
+    "y": 0,
+    "w": 66,
+    "h": 68
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 66,
+    "h": 68
+   },
+   "sourceSize": {
+    "w": 66,
+    "h": 68
+   },
+   "duration": 80
+  },
+  {
+   "filename": "eclipse_staff_tell_front_29",
+   "frame": {
+    "x": 1914,
+    "y": 0,
+    "w": 66,
+    "h": 68
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 66,
+    "h": 68
+   },
+   "sourceSize": {
+    "w": 66,
+    "h": 68
+   },
+   "duration": 80
+  },
+  {
+   "filename": "eclipse_staff_tell_front_30",
+   "frame": {
+    "x": 1980,
+    "y": 0,
+    "w": 66,
+    "h": 68
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 66,
+    "h": 68
+   },
+   "sourceSize": {
+    "w": 66,
+    "h": 68
+   },
+   "duration": 80
+  },
+  {
+   "filename": "eclipse_staff_tell_front_31",
+   "frame": {
+    "x": 0,
+    "y": 68,
+    "w": 66,
+    "h": 68
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 66,
+    "h": 68
+   },
+   "sourceSize": {
+    "w": 66,
+    "h": 68
+   },
+   "duration": 80
+  },
+  {
+   "filename": "eclipse_staff_tell_front_32",
+   "frame": {
+    "x": 66,
+    "y": 68,
+    "w": 66,
+    "h": 68
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 66,
+    "h": 68
+   },
+   "sourceSize": {
+    "w": 66,
+    "h": 68
+   },
+   "duration": 80
+  },
+  {
+   "filename": "eclipse_staff_tell_front_33",
+   "frame": {
+    "x": 132,
+    "y": 68,
+    "w": 66,
+    "h": 68
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 66,
+    "h": 68
+   },
+   "sourceSize": {
+    "w": 66,
+    "h": 68
+   },
+   "duration": 80
+  },
+  {
+   "filename": "eclipse_staff_tell_front_34",
+   "frame": {
+    "x": 198,
+    "y": 68,
+    "w": 66,
+    "h": 68
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 66,
+    "h": 68
+   },
+   "sourceSize": {
+    "w": 66,
+    "h": 68
+   },
+   "duration": 80
+  },
+  {
+   "filename": "eclipse_staff_tell_front_35",
+   "frame": {
+    "x": 264,
+    "y": 68,
+    "w": 66,
+    "h": 68
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 66,
+    "h": 68
+   },
+   "sourceSize": {
+    "w": 66,
+    "h": 68
+   },
+   "duration": 80
+  },
+  {
+   "filename": "eclipse_staff_tell_front_36",
+   "frame": {
+    "x": 330,
+    "y": 68,
+    "w": 66,
+    "h": 68
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 66,
+    "h": 68
+   },
+   "sourceSize": {
+    "w": 66,
+    "h": 68
+   },
+   "duration": 80
+  },
+  {
+   "filename": "eclipse_staff_tell_front_37",
+   "frame": {
+    "x": 396,
+    "y": 68,
+    "w": 66,
+    "h": 68
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 66,
+    "h": 68
+   },
+   "sourceSize": {
+    "w": 66,
+    "h": 68
+   },
+   "duration": 80
+  }
+ ],
+ "anchorX": 1.0,
+ "anchorY": 209.0,
+ "layer": "front",
+ "frameMs": 80,
+ "clip": "tell",
+ "startsAt": "the windup start, 38 frames before Release",
+ "anchorIs": "the caster's feet point",
+ "note": "the black sun on his staff pulses, then flares through the last second; drawn for his pose in this capture, the staff sun 32 px right of and 175 px above his feet"
+}

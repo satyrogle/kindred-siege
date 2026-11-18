@@ -1,0 +1,34 @@
+{
+ "frames": [
+  {
+   "filename": "eclipse_sun_dark_over_00",
+   "frame": {
+    "x": 0,
+    "y": 0,
+    "w": 194,
+    "h": 193
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 194,
+    "h": 193
+   },
+   "sourceSize": {
+    "w": 194,
+    "h": 193
+   },
+   "duration": 80
+  }
+ ],
+ "anchorX": 95.0,
+ "anchorY": 97.0,
+ "layer": "over",
+ "frameMs": 80,
+ "clip": "hit",
+ "startsAt": "the Release tick",
+ "anchorIs": "the black sun's centre",
+ "note": "flat dark, 1 frame"
+}

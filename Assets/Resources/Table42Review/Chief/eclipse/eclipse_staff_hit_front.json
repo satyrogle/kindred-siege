@@ -1,0 +1,78 @@
+{
+ "frames": [
+  {
+   "filename": "eclipse_staff_hit_front_00",
+   "frame": {
+    "x": 0,
+    "y": 0,
+    "w": 66,
+    "h": 68
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 66,
+    "h": 68
+   },
+   "sourceSize": {
+    "w": 66,
+    "h": 68
+   },
+   "duration": 80
+  },
+  {
+   "filename": "eclipse_staff_hit_front_01",
+   "frame": {
+    "x": 66,
+    "y": 0,
+    "w": 66,
+    "h": 68
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 66,
+    "h": 68
+   },
+   "sourceSize": {
+    "w": 66,
+    "h": 68
+   },
+   "duration": 80
+  },
+  {
+   "filename": "eclipse_staff_hit_front_02",
+   "frame": {
+    "x": 132,
+    "y": 0,
+    "w": 66,
+    "h": 68
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 66,
+    "h": 68
+   },
+   "sourceSize": {
+    "w": 66,
+    "h": 68
+   },
+   "duration": 80
+  }
+ ],
+ "anchorX": 1.0,
+ "anchorY": 209.0,
+ "layer": "front",
+ "frameMs": 80,
+ "clip": "hit",
+ "startsAt": "the Release tick",
+ "anchorIs": "the caster's feet point",
+ "note": "dark, white, then small, 3 frames"
+}

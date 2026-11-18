@@ -1,0 +1,353 @@
+{
+ "frames": [
+  {
+   "filename": "eclipse_hit_front_00",
+   "frame": {
+    "x": 0,
+    "y": 0,
+    "w": 206,
+    "h": 81
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 206,
+    "h": 81
+   },
+   "sourceSize": {
+    "w": 206,
+    "h": 81
+   },
+   "duration": 80
+  },
+  {
+   "filename": "eclipse_hit_front_01",
+   "frame": {
+    "x": 206,
+    "y": 0,
+    "w": 206,
+    "h": 81
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 206,
+    "h": 81
+   },
+   "sourceSize": {
+    "w": 206,
+    "h": 81
+   },
+   "duration": 80
+  },
+  {
+   "filename": "eclipse_hit_front_02",
+   "frame": {
+    "x": 412,
+    "y": 0,
+    "w": 206,
+    "h": 81
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 206,
+    "h": 81
+   },
+   "sourceSize": {
+    "w": 206,
+    "h": 81
+   },
+   "duration": 80
+  },
+  {
+   "filename": "eclipse_hit_front_03",
+   "frame": {
+    "x": 618,
+    "y": 0,
+    "w": 206,
+    "h": 81
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 206,
+    "h": 81
+   },
+   "sourceSize": {
+    "w": 206,
+    "h": 81
+   },
+   "duration": 80
+  },
+  {
+   "filename": "eclipse_hit_front_04",
+   "frame": {
+    "x": 824,
+    "y": 0,
+    "w": 206,
+    "h": 81
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 206,
+    "h": 81
+   },
+   "sourceSize": {
+    "w": 206,
+    "h": 81
+   },
+   "duration": 80
+  },
+  {
+   "filename": "eclipse_hit_front_05",
+   "frame": {
+    "x": 1030,
+    "y": 0,
+    "w": 206,
+    "h": 81
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 206,
+    "h": 81
+   },
+   "sourceSize": {
+    "w": 206,
+    "h": 81
+   },
+   "duration": 80
+  },
+  {
+   "filename": "eclipse_hit_front_06",
+   "frame": {
+    "x": 1236,
+    "y": 0,
+    "w": 206,
+    "h": 81
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 206,
+    "h": 81
+   },
+   "sourceSize": {
+    "w": 206,
+    "h": 81
+   },
+   "duration": 80
+  },
+  {
+   "filename": "eclipse_hit_front_07",
+   "frame": {
+    "x": 1442,
+    "y": 0,
+    "w": 206,
+    "h": 81
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 206,
+    "h": 81
+   },
+   "sourceSize": {
+    "w": 206,
+    "h": 81
+   },
+   "duration": 80
+  },
+  {
+   "filename": "eclipse_hit_front_08",
+   "frame": {
+    "x": 1648,
+    "y": 0,
+    "w": 206,
+    "h": 81
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 206,
+    "h": 81
+   },
+   "sourceSize": {
+    "w": 206,
+    "h": 81
+   },
+   "duration": 80
+  },
+  {
+   "filename": "eclipse_hit_front_09",
+   "frame": {
+    "x": 0,
+    "y": 81,
+    "w": 206,
+    "h": 81
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 206,
+    "h": 81
+   },
+   "sourceSize": {
+    "w": 206,
+    "h": 81
+   },
+   "duration": 80
+  },
+  {
+   "filename": "eclipse_hit_front_10",
+   "frame": {
+    "x": 206,
+    "y": 81,
+    "w": 206,
+    "h": 81
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 206,
+    "h": 81
+   },
+   "sourceSize": {
+    "w": 206,
+    "h": 81
+   },
+   "duration": 80
+  },
+  {
+   "filename": "eclipse_hit_front_11",
+   "frame": {
+    "x": 412,
+    "y": 81,
+    "w": 206,
+    "h": 81
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 206,
+    "h": 81
+   },
+   "sourceSize": {
+    "w": 206,
+    "h": 81
+   },
+   "duration": 80
+  },
+  {
+   "filename": "eclipse_hit_front_12",
+   "frame": {
+    "x": 618,
+    "y": 81,
+    "w": 206,
+    "h": 81
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 206,
+    "h": 81
+   },
+   "sourceSize": {
+    "w": 206,
+    "h": 81
+   },
+   "duration": 80
+  },
+  {
+   "filename": "eclipse_hit_front_13",
+   "frame": {
+    "x": 824,
+    "y": 81,
+    "w": 206,
+    "h": 81
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 206,
+    "h": 81
+   },
+   "sourceSize": {
+    "w": 206,
+    "h": 81
+   },
+   "duration": 80
+  }
+ ],
+ "anchorX": 103.0,
+ "anchorY": 52.0,
+ "layer": "front",
+ "frameMs": 80,
+ "clip": "hit",
+ "startsAt": "the frame his comet hits (see eclipse_cues.json)",
+ "anchorIs": "each target's feet point",
+ "impactFrame": 0,
+ "cues": [
+  {
+   "frame": 0,
+   "victim": "white",
+   "victimDy": 2,
+   "shake": [
+    5,
+    -2
+   ]
+  },
+  {
+   "frame": 1,
+   "victim": "red",
+   "victimDy": 1,
+   "shake": [
+    -5,
+    2
+   ]
+  },
+  {
+   "frame": 2,
+   "shake": [
+    2,
+    -1
+   ]
+  },
+  {
+   "frame": 3,
+   "victim": "red"
+  }
+ ],
+ "cuesNote": "the first target's shake; every later target shakes [4,-2], [-4,2], [2,-1]; when two overlap the earlier target's shake wins",
+ "note": "only the lower 44 px of the same frames, over his legs, so the fire is round him and his flashes still show"
+}

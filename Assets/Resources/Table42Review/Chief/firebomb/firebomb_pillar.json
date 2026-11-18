@@ -1,0 +1,510 @@
+{
+ "frames": [
+  {
+   "filename": "firebomb_pillar_00",
+   "frame": {
+    "x": 0,
+    "y": 0,
+    "w": 156,
+    "h": 186
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 156,
+    "h": 186
+   },
+   "sourceSize": {
+    "w": 156,
+    "h": 186
+   },
+   "duration": 80
+  },
+  {
+   "filename": "firebomb_pillar_01",
+   "frame": {
+    "x": 156,
+    "y": 0,
+    "w": 156,
+    "h": 186
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 156,
+    "h": 186
+   },
+   "sourceSize": {
+    "w": 156,
+    "h": 186
+   },
+   "duration": 80
+  },
+  {
+   "filename": "firebomb_pillar_02",
+   "frame": {
+    "x": 312,
+    "y": 0,
+    "w": 156,
+    "h": 186
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 156,
+    "h": 186
+   },
+   "sourceSize": {
+    "w": 156,
+    "h": 186
+   },
+   "duration": 80
+  },
+  {
+   "filename": "firebomb_pillar_03",
+   "frame": {
+    "x": 468,
+    "y": 0,
+    "w": 156,
+    "h": 186
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 156,
+    "h": 186
+   },
+   "sourceSize": {
+    "w": 156,
+    "h": 186
+   },
+   "duration": 80
+  },
+  {
+   "filename": "firebomb_pillar_04",
+   "frame": {
+    "x": 624,
+    "y": 0,
+    "w": 156,
+    "h": 186
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 156,
+    "h": 186
+   },
+   "sourceSize": {
+    "w": 156,
+    "h": 186
+   },
+   "duration": 80
+  },
+  {
+   "filename": "firebomb_pillar_05",
+   "frame": {
+    "x": 780,
+    "y": 0,
+    "w": 156,
+    "h": 186
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 156,
+    "h": 186
+   },
+   "sourceSize": {
+    "w": 156,
+    "h": 186
+   },
+   "duration": 80
+  },
+  {
+   "filename": "firebomb_pillar_06",
+   "frame": {
+    "x": 936,
+    "y": 0,
+    "w": 156,
+    "h": 186
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 156,
+    "h": 186
+   },
+   "sourceSize": {
+    "w": 156,
+    "h": 186
+   },
+   "duration": 80
+  },
+  {
+   "filename": "firebomb_pillar_07",
+   "frame": {
+    "x": 1092,
+    "y": 0,
+    "w": 156,
+    "h": 186
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 156,
+    "h": 186
+   },
+   "sourceSize": {
+    "w": 156,
+    "h": 186
+   },
+   "duration": 80
+  },
+  {
+   "filename": "firebomb_pillar_08",
+   "frame": {
+    "x": 1248,
+    "y": 0,
+    "w": 156,
+    "h": 186
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 156,
+    "h": 186
+   },
+   "sourceSize": {
+    "w": 156,
+    "h": 186
+   },
+   "duration": 80
+  },
+  {
+   "filename": "firebomb_pillar_09",
+   "frame": {
+    "x": 1404,
+    "y": 0,
+    "w": 156,
+    "h": 186
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 156,
+    "h": 186
+   },
+   "sourceSize": {
+    "w": 156,
+    "h": 186
+   },
+   "duration": 80
+  },
+  {
+   "filename": "firebomb_pillar_10",
+   "frame": {
+    "x": 1560,
+    "y": 0,
+    "w": 156,
+    "h": 186
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 156,
+    "h": 186
+   },
+   "sourceSize": {
+    "w": 156,
+    "h": 186
+   },
+   "duration": 80
+  },
+  {
+   "filename": "firebomb_pillar_11",
+   "frame": {
+    "x": 1716,
+    "y": 0,
+    "w": 156,
+    "h": 186
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 156,
+    "h": 186
+   },
+   "sourceSize": {
+    "w": 156,
+    "h": 186
+   },
+   "duration": 80
+  },
+  {
+   "filename": "firebomb_pillar_12",
+   "frame": {
+    "x": 1872,
+    "y": 0,
+    "w": 156,
+    "h": 186
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 156,
+    "h": 186
+   },
+   "sourceSize": {
+    "w": 156,
+    "h": 186
+   },
+   "duration": 80
+  },
+  {
+   "filename": "firebomb_pillar_13",
+   "frame": {
+    "x": 0,
+    "y": 186,
+    "w": 156,
+    "h": 186
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 156,
+    "h": 186
+   },
+   "sourceSize": {
+    "w": 156,
+    "h": 186
+   },
+   "duration": 80
+  },
+  {
+   "filename": "firebomb_pillar_14",
+   "frame": {
+    "x": 156,
+    "y": 186,
+    "w": 156,
+    "h": 186
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 156,
+    "h": 186
+   },
+   "sourceSize": {
+    "w": 156,
+    "h": 186
+   },
+   "duration": 80
+  },
+  {
+   "filename": "firebomb_pillar_15",
+   "frame": {
+    "x": 312,
+    "y": 186,
+    "w": 156,
+    "h": 186
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 156,
+    "h": 186
+   },
+   "sourceSize": {
+    "w": 156,
+    "h": 186
+   },
+   "duration": 80
+  },
+  {
+   "filename": "firebomb_pillar_16",
+   "frame": {
+    "x": 468,
+    "y": 186,
+    "w": 156,
+    "h": 186
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 156,
+    "h": 186
+   },
+   "sourceSize": {
+    "w": 156,
+    "h": 186
+   },
+   "duration": 80
+  },
+  {
+   "filename": "firebomb_pillar_17",
+   "frame": {
+    "x": 624,
+    "y": 186,
+    "w": 156,
+    "h": 186
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 156,
+    "h": 186
+   },
+   "sourceSize": {
+    "w": 156,
+    "h": 186
+   },
+   "duration": 80
+  },
+  {
+   "filename": "firebomb_pillar_18",
+   "frame": {
+    "x": 780,
+    "y": 186,
+    "w": 156,
+    "h": 186
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 156,
+    "h": 186
+   },
+   "sourceSize": {
+    "w": 156,
+    "h": 186
+   },
+   "duration": 80
+  },
+  {
+   "filename": "firebomb_pillar_19",
+   "frame": {
+    "x": 936,
+    "y": 186,
+    "w": 156,
+    "h": 186
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 156,
+    "h": 186
+   },
+   "sourceSize": {
+    "w": 156,
+    "h": 186
+   },
+   "duration": 80
+  },
+  {
+   "filename": "firebomb_pillar_20",
+   "frame": {
+    "x": 1092,
+    "y": 186,
+    "w": 156,
+    "h": 186
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 156,
+    "h": 186
+   },
+   "sourceSize": {
+    "w": 156,
+    "h": 186
+   },
+   "duration": 80
+  },
+  {
+   "filename": "firebomb_pillar_21",
+   "frame": {
+    "x": 1248,
+    "y": 186,
+    "w": 156,
+    "h": 186
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 156,
+    "h": 186
+   },
+   "sourceSize": {
+    "w": 156,
+    "h": 186
+   },
+   "duration": 80
+  }
+ ],
+ "anchorX": 77.0,
+ "anchorY": 160.0,
+ "layer": "behind",
+ "frameMs": 80,
+ "clip": "hit",
+ "startsAt": "the Release tick, 1 frame later for the lower front fighter (see cues)",
+ "impactFrame": 8,
+ "cues": [
+  {
+   "frame": 8,
+   "victim": "white"
+  },
+  {
+   "frame": 9,
+   "victim": "red"
+  },
+  {
+   "frame": 11,
+   "victim": "red"
+  }
+ ],
+ "note": "a pillar of violet fire erupting out of the mark behind him, from hit frame 6, then dying to embers"
+}

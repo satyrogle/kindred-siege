@@ -1,0 +1,166 @@
+{
+ "frames": [
+  {
+   "filename": "steel_storm_hold_m_00",
+   "frame": {
+    "x": 0,
+    "y": 0,
+    "w": 192,
+    "h": 224
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 192,
+    "h": 224
+   },
+   "sourceSize": {
+    "w": 192,
+    "h": 224
+   },
+   "duration": 80
+  },
+  {
+   "filename": "steel_storm_hold_m_01",
+   "frame": {
+    "x": 192,
+    "y": 0,
+    "w": 192,
+    "h": 224
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 192,
+    "h": 224
+   },
+   "sourceSize": {
+    "w": 192,
+    "h": 224
+   },
+   "duration": 80
+  },
+  {
+   "filename": "steel_storm_hold_m_02",
+   "frame": {
+    "x": 384,
+    "y": 0,
+    "w": 192,
+    "h": 224
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 192,
+    "h": 224
+   },
+   "sourceSize": {
+    "w": 192,
+    "h": 224
+   },
+   "duration": 80
+  },
+  {
+   "filename": "steel_storm_hold_m_03",
+   "frame": {
+    "x": 576,
+    "y": 0,
+    "w": 192,
+    "h": 224
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 192,
+    "h": 224
+   },
+   "sourceSize": {
+    "w": 192,
+    "h": 224
+   },
+   "duration": 80
+  },
+  {
+   "filename": "steel_storm_hold_m_04",
+   "frame": {
+    "x": 768,
+    "y": 0,
+    "w": 192,
+    "h": 224
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 192,
+    "h": 224
+   },
+   "sourceSize": {
+    "w": 192,
+    "h": 224
+   },
+   "duration": 80
+  },
+  {
+   "filename": "steel_storm_hold_m_05",
+   "frame": {
+    "x": 960,
+    "y": 0,
+    "w": 192,
+    "h": 224
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 192,
+    "h": 224
+   },
+   "sourceSize": {
+    "w": 192,
+    "h": 224
+   },
+   "duration": 80
+  },
+  {
+   "filename": "steel_storm_hold_m_06",
+   "frame": {
+    "x": 1152,
+    "y": 0,
+    "w": 192,
+    "h": 224
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 192,
+    "h": 224
+   },
+   "sourceSize": {
+    "w": 192,
+    "h": 224
+   },
+   "duration": 80
+  }
+ ],
+ "anchorX": 96.0,
+ "anchorY": 194.0,
+ "layer": "front",
+ "frameMs": 80,
+ "clip": "hold",
+ "loop": true,
+ "startsAt": "the frame after the rise ends",
+ "note": "a 7 frame loop while the wall stands: light rippling over the tiles"
+}

@@ -1,0 +1,187 @@
+{
+ "frames": [
+  {
+   "filename": "steel_storm_rise_w_00",
+   "frame": {
+    "x": 0,
+    "y": 0,
+    "w": 156,
+    "h": 182
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 156,
+    "h": 182
+   },
+   "sourceSize": {
+    "w": 156,
+    "h": 182
+   },
+   "duration": 80
+  },
+  {
+   "filename": "steel_storm_rise_w_01",
+   "frame": {
+    "x": 156,
+    "y": 0,
+    "w": 156,
+    "h": 182
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 156,
+    "h": 182
+   },
+   "sourceSize": {
+    "w": 156,
+    "h": 182
+   },
+   "duration": 80
+  },
+  {
+   "filename": "steel_storm_rise_w_02",
+   "frame": {
+    "x": 312,
+    "y": 0,
+    "w": 156,
+    "h": 182
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 156,
+    "h": 182
+   },
+   "sourceSize": {
+    "w": 156,
+    "h": 182
+   },
+   "duration": 80
+  },
+  {
+   "filename": "steel_storm_rise_w_03",
+   "frame": {
+    "x": 468,
+    "y": 0,
+    "w": 156,
+    "h": 182
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 156,
+    "h": 182
+   },
+   "sourceSize": {
+    "w": 156,
+    "h": 182
+   },
+   "duration": 80
+  },
+  {
+   "filename": "steel_storm_rise_w_04",
+   "frame": {
+    "x": 624,
+    "y": 0,
+    "w": 156,
+    "h": 182
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 156,
+    "h": 182
+   },
+   "sourceSize": {
+    "w": 156,
+    "h": 182
+   },
+   "duration": 80
+  },
+  {
+   "filename": "steel_storm_rise_w_05",
+   "frame": {
+    "x": 780,
+    "y": 0,
+    "w": 156,
+    "h": 182
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 156,
+    "h": 182
+   },
+   "sourceSize": {
+    "w": 156,
+    "h": 182
+   },
+   "duration": 80
+  },
+  {
+   "filename": "steel_storm_rise_w_06",
+   "frame": {
+    "x": 936,
+    "y": 0,
+    "w": 156,
+    "h": 182
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 156,
+    "h": 182
+   },
+   "sourceSize": {
+    "w": 156,
+    "h": 182
+   },
+   "duration": 80
+  },
+  {
+   "filename": "steel_storm_rise_w_07",
+   "frame": {
+    "x": 1092,
+    "y": 0,
+    "w": 156,
+    "h": 182
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 156,
+    "h": 182
+   },
+   "sourceSize": {
+    "w": 156,
+    "h": 182
+   },
+   "duration": 80
+  }
+ ],
+ "anchorX": 78.0,
+ "anchorY": 157.0,
+ "layer": "front",
+ "frameMs": 80,
+ "clip": "rise",
+ "startsAt": "the frame after the dark frame",
+ "note": "hex tiles flipping up out of the ring row by row into the dome, drawn over the fighter"
+}

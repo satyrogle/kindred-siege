@@ -1,0 +1,429 @@
+{
+ "frames": [
+  {
+   "filename": "steel_storm_smash_m_00",
+   "frame": {
+    "x": 0,
+    "y": 0,
+    "w": 209,
+    "h": 246
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 209,
+    "h": 246
+   },
+   "sourceSize": {
+    "w": 209,
+    "h": 246
+   },
+   "duration": 80
+  },
+  {
+   "filename": "steel_storm_smash_m_01",
+   "frame": {
+    "x": 209,
+    "y": 0,
+    "w": 209,
+    "h": 246
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 209,
+    "h": 246
+   },
+   "sourceSize": {
+    "w": 209,
+    "h": 246
+   },
+   "duration": 80
+  },
+  {
+   "filename": "steel_storm_smash_m_02",
+   "frame": {
+    "x": 418,
+    "y": 0,
+    "w": 209,
+    "h": 246
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 209,
+    "h": 246
+   },
+   "sourceSize": {
+    "w": 209,
+    "h": 246
+   },
+   "duration": 80
+  },
+  {
+   "filename": "steel_storm_smash_m_03",
+   "frame": {
+    "x": 627,
+    "y": 0,
+    "w": 209,
+    "h": 246
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 209,
+    "h": 246
+   },
+   "sourceSize": {
+    "w": 209,
+    "h": 246
+   },
+   "duration": 80
+  },
+  {
+   "filename": "steel_storm_smash_m_04",
+   "frame": {
+    "x": 836,
+    "y": 0,
+    "w": 209,
+    "h": 246
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 209,
+    "h": 246
+   },
+   "sourceSize": {
+    "w": 209,
+    "h": 246
+   },
+   "duration": 80
+  },
+  {
+   "filename": "steel_storm_smash_m_05",
+   "frame": {
+    "x": 1045,
+    "y": 0,
+    "w": 209,
+    "h": 246
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 209,
+    "h": 246
+   },
+   "sourceSize": {
+    "w": 209,
+    "h": 246
+   },
+   "duration": 80
+  },
+  {
+   "filename": "steel_storm_smash_m_06",
+   "frame": {
+    "x": 1254,
+    "y": 0,
+    "w": 209,
+    "h": 246
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 209,
+    "h": 246
+   },
+   "sourceSize": {
+    "w": 209,
+    "h": 246
+   },
+   "duration": 80
+  },
+  {
+   "filename": "steel_storm_smash_m_07",
+   "frame": {
+    "x": 1463,
+    "y": 0,
+    "w": 209,
+    "h": 246
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 209,
+    "h": 246
+   },
+   "sourceSize": {
+    "w": 209,
+    "h": 246
+   },
+   "duration": 80
+  },
+  {
+   "filename": "steel_storm_smash_m_08",
+   "frame": {
+    "x": 1672,
+    "y": 0,
+    "w": 209,
+    "h": 246
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 209,
+    "h": 246
+   },
+   "sourceSize": {
+    "w": 209,
+    "h": 246
+   },
+   "duration": 80
+  },
+  {
+   "filename": "steel_storm_smash_m_09",
+   "frame": {
+    "x": 0,
+    "y": 246,
+    "w": 209,
+    "h": 246
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 209,
+    "h": 246
+   },
+   "sourceSize": {
+    "w": 209,
+    "h": 246
+   },
+   "duration": 80
+  },
+  {
+   "filename": "steel_storm_smash_m_10",
+   "frame": {
+    "x": 209,
+    "y": 246,
+    "w": 209,
+    "h": 246
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 209,
+    "h": 246
+   },
+   "sourceSize": {
+    "w": 209,
+    "h": 246
+   },
+   "duration": 80
+  },
+  {
+   "filename": "steel_storm_smash_m_11",
+   "frame": {
+    "x": 418,
+    "y": 246,
+    "w": 209,
+    "h": 246
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 209,
+    "h": 246
+   },
+   "sourceSize": {
+    "w": 209,
+    "h": 246
+   },
+   "duration": 80
+  },
+  {
+   "filename": "steel_storm_smash_m_12",
+   "frame": {
+    "x": 627,
+    "y": 246,
+    "w": 209,
+    "h": 246
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 209,
+    "h": 246
+   },
+   "sourceSize": {
+    "w": 209,
+    "h": 246
+   },
+   "duration": 80
+  },
+  {
+   "filename": "steel_storm_smash_m_13",
+   "frame": {
+    "x": 836,
+    "y": 246,
+    "w": 209,
+    "h": 246
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 209,
+    "h": 246
+   },
+   "sourceSize": {
+    "w": 209,
+    "h": 246
+   },
+   "duration": 80
+  },
+  {
+   "filename": "steel_storm_smash_m_14",
+   "frame": {
+    "x": 1045,
+    "y": 246,
+    "w": 209,
+    "h": 246
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 209,
+    "h": 246
+   },
+   "sourceSize": {
+    "w": 209,
+    "h": 246
+   },
+   "duration": 80
+  },
+  {
+   "filename": "steel_storm_smash_m_15",
+   "frame": {
+    "x": 1254,
+    "y": 246,
+    "w": 209,
+    "h": 246
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 209,
+    "h": 246
+   },
+   "sourceSize": {
+    "w": 209,
+    "h": 246
+   },
+   "duration": 80
+  },
+  {
+   "filename": "steel_storm_smash_m_16",
+   "frame": {
+    "x": 1463,
+    "y": 246,
+    "w": 209,
+    "h": 246
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 209,
+    "h": 246
+   },
+   "sourceSize": {
+    "w": 209,
+    "h": 246
+   },
+   "duration": 80
+  },
+  {
+   "filename": "steel_storm_smash_m_17",
+   "frame": {
+    "x": 1672,
+    "y": 246,
+    "w": 209,
+    "h": 246
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 209,
+    "h": 246
+   },
+   "sourceSize": {
+    "w": 209,
+    "h": 246
+   },
+   "duration": 80
+  },
+  {
+   "filename": "steel_storm_smash_m_18",
+   "frame": {
+    "x": 0,
+    "y": 492,
+    "w": 209,
+    "h": 246
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 209,
+    "h": 246
+   },
+   "sourceSize": {
+    "w": 209,
+    "h": 246
+   },
+   "duration": 80
+  }
+ ],
+ "anchorX": 105.0,
+ "anchorY": 194.0,
+ "layer": "front",
+ "frameMs": 80,
+ "clip": "smash",
+ "startsAt": "the Unleash that smashes the wall, the same frame for every fighter; or when the wall's time runs out",
+ "note": "dark, white, the tiles popping off and scattering, their specks"
+}

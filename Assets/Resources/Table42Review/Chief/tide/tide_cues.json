@@ -1,0 +1,10 @@
+{
+ "spell": "Tide",
+ "frameMs": 80,
+ "tellFrames": 38,
+ "targets": "your back row",
+ "stagger": "the hit clips start 1 frame (80 ms) later for each fighter further down the back row; a fighter waiting his turn holds tide_tell_under's last frame",
+ "impactFrame": 10,
+ "shake": "only on the first fighter's hit",
+ "casterAnchor": "the Thundercoast chief's feet"
+}

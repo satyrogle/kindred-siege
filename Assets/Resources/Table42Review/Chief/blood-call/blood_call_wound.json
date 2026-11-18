@@ -1,0 +1,848 @@
+{
+ "frames": [
+  {
+   "filename": "blood_call_wound_00",
+   "frame": {
+    "x": 0,
+    "y": 0,
+    "w": 18,
+    "h": 36
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 18,
+    "h": 36
+   },
+   "sourceSize": {
+    "w": 18,
+    "h": 36
+   },
+   "duration": 80
+  },
+  {
+   "filename": "blood_call_wound_01",
+   "frame": {
+    "x": 18,
+    "y": 0,
+    "w": 18,
+    "h": 36
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 18,
+    "h": 36
+   },
+   "sourceSize": {
+    "w": 18,
+    "h": 36
+   },
+   "duration": 80
+  },
+  {
+   "filename": "blood_call_wound_02",
+   "frame": {
+    "x": 36,
+    "y": 0,
+    "w": 18,
+    "h": 36
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 18,
+    "h": 36
+   },
+   "sourceSize": {
+    "w": 18,
+    "h": 36
+   },
+   "duration": 80
+  },
+  {
+   "filename": "blood_call_wound_03",
+   "frame": {
+    "x": 54,
+    "y": 0,
+    "w": 18,
+    "h": 36
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 18,
+    "h": 36
+   },
+   "sourceSize": {
+    "w": 18,
+    "h": 36
+   },
+   "duration": 80
+  },
+  {
+   "filename": "blood_call_wound_04",
+   "frame": {
+    "x": 72,
+    "y": 0,
+    "w": 18,
+    "h": 36
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 18,
+    "h": 36
+   },
+   "sourceSize": {
+    "w": 18,
+    "h": 36
+   },
+   "duration": 80
+  },
+  {
+   "filename": "blood_call_wound_05",
+   "frame": {
+    "x": 90,
+    "y": 0,
+    "w": 18,
+    "h": 36
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 18,
+    "h": 36
+   },
+   "sourceSize": {
+    "w": 18,
+    "h": 36
+   },
+   "duration": 80
+  },
+  {
+   "filename": "blood_call_wound_06",
+   "frame": {
+    "x": 108,
+    "y": 0,
+    "w": 18,
+    "h": 36
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 18,
+    "h": 36
+   },
+   "sourceSize": {
+    "w": 18,
+    "h": 36
+   },
+   "duration": 80
+  },
+  {
+   "filename": "blood_call_wound_07",
+   "frame": {
+    "x": 126,
+    "y": 0,
+    "w": 18,
+    "h": 36
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 18,
+    "h": 36
+   },
+   "sourceSize": {
+    "w": 18,
+    "h": 36
+   },
+   "duration": 80
+  },
+  {
+   "filename": "blood_call_wound_08",
+   "frame": {
+    "x": 144,
+    "y": 0,
+    "w": 18,
+    "h": 36
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 18,
+    "h": 36
+   },
+   "sourceSize": {
+    "w": 18,
+    "h": 36
+   },
+   "duration": 80
+  },
+  {
+   "filename": "blood_call_wound_09",
+   "frame": {
+    "x": 162,
+    "y": 0,
+    "w": 18,
+    "h": 36
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 18,
+    "h": 36
+   },
+   "sourceSize": {
+    "w": 18,
+    "h": 36
+   },
+   "duration": 80
+  },
+  {
+   "filename": "blood_call_wound_10",
+   "frame": {
+    "x": 180,
+    "y": 0,
+    "w": 18,
+    "h": 36
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 18,
+    "h": 36
+   },
+   "sourceSize": {
+    "w": 18,
+    "h": 36
+   },
+   "duration": 80
+  },
+  {
+   "filename": "blood_call_wound_11",
+   "frame": {
+    "x": 198,
+    "y": 0,
+    "w": 18,
+    "h": 36
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 18,
+    "h": 36
+   },
+   "sourceSize": {
+    "w": 18,
+    "h": 36
+   },
+   "duration": 80
+  },
+  {
+   "filename": "blood_call_wound_12",
+   "frame": {
+    "x": 216,
+    "y": 0,
+    "w": 18,
+    "h": 36
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 18,
+    "h": 36
+   },
+   "sourceSize": {
+    "w": 18,
+    "h": 36
+   },
+   "duration": 80
+  },
+  {
+   "filename": "blood_call_wound_13",
+   "frame": {
+    "x": 234,
+    "y": 0,
+    "w": 18,
+    "h": 36
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 18,
+    "h": 36
+   },
+   "sourceSize": {
+    "w": 18,
+    "h": 36
+   },
+   "duration": 80
+  },
+  {
+   "filename": "blood_call_wound_14",
+   "frame": {
+    "x": 252,
+    "y": 0,
+    "w": 18,
+    "h": 36
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 18,
+    "h": 36
+   },
+   "sourceSize": {
+    "w": 18,
+    "h": 36
+   },
+   "duration": 80
+  },
+  {
+   "filename": "blood_call_wound_15",
+   "frame": {
+    "x": 270,
+    "y": 0,
+    "w": 18,
+    "h": 36
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 18,
+    "h": 36
+   },
+   "sourceSize": {
+    "w": 18,
+    "h": 36
+   },
+   "duration": 80
+  },
+  {
+   "filename": "blood_call_wound_16",
+   "frame": {
+    "x": 288,
+    "y": 0,
+    "w": 18,
+    "h": 36
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 18,
+    "h": 36
+   },
+   "sourceSize": {
+    "w": 18,
+    "h": 36
+   },
+   "duration": 80
+  },
+  {
+   "filename": "blood_call_wound_17",
+   "frame": {
+    "x": 306,
+    "y": 0,
+    "w": 18,
+    "h": 36
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 18,
+    "h": 36
+   },
+   "sourceSize": {
+    "w": 18,
+    "h": 36
+   },
+   "duration": 80
+  },
+  {
+   "filename": "blood_call_wound_18",
+   "frame": {
+    "x": 324,
+    "y": 0,
+    "w": 18,
+    "h": 36
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 18,
+    "h": 36
+   },
+   "sourceSize": {
+    "w": 18,
+    "h": 36
+   },
+   "duration": 80
+  },
+  {
+   "filename": "blood_call_wound_19",
+   "frame": {
+    "x": 342,
+    "y": 0,
+    "w": 18,
+    "h": 36
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 18,
+    "h": 36
+   },
+   "sourceSize": {
+    "w": 18,
+    "h": 36
+   },
+   "duration": 80
+  },
+  {
+   "filename": "blood_call_wound_20",
+   "frame": {
+    "x": 360,
+    "y": 0,
+    "w": 18,
+    "h": 36
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 18,
+    "h": 36
+   },
+   "sourceSize": {
+    "w": 18,
+    "h": 36
+   },
+   "duration": 80
+  },
+  {
+   "filename": "blood_call_wound_21",
+   "frame": {
+    "x": 378,
+    "y": 0,
+    "w": 18,
+    "h": 36
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 18,
+    "h": 36
+   },
+   "sourceSize": {
+    "w": 18,
+    "h": 36
+   },
+   "duration": 80
+  },
+  {
+   "filename": "blood_call_wound_22",
+   "frame": {
+    "x": 396,
+    "y": 0,
+    "w": 18,
+    "h": 36
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 18,
+    "h": 36
+   },
+   "sourceSize": {
+    "w": 18,
+    "h": 36
+   },
+   "duration": 80
+  },
+  {
+   "filename": "blood_call_wound_23",
+   "frame": {
+    "x": 414,
+    "y": 0,
+    "w": 18,
+    "h": 36
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 18,
+    "h": 36
+   },
+   "sourceSize": {
+    "w": 18,
+    "h": 36
+   },
+   "duration": 80
+  },
+  {
+   "filename": "blood_call_wound_24",
+   "frame": {
+    "x": 432,
+    "y": 0,
+    "w": 18,
+    "h": 36
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 18,
+    "h": 36
+   },
+   "sourceSize": {
+    "w": 18,
+    "h": 36
+   },
+   "duration": 80
+  },
+  {
+   "filename": "blood_call_wound_25",
+   "frame": {
+    "x": 450,
+    "y": 0,
+    "w": 18,
+    "h": 36
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 18,
+    "h": 36
+   },
+   "sourceSize": {
+    "w": 18,
+    "h": 36
+   },
+   "duration": 80
+  },
+  {
+   "filename": "blood_call_wound_26",
+   "frame": {
+    "x": 468,
+    "y": 0,
+    "w": 18,
+    "h": 36
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 18,
+    "h": 36
+   },
+   "sourceSize": {
+    "w": 18,
+    "h": 36
+   },
+   "duration": 80
+  },
+  {
+   "filename": "blood_call_wound_27",
+   "frame": {
+    "x": 486,
+    "y": 0,
+    "w": 18,
+    "h": 36
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 18,
+    "h": 36
+   },
+   "sourceSize": {
+    "w": 18,
+    "h": 36
+   },
+   "duration": 80
+  },
+  {
+   "filename": "blood_call_wound_28",
+   "frame": {
+    "x": 504,
+    "y": 0,
+    "w": 18,
+    "h": 36
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 18,
+    "h": 36
+   },
+   "sourceSize": {
+    "w": 18,
+    "h": 36
+   },
+   "duration": 80
+  },
+  {
+   "filename": "blood_call_wound_29",
+   "frame": {
+    "x": 522,
+    "y": 0,
+    "w": 18,
+    "h": 36
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 18,
+    "h": 36
+   },
+   "sourceSize": {
+    "w": 18,
+    "h": 36
+   },
+   "duration": 80
+  },
+  {
+   "filename": "blood_call_wound_30",
+   "frame": {
+    "x": 540,
+    "y": 0,
+    "w": 18,
+    "h": 36
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 18,
+    "h": 36
+   },
+   "sourceSize": {
+    "w": 18,
+    "h": 36
+   },
+   "duration": 80
+  },
+  {
+   "filename": "blood_call_wound_31",
+   "frame": {
+    "x": 558,
+    "y": 0,
+    "w": 18,
+    "h": 36
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 18,
+    "h": 36
+   },
+   "sourceSize": {
+    "w": 18,
+    "h": 36
+   },
+   "duration": 80
+  },
+  {
+   "filename": "blood_call_wound_32",
+   "frame": {
+    "x": 576,
+    "y": 0,
+    "w": 18,
+    "h": 36
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 18,
+    "h": 36
+   },
+   "sourceSize": {
+    "w": 18,
+    "h": 36
+   },
+   "duration": 80
+  },
+  {
+   "filename": "blood_call_wound_33",
+   "frame": {
+    "x": 594,
+    "y": 0,
+    "w": 18,
+    "h": 36
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 18,
+    "h": 36
+   },
+   "sourceSize": {
+    "w": 18,
+    "h": 36
+   },
+   "duration": 80
+  },
+  {
+   "filename": "blood_call_wound_34",
+   "frame": {
+    "x": 612,
+    "y": 0,
+    "w": 18,
+    "h": 36
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 18,
+    "h": 36
+   },
+   "sourceSize": {
+    "w": 18,
+    "h": 36
+   },
+   "duration": 80
+  },
+  {
+   "filename": "blood_call_wound_35",
+   "frame": {
+    "x": 630,
+    "y": 0,
+    "w": 18,
+    "h": 36
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 18,
+    "h": 36
+   },
+   "sourceSize": {
+    "w": 18,
+    "h": 36
+   },
+   "duration": 80
+  },
+  {
+   "filename": "blood_call_wound_36",
+   "frame": {
+    "x": 648,
+    "y": 0,
+    "w": 18,
+    "h": 36
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 18,
+    "h": 36
+   },
+   "sourceSize": {
+    "w": 18,
+    "h": 36
+   },
+   "duration": 80
+  },
+  {
+   "filename": "blood_call_wound_37",
+   "frame": {
+    "x": 666,
+    "y": 0,
+    "w": 18,
+    "h": 36
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 18,
+    "h": 36
+   },
+   "sourceSize": {
+    "w": 18,
+    "h": 36
+   },
+   "duration": 80
+  }
+ ],
+ "anchorX": 9.0,
+ "anchorY": 28.5,
+ "layer": "front",
+ "frameMs": 80,
+ "clip": "tell",
+ "startsAt": "the windup start, 38 frames before Release",
+ "anchorIs": "the wound: 4 px right of his feet point and half his height up",
+ "note": "the wound beating and blood beads lifting out of it"
+}

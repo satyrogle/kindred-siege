@@ -1,0 +1,203 @@
+{
+ "frames": [
+  {
+   "filename": "steel_storm_struck_w_00",
+   "frame": {
+    "x": 0,
+    "y": 0,
+    "w": 156,
+    "h": 182
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 156,
+    "h": 182
+   },
+   "sourceSize": {
+    "w": 156,
+    "h": 182
+   },
+   "duration": 80
+  },
+  {
+   "filename": "steel_storm_struck_w_01",
+   "frame": {
+    "x": 156,
+    "y": 0,
+    "w": 156,
+    "h": 182
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 156,
+    "h": 182
+   },
+   "sourceSize": {
+    "w": 156,
+    "h": 182
+   },
+   "duration": 80
+  },
+  {
+   "filename": "steel_storm_struck_w_02",
+   "frame": {
+    "x": 312,
+    "y": 0,
+    "w": 156,
+    "h": 182
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 156,
+    "h": 182
+   },
+   "sourceSize": {
+    "w": 156,
+    "h": 182
+   },
+   "duration": 80
+  },
+  {
+   "filename": "steel_storm_struck_w_03",
+   "frame": {
+    "x": 468,
+    "y": 0,
+    "w": 156,
+    "h": 182
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 156,
+    "h": 182
+   },
+   "sourceSize": {
+    "w": 156,
+    "h": 182
+   },
+   "duration": 80
+  },
+  {
+   "filename": "steel_storm_struck_w_04",
+   "frame": {
+    "x": 624,
+    "y": 0,
+    "w": 156,
+    "h": 182
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 156,
+    "h": 182
+   },
+   "sourceSize": {
+    "w": 156,
+    "h": 182
+   },
+   "duration": 80
+  },
+  {
+   "filename": "steel_storm_struck_w_05",
+   "frame": {
+    "x": 780,
+    "y": 0,
+    "w": 156,
+    "h": 182
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 156,
+    "h": 182
+   },
+   "sourceSize": {
+    "w": 156,
+    "h": 182
+   },
+   "duration": 80
+  },
+  {
+   "filename": "steel_storm_struck_w_06",
+   "frame": {
+    "x": 936,
+    "y": 0,
+    "w": 156,
+    "h": 182
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 156,
+    "h": 182
+   },
+   "sourceSize": {
+    "w": 156,
+    "h": 182
+   },
+   "duration": 80
+  },
+  {
+   "filename": "steel_storm_struck_w_07",
+   "frame": {
+    "x": 1092,
+    "y": 0,
+    "w": 156,
+    "h": 182
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 156,
+    "h": 182
+   },
+   "sourceSize": {
+    "w": 156,
+    "h": 182
+   },
+   "duration": 80
+  }
+ ],
+ "anchorX": 78.0,
+ "anchorY": 157.0,
+ "layer": "front",
+ "frameMs": 80,
+ "clip": "struck",
+ "startsAt": "a blow of yours landing on that fighter's dome",
+ "note": "8 frames replacing the hold: a white flash where the blow lands and a wave of light over the tiles; the hold loop carries on counting underneath",
+ "cues": [
+  {
+   "frame": 0,
+   "shake": [
+    2,
+    -1
+   ]
+  },
+  {
+   "frame": 1,
+   "shake": [
+    -2,
+    1
+   ]
+  }
+ ]
+}

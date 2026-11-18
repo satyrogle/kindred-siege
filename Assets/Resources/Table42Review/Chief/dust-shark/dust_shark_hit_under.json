@@ -1,0 +1,615 @@
+{
+ "frames": [
+  {
+   "filename": "dust_shark_hit_under_00",
+   "frame": {
+    "x": 0,
+    "y": 0,
+    "w": 158,
+    "h": 190
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 158,
+    "h": 190
+   },
+   "sourceSize": {
+    "w": 158,
+    "h": 190
+   },
+   "duration": 80
+  },
+  {
+   "filename": "dust_shark_hit_under_01",
+   "frame": {
+    "x": 158,
+    "y": 0,
+    "w": 158,
+    "h": 190
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 158,
+    "h": 190
+   },
+   "sourceSize": {
+    "w": 158,
+    "h": 190
+   },
+   "duration": 80
+  },
+  {
+   "filename": "dust_shark_hit_under_02",
+   "frame": {
+    "x": 316,
+    "y": 0,
+    "w": 158,
+    "h": 190
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 158,
+    "h": 190
+   },
+   "sourceSize": {
+    "w": 158,
+    "h": 190
+   },
+   "duration": 80
+  },
+  {
+   "filename": "dust_shark_hit_under_03",
+   "frame": {
+    "x": 474,
+    "y": 0,
+    "w": 158,
+    "h": 190
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 158,
+    "h": 190
+   },
+   "sourceSize": {
+    "w": 158,
+    "h": 190
+   },
+   "duration": 80
+  },
+  {
+   "filename": "dust_shark_hit_under_04",
+   "frame": {
+    "x": 632,
+    "y": 0,
+    "w": 158,
+    "h": 190
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 158,
+    "h": 190
+   },
+   "sourceSize": {
+    "w": 158,
+    "h": 190
+   },
+   "duration": 80
+  },
+  {
+   "filename": "dust_shark_hit_under_05",
+   "frame": {
+    "x": 790,
+    "y": 0,
+    "w": 158,
+    "h": 190
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 158,
+    "h": 190
+   },
+   "sourceSize": {
+    "w": 158,
+    "h": 190
+   },
+   "duration": 80
+  },
+  {
+   "filename": "dust_shark_hit_under_06",
+   "frame": {
+    "x": 948,
+    "y": 0,
+    "w": 158,
+    "h": 190
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 158,
+    "h": 190
+   },
+   "sourceSize": {
+    "w": 158,
+    "h": 190
+   },
+   "duration": 80
+  },
+  {
+   "filename": "dust_shark_hit_under_07",
+   "frame": {
+    "x": 1106,
+    "y": 0,
+    "w": 158,
+    "h": 190
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 158,
+    "h": 190
+   },
+   "sourceSize": {
+    "w": 158,
+    "h": 190
+   },
+   "duration": 80
+  },
+  {
+   "filename": "dust_shark_hit_under_08",
+   "frame": {
+    "x": 1264,
+    "y": 0,
+    "w": 158,
+    "h": 190
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 158,
+    "h": 190
+   },
+   "sourceSize": {
+    "w": 158,
+    "h": 190
+   },
+   "duration": 80
+  },
+  {
+   "filename": "dust_shark_hit_under_09",
+   "frame": {
+    "x": 1422,
+    "y": 0,
+    "w": 158,
+    "h": 190
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 158,
+    "h": 190
+   },
+   "sourceSize": {
+    "w": 158,
+    "h": 190
+   },
+   "duration": 80
+  },
+  {
+   "filename": "dust_shark_hit_under_10",
+   "frame": {
+    "x": 1580,
+    "y": 0,
+    "w": 158,
+    "h": 190
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 158,
+    "h": 190
+   },
+   "sourceSize": {
+    "w": 158,
+    "h": 190
+   },
+   "duration": 80
+  },
+  {
+   "filename": "dust_shark_hit_under_11",
+   "frame": {
+    "x": 1738,
+    "y": 0,
+    "w": 158,
+    "h": 190
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 158,
+    "h": 190
+   },
+   "sourceSize": {
+    "w": 158,
+    "h": 190
+   },
+   "duration": 80
+  },
+  {
+   "filename": "dust_shark_hit_under_12",
+   "frame": {
+    "x": 0,
+    "y": 190,
+    "w": 158,
+    "h": 190
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 158,
+    "h": 190
+   },
+   "sourceSize": {
+    "w": 158,
+    "h": 190
+   },
+   "duration": 80
+  },
+  {
+   "filename": "dust_shark_hit_under_13",
+   "frame": {
+    "x": 158,
+    "y": 190,
+    "w": 158,
+    "h": 190
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 158,
+    "h": 190
+   },
+   "sourceSize": {
+    "w": 158,
+    "h": 190
+   },
+   "duration": 80
+  },
+  {
+   "filename": "dust_shark_hit_under_14",
+   "frame": {
+    "x": 316,
+    "y": 190,
+    "w": 158,
+    "h": 190
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 158,
+    "h": 190
+   },
+   "sourceSize": {
+    "w": 158,
+    "h": 190
+   },
+   "duration": 80
+  },
+  {
+   "filename": "dust_shark_hit_under_15",
+   "frame": {
+    "x": 474,
+    "y": 190,
+    "w": 158,
+    "h": 190
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 158,
+    "h": 190
+   },
+   "sourceSize": {
+    "w": 158,
+    "h": 190
+   },
+   "duration": 80
+  },
+  {
+   "filename": "dust_shark_hit_under_16",
+   "frame": {
+    "x": 632,
+    "y": 190,
+    "w": 158,
+    "h": 190
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 158,
+    "h": 190
+   },
+   "sourceSize": {
+    "w": 158,
+    "h": 190
+   },
+   "duration": 80
+  },
+  {
+   "filename": "dust_shark_hit_under_17",
+   "frame": {
+    "x": 790,
+    "y": 190,
+    "w": 158,
+    "h": 190
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 158,
+    "h": 190
+   },
+   "sourceSize": {
+    "w": 158,
+    "h": 190
+   },
+   "duration": 80
+  },
+  {
+   "filename": "dust_shark_hit_under_18",
+   "frame": {
+    "x": 948,
+    "y": 190,
+    "w": 158,
+    "h": 190
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 158,
+    "h": 190
+   },
+   "sourceSize": {
+    "w": 158,
+    "h": 190
+   },
+   "duration": 80
+  },
+  {
+   "filename": "dust_shark_hit_under_19",
+   "frame": {
+    "x": 1106,
+    "y": 190,
+    "w": 158,
+    "h": 190
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 158,
+    "h": 190
+   },
+   "sourceSize": {
+    "w": 158,
+    "h": 190
+   },
+   "duration": 80
+  },
+  {
+   "filename": "dust_shark_hit_under_20",
+   "frame": {
+    "x": 1264,
+    "y": 190,
+    "w": 158,
+    "h": 190
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 158,
+    "h": 190
+   },
+   "sourceSize": {
+    "w": 158,
+    "h": 190
+   },
+   "duration": 80
+  },
+  {
+   "filename": "dust_shark_hit_under_21",
+   "frame": {
+    "x": 1422,
+    "y": 190,
+    "w": 158,
+    "h": 190
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 158,
+    "h": 190
+   },
+   "sourceSize": {
+    "w": 158,
+    "h": 190
+   },
+   "duration": 80
+  },
+  {
+   "filename": "dust_shark_hit_under_22",
+   "frame": {
+    "x": 1580,
+    "y": 190,
+    "w": 158,
+    "h": 190
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 158,
+    "h": 190
+   },
+   "sourceSize": {
+    "w": 158,
+    "h": 190
+   },
+   "duration": 80
+  },
+  {
+   "filename": "dust_shark_hit_under_23",
+   "frame": {
+    "x": 1738,
+    "y": 190,
+    "w": 158,
+    "h": 190
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 158,
+    "h": 190
+   },
+   "sourceSize": {
+    "w": 158,
+    "h": 190
+   },
+   "duration": 80
+  },
+  {
+   "filename": "dust_shark_hit_under_24",
+   "frame": {
+    "x": 0,
+    "y": 380,
+    "w": 158,
+    "h": 190
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 158,
+    "h": 190
+   },
+   "sourceSize": {
+    "w": 158,
+    "h": 190
+   },
+   "duration": 80
+  },
+  {
+   "filename": "dust_shark_hit_under_25",
+   "frame": {
+    "x": 158,
+    "y": 380,
+    "w": 158,
+    "h": 190
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 158,
+    "h": 190
+   },
+   "sourceSize": {
+    "w": 158,
+    "h": 190
+   },
+   "duration": 80
+  }
+ ],
+ "anchorX": 71.0,
+ "anchorY": 160.0,
+ "layer": "under",
+ "frameMs": 80,
+ "clip": "hit",
+ "startsAt": "the Release tick, 2 frames later for each target further down (see cues)",
+ "impactFrame": 9,
+ "cues": [
+  {
+   "frame": 9,
+   "victim": "white",
+   "victimDy": 3,
+   "shake": [
+    4,
+    -2
+   ]
+  },
+  {
+   "frame": 10,
+   "victim": "red",
+   "victimDy": 1,
+   "shake": [
+    -4,
+    2
+   ]
+  },
+  {
+   "frame": 11,
+   "shake": [
+    2,
+    -1
+   ]
+  },
+  {
+   "frame": 12,
+   "victim": "red"
+  }
+ ],
+ "note": "dark mark, its shadow growing as the shark falls, then sand blasting out of the mark as it dives in"
+}

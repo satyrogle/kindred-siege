@@ -1,0 +1,122 @@
+{
+ "frames": [
+  {
+   "filename": "steel_storm_cast_ring_00",
+   "frame": {
+    "x": 0,
+    "y": 0,
+    "w": 393,
+    "h": 144
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 393,
+    "h": 144
+   },
+   "sourceSize": {
+    "w": 393,
+    "h": 144
+   },
+   "duration": 80
+  },
+  {
+   "filename": "steel_storm_cast_ring_01",
+   "frame": {
+    "x": 393,
+    "y": 0,
+    "w": 393,
+    "h": 144
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 393,
+    "h": 144
+   },
+   "sourceSize": {
+    "w": 393,
+    "h": 144
+   },
+   "duration": 80
+  },
+  {
+   "filename": "steel_storm_cast_ring_02",
+   "frame": {
+    "x": 786,
+    "y": 0,
+    "w": 393,
+    "h": 144
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 393,
+    "h": 144
+   },
+   "sourceSize": {
+    "w": 393,
+    "h": 144
+   },
+   "duration": 80
+  },
+  {
+   "filename": "steel_storm_cast_ring_03",
+   "frame": {
+    "x": 1179,
+    "y": 0,
+    "w": 393,
+    "h": 144
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 393,
+    "h": 144
+   },
+   "sourceSize": {
+    "w": 393,
+    "h": 144
+   },
+   "duration": 80
+  },
+  {
+   "filename": "steel_storm_cast_ring_04",
+   "frame": {
+    "x": 1572,
+    "y": 0,
+    "w": 393,
+    "h": 144
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 393,
+    "h": 144
+   },
+   "sourceSize": {
+    "w": 393,
+    "h": 144
+   },
+   "duration": 80
+  }
+ ],
+ "anchorX": 196.0,
+ "anchorY": 70.0,
+ "layer": "under",
+ "frameMs": 80,
+ "clip": "cast",
+ "startsAt": "the Release tick",
+ "anchorIs": "each Warden's feet",
+ "note": "frame 0 empty; a ring of light runs out over the ground from each Warden for 4 frames"
+}

@@ -1,0 +1,188 @@
+{
+ "frames": [
+  {
+   "filename": "eclipse_sun_loop_over_00",
+   "frame": {
+    "x": 0,
+    "y": 0,
+    "w": 194,
+    "h": 193
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 194,
+    "h": 193
+   },
+   "sourceSize": {
+    "w": 194,
+    "h": 193
+   },
+   "duration": 80
+  },
+  {
+   "filename": "eclipse_sun_loop_over_01",
+   "frame": {
+    "x": 194,
+    "y": 0,
+    "w": 194,
+    "h": 193
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 194,
+    "h": 193
+   },
+   "sourceSize": {
+    "w": 194,
+    "h": 193
+   },
+   "duration": 80
+  },
+  {
+   "filename": "eclipse_sun_loop_over_02",
+   "frame": {
+    "x": 388,
+    "y": 0,
+    "w": 194,
+    "h": 193
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 194,
+    "h": 193
+   },
+   "sourceSize": {
+    "w": 194,
+    "h": 193
+   },
+   "duration": 80
+  },
+  {
+   "filename": "eclipse_sun_loop_over_03",
+   "frame": {
+    "x": 582,
+    "y": 0,
+    "w": 194,
+    "h": 193
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 194,
+    "h": 193
+   },
+   "sourceSize": {
+    "w": 194,
+    "h": 193
+   },
+   "duration": 80
+  },
+  {
+   "filename": "eclipse_sun_loop_over_04",
+   "frame": {
+    "x": 776,
+    "y": 0,
+    "w": 194,
+    "h": 193
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 194,
+    "h": 193
+   },
+   "sourceSize": {
+    "w": 194,
+    "h": 193
+   },
+   "duration": 80
+  },
+  {
+   "filename": "eclipse_sun_loop_over_05",
+   "frame": {
+    "x": 970,
+    "y": 0,
+    "w": 194,
+    "h": 193
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 194,
+    "h": 193
+   },
+   "sourceSize": {
+    "w": 194,
+    "h": 193
+   },
+   "duration": 80
+  },
+  {
+   "filename": "eclipse_sun_loop_over_06",
+   "frame": {
+    "x": 1164,
+    "y": 0,
+    "w": 194,
+    "h": 193
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 194,
+    "h": 193
+   },
+   "sourceSize": {
+    "w": 194,
+    "h": 193
+   },
+   "duration": 80
+  },
+  {
+   "filename": "eclipse_sun_loop_over_07",
+   "frame": {
+    "x": 1358,
+    "y": 0,
+    "w": 194,
+    "h": 193
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 194,
+    "h": 193
+   },
+   "sourceSize": {
+    "w": 194,
+    "h": 193
+   },
+   "duration": 80
+  }
+ ],
+ "anchorX": 95.0,
+ "anchorY": 97.0,
+ "layer": "over",
+ "frameMs": 80,
+ "clip": "loop",
+ "startsAt": "on the frames from Release + 2 until the last comet hits that have no other sun clip",
+ "anchorIs": "the black sun's centre",
+ "note": "an 8 frame loop: frame (framesSinceWindupStart - 8) mod 8"
+}

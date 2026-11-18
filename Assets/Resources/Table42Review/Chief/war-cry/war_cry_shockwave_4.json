@@ -1,0 +1,58 @@
+{
+ "frames": [
+  {
+   "filename": "war_cry_shockwave_4_00",
+   "frame": {
+    "x": 0,
+    "y": 0,
+    "w": 759,
+    "h": 604
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 759,
+    "h": 604
+   },
+   "sourceSize": {
+    "w": 759,
+    "h": 604
+   },
+   "duration": 80
+  },
+  {
+   "filename": "war_cry_shockwave_4_01",
+   "frame": {
+    "x": 759,
+    "y": 0,
+    "w": 759,
+    "h": 604
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 759,
+    "h": 604
+   },
+   "sourceSize": {
+    "w": 759,
+    "h": 604
+   },
+   "duration": 80
+  }
+ ],
+ "anchorX": 570.0,
+ "anchorY": 401.0,
+ "layer": "under",
+ "frameMs": 80,
+ "clip": "hit",
+ "startsAt": "the Release tick",
+ "note": "the shockwave rolls out over the floor from the captain's feet; frame 0 is empty",
+ "part": 4,
+ "parts": 4,
+ "firstFrame": 18
+}

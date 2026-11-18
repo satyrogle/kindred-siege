@@ -1,0 +1,34 @@
+{
+ "frames": [
+  {
+   "filename": "steel_storm_glass_under_m_00",
+   "frame": {
+    "x": 0,
+    "y": 0,
+    "w": 163,
+    "h": 59
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 163,
+    "h": 59
+   },
+   "sourceSize": {
+    "w": 163,
+    "h": 59
+   },
+   "duration": 80
+  }
+ ],
+ "anchorX": 81.0,
+ "anchorY": 27.0,
+ "layer": "under",
+ "frameMs": 80,
+ "clip": "glass",
+ "startsAt": "the frame after the dark frame",
+ "hold": "held from the rise's first frame until smash frame 9",
+ "note": "the dome's glass floor on the ground"
+}

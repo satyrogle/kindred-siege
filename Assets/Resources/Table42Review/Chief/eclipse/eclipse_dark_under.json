@@ -1,0 +1,34 @@
+{
+ "frames": [
+  {
+   "filename": "eclipse_dark_under_00",
+   "frame": {
+    "x": 0,
+    "y": 0,
+    "w": 129,
+    "h": 55
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 129,
+    "h": 55
+   },
+   "sourceSize": {
+    "w": 129,
+    "h": 55
+   },
+   "duration": 80
+  }
+ ],
+ "anchorX": 64.0,
+ "anchorY": 30.0,
+ "layer": "under",
+ "frameMs": 80,
+ "clip": "hit",
+ "startsAt": "the Release tick, every target",
+ "anchorIs": "each target's feet point",
+ "note": "the sigil flat dark for 1 frame"
+}

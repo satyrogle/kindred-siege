@@ -1,0 +1,54 @@
+{
+ "frames": [
+  {
+   "filename": "tide_caster_hit_front_00",
+   "frame": {
+    "x": 0,
+    "y": 0,
+    "w": 47,
+    "h": 47
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 47,
+    "h": 47
+   },
+   "sourceSize": {
+    "w": 47,
+    "h": 47
+   },
+   "duration": 80
+  },
+  {
+   "filename": "tide_caster_hit_front_01",
+   "frame": {
+    "x": 47,
+    "y": 0,
+    "w": 47,
+    "h": 47
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 47,
+    "h": 47
+   },
+   "sourceSize": {
+    "w": 47,
+    "h": 47
+   },
+   "duration": 80
+  }
+ ],
+ "anchorX": 44.0,
+ "anchorY": 190.0,
+ "layer": "front",
+ "frameMs": 80,
+ "clip": "hit",
+ "startsAt": "the Release tick"
+}

@@ -7,6 +7,9 @@ Shader "KindredSiege/UI/CombatHitFlash"
         _ParryGold ("Parry gold", Range(0,1)) = 0
         _ParryRim ("Parry rim", Range(0,1)) = 0
         _FlatWhite ("Flat white", Range(0,1)) = 0
+        _CounterRim ("Counter rim", Range(0,1)) = 0
+        _CounterWidth ("Counter outline width", Range(1,2)) = 1
+        _CounterColor ("Counter colour", Color) = (1,1,1,1)
         _BodyMask ("Resting body silhouette", 2D) = "white" {}
     }
     SubShader
@@ -27,6 +30,7 @@ Shader "KindredSiege/UI/CombatHitFlash"
             float4 _SpriteRect, _MaskRect, _MaskMap;
             float _HitWhite;
             float _ParryGold, _ParryRim, _FlatWhite;
+            float _CounterRim, _CounterWidth;fixed4 _CounterColor;
             float4 _MainTex_TexelSize;
             v2f vert(appdata v)
             {
@@ -51,6 +55,10 @@ Shader "KindredSiege/UI/CombatHitFlash"
                 c.rgb=lerp(c.rgb,fixed3(.941,.698,.196),_ParryGold*.55);
                 c.rgb=lerp(c.rgb,lerp(fixed3(.541,.329,.063),fixed3(1,.941,.690),local.y),edge*_ParryRim);
                 c.rgb=lerp(c.rgb,fixed3(1,1,1),_FlatWhite);
+                float2 cp=px*_CounterWidth;
+                float counterEdge=1-min(min(tex2D(_MainTex,i.uv+float2(cp.x,0)).a,tex2D(_MainTex,i.uv-float2(cp.x,0)).a),
+                    min(tex2D(_MainTex,i.uv+float2(0,cp.y)).a,tex2D(_MainTex,i.uv-float2(0,cp.y)).a));
+                c.rgb=lerp(c.rgb,_CounterColor.rgb,counterEdge*_CounterRim);
                 return c;
             }
             ENDCG

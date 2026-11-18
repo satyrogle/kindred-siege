@@ -1,0 +1,848 @@
+{
+ "frames": [
+  {
+   "filename": "eclipse_sun_tell_over_00",
+   "frame": {
+    "x": 0,
+    "y": 0,
+    "w": 217,
+    "h": 210
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 217,
+    "h": 210
+   },
+   "sourceSize": {
+    "w": 217,
+    "h": 210
+   },
+   "duration": 80
+  },
+  {
+   "filename": "eclipse_sun_tell_over_01",
+   "frame": {
+    "x": 217,
+    "y": 0,
+    "w": 217,
+    "h": 210
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 217,
+    "h": 210
+   },
+   "sourceSize": {
+    "w": 217,
+    "h": 210
+   },
+   "duration": 80
+  },
+  {
+   "filename": "eclipse_sun_tell_over_02",
+   "frame": {
+    "x": 434,
+    "y": 0,
+    "w": 217,
+    "h": 210
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 217,
+    "h": 210
+   },
+   "sourceSize": {
+    "w": 217,
+    "h": 210
+   },
+   "duration": 80
+  },
+  {
+   "filename": "eclipse_sun_tell_over_03",
+   "frame": {
+    "x": 651,
+    "y": 0,
+    "w": 217,
+    "h": 210
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 217,
+    "h": 210
+   },
+   "sourceSize": {
+    "w": 217,
+    "h": 210
+   },
+   "duration": 80
+  },
+  {
+   "filename": "eclipse_sun_tell_over_04",
+   "frame": {
+    "x": 868,
+    "y": 0,
+    "w": 217,
+    "h": 210
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 217,
+    "h": 210
+   },
+   "sourceSize": {
+    "w": 217,
+    "h": 210
+   },
+   "duration": 80
+  },
+  {
+   "filename": "eclipse_sun_tell_over_05",
+   "frame": {
+    "x": 1085,
+    "y": 0,
+    "w": 217,
+    "h": 210
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 217,
+    "h": 210
+   },
+   "sourceSize": {
+    "w": 217,
+    "h": 210
+   },
+   "duration": 80
+  },
+  {
+   "filename": "eclipse_sun_tell_over_06",
+   "frame": {
+    "x": 1302,
+    "y": 0,
+    "w": 217,
+    "h": 210
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 217,
+    "h": 210
+   },
+   "sourceSize": {
+    "w": 217,
+    "h": 210
+   },
+   "duration": 80
+  },
+  {
+   "filename": "eclipse_sun_tell_over_07",
+   "frame": {
+    "x": 1519,
+    "y": 0,
+    "w": 217,
+    "h": 210
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 217,
+    "h": 210
+   },
+   "sourceSize": {
+    "w": 217,
+    "h": 210
+   },
+   "duration": 80
+  },
+  {
+   "filename": "eclipse_sun_tell_over_08",
+   "frame": {
+    "x": 1736,
+    "y": 0,
+    "w": 217,
+    "h": 210
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 217,
+    "h": 210
+   },
+   "sourceSize": {
+    "w": 217,
+    "h": 210
+   },
+   "duration": 80
+  },
+  {
+   "filename": "eclipse_sun_tell_over_09",
+   "frame": {
+    "x": 0,
+    "y": 210,
+    "w": 217,
+    "h": 210
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 217,
+    "h": 210
+   },
+   "sourceSize": {
+    "w": 217,
+    "h": 210
+   },
+   "duration": 80
+  },
+  {
+   "filename": "eclipse_sun_tell_over_10",
+   "frame": {
+    "x": 217,
+    "y": 210,
+    "w": 217,
+    "h": 210
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 217,
+    "h": 210
+   },
+   "sourceSize": {
+    "w": 217,
+    "h": 210
+   },
+   "duration": 80
+  },
+  {
+   "filename": "eclipse_sun_tell_over_11",
+   "frame": {
+    "x": 434,
+    "y": 210,
+    "w": 217,
+    "h": 210
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 217,
+    "h": 210
+   },
+   "sourceSize": {
+    "w": 217,
+    "h": 210
+   },
+   "duration": 80
+  },
+  {
+   "filename": "eclipse_sun_tell_over_12",
+   "frame": {
+    "x": 651,
+    "y": 210,
+    "w": 217,
+    "h": 210
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 217,
+    "h": 210
+   },
+   "sourceSize": {
+    "w": 217,
+    "h": 210
+   },
+   "duration": 80
+  },
+  {
+   "filename": "eclipse_sun_tell_over_13",
+   "frame": {
+    "x": 868,
+    "y": 210,
+    "w": 217,
+    "h": 210
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 217,
+    "h": 210
+   },
+   "sourceSize": {
+    "w": 217,
+    "h": 210
+   },
+   "duration": 80
+  },
+  {
+   "filename": "eclipse_sun_tell_over_14",
+   "frame": {
+    "x": 1085,
+    "y": 210,
+    "w": 217,
+    "h": 210
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 217,
+    "h": 210
+   },
+   "sourceSize": {
+    "w": 217,
+    "h": 210
+   },
+   "duration": 80
+  },
+  {
+   "filename": "eclipse_sun_tell_over_15",
+   "frame": {
+    "x": 1302,
+    "y": 210,
+    "w": 217,
+    "h": 210
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 217,
+    "h": 210
+   },
+   "sourceSize": {
+    "w": 217,
+    "h": 210
+   },
+   "duration": 80
+  },
+  {
+   "filename": "eclipse_sun_tell_over_16",
+   "frame": {
+    "x": 1519,
+    "y": 210,
+    "w": 217,
+    "h": 210
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 217,
+    "h": 210
+   },
+   "sourceSize": {
+    "w": 217,
+    "h": 210
+   },
+   "duration": 80
+  },
+  {
+   "filename": "eclipse_sun_tell_over_17",
+   "frame": {
+    "x": 1736,
+    "y": 210,
+    "w": 217,
+    "h": 210
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 217,
+    "h": 210
+   },
+   "sourceSize": {
+    "w": 217,
+    "h": 210
+   },
+   "duration": 80
+  },
+  {
+   "filename": "eclipse_sun_tell_over_18",
+   "frame": {
+    "x": 0,
+    "y": 420,
+    "w": 217,
+    "h": 210
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 217,
+    "h": 210
+   },
+   "sourceSize": {
+    "w": 217,
+    "h": 210
+   },
+   "duration": 80
+  },
+  {
+   "filename": "eclipse_sun_tell_over_19",
+   "frame": {
+    "x": 217,
+    "y": 420,
+    "w": 217,
+    "h": 210
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 217,
+    "h": 210
+   },
+   "sourceSize": {
+    "w": 217,
+    "h": 210
+   },
+   "duration": 80
+  },
+  {
+   "filename": "eclipse_sun_tell_over_20",
+   "frame": {
+    "x": 434,
+    "y": 420,
+    "w": 217,
+    "h": 210
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 217,
+    "h": 210
+   },
+   "sourceSize": {
+    "w": 217,
+    "h": 210
+   },
+   "duration": 80
+  },
+  {
+   "filename": "eclipse_sun_tell_over_21",
+   "frame": {
+    "x": 651,
+    "y": 420,
+    "w": 217,
+    "h": 210
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 217,
+    "h": 210
+   },
+   "sourceSize": {
+    "w": 217,
+    "h": 210
+   },
+   "duration": 80
+  },
+  {
+   "filename": "eclipse_sun_tell_over_22",
+   "frame": {
+    "x": 868,
+    "y": 420,
+    "w": 217,
+    "h": 210
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 217,
+    "h": 210
+   },
+   "sourceSize": {
+    "w": 217,
+    "h": 210
+   },
+   "duration": 80
+  },
+  {
+   "filename": "eclipse_sun_tell_over_23",
+   "frame": {
+    "x": 1085,
+    "y": 420,
+    "w": 217,
+    "h": 210
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 217,
+    "h": 210
+   },
+   "sourceSize": {
+    "w": 217,
+    "h": 210
+   },
+   "duration": 80
+  },
+  {
+   "filename": "eclipse_sun_tell_over_24",
+   "frame": {
+    "x": 1302,
+    "y": 420,
+    "w": 217,
+    "h": 210
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 217,
+    "h": 210
+   },
+   "sourceSize": {
+    "w": 217,
+    "h": 210
+   },
+   "duration": 80
+  },
+  {
+   "filename": "eclipse_sun_tell_over_25",
+   "frame": {
+    "x": 1519,
+    "y": 420,
+    "w": 217,
+    "h": 210
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 217,
+    "h": 210
+   },
+   "sourceSize": {
+    "w": 217,
+    "h": 210
+   },
+   "duration": 80
+  },
+  {
+   "filename": "eclipse_sun_tell_over_26",
+   "frame": {
+    "x": 1736,
+    "y": 420,
+    "w": 217,
+    "h": 210
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 217,
+    "h": 210
+   },
+   "sourceSize": {
+    "w": 217,
+    "h": 210
+   },
+   "duration": 80
+  },
+  {
+   "filename": "eclipse_sun_tell_over_27",
+   "frame": {
+    "x": 0,
+    "y": 630,
+    "w": 217,
+    "h": 210
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 217,
+    "h": 210
+   },
+   "sourceSize": {
+    "w": 217,
+    "h": 210
+   },
+   "duration": 80
+  },
+  {
+   "filename": "eclipse_sun_tell_over_28",
+   "frame": {
+    "x": 217,
+    "y": 630,
+    "w": 217,
+    "h": 210
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 217,
+    "h": 210
+   },
+   "sourceSize": {
+    "w": 217,
+    "h": 210
+   },
+   "duration": 80
+  },
+  {
+   "filename": "eclipse_sun_tell_over_29",
+   "frame": {
+    "x": 434,
+    "y": 630,
+    "w": 217,
+    "h": 210
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 217,
+    "h": 210
+   },
+   "sourceSize": {
+    "w": 217,
+    "h": 210
+   },
+   "duration": 80
+  },
+  {
+   "filename": "eclipse_sun_tell_over_30",
+   "frame": {
+    "x": 651,
+    "y": 630,
+    "w": 217,
+    "h": 210
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 217,
+    "h": 210
+   },
+   "sourceSize": {
+    "w": 217,
+    "h": 210
+   },
+   "duration": 80
+  },
+  {
+   "filename": "eclipse_sun_tell_over_31",
+   "frame": {
+    "x": 868,
+    "y": 630,
+    "w": 217,
+    "h": 210
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 217,
+    "h": 210
+   },
+   "sourceSize": {
+    "w": 217,
+    "h": 210
+   },
+   "duration": 80
+  },
+  {
+   "filename": "eclipse_sun_tell_over_32",
+   "frame": {
+    "x": 1085,
+    "y": 630,
+    "w": 217,
+    "h": 210
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 217,
+    "h": 210
+   },
+   "sourceSize": {
+    "w": 217,
+    "h": 210
+   },
+   "duration": 80
+  },
+  {
+   "filename": "eclipse_sun_tell_over_33",
+   "frame": {
+    "x": 1302,
+    "y": 630,
+    "w": 217,
+    "h": 210
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 217,
+    "h": 210
+   },
+   "sourceSize": {
+    "w": 217,
+    "h": 210
+   },
+   "duration": 80
+  },
+  {
+   "filename": "eclipse_sun_tell_over_34",
+   "frame": {
+    "x": 1519,
+    "y": 630,
+    "w": 217,
+    "h": 210
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 217,
+    "h": 210
+   },
+   "sourceSize": {
+    "w": 217,
+    "h": 210
+   },
+   "duration": 80
+  },
+  {
+   "filename": "eclipse_sun_tell_over_35",
+   "frame": {
+    "x": 1736,
+    "y": 630,
+    "w": 217,
+    "h": 210
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 217,
+    "h": 210
+   },
+   "sourceSize": {
+    "w": 217,
+    "h": 210
+   },
+   "duration": 80
+  },
+  {
+   "filename": "eclipse_sun_tell_over_36",
+   "frame": {
+    "x": 0,
+    "y": 840,
+    "w": 217,
+    "h": 210
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 217,
+    "h": 210
+   },
+   "sourceSize": {
+    "w": 217,
+    "h": 210
+   },
+   "duration": 80
+  },
+  {
+   "filename": "eclipse_sun_tell_over_37",
+   "frame": {
+    "x": 217,
+    "y": 840,
+    "w": 217,
+    "h": 210
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 217,
+    "h": 210
+   },
+   "sourceSize": {
+    "w": 217,
+    "h": 210
+   },
+   "duration": 80
+  }
+ ],
+ "anchorX": 109.0,
+ "anchorY": 103.0,
+ "layer": "over",
+ "frameMs": 80,
+ "clip": "tell",
+ "startsAt": "the windup start, 38 frames before Release",
+ "anchorIs": "the black sun's centre",
+ "note": "the black sun snaps into the sky on tell frame 6 and its corona breathes; it blazes in the last second"
+}

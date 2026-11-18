@@ -1,0 +1,297 @@
+{
+ "frames": [
+  {
+   "filename": "war_cry_broken_over_00",
+   "frame": {
+    "x": 0,
+    "y": 0,
+    "w": 217,
+    "h": 264
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 217,
+    "h": 264
+   },
+   "sourceSize": {
+    "w": 217,
+    "h": 264
+   },
+   "duration": 80
+  },
+  {
+   "filename": "war_cry_broken_over_01",
+   "frame": {
+    "x": 217,
+    "y": 0,
+    "w": 217,
+    "h": 264
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 217,
+    "h": 264
+   },
+   "sourceSize": {
+    "w": 217,
+    "h": 264
+   },
+   "duration": 80
+  },
+  {
+   "filename": "war_cry_broken_over_02",
+   "frame": {
+    "x": 434,
+    "y": 0,
+    "w": 217,
+    "h": 264
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 217,
+    "h": 264
+   },
+   "sourceSize": {
+    "w": 217,
+    "h": 264
+   },
+   "duration": 80
+  },
+  {
+   "filename": "war_cry_broken_over_03",
+   "frame": {
+    "x": 651,
+    "y": 0,
+    "w": 217,
+    "h": 264
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 217,
+    "h": 264
+   },
+   "sourceSize": {
+    "w": 217,
+    "h": 264
+   },
+   "duration": 80
+  },
+  {
+   "filename": "war_cry_broken_over_04",
+   "frame": {
+    "x": 868,
+    "y": 0,
+    "w": 217,
+    "h": 264
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 217,
+    "h": 264
+   },
+   "sourceSize": {
+    "w": 217,
+    "h": 264
+   },
+   "duration": 80
+  },
+  {
+   "filename": "war_cry_broken_over_05",
+   "frame": {
+    "x": 1085,
+    "y": 0,
+    "w": 217,
+    "h": 264
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 217,
+    "h": 264
+   },
+   "sourceSize": {
+    "w": 217,
+    "h": 264
+   },
+   "duration": 80
+  },
+  {
+   "filename": "war_cry_broken_over_06",
+   "frame": {
+    "x": 1302,
+    "y": 0,
+    "w": 217,
+    "h": 264
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 217,
+    "h": 264
+   },
+   "sourceSize": {
+    "w": 217,
+    "h": 264
+   },
+   "duration": 80
+  },
+  {
+   "filename": "war_cry_broken_over_07",
+   "frame": {
+    "x": 1519,
+    "y": 0,
+    "w": 217,
+    "h": 264
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 217,
+    "h": 264
+   },
+   "sourceSize": {
+    "w": 217,
+    "h": 264
+   },
+   "duration": 80
+  },
+  {
+   "filename": "war_cry_broken_over_08",
+   "frame": {
+    "x": 1736,
+    "y": 0,
+    "w": 217,
+    "h": 264
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 217,
+    "h": 264
+   },
+   "sourceSize": {
+    "w": 217,
+    "h": 264
+   },
+   "duration": 80
+  },
+  {
+   "filename": "war_cry_broken_over_09",
+   "frame": {
+    "x": 0,
+    "y": 264,
+    "w": 217,
+    "h": 264
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 217,
+    "h": 264
+   },
+   "sourceSize": {
+    "w": 217,
+    "h": 264
+   },
+   "duration": 80
+  },
+  {
+   "filename": "war_cry_broken_over_10",
+   "frame": {
+    "x": 217,
+    "y": 264,
+    "w": 217,
+    "h": 264
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 217,
+    "h": 264
+   },
+   "sourceSize": {
+    "w": 217,
+    "h": 264
+   },
+   "duration": 80
+  },
+  {
+   "filename": "war_cry_broken_over_11",
+   "frame": {
+    "x": 434,
+    "y": 264,
+    "w": 217,
+    "h": 264
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 217,
+    "h": 264
+   },
+   "sourceSize": {
+    "w": 217,
+    "h": 264
+   },
+   "duration": 80
+  },
+  {
+   "filename": "war_cry_broken_over_12",
+   "frame": {
+    "x": 651,
+    "y": 264,
+    "w": 217,
+    "h": 264
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 217,
+    "h": 264
+   },
+   "sourceSize": {
+    "w": 217,
+    "h": 264
+   },
+   "duration": 80
+  }
+ ],
+ "anchorX": 125.0,
+ "anchorY": 317.0,
+ "layer": "over",
+ "frameMs": 80,
+ "clip": "broken",
+ "startsAt": "the Focus Fire hit that breaks the cry; stop the tell clips",
+ "note": "the hit spark on his chest, then the smoke hound bursting into specks; its first 3 frames still show the tell's hound as it was 24 frames in. The Focus Fire bolts flying in are the order's own art, not in this clip"
+}

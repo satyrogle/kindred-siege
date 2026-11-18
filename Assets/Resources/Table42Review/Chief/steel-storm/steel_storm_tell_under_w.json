@@ -1,0 +1,847 @@
+{
+ "frames": [
+  {
+   "filename": "steel_storm_tell_under_w_00",
+   "frame": {
+    "x": 0,
+    "y": 0,
+    "w": 125,
+    "h": 45
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 125,
+    "h": 45
+   },
+   "sourceSize": {
+    "w": 125,
+    "h": 45
+   },
+   "duration": 80
+  },
+  {
+   "filename": "steel_storm_tell_under_w_01",
+   "frame": {
+    "x": 125,
+    "y": 0,
+    "w": 125,
+    "h": 45
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 125,
+    "h": 45
+   },
+   "sourceSize": {
+    "w": 125,
+    "h": 45
+   },
+   "duration": 80
+  },
+  {
+   "filename": "steel_storm_tell_under_w_02",
+   "frame": {
+    "x": 250,
+    "y": 0,
+    "w": 125,
+    "h": 45
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 125,
+    "h": 45
+   },
+   "sourceSize": {
+    "w": 125,
+    "h": 45
+   },
+   "duration": 80
+  },
+  {
+   "filename": "steel_storm_tell_under_w_03",
+   "frame": {
+    "x": 375,
+    "y": 0,
+    "w": 125,
+    "h": 45
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 125,
+    "h": 45
+   },
+   "sourceSize": {
+    "w": 125,
+    "h": 45
+   },
+   "duration": 80
+  },
+  {
+   "filename": "steel_storm_tell_under_w_04",
+   "frame": {
+    "x": 500,
+    "y": 0,
+    "w": 125,
+    "h": 45
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 125,
+    "h": 45
+   },
+   "sourceSize": {
+    "w": 125,
+    "h": 45
+   },
+   "duration": 80
+  },
+  {
+   "filename": "steel_storm_tell_under_w_05",
+   "frame": {
+    "x": 625,
+    "y": 0,
+    "w": 125,
+    "h": 45
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 125,
+    "h": 45
+   },
+   "sourceSize": {
+    "w": 125,
+    "h": 45
+   },
+   "duration": 80
+  },
+  {
+   "filename": "steel_storm_tell_under_w_06",
+   "frame": {
+    "x": 750,
+    "y": 0,
+    "w": 125,
+    "h": 45
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 125,
+    "h": 45
+   },
+   "sourceSize": {
+    "w": 125,
+    "h": 45
+   },
+   "duration": 80
+  },
+  {
+   "filename": "steel_storm_tell_under_w_07",
+   "frame": {
+    "x": 875,
+    "y": 0,
+    "w": 125,
+    "h": 45
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 125,
+    "h": 45
+   },
+   "sourceSize": {
+    "w": 125,
+    "h": 45
+   },
+   "duration": 80
+  },
+  {
+   "filename": "steel_storm_tell_under_w_08",
+   "frame": {
+    "x": 1000,
+    "y": 0,
+    "w": 125,
+    "h": 45
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 125,
+    "h": 45
+   },
+   "sourceSize": {
+    "w": 125,
+    "h": 45
+   },
+   "duration": 80
+  },
+  {
+   "filename": "steel_storm_tell_under_w_09",
+   "frame": {
+    "x": 1125,
+    "y": 0,
+    "w": 125,
+    "h": 45
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 125,
+    "h": 45
+   },
+   "sourceSize": {
+    "w": 125,
+    "h": 45
+   },
+   "duration": 80
+  },
+  {
+   "filename": "steel_storm_tell_under_w_10",
+   "frame": {
+    "x": 1250,
+    "y": 0,
+    "w": 125,
+    "h": 45
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 125,
+    "h": 45
+   },
+   "sourceSize": {
+    "w": 125,
+    "h": 45
+   },
+   "duration": 80
+  },
+  {
+   "filename": "steel_storm_tell_under_w_11",
+   "frame": {
+    "x": 1375,
+    "y": 0,
+    "w": 125,
+    "h": 45
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 125,
+    "h": 45
+   },
+   "sourceSize": {
+    "w": 125,
+    "h": 45
+   },
+   "duration": 80
+  },
+  {
+   "filename": "steel_storm_tell_under_w_12",
+   "frame": {
+    "x": 1500,
+    "y": 0,
+    "w": 125,
+    "h": 45
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 125,
+    "h": 45
+   },
+   "sourceSize": {
+    "w": 125,
+    "h": 45
+   },
+   "duration": 80
+  },
+  {
+   "filename": "steel_storm_tell_under_w_13",
+   "frame": {
+    "x": 1625,
+    "y": 0,
+    "w": 125,
+    "h": 45
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 125,
+    "h": 45
+   },
+   "sourceSize": {
+    "w": 125,
+    "h": 45
+   },
+   "duration": 80
+  },
+  {
+   "filename": "steel_storm_tell_under_w_14",
+   "frame": {
+    "x": 1750,
+    "y": 0,
+    "w": 125,
+    "h": 45
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 125,
+    "h": 45
+   },
+   "sourceSize": {
+    "w": 125,
+    "h": 45
+   },
+   "duration": 80
+  },
+  {
+   "filename": "steel_storm_tell_under_w_15",
+   "frame": {
+    "x": 1875,
+    "y": 0,
+    "w": 125,
+    "h": 45
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 125,
+    "h": 45
+   },
+   "sourceSize": {
+    "w": 125,
+    "h": 45
+   },
+   "duration": 80
+  },
+  {
+   "filename": "steel_storm_tell_under_w_16",
+   "frame": {
+    "x": 0,
+    "y": 45,
+    "w": 125,
+    "h": 45
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 125,
+    "h": 45
+   },
+   "sourceSize": {
+    "w": 125,
+    "h": 45
+   },
+   "duration": 80
+  },
+  {
+   "filename": "steel_storm_tell_under_w_17",
+   "frame": {
+    "x": 125,
+    "y": 45,
+    "w": 125,
+    "h": 45
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 125,
+    "h": 45
+   },
+   "sourceSize": {
+    "w": 125,
+    "h": 45
+   },
+   "duration": 80
+  },
+  {
+   "filename": "steel_storm_tell_under_w_18",
+   "frame": {
+    "x": 250,
+    "y": 45,
+    "w": 125,
+    "h": 45
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 125,
+    "h": 45
+   },
+   "sourceSize": {
+    "w": 125,
+    "h": 45
+   },
+   "duration": 80
+  },
+  {
+   "filename": "steel_storm_tell_under_w_19",
+   "frame": {
+    "x": 375,
+    "y": 45,
+    "w": 125,
+    "h": 45
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 125,
+    "h": 45
+   },
+   "sourceSize": {
+    "w": 125,
+    "h": 45
+   },
+   "duration": 80
+  },
+  {
+   "filename": "steel_storm_tell_under_w_20",
+   "frame": {
+    "x": 500,
+    "y": 45,
+    "w": 125,
+    "h": 45
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 125,
+    "h": 45
+   },
+   "sourceSize": {
+    "w": 125,
+    "h": 45
+   },
+   "duration": 80
+  },
+  {
+   "filename": "steel_storm_tell_under_w_21",
+   "frame": {
+    "x": 625,
+    "y": 45,
+    "w": 125,
+    "h": 45
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 125,
+    "h": 45
+   },
+   "sourceSize": {
+    "w": 125,
+    "h": 45
+   },
+   "duration": 80
+  },
+  {
+   "filename": "steel_storm_tell_under_w_22",
+   "frame": {
+    "x": 750,
+    "y": 45,
+    "w": 125,
+    "h": 45
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 125,
+    "h": 45
+   },
+   "sourceSize": {
+    "w": 125,
+    "h": 45
+   },
+   "duration": 80
+  },
+  {
+   "filename": "steel_storm_tell_under_w_23",
+   "frame": {
+    "x": 875,
+    "y": 45,
+    "w": 125,
+    "h": 45
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 125,
+    "h": 45
+   },
+   "sourceSize": {
+    "w": 125,
+    "h": 45
+   },
+   "duration": 80
+  },
+  {
+   "filename": "steel_storm_tell_under_w_24",
+   "frame": {
+    "x": 1000,
+    "y": 45,
+    "w": 125,
+    "h": 45
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 125,
+    "h": 45
+   },
+   "sourceSize": {
+    "w": 125,
+    "h": 45
+   },
+   "duration": 80
+  },
+  {
+   "filename": "steel_storm_tell_under_w_25",
+   "frame": {
+    "x": 1125,
+    "y": 45,
+    "w": 125,
+    "h": 45
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 125,
+    "h": 45
+   },
+   "sourceSize": {
+    "w": 125,
+    "h": 45
+   },
+   "duration": 80
+  },
+  {
+   "filename": "steel_storm_tell_under_w_26",
+   "frame": {
+    "x": 1250,
+    "y": 45,
+    "w": 125,
+    "h": 45
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 125,
+    "h": 45
+   },
+   "sourceSize": {
+    "w": 125,
+    "h": 45
+   },
+   "duration": 80
+  },
+  {
+   "filename": "steel_storm_tell_under_w_27",
+   "frame": {
+    "x": 1375,
+    "y": 45,
+    "w": 125,
+    "h": 45
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 125,
+    "h": 45
+   },
+   "sourceSize": {
+    "w": 125,
+    "h": 45
+   },
+   "duration": 80
+  },
+  {
+   "filename": "steel_storm_tell_under_w_28",
+   "frame": {
+    "x": 1500,
+    "y": 45,
+    "w": 125,
+    "h": 45
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 125,
+    "h": 45
+   },
+   "sourceSize": {
+    "w": 125,
+    "h": 45
+   },
+   "duration": 80
+  },
+  {
+   "filename": "steel_storm_tell_under_w_29",
+   "frame": {
+    "x": 1625,
+    "y": 45,
+    "w": 125,
+    "h": 45
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 125,
+    "h": 45
+   },
+   "sourceSize": {
+    "w": 125,
+    "h": 45
+   },
+   "duration": 80
+  },
+  {
+   "filename": "steel_storm_tell_under_w_30",
+   "frame": {
+    "x": 1750,
+    "y": 45,
+    "w": 125,
+    "h": 45
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 125,
+    "h": 45
+   },
+   "sourceSize": {
+    "w": 125,
+    "h": 45
+   },
+   "duration": 80
+  },
+  {
+   "filename": "steel_storm_tell_under_w_31",
+   "frame": {
+    "x": 1875,
+    "y": 45,
+    "w": 125,
+    "h": 45
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 125,
+    "h": 45
+   },
+   "sourceSize": {
+    "w": 125,
+    "h": 45
+   },
+   "duration": 80
+  },
+  {
+   "filename": "steel_storm_tell_under_w_32",
+   "frame": {
+    "x": 0,
+    "y": 90,
+    "w": 125,
+    "h": 45
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 125,
+    "h": 45
+   },
+   "sourceSize": {
+    "w": 125,
+    "h": 45
+   },
+   "duration": 80
+  },
+  {
+   "filename": "steel_storm_tell_under_w_33",
+   "frame": {
+    "x": 125,
+    "y": 90,
+    "w": 125,
+    "h": 45
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 125,
+    "h": 45
+   },
+   "sourceSize": {
+    "w": 125,
+    "h": 45
+   },
+   "duration": 80
+  },
+  {
+   "filename": "steel_storm_tell_under_w_34",
+   "frame": {
+    "x": 250,
+    "y": 90,
+    "w": 125,
+    "h": 45
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 125,
+    "h": 45
+   },
+   "sourceSize": {
+    "w": 125,
+    "h": 45
+   },
+   "duration": 80
+  },
+  {
+   "filename": "steel_storm_tell_under_w_35",
+   "frame": {
+    "x": 375,
+    "y": 90,
+    "w": 125,
+    "h": 45
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 125,
+    "h": 45
+   },
+   "sourceSize": {
+    "w": 125,
+    "h": 45
+   },
+   "duration": 80
+  },
+  {
+   "filename": "steel_storm_tell_under_w_36",
+   "frame": {
+    "x": 500,
+    "y": 90,
+    "w": 125,
+    "h": 45
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 125,
+    "h": 45
+   },
+   "sourceSize": {
+    "w": 125,
+    "h": 45
+   },
+   "duration": 80
+  },
+  {
+   "filename": "steel_storm_tell_under_w_37",
+   "frame": {
+    "x": 625,
+    "y": 90,
+    "w": 125,
+    "h": 45
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 125,
+    "h": 45
+   },
+   "sourceSize": {
+    "w": 125,
+    "h": 45
+   },
+   "duration": 80
+  }
+ ],
+ "anchorX": 62.0,
+ "anchorY": 20.0,
+ "layer": "under",
+ "frameMs": 80,
+ "clip": "tell",
+ "startsAt": "the windup start, 38 frames before Release",
+ "note": "a ring of teal light under her fighter, flashing in the tell's last second"
+}

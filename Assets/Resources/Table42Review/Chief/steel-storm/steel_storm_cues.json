@@ -1,0 +1,29 @@
+{
+ "spell": "Steel Storm (the hex shield)",
+ "frameMs": 80,
+ "tellFrames": 38,
+ "targets": "every fighter on her side, each in its own dome",
+ "sizes": {
+  "w": "her ordinary fighters (Wardens and the rest)",
+  "m": "her leader, the tall one"
+ },
+ "delay": {
+  "rule": "the ring of light from the Wardens reaches each fighter: delay = ceil(distance to the nearest Warden / 70 px), distance measured with the vertical gap divided by 0.36 (the floor's squash)",
+  "inTheTake": {
+   "0": 0,
+   "1": 3,
+   "2": 6,
+   "3": 6,
+   "4": 4,
+   "5": 0
+  }
+ },
+ "order": "tell ring from the windup start; at Release + delay the dark ring (1 frame); then the glass floor and the rise (8 frames); then the hold loop until the smash; a fighter waiting for his delay holds the tell's last frame",
+ "cues": {
+  "release": "at Release + 1 the Wardens flash white and the screen shakes [3, -1]",
+  "tell": "the Wardens get a 2 px teal rim on even frames in the tell's last second (tell frames 26 to 37)",
+  "struck": "a blow on a dome: steel_storm_struck_w, shake [2, -1] then [-2, 1]",
+  "smash": "smash frames 1 to 3: the screen shakes [[6, -3], [-6, 3], [3, -1]] and everyone on her side is pushed back 3, 2, 1 px"
+ },
+ "layers": "the domes are drawn over each fighter (front), so a dome lower down covers the one above it, as in the take"
+}

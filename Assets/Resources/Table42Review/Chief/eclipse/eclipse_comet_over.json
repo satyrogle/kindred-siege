@@ -1,0 +1,144 @@
+{
+ "frames": [
+  {
+   "filename": "eclipse_comet_over_00",
+   "frame": {
+    "x": 0,
+    "y": 0,
+    "w": 197,
+    "h": 218
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 197,
+    "h": 218
+   },
+   "sourceSize": {
+    "w": 197,
+    "h": 218
+   },
+   "duration": 80
+  },
+  {
+   "filename": "eclipse_comet_over_01",
+   "frame": {
+    "x": 197,
+    "y": 0,
+    "w": 197,
+    "h": 218
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 197,
+    "h": 218
+   },
+   "sourceSize": {
+    "w": 197,
+    "h": 218
+   },
+   "duration": 80
+  },
+  {
+   "filename": "eclipse_comet_over_02",
+   "frame": {
+    "x": 394,
+    "y": 0,
+    "w": 197,
+    "h": 218
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 197,
+    "h": 218
+   },
+   "sourceSize": {
+    "w": 197,
+    "h": 218
+   },
+   "duration": 80
+  },
+  {
+   "filename": "eclipse_comet_over_03",
+   "frame": {
+    "x": 591,
+    "y": 0,
+    "w": 197,
+    "h": 218
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 197,
+    "h": 218
+   },
+   "sourceSize": {
+    "w": 197,
+    "h": 218
+   },
+   "duration": 80
+  },
+  {
+   "filename": "eclipse_comet_over_04",
+   "frame": {
+    "x": 788,
+    "y": 0,
+    "w": 197,
+    "h": 218
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 197,
+    "h": 218
+   },
+   "sourceSize": {
+    "w": 197,
+    "h": 218
+   },
+   "duration": 80
+  },
+  {
+   "filename": "eclipse_comet_over_05",
+   "frame": {
+    "x": 985,
+    "y": 0,
+    "w": 197,
+    "h": 218
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 197,
+    "h": 218
+   },
+   "sourceSize": {
+    "w": 197,
+    "h": 218
+   },
+   "duration": 80
+  }
+ ],
+ "anchorX": 61.0,
+ "anchorY": 145.0,
+ "layer": "over",
+ "frameMs": 80,
+ "clip": "comet",
+ "startsAt": "see eclipse_cues.json",
+ "anchorIs": "the middle of the comet's black orb",
+ "note": "one frame per slot your fighters can stand on, tilted to fly from the black sun to that slot (rotsprite); frames 0 and 2 are the two in the take"
+}

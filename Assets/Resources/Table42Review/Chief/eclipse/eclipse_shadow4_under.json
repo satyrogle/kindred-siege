@@ -1,0 +1,78 @@
+{
+ "frames": [
+  {
+   "filename": "eclipse_shadow4_under_00",
+   "frame": {
+    "x": 0,
+    "y": 0,
+    "w": 63,
+    "h": 27
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 63,
+    "h": 27
+   },
+   "sourceSize": {
+    "w": 63,
+    "h": 27
+   },
+   "duration": 80
+  },
+  {
+   "filename": "eclipse_shadow4_under_01",
+   "frame": {
+    "x": 63,
+    "y": 0,
+    "w": 63,
+    "h": 27
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 63,
+    "h": 27
+   },
+   "sourceSize": {
+    "w": 63,
+    "h": 27
+   },
+   "duration": 80
+  },
+  {
+   "filename": "eclipse_shadow4_under_02",
+   "frame": {
+    "x": 126,
+    "y": 0,
+    "w": 63,
+    "h": 27
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 63,
+    "h": 27
+   },
+   "sourceSize": {
+    "w": 63,
+    "h": 27
+   },
+   "duration": 80
+  }
+ ],
+ "anchorX": 31.0,
+ "anchorY": 15.0,
+ "layer": "under",
+ "frameMs": 80,
+ "clip": "fall",
+ "startsAt": "the frame his comet launches, for a 4 frame fall",
+ "anchorIs": "each target's feet point",
+ "note": "the comet's shadow growing under him, drawn over eclipse_wait_under"
+}
