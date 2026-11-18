@@ -277,7 +277,7 @@ namespace KindredSiege.Sim.Learning
 
         /// Buys a talent in the camp tree with talent points, kept between runs. At camp only, in its limb's order (tier 1, tier
         /// 2, one of the tier 3 pair, then the keystone), and from the campaign tier that opens it.
-        public bool TryBuyTalent(GluttonTalent talent, out string why)
+        public bool CanBuyTalent(GluttonTalent talent, out string why)
         {
             why = string.Empty;
             if (!GluttonRun) why = "The tree comes with campaign rules " + GluttonTreeRules + ".";
@@ -288,7 +288,12 @@ namespace KindredSiege.Sim.Learning
             else if (ReachedTier < GluttonRules.OpensAtTier(talent)) why = "Opens at campaign tier " + GluttonRules.OpensAtTier(talent) + ".";
             else if (TalentPoints < GluttonRules.Cost(talent))
                 why = "Needs " + GluttonRules.Cost(talent) + " points, you have " + TalentPoints + ".";
-            if (why.Length > 0) return false;
+            return why.Length == 0;
+        }
+
+        public bool TryBuyTalent(GluttonTalent talent, out string why)
+        {
+            if (!CanBuyTalent(talent, out why)) return false;
             _owned.Add(talent);
             return true;
         }

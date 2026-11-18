@@ -57,10 +57,20 @@ namespace KindredSiege.Sim.Battle
         private readonly int[] _percent = new int[(int)HitLayer.Armor + 1];
 
         /// A hit worth this many points before its layers.
-        public Hit(int points)
+        public Hit(int points, bool isPayoff = false)
         {
             Base = points * Unit;
+            IsPayoff = isPayoff;
         }
+
+        /// Payoff identity does not depend on already having a numerical Combo/Cash bonus.
+        public bool IsPayoff { get; private set; }
+        /// This amount already includes the originating fighter's rank. Release effects may add their own modifiers.
+        public bool IsRecordedDamage { get; private set; }
+        public static Hit Recorded(int points) => new Hit(points) { IsRecordedDamage = true };
+        /// Frozen Flurry has resolved the contributing hit's layers. Only thaw bonuses and live shields remain.
+        public bool IsDeferredDamage { get; private set; }
+        public static Hit Deferred(int points) => new Hit(points, isPayoff: true) { IsRecordedDamage = true, IsDeferredDamage = true };
 
         /// A hit worth this percent of a number (a share of health, a percent of power), exactly, nothing rounded off.
         public static Hit Percent(long of, int percent)
@@ -93,7 +103,7 @@ namespace KindredSiege.Sim.Battle
         /// The same hit, for another target.
         public Hit Copy()
         {
-            var copy = new Hit(0) { Base = Base };
+            var copy = new Hit(0) { Base = Base, IsPayoff = IsPayoff, IsRecordedDamage = IsRecordedDamage, IsDeferredDamage = IsDeferredDamage };
             Array.Copy(_percent, copy._percent, _percent.Length);
             return copy;
         }

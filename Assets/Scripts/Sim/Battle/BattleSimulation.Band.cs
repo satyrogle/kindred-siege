@@ -204,8 +204,9 @@ namespace KindredSiege.Sim.Battle
         {
             SideState state = _sides[side];
             if (!HasBand(side, BandTrait.Mender) || _tick < state.MendNext) return;
-            state.MendNext = _tick + BandRules.MendEveryTicks;
             BattleUnit leader = Leader(side);
+            if (_fight.FreezeContracts && ControlBlocked(leader)) return;
+            state.MendNext = _tick + BandRules.MendEveryTicks;
             if (leader == null) return;
             BattleUnit patient = MostHurtAlly(leader, 1000, true);
             if (patient != null) Heal(leader, patient, Math.Max(1, patient.MaxHp * BandRules.MendPercent / 100), BandRules.MendDetail);

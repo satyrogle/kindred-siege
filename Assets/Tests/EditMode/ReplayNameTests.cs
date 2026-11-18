@@ -86,7 +86,7 @@ namespace KindredSiege.Sim.Tests
             PlayOne(c, 1262, 0, out string fightId);
             string now = CampaignSave.Write(c);
             Assert.IsTrue(now.Contains("\nnames\t"));
-            string old = string.Join("\n", now.Split('\n').Where(l => !l.StartsWith("names\t") && !l.StartsWith("clearroad\t") && !l.StartsWith("palroad\t") && !l.StartsWith("favouroffer\t")))
+            string old = string.Join("\n", now.Split('\n').Where(l => !l.StartsWith("names\t") && !l.StartsWith("clearroad\t") && !l.StartsWith("palroad\t") && !l.StartsWith("beastroll\t") && !l.StartsWith("favouroffer\t")))
                 .Replace(CampaignSave.Header + "\t" + CampaignSave.Version, CampaignSave.Header + "\t6");
             Campaign read = CampaignSave.Read(old);
             Assert.IsEmpty(read.LoadNote);

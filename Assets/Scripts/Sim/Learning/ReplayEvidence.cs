@@ -76,7 +76,19 @@ namespace KindredSiege.Sim.Learning
         // (fighter id and vow) after format 37's; older evidence reads them as off and none.
         // Format 39 (2 Nov 2026, the duos that change a move, campaign rules 34) adds that switch and each side's streak after
         // format 38's; older evidence reads them as off and none.
-        private const int FormatVersion = 39;
+        // Format42 adds rules37 FreezeContracts. Older setups keep their original format and identity.
+        // Format 43 (4 Nov 2026, The Pit, campaign rules 38) adds that switch after format 42's; older evidence reads it as off.
+        // Format 44 (6 Nov 2026, one blow on stage at a time, campaign rules 40) adds that switch after format 43's; older
+        // evidence reads it as off.
+        // Format 45 (7 Nov 2026, the attack table, campaign rules 42) adds that switch after format 44's; older evidence reads
+        // it as off.
+        // Format 46 (8 Nov 2026, the leaders and the champion's fight, campaign rules 43) adds those two switches after format
+        // 45's; older evidence reads them as off.
+        // Format 47 (9 Nov 2026, the grid, campaign rules 44) adds that switch after format 46's; older evidence reads it as
+        // off.
+        // Format 49 (16 Nov 2026, the Glutton's tree retargeted, campaign rules 46) adds that switch after format 48's; older
+        // evidence reads it as off.
+        private const int FormatVersion = 49;
 
         // The longest move name a learned wait out or feint can sit on, read back.
         private const int MaxMoveName = 64;
@@ -119,6 +131,16 @@ namespace KindredSiege.Sim.Learning
         // piece, else 9.
         private static int FormatUsed(BattleSetup setup)
         {
+            if (setup.Fight.TreeRetarget) return 49;
+            if (setup.Fight.LockedPairs) return 48;
+            if (setup.Fight.Grid) return 47;
+            if (setup.Fight.Leaders) return 46;
+            if (setup.Fight.Table) return 45;
+            if (setup.Fight.Stage) return 44;
+            if (setup.Fight.Pit) return 43;
+            if (setup.Fight.FreezeContracts) return 42;
+            if (setup.Fight.Contracts) return 41;
+            if (setup.Fight.Corrections) return 40;
             if (setup.Fight.DuoMoves) return 39;
             if (setup.Fight.Vows || setup.Fight.MarksOnHits) return 38;
             if (setup.Fight.Flavours) return 37;
@@ -513,6 +535,21 @@ namespace KindredSiege.Sim.Learning
             // Format 39: the duos that change a move (rules 34): the switch, then each side's streak.
             w.Write(fight.DuoMoves);
             for (int side = 0; side < 2; side++) w.Write(s.Rules(side).Pals.DuoLevel);
+            if (format >= 40) w.Write(fight.Corrections);
+            if (format >= 41) w.Write(fight.Contracts);
+            if (format >= 42) w.Write(fight.FreezeContracts);
+            if (format >= 43) w.Write(fight.Pit);
+            if (format >= 44) w.Write(fight.Stage);
+            if (format >= 45) w.Write(fight.Table);
+            if (format < 46) return;
+            // Format 46: the leaders and the champion's fight (rules 43).
+            w.Write(fight.Leaders);
+            w.Write(fight.ChampionFight);
+            // Format 47: the grid (rules 44).
+            if (format >= 47) w.Write(fight.Grid);
+            if (format >= 48) w.Write(fight.LockedPairs);
+            // Format 49: the Glutton's tree retargeted (rules 46).
+            if (format >= 49) w.Write(fight.TreeRetarget);
         }
 
         private static BattleSetup ReadSetup(BinaryReader r, int version)
@@ -777,6 +814,22 @@ namespace KindredSiege.Sim.Learning
                         rules[side] = rules[side].WithPals(rules[side].Pals.WithDuoLevel(Range(r.ReadInt32(), 0, DuoRules.MaxLevel)));
                     if (duoMoves) fight = fight.WithDuoMoves();
                 }
+                if (version >= 40 && r.ReadBoolean()) fight = fight.WithCorrections();
+                if (version >= 41 && r.ReadBoolean()) fight = fight.WithContracts();
+                if (version >= 42 && r.ReadBoolean()) fight = fight.WithFreezeContracts();
+                if (version >= 43 && r.ReadBoolean()) fight = fight.WithPit();
+                if (version >= 44 && r.ReadBoolean()) fight = fight.WithStage();
+                if (version >= 45 && r.ReadBoolean()) fight = fight.WithTable();
+                if (version >= 46)
+                {
+                    bool leaders = r.ReadBoolean();
+                    bool championFight = r.ReadBoolean();
+                    if (leaders) fight = fight.WithLeaders();
+                    if (championFight) fight = fight.WithChampionFight();
+                }
+                if (version >= 47 && r.ReadBoolean()) fight = fight.WithGrid();
+                if (version >= 48 && r.ReadBoolean()) fight = fight.WithLockedPairs();
+                if (version >= 49 && r.ReadBoolean()) fight = fight.WithTreeRetarget();
                 // A beast's side is exactly its parts, or the fight cannot be played back (the audit, 22 Oct 2026); from rules 27 the
                 // shark's sand pups come after them.
                 for (int side = 0; side < 2 && beasts; side++)

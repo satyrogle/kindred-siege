@@ -18,57 +18,69 @@ namespace KindredSiege.Sim.Battle
             if (_finished || !victim.Alive || hit.Base <= 0) return;
             if (LeaderProtected(victim)) return;
             if (_halted) return;
-            if (_comboOn && (victim.EvacTicks > 0 || FlurryKeeps(victim, sourceSide, hit.Points, detail))) return;
+            if (_comboOn && (victim.EvacTicks > 0 || (!_fight.FreezeContracts && FlurryKeeps(victim, sourceSide, hit.Points, detail)))) return;
+            bool deferred = _fight.FreezeContracts && hit.IsDeferredDamage;
+            bool storing = _fight.FreezeContracts && _comboOn && FlurryCaptures(victim, sourceSide, detail);
 
             bool foe = sourceSide == 1 - victim.Side;
             // From rules 22 held parry bars make your payoffs stronger (BattleSimulation.Meter.cs).
-            if (foe) MeterBoost(sourceSide, hit);
-            // From rules 26 a side that whiffed a parry takes more for a second (BattleSimulation.Tight.cs).
-            if (_tightOn) WhiffHit(victim, foe, hit);
-            // From rules 29 Dark Matter Plating and Deep Node (BattleSimulation.Glutton.cs).
-            if (foe && _gluttonOn) GluttonHit(sourceSide, victim, hit, detail);
-            // From rules 31 the sized picks (BattleSimulation.Sized.cs): her trick at its route's form, a ranked fighter's hit.
-            if (foe && _sizedOn)
+            // A frozen contribution waits to receive the thaw's one parry multiplier.
+            if (foe && !storing) MeterBoost(sourceSide, hit);
+            if (!deferred)
             {
-                int form = ShadeRules.IsTrickDetail(detail) ? ShadeSized(sourceSide, RouteOfTrick(detail)) : 0;
-                if (form > 0) hit.Add(HitLayer.Pal, form);
-                int rank = source != null && source.Side == sourceSide ? RankSized(source) : 0;
-                if (rank > 0) hit.Add(HitLayer.Pal, rank);
-            }
-            // From rules 32 a combo's hit grows with its flavour (BattleSimulation.Flavours.cs).
-            if (foe && _flavoursOn)
-            {
-                int flavour = FlavourHitPercent(source, detail);
-                if (flavour > 0) hit.Add(HitLayer.Pal, flavour);
-            }
-            // From rules 34 Endless Unleash's stacks, and Executioner's catch on the star (BattleSimulation.DuoMoves.cs).
-            if (foe && _duoMovesOn)
-            {
-                int endless = EndlessPercent(sourceSide);
-                if (endless > 0) hit.Add(HitLayer.Pal, endless);
-                int taken = ExecutionerTaken(victim);
-                if (taken > 0) hit.Add(HitLayer.Guard, taken);
-            }
-            // From rules 30 Gorged Tricks on one of her tricks (BattleSimulation.Duos.cs).
-            if (foe && _duosOn && ShadeRules.IsTrickDetail(detail))
-            {
-                int gorged = GorgedTrickPercent(sourceSide);
-                if (gorged > 0) hit.Add(HitLayer.Kit, gorged);
-            }
-            if (_spellsOn && _sides[victim.Side].WallTicks > 0 && foe) hit.Add(HitLayer.Guard, WallPercentOf(victim.Side) - 100);
-            // Breach's price (rules 28): a side that breaches takes more while it is exposed (BattleSimulation.Shade.cs).
-            if (_shadeOn && foe && _sides[victim.Side].ExposedTicks > 0) hit.Add(HitLayer.Guard, ShadeRules.ExposedPercent * PriceLeft(victim.Side) / 100);
-            else if (_kitsTwoOn && foe && LockdownHolds(victim.Side)) hit.Add(HitLayer.Guard, ChiefSpells.WallDamagePercent - 100);
-            if (_beastOn && victim.Side == _beastSide && foe && !CageHit(victim, sourceSide, hit)) return;
-            if (victim.Role == UnitRole.Chief && WornOutTicksLeft(victim.Side) > 0) hit.Add(HitLayer.Kit, Moves.WornOutDamagePercent - 100);
-            if (_huntOn && Turned(victim) && foe) hit.Add(HitLayer.Kit, ChiefKits.TurnedPercent - 100);
-            int guard = SpecOf(victim).BigHitArmorPercent;
-            if (guard > 0 && detail == Moves.EclipseDetail) hit.Add(HitLayer.Armor, -guard);
+                // From rules 26 a side that whiffed a parry takes more for a second (BattleSimulation.Tight.cs).
+                if (_tightOn) WhiffHit(victim, foe, hit);
+                // From rules 29 Dark Matter Plating and Deep Node (BattleSimulation.Glutton.cs).
+                if (foe && _gluttonOn) GluttonHit(sourceSide, victim, hit, detail);
+                // From rules 31 the sized picks (BattleSimulation.Sized.cs): her trick at its route's form, a ranked fighter's hit.
+                if (foe && _sizedOn)
+                {
+                    int form = ShadeRules.IsTrickDetail(detail) ? ShadeSized(sourceSide, RouteOfTrick(detail)) : 0;
+                    if (form > 0) hit.Add(HitLayer.Pal, form);
+                    int rank = source != null && source.Side == sourceSide && !(_fight.Contracts && hit.IsRecordedDamage) ? RankSized(source) : 0;
+                    if (rank > 0) hit.Add(HitLayer.Pal, rank);
+                }
+                // From rules 32 a combo's hit grows with its flavour (BattleSimulation.Flavours.cs).
+                if (foe && _flavoursOn)
+                {
+                    int flavour = FlavourHitPercent(source, detail);
+                    if (flavour > 0) hit.Add(HitLayer.Pal, flavour);
+                }
+                // From rules 34 Endless Unleash's stacks, and Executioner's catch on the star (BattleSimulation.DuoMoves.cs).
+                if (foe && _duoMovesOn)
+                {
+                    int endless = EndlessPercent(sourceSide);
+                    if (endless > 0) hit.Add(HitLayer.Pal, endless);
+                    int taken = ExecutionerTaken(victim);
+                    if (taken > 0) hit.Add(HitLayer.Guard, taken);
+                }
+                // From rules 30 Gorged Tricks on one of her tricks (BattleSimulation.Duos.cs).
+                if (foe && _duosOn && ShadeRules.IsTrickDetail(detail))
+                {
+                    int gorged = GorgedTrickPercent(sourceSide);
+                    if (gorged > 0) hit.Add(HitLayer.Kit, gorged);
+                }
+                if (_spellsOn && _sides[victim.Side].WallTicks > 0 && foe) hit.Add(HitLayer.Guard, WallPercentOf(victim.Side) - 100);
+                // Breach's price (rules 28): a side that breaches takes more while it is exposed (BattleSimulation.Shade.cs).
+                if (_shadeOn && foe && _sides[victim.Side].ExposedTicks > 0) hit.Add(HitLayer.Guard, ShadeRules.ExposedPercent * PriceLeft(victim.Side) / 100);
+                if (_kitsTwoOn && foe && LockdownHolds(victim.Side) && (_fight.Corrections ? !(_spellsOn && _sides[victim.Side].WallTicks > 0) : !(_shadeOn && _sides[victim.Side].ExposedTicks > 0))) hit.Add(HitLayer.Guard, ChiefSpells.WallDamagePercent - 100);
+                if (_beastOn && victim.Side == _beastSide && foe && !CageHit(victim, sourceSide, hit)) return;
+                if (victim.Role == UnitRole.Chief && WornOutTicksLeft(victim.Side) > 0) hit.Add(HitLayer.Kit, Moves.WornOutDamagePercent - 100);
+                if (_huntOn && Turned(victim) && foe) hit.Add(HitLayer.Kit, ChiefKits.TurnedPercent - 100);
+                int guard = SpecOf(victim).BigHitArmorPercent;
+                if (guard > 0 && detail == Moves.EclipseDetail) hit.Add(HitLayer.Armor, -guard);
 
+            }
+            else if (foe && _flavoursOn)
+            {
+                // The freezer owns the thaw's flavour bonus, never a second rank/target calculation.
+                hit.Add(HitLayer.Pal, FlavourHitPercent(source, detail));
+            }
             long left = victim.HitLeftover;
             int amount = hit.Resolve(ref left);
             victim.HitLeftover = left;
             if (leaveOne) amount = Math.Min(amount, victim.Hp - 1);
+            if (storing && FlurryKeeps(victim, sourceSide, amount, detail)) return;
             // A shield soaks what it can first (rules 23, BattleSimulation.Shade.cs).
             int unshielded = amount;
             amount = Shielded(victim, amount);
@@ -92,6 +104,8 @@ namespace KindredSiege.Sim.Battle
                 RiteTreated(healer, patient);
                 if (Stopped) return;
             }
+            // From rules 40 a heal given on a turn is bigger, the turns fewer (BattleSimulation.Stage.cs).
+            if (_stageOn) StageBlow(heal);
             // From rules 29 Matter Printer and Recompile (BattleSimulation.Glutton.cs).
             if (_gluttonOn) GluttonHeal(healer, patient, heal);
             // From rules 33 a Martyr heals more the less health she has (BattleSimulation.Vows.cs).
@@ -118,6 +132,8 @@ namespace KindredSiege.Sim.Battle
         {
             Hit hit = Hit.Percent(power, roll);
             if (hit.Base < Hit.Unit) hit = new Hit(1);
+            // From rules 40 a turn's auto attack is bigger, its turns fewer (BattleSimulation.Stage.cs).
+            if (_stageOn && kind == BlowKind.Auto) StageBlow(hit);
             SideState mine = _sides[attacker.Side];
             SideState theirs = _sides[target.Side];
             if (mine.UnleashTicks > 0) hit.Add(HitLayer.Orders, UnleashPercent(attacker.Side) - 100);

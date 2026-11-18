@@ -250,7 +250,7 @@ namespace KindredSiege.Sim.Battle
             {
                 BattleUnit u = _units[i];
                 if (u.Alive && u.Side == side && u.Role == UnitRole.Fighter && u.Class == UnitClass.Trapper && u.SnareTicks <= 0 &&
-                    u.PanicTicks <= 0 && u.StunTicks <= 0)
+                    u.PanicTicks <= 0 && u.StunTicks <= 0 && !(_fight.FreezeContracts && ControlBlocked(u)))
                     return u;
             }
             return null;
@@ -279,6 +279,7 @@ namespace KindredSiege.Sim.Battle
                 Answered(enemy, ChiefAnswer.Break, chief, FightRules.InterruptPoints, FightRules.InterruptReason);
                 return;
             }
+            if (_fight.FreezeContracts && ControlBlocked(engineer)) return;
             if (--state.CrankTicks > 0) return;
             // Under the parry at the center the slam is its beat (BattleSimulation.Parry.cs): parried, the gate jams. It hits
             // nobody of yours, so a stale Hold costs nothing here.

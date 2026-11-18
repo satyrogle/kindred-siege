@@ -132,7 +132,8 @@ namespace KindredSiege.Sim.Tests
                 int before = c.Materials;
                 // A favour fight drops a Pal's favour instead of gear (18 Oct 2026), so this takes a gear fight, one with no
                 // bonus goal so its drop is its kind's. From rules 19 every road fight drops gear beside its Pal's picks (fix 5).
-                int gear = c.Offers.ToList().FindIndex(o => o.Node != null && (o.Node.Pal == Pal.None || c.PalRoadRun) && o.Objective == FightObjective.None);
+                int gear = c.Offers.ToList().FindIndex(o => o.Node != null && (o.Node.Pal == Pal.None || c.PalRoadRun) && o.Objective == FightObjective.None &&
+                    o.Kind != EncounterKind.Beast);
                 if (gear < 0) continue;
                 EncounterResult r = CampaignPilot.PlayFight(c, c.StartEncounter(gear), new CampaignPilot(PilotStyle.Reference, seed));
                 if (!r.Won) continue;

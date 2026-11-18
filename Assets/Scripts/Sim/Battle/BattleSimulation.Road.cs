@@ -174,6 +174,8 @@ namespace KindredSiege.Sim.Battle
             Emit(EventFor(BattleEventKind.Snap, u, null, 0, RoadRules.Fled));
             Earn(1 - u.Side, FightRules.PanicPoints, FightRules.PanicReason);
             CheckWipe();
+            // From rules 43 their leader leaves when his last fighter flees too (BattleSimulation.Leaders.cs).
+            if (LeadersOn) FighterGone(u);
         }
 
         // A frenzy that has run its time ends in collapse: he falls, as dead for this fight.

@@ -239,6 +239,34 @@ namespace KindredSiege.Sim.Learning
         public string Text => BeastKits.ScarText(Class);
     }
 
+    /// Beasts as rolls (Jacob, 2 Nov 2026: "integrate beasts as rolls they appear in 1 in 5 run pure randomness every time it
+    /// comes back after defeat it will be even more powerful tier 1 to tier 50"; DESIGN_LOCKS "Beasts as rolls, tier 1 to 50";
+    /// built on his "go", 4 Nov, as campaign rules 39). Every number here is Claude's starting value, his to change.
+    public static class BeastTierRules
+    {
+        /// A run rolls a beast 1 time in this many.
+        public const int OneIn = 5;
+
+        /// The tiers a beast climbs, starting at 1.
+        public const int Max = 50;
+
+        /// Each tier above 1 adds this percent to its parts' health and to the power its moves hit by: tier 50 has 492 percent of
+        /// tier 1's health and 345 percent of its power.
+        public const int HealthPercentEach = 8;
+        public const int PowerPercentEach = 5;
+
+        /// Each tier above 1 adds this percent to the materials a win sends home, and every TrophiesEvery tiers each part broken
+        /// sends one more trophy: tier 1 to 9 one each, 10 to 19 two, up to six at tier 50.
+        public const int MaterialsPercentEach = 10;
+        public const int TrophiesEvery = 10;
+
+        public static int Clamp(int tier) => Math.Min(Max, Math.Max(1, tier));
+        public static int HealthPercent(int tier) => 100 + HealthPercentEach * (Clamp(tier) - 1);
+        public static int PowerPercent(int tier) => 100 + PowerPercentEach * (Clamp(tier) - 1);
+        public static int MaterialsPercent(int tier) => 100 + MaterialsPercentEach * (Clamp(tier) - 1);
+        public static int Trophies(int tier) => 1 + Clamp(tier) / TrophiesEvery;
+    }
+
     /// The beasts beside the roads (Jacob, 20 Oct 2026, DESIGN_LOCKS "Beasts" and points 2 and 7; his six calls and "go, build
     /// the shark API with your six calls", 21 Oct 2026; its phases on 22 Oct; "go, build the Cage Bear as planned", 22 Oct). The
     /// Broken Wastes' sand shark waits beside each run's first road, and Skullpeak's cage bear beside Skullpeak's road when a
@@ -277,6 +305,8 @@ namespace KindredSiege.Sim.Learning
         {
             get
             {
+                // A run that rolls for its beast (rules 39) has none beside its roads: its beast, if any, stands on a node.
+                if (BeastRollRun) return BeastKit.None;
                 if (Stage != CampaignStage.InRun || Target == null || Target == AlphaHunt.Tribe) return BeastKit.None;
                 if (Target.Id == CampaignTribes.SkullpeakId) return BeastKit.CageBear;
                 return Target.Tier == LowestTier() ? BeastKit.SandShark : BeastKit.None;
@@ -333,6 +363,8 @@ namespace KindredSiege.Sim.Learning
             else if (_active != null) why = "A fight is already running.";
             else if (kit != BeastKit.None && _beastsBeaten.Contains(kit))
                 why = "You beat the " + BeastKits.Name(kit).ToLowerInvariant() + " this run.";
+            else if (!BeastWaits && BeastRollRun)
+                why = "No beast waits beside the road. When a run rolls one, it stands on a fight node of the first road.";
             else if (!BeastWaits)
                 why = "No beast waits here. The sand shark hunts beside a run's first road and the cage bear beside Skullpeak's, each before that road's chief.";
             return why.Length == 0;
@@ -378,6 +410,11 @@ namespace KindredSiege.Sim.Learning
             result.ScarsEarned = scars;
             result.RespectNeeded = RoadRows;
             result.RespectBefore = result.RespectBeforeHalving = result.RespectAfter = Step;
+            // From rules 39 a rolled beast stands on a road node (PlaceRolledBeast).
+            RoadNode node = result.Encounter.Node;
+            int tier = result.Encounter.BeastTier;
+            if (node != null) result.BeastTierAfter = BeastTier(kit);
+            if (!won && node != null) return LoseRolledBeast(result);
 
             if (!won)
             {
@@ -394,8 +431,12 @@ namespace KindredSiege.Sim.Learning
                 return result;
             }
 
-            _trophies.AddRange(broken);
-            result.Trophies = new List<BeastPart>(broken);
+            // A rolled beast sends home more trophies the higher its tier: every part broken, BeastTierRules.Trophies times.
+            var sent = new List<BeastPart>(broken);
+            if (node != null)
+                for (int extra = 1; extra < BeastTierRules.Trophies(tier); extra++) sent.AddRange(broken);
+            _trophies.AddRange(sent);
+            result.Trophies = sent;
             result.BeastKilled = BeastKits.Kills(kit, broken);
             for (int i = 0; i < ev.Count; i++)
             {
@@ -404,10 +445,22 @@ namespace KindredSiege.Sim.Learning
                 result.BeastEscaped = ev[i].Detail == BeastKits.EscapeDetail;
             }
             int materials = _tuning.MaterialsPerFight * (100 + OmenRules.MaterialsPercentEach * _omens.Count) / 100;
+            if (node != null) materials = materials * BeastTierRules.MaterialsPercent(tier) / 100;
             _materials += materials;
             result.MaterialsEarned = materials;
             _beastsBeaten.Add(kit);
             Discover("Beast: " + BeastKits.Name(kit));
+            if (node != null)
+            {
+                // Beaten, it climbs a tier at camp and comes back that much stronger the next time a run rolls it; you stand on
+                // its node, as on any road fight won.
+                _beastTiers[(int)kit] = Math.Min(BeastTierRules.Max, BeastTier(kit) + 1);
+                result.BeastTierAfter = BeastTier(kit);
+                Step = node.Row + 1;
+                _roadLane = node.Lane;
+                result.RespectBeforeHalving = result.RespectAfter = Step;
+                result.ChiefReady = Step >= RoadRows;
+            }
             result.FightersLeft = _reserve.Count;
             MakeOffers();
             KeepTabardWorn();
@@ -454,7 +507,94 @@ namespace KindredSiege.Sim.Learning
             }
         }
 
+        // ------------------------------------------------------------ rules 39, beasts as rolls
+
+        // Each beast's tier at camp, by kit; 0 is tier 1. It outlives runs.
+        private readonly int[] _beastTiers = new int[3];
+
+        // The roll's own dice: nothing else draws from them, so a saved run always keeps its beast or its lack of one.
+        private const ulong BeastRollStream = 14UL;
+
+        /// A beast's tier at camp, 1 to BeastTierRules.Max: 1 until you first beat it, then one up for every time you beat it.
+        public int BeastTier(BeastKit kit)
+        {
+            return (int)kit <= 0 || (int)kit >= _beastTiers.Length ? 1 : Math.Max(1, _beastTiers[(int)kit]);
+        }
+
+        /// The beast this run rolled (rules 39), or None: none rolled, an older run, or at camp. It stands on one fight node of
+        /// the run's first road (RoadNode.Beast).
+        public BeastKit RunBeast => Stage == CampaignStage.InRun && BeastRollRun ? RollBeast(out _) : BeastKit.None;
+
+        // The run's roll: 1 in BeastTierRules.OneIn, then which beast, each built beast as likely. The same dice then place it.
+        private BeastKit RollBeast(out DeterministicRng dice)
+        {
+            dice = new DeterministicRng(CampaignRoad.Mix(Seed, RunsStarted, "beast.roll"), BeastRollStream);
+            if (dice.Next(BeastTierRules.OneIn) != 0) return BeastKit.None;
+            return dice.Next(2) == 0 ? BeastKit.SandShark : BeastKit.CageBear;
+        }
+
+        // On the run's first road (its lowest tier's tribe, like the shark beside it before), the rolled beast takes one fight
+        // node: a random row, never the chief's, then a random fight in it. The node drops trophies, so it carries no Pal.
+        private void PlaceRolledBeast(CampaignRoad road, CampaignTribe tribe)
+        {
+            if (tribe.Tier != LowestTier() || road.Rows == 0) return;
+            BeastKit kit = RollBeast(out DeterministicRng dice);
+            if (kit == BeastKit.None) return;
+            int row = dice.Next(road.Rows);
+            var fights = new List<int>();
+            for (int l = 0; l < CampaignRoad.Lanes; l++)
+                if (road.Node(row, l).Kind == RoadNodeKind.Fight) fights.Add(l);
+            if (fights.Count == 0) return;
+            RoadNode node = road.Node(row, fights[dice.Next(fights.Count)]);
+            node.Beast = kit;
+            node.Pal = Pal.None;
+        }
+
+        // What waits on a road node: its rolled beast, the hunters who took it, or its own fight.
+        private Encounter NodeEncounter(RoadNode node)
+        {
+            if (node.Beast != BeastKit.None)
+            {
+                Encounter beast = MakeEncounter(EncounterKind.Beast, Target, node);
+                beast.Beast = node.Beast;
+                beast.BeastTier = BeastTier(node.Beast);
+                return beast;
+            }
+            return IsAmbush(node) ? MakeAmbush(node) : MakeEncounter(node.Fight, Target, node);
+        }
+
+        // A rolled beast is a road fight, so losing to it costs a life like any (rules 11): each of yours who fell loses his top
+        // rank (rules 24) and the streak goes with the life (rules 12; Branch Hedge keeps it, rules 29). It captures nobody, takes
+        // no grudge, keeps its tier and waits on its node: try it again, or go round it.
+        private EncounterResult LoseRolledBeast(EncounterResult result)
+        {
+            Lives = Math.Max(0, Lives - 1);
+            result.LivesLeft = Lives;
+            result.RanksLost = DropRanks(result.Fallen);
+            if (!Hedged()) Streak = 0;
+            result.FightersLeft = _reserve.Count;
+            if (Lives <= 0)
+            {
+                result.RunOver = true;
+                EndRun();
+                return result;
+            }
+            MakeOffers();
+            KeepTabardWorn();
+            return result;
+        }
+
         // ------------------------------------------------------------ for CampaignSave
+
+        /// A beast's tier at camp (rules 39). False if it is no beast, the tier is not 2 to BeastTierRules.Max, or it is set.
+        internal bool RestoreBeastTier(BeastKit kit, int tier)
+        {
+            if (BeastKits.Parts(kit).Count == 0 || (int)kit >= _beastTiers.Length || tier < 2 || tier > BeastTierRules.Max ||
+                _beastTiers[(int)kit] != 0)
+                return false;
+            _beastTiers[(int)kit] = tier;
+            return true;
+        }
 
         internal int BeastFights { get => _beastFights; set => _beastFights = Math.Max(0, value); }
 

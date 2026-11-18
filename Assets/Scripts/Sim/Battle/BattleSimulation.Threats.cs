@@ -196,7 +196,7 @@ namespace KindredSiege.Sim.Battle
                 bool fake = !second && (flags & BeatFeinted) == 0 && FeintsOn(foe, t.Name);
                 bool waits = !second && !fake && (flags & BeatWaited) == 0 && !(_squadOn && (flags & BeatFeinted) != 0) &&
                              WaitsOutOn(foe, t.Name);
-                list[i] = t.WithBeat(fake, waits, BigHeavies || t.Name != HeavyRules.Heavy, ParryWindowTicks);
+                list[i] = t.WithBeat(fake, waits, BigHeavies || t.Name != HeavyRules.Heavy, ParryWindow(1 - foe));
             }
         }
 
@@ -364,7 +364,7 @@ namespace KindredSiege.Sim.Battle
             SideState his = _sides[foe];
             if (his.Windup <= 0) return;
             BattleUnit caster = FindById(his.CasterId);
-            if (caster == null || !caster.Alive) return;
+            if (caster == null || !caster.Alive || (_fight.FreezeContracts && ControlBlocked(caster))) return;
             ChiefSpell spell = _rules[foe].Spell;
             string name = his.WindupPyre ? Moves.Pyre : spell == ChiefSpell.Eclipse ? Directives.Name(Directive.Eclipse) : ChiefSpells.Name(spell);
             int percent = his.WindupPercent;
@@ -431,7 +431,7 @@ namespace KindredSiege.Sim.Battle
             SideState his = _sides[foe];
             if (his.HeavyWindup <= 0) return;
             BattleUnit swinger = FindById(his.HeavySwingerId);
-            if (swinger == null || !swinger.Alive) return;
+            if (swinger == null || !swinger.Alive || (_fight.FreezeContracts && ControlBlocked(swinger))) return;
             BattleUnit target = FindById(his.HeavyTargetId);
             int power = swinger.Class == UnitClass.Medic
                 ? Math.Max(1, SliceClasses.MedicFallbackAttack * swinger.PowerPercent / 100)
@@ -456,7 +456,7 @@ namespace KindredSiege.Sim.Battle
             SideState his = _sides[foe];
 
             // Bloodridge's Cleave and Brands (21 Oct 2026).
-            if (his.CleaveWindup > 0)
+            if (his.CleaveWindup > 0 && !(_fight.FreezeContracts && ControlBlocked(chief)))
             {
                 BattleUnit target = FindById(his.CleaveTargetId);
                 list.Add(new Threat(ChiefKits.CleaveName, ThreatTier.Move, chief.Id, IdOf(target), his.CleaveWindup,
@@ -476,7 +476,7 @@ namespace KindredSiege.Sim.Battle
             if (!_kitsTwoOn) return;
 
             // Bloodridge's Burning Ring and Sun Mantle (22 Oct 2026).
-            if (his.RingSpin > 0)
+            if (his.RingSpin > 0 && !(_fight.FreezeContracts && ControlBlocked(chief)))
             {
                 BattleUnit mark = FindById(his.RingTargetId);
                 int lane = mark != null ? LanePosition(mark) : LanePosition(chief);
@@ -489,7 +489,7 @@ namespace KindredSiege.Sim.Battle
                     castBar: RaidChiefSide(foe)));
             }
             // Under the parry at the center his Sun Mantle flares after its tell: the flare is its beat.
-            if (his.MantleFlare > 0)
+            if (his.MantleFlare > 0 && !(_fight.FreezeContracts && ControlBlocked(chief)))
             {
                 BattleUnit band = FirstOfBand(foe, false);
                 // A raid chief stands alone: Focus Fire on him breaks his Mantle as it lights (BattleSimulation.Raid.cs).
@@ -506,7 +506,7 @@ namespace KindredSiege.Sim.Battle
             }
 
             // Skullpeak's Hook, Rifle Line, Iron Advance and Overclock (her Steel Storm is her spell).
-            if (his.HookTell > 0)
+            if (his.HookTell > 0 && !(_fight.FreezeContracts && ControlBlocked(chief)))
                 list.Add(new Threat(ChiefKits.HookName, ThreatTier.Move, chief.Id, his.HookTargetId, his.HookTell, 0,
                     (_fight.PerfectHold ? ThreatAnswer.Parry : ThreatAnswer.None) | Squad(side, ThreatAnswer.Warden), string.Empty,
                     BeatIn(his.HookTell)));
@@ -519,16 +519,16 @@ namespace KindredSiege.Sim.Battle
                 for (int i = 0; i < _units.Count; i++)
                 {
                     BattleUnit u = _units[i];
-                    if (!u.Alive || u.Side != foe || u.RifleTicks <= 0) continue;
+                    if (!u.Alive || u.Side != foe || u.RifleTicks <= 0 || (_fight.FreezeContracts && ControlBlocked(u))) continue;
                     shots++;
                     if (shooter == null || (shooter.Role != UnitRole.Fighter && u.Role == UnitRole.Fighter)) shooter = u;
                 }
-                list.Add(new Threat(ChiefKits.RifleName, ThreatTier.Move, chief.Id, IdOf(target), his.RifleTicks,
+                if (!_fight.FreezeContracts || shots > 0) list.Add(new Threat(ChiefKits.RifleName, ThreatTier.Move, _fight.FreezeContracts ? IdOf(shooter) : chief.Id, IdOf(target), his.RifleTicks,
                     target == null ? 0 : shots * Percent(target, ChiefKits.RifleShotPercent),
                     ThreatAnswer.FallBack | AtBeat | (shooter != null ? ThreatAnswer.FocusFire : ThreatAnswer.None) | Squad(side, ThreatAnswer.Medic),
                     IdOf(shooter), BeatIn(his.RifleTicks)));
             }
-            if (his.AdvanceTicks > 0 || his.AdvanceHold > 0)
+            if ((his.AdvanceTicks > 0 || his.AdvanceHold > 0) && !(_fight.FreezeContracts && ControlBlocked(chief)))
             {
                 Row row = AnyMarkIn(side, Row.Front) ? Row.Front : Row.Back;
                 List<BattleUnit> crushed = MarksIn(side, row);
@@ -543,7 +543,7 @@ namespace KindredSiege.Sim.Battle
             if (his.JabTicks > 0)
             {
                 BattleUnit medic = FindById(his.JabMedicId);
-                list.Add(new Threat(ChiefKits.OverclockName, ThreatTier.Move, IdOf(medic), string.Empty, his.JabTicks, 0,
+                if (!(_fight.FreezeContracts && ControlBlocked(medic))) list.Add(new Threat(ChiefKits.OverclockName, ThreatTier.Move, IdOf(medic), string.Empty, his.JabTicks, 0,
                     ThreatAnswer.FocusFire | AtBeat | Squad(side, ThreatAnswer.Trapper), IdOf(medic), BeatIn(his.JabTicks)));
             }
             if (his.OverclockTicks > 0)
@@ -558,7 +558,7 @@ namespace KindredSiege.Sim.Battle
         private void ThreatsOfRite(List<Threat> list, int side, int foe, BattleUnit chief)
         {
             SideState his = _sides[foe];
-            if (his.BasinTicks > 0 || his.BasinHold > 0)
+            if ((his.BasinTicks > 0 || his.BasinHold > 0) && !(_fight.FreezeContracts && (ControlBlocked(chief) || ControlBlocked(FindById(his.BasinCarrierId)))))
             {
                 // Under the parry at the center his drink is its beat: due at the next second if your bleeding fills the Basin.
                 int drink = his.BasinHold > 0 ? his.BasinHold
@@ -568,7 +568,7 @@ namespace KindredSiege.Sim.Battle
             }
             // Under the parry at the center his Leeches leap, his cut opens your veins and his Transfusion latches after their
             // tells: each of those moments is a beat.
-            if (his.LeechLeap > 0)
+            if (his.LeechLeap > 0 && !(_fight.FreezeContracts && ControlBlocked(chief)))
             {
                 BattleUnit target = FindById(his.LeechTargetId);
                 int drinks = ChiefKits.LeechTicks / SimClock.TicksPerSecond;
@@ -576,10 +576,10 @@ namespace KindredSiege.Sim.Battle
                     target == null ? 0 : drinks * Percent(target, ChiefKits.LeechPercent),
                     ThreatAnswer.FallBack | AtBeat | ThreatAnswer.Hold, string.Empty, BeatIn(his.LeechLeap)));
             }
-            if (his.VeinsCut > 0)
+            if (his.VeinsCut > 0 && !(_fight.FreezeContracts && ControlBlocked(chief)))
                 list.Add(new Threat(ChiefKits.VeinsName, ThreatTier.Move, chief.Id, string.Empty, his.VeinsCut, 0,
                     AtBeat | ThreatAnswer.Hold, string.Empty, BeatIn(his.VeinsCut)));
-            if (his.DrawLatch > 0)
+            if (his.DrawLatch > 0 && !(_fight.FreezeContracts && ControlBlocked(chief)))
             {
                 BattleUnit target = FindById(his.DrawTargetId);
                 int draws = ChiefKits.TransfusionTicks / SimClock.TicksPerSecond;
@@ -622,7 +622,7 @@ namespace KindredSiege.Sim.Battle
         private void ThreatsOfTide(List<Threat> list, int side, int foe, BattleUnit chief)
         {
             SideState his = _sides[foe];
-            if (his.CrankTicks > 0)
+            if (his.CrankTicks > 0 && !(_fight.FreezeContracts && ControlBlocked(FindById(his.EngineerId))))
                 list.Add(new Threat(ChiefKits.SluiceName, ThreatTier.Move, his.EngineerId, string.Empty, his.CrankTicks, 0,
                     ThreatAnswer.FocusFire | ThreatAnswer.Unleash | AtBeat, his.EngineerId, BeatIn(his.CrankTicks)));
             if (his.RipTicks > 0)
@@ -655,7 +655,7 @@ namespace KindredSiege.Sim.Battle
                     his.BoreTicks, amount, ThreatAnswer.FallBack | ThreatAnswer.Hold | (warden ? ThreatAnswer.Warden : ThreatAnswer.None) |
                     (beat >= 1 ? AtBeat : ThreatAnswer.None), string.Empty, beat));
             }
-            if (his.HornTicks > 0)
+            if (his.HornTicks > 0 && !(_fight.FreezeContracts && ControlBlocked(chief)))
                 list.Add(new Threat(ChiefKits.SurgeName, ThreatTier.Move, chief.Id, string.Empty, his.HornTicks, 0,
                     ThreatAnswer.FocusFire | AtBeat, chief.Id, BeatIn(his.HornTicks)));
             if (his.SurgeTicks > 0)
@@ -667,12 +667,13 @@ namespace KindredSiege.Sim.Battle
         private void ThreatsOfHunt(List<Threat> list, int side, int foe)
         {
             BattleUnit captain = KitChief(foe);
-            if (captain == null) return;
+            if (captain == null || (_fight.FreezeContracts && ControlBlocked(captain))) return;
             for (int k = 0; k < HuntCount; k++)
             {
                 HuntStep step = (HuntStep)_huntStep[k];
                 BattleUnit prey = FindById(_huntPrey[k]);
                 if (step == HuntStep.None || prey == null || !prey.Alive) continue;
+                if (_fight.FreezeContracts && step == HuntStep.Corner && ControlBlocked(FindById(_huntNetter[k]))) continue;
                 ThreatAnswer answers;
                 string focus = string.Empty;
                 switch (step)

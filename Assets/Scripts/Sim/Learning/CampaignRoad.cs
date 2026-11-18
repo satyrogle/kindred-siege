@@ -198,6 +198,10 @@ namespace KindredSiege.Sim.Learning
         /// For a fight: the Pal whose favour it drops instead of gear (Jacob, 18 Oct 2026), or None for a gear fight.
         public Pal Pal { get; internal set; }
 
+        /// From rules 39: the beast the run rolled onto this fight node (Campaign.RunBeast), or None. Its fight is that beast at
+        /// its tier, it drops trophies and no Pal, and you can go round it.
+        public BeastKit Beast { get; internal set; }
+
         /// Lanes in the next row this node leads to. Empty in the last row, which leads to the chief.
         public IReadOnlyList<int> Next => _next;
 

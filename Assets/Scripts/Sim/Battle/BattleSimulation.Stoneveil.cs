@@ -321,7 +321,7 @@ namespace KindredSiege.Sim.Battle
             for (int i = 0; i < _units.Count; i++)
             {
                 BattleUnit u = _units[i];
-                if (!u.Alive || u.Side != side || u.Role != UnitRole.Fighter || u.SnareTicks > 0 || u.PanicTicks > 0 || u.StunTicks > 0)
+                if (!u.Alive || u.Side != side || u.Role != UnitRole.Fighter || u.SnareTicks > 0 || u.PanicTicks > 0 || u.StunTicks > 0 || (_fight.FreezeContracts && ControlBlocked(u)))
                     continue;
                 if (u.Class == UnitClass.Medic) return u;
                 if (first == null) first = u;
@@ -353,6 +353,7 @@ namespace KindredSiege.Sim.Battle
                 if (!Stopped) Answered(enemy, ChiefAnswer.Break, chief, FightRules.InterruptPoints, FightRules.InterruptReason);
                 return;
             }
+            if (_fight.FreezeContracts && (ControlBlocked(acolyte) || ControlBlocked(chief))) return;
             // Under the parry at the center the drink is its beat (BattleSimulation.Parry.cs).
             if (state.BasinHold > 0)
             {

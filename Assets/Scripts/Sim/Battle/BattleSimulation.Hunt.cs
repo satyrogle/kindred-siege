@@ -102,7 +102,7 @@ namespace KindredSiege.Sim.Battle
         private void AdvanceHunt(int side)
         {
             BattleUnit captain = KitChief(side);
-            if (captain == null || _turnedTicks > 0) return;
+            if (captain == null || _turnedTicks > 0 || (_fight.FreezeContracts && ControlBlocked(captain))) return;
             for (int k = 0; k < HuntCount && !Stopped; k++) AdvanceOneHunt(side, captain, k);
         }
 
@@ -169,6 +169,7 @@ namespace KindredSiege.Sim.Battle
                             FightRules.InterruptReason);
                         return;
                     }
+                    if (_fight.FreezeContracts && ControlBlocked(netter)) return;
                     if (--_huntTicks[k] > 0) return;
                     if (_parryOn && HuntBeat(side, captain, k, prey, HuntStep.Corner, netter)) return;
                     Net(side, captain, k, prey, netter);
@@ -284,7 +285,7 @@ namespace KindredSiege.Sim.Battle
             for (int i = 0; i < _units.Count && netter == null; i++)
             {
                 BattleUnit u = _units[i];
-                if (u.Alive && u.Side == side && u.Role == UnitRole.Fighter && u.Class == UnitClass.Trapper) netter = u;
+                if (u.Alive && u.Side == side && u.Role == UnitRole.Fighter && u.Class == UnitClass.Trapper && !(_fight.FreezeContracts && ControlBlocked(u))) netter = u;
             }
             netter = netter ?? captain;
             _huntStep[k] = (int)HuntStep.Corner;
@@ -323,12 +324,13 @@ namespace KindredSiege.Sim.Battle
                 return;
             }
             if (!_parryOn && _fight.PerfectHold && theirs.HoldTicks > 0 && theirs.LastHoldTick >= 0 &&
-                _tick - theirs.LastHoldTick <= ParryWindowTicks)
+                _tick - theirs.LastHoldTick <= ParryWindow(foe))
             {
                 Emit(EventFor(BattleEventKind.Land, captain, prey, 0, name + ChiefKits.Parried));
                 Emit(new BattleEvent(_tick, BattleEventKind.Parry, foe, string.Empty, -1, captain.Id, (int)captain.Class,
-                    FightRules.StaggerTicks, ChiefKits.Name(HuntStep.Kill)));
-                captain.Cooldown += FightRules.StaggerTicks;
+                    ParryStagger(foe), ChiefKits.Name(HuntStep.Kill)));
+                captain.Cooldown += ParryStagger(foe);
+                StaggerTimer(captain, ParryStagger(foe));
                 theirs.HoldTicks = 0;
                 theirs.LastParryTick = _tick;
                 theirs.ParriedCasterId = captain.Id;
@@ -533,7 +535,10 @@ namespace KindredSiege.Sim.Battle
         // While Turned Hunt runs, nobody covers the captain and your blows on him land double.
         private bool Turned(BattleUnit unit)
         {
-            return _turnedTicks > 0 && unit.Side == _huntSide && unit.Role == UnitRole.Chief;
+            if (_turnedTicks <= 0 || unit.Side != _huntSide) return false;
+            // From rules 43 the captain can't be hit while his hunters stand, so Turned Hunt turns on them instead
+            // (BattleSimulation.Leaders.cs).
+            return LeadersOn ? unit.Role == UnitRole.Fighter : unit.Role == UnitRole.Chief;
         }
 
         private void AppendHunt(SnapshotBuilder b)

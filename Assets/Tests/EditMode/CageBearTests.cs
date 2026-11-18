@@ -368,7 +368,7 @@ namespace KindredSiege.Sim.Tests
         [Test]
         public void TheCageBearWaitsBesideSkullpeaksRoad()
         {
-            Campaign c = OnSkullpeaksRoad(6100, new CampaignTuning());
+            Campaign c = OnSkullpeaksRoad(6100, new CampaignTuning { RulesCap = Campaign.PitRules });
             Assert.AreEqual(BeastKit.CageBear, c.RoadBeast);
             Encounter bear = c.BeastOffer;
             Assert.IsNotNull(bear);
@@ -385,7 +385,7 @@ namespace KindredSiege.Sim.Tests
             Assert.AreEqual("Cage bear claw", fight.NameOf(claw.Id));
 
             // The first road still has the shark.
-            Campaign first = Campaign.New(6100, new CampaignTuning());
+            Campaign first = Campaign.New(6100, new CampaignTuning { RulesCap = Campaign.PitRules });
             Assert.IsTrue(CampaignPilot.PlayTutorial(first, PilotStyle.Reference, 6100, 10));
             first.StartRun();
             Assert.AreEqual(BeastKit.SandShark, first.RoadBeast);
@@ -396,7 +396,7 @@ namespace KindredSiege.Sim.Tests
         public void FixtureAWinSendsHomeOnlyThePartsYouBroke()
         {
             // A weak bear, so the bot breaks its heart.
-            var t = new CampaignTuning { EnemyScaleTier2 = 25 };
+            var t = new CampaignTuning { EnemyScaleTier2 = 25, RulesCap = Campaign.PitRules };
             for (ulong seed = 6200; seed < 6240; seed++)
             {
                 Campaign c = OnSkullpeaksRoad(seed, t);
@@ -469,7 +469,7 @@ namespace KindredSiege.Sim.Tests
         [Test]
         public void ABearFightSavedHalfwayResumesExactly()
         {
-            var t = new CampaignTuning();
+            var t = new CampaignTuning { RulesCap = Campaign.PitRules };
             Campaign c = OnSkullpeaksRoad(6500, t);
             CampaignFight fight = c.StartBeast();
             var pilot = new CampaignPilot(PilotStyle.Reference, 6500);

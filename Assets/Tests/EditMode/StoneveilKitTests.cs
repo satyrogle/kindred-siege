@@ -488,7 +488,8 @@ namespace KindredSiege.Sim.Tests
         public void TheStoneveilChiefFightsWithHisKitAndHisFightSavesAndPlaysBackExactly()
         {
             var t = new CampaignTuning { PathFights = 0 };
-            for (ulong seed = 4600; seed < 4640; seed++)
+            // About one fight in twenty lasts that long, so it looks through two hundred (rules 42 moved the one forty had).
+            for (ulong seed = 4600; seed < 4800; seed++)
             {
                 Campaign c = Campaign.New(seed, t);
                 Assert.IsTrue(CampaignPilot.PlayTutorial(c, PilotStyle.Reference, seed, 10), "the tutorial was never won");
@@ -526,7 +527,7 @@ namespace KindredSiege.Sim.Tests
                 Assert.IsTrue(c.Archive.TryReplay(fight.Setup.FightId, out _, out string failure), failure);
                 return;
             }
-            Assert.Fail("no Stoneveil chief fight lasted past his first Blood Call in forty campaigns");
+            Assert.Fail("no Stoneveil chief fight lasted past his first Blood Call in two hundred campaigns");
         }
     }
 }

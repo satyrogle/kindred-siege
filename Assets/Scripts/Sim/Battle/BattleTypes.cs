@@ -745,6 +745,12 @@ namespace KindredSiege.Sim.Battle
         /// Warden only: the ally it is currently covering. Empty when none.
         public string GuardTargetId { get; internal set; }
 
+        /// From rules 44 (BattleSimulation.Grid.cs): his panel on his band's own 3 by 3 grid. GridCol 0 is the back row, 1 the
+        /// middle, 2 the front, counted from his own side; GridLane 0 is the top lane, 1 the middle, 2 the bottom. Both -1 off
+        /// the grid (outside rules 44, or waiting on the bench).
+        public int GridCol { get; internal set; } = -1;
+        public int GridLane { get; internal set; } = -1;
+
         /// Warden only, from rules 24 (BattleSimulation.Whisperer.cs): the second ally he covers at rank 2, or the Medic under
         /// Mend and Hold. Empty when none.
         public string GuardTargetId2 { get; internal set; } = string.Empty;
@@ -758,6 +764,10 @@ namespace KindredSiege.Sim.Battle
         /// Rewind Wound's longer memory of what he lost each second.
         public long ParriedAtTick { get; internal set; } = -1;
         public int ParriedBySide { get; internal set; } = -1;
+
+        /// From rules 46 (BattleSimulation.Tree.cs): the tick his stagger ends, and how many cashes his Snare has taken.
+        public long StaggeredUntil { get; internal set; } = -1;
+        public int SnareCashes { get; internal set; }
         internal int[] HurtLongLost { get; } = new int[ClassSpells.RewindSeconds + 2 * GluttonRules.RewindMoreSeconds];
         internal long[] HurtLongSecond { get; } = LongSeconds();
 
@@ -773,6 +783,7 @@ namespace KindredSiege.Sim.Battle
 
         /// From rules 34 (BattleSimulation.DuoMoves.cs): how many percent a Gorge star has grown this fight.
         public int GorgePercent { get; internal set; }
+        public int GorgeKills { get; internal set; }
         public string EchoTargetId { get; internal set; } = string.Empty;
 
         /// Every status on this fighter (Statuses.cs; DESIGN_LOCKS, "Builds: one theme per Pal", step 1, 30 Oct 2026): panic,
@@ -1146,7 +1157,21 @@ namespace KindredSiege.Sim.Battle
         /// whom it was on, detail which (WhisperRules.FreeDetail for a pair's free answer or an upgraded Avenger's free strike,
         /// InHandDetail for a Medic keeping a treatment in hand, AmbushDetail or StoppedDetail for an Ambusher's trap on a heavy
         /// swing, CounterDetail for an upgraded Counter Shot fired with no aim).
-        Whisper = 50
+        Whisper = 50,
+
+        /// Struck, the attack table on a blow that lands (campaign rules 42, BattleSimulation.Table.cs): actor the attacker,
+        /// target the fighter it was aimed at, detail AttackTable.BlockDetail (amount the points the block took off) or
+        /// CritDetail (amount the points the crit added). The Hit follows on the same tick. A dodge or a parry is a Miss
+        /// with that detail.
+        Struck = 51,
+
+        /// Step, the grid (campaign rules 44, BattleSimulation.Grid.cs): actor the fighter who moved, amount the panel he moved to
+        /// (GridRules.Panel: column times three plus lane, counted from his own side), detail GridRules.StepDetail for his own
+        /// step, SwapDetail when an ally's step traded panels with him, RoomDetail when he stepped forward to make room for an
+        /// ally, FallBackDetail when a Fall Back moved him, JoinDetail when he came onto the field.
+        Step = 52,
+        Pair = 53,
+        PairWindup = 54
     }
 
     /// Why a fighter may not strike an enemy right now (BattleSimulation.CanStrike, 11 Oct 2026).

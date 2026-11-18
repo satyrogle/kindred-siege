@@ -102,7 +102,10 @@ namespace KindredSiege.Sim.Battle
             {
                 BattleUnit u = _units[i];
                 if (!u.Alive || SpecOf(u).Carries == ChiefMove.None) continue;
-                if (u.SnareTicks > 0 || u.PanicTicks > 0 || u.StunTicks > 0 || u.ReelTicks > 0)
+                // Stasis restarts this windup. Keep it suspended while pinned, then resume its tell.
+                if (_fight.FreezeContracts && u.PinTicks > 0) continue;
+                if (u.SnareTicks > 0 || u.PanicTicks > 0 || u.StunTicks > 0 || u.ReelTicks > 0 ||
+                    (_fight.FreezeContracts && ControlBlocked(u)))
                 {
                     // Held, he cannot start a move, and one he was telling is lost.
                     if (u.CarryTell > 0) EndCarry(u);
@@ -121,6 +124,9 @@ namespace KindredSiege.Sim.Battle
         private void StartCarry(BattleUnit u)
         {
             ChiefMove move = u.CarryMove;
+            // The Pit: a carried Cleave, the one a Hold parries, waits while another parryable move of his side winds up
+            // (BattleSimulation.Pit.cs, rule 3); his clock tries again next tick.
+            if (move == ChiefMove.Cleave && PitWaits(u.Side)) return;
             if (move == ChiefMove.Brand)
             {
                 BattleUnit mark = MostHurtFoe(u.Side);
@@ -267,7 +273,7 @@ namespace KindredSiege.Sim.Battle
             for (int i = 0; i < _units.Count; i++)
             {
                 BattleUnit u = _units[i];
-                if (u.Alive && u.Side == foe && u.CarryTell > 0)
+                if (u.Alive && u.Side == foe && u.CarryTell > 0 && !(_fight.FreezeContracts && ControlBlocked(u)))
                 {
                     if (u.CarryMove == ChiefMove.Cleave)
                         list.Add(new Threat(ChiefKits.CleaveName, ThreatTier.Move, u.Id, u.CarryTargetId, u.CarryTell,

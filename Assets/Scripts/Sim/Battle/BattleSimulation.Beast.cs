@@ -449,8 +449,9 @@ namespace KindredSiege.Sim.Battle
             {
                 Emit(EventFor(BattleEventKind.Land, jaw, target, 0, name + BeastKits.Parried));
                 Emit(new BattleEvent(_tick, BattleEventKind.Parry, foe, string.Empty, -1, jaw.Id, (int)jaw.Class,
-                    FightRules.StaggerTicks, BeastKits.BiteName));
-                _partNext[slot] += FightRules.StaggerTicks;
+                    ParryStagger(foe), BeastKits.BiteName));
+                _partNext[slot] += ParryStagger(foe);
+                StaggerTimer(jaw, ParryStagger(foe));
                 theirs.HoldTicks = 0;
                 theirs.LastParryTick = _tick;
                 theirs.ParriedCasterId = jaw.Id;
@@ -552,7 +553,8 @@ namespace KindredSiege.Sim.Battle
         // FightRules.StaggerTicks later) and reels, and it is left with an Opening. A beast has no nerve to crack.
         private void BeastParried(BattleUnit part, BeastPart which, string move)
         {
-            _partNext[BeastKits.Slot(which)] += FightRules.StaggerTicks;
+            _partNext[BeastKits.Slot(which)] += ParryStagger(1 - part.Side);
+            StaggerTimer(part, ParryStagger(1 - part.Side));
             ParriedBeat(part.Side, part, move, ChiefKits.ParryNerve, FightRules.ParryPoints, false);
         }
 

@@ -121,6 +121,9 @@ namespace KindredSiege.Sim.Battle
         private BattleUnit SpellTarget(BattleUnit unit, bool aimed)
         {
             if (MeleeHeldBack(unit) != StrikeBlock.None) return null;
+            // From rules 44 only whoever his class shape reaches from his panel (BattleSimulation.Grid.cs).
+            if (_pairsOn && (ExchangeOf(unit) != null || PairFocus(unit) != null)) return PairTarget(unit);
+            if (_gridOn && unit.GridCol >= 0) return GridTarget(unit);
             // Whoever her Hook dragged in front of her shields comes first for her side too (ChiefKits, 22 Oct 2026).
             BattleUnit dragged = _kitsTwoOn ? DraggedFoe(unit.Side) : null;
             if (dragged != null && !LeaderProtected(dragged)) return dragged;
@@ -197,9 +200,15 @@ namespace KindredSiege.Sim.Battle
             for (int i = 0; i < _units.Count && !_finished; i++)
             {
                 BattleUnit u = _units[i];
-                if (!u.Alive || u.AimTicks <= 0 || u.PanicTicks > 0) continue;
+                if (!u.Alive || u.AimTicks <= 0 || u.PanicTicks > 0 || (_fight.Contracts && ActionBlocked(u, completingAim: true))) continue;
                 u.AimTicks--;
                 if (u.AimTicks > 0) continue;
+                // From rules 40 a shot due on a tick a turn or another shot landed waits for the next (BattleSimulation.Stage.cs).
+                if (_stageOn && StageTaken())
+                {
+                    u.AimTicks = 1;
+                    continue;
+                }
                 BattleUnit target = FindById(u.AimTargetId);
                 u.AimTargetId = string.Empty;
                 u.SpellTicks = AimEvery(u);
@@ -208,7 +217,8 @@ namespace KindredSiege.Sim.Battle
                 // A shot aimed in a road combat chain stays in it; one that has to find a new mark starts afresh.
                 int chain = u.AimChainId;
                 u.AimChainId = 0;
-                if (target == null || !target.Alive || Spared(u, target))
+                // From rules 44 the shot goes down his lane and stops at the first body, whoever he aimed at (BattleSimulation.Grid.cs).
+                if (target == null || !target.Alive || Spared(u, target) || (_gridOn && u.GridCol >= 0 && !ReferenceEquals(GridTarget(u), target)))
                 {
                     target = SpellTarget(u, true);
                     chain = 0;
@@ -226,6 +236,8 @@ namespace KindredSiege.Sim.Battle
                 _currentChain = saved;
                 // A Steady shot goes through to the enemy behind its mark (the road kit).
                 if (u.Steady && shots > 0) Pierce(u, target);
+                if (_stageOn) StageShot();
+                if (_pairsOn && ExchangeOf(u) != null) { FirePairSupport(u); FinishExchange(ExchangeOf(u), u); }
                 CheckWipe();
             }
         }
@@ -284,6 +296,8 @@ namespace KindredSiege.Sim.Battle
             // A chief whose band still stands shrugs the hold off; the barbs still cut (ChiefFight).
             if (!ShrugsMarks(victim))
             {
+                // A new Snare has taken no cashes yet (Time Lock, rules 46).
+                if (_treeOn) victim.SnareCashes = 0;
                 victim.Statuses.Apply(StatusKind.Snare, hold);
                 MarkEvent(side, trapper, victim, hold, ClassSpells.SnareMark);
                 // Singularity Net and Time Snare ride on the hold (BattleSimulation.Combos.cs).
@@ -495,7 +509,10 @@ namespace KindredSiege.Sim.Battle
             // Through the damage layers all the bleeding left, exactly (BattleSimulation.Layers.cs).
             // From rules 20 a big target's share counts at most PayoffRules.PercentHealthCap (BattleSimulation.Payoffs.cs).
             Hit ripped = _layersOn ? Hit.Percent((long)left * ShareHealth(target), target.BleedPercent) : null;
-            int rip = ripped != null ? ripped.Points : left * Math.Max(1, ShareHealth(target) * target.BleedPercent / 100);
+            // Strip (rules 46, BattleSimulation.Tree.cs): she rips it open harder.
+            int ripMore = RipMorePercent(attacker);
+            if (ripped != null && ripMore > 0) ripped.Add(HitLayer.Increased, ripMore);
+            int rip = ripped != null ? ripped.Points : left * Math.Max(1, ShareHealth(target) * target.BleedPercent / 100) * (100 + ripMore) / 100;
             target.Statuses.Clear(StatusKind.Bleed);
             Emit(EventFor(BattleEventKind.Cash, attacker, target, rip, ClassSpells.RipDetail));
             if (ripped != null) ApplyHit(attacker, attacker.Side, target, ripped, ClassSpells.RipDetail);
@@ -538,6 +555,7 @@ namespace KindredSiege.Sim.Battle
         // attacks.
         private bool CanSwingHeavy(BattleUnit u)
         {
+            if (_fight.Contracts && ActionBlocked(u)) return false;
             return !_classOn || (u.SnareTicks <= 0 && u.AimTicks <= 0 && u.PinTicks <= 0 && u.Class != UnitClass.Medic);
         }
     }

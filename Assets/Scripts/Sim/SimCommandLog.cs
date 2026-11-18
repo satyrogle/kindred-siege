@@ -26,6 +26,26 @@ namespace KindredSiege.Sim
 
         public bool TryRecord(SimCommand command, out string failure)
         {
+            if (!CanRecord(command, out failure)) return false;
+            _sequences.Add(command.Sequence);
+            int insertAt = _commands.Count;
+            for (int i = 0; i < _commands.Count; i++)
+            {
+                SimCommand existing = _commands[i];
+                if (command.Tick < existing.Tick ||
+                    (command.Tick == existing.Tick && command.Sequence < existing.Sequence))
+                {
+                    insertAt = i;
+                    break;
+                }
+            }
+            _commands.Insert(insertAt, command);
+            return true;
+        }
+
+        // Live sessions validate recording before applying a command. This check must not mutate the log.
+        internal bool CanRecord(SimCommand command, out string failure)
+        {
             failure = string.Empty;
             if (command == null)
             {
@@ -57,24 +77,12 @@ namespace KindredSiege.Sim
                 failure = "Command kind cannot be empty.";
                 return false;
             }
-            if (!_sequences.Add(command.Sequence))
+            if (_sequences.Contains(command.Sequence))
             {
                 failure = "Duplicate command sequence " + command.Sequence + ".";
                 return false;
             }
 
-            int insertAt = _commands.Count;
-            for (int i = 0; i < _commands.Count; i++)
-            {
-                SimCommand existing = _commands[i];
-                if (command.Tick < existing.Tick ||
-                    (command.Tick == existing.Tick && command.Sequence < existing.Sequence))
-                {
-                    insertAt = i;
-                    break;
-                }
-            }
-            _commands.Insert(insertAt, command);
             return true;
         }
 

@@ -367,13 +367,14 @@ namespace KindredSiege.Sim.Battle
                 return;
             }
             if (!_parryOn && _fight.PerfectHold && theirs.HoldTicks > 0 && theirs.LastHoldTick >= 0 &&
-                _tick - theirs.LastHoldTick <= ParryWindowTicks)
+                _tick - theirs.LastHoldTick <= ParryWindow(enemy))
             {
                 Emit(EventFor(BattleEventKind.Land, chief, target, 0, name + ChiefKits.Parried));
                 Emit(new BattleEvent(_tick, BattleEventKind.Parry, enemy, string.Empty, -1, chief.Id, (int)chief.Class,
-                    FightRules.StaggerTicks, ChiefKits.HookName));
-                chief.Cooldown += FightRules.StaggerTicks;
-                state.HookNext += FightRules.StaggerTicks;
+                    ParryStagger(enemy), ChiefKits.HookName));
+                chief.Cooldown += ParryStagger(enemy);
+                StaggerTimer(chief, ParryStagger(enemy));
+                state.HookNext += ParryStagger(enemy);
                 theirs.HoldTicks = 0;
                 theirs.LastParryTick = _tick;
                 theirs.ParriedCasterId = chief.Id;
@@ -504,7 +505,7 @@ namespace KindredSiege.Sim.Battle
 
         private bool FreeShooter(BattleUnit u)
         {
-            return u.Alive && u.Stats.Ranged && u.Class != UnitClass.Medic && u.SnareTicks <= 0 && u.PanicTicks <= 0 && u.AimTicks <= 0 &&
+            return !(_fight.FreezeContracts && ControlBlocked(u)) && u.Alive && u.Stats.Ranged && u.Class != UnitClass.Medic && u.SnareTicks <= 0 && u.PanicTicks <= 0 && u.AimTicks <= 0 &&
                 u.RifleTicks <= 0 && u.StunTicks <= 0 && !(_heavyOn && IsSwingingHeavy(u));
         }
 
@@ -547,6 +548,11 @@ namespace KindredSiege.Sim.Battle
             {
                 BattleUnit u = _units[i];
                 if (u.Side != side || u.RifleTicks <= 0) continue;
+                if (_fight.FreezeContracts && ControlBlocked(u))
+                {
+                    u.RifleTicks = 0; // misses this coordinated volley; other shooters keep their shots
+                    continue;
+                }
                 if (!fire)
                 {
                     u.RifleTicks--;
@@ -664,6 +670,7 @@ namespace KindredSiege.Sim.Battle
                 ClearAdvance(state);
                 return;
             }
+            if (_fight.FreezeContracts && ControlBlocked(chief)) return;
             // Under the parry at the center every crush is a beat (BattleSimulation.Parry.cs): one that waits or feints holds
             // the march until it lands.
             if (state.AdvanceHold > 0)
@@ -818,7 +825,7 @@ namespace KindredSiege.Sim.Battle
             {
                 BattleUnit u = _units[i];
                 if (u.Alive && u.Side == side && u.Role == UnitRole.Fighter && u.Class == UnitClass.Medic && u.SnareTicks <= 0 &&
-                    u.PanicTicks <= 0)
+                    u.PanicTicks <= 0 && !(_fight.FreezeContracts && ControlBlocked(u)))
                     return u;
             }
             return null;
@@ -848,6 +855,7 @@ namespace KindredSiege.Sim.Battle
                 else Answered(enemy, ChiefAnswer.Break, chief, FightRules.InterruptPoints, FightRules.InterruptReason);
                 return;
             }
+            if (_fight.FreezeContracts && ControlBlocked(medic)) return;
             state.JabTicks--;
             if (state.JabTicks > 0) return;
             // Under the parry at the center the needle is its beat (BattleSimulation.Parry.cs): parried, no flurry comes. It hits

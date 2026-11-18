@@ -115,6 +115,8 @@ namespace KindredSiege.Sim.Battle
             SideState state = _sides[side];
             if (rules.HeavyEveryTicks <= 0 || _finished || state.HeavyWindup > 0 || state.Windup > 0 || _tick < state.HeavyNextTick)
                 return;
+            // The Pit: it waits while another parryable move of this side winds up (BattleSimulation.Pit.cs, rule 3).
+            if (PitWaits(side)) return;
             int count = _units.Count;
             for (int k = 0; k < count; k++)
             {
@@ -151,7 +153,7 @@ namespace KindredSiege.Sim.Battle
             // A swinger held by a barbed snare loses the swing too (ClassSpells), and so does one a black hole pins or a freeze
             // holds (BattleSimulation.Combos.cs), and a Thick Hide hunter you focus.
             if (swinger == null || !swinger.Alive || swinger.PanicTicks > 0 || (_classOn && (swinger.SnareTicks > 0 || swinger.PinTicks > 0)) ||
-                (_parryOn && Braced(swinger)))
+                (_parryOn && Braced(swinger)) || (_fight.Contracts && ActionBlocked(swinger, completingHeavy: true)))
             {
                 ClearHeavy(state);
                 return;
@@ -202,6 +204,12 @@ namespace KindredSiege.Sim.Battle
                 FavourDodge(enemy, swinger);
                 return;
             }
+            // The Pit: its mark was locked at its windup, so with the mark fallen it lands on nobody (BattleSimulation.Pit.cs, rule 2).
+            if (_pitOn && (target == null || !target.Alive))
+            {
+                LostSwing(side, swinger, target);
+                return;
+            }
             if (target == null || !target.Alive) target = ChooseTarget(swinger);
             if (target == null) return;
 
@@ -211,8 +219,9 @@ namespace KindredSiege.Sim.Battle
                 Emit(new BattleEvent(_tick, BattleEventKind.Release, side, swinger.Id, (int)swinger.Class, target.Id,
                     (int)target.Class, 0, FightRules.Parried));
                 Emit(new BattleEvent(_tick, BattleEventKind.Parry, enemy, string.Empty, -1, swinger.Id, (int)swinger.Class,
-                    FightRules.StaggerTicks, string.Empty));
-                swinger.Cooldown += FightRules.StaggerTicks;
+                    ParryStagger(enemy), string.Empty));
+                swinger.Cooldown += ParryStagger(enemy);
+                StaggerTimer(swinger, ParryStagger(enemy));
                 theirs.HoldTicks = 0;
                 theirs.LastParryTick = _tick;
                 theirs.ParriedCasterId = swinger.Id;
@@ -332,6 +341,13 @@ namespace KindredSiege.Sim.Battle
                 FavourDodge(enemy, swinger);
                 if (!_finished && BigHeavies) SafeBeat(side, crack);
                 if (first && !_finished) NextSwing(side, swinger, targetId, flags, false);
+                return;
+            }
+            // The Pit: its mark was locked at its windup, so with the mark fallen it lands on nobody, and a double swing's second
+            // never comes (BattleSimulation.Pit.cs, rule 2).
+            if (_pitOn && (target == null || !target.Alive))
+            {
+                LostSwing(side, swinger, target);
                 return;
             }
             if (target == null || !target.Alive) target = ChooseTarget(swinger);

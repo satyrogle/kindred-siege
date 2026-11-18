@@ -6,7 +6,8 @@ using KindredSiege.Sim.Battle;
 
 namespace KindredSiege.Sim.Learning
 {
-    /// Writes a campaign down and reads it back. Version 32 (2 Nov 2026, the duos that change a move, campaign rules 34) keeps
+    /// Writes a campaign down and reads it back. Version 33 distinguishes the audited rules35 lineage from older readers.
+    /// Version 32 (2 Nov 2026, the duos that change a move, campaign rules 34) keeps
     /// the duos' streak (duolevel). Version 31 (2 Nov 2026, the Whisperer's vows, campaign rules 33) keeps each
     /// ranked fighter's vow (vow: the fighter and the Battle.StarVow), and a Whisperer pick on offer can carry one (whisperpick's
     /// seventh field, written only when set). Version 30 (1 Nov 2026, the Pals' duos, campaign rules 30) keeps the run's duos
@@ -72,7 +73,9 @@ namespace KindredSiege.Sim.Learning
     public static partial class CampaignSave
     {
         public const string Header = "kindred-siege-campaign";
-        public const int Version = 32;
+        // Version35 carries rules37 fights and format42 evidence; older readers reject rather than misinterpret them.
+        // Version 36 (rules 39, beasts as rolls) adds each beast's tier at camp and whether a run rolls for its beast.
+        public const int Version = 36;
 
         public const string OldSaveNote =
             "This save is from the old respect campaign, so you are back at camp. What the tribes learned about you and your codex are kept.";
@@ -88,7 +91,8 @@ namespace KindredSiege.Sim.Learning
         {
             "joined", "fighter", "assist", "gear", "piece", "spoils", "grudge", "run", "road", "feat", "offer", "fight", "proof", "squad", "order",
             "bounty", "beaten", "promoted", "favour", "favouroffer", "routepick", "beast", "lives", "bond", "streak", "clearroad",
-            "roadpals", "palroad", "talent", "route", "pair", "rank", "slot2", "habitup", "whisperpick", "feed", "hedge", "duo", "vow", "duolevel"
+            "roadpals", "palroad", "talent", "route", "pair", "rank", "slot2", "habitup", "whisperpick", "feed", "hedge", "duo", "vow", "duolevel",
+            "beastroll"
         };
 
         public static string Write(Campaign c)
@@ -111,6 +115,9 @@ namespace KindredSiege.Sim.Learning
             for (int i = 0; i < c.Trophies.Count; i++) Line(b, "trophy", N((int)c.Trophies[i]));
             for (int i = 0; i < c.BeastPiecesForged.Count; i++) Line(b, "beastpiece", N((int)c.BeastPiecesForged[i]));
             if (c.BeastFights > 0) Line(b, "beasts", N(c.BeastFights));
+            // Each beast's tier at camp above 1 (version 36, rules 39), by kit.
+            for (int kit = (int)BeastKit.SandShark; kit <= (int)BeastKit.CageBear; kit++)
+                if (c.BeastTier((BeastKit)kit) > 1) Line(b, "beasttier", N(kit), N(c.BeastTier((BeastKit)kit)));
             for (int i = 0; i < c.Omens.Count; i++) Line(b, "omen", N((int)c.Omens[i]));
             var named = new List<string>(c.NamesGiven.Keys);
             named.Sort(StringComparer.Ordinal);
@@ -222,6 +229,8 @@ namespace KindredSiege.Sim.Learning
                 if (c.RoadPals != 0) Line(b, "roadpals", N(c.RoadPals));
                 // A Pal on every fight of its roads (version 25, rules 19).
                 if (c.PalRoadRun) Line(b, "palroad", "1");
+                // A run that rolls for its beast (version 36, rules 39), so its first road comes back with the same beast node.
+                if (c.BeastRollRun) Line(b, "beastroll", "1");
                 Line(b, "road", N(c.RoadLane));
                 // The beasts beaten this run, by kit (version 17; version 16 wrote "1" for the shark).
                 for (int i = 0; i < c.BeastsBeatenThisRun.Count; i++) Line(b, "beast", N((int)c.BeastsBeatenThisRun[i]));
@@ -442,6 +451,12 @@ namespace KindredSiege.Sim.Learning
                             return Fail(where + "bad beasts record.", out failure);
                         c.BeastFights = beasts;
                         break;
+                    case "beasttier":
+                        // A beast's tier at camp, 2 to 50 (version 36, rules 39). Older saves have every beast at tier 1.
+                        if (c == null || f.Length != 3 || !TryInt(f[1], out int tierKit) || !TryInt(f[2], out int beastTier) ||
+                            !c.RestoreBeastTier((BeastKit)tierKit, beastTier))
+                            return Fail(where + "bad or repeated beast tier record.", out failure);
+                        break;
                     case "omen":
                         // An omen picked at camp (version 10). Older saves have none.
                         if (c == null || f.Length != 2 || !TryInt(f[1], out int omen) || !OmenRules.IsOmen(omen) || !c.RestoreOmen((Omen)omen))
@@ -612,7 +627,7 @@ namespace KindredSiege.Sim.Learning
             int roadLane = -1;
             bool roadSeen = false;
             bool routePickSeen = false;
-            bool clearRoadSeen = false, roadPalsSeen = false, palRoadSeen = false;
+            bool clearRoadSeen = false, roadPalsSeen = false, palRoadSeen = false, beastRollSeen = false;
             c.RoutePickVersion = 0; // Saves through v13 keep their current run's original future tiers.
             var offers = new List<EncounterKind>();
             string wearer = null;
@@ -821,6 +836,12 @@ namespace KindredSiege.Sim.Learning
                         palRoadSeen = true;
                         c.PalRoadRun = true;
                         break;
+                    case "beastroll":
+                        if (version < 36 || runTarget == null || beastRollSeen || f.Length != 2 || f[1] != "1")
+                            return Fail(where + "bad beast roll record.", out failure);
+                        beastRollSeen = true;
+                        c.BeastRollRun = true;
+                        break;
                     case "roadpals":
                         if (version < 24 || runTarget == null || roadPalsSeen || f.Length != 2 || !TryInt(f[1], out int roadPals) ||
                             roadPals <= 0 || roadPals >= 1 << (FavourRules.Pals.Length + 1))
@@ -845,8 +866,10 @@ namespace KindredSiege.Sim.Learning
                         // The respect campaign's feats, gone since 10 Oct 2026.
                         break;
                     case "offer":
+                        // From version 36 a rolled beast's road node is an offer too (rules 39).
                         if (runTarget == null || f.Length != 2 || !TryInt(f[1], out int offerKind) || offerKind < 0 ||
-                            offerKind > (int)EncounterKind.Ambush || offerKind == (int)EncounterKind.Tutorial)
+                            (offerKind > (int)EncounterKind.Ambush && !(version >= 36 && offerKind == (int)EncounterKind.Beast)) ||
+                            offerKind == (int)EncounterKind.Tutorial)
                             return Fail(where + "bad offer record.", out failure);
                         offers.Add((EncounterKind)offerKind);
                         break;

@@ -84,7 +84,8 @@ namespace KindredSiege.Sim.Battle
             target.Statuses.Apply(mark, MarkRules.Ticks, sourceId: attacker.Id, stacks: SizeRules.HitStacks);
             Emit(new BattleEvent(_tick, BattleEventKind.Mark, attacker.Side, attacker.Id, (int)attacker.Class, target.Id, (int)target.Class,
                 MarkRules.Ticks, MarkRules.Name(mark)));
-            if (target.Statuses[mark].Stacks >= MarkRules.MaxStacks) Burst(attacker, target, mark);
+            // Stasis Wind Up (rules 46, BattleSimulation.Tree.cs): sooner on a snared man.
+            if (target.Statuses[mark].Stacks >= BurstAt(attacker, target)) Burst(attacker, target, mark);
         }
 
         // ------------------------------------------------------------ the final forms
@@ -119,6 +120,7 @@ namespace KindredSiege.Sim.Battle
                 BattleUnit next = beside[k];
                 if (!next.Alive || next.Side != target.Side || next.Statuses[StatusKind.WideOpen].On || ShrugsMarks(next)) continue;
                 next.Statuses.Apply(StatusKind.WideOpen, MarkRules.WideOpenTicks, size: size, sourceId: sourceId);
+                if (_fight.Corrections) next.Statuses[StatusKind.WideOpen].Size = size;
                 next.Statuses[StatusKind.WideOpen].Store = jumps - 1;
                 BattleUnit by = FindById(sourceId);
                 Emit(new BattleEvent(_tick, BattleEventKind.Burst, 1 - target.Side, sourceId, by == null ? -1 : (int)by.Class,

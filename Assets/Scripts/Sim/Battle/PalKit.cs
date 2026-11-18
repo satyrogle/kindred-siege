@@ -278,7 +278,7 @@ namespace KindredSiege.Sim.Battle
         public const int Fed = 2;
 
         /// The limbs, in GluttonTalent's order.
-        public static readonly string[] Limbs = { "Front line", "Strikers", "Shooters", "Control", "Healers", "Command", "War chest" };
+        public static readonly string[] Limbs = { "Front line", "Strikers", "Shooters", "Control", "Casters", "Command", "War chest" };
 
         /// Its limb, 0 to 6.
         public static int LimbOf(GluttonTalent t) => ((int)t - 1) / PerLimb;
@@ -416,6 +416,8 @@ namespace KindredSiege.Sim.Battle
             {
                 case GluttonTalent.None: return string.Empty;
                 case GluttonTalent.GlancingBlow: return "Glancing Fold";
+                // Renamed when the Healers limb became Casters (DESIGN_LOCKS, 15 Nov 2026).
+                case GluttonTalent.SynthArmour: return "Half Life";
                 default:
                     // "DarkMatterPlating" to "Dark Matter Plating".
                     string s = t.ToString();
@@ -429,8 +431,55 @@ namespace KindredSiege.Sim.Battle
             }
         }
 
-        /// What it does, in one line.
+        /// What it does, in one line: the meanings locked on 16 Nov 2026 (DESIGN_LOCKS "The Glutton's whole tree retargeted"),
+        /// which campaign rules 46 plays (BattleSimulation.Tree.cs). A talent whose piece is not in the sim yet (Shield Pin, the
+        /// Hex, Bad Blood and the 12 new classes' moves and combos) does nothing until it is built. DescribeRules29 keeps the
+        /// 1 Nov words, for a fight under rules 29 to 45.
         public static string Describe(GluttonTalent t)
+        {
+            switch (t)
+            {
+                case GluttonTalent.DarkMatterPlating: return "Shield Pin comes round every 10 s, not 15.";
+                case GluttonTalent.EntropySink: return "The Warden's bash on a cursed man lands triple, not double.";
+                case GluttonTalent.FoldShield: return "Still Wall freezes 3 s, not 2.";
+                case GluttonTalent.NeutronMass: return "Wrecking Ball drags men from twice as far.";
+                case GluttonTalent.BranchAnchor: return "Sanctuary's shields are twice as thick.";
+                case GluttonTalent.NucleusEdge: return "Twin Cut's two cuts hit twice as hard.";
+                case GluttonTalent.Strip: return "Her strike rips a bleed open half again as hard.";
+                case GluttonTalent.FoldStep: return "Collapse's pin lasts 3 s, not 2.";
+                case GluttonTalent.EchoStrike: return "Echo replays Skirmishers' hits at full strength.";
+                case GluttonTalent.AnswerTheParry: return "The Duelist's Riposte lands triple, not double.";
+                case GluttonTalent.SlowLightRounds: return "On a bleeding man, Stopped Bullets lands triple, not double.";
+                case GluttonTalent.DarkMatterRounds: return "Steady's shot goes through at full power, not half.";
+                case GluttonTalent.LightStake: return "Stopwatch Sentry slows men to a quarter speed, not half.";
+                case GluttonTalent.ProbabilityLock: return "Marksmen hit a snared enemy " + LockPercent + "% harder.";
+                case GluttonTalent.NothingWasted: return "Marksmen hit your Focus Fire target twice as hard.";
+                case GluttonTalent.GravityMesh: return "Spells, shells, gas and sound spring Doorway's trap too, not only shots.";
+                case GluttonTalent.TimeLock: return "A Snare takes two cashes before it is spent.";
+                case GluttonTalent.CrawlField: return "Heavy Hook's crush hits twice as hard.";
+                case GluttonTalent.FoldTrap: return "The free swings on the man the Binder pulls hit twice as hard.";
+                case GluttonTalent.StasisWindUp: return "On a snared or tethered man, the Butcher's flavour stacks burst at 2, not 3.";
+                case GluttonTalent.MatterPrinter: return "Bad Blood's bleed jumps twice as far.";
+                case GluttonTalent.RewindWound: return "Vent's cloud is twice as wide.";
+                case GluttonTalent.SynthArmour: return "The Hex lasts twice as long.";
+                case GluttonTalent.EntropyPurge: return "Your casters' portals take half the nerve.";
+                case GluttonTalent.Recompile: return "Caster blasts are twice as big on anyone under a quarter health.";
+                case GluttonTalent.Precognition: return "A man you parry staggers 3 s, not 2.";
+                case GluttonTalent.GlancingBlow: return "Mirror sends back twice as much.";
+                case GluttonTalent.DeepNode: return "Rupture's Crack thins armour twice as much.";
+                case GluttonTalent.ChargedBranches: return "Each held parry bar adds " + (MeterRules.PercentPerBar + ChargedPercent) + "%, not " + MeterRules.PercentPerBar + "%.";
+                case GluttonTalent.CommandRelay: return "Your chief spell hits twice as hard.";
+                case GluttonTalent.RoguePlanetProspecting: return "Won fights send home " + ProspectingPercent + "% more.";
+                case GluttonTalent.BranchHedge: return "Your streak survives one lost fight a run.";
+                case GluttonTalent.SynthesisDiscount: return "The forge costs a third less.";
+                case GluttonTalent.GeneLibrary: return "Pairs answer twice as often.";
+                case GluttonTalent.NodeCache: return "Every Pal card shows " + (FavourRulesOffered + CacheMore) + " picks, not " + FavourRulesOffered + ".";
+                default: return string.Empty;
+            }
+        }
+
+        /// What it did under campaign rules 29 to 45, in one line (the 1 Nov 2026 words).
+        public static string DescribeRules29(GluttonTalent t)
         {
             switch (t)
             {

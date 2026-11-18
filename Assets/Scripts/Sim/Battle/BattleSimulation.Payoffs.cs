@@ -26,7 +26,10 @@ namespace KindredSiege.Sim.Battle
         // counted it (ConfirmTeamwork, RoadCash).
         private void SnareSpent(BattleUnit target, string detail)
         {
-            if (_payoffsOn && target.Alive && detail == ClassSpells.AimedPinDetail) target.Statuses.Clear(StatusKind.Snare);
+            if (!_payoffsOn || !target.Alive || detail != ClassSpells.AimedPinDetail) return;
+            // Time Lock (rules 46, BattleSimulation.Tree.cs): the Snare takes more cashes before it is spent.
+            if (_treeOn && ++target.SnareCashes < SnareCashesFor(1 - target.Side)) return;
+            target.Statuses.Clear(StatusKind.Snare);
         }
     }
 }

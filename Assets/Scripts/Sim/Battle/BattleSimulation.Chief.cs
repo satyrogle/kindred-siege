@@ -75,6 +75,8 @@ namespace KindredSiege.Sim.Battle
                 u.Benched = false;
                 u.Alive = true;
                 u.Cooldown = 1 + u.Stats.CooldownTicks / 2;
+                // From rules 44 he comes onto a free panel (BattleSimulation.Grid.cs).
+                if (_gridOn) GridJoin(u);
                 Emit(EventFor(BattleEventKind.Join, chief, u, 0, string.Empty));
             }
             SideState state = _sides[side];
@@ -166,6 +168,8 @@ namespace KindredSiege.Sim.Battle
         // his Leeches drink from comes first, and while his chant or his Open Veins run a bleeding wound (BattleSimulation.Stoneveil.cs).
         private BattleUnit PatientFor(BattleUnit medic)
         {
+            // From rules 44 only an ally on her own panel or one touching it (BattleSimulation.Grid.cs).
+            if (_gridOn && medic.GridCol >= 0) return GridPatient(medic);
             if (_riteOn)
             {
                 BattleUnit rite = RitePatient(medic);

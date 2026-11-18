@@ -201,7 +201,7 @@ namespace KindredSiege.Sim.Battle
         // He can start a move: standing, not kneeling, not stunned, not held by a snare.
         private bool CanMove(BattleUnit chief)
         {
-            return chief.Alive && !chief.Yielded && chief.StunTicks <= 0 && chief.PanicTicks <= 0 && !(_classOn && chief.SnareTicks > 0);
+            return !(_fight.FreezeContracts && ControlBlocked(chief)) && chief.Alive && !chief.Yielded && chief.StunTicks <= 0 && chief.PanicTicks <= 0 && !(_classOn && chief.SnareTicks > 0);
         }
 
         // A chief winding up his Cleave does nothing else.
@@ -242,15 +242,16 @@ namespace KindredSiege.Sim.Battle
         private void StartKitMoves(int side)
         {
             if (!KitOn(side)) return;
-            TryStartRing(side);
-            if (!Stopped) TryStartMantle(side);
-            if (!Stopped) TryStartHook(side);
-            if (!Stopped) TryStartRifle(side);
-            if (!Stopped) TryStartAdvance(side);
-            if (!Stopped) TryStartOverclock(side);
+            // The Pit: while one parryable move of his side winds up, his other moves wait (BattleSimulation.Pit.cs, rule 3).
+            if (!PitWaits(side)) TryStartRing(side);
+            if (!Stopped && !PitWaits(side)) TryStartMantle(side);
+            if (!Stopped && !PitWaits(side)) TryStartHook(side);
+            if (!Stopped && !PitWaits(side)) TryStartRifle(side);
+            if (!Stopped && !PitWaits(side)) TryStartAdvance(side);
+            if (!Stopped && !PitWaits(side)) TryStartOverclock(side);
             // The Stoneveil and Thundercoast chiefs' (BattleSimulation.Stoneveil.cs, BattleSimulation.Thundercoast.cs).
-            if (_riteOn && !Stopped) StartRiteMoves(side);
-            if (_tideOn && !Stopped) StartTideMoves(side);
+            if (_riteOn && !Stopped && !PitWaits(side)) StartRiteMoves(side);
+            if (_tideOn && !Stopped && !PitWaits(side)) StartTideMoves(side);
         }
 
         // And run on, after the tick's blows, landing when their time comes. The hunt runs here too (BattleSimulation.Hunt.cs).
@@ -349,6 +350,8 @@ namespace KindredSiege.Sim.Battle
         {
             SideState state = _sides[side];
             if (!HasMove(side, ChiefMove.Cleave) || state.CleaveWindup > 0 || _tick < state.CleaveNext) return;
+            // The Pit: it waits while another parryable move of his side winds up (BattleSimulation.Pit.cs, rule 3).
+            if (PitWaits(side)) return;
             // From rules 21 his swings and blasts take turns (BattleSimulation.Danger.cs).
             if (CleaveWaitsForBlast(side)) return;
             BattleUnit chief = KitChief(side);
@@ -381,6 +384,7 @@ namespace KindredSiege.Sim.Battle
             SideState state = _sides[side];
             if (state.CleaveWindup <= 0) return;
             BattleUnit chief = KitChief(side);
+            if (_fight.FreezeContracts && chief != null && chief.PinTicks > 0) return;
             if (chief == null || !CanMove(chief))
             {
                 ClearCleave(state);
@@ -419,6 +423,12 @@ namespace KindredSiege.Sim.Battle
             SideState theirs = _sides[enemy];
             BattleUnit target = FindById(state.CleaveTargetId);
             ClearCleave(state);
+            // The Pit: its mark was locked at its windup, so with the mark fallen it lands on nobody (BattleSimulation.Pit.cs, rule 2).
+            if (_pitOn && (target == null || !target.Alive))
+            {
+                Emit(EventFor(BattleEventKind.Land, chief, target, 0, ChiefKits.CleaveName + "." + PitRules.Lost));
+                return;
+            }
             if (target == null || !target.Alive) target = AcrossFrom(chief);
             if (target == null) return;
             string name = ChiefKits.CleaveName + ".";
@@ -433,12 +443,13 @@ namespace KindredSiege.Sim.Battle
                 return;
             }
             if (!_parryOn && _fight.PerfectHold && !Unparryable(side) && theirs.HoldTicks > 0 && theirs.LastHoldTick >= 0 &&
-                _tick - theirs.LastHoldTick <= ParryWindowTicks)
+                _tick - theirs.LastHoldTick <= ParryWindow(1 - side))
             {
                 Emit(EventFor(BattleEventKind.Land, chief, target, 0, name + ChiefKits.Parried));
                 Emit(new BattleEvent(_tick, BattleEventKind.Parry, enemy, string.Empty, -1, chief.Id, (int)chief.Class,
-                    FightRules.StaggerTicks, ChiefKits.CleaveName));
-                chief.Cooldown += FightRules.StaggerTicks;
+                    ParryStagger(enemy), ChiefKits.CleaveName));
+                chief.Cooldown += ParryStagger(enemy);
+                StaggerTimer(chief, ParryStagger(enemy));
                 theirs.HoldTicks = 0;
                 theirs.LastParryTick = _tick;
                 theirs.ParriedCasterId = chief.Id;
@@ -506,6 +517,8 @@ namespace KindredSiege.Sim.Battle
         {
             SideState state = _sides[side];
             if (!HasMove(side, ChiefMove.Brand) || _tick < state.BrandNext) return;
+            // The Pit: it waits while another parryable move of his side winds up (BattleSimulation.Pit.cs, rule 3).
+            if (PitWaits(side)) return;
             BattleUnit chief = KitChief(side);
             List<BattleUnit> pool = chief != null && CanMove(chief) ? Brandable(side) : new List<BattleUnit>();
             if (pool.Count == 0)

@@ -344,7 +344,8 @@ namespace KindredSiege.Sim.Battle
             SideState theirs = _sides[facing];
             // Sanctuary's price (rules 28): the parrying side's parries do not stagger (BattleSimulation.Shade.cs).
             // Command Relay (rules 29) gives part of it back.
-            int stagger = SanctuaryPriced(facing) ? FightRules.StaggerTicks * (100 - PriceLeft(facing)) / 100 : FightRules.StaggerTicks;
+            // Precognition (rules 46, BattleSimulation.Tree.cs) staggers him longer.
+            int stagger = SanctuaryPriced(facing) ? ParryStagger(facing) * (100 - PriceLeft(facing)) / 100 : ParryStagger(facing);
             // Answer the Parry (rules 29) remembers who was parried, and by whom.
             if (_gluttonOn)
             {
@@ -357,6 +358,7 @@ namespace KindredSiege.Sim.Battle
             {
                 doer.Cooldown += stagger;
                 doer.ReelTicks = stagger;
+                StaggerTimer(doer, stagger);
             }
             // From rules 26 every parry hits him back for the move's damage, once the tick's moves are done; counter is it
             // when the caller knows it, else his heavy blow (BattleSimulation.Tight.cs).

@@ -50,8 +50,10 @@ namespace KindredSiege.Sim.Battle
         }
 
         // A burst went off (Burst): Crowned Marks gives the star who set it off his spell again.
+        private bool _duoCasting;
         private void DuoBurst(BattleUnit by)
         {
+            if (_fight.Corrections && _duoCasting) return;
             if (HasDuo(by.Side, PalDuo.CrownedMarks) && by.Alive && IsStar(by)) _sides[by.Side].StarCastDue = 2;
         }
 
@@ -158,7 +160,7 @@ namespace KindredSiege.Sim.Battle
             // Sized from rules 31 (BattleSimulation.Sized.cs), and more again on a Fattened Star.
             if (!_sizedOn) return GluttonRules.Bonus(TalentLevelOf(unit, talent), bonus);
             int sized = GluttonSized(unit.Side, talent, bonus);
-            if (SizeRules.FattenedPercent > 0 && sized >= SizeRules.GluttonMinBonus && HasDuo(unit.Side, PalDuo.FattenedStar) && IsStar(unit))
+            if ((!_fight.Corrections || !DimensionedBonus(talent)) && SizeRules.FattenedPercent > 0 && sized >= SizeRules.GluttonMinBonus && HasDuo(unit.Side, PalDuo.FattenedStar) && IsStar(unit))
                 sized = sized * (100 + SizeRules.FattenedPercent) / 100;
             return GluttonRules.Bonus(TalentLevelOf(unit, talent), sized);
         }
@@ -179,7 +181,7 @@ namespace KindredSiege.Sim.Battle
                     state.StarCastDue = 0;
                     continue;
                 }
-                if (star.PanicTicks > 0 || (_beastOn && IsHeld(star)) || (_heavyOn && IsSwingingHeavy(star)) || (_kitsOn && KitBusy(star)))
+                if ((_fight.Contracts && ActionBlocked(star)) || star.PanicTicks > 0 || (_beastOn && IsHeld(star)) || (_heavyOn && IsSwingingHeavy(star)) || (_kitsOn && KitBusy(star)))
                     continue;
                 if (_classOn && (star.SnareTicks > 0 || star.AimTicks > 0 || star.PinTicks > 0 || star.EvacTicks > 0)) continue;
                 int which = state.StarCastDue;
@@ -187,7 +189,8 @@ namespace KindredSiege.Sim.Battle
                 int keep = star.Cooldown;
                 star.SpellTicks = 0;
                 Emit(new BattleEvent(_tick, BattleEventKind.Trick, side, star.Id, (int)star.Class, string.Empty, -1, which, DuoRules.StarDetail));
-                Act(star);
+                _duoCasting = true;
+                try { Act(star); } finally { _duoCasting = false; }
                 if (star.Alive) star.Cooldown = keep;
                 if (!Stopped) CheckWipe();
             }

@@ -21,7 +21,7 @@ namespace KindredSiege.Sim.Tests
         }
 
         static string Route(Campaign c) => string.Join("/", c.RunRoute.Select(t => t.Id));
-        static string Legacy(string save) => string.Join("\n", save.Split('\n').Where(l => !l.StartsWith("routepick\t") && !l.StartsWith("clearroad\t") && !l.StartsWith("palroad\t")))
+        static string Legacy(string save) => string.Join("\n", save.Split('\n').Where(l => !l.StartsWith("routepick\t") && !l.StartsWith("clearroad\t") && !l.StartsWith("palroad\t") && !l.StartsWith("beastroll\t")))
             .Replace(CampaignSave.Header + "\t" + CampaignSave.Version, CampaignSave.Header + "\t13");
 
         [Test]

@@ -14,9 +14,13 @@ namespace KindredSiege.Sim.Tests
     {
         // Tier 2 enemies at half strength, so the reference pilot still reaches Skullpeak's chief under the class spells
         // (20 Oct 2026). These tests check line ups, not balance.
+        // Historical mixed-node road. A reload takes the same tuning, or it would play today's rules (the cap is not saved): from
+        // rules 43 the road's last row is the champion's, whose band is one fighter smaller.
+        private static CampaignTuning Pinned() => new CampaignTuning { EnemyScaleTier2 = 50, RulesCap = 12 };
+
         private static Campaign Ready(ulong seed)
         {
-            Campaign c = Campaign.New(seed, new CampaignTuning { EnemyScaleTier2 = 50, RulesCap = 12 }); // Historical mixed-node road.
+            Campaign c = Campaign.New(seed, Pinned());
             Assert.IsTrue(CampaignPilot.PlayTutorial(c, PilotStyle.Reference, seed, 10), "the tutorial was never won");
             return c;
         }
@@ -68,7 +72,7 @@ namespace KindredSiege.Sim.Tests
                         // What the node (or the chief's band) shows is what comes, after a save too.
                         IReadOnlyList<UnitClass> shown = e.Kind == EncounterKind.Chief ? c.ChiefSquad : c.SquadOn(e.Node);
                         CollectionAssert.AreEqual(e.EnemyClasses, shown, "the node shows the squad that comes");
-                        Campaign copy = CampaignSave.Read(CampaignSave.Write(c));
+                        Campaign copy = CampaignSave.Read(CampaignSave.Write(c), Pinned());
                         CampaignFight fight = copy.StartEncounter(i);
                         CollectionAssert.AreEqual(Expected(e.Tribe, e.Kind, e.EnemyFighters, e.Squad), Fighters(fight.Setup.Side(1)),
                             e.Tribe.Name + " " + e.Kind + " after " + before + " fights");

@@ -39,7 +39,8 @@ namespace KindredSiege.Sim.Battle
         {
             int side = attacker.Side;
             if (side < 0 || side > 1 || target.Side == side) return;
-            if (attacker.Class == UnitClass.Skirmisher)
+            // From rules 46 Nucleus Edge and Answer the Parry boost other pieces (BattleSimulation.Tree.cs).
+            if (attacker.Class == UnitClass.Skirmisher && OldTree)
             {
                 int edge = Bonus(attacker, GluttonTalent.NucleusEdge, GluttonRules.EdgePercent);
                 if (edge > 0) hit.Add(HitLayer.Increased, edge);
@@ -69,16 +70,18 @@ namespace KindredSiege.Sim.Battle
         // tricks.
         private void GluttonHit(int sourceSide, BattleUnit victim, Hit hit, string detail)
         {
-            if (victim.Row == Row.Front && victim.Side >= 0 && victim.Side <= 1)
+            if (OldTree && victim.Row == Row.Front && victim.Side >= 0 && victim.Side <= 1)
             {
                 int plating = Bonus(victim, GluttonTalent.DarkMatterPlating, GluttonRules.PlatingPercent);
                 if (plating > 0) hit.Add(HitLayer.Guard, -plating);
             }
-            if (sourceSide >= 0 && sourceSide <= 1 && ShadeRules.IsTrickDetail(detail))
+            if (OldTree && sourceSide >= 0 && sourceSide <= 1 && ShadeRules.IsTrickDetail(detail))
             {
                 int node = Bonus(sourceSide, GluttonTalent.DeepNode, GluttonRules.DeepNodePercent);
                 if (node > 0) hit.Add(HitLayer.Kit, node);
             }
+            // From rules 46 Command Relay: your chief spell hits harder (BattleSimulation.Tree.cs).
+            if (sourceSide >= 0 && sourceSide <= 1) ChiefSpellRelay(sourceSide, hit, detail);
         }
 
         // A heal's talents: Matter Printer, and Recompile on one under a quarter of his health.
@@ -87,7 +90,7 @@ namespace KindredSiege.Sim.Battle
             int side = healer != null ? healer.Side : patient.Side;
             if (side < 0 || side > 1) return;
             int printer = healer != null ? Bonus(healer, GluttonTalent.MatterPrinter, GluttonRules.PrinterPercent) : Bonus(side, GluttonTalent.MatterPrinter, GluttonRules.PrinterPercent);
-            if (printer > 0) heal.Add(HitLayer.Increased, printer);
+            if (printer > 0 && OldTree) heal.Add(HitLayer.Increased, printer);
             if (patient.HpPermille < GluttonRules.RecompileBelowPermille)
             {
                 int recompile = healer != null ? Bonus(healer, GluttonTalent.Recompile, GluttonRules.RecompilePercent) : Bonus(side, GluttonTalent.Recompile, GluttonRules.RecompilePercent);
@@ -98,7 +101,7 @@ namespace KindredSiege.Sim.Battle
         // Dark Matter Rounds: a Marksman's blow passes through part of the armour.
         private int ArmorAgainst(BattleUnit attacker, int armor)
         {
-            if (!_gluttonOn || attacker == null || armor <= 0 || attacker.Class != UnitClass.Marksman) return armor;
+            if (!OldTree || attacker == null || armor <= 0 || attacker.Class != UnitClass.Marksman) return armor;
             int through = Math.Min(100, Bonus(attacker, GluttonTalent.DarkMatterRounds, GluttonRules.DarkRoundsPercent));
             return armor * (100 - through) / 100;
         }
@@ -108,42 +111,43 @@ namespace KindredSiege.Sim.Battle
         // Entropy Sink: a front row fighter's clocks run faster, on the faster hook's percent.
         private int SinkPercent(BattleUnit unit)
         {
-            if (!_gluttonOn || unit.Row != Row.Front || unit.Side < 0 || unit.Side > 1) return 0;
+            if (!OldTree || unit.Row != Row.Front || unit.Side < 0 || unit.Side > 1) return 0;
             return Bonus(unit, GluttonTalent.EntropySink, GluttonRules.SinkPercent);
         }
 
         // Branch Anchor: a Sanctuary shield on a front row fighter, thicker.
         private int Anchored(BattleUnit unit, int size)
         {
-            if (!_gluttonOn || unit.Row != Row.Front) return size;
+            // From rules 46 on anyone, not only the front row (BattleSimulation.Tree.cs).
+            if (!_gluttonOn || (!_treeOn && unit.Row != Row.Front)) return size;
             return size * (100 + Bonus(unit, GluttonTalent.BranchAnchor, GluttonRules.AnchorPercent)) / 100;
         }
 
         // Strip: an Opening this side leaves lasts longer.
         private int Stripped(int side, int ticks)
         {
-            if (!_gluttonOn || side < 0 || side > 1) return ticks;
+            if (!OldTree || side < 0 || side > 1) return ticks;
             return ticks * (100 + Bonus(side, GluttonTalent.Strip, GluttonRules.StripPercent)) / 100;
         }
 
         // Time Lock: a snare this side lays holds longer.
         private int Locked(int side, int ticks)
         {
-            if (!_gluttonOn || side < 0 || side > 1) return ticks;
+            if (!OldTree || side < 0 || side > 1) return ticks;
             return ticks * (100 + Bonus(side, GluttonTalent.TimeLock, GluttonRules.TimeLockPercent)) / 100;
         }
 
         // Gravity Mesh: a snared enemy of this side's cannot Step Back.
         private bool Meshed(BattleUnit attacker, BattleUnit target)
         {
-            return _gluttonOn && target.SnareTicks > 0 && HasTalent(attacker.Side, GluttonTalent.GravityMesh);
+            return OldTree && target.SnareTicks > 0 && HasTalent(attacker.Side, GluttonTalent.GravityMesh);
         }
 
         // Crawl Field: the wind up percent a Time Snare slows by, from the side whose Trapper laid it.
         private int CrawlPercent(BattleUnit unit)
         {
             int percent = ClassSpells.TimeSnarePercent;
-            if (!_gluttonOn) return percent;
+            if (!OldTree) return percent;
             int side = 1 - unit.Side;
             return side < 0 || side > 1 ? percent : percent + Bonus(side, GluttonTalent.CrawlField, GluttonRules.CrawlPercent);
         }
@@ -151,7 +155,7 @@ namespace KindredSiege.Sim.Battle
         // How many places either side a pull reaches: Neutron Mass for Event Horizon, Stasis Wind Up for Singularity Net.
         private int Reach(BattleUnit by, ClassBend bend)
         {
-            if (!_gluttonOn) return 1;
+            if (!OldTree) return 1;
             if (bend == ClassBend.EventHorizon) return 1 + Bonus(by, GluttonTalent.NeutronMass, GluttonRules.NeutronReach - 1);
             if (bend == ClassBend.SingularityNet) return 1 + Bonus(by, GluttonTalent.StasisWindUp, GluttonRules.StasisReach);
             return 1;
@@ -180,7 +184,7 @@ namespace KindredSiege.Sim.Battle
         // Fold Trap: a Doorway Trapper's trap springs this many more times.
         private int FoldTrapSprings(BattleUnit trapper)
         {
-            if (!_gluttonOn || trapper == null || !Wears(trapper, ClassBend.Doorway)) return 0;
+            if (!OldTree || trapper == null || !Wears(trapper, ClassBend.Doorway)) return 0;
             return Bonus(trapper, GluttonTalent.FoldTrap, GluttonRules.FoldTrapMore);
         }
 
@@ -189,24 +193,24 @@ namespace KindredSiege.Sim.Battle
         // Light Stake: Black Hole Round's crush. Fold Step: Execution Corridor's blow. Slow Light Rounds: Stopped Bullets' freeze.
         private int StakePercent(BattleUnit marksman)
         {
-            return ClassSpells.BlackHoleCrushPercent * (100 + (_gluttonOn ? Bonus(marksman, GluttonTalent.LightStake, GluttonRules.StakePercent) : 0)) / 100;
+            return ClassSpells.BlackHoleCrushPercent * (100 + (OldTree ? Bonus(marksman, GluttonTalent.LightStake, GluttonRules.StakePercent) : 0)) / 100;
         }
 
         private int CorridorPercent(BattleUnit skirmisher)
         {
-            return ClassSpells.CorridorPercent + (_gluttonOn ? Bonus(skirmisher, GluttonTalent.FoldStep, GluttonRules.FoldStepPercent) : 0);
+            return ClassSpells.CorridorPercent + (OldTree ? Bonus(skirmisher, GluttonTalent.FoldStep, GluttonRules.FoldStepPercent) : 0);
         }
 
         private int FreezeTicks(BattleUnit marksman)
         {
-            return ClassSpells.StoppedFreezeTicks + (_gluttonOn ? Bonus(marksman, GluttonTalent.SlowLightRounds, GluttonRules.SlowLightTicks) : 0);
+            return ClassSpells.StoppedFreezeTicks + (OldTree ? Bonus(marksman, GluttonTalent.SlowLightRounds, GluttonRules.SlowLightTicks) : 0);
         }
 
         // Synthesis Discount: what is left of a pact's cost, in percent.
         private int PactLeft(int side)
         {
             if (!_gluttonOn || side < 0 || side > 1) return 100;
-            int left = Math.Max(0, 100 - Bonus(side, GluttonTalent.SynthesisDiscount, GluttonRules.DiscountPercent));
+            int left = !OldTree ? 100 : Math.Max(0, 100 - Bonus(side, GluttonTalent.SynthesisDiscount, GluttonRules.DiscountPercent));
             // The sizing pass (rules 31, BattleSimulation.Sized.cs).
             return _sizedOn ? left * SizeRules.PactPercent / 100 : left;
         }
@@ -222,7 +226,7 @@ namespace KindredSiege.Sim.Battle
         {
             int percent = PactLeft(unit.Side);
             if (!_gluttonOn) return percent;
-            if (unit.Row == Row.Front) percent = percent * (100 - Math.Min(100, Bonus(unit, GluttonTalent.FoldShield, GluttonRules.PortalNervePercent))) / 100;
+            if (OldTree && unit.Row == Row.Front) percent = percent * (100 - Math.Min(100, Bonus(unit, GluttonTalent.FoldShield, GluttonRules.PortalNervePercent))) / 100;
             if (unit.Class == UnitClass.Medic) percent = percent * (100 - Math.Min(100, Bonus(unit, GluttonTalent.EntropyPurge, GluttonRules.PortalNervePercent))) / 100;
             return percent;
         }
@@ -243,7 +247,7 @@ namespace KindredSiege.Sim.Battle
         // Rewind Wound: how many seconds this Medic's Rewind looks back.
         private int RewindSecondsOf(BattleUnit medic)
         {
-            return ClassSpells.RewindSeconds + (_gluttonOn ? Bonus(medic, GluttonTalent.RewindWound, GluttonRules.RewindMoreSeconds) : 0);
+            return ClassSpells.RewindSeconds + (OldTree ? Bonus(medic, GluttonTalent.RewindWound, GluttonRules.RewindMoreSeconds) : 0);
         }
 
         // Gene Library: how long a pair waits between free answers.
@@ -265,27 +269,31 @@ namespace KindredSiege.Sim.Battle
         private int PriceLeft(int side)
         {
             if (side < 0 || side > 1) return 100;
-            int left = _gluttonOn ? Math.Max(0, 100 - Bonus(side, GluttonTalent.CommandRelay, GluttonRules.RelayPricePercent)) : 100;
+            int left = OldTree ? Math.Max(0, 100 - Bonus(side, GluttonTalent.CommandRelay, GluttonRules.RelayPricePercent)) : 100;
             // Gorged Tricks (rules 30, BattleSimulation.Duos.cs) halves what is left, and the sizing pass (rules 31) sizes it.
             if (_duosOn) left = GorgedPrice(side, left);
             return _sizedOn ? PriceSized(left) : left;
         }
 
         // Precognition: how many ticks before a beat a live Hold parries it.
+        public int ParryWindowTicksFor(int side) => ParryWindow(side);
+
         private int ParryWindow(int side)
         {
             // The window it widens is the tight parry's from rules 26 (BattleSimulation.Tight.cs).
-            if (!_gluttonOn || side < 0 || side > 1) return ParryWindowTicks;
+            if (!OldTree || side < 0 || side > 1) return ParryWindowTicks;
             return ParryWindowTicks * (100 + Bonus(side, GluttonTalent.Precognition, GluttonRules.PrecognitionPercent)) / 100;
         }
 
         // Glancing Fold: a Hold that soaks takes this percent of the hit, soaking more.
         private int Glanced(int side, int taken)
         {
-            if (!_gluttonOn || side < 0 || side > 1) return taken;
+            if (!OldTree || side < 0 || side > 1) return taken;
             int more = Bonus(side, GluttonTalent.GlancingBlow, GluttonRules.GlancingPercent);
             return more <= 0 ? taken : Math.Max(0, 100 - (100 - taken) * (100 + more) / 100);
         }
+
+        public int ParryComboBonusPercent(int side) => side >= 0 && side <= 1 && MeterFor(side) ? _sides[side].ParryBars * PerBar(side) : 0;
 
         // Charged Branches: what each held parry bar adds.
         private int PerBar(int side)

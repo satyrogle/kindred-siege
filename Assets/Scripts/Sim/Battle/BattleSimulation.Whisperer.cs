@@ -73,7 +73,9 @@ namespace KindredSiege.Sim.Battle
         private bool Reachable(BattleUnit unit, BattleUnit e, bool reachBack)
         {
             return e != null && e.Alive && e.Side != unit.Side && !LeaderProtected(e) && (e.Row == Row.Front || reachBack) &&
-                   !Spared(unit, e) && e.EvacTicks <= 0;
+                   !Spared(unit, e) && e.EvacTicks <= 0 &&
+                   // From rules 44 only whoever his class shape reaches from his panel (BattleSimulation.Grid.cs).
+                   !(_gridOn && unit.GridCol >= 0 && !ReferenceEquals(GridTarget(unit), e));
         }
 
         // ------------------------------------------------------------ the habits' targets
@@ -334,7 +336,7 @@ namespace KindredSiege.Sim.Battle
             for (int i = 0; i < _units.Count; i++)
             {
                 BattleUnit w = _units[i];
-                if (!w.Alive || w.Side != medic.Side || w.Class != UnitClass.Warden) continue;
+                if (!w.Alive || w.Side != medic.Side || w.Class != UnitClass.Warden || (_fight.Contracts && ActionBlocked(w))) continue;
                 UpdateGuard(w);
                 SecondGuard(w);
             }
@@ -395,7 +397,7 @@ namespace KindredSiege.Sim.Battle
             for (int i = 0; i < _units.Count && !Stopped; i++)
             {
                 BattleUnit u = _units[i];
-                if (!u.Alive) continue;
+                if (!u.Alive || (_fight.Contracts && ActionBlocked(u))) continue;
                 if (u.Class == UnitClass.Warden && HabitUp(u, WhispererHabit.Rescuer))
                 {
                     BattleUnit lowest = MostHurtAlly(u, int.MaxValue, false);

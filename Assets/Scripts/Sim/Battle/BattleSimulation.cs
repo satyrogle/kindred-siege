@@ -102,6 +102,10 @@ namespace KindredSiege.Sim.Battle
             // enemy who last hit one of this side and one of its back row, the one an upgraded Avenger owes a strike, and whom
             // its Medic last treated.
             public int TrapSprings;
+            // From rules 44 (BattleSimulation.Grid.cs): the lane of the enemy front row panel the armed trap sits on, -1 when
+            // none, and whom it last sprang on, so a trap that springs twice never springs twice on one body standing still.
+            public int TrapLane = -1;
+            public string TrapSprungOn = string.Empty;
             public string LastHitterId = string.Empty;
             public string LastBackHitterId = string.Empty;
             public string AvengeId = string.Empty;
@@ -415,6 +419,10 @@ namespace KindredSiege.Sim.Battle
             _meterOn = _fight.Meter;
             // The tight parry (BattleSimulation.Tight.cs, campaign rules 26), on the parry at the center.
             _tightOn = _parryOn && _fight.Tight;
+            // The Pit (BattleSimulation.Pit.cs, campaign rules 38).
+            _pitOn = _fight.Pit;
+            _stageOn = _fight.Stage && !_fight.LockedPairs;
+            _stageReadyAt = NewStageClocks(_units.Count);
             // The chief rules (BattleSimulation.Chief.cs, 20 Oct 2026): his reserves wait out of the fight.
             _chiefOn = _fight.ChiefRules;
             if (_chiefOn) BenchReserves();
@@ -478,9 +486,20 @@ namespace KindredSiege.Sim.Battle
                 _sides[s].MendNext = (_rules[s].Band & BandTrait.Mender) != 0 ? BandRules.MendEveryTicks : 0;
             }
 
+            // From rules 44 each band stands on its own 3 by 3 panels, never in a duel or a beast fight (BattleSimulation.Grid.cs).
+            // It draws no random number.
+            _gridOn = _fight.Grid && !_beastOn && !_duelOn;
+            if (_gridOn) PlaceOnGrid();
+            _pairsOn = _fight.LockedPairs && !_beastOn && !_duelOn;
+            if (_pairsOn) PrepareExchanges();
+            // From rules 46 the Glutton's tree retargeted and the live hooks (BattleSimulation.Tree.cs).
+            _treeOn = _fight.TreeRetarget;
+
             // Stagger first actions so both sides do not open in lockstep.
             for (int i = 0; i < _units.Count; i++)
                 _units[i].Cooldown = 1 + _rng.Next(_units[i].Stats.CooldownTicks);
+            // From rules 40 the first turns come as much later as every turn (BattleSimulation.Stage.cs).
+            if (_stageOn) StageStagger();
             if (_classOn) StartSpellClocks();
             // The rules 34 duos' streak and Shadow Twin's half health (BattleSimulation.DuoMoves.cs).
             if (_duoMovesOn) StartDuoMoves();
@@ -655,6 +674,11 @@ namespace KindredSiege.Sim.Battle
                     failure = "Eclipse needs a living leader to cast it.";
                     return false;
                 }
+                if (_fight.FreezeContracts && ControlBlocked(Leader(side)))
+                {
+                    failure = "The leader cannot cast while controlled.";
+                    return false;
+                }
                 if (state.Windup > 0)
                 {
                     failure = "Eclipse is already winding up.";
@@ -702,6 +726,25 @@ namespace KindredSiege.Sim.Battle
             return _tick;
         }
 
+        private bool ControlBlocked(BattleUnit unit)
+        {
+            if (unit == null || !unit.Alive || unit.Benched || unit.Yielded || unit.PanicTicks > 0 || unit.StunTicks > 0) return true;
+            if (_classOn && (unit.SnareTicks > 0 || unit.PinTicks > 0 || unit.EvacTicks > 0)) return true;
+            return (_beastOn && IsHeld(unit)) || (_beastRaidOn && Frozen(unit));
+        }
+
+        private bool ActionBlocked(BattleUnit unit, bool completingAim = false, bool completingHeavy = false)
+        {
+            if (_fight.FreezeContracts && ControlBlocked(unit)) return true;
+            if (unit == null || !unit.Alive || unit.Benched || unit.PanicTicks > 0 || unit.Yielded) return true;
+            if (_classOn && (unit.SnareTicks > 0 || unit.PinTicks > 0 || unit.EvacTicks > 0 || (!completingAim && unit.AimTicks > 0))) return true;
+            if (_beastOn && IsHeld(unit)) return true;
+            if (_beastRaidOn && Frozen(unit)) return true;
+            if (_heavyOn && !completingHeavy && IsSwingingHeavy(unit)) return true;
+            if (_kitsOn && KitBusy(unit)) return true;
+            return _parryOn && Braced(unit);
+        }
+
         public void Tick()
         {
             // A chief kneels (BattleSimulation.Kit.cs, 21 Oct 2026): nothing moves until the other side spares or executes
@@ -714,6 +757,7 @@ namespace KindredSiege.Sim.Battle
             }
             if (!_finished)
             {
+                if (_pairsOn) TickExchanges();
                 if (_tick == OpenerTick)
                 {
                     for (int s = 0; s < 2; s++) TryOpener(s);
@@ -747,7 +791,7 @@ namespace KindredSiege.Sim.Battle
                 for (int n = 0; n < _units.Count && !Stopped; n++)
                 {
                     BattleUnit unit = _units[forward ? n : _units.Count - 1 - n];
-                    if (!unit.Alive) continue;
+                    if (!unit.Alive || (_fight.Contracts && ActionBlocked(unit))) continue;
                     if (_beastOn && unit.Side == _beastSide) continue; // a beast's parts only move by their clocks
                     if (_beastOn && IsHeld(unit)) continue; // in the cage bear's claw, out of the fight
                     if (_beastRaidOn && Frozen(unit)) continue; // frozen by the cage bear's frost (BattleSimulation.BeastRaid.cs)
@@ -762,13 +806,23 @@ namespace KindredSiege.Sim.Battle
                     if (_duoMovesOn && Tired(unit)) continue; // tired after an Endless Unleash (BattleSimulation.DuoMoves.cs)
                     unit.Cooldown--;
                     if (unit.Cooldown > 0) continue;
+                    if (_pairsOn && PairAction(unit)) continue;
+                    // From rules 40 his turn joins the line, one landing a tick (BattleSimulation.Stage.cs).
+                    if (_stageOn)
+                    {
+                        StageReady(unit);
+                        continue;
+                    }
                     Act(unit);
-                    // Heavy slows a Gravity Well Warden's and Medic's turns (BattleSimulation.Combos.cs).
-                    if (unit.Alive) unit.Cooldown += HeavyTurn(unit, NextCooldown(unit));
+                    // Heavy slows a Gravity Well Warden's and Medic's turns (BattleSimulation.Combos.cs). From rules 44 a step is
+                    // a short turn (BattleSimulation.Grid.cs).
+                    if (unit.Alive) unit.Cooldown += _gridOn && StepTaken() ? GridRules.StepTicks : HeavyTurn(unit, NextCooldown(unit));
                     // A gorged star's turns slow by half of what he grew (rules 34, BattleSimulation.DuoMoves.cs).
                     if (_duoMovesOn && unit.Alive && unit.GorgePercent > 0) unit.Cooldown += NextCooldown(unit) * unit.GorgePercent / 200;
                     CheckWipe();
                 }
+                // The first in line takes his turn (rules 40, BattleSimulation.Stage.cs).
+                if (_stageOn && !Stopped) StageNext();
 
                 // The Whisperer's upgraded Rescuers and Avengers (BattleSimulation.Whisperer.cs, rules 24).
                 if (_whisperOn && !Stopped) TickWhisper();
@@ -779,6 +833,8 @@ namespace KindredSiege.Sim.Battle
 
                 // Class spells (BattleSimulation.Class.cs, 20 Oct 2026): aims run on, and a finished one fires.
                 if (_classOn && !Stopped) AdvanceAims();
+                // From rules 44 a trap springs on whoever stands on its panel (BattleSimulation.Grid.cs).
+                if (_gridOn && !Stopped) TickGrid();
 
                 // The new tribes (BattleSimulation.Tribes.cs, 18 Oct 2026): wounds that bleed, and the water rising.
                 if (_bleedOn && !Stopped) TickBleeding();
@@ -936,10 +992,27 @@ namespace KindredSiege.Sim.Battle
 
             if (!CanUse(side, directive, out failure)) return false;
 
-            BattleUnit target = null;
+            if (!OrderTarget(side, directive, command.TargetId, out BattleUnit target, out failure)) return false;
+
+            int at = _events.Count;
+            ApplyDirective(side, directive, target, "side" + side.ToString(CultureInfo.InvariantCulture));
+            // A Hold given while the fight was paused still soaks, but it can never parry: the parry is a live
+            // press (Jacob, 18 Oct 2026). Only in fights with heavy swings, or a beast's Bite to parry (the audit, 22 Oct
+            // 2026), so older fights replay as they were; under the parry at the center in every fight (24 Oct 2026).
+            if ((_heavyOn || _beastOn || _parryOn) && directive == Directive.Hold && command.Arg0 == HeavyRules.PausedOrderArg)
+                _sides[side].LastHoldTick = -1;
+            // Which orders were given while paused, for their results (BattleSimulation.Orders.cs). Not in the snapshot.
+            if (command.Arg0 == HeavyRules.PausedOrderArg && at < _events.Count) _pausedOrders.Add(at);
+            return true;
+        }
+
+        private bool OrderTarget(int side, Directive directive, string targetId, out BattleUnit target, out string failure)
+        {
+            failure = string.Empty;
+            target = null;
             if (directive == Directive.FocusFire)
             {
-                target = FindById(command.TargetId);
+                target = FindById(targetId);
                 if (target == null || !target.Alive || target.Side == side)
                 {
                     failure = "Focus fire needs a living enemy target.";
@@ -954,7 +1027,7 @@ namespace KindredSiege.Sim.Battle
             }
             else if (directive == Directive.Sacrifice)
             {
-                target = FindById(command.TargetId);
+                target = FindById(targetId);
                 if (target == null || !target.Alive || target.Side != side)
                 {
                     failure = "Sacrifice needs a living unit on your side.";
@@ -972,15 +1045,6 @@ namespace KindredSiege.Sim.Battle
                 }
             }
 
-            int at = _events.Count;
-            ApplyDirective(side, directive, target, "side" + side.ToString(CultureInfo.InvariantCulture));
-            // A Hold given while the fight was paused still soaks, but it can never parry: the parry is a live
-            // press (Jacob, 18 Oct 2026). Only in fights with heavy swings, or a beast's Bite to parry (the audit, 22 Oct
-            // 2026), so older fights replay as they were; under the parry at the center in every fight (24 Oct 2026).
-            if ((_heavyOn || _beastOn || _parryOn) && directive == Directive.Hold && command.Arg0 == HeavyRules.PausedOrderArg)
-                _sides[side].LastHoldTick = -1;
-            // Which orders were given while paused, for their results (BattleSimulation.Orders.cs). Not in the snapshot.
-            if (command.Arg0 == HeavyRules.PausedOrderArg && at < _events.Count) _pausedOrders.Add(at);
             return true;
         }
 
@@ -989,6 +1053,7 @@ namespace KindredSiege.Sim.Battle
             get
             {
                 var b = new SnapshotBuilder();
+                if (_fight.Contracts) AppendSetupInputs(b);
                 b.Section("battle");
                 b.Field("fight", _setup.FightId);
                 b.Field("tick", _tick);
@@ -1023,6 +1088,11 @@ namespace KindredSiege.Sim.Battle
                 if (_beastOn) AppendBeast(b);
                 if (_huntOn) AppendHunt(b);
                 if (_roadCombatOn) AppendChains(b);
+                // Written only under rules 40, so every older fight keeps its checksum.
+                if (_stageOn) AppendStage(b);
+                // Written only under rules 44, so every older fight keeps its checksum.
+                if (_gridOn) AppendGrid(b);
+                if (_pairsOn) AppendExchanges(b);
                 for (int s = 0; s < 2; s++)
                 {
                     SideState state = _sides[s];
@@ -1276,6 +1346,7 @@ namespace KindredSiege.Sim.Battle
                             b.Field(name, mark.Ticks);
                             b.Field(name + "Stacks", mark.Stacks);
                             b.Field(name + "By", mark.SourceId);
+                            if (_fight.Corrections) { b.Field(name + "Size", mark.Size); b.Field(name + "Store", mark.Store); }
                         }
                     }
                     // And the floor under the three Pals, only where it plays (BattleSimulation.Shade.cs).
@@ -1293,6 +1364,7 @@ namespace KindredSiege.Sim.Battle
                         // And the Shade's forms, only where they play (rules 28).
                         if (_shadeOn) AppendShadeUnit(b, u);
                         if (_gluttonOn) AppendGluttonUnit(b, u);
+                        if (_treeOn) AppendTreeUnit(b, u);
                         if (_duoMovesOn) AppendDuoMovesUnit(b, u);
                     }
                 }
@@ -1300,6 +1372,60 @@ namespace KindredSiege.Sim.Battle
                 b.Field("count", _events.Count);
                 b.Field("hash", _eventHash);
                 return b.ToString();
+            }
+        }
+
+        // Rules36 includes immutable combat inputs as well as mutable state. In particular armour must distinguish
+        // two fights before their first hit. Fixed field order, never reflection or unordered collection traversal.
+        private void AppendSetupInputs(SnapshotBuilder b)
+        {
+            b.Section("setup36");
+            b.Field("seed", _setup.Seed);
+            b.Field("limit", _setup.TickLimit);
+            b.Field("points", _setup.StartingDirectivePoints);
+            b.Field("refill", _setup.RefillTicks);
+            b.Field("health", _setup.HealthPercent);
+            b.Field("nerve", _setup.Nerve.Enabled);
+            b.Field("unleashCost", _setup.Nerve.UnleashCost);
+            b.Field("holdDrain", _setup.Nerve.HoldDrainEveryTicks);
+            for (int side = 0; side < 2; side++)
+            {
+                b.Section("setupSide" + side.ToString(CultureInfo.InvariantCulture));
+                b.Field("startNerve", _setup.Nerve.StartNerve(side));
+                b.Field("fear", _setup.Nerve.FearBonusPercent(side));
+                _setup.Rules(side).AppendTo(b, "rules.");
+                var specs = _setup.Side(side);
+                b.Field("count", specs.Count);
+                for (int i = 0; i < specs.Count; i++)
+                {
+                    UnitSpec spec = specs[i];
+                    b.Section("spec" + i.ToString(CultureInfo.InvariantCulture));
+                    b.Field("id", spec.Id);
+                    b.Field("class", (int)spec.Class);
+                    b.Field("row", (int)spec.Row);
+                    b.Field("role", (int)spec.Role);
+                    b.Field("power", spec.PowerPercent);
+                    b.Field("health", spec.HealthPercent);
+                    b.Field("fear", spec.FearPercent);
+                    b.Field("wounded", spec.WoundedBonusPercent);
+                    b.Field("armor", spec.ArmorPercent);
+                    b.Field("hit", spec.HitBonus);
+                    b.Field("avoid", spec.AvoidBonus);
+                    b.Field("rise", spec.RiseBonus);
+                    b.Field("killNerve", spec.KillNerve);
+                    b.Field("bigArmor", spec.BigHitArmorPercent);
+                    b.Field("bleed", spec.BleedPercent);
+                    b.Field("bend", (int)spec.Bend);
+                    b.Field("reserve", spec.Reserve);
+                    b.Field("scars", spec.BeastScars);
+                    b.Field("burn", spec.BurnPercent);
+                    b.Field("carries", (int)spec.Carries);
+                    b.Field("comboRank", spec.ComboRank);
+                    b.Field("bend2", (int)spec.Bend2);
+                    b.Field("comboRank2", spec.ComboRank2);
+                    b.Field("clock", spec.ClockPercent);
+                    b.Field("rank", spec.Rank);
+                }
             }
         }
 
@@ -1341,6 +1467,9 @@ namespace KindredSiege.Sim.Battle
                     if (_shadeOn && KitOf(side).Has(ShadeRoute.Backstab))
                         state.FallBackLockTicks = state.FallBackTicks + ShadeRules.BackstabLockTicks * PriceLeft(side) / 100;
                     if (ordered) state.LastFallBackTick = _tick;
+                    // From rules 44 the band steps back one row (BattleSimulation.Grid.cs).
+                    if (_pairsOn) PairOrder(side);
+                    if (_gridOn) GridFallBack(side);
                     ReflexPressOnFallBack(1 - side);
                     // Backstab, the Shade's Fall Back trick (rules 23, BattleSimulation.Shade.cs).
                     if (_floorOn) Backstab(side);
@@ -1352,6 +1481,7 @@ namespace KindredSiege.Sim.Battle
                     if (_parryOn && HasBand(target.Side, BandTrait.ThickHide)) Fired(target.Side, LessonFiring.ThickHide, target, null);
                     state.FocusTargetId = target.Id;
                     state.FocusTicks = FearPriced(side, Longer(FocusTicks * percent / 100, _rules[side].Favours.FocusLongerPercent));
+                    if (_pairsOn) PairOrder(side, target);
                     // Rupture (rules 28): a new Focus Fire starts its weak point over (BattleSimulation.Shade.cs).
                     if (_shadeOn) RuptureOn(side, state, target);
                     if (ordered)
@@ -1602,6 +1732,8 @@ namespace KindredSiege.Sim.Battle
             if (rules.AutoEclipseTicks <= 0 || rules.EclipseGrade <= 0 || _tick < state.NextAutoEclipse) return;
             // One tell at a time: the Eclipse waits for the side's heavy swing to land (18 Oct 2026).
             if (_heavyOn && state.HeavyWindup > 0) return;
+            // The Pit: nor while any other parryable move of his side winds up (BattleSimulation.Pit.cs, rule 3).
+            if (PitWaits(side)) return;
             // A chief never casts Steel Storm again while his wall still stands, so it cannot be kept up for good.
             if (_spellsOn && state.WallTicks > 0) return;
             // A chief who yielded casts nothing more (ChiefFight).
@@ -1665,6 +1797,8 @@ namespace KindredSiege.Sim.Battle
                 ClearWindup(state);
                 return;
             }
+            // A frozen caster keeps the restarted windup but cannot advance it until released.
+            if (_fight.FreezeContracts && ControlBlocked(caster)) return;
             // While her Wardens lock shields, a snare on any of them leaves the wall half built (ChiefKits).
             if (_kitsTwoOn && Kit(side) == ChiefKit.Skullpeak && WardenSnared(side)) state.LockSnared = true;
             state.Windup--;
@@ -1859,6 +1993,8 @@ namespace KindredSiege.Sim.Battle
 
         private void Act(BattleUnit unit)
         {
+            // From rules 44 a fighter whose class shape reaches nobody steps one panel instead (BattleSimulation.Grid.cs).
+            if (_gridOn && (!_pairsOn || ExchangeOf(unit) == null) && GridStepInstead(unit)) return;
             // With class spells each class casts its own spell (BattleSimulation.Class.cs).
             if (_classOn)
             {
@@ -1894,6 +2030,8 @@ namespace KindredSiege.Sim.Battle
             {
                 own.TrapArmed = true;
                 own.TrapOwnerId = unit.Id;
+                // From rules 44 on the enemy front row panel of her lane (BattleSimulation.Grid.cs).
+                if (_gridOn) SetTrapLane(own, unit);
                 // A rank 2 Trapper's trap springs twice before she rearms it (rules 24, BattleSimulation.Whisperer.cs).
                 if (_whisperOn) own.TrapSprings = SpringsOf(unit) + FoldTrapSprings(unit);
                 _trapReadyIn[unit.Index] = RearmActions(unit);
@@ -1999,7 +2137,7 @@ namespace KindredSiege.Sim.Battle
         {
             // Under the road kit Fall Back is a pure dodge: nobody of the falling side attacks (BattleSimulation.Boosts.cs).
             // From rules 34 a Shadow Twin star's shadow fights on (BattleSimulation.DuoMoves.cs).
-            if (FallingBack(attacker.Side) && !(_duoMovesOn && ShadowFights(attacker))) return;
+            if (FallingBack(attacker.Side) && !(_duoMovesOn && (_fight.Corrections ? ShadowFighting(attacker) : ShadowFights(attacker)))) return;
             // Rift Mine (rules 28): striking one of a side with a mine sets it off, and a blast that drops him stops the blow.
             if (_shadeOn && MineGoesOff(attacker, target)) return;
             int roll = 85 + _rng.Next(31);
@@ -2016,7 +2154,10 @@ namespace KindredSiege.Sim.Battle
             // A melee attacker springs the defenders' armed trap before its blow lands. Through Doorway's portal a shooter does
             // too (BattleSimulation.Combos.cs). A duel's champion springs it once, then steps around it (DESIGN_LOCKS, "Duels").
             // An Ambusher's trap ignores these blows and waits for a heavy swing (rules 24, BattleSimulation.Whisperer.cs).
-            if ((!attacker.Stats.Ranged || Doorway(theirs)) && theirs.TrapArmed && !(_duelOn && attacker.SprangTrap) && !AmbushWaits(target.Side))
+            // From rules 43 a leader no blow can reach steps around it, so it waits for a fighter (BattleSimulation.Leaders.cs).
+            // From rules 44 the trap sits on a panel and springs on whoever stands there, never on a blow (BattleSimulation.Grid.cs).
+            if (!_gridOn && (!attacker.Stats.Ranged || Doorway(theirs)) && theirs.TrapArmed && !(_duelOn && attacker.SprangTrap) && !AmbushWaits(target.Side) &&
+                !(LeadersOn && LeaderProtected(attacker)))
             {
                 if (_duelOn) attacker.SprangTrap = true;
                 BattleUnit trapper = FindById(theirs.TrapOwnerId);
@@ -2040,6 +2181,8 @@ namespace KindredSiege.Sim.Battle
                     Snare(trapper, target.Side, attacker);
                     // Rules 18: a shooter Doorway caught carries Exposed (BattleSimulation.Marks.cs).
                     if (attacker.Stats.Ranged) Lay(trapper, attacker, ClassBend.Doorway);
+                    // Doorway's hook (rules 46, BattleSimulation.Tree.cs): her catch is left with an Opening.
+                    if (_treeOn && trapper != null && attacker.Alive && !_finished && Wears(trapper, ClassBend.Doorway)) Open(trapper, attacker);
                     return;
                 }
             }
@@ -2059,6 +2202,16 @@ namespace KindredSiege.Sim.Battle
                 damage = More(damage, hit, HitLayer.Cash, MarkRules.WideOpenCashPercent * (100 + wideMore) / 100);
                 Emit(EventFor(BattleEventKind.Cash, attacker, target, (hit != null ? hit.Points : damage) - before, MarkRules.WideOpenDetail));
             }
+            // Stopped Bullets' hook (rules 46, BattleSimulation.Tree.cs): the volley on a bleeding man lands in one wound, double,
+            // and spends the Bleed; Slow Light Rounds makes it triple.
+            int bleedCash = StoppedBleedCash(attacker, target);
+            if (bleedCash > 0)
+            {
+                int before = hit != null ? hit.Points : damage;
+                damage = More(damage, hit, HitLayer.Cash, 100 + bleedCash);
+                target.Statuses.Clear(StatusKind.Bleed);
+                Emit(EventFor(BattleEventKind.Cash, attacker, target, (hit != null ? hit.Points : damage) - before, ClassSpells.RipDetail));
+            }
             // Backstab, the Shade's Fall Back trick (rules 23): stepping out behind them, this blow doubles, in the Cash layer
             // (BattleSimulation.Shade.cs).
             if (SpendBackstab(attacker, target))
@@ -2076,8 +2229,10 @@ namespace KindredSiege.Sim.Battle
                 damage = More(damage, hit, HitLayer.Cash, DuelistPercent(attacker));
                 Emit(EventFor(BattleEventKind.Cash, attacker, target, (hit != null ? hit.Points : damage) - before, VowRules.DuelistDetail));
             }
-            if (_fight.Misses && !wideOpen && !duel && !(_classOn && (target.SnareTicks > 0 || target.PinTicks > 0)) && target.HookTicks <= 0 && !_timeShot &&
-                Missed(attacker, target)) return;
+            bool rolls = !wideOpen && !duel && !(_classOn && (target.SnareTicks > 0 || target.PinTicks > 0)) && target.HookTicks <= 0 && !_timeShot;
+            // From rules 42 a blow that can miss rolls on the attack table instead: a dodge, a parry, a block, a crit or a hit
+            // (BattleSimulation.Table.cs).
+            if (_fight.Table ? rolls && Tabled(attacker, target, hit, ref damage) : _fight.Misses && rolls && Missed(attacker, target)) return;
             // Under road combat a Marksman's Step Back makes a melee blow at him miss (BattleSimulation.Defence.cs).
             if (_roadCombatOn && !wideOpen && SteppedBack(attacker, target)) return;
 
@@ -2096,8 +2251,15 @@ namespace KindredSiege.Sim.Battle
                 door = true;
                 Emit(EventFor(BattleEventKind.Portal, warden, target, 0, ClassSpells.Name(ClassBend.WrongDoor)));
             }
+            // From rules 43 a Warden holds the middle: his Defence decides whether he steps in front of a melee blow on another of
+            // his side (BattleSimulation.Leaders.cs).
+            // From rules 44 it is the Warden whose panel touches the target's, for any blow (BattleSimulation.Grid.cs).
+            if (warden == null && (LeadersOn || _gridOn) && !_timeShot && !portal && !wideOpen)
+                warden = _gridOn ? CrossWarden(attacker, target) : MiddleWarden(attacker, target);
             if (warden != null)
             {
+                // From rules 42 the Warden's Defence takes its slice too (BattleSimulation.Table.cs).
+                damage = Defended(warden, hit, damage);
                 int cut = _classOn ? GuardCut(warden) : SliceClasses.GuardReductionPercent;
                 if (hit != null) GuardedHit(attacker, target, warden, hit, cut);
                 else
@@ -2131,6 +2293,8 @@ namespace KindredSiege.Sim.Battle
                 if (hit != null) CashInHit(attacker, target, kind, hit, out detail);
                 else damage = CashIn(attacker, target, kind, damage, out detail);
             }
+            // From rules 42 the target's Defence takes its slice (BattleSimulation.Table.cs).
+            damage = Defended(target, hit, damage);
             if (hit != null) ApplyHit(attacker, attacker.Side, target, Armor(target, hit, attacker), detail);
             else ApplyDamage(attacker, attacker.Side, target, Armored(target, damage), detail);
             if (_roadKitOn) Burned(attacker, target);
@@ -2304,11 +2468,11 @@ namespace KindredSiege.Sim.Battle
             // Shadow Strike, Backstab's last form (rules 28): your side keeps striking while it falls back, and they still can't
             // reach you (BattleSimulation.Shade.cs).
             // Rift Mine's price (rules 28): your attacks wait out its return too.
-            if ((mine.FallBackTicks > 0 && !ShadowStrike(attacker.Side)) || (_shadeOn && mine.ReturnTicks > 0) ||
+            if ((mine.FallBackTicks > 0 && !ShadowStrike(attacker.Side) && !(_fight.Corrections && ShadowFights(attacker))) || (_shadeOn && mine.ReturnTicks > 0 && !(_fight.Corrections && ShadowFights(attacker) && mine.FallBackTicks > 0)) ||
                 (theirs.FallBackTicks > 0 && !HasBand(attacker.Side, BandTrait.LongReach)))
                 return StrikeBlock.FallBack;
             // Never on an Ambusher's trap, which no light blow springs (rules 24).
-            if (attacker.Class != UnitClass.Warden && theirs.TrapArmed && !AmbushWaits(1 - attacker.Side) &&
+            if (!_gridOn && attacker.Class != UnitClass.Warden && theirs.TrapArmed && !AmbushWaits(1 - attacker.Side) &&
                 _tactics[attacker.Side].TrapCaution >= HabitThreshold && FirstLivingWarden(attacker.Side) != null)
                 return StrikeBlock.WaitsOutTrap;
             return StrikeBlock.None;
@@ -2335,6 +2499,9 @@ namespace KindredSiege.Sim.Battle
             // Either side has fallen back (no melee lands for now), or a learned habit lets our own
             // Warden spring their trap first.
             if (MeleeHeldBack(attacker) != StrikeBlock.None) return null;
+            // From rules 44 only whoever his class shape reaches from his panel (BattleSimulation.Grid.cs).
+            if (_pairsOn && (ExchangeOf(attacker) != null || PairFocus(attacker) != null)) return PairTarget(attacker);
+            if (_gridOn && attacker.GridCol >= 0) return GridTarget(attacker);
 
             // Her side goes for whoever her Hook dragged in front of her shields (ChiefKits, 22 Oct 2026).
             BattleUnit dragged = _kitsTwoOn ? DraggedFoe(attacker.Side) : null;
@@ -2402,9 +2569,13 @@ namespace KindredSiege.Sim.Battle
             {
                 BattleUnit u = _units[i];
                 // From rules 24 his second ward too, and an upgraded Bodyguard's back row (BattleSimulation.Whisperer.cs).
+                // From rules 43 a leader no blow can reach covers nobody, or he would be a wall nothing breaks
+                // (BattleSimulation.Leaders.cs).
                 if (u.Alive && u.Side == target.Side && u.Class == UnitClass.Warden && !ReferenceEquals(u, target) &&
                     (string.Equals(u.GuardTargetId, target.Id, StringComparison.Ordinal) || (_whisperOn && AlsoGuards(u, target))) &&
-                    !(_shadeOn && u.Statuses[StatusKind.NoCover].On))
+                    !(_shadeOn && u.Statuses[StatusKind.NoCover].On) && !(LeadersOn && LeaderProtected(u)) &&
+                    // From rules 44 only a ward on a panel touching his (BattleSimulation.Grid.cs).
+                    !(_gridOn && !Touches(u, target)))
                     return u;
             }
             return null;
@@ -2578,6 +2749,8 @@ namespace KindredSiege.Sim.Battle
 
             // A side whose Pal or Chief drops breaks on the spot.
             if (killed && victim.IsLeader) LeaderDown(victim.Side);
+            // From rules 43 their leader leaves when his last fighter falls (BattleSimulation.Leaders.cs).
+            else if (killed && LeadersOn) FighterGone(victim);
 
             // Her tricks under the duos: Marked Tricks and Shadow Star (rules 30, BattleSimulation.Duos.cs).
             if (_duosOn && !_finished) DuoLanded(sourceSide, victim, detail);
@@ -2719,6 +2892,8 @@ namespace KindredSiege.Sim.Battle
         private void LeaderDown(int side)
         {
             if (_finished) return;
+            // From rules 43 their champion's fall breaks his band, road fight or not (BattleSimulation.Leaders.cs).
+            if (ChampionFell(side)) return;
             // In a road combat road fight a leader falling does not break his side: it fights on until nobody is left
             // (BattleSimulation.Road.cs).
             if (_unitNerveOn)

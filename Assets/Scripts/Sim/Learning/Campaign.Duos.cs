@@ -66,6 +66,7 @@ namespace KindredSiege.Sim.Learning
         {
             if (!DuosRun || Stage != CampaignStage.InRun || !DuoRules.Valid(duo) || HoldsDuo(duo)) return false;
             _duos |= 1 << (int)duo;
+            if (Math.Min(RulesVersion, _tuning.RulesCap) >= CorrectnessRules && DuoRules.IsMove(duo)) _duoLevel = Math.Max(1, _duoLevel);
             return true;
         }
 

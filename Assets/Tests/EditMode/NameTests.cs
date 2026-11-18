@@ -73,8 +73,9 @@ namespace KindredSiege.Sim.Tests
                 {
                     CampaignFight fight = c.StartEncounter(picker.PickOffer(c));
                     string tribe = fight.Encounter.Tribe.Id;
-                    // Hunter fights use the company names and are not part of this tribe's naming sequence.
-                    if (fight.Encounter.Tribe.Id == AlphaHunt.Id)
+                    // Hunter fights use the company names and are not part of this tribe's naming sequence; nor are beasts
+                    // (rules 39 puts a rolled one on a road node), whose parts keep their names when tried again.
+                    if (fight.Encounter.Tribe.Id == AlphaHunt.Id || fight.Encounter.Kind == EncounterKind.Beast)
                     {
                         CampaignPilot.PlayFight(c, fight, new CampaignPilot(PilotStyle.Reference, seed * 31UL + n));
                         continue;
@@ -271,7 +272,7 @@ namespace KindredSiege.Sim.Tests
             c.StartRun();
             string now = CampaignSave.Write(c);
             string old = string.Join("\n", now.Split('\n')
-                    .Where(l => !l.StartsWith("named\t") && !l.StartsWith("clearroad\t") && !l.StartsWith("palroad\t"))
+                    .Where(l => !l.StartsWith("named\t") && !l.StartsWith("clearroad\t") && !l.StartsWith("palroad\t") && !l.StartsWith("beastroll\t"))
                     .Select(l => l.StartsWith("fighter\t") ? string.Join("\t", l.Split('\t').Take(4)) : l))
                 .Replace(CampaignSave.Header + "\t" + CampaignSave.Version, CampaignSave.Header + "\t5");
             Assert.AreNotEqual(now, old);

@@ -91,6 +91,9 @@ namespace KindredSiege.Sim
         {
             Simulation = simulation ?? throw new ArgumentNullException(nameof(simulation));
             Log = log ?? new SimCommandLog();
+            int greatest = 0;
+            for (int i = 0; i < Log.Count; i++) greatest = Math.Max(greatest, Log.Commands[i].Sequence);
+            _nextSequence = greatest == int.MaxValue ? 0 : greatest + 1;
         }
 
         public ISimulation Simulation { get; }
@@ -112,10 +115,12 @@ namespace KindredSiege.Sim
                 _nextSequence,
                 kind, actorId, targetId, arg0, arg1, textArg);
 
+            // The session is single-threaded. Reject an unwritable/duplicate log before changing the fight.
+            if (!Log.CanRecord(command, out failure)) return false;
             if (!Simulation.TryApply(command, out failure)) return false;
             if (!Log.TryRecord(command, out failure))
                 throw new InvalidOperationException("Command applied but not recorded: " + failure);
-            _nextSequence++;
+            _nextSequence = _nextSequence == int.MaxValue ? 0 : _nextSequence + 1;
             return true;
         }
 

@@ -336,7 +336,7 @@ namespace KindredSiege.Sim.Tests
         [Test]
         public void TheSharkWaitsBesideTheFirstRoadOnly()
         {
-            Campaign c = OnTheFirstRoad(5100, new CampaignTuning());
+            Campaign c = OnTheFirstRoad(5100, new CampaignTuning { RulesCap = Campaign.PitRules });
             Encounter shark = c.BeastOffer;
             Assert.IsNotNull(shark);
             Assert.AreEqual(EncounterKind.Beast, shark.Kind);
@@ -346,11 +346,11 @@ namespace KindredSiege.Sim.Tests
 
             // Not on a deeper tribe's road (Skullpeak's has the cage bear instead, CageBearTests), and not on a road with no
             // rows before its chief.
-            Campaign deeper = Campaign.New(5100, new CampaignTuning());
+            Campaign deeper = Campaign.New(5100, new CampaignTuning { RulesCap = Campaign.PitRules });
             Assert.IsTrue(CampaignPilot.PlayTutorial(deeper, PilotStyle.Reference, 5100, 10));
             deeper.ChooseTribe(CampaignTribes.ThundercoastId);
             Assert.IsNull(deeper.BeastOffer);
-            Assert.IsNull(OnTheFirstRoad(5100, new CampaignTuning { PathFights = 0 }).BeastOffer);
+            Assert.IsNull(OnTheFirstRoad(5100, new CampaignTuning { PathFights = 0, RulesCap = Campaign.PitRules }).BeastOffer);
         }
 
         [Test]
@@ -358,14 +358,14 @@ namespace KindredSiege.Sim.Tests
         {
             // A short clock, so it dives away before every part breaks. 30 s from rules 25 (1 Nov 2026), whose Bite on a whole row
             // sends more back into the jaw, so a 40 s clock saw it die in all forty.
-            var t = new CampaignTuning { FightTicks = 30 * SimClock.TicksPerSecond };
+            var t = new CampaignTuning { FightTicks = 30 * SimClock.TicksPerSecond, RulesCap = Campaign.PitRules };
             for (ulong seed = 5200; seed < 5240; seed++)
             {
                 Campaign c = OnTheFirstRoad(seed, t);
                 int step = c.Step;
                 int offers = c.Offers.Count;
                 CampaignFight fight = c.StartBeast();
-                Assert.AreEqual(Campaign.RulesVersion, fight.RulesVersion);
+                Assert.AreEqual(Campaign.PitRules, fight.RulesVersion);
                 Assert.IsTrue(fight.Setup.Fight.Beasts);
                 EncounterResult r = CampaignPilot.PlayFight(c, fight, new CampaignPilot(PilotStyle.Reference, seed));
                 if (!r.Won || r.PartsBroken.Count == 0 || r.BeastKilled) continue;
@@ -460,7 +460,7 @@ namespace KindredSiege.Sim.Tests
         [Test]
         public void ABeastFightSavedHalfwayResumesExactly()
         {
-            var t = new CampaignTuning();
+            var t = new CampaignTuning { RulesCap = Campaign.PitRules };
             Campaign c = OnTheFirstRoad(5500, t);
             CampaignFight fight = c.StartBeast();
             var pilot = new CampaignPilot(PilotStyle.Reference, 5500);

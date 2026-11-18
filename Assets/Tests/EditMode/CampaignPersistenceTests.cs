@@ -115,7 +115,7 @@ namespace KindredSiege.Sim.Tests
         {
             var c = Active();
             string old = string.Join("\n", CampaignSave.Write(c).Split('\n')
-                .Where(l => !l.StartsWith("archive\t") && !l.StartsWith("proof\t") && !l.StartsWith("clearroad\t") && !l.StartsWith("palroad\t")))
+                .Where(l => !l.StartsWith("archive\t") && !l.StartsWith("proof\t") && !l.StartsWith("clearroad\t") && !l.StartsWith("palroad\t") && !l.StartsWith("beastroll\t")))
                 .Replace(CampaignSave.Header + "\t" + CampaignSave.Version, CampaignSave.Header + "\t3");
             var read = CampaignSave.Read(old);
             Assert.IsNull(read.Active); Assert.AreEqual(c.Stage, read.Stage);

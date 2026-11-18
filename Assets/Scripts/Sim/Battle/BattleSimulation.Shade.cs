@@ -60,6 +60,12 @@ namespace KindredSiege.Sim.Battle
         {
             if (!_floorOn || unit == null) return ticks;
             // Entropy Sink (rules 29, BattleSimulation.Glutton.cs) on the same percent.
+            if (_fight.Corrections)
+            {
+                // Independent time modifiers compound; two valid reductions cannot add past minus 100%.
+                int baseTicks = Math.Max(1, ticks * (100 + SpecOf(unit).ClockPercent) / 100);
+                return Math.Max(1, baseTicks * (100 - SinkPercent(unit)) / 100);
+            }
             int percent = SpecOf(unit).ClockPercent - SinkPercent(unit);
             return percent == 0 ? ticks : Math.Max(1, ticks * (100 + percent) / 100);
         }
@@ -368,7 +374,8 @@ namespace KindredSiege.Sim.Battle
             if (!_shadeOn || side < 0 || side > 1 || _finished) return string.Empty;
             SideState state = _sides[side];
             if (directive == Directive.FocusFire && KitOf(side).Has(ShadeRoute.Rupture) && state.FocusTicks > 0 &&
-                string.Equals(state.FocusTargetId, targetId ?? string.Empty, StringComparison.Ordinal))
+                string.Equals(state.FocusTargetId, targetId ?? string.Empty, StringComparison.Ordinal) &&
+                (!_fight.Corrections || (FindById(targetId) != null && FindById(targetId).Alive)))
                 return ShadeRules.FormName(ShadeRoute.Rupture, 1);
             if (directive != Directive.Unleash || state.UnleashTicks <= 0) return string.Empty;
             if (FormOf(side, ShadeRoute.Breach) >= 3) return ShadeRules.FormName(ShadeRoute.Breach, 3);
@@ -379,54 +386,68 @@ namespace KindredSiege.Sim.Battle
         // A press that follows up an order still running: Rupture's second Focus Fire on its target, and while Unleash runs
         // Breach's Ram or Echo's Release. Each is free and never fires the plain order (finding F3). 1 when it went, -1 when it
         // is refused (failure says why, nothing spent), 0 when it is no follow up and the plain order goes.
-        private int FollowUp(int side, Directive directive, string targetId, out string failure)
+        // Read and command share this decision; the screen must not advertise a free follow-up that would be refused.
+        private int FollowUpStatus(int side, Directive directive, string targetId, out string failure)
         {
             failure = string.Empty;
+            if (!_shadeOn || _finished || _halted || side < 0 || side > 1) return 0;
             SideState state = _sides[side];
             if (directive == Directive.FocusFire && KitOf(side).Has(ShadeRoute.Rupture) && state.FocusTicks > 0 &&
                 string.Equals(state.FocusTargetId, targetId, StringComparison.Ordinal))
             {
                 BattleUnit target = FindById(targetId);
                 if (target == null || !target.Alive) return 0;
-                if (state.RuptureSteps <= 0)
-                {
-                    failure = "Nothing to rupture yet.";
-                    return -1;
-                }
-                Rupture(side, state, target);
-                return 1;
+                if (state.RuptureSteps > 0) return 1;
+                failure = "Nothing to rupture yet."; return -1;
             }
             if (directive != Directive.Unleash) return 0;
-            // One Impact a Breach: no new one while it runs or its exposure lasts, except its Ram.
-            if (KitOf(side).Has(ShadeRoute.Breach) && state.ExposedTicks > 0 &&
+            if (KitOf(side).Has(ShadeRoute.Breach) && (state.ExposedTicks > 0 || (_fight.Corrections && state.UnleashTicks > 0)) &&
                 (state.UnleashTicks <= 0 || FormOf(side, ShadeRoute.Breach) < 3))
-            {
-                failure = "Breach is still open: " + SecondsLeft(state.ExposedTicks) + ".";
-                return -1;
-            }
+            { failure = "Breach is still open: " + SecondsLeft(state.ExposedTicks) + "."; return -1; }
             if (state.UnleashTicks <= 0) return 0;
             if (FormOf(side, ShadeRoute.Breach) >= 3)
             {
-                if (state.UnleashTicks < ShadeRules.RamMinTicks)
-                {
-                    failure = "Too little Unleash left to ram.";
-                    return -1;
-                }
-                Ram(side, state);
-                return 1;
+                if (state.UnleashTicks >= ShadeRules.RamMinTicks) return 1;
+                failure = "Too little Unleash left to ram."; return -1;
             }
             if (FormOf(side, ShadeRoute.Echo) >= 2)
             {
-                if (!AnyEcho(side))
-                {
-                    failure = "No echoes to let go yet.";
-                    return -1;
-                }
-                state.UnleashTicks = 0;
-                ReleaseEchoes(side, state, FormOf(side, ShadeRoute.Echo) >= 3);
-                return 1;
+                if (AnyEcho(side)) return 1;
+                failure = "No echoes to let go yet."; return -1;
             }
             return 0;
+        }
+
+        /// Eligibility for this actual target, including free follow-ups and their refusal reasons. Read only.
+        public bool CanUseOrder(int side, Directive directive, string targetId, out string failure)
+        {
+            failure = string.Empty;
+            if (side < 0 || side > 1 || (int)directive < 0 || (int)directive > (int)Directive.Eclipse)
+            { failure = "Invalid order or side."; return false; }
+            if (_halted)
+            {
+                if (!CanUse(side, directive, out failure)) return false;
+                if (directive == Directive.FocusFire && (KneelingChief == null || targetId != KneelingChief.Id))
+                { failure = "Focus the kneeling chief."; return false; }
+                return true;
+            }
+            int follow = FollowUpStatus(side, directive, targetId, out failure);
+            return follow == 0 ? CanUse(side, directive, out failure) && OrderTarget(side, directive, targetId, out _, out failure) : follow > 0;
+        }
+
+        private int FollowUp(int side, Directive directive, string targetId, out string failure)
+        {
+            int status = FollowUpStatus(side, directive, targetId, out failure);
+            if (status != 1) return status;
+            SideState state = _sides[side];
+            if (directive == Directive.FocusFire) Rupture(side, state, FindById(targetId));
+            else if (FormOf(side, ShadeRoute.Breach) >= 3) Ram(side, state);
+            else
+            {
+                state.UnleashTicks = 0;
+                ReleaseEchoes(side, state, FormOf(side, ShadeRoute.Echo) >= 3);
+            }
+            return 1;
         }
 
         // A blow of this side landed (Land): on its Rupture target it opens a step, and while its Unleash records it goes into
@@ -463,7 +484,8 @@ namespace KindredSiege.Sim.Battle
             if (!KitOf(side).Has(ShadeRoute.Mirror) || doer == null || !doer.Alive || _finished) return;
             int form = FormOf(side, ShadeRoute.Mirror);
             int times = form >= 2 ? Math.Min(ShadeRules.MirrorCatchMax, Math.Max(1, chain)) : 1;
-            int damage = Math.Max(1, doer.MaxHp * ShadeRules.MirrorPercent * times / 100);
+            // Glancing Blow (rules 46, BattleSimulation.Tree.cs) sends back more.
+            int damage = MirrorDamage(side, Math.Max(1, doer.MaxHp * ShadeRules.MirrorPercent * times / 100));
             BattleUnit behind = form >= 3 ? Behind(doer) : null;
             Emit(new BattleEvent(_tick, BattleEventKind.Trick, side, string.Empty, -1, doer.Id, (int)doer.Class, damage, ShadeRules.MirrorDetail));
             ApplyDamage(null, side, doer, damage, ShadeRules.MirrorDetail);
@@ -540,10 +562,10 @@ namespace KindredSiege.Sim.Battle
             int damage = Math.Max(1, target.MaxHp * ShadeRules.RupturePercent * steps / 100);
             state.RuptureSteps = 0;
             state.RuptureTargetId = string.Empty;
-            state.FocusTicks = 0;
-            state.FocusTargetId = string.Empty;
+            if (!_fight.Corrections) { state.FocusTicks = 0; state.FocusTargetId = string.Empty; }
             Emit(new BattleEvent(_tick, BattleEventKind.Trick, side, string.Empty, -1, target.Id, (int)target.Class, steps, ShadeRules.RuptureDetail));
             ApplyDamage(null, side, target, damage, ShadeRules.RuptureDetail);
+            if (_fight.Corrections) { state.FocusTicks = 0; state.FocusTargetId = string.Empty; }
             if (steps < ShadeRules.RuptureSteps || _finished) return;
             if (form >= 2 && target.Alive) target.Statuses.Apply(StatusKind.Crack, ShadeRules.CrackTicks);
             if (form >= 3) Finish(side);
@@ -576,7 +598,8 @@ namespace KindredSiege.Sim.Battle
         private int Cracked(BattleUnit victim, int armor)
         {
             if (!_shadeOn || armor <= 0 || !victim.Statuses[StatusKind.Crack].On) return armor;
-            return armor * (100 - ShadeRules.CrackPercent) / 100;
+            // Deep Node (rules 46, BattleSimulation.Tree.cs): a Crack from the other side thins more.
+            return armor * (100 - (_treeOn ? CrackPercentFrom(1 - victim.Side) : ShadeRules.CrackPercent)) / 100;
         }
 
         // ------------------------------------------------------------ Breach and Echo (Unleash)
@@ -676,7 +699,8 @@ namespace KindredSiege.Sim.Battle
                 u.EchoTargetId = string.Empty;
                 if (_finished || target == null || !target.Alive || target.Side == side) continue;
                 Emit(new BattleEvent(_tick, BattleEventKind.Trick, side, u.Id, (int)u.Class, target.Id, (int)target.Class, stored, ShadeRules.EchoDetail));
-                ApplyDamage(u, side, target, stored, ShadeRules.EchoDetail);
+                if (_fight.Contracts && _layersOn) ApplyHit(u, side, target, Hit.Recorded(stored), ShadeRules.EchoDetail);
+                else ApplyDamage(u, side, target, stored, ShadeRules.EchoDetail);
             }
         }
     }

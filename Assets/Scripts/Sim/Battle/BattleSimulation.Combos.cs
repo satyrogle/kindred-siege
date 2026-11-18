@@ -205,7 +205,8 @@ namespace KindredSiege.Sim.Battle
             bool rips = mark.BleedTicks > 0;
             if ((!rips && skirmisher.ComboCount % ClassSpells.CollapseEvery != 0) || _finished || !mark.Alive || ShrugsMarks(mark)) return;
             Emit(EventFor(BattleEventKind.Pull, skirmisher, mark, 0, ClassSpells.Name(ClassBend.Collapse)));
-            Pin(mark, FlavourHold(skirmisher, ClassBend.Collapse, ClassSpells.CollapseTicks));
+            // Fold Step (rules 46, BattleSimulation.Tree.cs) pins longer; Shield Pin keeps its own.
+            Pin(mark, FlavourHold(skirmisher, ClassBend.Collapse, CollapsePinTicks(skirmisher)));
             Lay(skirmisher, mark, ClassBend.Collapse);
         }
 
@@ -472,11 +473,16 @@ namespace KindredSiege.Sim.Battle
             Lay(skirmisher, mark, ClassBend.FrozenFlurry);
         }
 
+        private bool FlurryCaptures(BattleUnit victim, int sourceSide, string detail) =>
+            victim.FlurryTicks > 0 && sourceSide == 1 - victim.Side && detail != ClassSpells.FlurryDetail;
+
         // A hit from the other side on a fighter frozen in a flurry waits. True when it was kept.
         private bool FlurryKeeps(BattleUnit victim, int sourceSide, int amount, string detail)
         {
-            if (victim.FlurryTicks <= 0 || sourceSide != 1 - victim.Side || detail == ClassSpells.FlurryDetail) return false;
-            victim.Statuses[StatusKind.Flurry].Store += amount;
+            if (!FlurryCaptures(victim, sourceSide, detail)) return false;
+            Status flurry = victim.Statuses[StatusKind.Flurry];
+            if (_fight.FreezeContracts) flurry.Store = (int)Math.Min(int.MaxValue, (long)flurry.Store + Math.Max(0, amount));
+            else flurry.Store += amount;
             return true;
         }
 
@@ -492,7 +498,7 @@ namespace KindredSiege.Sim.Battle
             flurry.SourceId = string.Empty;
             if (store <= 0 || !victim.Alive) return;
             // Through the damage layers the kept hits are its base and the Opening's cash a layer (BattleSimulation.Layers.cs).
-            Hit kept = _layersOn ? new Hit(store) : null;
+            Hit kept = _layersOn ? (_fight.FreezeContracts ? Hit.Deferred(store) : new Hit(store)) : null;
             if (by != null && by.Alive && victim.OpeningTicks > 0)
             {
                 int opened = kept != null ? kept.Add(HitLayer.Cash, ClassSpells.FlurryOpenPercent - 100).Points : store * ClassSpells.FlurryOpenPercent / 100;
@@ -513,7 +519,8 @@ namespace KindredSiege.Sim.Battle
             if (warden.ComboTicks > 0 || !warden.Alive || !striker.Alive || ShrugsMarks(striker) || !Wears(warden, ClassBend.StillWall))
                 return;
             warden.ComboTicks = ClassSpells.StillWallEveryTicks;
-            int wall = FlavourHold(warden, ClassBend.StillWall, ClassSpells.StillWallTicks);
+            // Fold Shield (rules 46, BattleSimulation.Tree.cs) holds it longer.
+            int wall = FlavourHold(warden, ClassBend.StillWall, WallTicks(warden));
             Pin(striker, wall);
             Emit(EventFor(BattleEventKind.Freeze, warden, striker, wall, ClassSpells.Name(ClassBend.StillWall)));
             Open(warden, striker);

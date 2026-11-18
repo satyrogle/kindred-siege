@@ -30,7 +30,7 @@ namespace KindredSiege.Sim.Battle
         public int GorgedOf(BattleUnit unit) => _duoMovesOn && unit != null ? unit.GorgePercent : 0;
 
         /// Shadow Twin: whether this fighter's shadow fights on while his side falls back.
-        public bool ShadowFighting(BattleUnit unit) => ShadowFights(unit) && FallingBack(unit.Side);
+        public bool ShadowFighting(BattleUnit unit) => ShadowFights(unit) && (_fight.Corrections ? _sides[unit.Side].FallBackTicks > 0 : FallingBack(unit.Side));
 
         private bool HasMove(int side, PalDuo duo) => _duoMovesOn && side >= 0 && side <= 1 && KitOf(side).HasDuo(duo);
 
@@ -50,7 +50,9 @@ namespace KindredSiege.Sim.Battle
                 if (!HasMove(side, PalDuo.ShadowTwin)) continue;
                 BattleUnit star = StarOf(side);
                 if (star == null) continue;
+                int oldMax = star.MaxHp;
                 star.MaxHp = Math.Max(1, star.MaxHp / 2);
+                if (_fight.Corrections) _sides[side].StartHp -= oldMax - star.MaxHp;
                 star.Hp = Math.Min(star.Hp, star.MaxHp);
             }
         }
@@ -78,7 +80,9 @@ namespace KindredSiege.Sim.Battle
                     else if (e.Detail.EndsWith(".full", StringComparison.Ordinal)) Missed(1 - e.ActorSide);
                     return;
                 case BattleEventKind.Kill:
-                    if (e.ActorSide >= 0 && e.ActorSide <= 1) Missed(1 - e.ActorSide);
+                    if (_fight.Corrections && FindById(e.TargetId) is BattleUnit victim)
+                    { Missed(victim.Side); GorgeFell(e.ActorSide, victim); }
+                    else if (e.ActorSide >= 0 && e.ActorSide <= 1) Missed(1 - e.ActorSide);
                     return;
             }
         }
@@ -278,15 +282,21 @@ namespace KindredSiege.Sim.Battle
             {
                 int grow = DuoRules.GorgePercent * _sides[sourceSide].DuoLevel;
                 source.GorgePercent += grow;
+                if (_fight.Corrections) source.GorgeKills++;
                 int more = Math.Max(1, source.MaxHp * grow / 100);
                 source.MaxHp += more;
                 source.Hp = Math.Min(source.MaxHp, source.Hp + more);
                 Emit(EventFor(BattleEventKind.Whisper, source, victim, source.GorgePercent, DuoRules.GorgeDetail));
             }
-            // The catch: a gorged star falling shakes every fighter of his side.
+            // Legacy ordering. Corrected fights handle every Kill, including Sacrifice and collapse, once in Emit.
+            if (!_fight.Corrections) GorgeFell(sourceSide, victim);
+        }
+
+        private void GorgeFell(int sourceSide, BattleUnit victim)
+        {
             if (victim.GorgePercent > 0 && HasMove(victim.Side, PalDuo.Gorge))
             {
-                int kills = Math.Max(1, victim.GorgePercent / DuoRules.GorgePercent);
+                int kills = _fight.Corrections ? victim.GorgeKills : Math.Max(1, victim.GorgePercent / DuoRules.GorgePercent);
                 int drain = DuoRules.GorgeNervePerKill * kills;
                 if (_unitNerveOn)
                 {
@@ -330,6 +340,7 @@ namespace KindredSiege.Sim.Battle
         private void AppendDuoMovesUnit(SnapshotBuilder b, BattleUnit u)
         {
             b.Field(u.Id + ".gorged", u.GorgePercent);
+            if (_fight.Corrections) b.Field(u.Id + ".gorgeKills", u.GorgeKills);
         }
     }
 }

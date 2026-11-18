@@ -29,7 +29,8 @@ namespace KindredSiege.Sim.Battle
         public const int Rank3Percent = 600;
 
         /// The Butcher: every burst this many percent bigger (Crush's hit, Exposed's crit, Stasis's freeze), and this many more for
-        /// each rank past the first of combos of its flavour the side wears.
+        /// each rank past the first of combos of its flavour the side wears. From rules36 Stasis uses only its separate
+        /// duration growth, never this damage multiplier.
         public const int BurstPercent = 0;
         public const int FlavourPercent = 500;
 
@@ -83,6 +84,20 @@ namespace KindredSiege.Sim.Battle
         /// Whether this fight plays the sized picks: campaign rules 31.
         public bool SizedOn => _sizedOn;
 
+        public static string RouteDescription(ShadeRoute route, int form, bool sized)
+        {
+            string text = ShadeRules.Describe(route, form);
+            if (!sized) return text;
+            int more = form >= 3 ? SizeRules.ShadeForm3Percent : form == 2 ? SizeRules.ShadeForm2Percent : SizeRules.ShadeForm1Percent;
+            return "BASE: " + text + " Fight: trick damage, shields and Fear +" + more + "%; route prices keep " + SizeRules.ShadePricePercent + "%.";
+        }
+        public string TalentDescription(int side, GluttonTalent talent) => GluttonRules.Describe(talent) +
+            (!_sizedOn ? "" : ((_fight.Corrections && DimensionedBonus(talent)) || (_fight.Contracts && CostReduction(talent))) ? " Authored held/fed value; no limb multiplier." : " Base value; fight bonus grows with other talents in this limb.");
+        public string FlavourDescription(int side, StatusKind mark) => MarkRules.Name(mark) + " ranks " + FlavourRanks(side, mark) +
+            (_fight.Contracts && mark == StatusKind.Stasis ? "; freeze duration grows with flavour ranks; no damage multiplier" :
+             _sizedOn ? "; flavour burst bonus +" + (SizeRules.BurstPercent + SizeRules.FlavourPercent * Math.Max(0, FlavourRanks(side, mark) - 1)) + "%" : "") +
+            (_flavoursOn && FinalForm(side, mark) ? "; FINAL FORM" : "");
+
         // ------------------------------------------------------------ the Shade
 
         // How many percent bigger this side's trick on this route is, at its form.
@@ -128,6 +143,7 @@ namespace KindredSiege.Sim.Battle
         // A talent's bonus on this side, sized: bigger, and bigger again for each other talent held in its limb.
         private int GluttonSized(int side, GluttonTalent talent, int bonus)
         {
+            if ((_fight.Corrections && DimensionedBonus(talent)) || (_fight.Contracts && CostReduction(talent))) return bonus;
             if (!_sizedOn || bonus < SizeRules.GluttonMinBonus || side < 0 || side > 1) return bonus;
             int limb = GluttonRules.LimbOf(talent), others = 0;
             for (int slot = 0; slot < GluttonRules.PerLimb; slot++)
@@ -137,6 +153,13 @@ namespace KindredSiege.Sim.Battle
             }
             return bonus * (100 + SizeRules.GluttonPercent + SizeRules.GluttonClimbPercent * others) / 100;
         }
+
+        private static bool CostReduction(GluttonTalent talent) =>
+            talent == GluttonTalent.CommandRelay || talent == GluttonTalent.SynthesisDiscount;
+
+        private static bool DimensionedBonus(GluttonTalent talent) =>
+            talent == GluttonTalent.EntropySink || talent == GluttonTalent.DarkMatterPlating ||
+            talent == GluttonTalent.EchoStrike || talent == GluttonTalent.Precognition || talent == GluttonTalent.SlowLightRounds;
 
         // ------------------------------------------------------------ the Whisperer
 

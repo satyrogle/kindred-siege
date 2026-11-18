@@ -9,7 +9,9 @@ namespace KindredSiege.Sim.Battle
         // Fled and reserve fighters cannot protect anyone; a frozen living ally still stands.
         public bool LeaderProtected(BattleUnit unit)
         {
-            if (!SquadScreenOn || unit == null || !unit.Alive || unit.Side != 0 || !unit.IsLeader) return false;
+            if (unit == null || !unit.Alive || !unit.IsLeader) return false;
+            // From rules 43 theirs too, never their champion (BattleSimulation.Leaders.cs).
+            if (!(SquadScreenOn && unit.Side == 0) && !TheirLeaderShielded(unit)) return false;
             for (int i = 0; i < _units.Count; i++)
             {
                 var ally = _units[i];

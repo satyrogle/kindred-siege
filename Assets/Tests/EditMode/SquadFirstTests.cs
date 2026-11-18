@@ -380,7 +380,8 @@ namespace KindredSiege.Sim.Tests
         public void AChiefLearnsOnlyFromFightsAgainstHim()
         {
             const ulong seed = 4610;
-            var tuning = new CampaignTuning { PathFights = 1 };
+            // Held at rules 42: from rules 43 a one row road is all the champion's fights, which this is not about.
+            var tuning = new CampaignTuning { PathFights = 1, RulesCap = Campaign.LeadersRules - 1 };
             Campaign c = Campaign.New(seed, tuning);
             Assert.IsTrue(CampaignPilot.PlayTutorial(c, PilotStyle.Reference, seed, 10), "the tutorial was never won");
             c.ChooseTribe(CampaignTribes.BloodridgeId);
@@ -392,7 +393,7 @@ namespace KindredSiege.Sim.Tests
             {
                 Assert.AreSame(tribe, c.MindFor(c.Offers[0]), "a road fight brings the tribe's mind");
                 CampaignFight road = c.StartEncounter(0);
-                Assert.AreEqual(Campaign.RulesVersion, road.RulesVersion);
+                Assert.AreEqual(Campaign.LeadersRules - 1, road.RulesVersion);
                 EncounterKind kind = road.Encounter.Kind;
                 CampaignPilot.PlayFight(c, road, new CampaignPilot(PilotStyle.Reference, seed));
                 Assert.AreEqual(before, chief.Snapshot(), "a road fight never arms the chief");

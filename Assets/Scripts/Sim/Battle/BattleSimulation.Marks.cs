@@ -86,7 +86,8 @@ namespace KindredSiege.Sim.Battle
             target.Statuses.Apply(mark, MarkRules.Ticks, sourceId: wearer.Id, stacks: stacks);
             Emit(new BattleEvent(_tick, BattleEventKind.Mark, wearer.Side, wearer.Id, (int)wearer.Class, target.Id, (int)target.Class,
                 MarkRules.Ticks, MarkRules.Name(mark)));
-            if (target.Statuses[mark].Stacks >= MarkRules.MaxStacks) Burst(wearer, target, mark);
+            // Stasis Wind Up (rules 46, BattleSimulation.Tree.cs): sooner on a snared man.
+            if (target.Statuses[mark].Stacks >= BurstAt(wearer, target)) Burst(wearer, target, mark);
         }
 
         // A mark reached its cap: it clears and bursts.
@@ -107,7 +108,7 @@ namespace KindredSiege.Sim.Battle
                     Hit crush = null;
                     if (_layersOn)
                     {
-                        crush = new Hit(by.Power);
+                        crush = new Hit(by.Power, isPayoff: true);
                         if (gorged > 0) crush.Add(HitLayer.Combo, gorged);
                         ApplyHit(by, by.Side, target, crush.Copy(), MarkRules.CrushedDetail);
                     }
@@ -120,13 +121,14 @@ namespace KindredSiege.Sim.Battle
                 }
                 case StatusKind.Exposed:
                     target.Statuses.Apply(StatusKind.WideOpen, MarkRules.WideOpenTicks, size: gorged, sourceId: by.Id);
+                    if (_fight.Corrections) target.Statuses[StatusKind.WideOpen].Size = Math.Max(target.Statuses[StatusKind.WideOpen].Size, gorged);
                     // The Fold Door's final form (rules 32): it can jump on.
                     if (FinalForm(by.Side, StatusKind.Exposed)) target.Statuses[StatusKind.WideOpen].Store = SizeRules.ExposedJumps;
                     Emit(EventFor(BattleEventKind.Burst, by, target, MarkRules.WideOpenTicks, MarkRules.Exposed));
                     break;
                 case StatusKind.Stasis:
                     // Frozen as a time combo freezes (a pin), and his wind up starts over.
-                    int freeze = FlavourHold(by, StatusKind.Stasis, MarkRules.StasisFreezeTicks * (100 + gorged) / 100);
+                    int freeze = FlavourHold(by, StatusKind.Stasis, _fight.Contracts ? MarkRules.StasisFreezeTicks : MarkRules.StasisFreezeTicks * (100 + gorged) / 100);
                     Emit(EventFor(BattleEventKind.Burst, by, target, freeze, MarkRules.Stasis));
                     Pin(target, freeze);
                     RestartWindUp(target);

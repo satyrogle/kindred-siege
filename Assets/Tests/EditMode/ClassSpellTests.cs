@@ -431,7 +431,7 @@ namespace KindredSiege.Sim.Tests
                 {
                     if (line.StartsWith("clearroad\t")) continue; // Not present in version 14.
                     // Nor fix 5's (version 25): the road kind, and a Pal's picks on offer beside the piece.
-                    if (line.StartsWith("palroad\t") || line.StartsWith("favouroffer\t")) continue;
+                    if (line.StartsWith("palroad\t") || line.StartsWith("beastroll\t") || line.StartsWith("favouroffer\t")) continue;
                     string[] f = line.Split('\t');
                     if (f[0] == CampaignSave.Header) f[1] = "14";
                     if (f[0] == "piece" || f[0] == "spoils")

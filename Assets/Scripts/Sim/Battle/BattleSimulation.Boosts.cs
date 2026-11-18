@@ -91,6 +91,7 @@ namespace KindredSiege.Sim.Battle
                     int bash = Math.Max(1, unit.Power * BoostRules.BashPercent / 100);
                     Boosted(unit, target, bash, BoostRules.ShieldBash);
                     target.Cooldown += FightRules.StaggerTicks;
+                    StaggerTimer(target, FightRules.StaggerTicks);
                     ApplyDamage(unit, unit.Side, target, Armored(target, bash), BoostRules.BashDetail);
                     if (target.Alive && !_finished) Open(unit, target);
                     return true;
@@ -101,7 +102,8 @@ namespace KindredSiege.Sim.Battle
                     BattleUnit target = SpellTarget(unit, false);
                     if (target == null) return false;
                     Boosted(unit, target, 0, BoostRules.TwinCut);
-                    int cut = Math.Max(1, unit.Power * BoostRules.TwinCutPercent / 100);
+                    // Nucleus Edge (rules 46, BattleSimulation.Tree.cs) makes each cut harder.
+                    int cut = TwinCutDamage(unit);
                     for (int i = 0; i < 2 && target.Alive && !_finished; i++)
                         ApplyDamage(unit, unit.Side, target, Armored(target, cut), BoostRules.CutDetail);
                     if (!target.Alive || _finished) return true;
@@ -116,6 +118,8 @@ namespace KindredSiege.Sim.Battle
                     Boosted(unit, null, 0, BoostRules.Rearm);
                     own.TrapArmed = true;
                     own.TrapOwnerId = unit.Id;
+                    // From rules 44 on the enemy front row panel of her lane (BattleSimulation.Grid.cs).
+                    if (_gridOn) SetTrapLane(own, unit);
                     // Twice for a rank 2 Trapper (rules 24, BattleSimulation.Whisperer.cs).
                     if (_whisperOn) own.TrapSprings = SpringsOf(unit) + FoldTrapSprings(unit);
                     _trapReadyIn[unit.Index] = SliceClasses.TrapRearmActions;
@@ -162,10 +166,13 @@ namespace KindredSiege.Sim.Battle
             marksman.Steady = false;
             // Version-gated: rules 12 evidence retains its original piercing hit.
             if (ClearRoadOn && FallingBack(marksman.Side)) return;
-            if (_finished || target == null || target.Row != Row.Front) return;
-            BattleUnit behind = NearestInLane(target.Side, Row.Back, LanePosition(target));
+            // From rules 44 the next body behind his mark in the same lane (BattleSimulation.Grid.cs).
+            bool grid = _gridOn && target != null && target.GridCol >= 0;
+            if (_finished || target == null || (!grid && target.Row != Row.Front)) return;
+            BattleUnit behind = grid ? GridBehind(marksman, target) : NearestInLane(target.Side, Row.Back, LanePosition(target));
             if (behind == null || !behind.Alive) return;
-            ApplyDamage(marksman, marksman.Side, behind, Armored(behind, Math.Max(1, marksman.Power * BoostRules.PiercePercent / 100)),
+            // Dark Matter Rounds (rules 46, BattleSimulation.Tree.cs): at full power.
+            ApplyDamage(marksman, marksman.Side, behind, Armored(behind, Math.Max(1, marksman.Power * PiercePercentOf(marksman) / 100)),
                 BoostRules.PierceDetail);
         }
     }

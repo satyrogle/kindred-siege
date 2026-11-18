@@ -104,6 +104,8 @@ namespace KindredSiege.Sim.Battle
             if (ClearRoadOn && _unitNerveOn && p.Side != 0) return;
             BattleUnit target = FindById(p.TargetId);
             if (target == null || !target.Alive || target.Side == p.Side) return;
+            // From rules 43 nobody chains at a leader no blow can reach (BattleSimulation.Leaders.cs).
+            if (LeadersOn && LeaderProtected(target)) return;
             // The mark must still be on him, and still be this one.
             if (p.Mark == ClassSpells.SnareMark && (target.SnareTicks <= 0 || target.SnareChain != p.Chain)) return;
             if (p.Mark == ClassSpells.OpeningMark && (target.OpeningTicks <= 0 || target.OpeningChain != p.Chain)) return;
@@ -169,8 +171,11 @@ namespace KindredSiege.Sim.Battle
         // Able to react to a setup on this target, in this chain, right now (the clock aside).
         private bool CanReact(BattleUnit u, BattleUnit target, int chain)
         {
+            if (_fight.Contracts && ActionBlocked(u)) return false;
             if (!u.Alive || u.SnareTicks > 0 || u.Frenzied || u.PanicTicks > 0 || u.AimTicks > 0 || u.LastChainId == chain) return false;
             if (MeleeHeldBack(u) != StrikeBlock.None || (target.Row == Row.Back && !CanReachBack(u)) || Spared(u, target)) return false;
+            // From rules 44 only a fighter whose class shape reaches the mark answers it (BattleSimulation.Grid.cs).
+            if (_gridOn && u.GridCol >= 0 && !ReferenceEquals(GridTarget(u), target)) return false;
             SideState mine = _sides[u.Side];
             if (mine.FocusTicks > 0 && mine.FocusTargetId.Length > 0 && mine.FocusTargetId != target.Id)
             {

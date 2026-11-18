@@ -43,7 +43,7 @@ namespace KindredSiege.Sim.Battle
         private void MeterBoost(int side, Hit hit)
         {
             if (!MeterFor(side) || _sides[side].ParryBars <= 0) return;
-            if (hit.On(HitLayer.Combo) == 0 && hit.On(HitLayer.Cash) == 0) return;
+            if (!(_fight.Contracts && hit.IsPayoff) && hit.On(HitLayer.Combo) == 0 && hit.On(HitLayer.Cash) == 0) return;
             // Charged Branches (rules 29) adds to each bar.
             hit.Add(HitLayer.Parry, _sides[side].ParryBars * PerBar(side));
         }

@@ -120,7 +120,8 @@ namespace KindredSiege.Sim.Learning
         public RoadNode Node { get; }
 
         /// Its bonus goal, or None (FightObjectives). Hunters waiting on a node bring no goal.
-        public FightObjective Objective => Node == null || Kind == EncounterKind.Ambush ? FightObjective.None : Node.Objective;
+        public FightObjective Objective =>
+            Node == null || Kind == EncounterKind.Ambush || Kind == EncounterKind.Beast ? FightObjective.None : Node.Objective;
 
         /// The named hunter leading an ambush or the hunt after the last chief (HunterCompany), or null.
         public CampaignHunter Hunter { get; internal set; }
@@ -145,11 +146,20 @@ namespace KindredSiege.Sim.Learning
         /// Someone on their side winds up an Eclipse you can answer.
         public bool EnemyCasts { get; }
 
+        /// From rules 43 the last fight of a tribe's road is its champion's (Jacob, 8 Nov 2026: "in stage 4, instead of
+        /// leader, the champion steps in and takes control of all the units"): he leads the band, winds up his big swing,
+        /// and his fall breaks them (Battle.BattleSimulation.Leaders.cs).
+        public bool Champion { get; internal set; }
+
         /// Fall Back is refused in this fight.
         public bool NoFallBack { get; }
 
         /// A beast fight's beast (Battle.BeastKits): the sand shark or the cage bear. None for every other fight.
         public BeastKit Beast { get; internal set; }
+
+        /// From rules 39, a beast the run rolled onto a road node (CampaignBeast.cs): the tier it comes at, 1 to BeastTierRules.Max.
+        /// 0 for the beast beside the road of older runs, and for every other fight.
+        public int BeastTier { get; internal set; }
 
         public string Title
         {
@@ -172,6 +182,16 @@ namespace KindredSiege.Sim.Learning
         }
 
         public string Text
+        {
+            get
+            {
+                // From rules 43 the road's last fight is the champion's.
+                if (Champion) return KindText + " Their champion leads them and winds up a big swing you can see coming. Kill him and they break.";
+                return KindText;
+            }
+        }
+
+        private string KindText
         {
             get
             {
@@ -442,6 +462,10 @@ namespace KindredSiege.Sim.Learning
         public bool BeastFled { get; internal set; }
         public bool BeastEscaped { get; internal set; }
 
+        /// A rolled beast's fight (rules 39): its tier at camp after it, one up if you beat it (BeastTierRules.Max at most), the
+        /// same if you lost. 0 for every other fight.
+        public int BeastTierAfter { get; internal set; }
+
         /// A won path fight: the first piece of their gear you can take in place of its materials before the next
         /// fight starts (Campaign.TryTakeSpoils). Null otherwise.
         public CampaignGear SpoilsOffered { get; internal set; }
@@ -629,7 +653,50 @@ namespace KindredSiege.Sim.Learning
         /// 34 those and the duos that change a move (Jacob in chat, 2 Nov 2026: "merge first, then build the duos on top. Go";
         /// Battle.FightRules.DuoMoves; DuoMovesRules): six new duos, each needing one exact pick from each of its Pals, free to
         /// take, growing with the streak of big moves answered, each with its catch.
-        public const int RulesVersion = 34;
+        /// 35 correctness repairs; 36 shared action/damage/payoff contracts and complete setup inputs in snapshots.
+        /// 38 those and The Pit (Jacob, 4 Nov 2026: "i wanna see it in action then only i can judge write the code and ask codex to
+        /// wire it up go"; Battle.FightRules.Pit; PitRules): every blow announced ahead for the screen, a parryable move keeps its
+        /// mark from its windup on, and a side winds up one parryable move at a time.
+        /// 39 those and beasts as rolls (Jacob, 2 Nov 2026, DESIGN_LOCKS "Beasts as rolls, tier 1 to 50"; his "go", 4 Nov;
+        /// CampaignBeast.cs; BeastRollRules): a run rolls 1 in 5 for a beast on a fight node of its first road, each beast keeps
+        /// its tier at camp, and beating it raises the tier.
+        /// 40 those and one blow on stage at a time (Jacob, 6 Nov 2026, after playing The Pit: "i cant understand shit ... they
+        /// are just lunging forward", then "Yes, build it"; Battle.FightRules.Stage; StageRules): turns and Aimed Shots land one
+        /// per tick, so the screen can play them one by one, and a turn comes three times as seldom and hits three times as hard
+        /// (Battle.StageRules.TurnTimes), so a fight has a third of the blows and lasts as long.
+        /// 41 those without the stage (Jacob, 6 Nov 2026: units "just head on fight", no "1 after other doing attacks"; big hits
+        /// go through the leader's parry circle and a missed parry lands on the unit, as before; then "Go"; BrawlRules): fights
+        /// play as rules 39 did, everyone at once.
+        /// 42 those and the attack table (Jacob, 7 Nov 2026: six stats "like pokemon stats", the five spreads, then "Go, build
+        /// it"; Battle.FightRules.Table; Battle.AttackTable): a blow rolls once for a dodge, a parry, a block, a crit or a hit,
+        /// and the Defence of whoever it lands on takes a slice.
+        /// 43 those and the leaders (Jacob, 8 Nov 2026: "the leader of the other tribe shouldn't be attacked", "the sim side is
+        /// actually fine", "in stage 4, instead of leader, the champion steps in"; Battle.FightRules.Leaders and ChampionFight;
+        /// LeadersRules): their leader can't be hit while his fighters stand and leaves when they are gone, except a chief in his
+        /// own fight; the last fight of a tribe's road brings its champion, whose fall breaks his band; a Warden holds the middle.
+        /// 44 those and the grid (Jacob, 9 Nov 2026: "why not use megaman battle network rules", the class shapes locked at
+        /// DESIGN_LOCKS line 1362, then "Build it"; Battle.FightRules.Grid; GridRules): each band stands on its own 3 by 3
+        /// panels, a fighter hits only whoever his class shape reaches and steps one panel when nobody is in reach, a shot stops
+        /// at the first body in its lane, a Warden guards the four panels touching his, a trap sits on one enemy front row panel
+        /// and a Medic treats only a touching ally. Never in a duel or a beast fight.
+        /// 46 those and the Glutton's tree retargeted, with the hooks of the cut to 12 that have a live target (Jacob, 16 Nov
+        /// 2026: "Yes, lock it", then "Go, both"; DESIGN_LOCKS "The Glutton's whole tree retargeted"; Battle.FightRules.TreeRetarget;
+        /// TreeRules; BattleSimulation.Tree.cs): each talent boosts its new piece where the piece is in the sim, Doorway's charger
+        /// is left with an Opening, Stopped Bullets cashes a Bleed, and a stagger is a timer. The forge costs a third less with
+        /// Synthesis Discount.
+        public const int RulesVersion = 46;
+        public const int TreeRules = 46;
+        public const int LockedPairsRules = 45;
+        public const int GridRules = 44;
+        public const int LeadersRules = 43;
+        public const int TableRules = 42;
+        public const int BrawlRules = 41;
+        public const int StageRules = 40;
+        public const int BeastRollRules = 39;
+        public const int PitRules = 38;
+        public const int FreezeRules = 37;
+        public const int ContractRules = 36;
+        public const int CorrectnessRules = 35;
         public const int SquadScreenRules = 14;
         public const int ClearRoadRules = 13;
 
@@ -739,6 +806,10 @@ namespace KindredSiege.Sim.Learning
         /// Whether this run's roads carry a Pal on every fight (fix 5): set when the run starts under PalRoadRules, and kept
         /// with the run, so its roads come back the same when it loads.
         public bool PalRoadRun { get; internal set; }
+
+        /// Whether this run rolls for its beast (rules 39, CampaignBeast.cs) instead of the beasts beside their roads: set when the
+        /// run starts under BeastRollRules, and kept with the run, so a run saved before keeps its beasts as they were.
+        public bool BeastRollRun { get; internal set; }
         /// Persisted per run: older roads keep their original rows and event lanes.
         public bool ClearRoadRun { get; internal set; }
         public bool StagedBloodridgeRoad => ClearRoadRun && Target != null && Target.Id == CampaignTribes.BloodridgeId;
@@ -1029,7 +1100,8 @@ namespace KindredSiege.Sim.Learning
         /// round them. Ask for every node when drawing the road: it changes as the bounty rises.
         public bool IsAmbush(RoadNode node)
         {
-            if (node == null || node.Kind != RoadNodeKind.Fight || _road == null || node.Row < Step ||
+            // A rolled beast's node is the beast's (rules 39): the hunters never take it.
+            if (node == null || node.Kind != RoadNodeKind.Fight || node.Beast != BeastKit.None || _road == null || node.Row < Step ||
                 !ReferenceEquals(_road.Node(node.Row, node.Lane), node))
                 return false;
             return AmbushLane(node.Row) == node.Lane && HunterOnRoad != null;
@@ -1414,6 +1486,14 @@ namespace KindredSiege.Sim.Learning
             return (int)(h % (ulong)tribesInTier);
         }
 
+        /// What the tabard costs: CampaignForge.TabardPrice, a third less from rules 46 with the Glutton's Synthesis Discount
+        /// owned (Battle.RetargetRules.ForgeOffPercent; DESIGN_LOCKS "The Glutton's whole tree retargeted").
+        public int TabardPrice =>
+            Math.Min(ResumeRulesVersion < 0 ? RulesVersion : ResumeRulesVersion, _tuning.RulesCap) >= TreeRules &&
+            _owned.Contains(GluttonTalent.SynthesisDiscount)
+                ? CampaignForge.TabardPrice * (100 - RetargetRules.ForgeOffPercent) / 100
+                : CampaignForge.TabardPrice;
+
         /// Whether the Butcher can forge the tabard now: at camp, with the recipe known, not forged
         /// yet, and CampaignForge.TabardPrice materials.
         public bool CanForgeTabard(out string why)
@@ -1422,8 +1502,8 @@ namespace KindredSiege.Sim.Learning
             if (Stage != CampaignStage.ChooseTribe) why = "The forge is at camp.";
             else if (!_tabardRecipe) why = "The Butcher does not know this recipe yet. Break the Bloodridge chief.";
             else if (_tabardForged) why = "The tabard is already forged.";
-            else if (_materials < CampaignForge.TabardPrice)
-                why = "The tabard costs " + CampaignForge.TabardPrice.ToString(CultureInfo.InvariantCulture) + " materials.";
+            else if (_materials < TabardPrice)
+                why = "The tabard costs " + TabardPrice.ToString(CultureInfo.InvariantCulture) + " materials.";
             return why.Length == 0;
         }
 
@@ -1431,7 +1511,7 @@ namespace KindredSiege.Sim.Learning
         public bool TryForgeTabard(out string why)
         {
             if (!CanForgeTabard(out why)) return false;
-            _materials -= CampaignForge.TabardPrice;
+            _materials -= TabardPrice;
             _tabardForged = true;
             Discover("Forged: " + CampaignForge.TabardName);
             return true;
@@ -1504,7 +1584,7 @@ namespace KindredSiege.Sim.Learning
             if (_favourOffer == null) why = "No favour is on offer.";
             else if (choice < 0 || choice >= _favourOffer.Choices.Count) why = "That favour is not on offer.";
             else if (_active != null) why = "Not in the middle of a fight.";
-            else if (_materials < _spoilsMaterials) why = "The materials it banked are already spent.";
+            else if (_materials < _spoilsMaterials && !(Math.Min(RulesVersion, _tuning.RulesCap) >= CorrectnessRules && FavourRules.IsDuo(_favourOffer.Choices[choice]) && DuoRules.IsMove(FavourRules.DuoOf(_favourOffer.Choices[choice])))) why = "The materials it banked are already spent.";
             return why.Length == 0;
         }
 
@@ -1926,6 +2006,7 @@ namespace KindredSiege.Sim.Learning
             RoutePickVersion = 1;
             ClearRoadRun = _tuning.RulesCap >= ClearRoadRules && _tuning.PathFights >= 3;
             PalRoadRun = Math.Min(RulesVersion, _tuning.RulesCap) >= PalRoadRules;
+            BeastRollRun = Math.Min(RulesVersion, _tuning.RulesCap) >= BeastRollRules;
             ClearGearAndGrudges();
             // A run starts with all its lives, no bonds (rules 11) and no streak (rules 12).
             Lives = RunLives;
@@ -2687,7 +2768,7 @@ namespace KindredSiege.Sim.Learning
             }
             // A fight node the hunters took is their ambush instead (18 Oct 2026).
             foreach (RoadNode node in NextNodes)
-                if (node.Kind == RoadNodeKind.Fight) _offers.Add(IsAmbush(node) ? MakeAmbush(node) : MakeEncounter(node.Fight, Target, node));
+                if (node.Kind == RoadNodeKind.Fight) _offers.Add(NodeEncounter(node));
         }
 
         // The hunters waiting on a road node: the road's hunter and AmbushFighters of the company, one more for every
@@ -2726,6 +2807,27 @@ namespace KindredSiege.Sim.Learning
             return classes;
         }
 
+        /// From rules 43: whether a fight of this kind on this node is the tribe's champion's, the road's last row. A duel
+        /// already is one against him alone, and a beast or the hunters on a node are no one's road fight.
+        private bool ChampionAt(RoadNode node, EncounterKind kind)
+        {
+            if (node == null || _road == null || node.Kind != RoadNodeKind.Fight || node.Row != _road.Rows - 1) return false;
+            return kind == EncounterKind.WarParty || kind == EncounterKind.HoldTheLine || kind == EncounterKind.Trial;
+        }
+
+        // From rules 43 the champion leads the band (Battle.BattleSimulation.Leaders.cs): the tribe's duel champion with a
+        // chief's power and a lieutenant's health in the front row, as their side's chief. A trial's shaman makes way for him.
+        private void AddChampion(List<UnitSpec> side1, Encounter encounter, string fightId)
+        {
+            CampaignTribe tribe = encounter.Tribe;
+            int pct = EnemyPercent(encounter);
+            for (int i = side1.Count - 1; i >= 0; i--)
+                if (side1[i].Role == UnitRole.Chief) side1.RemoveAt(i);
+            UnitClass champion = DuelChampion(tribe);
+            side1.Add(TribeTraits.Spec(fightId + "." + tribe.Id + ".champion", champion, Row.Front, UnitRole.Chief,
+                pct * _tuning.ChiefPowerPercent / 100, pct * _tuning.LieutenantHealthPercent / 100, 0, tribe.Id));
+        }
+
         // A duel's champion: the tribe's first Warden or Skirmisher.
         private static UnitClass DuelChampion(CampaignTribe tribe)
         {
@@ -2743,7 +2845,16 @@ namespace KindredSiege.Sim.Learning
         {
             if (node == null || _road == null || node.Kind != RoadNodeKind.Fight || _road.Node(node.Row, node.Lane) != node)
                 return NoClasses;
-            return (IsAmbush(node) ? MakeAmbush(node) : MakeEncounter(node.Fight, Target, node)).EnemyClasses;
+            return NodeEncounter(node).EnemyClasses;
+        }
+
+        /// From rules 43: true when the fight on this road node is its tribe's champion's (the road's last row), so the map can
+        /// show him. False for an event and for a node that is not on this run's road.
+        public bool ChampionOn(RoadNode node)
+        {
+            if (node == null || _road == null || node.Kind != RoadNodeKind.Fight || _road.Node(node.Row, node.Lane) != node)
+                return false;
+            return NodeEncounter(node).Champion;
         }
 
         /// The chief's band this run, not counting the chief (18 Oct 2026). Empty with no road tribe, and on the hunt.
@@ -2806,7 +2917,17 @@ namespace KindredSiege.Sim.Learning
                     break;
             }
             bool noFallBack = kind == EncounterKind.HoldTheLine && _tuning.HoldForbidsFallBack;
+            // From rules 43 the last fight of the road is the champion's: he takes one fighter's place at the head of the band
+            // (a trial's shaman makes way for him instead) and winds up his big swing.
+            bool champion = Math.Min(RulesVersion, _tuning.RulesCap) >= LeadersRules && ChampionAt(node, kind);
+            if (champion)
+            {
+                if (!(kind == EncounterKind.Trial && casts)) fighters = Math.Max(1, fighters - 1);
+                units = fighters + 1;
+                casts = true;
+            }
             var encounter = new Encounter(kind, tribe, squad, fighters, units, casts, noFallBack, node);
+            encounter.Champion = champion;
             // Three squads per fight (Jacob, 18 Oct 2026): a road node sends the one its own dice pick, a chief the run's.
             encounter.Squad = SquadFor(kind, tribe, node);
             encounter.EnemyClasses = EnemyClassesOf(encounter);
@@ -3161,6 +3282,9 @@ namespace KindredSiege.Sim.Learning
             // From rules 3 the Blood Moon omen keeps a fighter's bleeding blades (21 Oct 2026).
             bool keepBleed = rules >= 3;
             List<UnitSpec> side1 = EnemySpecs(encounter, fightId, keepBleed);
+            // From rules 43 the last fight of the road brings the champion (an older unfinished fight resumes without him).
+            bool champion = encounter.Champion && rules >= LeadersRules;
+            if (champion) AddChampion(side1, encounter, fightId);
             Assist assist = FightAssist(encounter, leaderFights);
             // Your 5th button does what its chief's spell does (ChiefSpells, 18 Oct 2026).
             CampaignTribe assistTribe = assist == null ? null : CampaignTribes.Find(assist.TribeId);
@@ -3266,6 +3390,9 @@ namespace KindredSiege.Sim.Learning
                 if (rules >= VowFlavourRules) fightRules = fightRules.WithVows();
                 // From rules 34 the duos that change a move. Last, after the vows.
                 if (rules >= DuoMovesRules) fightRules = fightRules.WithDuoMoves();
+                if (rules >= CorrectnessRules) fightRules = fightRules.WithCorrections();
+                if (rules >= ContractRules) fightRules = fightRules.WithContracts();
+                if (rules >= FreezeRules) fightRules = fightRules.WithFreezeContracts();
             }
             // From rules 25 a beast fight plays its moves as the approved scenes show them (Jacob, 1 Nov 2026). Last, after the
             // Whisperer.
@@ -3280,6 +3407,24 @@ namespace KindredSiege.Sim.Learning
                 fightRules = fightRules.WithBeastRaid();
                 if (encounter.Beast == BeastKit.SandShark) AddPups(side1, fightId);
             }
+            // From rules 38 The Pit (Battle.FightRules.Pit). Last, after everything else.
+            if (rules >= PitRules) fightRules = fightRules.WithPit();
+            // From rules 40 one blow on stage at a time (Battle.FightRules.Stage), after The Pit.
+            // Rules 41 takes it out again: everyone fights at once.
+            if (rules >= StageRules && rules < BrawlRules) fightRules = fightRules.WithStage();
+            // From rules 42 the attack table (Battle.FightRules.Table). Last, after everything else.
+            if (rules >= TableRules) fightRules = fightRules.WithTable();
+            // From rules 43 the leaders (Battle.FightRules.Leaders), and the champion's fight on the road's last row. Last.
+            if (rules >= LeadersRules)
+            {
+                fightRules = fightRules.WithLeaders();
+                if (champion) fightRules = fightRules.WithChampionFight();
+            }
+            // From rules 44 the grid (Battle.FightRules.Grid). Last, after the leaders.
+            if (rules >= GridRules) fightRules = fightRules.WithGrid();
+            if (rules >= LockedPairsRules) fightRules = fightRules.WithLockedPairs();
+            // From rules 46 the Glutton's tree retargeted and the live hooks (Battle.FightRules.TreeRetarget).
+            if (rules >= TreeRules) fightRules = fightRules.WithTreeRetarget();
             bool raidChief = IsRaidChief(tribe, encounter.Kind, rules);
             if (raidChief) MakeRaidChief(side1);
             // His second phase brings his reserves into the fight (Battle.ChiefFight).
@@ -3501,8 +3646,11 @@ namespace KindredSiege.Sim.Learning
         // This run's road to this tribe; the hunters have none.
         private CampaignRoad MakeRoad(CampaignTribe tribe)
         {
-            return tribe == null || tribe == AlphaHunt.Tribe ? null : CampaignRoad.Make(Seed, RunsStarted, tribe.Id, RoadRows, StagedBloodridgeRoad,
-                RoadPals, PalRoadRun);
+            CampaignRoad road = tribe == null || tribe == AlphaHunt.Tribe ? null : CampaignRoad.Make(Seed, RunsStarted, tribe.Id, RoadRows,
+                StagedBloodridgeRoad, RoadPals, PalRoadRun);
+            // From rules 39 the run's rolled beast takes a fight node on its first road (CampaignBeast.cs).
+            if (road != null && BeastRollRun) PlaceRolledBeast(road, tribe);
+            return road;
         }
 
         private static GearTier Raise(GearTier tier, int steps)
@@ -3559,6 +3707,12 @@ namespace KindredSiege.Sim.Learning
                 IReadOnlyList<UnitSpec> parts = setup.Side(1);
                 for (int i = 0; i < parts.Count && i < BeastKits.PartCount; i++)
                     names[parts[i].Id] = BeastKits.Name(encounter.Beast) + " " + BeastKits.Name(BeastKits.PartAt(encounter.Beast, i));
+                // A rolled beast (rules 39) names the shark's pups too; the beast beside an older run's road keeps its fights as
+                // they were.
+                if (encounter.Node != null)
+                    for (int i = BeastKits.PartCount; i < parts.Count; i++)
+                        names[parts[i].Id] = BeastKits.Name(encounter.Beast) + " pup " +
+                            (i - BeastKits.PartCount + 1).ToString(CultureInfo.InvariantCulture);
                 return names;
             }
             // A named hunter fights under their own name; the company's blades have none (18 Oct 2026).
@@ -3592,6 +3746,10 @@ namespace KindredSiege.Sim.Learning
             if (rules == ClearRoadRules && StagedBloodridgeRoad && encounter.Node != null && encounter.Node.Row == 0) heavy = 0;
             if (encounter.Kind == EncounterKind.AlphaHunt || encounter.Kind == EncounterKind.Ambush)
                 return HuntersRules(encounter, heavy, rules >= 6 && encounter.Kind == EncounterKind.AlphaHunt, rules >= 8);
+            // From rules 43 the champion winds up his big swing as a duel's champion does, his tribe's spell at a duel's grade.
+            if (encounter.Champion && rules >= LeadersRules)
+                return new SideRules(_tuning.DuelEclipseGrade, _tuning.DuelEclipseTicks, false, heavy, encounter.Tribe.Spell,
+                    flood: encounter.Tribe.Floods);
             // The sea tribe floods every fight it is in (Battle.FloodRules, 18 Oct 2026).
             bool flood = encounter.Tribe.Floods;
             if (!encounter.EnemyCasts) return heavy == 0 && !flood ? SideRules.None : new SideRules(0, 0, false, heavy, flood: flood);
@@ -3741,11 +3899,23 @@ namespace KindredSiege.Sim.Learning
                 {
                     // The beast's parts in their order (BeastKits.Parts), each with its own health at the fight's strength; their
                     // moves hit by plain power, which Blood Moon raises below (Battle.BeastKits, 21 and 22 Oct 2026).
+                    // From rules 39 a rolled beast comes at its tier: every tier above 1 adds to its parts' health and to the power
+                    // its moves hit by (BeastTierRules; the shark's pups follow its parts). Tier 0, the beast beside an older run's
+                    // road, and tier 1 come as they always did.
                     IReadOnlyList<BeastPart> parts = BeastKits.Parts(encounter.Beast);
+                    int tier = encounter.BeastTier;
                     for (int p = 0; p < parts.Count; p++)
+                    {
+                        int power = UnitSpec.PlainPercent;
+                        int health = Math.Max(1, pct * BeastKits.HealthPercent(parts[p]) / 100);
+                        if (tier > 1)
+                        {
+                            power = power * BeastTierRules.PowerPercent(tier) / 100;
+                            health = Math.Max(1, health * BeastTierRules.HealthPercent(tier) / 100);
+                        }
                         specs.Add(new UnitSpec(fightId + "." + BeastKits.Id(encounter.Beast) + "." + BeastKits.Name(parts[p]), UnitClass.Warden,
-                            BeastKits.RowOf(parts[p]), UnitRole.Fighter, UnitSpec.PlainPercent,
-                            Math.Max(1, pct * BeastKits.HealthPercent(parts[p]) / 100)));
+                            BeastKits.RowOf(parts[p]), UnitRole.Fighter, power, health));
+                    }
                     break;
                 }
             }

@@ -49,6 +49,8 @@ namespace KindredSiege.Sim.Battle
         /// are off. Read only. Never shown as a number (Jacob, 13 Oct 2026); for tests and bots.
         public int HitChance(BattleUnit attacker, BattleUnit target)
         {
+            // From rules 42 a blow lands unless the attack table dodges or parries it (BattleSimulation.Table.cs).
+            if (_fight.Table && attacker != null && target != null) return 100 - DodgeChance(attacker, target) - ParryChance(attacker, target);
             if (!_fight.Misses || attacker == null || target == null) return 100;
             int chance = SliceClasses.Hit(attacker.Class) + SpecOf(attacker).HitBonus -
                 SliceClasses.Avoid(target.Class) - SpecOf(target).AvoidBonus;
@@ -148,8 +150,9 @@ namespace KindredSiege.Sim.Battle
             Emit(new BattleEvent(_tick, BattleEventKind.Release, side, caster.Id, (int)caster.Class, string.Empty, -1,
                 percent, FightRules.Parried));
             Emit(new BattleEvent(_tick, BattleEventKind.Parry, enemy, string.Empty, -1, caster.Id, (int)caster.Class,
-                FightRules.StaggerTicks, string.Empty));
-            caster.Cooldown += FightRules.StaggerTicks;
+                ParryStagger(enemy), string.Empty));
+            caster.Cooldown += ParryStagger(enemy);
+            StaggerTimer(caster, ParryStagger(enemy));
             theirs.HoldTicks = 0;
             theirs.LastParryTick = _tick;
             theirs.ParriedCasterId = caster.Id;
